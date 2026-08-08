@@ -1,48 +1,980 @@
----
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
----
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buzzyfly | Practical Digital Tools & Systems</title>
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-	</head>
-	<body>
-		<Header />
-		<main>
-			<h1>🪰 Buzzyfly Welcome/h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">buzzyfly space</a>.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://www.buzzyfly.com">buzzy-fly</a>.
-			</p>
-		</main>
-		<Footer />
-	</body>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- Custom Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            500: '#0f172a',
+                            600: '#020617',
+                            700: '#000000',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Space Grotesk"', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        .glass-panel {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05);
+        }
+
+        .bg-glow-radial {
+            background: radial-gradient(circle at 50% 15%, rgba(15, 23, 42, 0.03) 0%, transparent 70%);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f8fafc;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0f172a;
+        }
+    </style>
+</head>
+
+<body class="bg-white text-slate-900 font-sans antialiased selection:bg-slate-900 selection:text-white transition-colors duration-300 min-h-screen flex flex-col relative overflow-x-hidden">
+
+    <canvas id="bg-canvas" class="fixed inset-0 pointer-events-none z-0 opacity-25"></canvas>
+
+    <div id="toast-container" class="fixed bottom-6 right-6 z-50 flex flex-col space-y-3 pointer-events-none"></div>
+
+    <header class="fixed top-0 inset-x-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+            
+            <a href="#hero" class="flex items-center gap-3 group shrink-0 min-w-0">
+                <div class="w-10 h-10 rounded-xl bg-slate-900 flex items-center justify-center text-white text-xl shadow-md group-hover:scale-105 transition-transform duration-300 shrink-0" id="brand-logo">
+                    <span class="text-xl">🪰</span>
+                </div>
+                <div class="flex flex-col justify-center min-w-0">
+                    <span class="font-display font-bold text-base sm:text-lg text-slate-900 tracking-tight block leading-snug whitespace-nowrap overflow-hidden text-ellipsis">Buzzyfly Systems</span>
+                    <span class="text-[11px] sm:text-xs text-emerald-600 font-bold tracking-wide whitespace-nowrap overflow-hidden text-ellipsis">Verified Digital Tools & Workflows</span>
+                </div>
+            </a>
+
+            <nav class="hidden md:flex items-center gap-8 text-sm font-semibold text-slate-700">
+                <a href="#store" class="hover:text-black transition-colors">Tested Products</a>
+                <a href="#best-seller" class="hover:text-black transition-colors">Flagship OS</a>
+                <a href="#why-us" class="hover:text-black transition-colors">Verified Features</a>
+                <a href="#reviews" class="hover:text-black transition-colors">Reviews</a>
+                <a href="#faq" class="hover:text-black transition-colors">FAQ</a>
+            </nav>
+
+            <div class="flex items-center gap-3 shrink-0">
+                <button onclick="togglePaymentSettingsModal()" title="Configure Payment Link" class="px-3 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-bold transition-all flex items-center gap-1.5">
+                    <i class="fa-solid fa-credit-card text-emerald-600"></i>
+                    <span class="hidden lg:inline">Payout Link Setup</span>
+                </button>
+
+                <button onclick="toggleCartDrawer()" class="relative px-4 py-2 rounded-xl border border-slate-300 bg-white hover:border-slate-900 text-slate-900 font-bold text-xs shadow-sm flex items-center gap-2 transition-all">
+                    <i class="fa-solid fa-cart-shopping text-slate-900"></i>
+                    <span class="hidden sm:inline">Cart</span>
+                    <span id="cart-count-badge" class="px-1.5 py-0.5 rounded-full bg-slate-900 text-white text-[10px] font-extrabold">0</span>
+                </button>
+
+                <a href="#store" class="hidden sm:inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white font-semibold text-sm shadow-md transition-all hover:scale-[1.02] active:scale-[0.98]">
+                    <i class="fa-solid fa-bag-shopping text-xs"></i>
+                    <span>Browse Store</span>
+                </a>
+
+                <button onclick="toggleMobileMenu()" class="md:hidden w-10 h-10 rounded-xl border border-slate-200 bg-white flex items-center justify-center text-slate-700">
+                    <i class="fa-solid fa-bars text-lg" id="mobile-menu-icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <div id="mobile-menu" class="hidden md:hidden border-t border-slate-200 bg-white px-6 py-6 flex flex-col space-y-4 shadow-xl">
+            <a href="#store" onclick="toggleMobileMenu()" class="text-slate-800 hover:text-black font-medium py-1">Tested Products</a>
+            <a href="#best-seller" onclick="toggleMobileMenu()" class="text-slate-800 hover:text-black font-medium py-1">Flagship OS</a>
+            <a href="#why-us" onclick="toggleMobileMenu()" class="text-slate-800 hover:text-black font-medium py-1">Verified Features</a>
+            <a href="#reviews" onclick="toggleMobileMenu()" class="text-slate-800 hover:text-black font-medium py-1">Reviews</a>
+            <a href="#faq" onclick="toggleMobileMenu()" class="text-slate-800 hover:text-black font-medium py-1">FAQ</a>
+            <button onclick="togglePaymentSettingsModal()" class="w-full text-center py-2.5 rounded-xl border border-slate-300 bg-slate-50 text-slate-900 font-bold text-xs">Configure Payment Processor Link</button>
+            <a href="#store" onclick="toggleMobileMenu()" class="w-full text-center py-3 rounded-xl bg-slate-900 text-white font-semibold text-sm shadow-md">Browse Store Now</a>
+        </div>
+    </header>
+
+    <div id="cart-drawer" class="fixed inset-y-0 right-0 z-50 w-full sm:w-96 bg-white border-l border-slate-200 transform translate-x-full transition-transform duration-300 ease-in-out p-6 overflow-y-auto flex flex-col justify-between shadow-2xl">
+        <div>
+            <div class="flex items-center justify-between pb-6 border-b border-slate-200">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping text-slate-900"></i>
+                    <h3 class="font-display font-bold text-lg text-slate-900">Your Cart</h3>
+                </div>
+                <button onclick="toggleCartDrawer()" class="text-slate-500 hover:text-slate-900 p-2">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <div id="cart-items-container" class="mt-6 space-y-4">
+                <div class="text-center py-12 text-slate-500 text-xs">
+                    <i class="fa-solid fa-basket-shopping text-3xl mb-2 text-slate-300 block"></i>
+                    Your cart is currently empty.
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-6 border-t border-slate-200 space-y-3">
+            <div class="flex justify-between items-center font-bold text-sm text-slate-900">
+                <span>Total Amount:</span>
+                <span id="cart-total-price">$0.00</span>
+            </div>
+            
+            <button onclick="checkoutCart()" class="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-bold transition-colors shadow-md flex items-center justify-center gap-2">
+                <i class="fa-solid fa-lock text-xs text-emerald-400"></i> Direct Instant Checkout
+            </button>
+            
+            <p class="text-[10px] text-slate-500 text-center flex items-center justify-center gap-1">
+                <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+                <span>Direct payout to your payment provider</span>
+            </p>
+        </div>
+    </div>
+
+    <main class="flex-grow z-10">
+        
+        <section id="hero" class="relative pt-28 pb-20 sm:pt-36 sm:pb-28 md:pt-40 md:pb-32 overflow-hidden bg-glow-radial border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-12 gap-12 items-center">
+                    
+                    <div class="lg:col-span-7 space-y-8 text-center lg:text-left">
+                        
+                        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-emerald-300 bg-emerald-50 text-emerald-900 text-xs font-bold tracking-wide shadow-sm">
+                            <span class="w-2.5 h-2.5 rounded-full bg-emerald-600 animate-pulse"></span>
+                            <span>⚡ Functional Notion Hubs, Prompt Kits & Email Systems</span>
+                        </div>
+
+                        <div class="space-y-4">
+                            <h1 class="text-4xl sm:text-6xl lg:text-7xl font-display font-extrabold text-slate-900 tracking-tight leading-tight">
+                                Streamline Work. <br class="hidden sm:inline">
+                                <span class="text-slate-900 font-extrabold">Sell Functional Systems.</span>
+                            </h1>
+                            <p class="text-xl sm:text-2xl font-semibold text-slate-800 font-display">
+                                Field-tested digital tools built to save hours and solve real problems.
+                            </p>
+                        </div>
+
+                        <p class="text-slate-700 text-base sm:text-lg max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium">
+                            Welcome to <a href="https://www.buzzyfly.com" target="_blank" rel="noopener noreferrer" class="text-slate-900 font-bold underline hover:text-black">Buzzyfly Systems</a>. Every tool in this vault is fully developed, tested in real production workflows, and ready for instant customer download.
+                        </p>
+
+                        <div class="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#store" class="px-8 py-4 rounded-xl bg-slate-900 hover:bg-black text-white font-bold text-sm shadow-xl transition-all hover:-translate-y-0.5 flex items-center gap-2">
+                                <i class="fa-solid fa-boxes-stacked text-xs"></i>
+                                <span>Explore Systems Catalog</span>
+                            </a>
+
+                            <a href="#best-seller" class="px-7 py-4 rounded-xl bg-white hover:bg-slate-50 text-slate-900 font-bold text-sm transition-all border border-slate-300 shadow-sm flex items-center gap-2">
+                                <i class="fa-solid fa-star text-amber-500"></i>
+                                <span>Featured Creator OS</span>
+                            </a>
+                        </div>
+
+                        <div class="pt-6 border-t border-slate-200 flex flex-wrap items-center justify-center lg:justify-start gap-6 text-slate-600 text-xs font-semibold">
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-bolt text-amber-500 text-sm"></i>
+                                <span>Instant One-Click Delivery</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-arrows-rotate text-emerald-600 text-sm"></i>
+                                <span>Lifetime Updates Included</span>
+                            </div>
+                            <div class="flex items-center gap-2">
+                                <i class="fa-solid fa-shield-halved text-slate-800 text-sm"></i>
+                                <span>100% Functional & Guarantee</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-md">
+                            <div class="relative rounded-3xl bg-white p-8 border border-slate-200 shadow-2xl space-y-6">
+                                
+                                <div class="flex items-center justify-between">
+                                    <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider">Flagship System</span>
+                                    <div class="flex text-amber-400 text-xs gap-1">
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                        <i class="fa-solid fa-star"></i>
+                                    </div>
+                                </div>
+
+                                <div class="w-full h-48 rounded-2xl bg-slate-100 border border-slate-200 overflow-hidden relative flex items-center justify-center">
+                                    <img src="https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80" alt="Buzzyfly Creator OS" class="w-full h-full object-cover">
+                                    <div class="absolute inset-0 bg-gradient-to-t from-slate-900/70 via-slate-900/20 to-transparent flex items-end p-4">
+                                        <span class="text-white font-bold text-sm">Buzzyfly Creator OS Dashboard</span>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-2">
+                                    <div class="flex items-baseline justify-between">
+                                        <h3 class="font-display font-bold text-xl text-slate-900">Buzzyfly Creator OS</h3>
+                                        <div class="text-right">
+                                            <span class="text-2xl font-extrabold text-slate-900">$47</span>
+                                            <span class="text-xs text-slate-400 line-through ml-1">$97</span>
+                                        </div>
+                                    </div>
+                                    <p class="text-xs text-slate-600 leading-relaxed">
+                                        Complete Notion workspace with content calendar, project hub, sponsorship pipeline, and automatic repurposing checklist.
+                                    </p>
+                                </div>
+
+                                <button onclick="addToCart(1)" class="w-full py-3.5 rounded-xl bg-slate-900 hover:bg-black text-white font-bold text-xs shadow-lg transition-all flex items-center justify-center gap-2">
+                                    <i class="fa-solid fa-cart-plus"></i>
+                                    <span>Get Immediate Access - $47</span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="py-12 bg-slate-50 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                    
+                    <div class="text-center space-y-1">
+                        <div class="text-3xl sm:text-5xl font-extrabold font-display text-slate-900 tracking-tight">3,400+</div>
+                        <p class="text-xs sm:text-sm text-slate-600 font-bold">Hours Saved for Creators</p>
+                    </div>
+
+                    <div class="text-center space-y-1">
+                        <div class="text-3xl sm:text-5xl font-extrabold font-display text-slate-900 tracking-tight">1,850+</div>
+                        <p class="text-xs sm:text-sm text-slate-600 font-bold">Active System Users</p>
+                    </div>
+
+                    <div class="text-center space-y-1">
+                        <div class="text-3xl sm:text-5xl font-extrabold font-display text-slate-900 tracking-tight">4.9 / 5</div>
+                        <p class="text-xs sm:text-sm text-slate-600 font-bold">Average User Rating</p>
+                    </div>
+
+                    <div class="text-center space-y-1">
+                        <div class="text-3xl sm:text-5xl font-extrabold font-display text-slate-900 tracking-tight">100%</div>
+                        <p class="text-xs sm:text-sm text-slate-600 font-bold">Actionable & Ready-to-Use</p>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <section id="store" class="py-24 relative bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+                    <div class="space-y-4 max-w-2xl">
+                        <span class="text-xs font-bold text-slate-900 uppercase tracking-widest px-3 py-1 rounded-full bg-slate-100 border border-slate-300">Tested & Verified Vault</span>
+                        <h2 class="text-3xl sm:text-4xl font-display font-bold text-slate-900">Functional Systems & Digital Tools</h2>
+                        <p class="text-slate-700 text-sm sm:text-base">
+                            Select a system built to solve specific workflow bottlenecks, organize your business, and automate repetitive tasks.
+                        </p>
+                    </div>
+
+                    <div class="flex flex-wrap gap-2" id="product-filters">
+                        <button onclick="filterProducts('all', event)" class="product-filter-btn active px-4 py-2 rounded-xl text-xs font-bold bg-slate-900 text-white shadow-md">All Tools</button>
+                        <button onclick="filterProducts('notion', event)" class="product-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-800 hover:text-black">Notion Hubs</button>
+                        <button onclick="filterProducts('ai', event)" class="product-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-800 hover:text-black">AI Prompt Kits</button>
+                        <button onclick="filterProducts('copywriting', event)" class="product-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-800 hover:text-black">Copy Kits</button>
+                        <button onclick="filterProducts('bundles', event)" class="product-filter-btn px-4 py-2 rounded-xl text-xs font-semibold bg-slate-100 text-slate-800 hover:text-black">All-In-One Bundle</button>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-grid">
+                    <!-- Products rendered dynamically via JS -->
+                </div>
+
+            </div>
+        </section>
+
+        <section id="best-seller" class="py-24 bg-slate-50 border-y border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <div class="glass-panel rounded-3xl border border-slate-200 p-8 sm:p-12 bg-white shadow-xl relative overflow-hidden">
+                    <div class="grid lg:grid-cols-12 gap-8 items-center">
+                        
+                        <div class="lg:col-span-7 space-y-6">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-100 text-amber-900 text-xs font-bold">
+                                <i class="fa-solid fa-crown text-amber-600"></i> #1 Flagship Operations Suite
+                            </div>
+
+                            <h2 class="text-3xl sm:text-5xl font-display font-bold text-slate-900 leading-tight">
+                                Buzzyfly All-in-One Operations Suite
+                            </h2>
+
+                            <p class="text-slate-700 text-sm sm:text-base leading-relaxed">
+                                Get instant lifetime access to our complete workspace collection: the Creator OS Notion Dashboard, Master AI Prompt Vault, and Email Copy Swipe Kit in one synchronized system.
+                            </p>
+
+                            <div class="grid sm:grid-cols-2 gap-4 text-xs font-semibold text-slate-800">
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600"></i> Full Creator OS Notion Workspace
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600"></i> 300+ Field-Tested System Prompts
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600"></i> 40+ Email Copywriting Templates
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <i class="fa-solid fa-check text-emerald-600"></i> Lifetime Quarterly Updates
+                                </div>
+                            </div>
+
+                            <div class="pt-4 flex flex-wrap items-center gap-4">
+                                <button onclick="addToCart(4)" class="px-8 py-4 rounded-xl bg-slate-900 hover:bg-black text-white font-bold text-sm shadow-xl transition-all flex items-center gap-2">
+                                    <i class="fa-solid fa-bolt"></i> Get Complete Bundle - $87
+                                </button>
+                                <span class="text-xs text-slate-500 font-bold">Bundle Value: <span class="line-through">$199</span> (Save $112)</span>
+                            </div>
+                        </div>
+
+                        <div class="lg:col-span-5 flex justify-center">
+                            <div class="w-full max-w-sm rounded-2xl bg-slate-100 border border-slate-200 p-6 text-center space-y-4">
+                                <i class="fa-solid fa-cubes-stacked text-5xl text-slate-900"></i>
+                                <h3 class="font-display font-bold text-xl text-slate-900">Included In The Vault:</h3>
+                                <ul class="text-xs text-slate-700 space-y-2 text-left border-t border-slate-200 pt-4">
+                                    <li class="flex items-center justify-between"><span>⚙️ Creator OS Workspace</span><span class="font-bold">$47 Value</span></li>
+                                    <li class="flex items-center justify-between"><span>🤖 Master AI Prompt Vault</span><span class="font-bold">$29 Value</span></li>
+                                    <li class="flex items-center justify-between"><span>✉️ Email & Copy Swipe Kit</span><span class="font-bold">$37 Value</span></li>
+                                    <li class="flex items-center justify-between"><span>🎥 Setup & Walkthrough Guides</span><span class="font-bold">$49 Value</span></li>
+                                </ul>
+                                <div class="pt-2 text-xs font-extrabold text-emerald-700 bg-emerald-50 py-2 rounded-lg border border-emerald-200">
+                                    Instant One-Click Access Upon Purchase
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="why-us" class="py-24 bg-white relative">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <span class="text-xs font-bold text-slate-900 uppercase tracking-widest px-3 py-1 rounded-full bg-slate-100 border border-slate-300">Why Buzzyfly Tools Work</span>
+                    <h2 class="text-3xl sm:text-4xl font-display font-bold text-slate-900">Tested, Tried & Functional</h2>
+                    <p class="text-slate-700 text-sm sm:text-base">
+                        Every system is rigorously built and tested in live daily workflows before being made available in the store.
+                    </p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    
+                    <div class="glass-panel p-8 rounded-2xl border border-slate-200 space-y-4 hover:border-slate-400 transition-colors">
+                        <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-900 text-xl font-bold">
+                            <i class="fa-solid fa-sitemap"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-display text-slate-900">Zero-Friction Duplicate</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Pre-configured Notion databases with relation rollups and views. Duplicate into your account in one click and start using immediately.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-2xl border border-slate-200 space-y-4 hover:border-slate-400 transition-colors">
+                        <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-900 text-xl font-bold">
+                            <i class="fa-solid fa-microchip"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-display text-slate-900">AI Prompt Precision</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Prompts engineered specifically for Claude 3.5 Sonnet, GPT-4o, and Gemini to produce reliable, high-quality outputs without endless tweaks.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-2xl border border-slate-200 space-y-4 hover:border-slate-400 transition-colors">
+                        <div class="w-12 h-12 rounded-xl bg-slate-100 flex items-center justify-center text-slate-900 text-xl font-bold">
+                            <i class="fa-solid fa-clock font-bold"></i>
+                        </div>
+                        <h3 class="text-xl font-bold font-display text-slate-900">Tested Operational Flow</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Replaces messy notes and scattered spreadsheets with clear step-by-step operating procedures that save 10+ hours per week.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="reviews" class="py-24 bg-slate-50 border-t border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="text-center max-w-3xl mx-auto space-y-4">
+                    <span class="text-xs font-bold text-slate-900 uppercase tracking-widest px-3 py-1 rounded-full bg-white border border-slate-300">Verified User Feedback</span>
+                    <h2 class="text-3xl sm:text-4xl font-display font-bold text-slate-900">What Customers Are Saying</h2>
+                    <p class="text-slate-700 text-sm sm:text-base">Feedback from creators, freelancers, and small business owners using Buzzyfly systems.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-8">
+                    
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-200 space-y-4">
+                        <div class="flex text-amber-400 text-xs gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            "The Creator OS completely cleaned up my chaotic workflow. I went from losing track of content ideas to having a full month scheduled ahead of time."
+                        </p>
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                            <span class="font-bold text-xs text-slate-900">Elena R., Content Strategist</span>
+                            <span class="text-[10px] text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> Verified Buyer</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-200 space-y-4">
+                        <div class="flex text-amber-400 text-xs gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            "The AI Prompt Vault actually works. The system prompts produce clean code refactoring and realistic copy on the first try."
+                        </p>
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                            <span class="font-bold text-xs text-slate-900">Jason M., Freelance Writer</span>
+                            <span class="text-[10px] text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> Verified Buyer</span>
+                        </div>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-200 space-y-4">
+                        <div class="flex text-amber-400 text-xs gap-1">
+                            <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                        </div>
+                        <p class="text-xs text-slate-700 leading-relaxed">
+                            "Straightforward setup. The email swipe file saved me hours drafting welcome sequences for my new digital product launch."
+                        </p>
+                        <div class="pt-2 border-t border-slate-100 flex items-center justify-between">
+                            <span class="font-bold text-xs text-slate-900">Sarah K., Solopreneur</span>
+                            <span class="text-[10px] text-emerald-600 font-bold"><i class="fa-solid fa-circle-check"></i> Verified Buyer</span>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section id="faq" class="py-24 bg-white relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
+                
+                <div class="text-center space-y-4">
+                    <span class="text-xs font-bold text-slate-900 uppercase tracking-widest px-3 py-1 rounded-full bg-slate-100 border border-slate-300">Frequently Asked Questions</span>
+                    <h2 class="text-3xl sm:text-4xl font-display font-bold text-slate-900">Common Questions Answered</h2>
+                </div>
+
+                <div class="space-y-4">
+                    
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-200">
+                        <h3 class="font-bold text-slate-900 text-base mb-2">How do I access the Notion templates after purchasing?</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Immediately after checkout, you receive a direct link to duplicate the Notion template workspace straight into your free or paid Notion account with one click.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-200">
+                        <h3 class="font-bold text-slate-900 text-base mb-2">Have these products been tested in real workflows?</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            Yes! Every template, prompt kit, and swipe file is extracted from real-world operations used to deliver actual projects for clients and solopreneurs.
+                        </p>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl border border-slate-200">
+                        <h3 class="font-bold text-slate-900 text-base mb-2">How do payments work for shop owners?</h3>
+                        <p class="text-xs text-slate-600 leading-relaxed">
+                            You can easily link your Gumroad, Stripe Payment Link, Lemon Squeezy, or PayPal checkout URL to the store buttons using the Payout Link Setup in the navigation bar.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+        <section class="py-20 bg-slate-900 text-white relative">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-6">
+                <span class="text-xs font-bold text-emerald-400 uppercase tracking-widest px-3 py-1 rounded-full bg-slate-800 border border-slate-700">Free Weekly Workflow Tips</span>
+                <h2 class="text-3xl sm:text-4xl font-display font-bold">Get Free Prompt Workflows & 15% Off</h2>
+                <p class="text-slate-300 text-sm max-w-xl mx-auto leading-relaxed">
+                    Join over 2,000+ productivity-focused creators. Get weekly system tweaks and an instant 15% discount on your first digital tool purchase.
+                </p>
+
+                <form onsubmit="handleNewsletterSubmit(event)" class="max-w-md mx-auto flex gap-2">
+                    <input type="email" required placeholder="Enter your email address" class="flex-grow bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:border-white">
+                    <button type="submit" class="px-6 py-3 rounded-xl bg-white hover:bg-slate-100 text-slate-900 font-bold text-xs shadow-md transition-all shrink-0">
+                        Get Free Toolkit
+                    </button>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="border-t border-slate-200 bg-slate-50 py-12 z-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center justify-between gap-6">
+            
+            <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center text-white font-bold text-sm">
+                    <span class="text-sm">🪰</span>
+                </div>
+                <p class="text-xs text-slate-600 font-medium">
+                    © <span id="current-year">2026</span> Buzzyfly Systems. All rights reserved.
+                </p>
+            </div>
+
+            <div class="flex items-center gap-6 text-slate-600 text-xs font-semibold">
+                <a href="#hero" class="hover:text-black transition-colors">Back to Top</a>
+                <a href="#store" class="hover:text-black transition-colors">Tested Products</a>
+                <a href="#reviews" class="hover:text-black transition-colors">Reviews</a>
+                <a href="#faq" class="hover:text-black transition-colors">FAQ</a>
+            </div>
+
+        </div>
+    </footer>
+
+    <div id="product-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 bg-slate-900/40 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-2xl rounded-3xl border border-slate-200 shadow-2xl overflow-hidden flex flex-col max-h-[90vh] bg-white">
+            
+            <div class="p-6 border-b border-slate-200 flex items-center justify-between">
+                <div>
+                    <span id="modal-category" class="text-xs font-bold text-slate-900 uppercase tracking-widest">Notion Hub</span>
+                    <h3 id="modal-title" class="text-2xl font-bold font-display text-slate-900">Product Title</h3>
+                </div>
+                <button onclick="closeProductModal()" class="text-slate-400 hover:text-slate-900 p-2">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+
+            <div class="p-6 overflow-y-auto space-y-6">
+                <div class="rounded-2xl overflow-hidden aspect-video bg-slate-100 border border-slate-200">
+                    <img id="modal-image" src="" alt="Product" class="w-full h-full object-cover">
+                </div>
+
+                <div>
+                    <div class="flex items-center justify-between mb-2">
+                        <h4 class="text-sm font-bold text-slate-900 uppercase tracking-wider">System Overview & Specs</h4>
+                        <span id="modal-price" class="text-xl font-extrabold text-slate-900">$0.00</span>
+                    </div>
+                    <p id="modal-description" class="text-slate-700 text-sm leading-relaxed mb-4">Product description details here.</p>
+                    
+                    <div class="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                        <span class="text-xs font-bold text-slate-900 uppercase tracking-wider block">Tested & Delivered Features:</span>
+                        <ul id="modal-features" class="text-xs text-slate-700 space-y-1.5 list-disc list-inside">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-slate-200 bg-slate-50 flex items-center justify-end gap-3">
+                <button onclick="closeProductModal()" class="px-5 py-2.5 rounded-xl border border-slate-300 text-slate-700 text-xs font-semibold hover:bg-slate-100">Close</button>
+                <button id="modal-buy-btn" onclick="" class="px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-bold shadow-md flex items-center gap-2">
+                    <i class="fa-solid fa-cart-shopping"></i> Add To Cart
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+    <div id="payment-settings-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 sm:p-6 bg-slate-900/40 backdrop-blur-md">
+        <div class="glass-panel w-full max-w-lg rounded-3xl border border-slate-200 shadow-2xl overflow-hidden flex flex-col bg-white p-6 space-y-6">
+            <div class="flex items-center justify-between border-b border-slate-200 pb-4">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-wallet text-emerald-600 text-lg"></i>
+                    <h3 class="font-display font-bold text-lg text-slate-900">Payment Processor Link</h3>
+                </div>
+                <button onclick="togglePaymentSettingsModal()" class="text-slate-400 hover:text-slate-900">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+
+            <p class="text-xs text-slate-600 leading-relaxed">
+                Connect your real payment URL (Stripe Payment Link, Gumroad product link, Lemon Squeezy, or PayPal checkout). When customers click "Checkout", they will be sent to your payment link so funds go directly to your account.
+            </p>
+
+            <div class="space-y-2">
+                <label class="block text-xs font-bold text-slate-900 uppercase tracking-wider">Your Payment / Checkout Link:</label>
+                <input id="custom-checkout-url-input" type="url" placeholder="https://buy.stripe.com/example or https://gumroad.com/l/example" class="w-full px-4 py-3 border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:border-slate-900">
+            </div>
+
+            <div class="flex items-center justify-end gap-3 pt-2 border-t border-slate-200">
+                <button onclick="togglePaymentSettingsModal()" class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 text-xs font-semibold">Cancel</button>
+                <button onclick="savePaymentUrl()" class="px-5 py-2 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-bold shadow-md">
+                    Save Checkout Link
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const storeProducts = [
+            {
+                id: 1,
+                title: "Buzzyfly Creator OS Workspace",
+                category: "notion",
+                categoryName: "Notion System",
+                price: 47,
+                originalPrice: 97,
+                image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?auto=format&fit=crop&w=800&q=80",
+                rating: 5,
+                summary: "Complete Notion operating system for managing content channels, project deadlines, and brand assets.",
+                description: "A functional, thoroughly tested Notion workspace that brings structure to content creation. Features a drag-and-drop Kanban content calendar, idea vault with 50 hook frameworks, sponsorship CRM, and automatic repurposing checklist.",
+                features: [
+                    "One-click duplicate link for Notion (Free or Paid accounts)",
+                    "Integrated Kanban Content Calendar & Idea Bank",
+                    "Brand Asset & Media Kit Storage Vault",
+                    "Sponsorship Pipeline & Rate Tracker",
+                    "Includes 3-minute Video Walkthrough & Setup Guide"
+                ]
+            },
+            {
+                id: 2,
+                title: "Master AI Prompt & Automation Vault",
+                category: "ai",
+                categoryName: "AI Prompt Kit",
+                price: 29,
+                originalPrice: 69,
+                image: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=800&q=80",
+                rating: 5,
+                summary: "300+ field-tested system prompts for writing, marketing strategy, coding, and workflow automation.",
+                description: "Tested with Claude 3.5 Sonnet, GPT-4o, and Gemini. This vault provides engineered system prompts designed to produce professional copy, clean code refactoring, and structured research summaries without endless retries.",
+                features: [
+                    "300+ Copy/Paste System Prompts categorized by task",
+                    "Tested for Copywriting, Code Refactoring, Email & Research",
+                    "Custom Persona & System Instruction Blueprints",
+                    "Instant PDF Sheet + Notion Database format included"
+                ]
+            },
+            {
+                id: 3,
+                title: "High-Converting Copy & Email Swipe Kit",
+                category: "copywriting",
+                categoryName: "Copywriting Kit",
+                price: 37,
+                originalPrice: 89,
+                image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",
+                rating: 5,
+                summary: "40+ plug-and-play email sequences, landing page frameworks, and high-converting headline templates.",
+                description: "Tested email welcome series, product launch sequences, abandoned cart reminders, and landing page headline formulas ready to customize in minutes.",
+                features: [
+                    "40+ Customizable Email Templates (Welcome, Sales, Nurture)",
+                    "100+ High-Open Email Subject Line Vault",
+                    "Landing Page Copy Structure Frameworks",
+                    "Formatted for ConvertKit, Mailchimp, Beehiiv, & Google Docs"
+                ]
+            },
+            {
+                id: 4,
+                title: "Buzzyfly All-in-One Operations Suite",
+                category: "bundles",
+                categoryName: "All-in-One Bundle",
+                price: 87,
+                originalPrice: 199,
+                image: "https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=800&q=80",
+                rating: 5,
+                summary: "Get all 3 flagship systems in one discounted bundle: Creator OS, AI Prompt Vault, and Email Swipe Kit.",
+                description: "The complete digital toolkit for modern creators and solopreneurs. Synchronizes your workflow hub, AI prompting library, and copywriting templates into one seamless operating environment.",
+                features: [
+                    "Full Access to Buzzyfly Creator OS Workspace ($47 value)",
+                    "Full Access to Master AI Prompt Vault ($29 value)",
+                    "Full Access to High-Converting Copy & Email Kit ($37 value)",
+                    "Free Lifetime Access to quarterly template updates"
+                ]
+            }
+        ];
+
+        let cart = [];
+        let configuredCheckoutUrl = localStorage.getItem('buzzyfly_checkout_url') || '';
+
+        window.addEventListener('DOMContentLoaded', () => {
+            renderProducts('all');
+            initCanvasParticles();
+            const input = document.getElementById('custom-checkout-url-input');
+            if (input && configuredCheckoutUrl) input.value = configuredCheckoutUrl;
+        });
+
+        function filterProducts(category, event) {
+            if (event && event.currentTarget) {
+                document.querySelectorAll('.product-filter-btn').forEach(btn => {
+                    btn.classList.remove('bg-slate-900', 'text-white', 'shadow-md', 'active');
+                    btn.classList.add('bg-slate-100', 'text-slate-800');
+                });
+                event.currentTarget.classList.add('bg-slate-900', 'text-white', 'shadow-md', 'active');
+                event.currentTarget.classList.remove('bg-slate-100', 'text-slate-800');
+            }
+            renderProducts(category);
+        }
+
+        function renderProducts(filter = 'all') {
+            const grid = document.getElementById('products-grid');
+            if (!grid) return;
+
+            const filtered = filter === 'all' 
+                ? storeProducts 
+                : storeProducts.filter(p => p.category === filter);
+
+            grid.innerHTML = filtered.map(product => `
+                <div class="glass-panel rounded-2xl border border-slate-200 overflow-hidden hover:border-slate-400 transition-all group flex flex-col justify-between bg-white shadow-md">
+                    <div>
+                        <div class="relative overflow-hidden aspect-video bg-slate-100">
+                            <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                            <span class="absolute top-3 left-3 px-2.5 py-1 rounded-full bg-white/95 backdrop-blur text-[10px] font-bold text-slate-900 border border-slate-200 shadow-sm">${product.categoryName}</span>
+                        </div>
+                        <div class="p-6 space-y-3">
+                            <div class="flex items-center justify-between">
+                                <div class="flex text-amber-400 text-xs gap-0.5">
+                                    <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                                </div>
+                                <div class="text-right">
+                                    <span class="text-xl font-extrabold text-slate-900">$${product.price}</span>
+                                    <span class="text-xs text-slate-400 line-through ml-1">$${product.originalPrice}</span>
+                                </div>
+                            </div>
+                            <h3 class="font-display font-bold text-lg text-slate-900 group-hover:text-black transition-colors">${product.title}</h3>
+                            <p class="text-xs text-slate-600 leading-relaxed">${product.summary}</p>
+                        </div>
+                    </div>
+                    <div class="p-6 pt-0 flex gap-2">
+                        <button onclick="openProductModal(${product.id})" class="w-1/2 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-800 text-xs font-bold transition-all">
+                            Details & Specs
+                        </button>
+                        <button onclick="addToCart(${product.id})" class="w-1/2 py-2.5 rounded-xl bg-slate-900 hover:bg-black text-white text-xs font-bold transition-all shadow-md flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-cart-plus"></i> Add To Cart
+                        </button>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function addToCart(productId) {
+            const product = storeProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            cart.push(product);
+            updateCartUI();
+            showToast(`🛒 "${product.title}" added to cart!`);
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-count-badge');
+            if (badge) badge.innerText = cart.length;
+
+            const container = document.getElementById('cart-items-container');
+            const totalEl = document.getElementById('cart-total-price');
+
+            if (!container) return;
+
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-slate-500 text-xs">
+                        <i class="fa-solid fa-basket-shopping text-3xl mb-2 text-slate-300 block"></i>
+                        Your cart is currently empty.
+                    </div>
+                `;
+                if (totalEl) totalEl.innerText = "$0.00";
+                return;
+            }
+
+            let total = 0;
+            container.innerHTML = cart.map((item, idx) => {
+                total += item.price;
+                return `
+                    <div class="flex items-center justify-between p-3 rounded-xl bg-slate-50 border border-slate-200">
+                        <div class="flex items-center gap-3">
+                            <img src="${item.image}" class="w-10 h-10 rounded-lg object-cover">
+                            <div>
+                                <h4 class="font-bold text-xs text-slate-900 leading-tight">${item.title}</h4>
+                                <span class="text-xs font-bold text-emerald-600">$${item.price}</span>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart(${idx})" class="text-slate-400 hover:text-red-600 p-1">
+                            <i class="fa-solid fa-trash-can text-xs"></i>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+
+            if (totalEl) totalEl.innerText = `$${total.toFixed(2)}`;
+        }
+
+        function removeFromCart(index) {
+            cart.splice(index, 1);
+            updateCartUI();
+            showToast("Item removed from cart.");
+        }
+
+        function toggleCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            if (drawer) drawer.classList.toggle('translate-x-full');
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) {
+                showToast("Your cart is empty! Select a tool first.");
+                return;
+            }
+
+            if (configuredCheckoutUrl) {
+                showToast("⚡ Redirecting to instant checkout payment processor...");
+                setTimeout(() => {
+                    window.location.href = configuredCheckoutUrl;
+                }, 1000);
+            } else {
+                showToast("⚡ Order prepared! Click 'Payout Link Setup' in top nav to connect Stripe or Gumroad.");
+            }
+        }
+
+        function togglePaymentSettingsModal() {
+            const modal = document.getElementById('payment-settings-modal');
+            if (modal) modal.classList.toggle('hidden');
+        }
+
+        function savePaymentUrl() {
+            const input = document.getElementById('custom-checkout-url-input');
+            if (input) {
+                configuredCheckoutUrl = input.value.trim();
+                localStorage.setItem('buzzyfly_checkout_url', configuredCheckoutUrl);
+                showToast("✅ Payment link saved! Customers will redirect to your processor.");
+                togglePaymentSettingsModal();
+            }
+        }
+
+        function openProductModal(id) {
+            const product = storeProducts.find(p => p.id === id);
+            if (!product) return;
+
+            document.getElementById('modal-category').innerText = product.categoryName;
+            document.getElementById('modal-title').innerText = product.title;
+            document.getElementById('modal-image').src = product.image;
+            document.getElementById('modal-price').innerText = `$${product.price}`;
+            document.getElementById('modal-description').innerText = product.description;
+
+            const featuresContainer = document.getElementById('modal-features');
+            if (featuresContainer && product.features) {
+                featuresContainer.innerHTML = product.features.map(f => `<li>${f}</li>`).join('');
+            }
+
+            const buyBtn = document.getElementById('modal-buy-btn');
+            if (buyBtn) buyBtn.onclick = () => { addToCart(product.id); closeProductModal(); };
+
+            const modal = document.getElementById('product-modal');
+            if (modal) modal.classList.remove('hidden');
+        }
+
+        function closeProductModal() {
+            const modal = document.getElementById('product-modal');
+            if (modal) modal.classList.add('hidden');
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            if (menu) menu.classList.toggle('hidden');
+        }
+
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            showToast("🎉 Discount unlocked! Check your inbox for code BUZZY15.");
+            e.target.reset();
+        }
+
+        function showToast(msg) {
+            const container = document.getElementById('toast-container');
+            if (!container) return;
+            const toast = document.createElement('div');
+            toast.className = "pointer-events-auto px-4 py-3 rounded-xl bg-slate-900 border border-slate-800 text-white font-semibold text-xs shadow-xl flex items-center gap-2 transform transition-all duration-300 translate-y-2 opacity-0";
+            toast.innerHTML = `<span>${msg}</span>`;
+            
+            container.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.classList.remove('translate-y-2', 'opacity-0');
+            }, 10);
+
+            setTimeout(() => {
+                toast.classList.add('opacity-0', 'translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function initCanvasParticles() {
+            const canvas = document.getElementById('bg-canvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+            
+            let width = canvas.width = window.innerWidth;
+            let height = canvas.height = window.innerHeight;
+
+            window.addEventListener('resize', () => {
+                width = canvas.width = window.innerWidth;
+                height = canvas.height = window.innerHeight;
+            });
+
+            const particles = Array.from({ length: 25 }, () => ({
+                x: Math.random() * width,
+                y: Math.random() * height,
+                vx: (Math.random() - 0.5) * 0.3,
+                vy: (Math.random() - 0.5) * 0.3,
+                radius: Math.random() * 2 + 1
+            }));
+
+            function animate() {
+                ctx.clearRect(0, 0, width, height);
+                ctx.fillStyle = "rgba(15, 23, 42, 0.12)";
+
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+
+                    if (p.x < 0) p.x = width;
+                    if (p.x > width) p.x = 0;
+                    if (p.y < 0) p.y = height;
+                    if (p.y > height) p.y = 0;
+
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+    </script>
+</body>
 </html>
