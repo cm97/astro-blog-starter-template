@@ -1,0 +1,65 @@
+---
+import { SEARCH_ENGINE_URL } from "../utils/search";
+---
+
+<form class="search-box" action={SEARCH_ENGINE_URL} method="get" target="_blank" rel="noopener">
+	<label for="search-input" class="sr-only">Search the web</label>
+	<input id="search-input" name="q" type="search" placeholder="Search the web" autocomplete="off" required />
+	<button type="submit" aria-label="Search">
+		<svg viewBox="0 0 16 16" aria-hidden="true" width="18" height="18"
+			><path
+				fill="currentColor"
+				d="M11.29 9.71a6 6 0 1 0-1.58 1.58l3.5 3.5 1.58-1.58zM6 10.5A4.5 4.5 0 1 1 10.5 6 4.5 4.5 0 0 1 6 10.5z"
+			></path></svg
+		>
+	</button>
+</form>
+
+<style>
+	.search-box {
+		display: flex;
+		align-items: center;
+		gap: 0.25em;
+	}
+	.search-box input {
+		font: inherit;
+		font-size: 0.9rem;
+		padding: 0.4em 0.6em;
+		border: 1px solid rgb(var(--gray));
+		border-radius: 6px;
+		width: 10em;
+	}
+	.search-box button {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.4em;
+		border: 1px solid rgb(var(--gray));
+		border-radius: 6px;
+		background: white;
+		color: rgb(var(--gray-dark));
+		cursor: pointer;
+	}
+	.search-box button:hover {
+		color: var(--accent);
+		border-color: var(--accent);
+	}
+	@media (max-width: 720px) {
+		.search-box input {
+			width: 6.5em;
+		}
+	}
+</style>
+
+<script>
+	import { buildSearchUrl } from "../utils/search";
+
+	const form = document.querySelector<HTMLFormElement>(".search-box");
+	const input = document.getElementById("search-input") as HTMLInputElement | null;
+
+	form?.addEventListener("submit", (event) => {
+		if (!input || !buildSearchUrl(input.value)) {
+			event.preventDefault();
+		}
+	});
+</script>
