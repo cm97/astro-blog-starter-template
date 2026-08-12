@@ -1,11 +1,19 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+
+const letters = SITE_TITLE.split('');
 ---
 
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<h2>
+			<a href="/" class="logo">
+				{letters.map((letter, i) => (
+					<span class="logo-letter" style={`--i: ${i}`}>{letter}</span>
+				))}
+			</a>
+		</h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
@@ -57,6 +65,58 @@ import { SITE_TITLE } from '../consts';
 	h2 a,
 	h2 a.active {
 		text-decoration: none;
+	}
+	.logo {
+		display: inline-flex;
+	}
+	.logo-letter {
+		display: inline-block;
+		font-weight: 700;
+		animation: buzz-idle 2.4s ease-in-out infinite;
+		animation-delay: calc(var(--i) * 0.09s);
+		color: hsl(calc(var(--i) * 47), 85%, 45%);
+		transition: transform 0.15s ease;
+	}
+	.logo:hover .logo-letter {
+		animation: google-bounce 0.7s cubic-bezier(0.28, 0.84, 0.42, 1);
+		animation-delay: calc(var(--i) * 0.06s);
+	}
+	@keyframes buzz-idle {
+		0%,
+		100% {
+			transform: translateY(0) rotate(0deg);
+		}
+		25% {
+			transform: translateY(-1px) rotate(-2deg);
+		}
+		75% {
+			transform: translateY(1px) rotate(2deg);
+		}
+	}
+	@keyframes google-bounce {
+		0% {
+			transform: translateY(0) scale(1);
+		}
+		30% {
+			transform: translateY(-14px) scale(1.15);
+		}
+		55% {
+			transform: translateY(2px) scale(0.95);
+		}
+		75% {
+			transform: translateY(-4px) scale(1.03);
+		}
+		100% {
+			transform: translateY(0) scale(1);
+		}
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.logo-letter {
+			animation: none;
+		}
+		.logo:hover .logo-letter {
+			animation: none;
+		}
 	}
 	nav {
 		display: flex;
