@@ -3,6 +3,28 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+// The wordmark is split into letters so each one can be tinted individually.
+const wordmark = [
+	{ text: 'Buddy', letters: 'Buddy'.split('') },
+	{ text: 'Fly', letters: 'Fly'.split('') },
+];
+
+// Palettes the wordmark rotates through. Muted, not neon — one swap every few
+// seconds, letters staggered so the change reads as a drift rather than a blink.
+const palettes = [
+	['#2f6df6', '#3fa9f5', '#16b8a6', '#f0a830', '#e2685f', '#2f6df6', '#16b8a6', '#3fa9f5'],
+	['#e2685f', '#f0a830', '#c9558f', '#7b61e8', '#3fa9f5', '#e2685f', '#7b61e8', '#f0a830'],
+	['#2fa36b', '#6cbf4b', '#16b8a6', '#2f6df6', '#f0a830', '#2fa36b', '#2f6df6', '#6cbf4b'],
+	['#7b61e8', '#9b6ef3', '#4aa3f0', '#c9558f', '#16b8a6', '#7b61e8', '#4aa3f0', '#9b6ef3'],
+];
+
+const taglines = [
+	'Small ideas, long distances.',
+	'Your co-pilot for the everyday.',
+	'Travel light. Land well.',
+	'Built for people who keep moving.',
+];
 ---
 
 <!doctype html>
@@ -12,37 +34,216 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	</head>
 	<body>
 		<Header />
-		<main>
-			<h1>🪰 Buzzyfly Welcome/h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">buzzyfly space</a>.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://www.buzzyfly.com">buzzy-fly</a>.
-			</p>
+		<main class="landing">
+			<div class="sky" aria-hidden="true"></div>
+
+			<section class="hero">
+				<h1 class="wordmark" data-wordmark>
+					<span class="sr-only">Buddy Fly</span>
+					{
+						wordmark.map((word, wordIndex) => (
+							<span class="word" aria-hidden="true">
+								{word.letters.map((letter, letterIndex) => (
+									<span
+										class="letter"
+										style={`--i: ${wordIndex * 5 + letterIndex}`}
+									>
+										{letter}
+									</span>
+								))}
+							</span>
+						))
+					}
+				</h1>
+
+				<p class="tagline" data-tagline aria-live="polite">{taglines[0]}</p>
+
+				<div class="actions">
+					<a class="btn btn-primary" href="/blog">Read the blog</a>
+					<a class="btn btn-ghost" href="/about">About Buddy Fly</a>
+				</div>
+			</section>
 		</main>
 		<Footer />
+
+		<script
+			is:inline
+			define:vars={{ palettes, taglines }}
+			>
+			const wordmark = document.querySelector('[data-wordmark]');
+			const tagline = document.querySelector('[data-tagline]');
+			const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+			const letters = wordmark ? Array.from(wordmark.querySelectorAll('.letter')) : [];
+
+			function paint(index) {
+				const palette = palettes[index % palettes.length];
+				letters.forEach((letter, i) => {
+					letter.style.color = palette[i % palette.length];
+				});
+			}
+
+			paint(0);
+
+			if (!reduceMotion.matches) {
+				let step = 0;
+
+				setInterval(() => {
+					step += 1;
+					paint(step);
+					if (tagline) {
+						tagline.classList.add('is-swapping');
+						setTimeout(() => {
+							tagline.textContent = taglines[step % taglines.length];
+							tagline.classList.remove('is-swapping');
+						}, 400);
+					}
+				}, 5000);
+			}
+		</script>
+
+		<style>
+			main.landing {
+				position: relative;
+				width: 100%;
+				max-width: none;
+				margin: 0;
+				padding: 0;
+				min-height: calc(100vh - 220px);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				overflow: hidden;
+			}
+
+			/* Soft, slow-drifting colour wash. Deliberately low contrast so the
+			   page reads as calm paper rather than a gradient poster. */
+			.sky {
+				position: absolute;
+				inset: -20%;
+				z-index: 0;
+				background:
+					radial-gradient(42% 42% at 18% 22%, rgba(63, 169, 245, 0.16), transparent 70%),
+					radial-gradient(38% 38% at 82% 26%, rgba(240, 168, 48, 0.14), transparent 70%),
+					radial-gradient(46% 46% at 60% 88%, rgba(22, 184, 166, 0.13), transparent 70%),
+					#fcfcfd;
+				animation: drift 34s ease-in-out infinite alternate;
+			}
+
+			@keyframes drift {
+				from {
+					transform: translate3d(-1.5%, -1%, 0) scale(1);
+				}
+				to {
+					transform: translate3d(1.5%, 1%, 0) scale(1.06);
+				}
+			}
+
+			.hero {
+				position: relative;
+				z-index: 1;
+				width: 100%;
+				max-width: 780px;
+				padding: 5rem 1.5rem 6rem;
+				text-align: center;
+			}
+
+			.wordmark {
+				margin: 0;
+				font-size: clamp(3rem, 12vw, 7rem);
+				font-weight: 700;
+				letter-spacing: -0.03em;
+				line-height: 1.05;
+			}
+
+			.word {
+				display: inline-block;
+				white-space: nowrap;
+			}
+
+			.word + .word {
+				margin-left: 0.28em;
+			}
+
+			.letter {
+				display: inline-block;
+				color: rgb(var(--black));
+				/* Staggered so the palette swap ripples left to right. */
+				transition: color 900ms ease;
+				transition-delay: calc(var(--i) * 70ms);
+			}
+
+			.tagline {
+				margin: 1.25rem 0 0;
+				font-size: clamp(1.05rem, 2.4vw, 1.35rem);
+				color: rgb(var(--gray));
+				transition: opacity 400ms ease;
+				min-height: 1.7em;
+			}
+
+			.tagline.is-swapping {
+				opacity: 0;
+			}
+
+			.actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.85rem;
+				justify-content: center;
+				margin-top: 2.5rem;
+			}
+
+			.btn {
+				display: inline-block;
+				padding: 0.7em 1.6em;
+				border-radius: 999px;
+				font-size: 1rem;
+				text-decoration: none;
+				border: 1px solid transparent;
+				transition:
+					transform 150ms ease,
+					box-shadow 150ms ease,
+					background-color 150ms ease;
+			}
+
+			.btn:hover {
+				transform: translateY(-1px);
+			}
+
+			.btn-primary {
+				background: var(--accent);
+				color: #fff;
+				box-shadow: 0 1px 2px rgba(var(--gray), 30%);
+			}
+
+			.btn-primary:hover {
+				background: var(--accent-dark);
+				color: #fff;
+				box-shadow: 0 4px 12px rgba(var(--gray), 35%);
+			}
+
+			.btn-ghost {
+				background: rgba(255, 255, 255, 0.7);
+				border-color: rgb(var(--gray-light));
+				color: rgb(var(--gray-dark));
+			}
+
+			.btn-ghost:hover {
+				background: #fff;
+				color: rgb(var(--black));
+				box-shadow: 0 4px 12px rgba(var(--gray), 20%);
+			}
+
+			@media (prefers-reduced-motion: reduce) {
+				.sky {
+					animation: none;
+				}
+				.letter,
+				.tagline,
+				.btn {
+					transition: none;
+				}
+			}
+		</style>
 	</body>
 </html>
