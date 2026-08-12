@@ -1,0 +1,164 @@
+---
+import BaseHead from '../../../components/BaseHead.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import FormattedDate from '../../../components/FormattedDate.astro';
+import EmailOptin from '../../../components/EmailOptin.astro';
+import { SITE_TITLE } from '../../../consts';
+import { getPostBySlug, mediaUrl } from '../../../lib/posts';
+import { renderMarkdown } from '../../../lib/markdown';
+
+export const prerender = false;
+
+const { slug } = Astro.params;
+const post = slug ? await getPostBySlug(Astro.locals.runtime.env, slug) : null;
+
+if (!post) return new Response(null, { status: 404, statusText: 'Not found' });
+
+const user = Astro.locals.user;
+const isAuthor = user?.id === post.authorId;
+const coverUrl = mediaUrl(post.coverImageKey);
+const videoUrl = mediaUrl(post.videoKey);
+const html = renderMarkdown(post.bodyMarkdown);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`${post.title} — ${SITE_TITLE}`}
+			description={post.title}
+			image={coverUrl ?? undefined}
+		/>
+	</head>
+	<body>
+		<Header user={user} />
+		<main>
+			<article>
+				{coverUrl && (
+					<div class="hero-image">
+						<img width={1020} height={510} src={coverUrl} alt="" />
+					</div>
+				)}
+				<div class="prose">
+					<div class="byline">
+						<div class="avatar" aria-hidden="true">{post.authorDisplayName.slice(0, 1).toUpperCase()}</div>
+						<div>
+							<p class="author-name">{post.authorDisplayName}</p>
+							<p class="date"><FormattedDate date={new Date(post.createdAt)} /></p>
+						</div>
+						{isAuthor && (
+							<button class="delete-button" data-delete-post={post.id} type="button">
+								Delete
+							</button>
+						)}
+					</div>
+					<h1>{post.title}</h1>
+					<hr />
+					{videoUrl && (
+						<video class="post-video" controls preload="metadata">
+							<source src={videoUrl} />
+						</video>
+					)}
+					<div class="post-body" set:html={html} />
+					<EmailOptin />
+				</div>
+			</article>
+		</main>
+		<Footer />
+		{isAuthor && (
+			<script define:vars={{ postId: post.id }}>
+				document.querySelector('[data-delete-post]')?.addEventListener('click', async () => {
+					if (!confirm('Delete this post? This cannot be undone.')) return;
+					const response = await fetch(`/api/posts/${postId}`, { method: 'DELETE' });
+					if (response.ok) {
+						window.location.href = '/blog';
+					} else {
+						alert('Could not delete this post. Please try again.');
+					}
+				});
+			</script>
+		)}
+		<style>
+			main {
+				width: calc(100% - 2em);
+				max-width: 100%;
+				margin: 0;
+			}
+			.hero-image {
+				width: 100%;
+			}
+			.hero-image img {
+				display: block;
+				margin: 0 auto;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
+			.prose {
+				width: 720px;
+				max-width: calc(100% - 2em);
+				margin: auto;
+				padding: 1em;
+				color: rgb(var(--gray-dark));
+			}
+			.byline {
+				display: flex;
+				align-items: center;
+				gap: 0.75em;
+				margin: 1.5em 0 1em 0;
+			}
+			.avatar {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 44px;
+				height: 44px;
+				flex-shrink: 0;
+				border-radius: 50%;
+				background: var(--accent);
+				color: #fff;
+				font-weight: 700;
+			}
+			.author-name {
+				margin: 0;
+				font-weight: 700;
+				color: rgb(var(--black));
+			}
+			.date {
+				margin: 0;
+				color: rgb(var(--gray));
+				font-size: 0.9em;
+			}
+			.delete-button {
+				margin-left: auto;
+				padding: 0.4em 0.9em;
+				border: 1px solid #b3261e;
+				border-radius: 999px;
+				background: none;
+				color: #b3261e;
+				cursor: pointer;
+				font-family: inherit;
+				font-size: 0.85em;
+			}
+			.delete-button:hover {
+				background: #fdecea;
+			}
+			h1 {
+				margin: 0 0 0.5em 0;
+				line-height: 1.15;
+			}
+			.post-video {
+				width: 100%;
+				border-radius: 12px;
+				margin: 1.5em 0;
+				box-shadow: var(--box-shadow);
+			}
+			.post-body {
+				margin-top: 1.5em;
+			}
+			.post-body :global(p) {
+				margin-bottom: 1.3em;
+			}
+		</style>
+	</body>
+</html>

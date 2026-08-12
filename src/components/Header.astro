@@ -1,6 +1,13 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { SITE_TITLE } from '../consts';
+import type { AuthUser } from '../lib/auth';
+
+interface Props {
+	user?: AuthUser | null;
+}
+
+const { user = null } = Astro.props;
 ---
 
 <header>
@@ -10,6 +17,30 @@ import { SITE_TITLE } from '../consts';
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
+		</div>
+		<div class="auth-links">
+			{
+				user ? (
+					<>
+						<a class="write-link" href="/blog/new">
+							✏️ Write
+						</a>
+						<span class="greeting">Hi, {user.displayName}</span>
+						<form method="POST" action="/api/auth/logout">
+							<button class="link-button" type="submit">
+								Log out
+							</button>
+						</form>
+					</>
+				) : (
+					<>
+						<a href="/login">Log in</a>
+						<a class="write-link" href="/signup">
+							Sign up
+						</a>
+					</>
+				)
+			}
 		</div>
 		<div class="social-links">
 			<a href="https://m.webtoo.ls/@astro" target="_blank">
@@ -77,8 +108,49 @@ import { SITE_TITLE } from '../consts';
 	.social-links a {
 		display: flex;
 	}
+	.auth-links {
+		display: flex;
+		align-items: center;
+		gap: 0.75em;
+		font-size: 0.9em;
+	}
+	.auth-links a {
+		padding: 0.4em 0;
+		border-bottom: none;
+	}
+	.greeting {
+		color: rgb(var(--gray));
+		white-space: nowrap;
+	}
+	.write-link {
+		padding: 0.5em 1em !important;
+		border-radius: 999px;
+		background: var(--accent);
+		color: #fff !important;
+		font-weight: 700;
+	}
+	.write-link:hover {
+		background: var(--accent-dark);
+		color: #fff;
+	}
+	.link-button {
+		background: none;
+		border: none;
+		padding: 0;
+		color: var(--black);
+		font-family: inherit;
+		font-size: 1em;
+		cursor: pointer;
+		text-decoration: underline;
+	}
+	.link-button:hover {
+		color: var(--accent);
+	}
 	@media (max-width: 720px) {
 		.social-links {
+			display: none;
+		}
+		.greeting {
 			display: none;
 		}
 	}

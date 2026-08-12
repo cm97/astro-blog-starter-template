@@ -1,0 +1,404 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+
+export const prerender = false;
+
+if (!Astro.locals.user) return Astro.redirect('/login');
+const user = Astro.locals.user;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Write a post — ${SITE_TITLE}`} description="Share a new post." />
+	</head>
+	<body>
+		<Header user={user} />
+		<main class="composer-main">
+			<h1>Write a post</h1>
+			<p class="composer-subtitle">Posting as <strong>{user.displayName}</strong></p>
+
+			<form data-post-form>
+				<label class="field-label" for="title">Title</label>
+				<input id="title" name="title" type="text" maxlength="140" placeholder="Give your post a title" required />
+
+				<div class="media-row">
+					<label class="media-picker">
+						<span class="media-picker__label">🖼️ Cover image</span>
+						<input type="file" name="cover" accept="image/jpeg,image/png,image/webp,image/gif" data-cover-input />
+					</label>
+					<label class="media-picker">
+						<span class="media-picker__label">🎬 Video</span>
+						<input type="file" name="video" accept="video/mp4,video/webm,video/quicktime" data-video-input />
+					</label>
+				</div>
+				<div class="media-preview" data-media-preview></div>
+
+				<label class="field-label" for="body">Post</label>
+				<div class="toolbar" role="toolbar" aria-label="Formatting">
+					<button type="button" data-cmd="bold" title="Bold"><strong>B</strong></button>
+					<button type="button" data-cmd="italic" title="Italic"><em>I</em></button>
+					<button type="button" data-cmd="heading" title="Heading">H2</button>
+					<button type="button" data-cmd="quote" title="Quote">&ldquo;</button>
+					<button type="button" data-cmd="list" title="Bulleted list">&bull; List</button>
+					<button type="button" data-cmd="numbered" title="Numbered list">1. List</button>
+					<button type="button" data-cmd="link" title="Link">🔗</button>
+					<button type="button" data-cmd="code" title="Code">&lt;/&gt;</button>
+					<button type="button" data-cmd="image" title="Insert image">🖼️</button>
+					<input type="file" data-inline-image-input accept="image/jpeg,image/png,image/webp,image/gif" hidden />
+					<span class="toolbar__status" data-toolbar-status role="status" aria-live="polite"></span>
+				</div>
+				<div class="editor-grid">
+					<textarea
+						id="body"
+						name="body"
+						data-body-input
+						rows="16"
+						maxlength="20000"
+						placeholder="Write in Markdown — drag & drop or paste an image to insert it."
+						required></textarea>
+					<div class="preview" data-preview aria-label="Preview">
+						<p class="preview__empty">Preview will appear here…</p>
+					</div>
+				</div>
+
+				<p class="composer-error" data-form-error role="alert" hidden></p>
+				<button class="publish-button" type="submit" data-submit-button>Publish post</button>
+			</form>
+		</main>
+		<Footer />
+		<script>
+			const form = document.querySelector<HTMLFormElement>('[data-post-form]');
+			const body = document.querySelector<HTMLTextAreaElement>('[data-body-input]');
+			const preview = document.querySelector<HTMLDivElement>('[data-preview]');
+			const toolbarStatus = document.querySelector<HTMLElement>('[data-toolbar-status]');
+			const formError = document.querySelector<HTMLElement>('[data-form-error]');
+			const submitButton = document.querySelector<HTMLButtonElement>('[data-submit-button]');
+			const mediaPreview = document.querySelector<HTMLDivElement>('[data-media-preview]');
+			const coverInput = document.querySelector<HTMLInputElement>('[data-cover-input]');
+			const videoInput = document.querySelector<HTMLInputElement>('[data-video-input]');
+			const inlineImageInput = document.querySelector<HTMLInputElement>('[data-inline-image-input]');
+
+			if (!form || !body || !preview) throw new Error('Composer failed to initialize.');
+
+			function insertAtCursor(before: string, after = '') {
+				const start = body!.selectionStart;
+				const end = body!.selectionEnd;
+				const value = body!.value;
+				const selected = value.slice(start, end);
+				body!.value = value.slice(0, start) + before + selected + after + value.slice(end);
+				const cursor = start + before.length + selected.length + after.length;
+				body!.focus();
+				body!.setSelectionRange(cursor, cursor);
+				body!.dispatchEvent(new Event('input', { bubbles: true }));
+			}
+
+			document.querySelectorAll<HTMLButtonElement>('[data-cmd]').forEach((button) => {
+				button.addEventListener('click', () => {
+					switch (button.dataset.cmd) {
+						case 'bold':
+							insertAtCursor('**', '**');
+							break;
+						case 'italic':
+							insertAtCursor('*', '*');
+							break;
+						case 'heading':
+							insertAtCursor('\n## ', '\n');
+							break;
+						case 'quote':
+							insertAtCursor('\n> ', '\n');
+							break;
+						case 'list':
+							insertAtCursor('\n- ', '\n');
+							break;
+						case 'numbered':
+							insertAtCursor('\n1. ', '\n');
+							break;
+						case 'code':
+							insertAtCursor('`', '`');
+							break;
+						case 'link': {
+							const url = window.prompt('Link URL (https://…)');
+							if (url) insertAtCursor('[', `](${url})`);
+							break;
+						}
+						case 'image':
+							inlineImageInput?.click();
+							break;
+					}
+				});
+			});
+
+			async function uploadInlineImage(file: File) {
+				if (toolbarStatus) toolbarStatus.textContent = 'Uploading image…';
+				const data = new FormData();
+				data.set('file', file);
+				try {
+					const response = await fetch('/api/uploads', { method: 'POST', body: data });
+					const result = (await response.json()) as { url?: string; error?: string };
+					if (!response.ok || !result.url) throw new Error(result.error ?? 'Upload failed.');
+					insertAtCursor(`\n![${file.name.replace(/\.[^.]+$/, '')}](${result.url})\n`);
+					if (toolbarStatus) toolbarStatus.textContent = 'Image added.';
+				} catch (error) {
+					if (toolbarStatus) toolbarStatus.textContent = error instanceof Error ? error.message : 'Upload failed.';
+				} finally {
+					setTimeout(() => {
+						if (toolbarStatus) toolbarStatus.textContent = '';
+					}, 3000);
+				}
+			}
+
+			inlineImageInput?.addEventListener('change', () => {
+				const file = inlineImageInput.files?.[0];
+				if (file) uploadInlineImage(file);
+				inlineImageInput.value = '';
+			});
+
+			body.addEventListener('dragover', (event) => event.preventDefault());
+			body.addEventListener('drop', (event) => {
+				const file = event.dataTransfer?.files?.[0];
+				if (file && file.type.startsWith('image/')) {
+					event.preventDefault();
+					uploadInlineImage(file);
+				}
+			});
+			body.addEventListener('paste', (event) => {
+				const file = Array.from(event.clipboardData?.items ?? [])
+					.find((item) => item.type.startsWith('image/'))
+					?.getAsFile();
+				if (file) {
+					event.preventDefault();
+					uploadInlineImage(file);
+				}
+			});
+
+			let previewTimer: ReturnType<typeof setTimeout>;
+			body.addEventListener('input', () => {
+				clearTimeout(previewTimer);
+				previewTimer = setTimeout(renderPreview, 350);
+			});
+
+			async function renderPreview() {
+				if (!body!.value.trim()) {
+					preview!.innerHTML = '<p class="preview__empty">Preview will appear here…</p>';
+					return;
+				}
+				try {
+					const response = await fetch('/api/posts/preview', {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify({ markdown: body!.value }),
+					});
+					const result = (await response.json()) as { html?: string };
+					if (result.html) preview!.innerHTML = result.html;
+				} catch {
+					// Preview is best-effort; ignore failures.
+				}
+			}
+
+			function previewFile(input: HTMLInputElement, kind: 'image' | 'video') {
+				const file = input.files?.[0];
+				const existing = mediaPreview?.querySelector(`[data-preview-for="${input.name}"]`);
+				existing?.remove();
+				if (!file || !mediaPreview) return;
+
+				const url = URL.createObjectURL(file);
+				const wrapper = document.createElement('div');
+				wrapper.dataset.previewFor = input.name;
+				wrapper.className = 'media-preview__item';
+				wrapper.innerHTML =
+					kind === 'image'
+						? `<img src="${url}" alt="Cover preview" />`
+						: `<video src="${url}" controls></video>`;
+				mediaPreview.appendChild(wrapper);
+			}
+
+			coverInput?.addEventListener('change', () => previewFile(coverInput, 'image'));
+			videoInput?.addEventListener('change', () => previewFile(videoInput, 'video'));
+
+			form.addEventListener('submit', async (event) => {
+				event.preventDefault();
+				if (formError) {
+					formError.hidden = true;
+					formError.textContent = '';
+				}
+				if (submitButton) {
+					submitButton.disabled = true;
+					submitButton.textContent = 'Publishing…';
+				}
+
+				try {
+					const response = await fetch('/api/posts', { method: 'POST', body: new FormData(form) });
+					const result = (await response.json()) as { ok?: boolean; slug?: string; error?: string };
+					if (!response.ok || !result.ok || !result.slug) {
+						throw new Error(result.error ?? 'Something went wrong publishing your post.');
+					}
+					window.location.href = `/blog/post/${result.slug}`;
+				} catch (error) {
+					if (formError) {
+						formError.hidden = false;
+						formError.textContent = error instanceof Error ? error.message : 'Publish failed.';
+					}
+					if (submitButton) {
+						submitButton.disabled = false;
+						submitButton.textContent = 'Publish post';
+					}
+				}
+			});
+		</script>
+		<style>
+			.composer-main {
+				width: 820px;
+				max-width: calc(100% - 2em);
+			}
+			.composer-subtitle {
+				color: rgb(var(--gray));
+				margin-top: -0.5em;
+			}
+			form {
+				display: flex;
+				flex-direction: column;
+				gap: 0.5em;
+			}
+			.field-label {
+				font-weight: 700;
+				margin-top: 1em;
+			}
+			#title {
+				padding: 0.65em 0.9em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 8px;
+				font-family: inherit;
+				font-size: 1.2em;
+			}
+			.media-row {
+				display: flex;
+				gap: 1em;
+				flex-wrap: wrap;
+				margin-top: 0.5em;
+			}
+			.media-picker {
+				display: flex;
+				flex-direction: column;
+				gap: 0.3em;
+				padding: 0.75em 1em;
+				border: 1px dashed rgb(var(--gray-light));
+				border-radius: 12px;
+				cursor: pointer;
+				font-size: 0.9em;
+			}
+			.media-picker input {
+				font-size: 0.85em;
+			}
+			.media-preview {
+				display: flex;
+				gap: 1em;
+				flex-wrap: wrap;
+			}
+			.media-preview__item img,
+			.media-preview__item video {
+				max-width: 220px;
+				max-height: 160px;
+				border-radius: 12px;
+				box-shadow: var(--box-shadow);
+			}
+			.toolbar {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.3em;
+				align-items: center;
+				padding: 0.4em;
+				border: 1px solid rgb(var(--gray-light));
+				border-bottom: none;
+				border-radius: 10px 10px 0 0;
+				background: rgb(var(--gray-light) / 30%);
+			}
+			.toolbar button {
+				min-width: 2.2em;
+				padding: 0.4em 0.6em;
+				border: 1px solid transparent;
+				border-radius: 6px;
+				background: transparent;
+				cursor: pointer;
+				font-family: inherit;
+			}
+			.toolbar button:hover {
+				background: #fff;
+				border-color: rgb(var(--gray-light));
+			}
+			.toolbar__status {
+				margin-left: auto;
+				font-size: 0.85em;
+				color: rgb(var(--gray));
+			}
+			.editor-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 0;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 0 0 10px 10px;
+				overflow: hidden;
+			}
+			textarea[data-body-input] {
+				border: none;
+				border-right: 1px solid rgb(var(--gray-light));
+				border-radius: 0;
+				padding: 1em;
+				resize: vertical;
+				font-family: inherit;
+				line-height: 1.6;
+			}
+			.preview {
+				padding: 1em;
+				overflow-y: auto;
+				max-height: 480px;
+			}
+			.preview__empty {
+				color: rgb(var(--gray));
+				font-style: italic;
+			}
+			.preview :global(img) {
+				max-width: 100%;
+			}
+			.composer-error {
+				padding: 0.75em 1em;
+				border-radius: 8px;
+				background: #fdecea;
+				color: #b3261e;
+				font-size: 0.9em;
+			}
+			.publish-button {
+				align-self: flex-start;
+				margin-top: 0.5em;
+				padding: 0.75em 2em;
+				border: none;
+				border-radius: 999px;
+				background: var(--accent);
+				color: #fff;
+				font-weight: 700;
+				font-size: 1.05em;
+				font-family: inherit;
+				cursor: pointer;
+			}
+			.publish-button:hover {
+				background: var(--accent-dark);
+			}
+			.publish-button:disabled {
+				opacity: 0.6;
+				cursor: not-allowed;
+			}
+			@media (max-width: 720px) {
+				.editor-grid {
+					grid-template-columns: 1fr;
+				}
+				textarea[data-body-input] {
+					border-right: none;
+					border-bottom: 1px solid rgb(var(--gray-light));
+				}
+			}
+		</style>
+	</body>
+</html>

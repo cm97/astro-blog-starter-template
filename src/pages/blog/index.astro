@@ -2,110 +2,252 @@
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import FormattedDate from '../../components/FormattedDate.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
-import FormattedDate from '../../components/FormattedDate.astro';
+import { listPosts, mediaUrl } from '../../lib/posts';
+import { markdownToExcerpt } from '../../lib/markdown';
 
-const posts = (await getCollection('blog')).sort(
-	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
-);
+export const prerender = false;
+
+const user = Astro.locals.user;
+const env = Astro.locals.runtime.env;
+
+interface FeedItem {
+	href: string;
+	title: string;
+	excerpt: string;
+	authorName: string;
+	date: Date;
+	coverImage: string | null;
+	hasVideo: boolean;
+}
+
+const staticPosts: FeedItem[] = (await getCollection('blog')).map((post) => ({
+	href: `/blog/${post.id}/`,
+	title: post.data.title,
+	excerpt: post.data.description,
+	authorName: SITE_TITLE,
+	date: post.data.pubDate,
+	coverImage: post.data.heroImage ?? null,
+	hasVideo: false,
+}));
+
+const userPosts: FeedItem[] = (await listPosts(env)).map((post) => ({
+	href: `/blog/post/${post.slug}`,
+	title: post.title,
+	excerpt: markdownToExcerpt(post.bodyMarkdown),
+	authorName: post.authorDisplayName,
+	date: new Date(post.createdAt),
+	coverImage: mediaUrl(post.coverImageKey),
+	hasVideo: Boolean(post.videoKey),
+}));
+
+const feed = [...staticPosts, ...userPosts].sort((a, b) => b.date.valueOf() - a.date.valueOf());
+const [featured, ...rest] = feed;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Blog — ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header user={user} />
+		<main>
+			<section class="composer-teaser">
+				{
+					user ? (
+						<a class="composer-teaser__card" href="/blog/new">
+							<div class="composer-teaser__avatar" aria-hidden="true">
+								{user.displayName.slice(0, 1).toUpperCase()}
+							</div>
+							<span class="composer-teaser__prompt">What's on your mind, {user.displayName}?</span>
+							<span class="composer-teaser__cta">Write a post</span>
+						</a>
+					) : (
+						<a class="composer-teaser__card composer-teaser__card--guest" href="/signup">
+							<span class="composer-teaser__prompt">Have something to share?</span>
+							<span class="composer-teaser__cta">Sign up to post</span>
+						</a>
+					)
+				}
+			</section>
+
+			{feed.length === 0 && <p class="empty-feed">No posts yet — be the first to share one!</p>}
+
+			{featured && (
+				<a class="featured-card" href={featured.href}>
+					{featured.coverImage && <img class="featured-card__image" src={featured.coverImage} alt="" />}
+					<div class="featured-card__body">
+						<p class="card-meta">
+							{featured.authorName} · <FormattedDate date={featured.date} />
+							{featured.hasVideo && <span class="badge">🎬 Video</span>}
+						</p>
+						<h2 class="card-title">{featured.title}</h2>
+						<p class="card-excerpt">{featured.excerpt}</p>
+					</div>
+				</a>
+			)}
+
+			<section class="feed-grid">
+				{
+					rest.map((item) => (
+						<a class="feed-card" href={item.href}>
+							{item.coverImage && <img class="feed-card__image" src={item.coverImage} alt="" />}
+							<div class="feed-card__body">
+								<p class="card-meta">
+									{item.authorName} · <FormattedDate date={item.date} />
+									{item.hasVideo && <span class="badge">🎬 Video</span>}
+								</p>
+								<h3 class="card-title">{item.title}</h3>
+								<p class="card-excerpt">{item.excerpt}</p>
+							</div>
+						</a>
+					))
+				}
+			</section>
+		</main>
+		<Footer />
 		<style>
 			main {
 				width: 960px;
 			}
-			ul {
+			.composer-teaser {
+				margin-bottom: 2em;
+			}
+			.composer-teaser__card {
 				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
+				align-items: center;
+				gap: 1em;
+				padding: 1em 1.25em;
+				border-radius: 999px;
+				background: #fff;
+				border: 1px solid rgb(var(--gray-light));
+				box-shadow: var(--box-shadow);
 				text-decoration: none;
-				transition: 0.2s ease;
+				transition: 0.15s ease-in-out;
 			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
+			.composer-teaser__card:hover {
+				border-color: var(--accent);
 			}
-			ul li:first-child img {
-				width: 100%;
+			.composer-teaser__card--guest {
+				justify-content: space-between;
 			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
+			.composer-teaser__avatar {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				width: 40px;
+				height: 40px;
+				flex-shrink: 0;
+				border-radius: 50%;
+				background: var(--accent);
+				color: #fff;
+				font-weight: 700;
 			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
+			.composer-teaser__prompt {
+				flex: 1;
 				color: rgb(var(--gray));
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
+			.composer-teaser__cta {
+				padding: 0.5em 1.2em;
+				border-radius: 999px;
+				background: var(--accent);
+				color: #fff;
+				font-weight: 700;
+				font-size: 0.9em;
+				white-space: nowrap;
 			}
-			ul a:hover img {
+			.empty-feed {
+				text-align: center;
+				color: rgb(var(--gray));
+				padding: 2em 0;
+			}
+			.featured-card,
+			.feed-card {
+				display: block;
+				text-decoration: none;
+				color: inherit;
+				background: #fff;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 16px;
+				overflow: hidden;
+				transition: 0.15s ease-in-out;
+			}
+			.featured-card:hover,
+			.feed-card:hover {
 				box-shadow: var(--box-shadow);
+				border-color: rgb(var(--gray-light));
+			}
+			.featured-card {
+				display: grid;
+				grid-template-columns: 1.1fr 1fr;
+				align-items: stretch;
+				margin-bottom: 2em;
+			}
+			.featured-card__image {
+				width: 100%;
+				height: 100%;
+				object-fit: cover;
+				border-radius: 0;
+				margin: 0;
+			}
+			.featured-card__body {
+				padding: 1.75em;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+			}
+			.featured-card .card-title {
+				font-size: 1.9em;
+			}
+			.feed-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+				gap: 1.5em;
+			}
+			.feed-card__image {
+				width: 100%;
+				aspect-ratio: 16 / 9;
+				object-fit: cover;
+				border-radius: 0;
+				margin: 0;
+				display: block;
+			}
+			.feed-card__body {
+				padding: 1.25em;
+			}
+			.card-meta {
+				margin: 0 0 0.4em 0;
+				color: rgb(var(--gray));
+				font-size: 0.85em;
+			}
+			.badge {
+				margin-left: 0.4em;
+			}
+			.card-title {
+				margin: 0 0 0.4em 0;
+				color: rgb(var(--black));
+				line-height: 1.25;
+			}
+			.card-excerpt {
+				margin: 0;
+				color: rgb(var(--gray-dark));
+				font-size: 0.95em;
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
 			}
 			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
+				.featured-card {
+					grid-template-columns: 1fr;
 				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
+				.featured-card__image {
+					aspect-ratio: 16 / 9;
 				}
 			}
 		</style>
-	</head>
-	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
-		<Footer />
 	</body>
 </html>

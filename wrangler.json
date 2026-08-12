@@ -15,6 +15,10 @@
 		{
 			"binding": "MY_PRODUCTS",
 			"bucket_name": "buzzyfly-products"
+		},
+		{
+			"binding": "BLOG_MEDIA",
+			"bucket_name": "buzzyfly-blog-media"
 		}
 	],
 	"d1_databases": [

@@ -1,0 +1,165 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+export const prerender = false;
+
+if (Astro.locals.user) return Astro.redirect('/blog');
+
+const error = Astro.url.searchParams.get('error');
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Sign up — ${SITE_TITLE}`} description="Create an account to start posting." />
+	</head>
+	<body>
+		<Header />
+		<main class="auth-main">
+			<div class="auth-card">
+				<h1>Join {SITE_TITLE}</h1>
+				<p class="auth-subtitle">Create an account to write and share posts.</p>
+				{error && <p class="auth-error" role="alert">{error}</p>}
+				<form data-signup-form method="POST" action="/api/auth/signup">
+					<label for="displayName">Display name</label>
+					<input id="displayName" name="displayName" type="text" required maxlength="60" autocomplete="name" />
+
+					<label for="username">Username</label>
+					<input
+						id="username"
+						name="username"
+						type="text"
+						required
+						minlength="3"
+						maxlength="24"
+						pattern="[a-z0-9_]+"
+						title="Lowercase letters, numbers, and underscores only"
+						autocomplete="username"
+					/>
+
+					<label for="email">Email</label>
+					<input id="email" name="email" type="email" required autocomplete="email" />
+
+					<label for="password">Password</label>
+					<input
+						id="password"
+						name="password"
+						type="password"
+						required
+						minlength="8"
+						autocomplete="new-password"
+					/>
+
+					<button type="submit">Create account</button>
+				</form>
+				<p class="auth-switch">Already have an account? <a href="/login">Log in</a></p>
+			</div>
+		</main>
+		<Footer />
+		<script>
+			const form = document.querySelector<HTMLFormElement>('[data-signup-form]');
+			form?.addEventListener('submit', async (event) => {
+				event.preventDefault();
+				const button = form.querySelector('button');
+				if (button) button.disabled = true;
+
+				const data = new FormData(form);
+				const payload = Object.fromEntries(data.entries()) as Record<string, string>;
+				payload.username = payload.username?.toLowerCase();
+
+				try {
+					const response = await fetch(form.action, {
+						method: 'POST',
+						headers: { 'Content-Type': 'application/json' },
+						body: JSON.stringify(payload),
+					});
+					const result = (await response.json()) as { ok: boolean; error?: string };
+					if (result.ok) {
+						window.location.href = '/blog';
+						return;
+					}
+					window.location.href = `/signup?error=${encodeURIComponent(result.error ?? 'Sign up failed.')}`;
+				} catch {
+					window.location.href = '/signup?error=Something%20went%20wrong.%20Please%20try%20again.';
+				} finally {
+					if (button) button.disabled = false;
+				}
+			});
+		</script>
+		<style>
+			.auth-main {
+				display: flex;
+				justify-content: center;
+				padding: 3em 1em;
+			}
+			.auth-card {
+				width: 100%;
+				max-width: 380px;
+				padding: 2em;
+				border-radius: 16px;
+				background: #fff;
+				border: 1px solid rgb(var(--gray-light));
+				box-shadow: var(--box-shadow);
+			}
+			.auth-card h1 {
+				margin-bottom: 0.2em;
+			}
+			.auth-subtitle {
+				color: rgb(var(--gray));
+				margin-bottom: 1.5em;
+			}
+			.auth-error {
+				padding: 0.75em 1em;
+				margin-bottom: 1em;
+				border-radius: 8px;
+				background: #fdecea;
+				color: #b3261e;
+				font-size: 0.9em;
+			}
+			form {
+				display: flex;
+				flex-direction: column;
+				gap: 0.4em;
+			}
+			label {
+				font-weight: 700;
+				font-size: 0.9em;
+				margin-top: 0.6em;
+			}
+			input {
+				padding: 0.65em 0.9em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 8px;
+				font-family: inherit;
+			}
+			button {
+				margin-top: 1.5em;
+				padding: 0.75em;
+				border: none;
+				border-radius: 8px;
+				background: var(--accent);
+				color: #fff;
+				font-weight: 700;
+				font-size: 1em;
+				font-family: inherit;
+				cursor: pointer;
+			}
+			button:hover {
+				background: var(--accent-dark);
+			}
+			button:disabled {
+				opacity: 0.6;
+				cursor: not-allowed;
+			}
+			.auth-switch {
+				margin: 1.5em 0 0 0;
+				text-align: center;
+				font-size: 0.9em;
+				color: rgb(var(--gray));
+			}
+		</style>
+	</body>
+</html>

@@ -9,7 +9,11 @@ declare namespace Cloudflare {
 		ASSETS: Fetcher;
 		// Private R2 bucket holding purchasable Buzzyfly digital assets.
 		MY_PRODUCTS: R2Bucket;
-		// Optional D1 database for newsletter subscribers / fulfillment records.
+		// Public R2 bucket holding reader-uploaded blog media (cover images,
+		// inline post images, post videos), served via /media/[...key].
+		BLOG_MEDIA: R2Bucket;
+		// Optional D1 database for newsletter subscribers / fulfillment records,
+		// and for the registered-user blog platform (users, sessions, posts).
 		DB?: D1Database;
 		// Secrets — set via `wrangler secret put <NAME>` or the Cloudflare
 		// dashboard. Never committed to source control.
