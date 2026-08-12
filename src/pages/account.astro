@@ -1,0 +1,195 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+import { readSessionCookie, verifySessionToken } from '../lib/auth';
+import { createDownloadToken, resolveProductFile } from '../lib/fulfillment';
+
+export const prerender = false;
+
+const env = Astro.locals.runtime.env;
+
+if (!env.SESSION_TOKEN_SECRET) {
+	return Astro.redirect('/login?error=invalid');
+}
+
+const sessionToken = readSessionCookie(Astro.request.headers.get('cookie'));
+const email = sessionToken ? await verifySessionToken(sessionToken, env.SESSION_TOKEN_SECRET) : null;
+
+if (!email) {
+	return Astro.redirect('/login');
+}
+
+type OrderRow = {
+	provider: string;
+	order_id: string;
+	item_id: string;
+	created_at: number;
+};
+
+let orders: (OrderRow & { downloadUrl: string | null; fileName: string | null })[] = [];
+
+if (env.DB) {
+	const result = await env.DB.prepare(
+		`SELECT provider, order_id, item_id, created_at FROM fulfillments
+		 WHERE LOWER(customer_email) = ? ORDER BY created_at DESC`,
+	)
+		.bind(email)
+		.all<OrderRow>();
+
+	orders = await Promise.all(
+		(result.results ?? []).map(async (order) => {
+			const productFile = resolveProductFile(order.item_id);
+			if (!productFile || !env.DOWNLOAD_TOKEN_SECRET) {
+				return { ...order, downloadUrl: null, fileName: productFile?.fileName ?? null };
+			}
+			const token = await createDownloadToken(
+				{ orderId: order.order_id, itemId: order.item_id },
+				env.DOWNLOAD_TOKEN_SECRET,
+			);
+			return { ...order, downloadUrl: `/api/download?token=${token}`, fileName: productFile.fileName };
+		}),
+	);
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Account | ${SITE_TITLE}`} description="Your Buzzy Fly account." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<div class="account-header">
+				<div>
+					<h1>Your account</h1>
+					<p class="signed-in-as">Signed in as {email}</p>
+				</div>
+				<form method="POST" action="/api/auth/logout">
+					<button type="submit" class="logout">Log out</button>
+				</form>
+			</div>
+
+			{
+				orders.length === 0 ? (
+					<p class="empty">No orders found for this email yet.</p>
+				) : (
+					<ul class="orders">
+						{orders.map((order) => (
+							<li class="order-card">
+								<div>
+									<h3>{order.fileName ?? order.item_id}</h3>
+									<p class="meta">
+										Order {order.order_id} &middot; {new Date(order.created_at).toLocaleDateString()}
+									</p>
+								</div>
+								{order.downloadUrl ? (
+									<a class="download" href={order.downloadUrl}>
+										Download
+									</a>
+								) : (
+									<span class="unavailable">Unavailable</span>
+								)}
+							</li>
+						))}
+					</ul>
+				)
+			}
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		max-width: 720px;
+	}
+	.account-header {
+		display: flex;
+		align-items: flex-start;
+		justify-content: space-between;
+		gap: 1em;
+		margin-bottom: 2em;
+	}
+	.account-header h1 {
+		margin: 0 0 0.25em 0;
+	}
+	.signed-in-as {
+		margin: 0;
+		color: rgb(var(--gray-dark));
+	}
+	.logout {
+		padding: 0.6em 1.25em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 999px;
+		background: white;
+		color: rgb(var(--gray-dark));
+		font-weight: 700;
+		font-family: inherit;
+		cursor: pointer;
+		white-space: nowrap;
+	}
+	.logout:hover {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+	.empty {
+		color: rgb(var(--gray-dark));
+	}
+	.orders {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: flex;
+		flex-direction: column;
+		gap: 1em;
+	}
+	.order-card {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1em;
+		padding: 1.25em 1.5em;
+		border-radius: 12px;
+		background: white;
+		box-shadow: var(--box-shadow);
+	}
+	.order-card h3 {
+		margin: 0 0 0.2em 0;
+	}
+	.meta {
+		margin: 0;
+		font-size: 0.85em;
+		color: rgb(var(--gray));
+	}
+	.download {
+		flex-shrink: 0;
+		padding: 0.6em 1.25em;
+		border-radius: 999px;
+		background: #123230;
+		color: white;
+		font-weight: 700;
+		text-decoration: none;
+		white-space: nowrap;
+	}
+	.download:hover {
+		background: #1c4b49;
+		color: white;
+	}
+	.unavailable {
+		flex-shrink: 0;
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+	}
+	@media (max-width: 600px) {
+		.account-header {
+			flex-direction: column;
+		}
+		.order-card {
+			flex-direction: column;
+			align-items: flex-start;
+		}
+	}
+</style>

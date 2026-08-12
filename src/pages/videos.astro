@@ -1,0 +1,54 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import VideoCard from '../components/VideoCard.astro';
+import { SITE_TITLE } from '../consts';
+import { VIDEOS } from '../data/videos';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Videos | ${SITE_TITLE}`} description="Watch the latest from Buzzy Fly." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<h1>Videos</h1>
+			<p class="intro">Everything we've put together so far, in one place.</p>
+			<div class="video-grid">
+				{VIDEOS.map((video) => <VideoCard video={video} />)}
+			</div>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: 1100px;
+		padding: 3em 1.5em;
+	}
+	.intro {
+		color: rgb(var(--gray-dark));
+		margin-top: -0.25em;
+	}
+	.video-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 2em;
+		margin-top: 2em;
+	}
+	@media (max-width: 900px) {
+		.video-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+	@media (max-width: 600px) {
+		.video-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>

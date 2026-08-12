@@ -1,0 +1,82 @@
+---
+import { SEARCH_ENGINE_URL } from '../utils/search';
+---
+
+<form class="portal-search" action={SEARCH_ENGINE_URL} method="get" target="_blank" rel="noopener">
+	<label for="portal-search-input" class="sr-only">Search the web</label>
+	<svg class="icon" viewBox="0 0 16 16" aria-hidden="true" width="20" height="20"
+		><path
+			fill="currentColor"
+			d="M11.29 9.71a6 6 0 1 0-1.58 1.58l3.5 3.5 1.58-1.58zM6 10.5A4.5 4.5 0 1 1 10.5 6 4.5 4.5 0 0 1 6 10.5z"
+		></path></svg
+	>
+	<input
+		id="portal-search-input"
+		name="q"
+		type="search"
+		placeholder="Search Buzzy Fly and the web"
+		autocomplete="off"
+		required
+	/>
+	<button type="submit">Search</button>
+</form>
+
+<style>
+	.portal-search {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		width: 100%;
+		max-width: 42em;
+		margin: 0 auto;
+		padding: 0.6em 0.75em 0.6em 1.1em;
+		border-radius: 999px;
+		background: white;
+		box-shadow: 0 12px 32px rgba(0, 0, 0, 0.28);
+	}
+	.icon {
+		flex-shrink: 0;
+		color: rgb(var(--gray));
+	}
+	.portal-search input {
+		flex: 1;
+		border: none;
+		outline: none;
+		font: inherit;
+		font-size: 1.05em;
+		padding: 0.4em 0;
+		color: rgb(var(--gray-dark));
+	}
+	.portal-search button {
+		flex-shrink: 0;
+		padding: 0.6em 1.4em;
+		border: none;
+		border-radius: 999px;
+		background: #123230;
+		color: white;
+		font-weight: 700;
+		cursor: pointer;
+		transition: background 0.15s ease;
+	}
+	.portal-search button:hover {
+		background: #1c4b49;
+	}
+	@media (max-width: 480px) {
+		.portal-search button {
+			padding: 0.6em 1em;
+		}
+	}
+</style>
+
+<script>
+	import { buildSearchUrl } from '../utils/search';
+
+	const form = document.querySelector<HTMLFormElement>('.portal-search');
+	const input = document.getElementById('portal-search-input') as HTMLInputElement | null;
+
+	form?.addEventListener('submit', (event) => {
+		if (!input || !buildSearchUrl(input.value)) {
+			event.preventDefault();
+		}
+	});
+</script>

@@ -6,3 +6,14 @@ LEMONSQUEEZY_WEBHOOK_SECRET=...
 DOWNLOAD_TOKEN_SECRET=change-me-to-a-long-random-string
 NEWSLETTER_API_URL=
 NEWSLETTER_API_KEY=
+
+# Customer login (passwordless magic link + session cookie). Use two
+# different long random strings so a leaked short-lived login link can't be
+# replayed as a long-lived session.
+LOGIN_TOKEN_SECRET=change-me-to-a-long-random-string
+SESSION_TOKEN_SECRET=change-me-to-a-different-long-random-string
+# Optional: a transactional email API to send the login link through. If
+# unset, the link is logged to the console instead — handy for local dev,
+# but set this in production or customers will never receive their link.
+AUTH_EMAIL_API_URL=
+AUTH_EMAIL_API_KEY=

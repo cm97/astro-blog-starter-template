@@ -1,0 +1,164 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_TITLE } from '../consts';
+
+const error = new URL(Astro.request.url).searchParams.get('error');
+const errorMessage =
+	error === 'expired'
+		? "That login link has expired. Request a new one below."
+		: error === 'invalid'
+			? "That login link isn't valid. Request a new one below."
+			: null;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Log In | ${SITE_TITLE}`} description="Log in to your Buzzy Fly account." />
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="login-card">
+				<h1>Log in</h1>
+				<p class="intro">
+					Bought something from us? Enter the email you used at checkout and we'll send you a
+					link to log in — no password needed.
+				</p>
+				{errorMessage && <p class="error-banner" role="alert">{errorMessage}</p>}
+				<form data-login-form>
+					<label class="sr-only" for="login-email">Email address</label>
+					<input
+						id="login-email"
+						type="email"
+						name="email"
+						placeholder="you@example.com"
+						autocomplete="email"
+						required
+					/>
+					<button type="submit">Send login link</button>
+				</form>
+				<p class="status" data-login-status role="status" aria-live="polite"></p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	main {
+		display: flex;
+		justify-content: center;
+	}
+	.login-card {
+		width: 100%;
+		max-width: 28em;
+		padding: 2.5em;
+		border-radius: 16px;
+		background: white;
+		box-shadow: var(--box-shadow);
+		text-align: center;
+	}
+	.login-card h1 {
+		margin: 0 0 0.5em 0;
+	}
+	.intro {
+		margin: 0 0 1.5em 0;
+		color: rgb(var(--gray-dark));
+	}
+	.error-banner {
+		margin: 0 0 1.25em 0;
+		padding: 0.75em 1em;
+		border-radius: 8px;
+		background: #fdecea;
+		color: #b3261e;
+		font-size: 0.9em;
+	}
+	form {
+		display: flex;
+		flex-direction: column;
+		gap: 0.75em;
+	}
+	input {
+		padding: 0.75em 1em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		font-family: inherit;
+		font-size: 1em;
+	}
+	button {
+		padding: 0.75em 1.5em;
+		border: none;
+		border-radius: 999px;
+		background: #123230;
+		color: white;
+		font-weight: 700;
+		font-size: 1em;
+		font-family: inherit;
+		cursor: pointer;
+		transition: background-color 0.15s ease;
+	}
+	button:hover {
+		background: #1c4b49;
+	}
+	button:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+	.status {
+		margin: 1em 0 0 0;
+		min-height: 1.2em;
+		font-size: 0.9em;
+		color: rgb(var(--gray));
+	}
+	.status[data-state='success'] {
+		color: #1a7a3c;
+	}
+	.status[data-state='error'] {
+		color: #b3261e;
+	}
+</style>
+
+<script>
+	const form = document.querySelector<HTMLFormElement>('[data-login-form]');
+	const statusEl = document.querySelector<HTMLElement>('[data-login-status]');
+
+	form?.addEventListener('submit', async (event) => {
+		event.preventDefault();
+
+		const submitButton = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+		const emailInput = form.querySelector<HTMLInputElement>('input[name="email"]');
+		const email = emailInput?.value ?? '';
+
+		if (submitButton) submitButton.disabled = true;
+		if (statusEl) {
+			statusEl.textContent = 'Sending…';
+			statusEl.dataset.state = 'pending';
+		}
+
+		try {
+			const response = await fetch('/api/auth/request-login', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ email }),
+			});
+
+			if (!response.ok) throw new Error('Request failed');
+
+			if (statusEl) {
+				statusEl.textContent = "Check your email for a login link. It's valid for 15 minutes.";
+				statusEl.dataset.state = 'success';
+			}
+			form.reset();
+		} catch {
+			if (statusEl) {
+				statusEl.textContent = 'Something went wrong. Please try again.';
+				statusEl.dataset.state = 'error';
+			}
+		} finally {
+			if (submitButton) submitButton.disabled = false;
+		}
+	});
+</script>

@@ -18,6 +18,11 @@ declare namespace Cloudflare {
 		DOWNLOAD_TOKEN_SECRET?: string;
 		NEWSLETTER_API_URL?: string;
 		NEWSLETTER_API_KEY?: string;
+		// Customer login (passwordless magic link + session cookie).
+		LOGIN_TOKEN_SECRET?: string;
+		SESSION_TOKEN_SECRET?: string;
+		AUTH_EMAIL_API_URL?: string;
+		AUTH_EMAIL_API_KEY?: string;
 	}
 }
 interface Env extends Cloudflare.Env {}

@@ -35,8 +35,14 @@ body {
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
+	background-color: #fff;
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.93), rgba(255, 255, 255, 0.93)),
+		url("/buzzyfly-badge.webp");
+	background-repeat: no-repeat, repeat;
+	background-size:
+		100% 100%,
+		140px 140px;
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));

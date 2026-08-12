@@ -2,47 +2,267 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import PortalSearch from '../components/PortalSearch.astro';
+import VideoCard from '../components/VideoCard.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { VIDEOS } from '../data/videos';
+
+// Placeholder copy below — swap in real brand messaging whenever it's ready.
+const pillars = [
+	{
+		title: 'Relentless',
+		description: "We don't slow down. Buzzy Fly keeps moving, keeps building, keeps buzzing.",
+	},
+	{
+		title: 'Bold',
+		description: 'Small in size, loud in impact. We show up different, on purpose.',
+	},
+	{
+		title: 'Community-driven',
+		description: 'Built with — and for — the people who follow along.',
+	},
+];
+
+const quickLinks = [
+	{ href: '/blog', label: 'Blog', description: 'Latest posts and updates.' },
+	{ href: '/videos', label: 'Videos', description: 'Watch the latest from the team.' },
+	{ href: '/about', label: 'About', description: 'The story so far.' },
+];
+
+const featuredVideos = VIDEOS.slice(0, 3);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} image="/buzzyfly-badge.webp" />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🪰 Buzzyfly Welcome/h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">buzzyfly space</a>.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://www.buzzyfly.com">buzzy-fly</a>.
-			</p>
+			<section class="hero">
+				<div class="hero-glow" aria-hidden="true"></div>
+				<div class="hero-badge-frame">
+					<img class="hero-badge" src="/buzzyfly-badge.webp" alt="Buzzy Fly badge logo" width="260" height="141" />
+				</div>
+				<h1>Buzzy Fly</h1>
+				<p class="tagline">{SITE_DESCRIPTION}</p>
+				<PortalSearch />
+				<div class="hero-links">
+					{
+						quickLinks.map((link) => (
+							<a class="hero-link" href={link.href}>
+								{link.label}
+							</a>
+						))
+					}
+				</div>
+			</section>
+
+			<section class="pillars">
+				{
+					pillars.map((pillar) => (
+						<div class="pillar-card">
+							<h3>{pillar.title}</h3>
+							<p>{pillar.description}</p>
+						</div>
+					))
+				}
+			</section>
+
+			<section class="videos-teaser">
+				<div class="videos-teaser-header">
+					<h2>Watch</h2>
+					<a class="see-all" href="/videos">See all videos &rarr;</a>
+				</div>
+				<div class="video-grid">
+					{featuredVideos.map((video) => <VideoCard video={video} />)}
+				</div>
+			</section>
+
+			<section class="about-teaser">
+				<img src="/buzzyfly-badge.webp" alt="" width="72" height="72" aria-hidden="true" />
+				<div>
+					<h2>The story so far</h2>
+					<p>
+						Buzzy Fly is just getting started. This is a placeholder home page — come back soon for
+						the full story, or <a href="/about">read more on the About page</a>.
+					</p>
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	.hero {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 1em;
+		padding: 4.5em 1em 5.5em;
+		text-align: center;
+		background: linear-gradient(180deg, #0d2422 0%, #123230 45%, #1c4b49 100%);
+		color: white;
+		overflow: hidden;
+	}
+	.hero-glow {
+		position: absolute;
+		inset: -20% -10% auto -10%;
+		height: 60%;
+		z-index: -1;
+		background: radial-gradient(50% 50% at 50% 0%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
+		pointer-events: none;
+	}
+	.hero-badge-frame {
+		display: inline-block;
+		padding: 0.75em 1em;
+		border-radius: 16px;
+		background: white;
+		box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+	}
+	.hero-badge {
+		display: block;
+		width: 180px;
+		height: auto;
+	}
+	.hero h1 {
+		margin: 0;
+		color: white;
+		font-size: 3.052em;
+	}
+	.hero .tagline {
+		margin: 0;
+		max-width: 32em;
+		font-size: 1.25em;
+		color: rgba(255, 255, 255, 0.85);
+	}
+	.hero-links {
+		display: flex;
+		gap: 1.5em;
+		margin-top: 0.5em;
+	}
+	.hero-link {
+		color: rgba(255, 255, 255, 0.85);
+		font-weight: 700;
+		text-decoration: none;
+		border-bottom: 2px solid transparent;
+		padding-bottom: 0.2em;
+	}
+	.hero-link:hover {
+		color: white;
+		border-bottom-color: white;
+	}
+
+	.pillars {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5em;
+		max-width: 1020px;
+		margin: 0 auto;
+		padding: 3.5em 1.5em;
+	}
+	.pillar-card {
+		padding: 1.75em;
+		border-radius: 12px;
+		background: white;
+		box-shadow: var(--box-shadow);
+		text-align: left;
+	}
+	.pillar-card h3 {
+		margin: 0 0 0.5em 0;
+		color: #1c4b49;
+	}
+	.pillar-card p {
+		margin: 0;
+		color: rgb(var(--gray-dark));
+	}
+
+	.videos-teaser {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 1em 1.5em 3.5em;
+	}
+	.videos-teaser-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: 1.25em;
+	}
+	.videos-teaser-header h2 {
+		margin: 0;
+	}
+	.see-all {
+		font-weight: 700;
+		white-space: nowrap;
+	}
+	.video-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5em;
+	}
+
+	.about-teaser {
+		display: flex;
+		align-items: center;
+		gap: 1.5em;
+		max-width: 720px;
+		margin: 0 auto;
+		padding: 1em 1.5em 5em;
+	}
+	.about-teaser img {
+		flex-shrink: 0;
+		object-fit: contain;
+	}
+	.about-teaser h2 {
+		margin: 0 0 0.35em 0;
+	}
+	.about-teaser p {
+		margin: 0;
+		color: rgb(var(--gray-dark));
+	}
+
+	@media (max-width: 900px) {
+		.video-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
+	@media (max-width: 720px) {
+		.hero {
+			padding: 3em 1em 3.5em;
+		}
+		.hero h1 {
+			font-size: 2.2em;
+		}
+		.hero-links {
+			flex-wrap: wrap;
+			justify-content: center;
+		}
+		.pillars {
+			grid-template-columns: 1fr;
+			padding: 2.5em 1em;
+		}
+		.videos-teaser-header {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.35em;
+		}
+		.video-grid {
+			grid-template-columns: 1fr;
+		}
+		.about-teaser {
+			flex-direction: column;
+			text-align: center;
+			padding: 0.5em 1.5em 3.5em;
+		}
+	}
+</style>
