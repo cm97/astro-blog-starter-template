@@ -1,0 +1,289 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+
+export const prerender = false;
+
+const env = Astro.locals.runtime.env;
+const saved = Astro.url.searchParams.get('saved');
+
+type AboutRow = { title: string; description: string; hero_image: string; body: string };
+let about: AboutRow | null = null;
+const settings: Record<string, string> = {};
+let mediaItems: { url: string; key: string; size: number }[] = [];
+let dbError = false;
+
+if (env.DB) {
+	try {
+		about =
+			(await env.DB.prepare(
+				`SELECT title, description, hero_image, body FROM site_content WHERE slug = 'about'`,
+			).first<AboutRow>()) ?? null;
+
+		const settingsRows = await env.DB.prepare(`SELECT key, value FROM site_settings`).all<{
+			key: string;
+			value: string;
+		}>();
+		for (const row of settingsRows.results ?? []) settings[row.key] = row.value;
+	} catch {
+		dbError = true;
+	}
+}
+
+if (env.MY_PRODUCTS) {
+	const listed = await env.MY_PRODUCTS.list({ prefix: 'site-media/' });
+	mediaItems = listed.objects
+		.sort((a, b) => b.uploaded.getTime() - a.uploaded.getTime())
+		.map((obj) => ({
+			key: obj.key,
+			url: `/media/${obj.key.replace('site-media/', '')}`,
+			size: obj.size,
+		}));
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="Admin — Buzzyfly" description="Buzzyfly admin console." />
+		<meta name="robots" content="noindex, nofollow" />
+	</head>
+	<body>
+		<header class="admin-header">
+			<h1>🪰 Buzzyfly Admin</h1>
+			<form method="POST" action="/api/admin/logout"><button type="submit">Log out</button></form>
+		</header>
+
+		<main class="admin-main">
+			{
+				dbError && (
+					<p class="banner banner-error">
+						The admin database tables haven't been created yet. Run the migration first:{' '}
+						<code>npx wrangler d1 execute buzzy-fly_db --remote --file=./migrations/0001_admin_console.sql</code>
+					</p>
+				)
+			}
+			{saved === 'content' && <p class="banner banner-ok">About page saved.</p>}
+			{saved === 'settings' && <p class="banner banner-ok">Site settings saved.</p>}
+			{saved === 'media' && <p class="banner banner-ok">Image uploaded.</p>}
+
+			<section class="card">
+				<h2>About page</h2>
+				<p class="hint">
+					Edit the text and hero image on <a href="/about" target="_blank">/about</a>. Leave a
+					field blank to keep the built-in default for it.
+				</p>
+				<form method="POST" action="/api/admin/content">
+					<input type="hidden" name="slug" value="about" />
+					<label for="title">Title</label>
+					<input id="title" name="title" type="text" value={about?.title ?? ''} placeholder="About Me" />
+
+					<label for="description">Description (used for SEO / link previews)</label>
+					<input
+						id="description"
+						name="description"
+						type="text"
+						value={about?.description ?? ''}
+						placeholder="How a mosquito bite..."
+					/>
+
+					<label for="hero_image">Hero image URL</label>
+					<input
+						id="hero_image"
+						name="hero_image"
+						type="text"
+						value={about?.hero_image ?? ''}
+						placeholder="/buzzyfly-about-hero.svg or /media/your-upload.jpg"
+					/>
+
+					<label for="body">Body (leave a blank line between paragraphs)</label>
+					<textarea id="body" name="body" rows="14">{about?.body ?? ''}</textarea>
+
+					<button type="submit">Save About page</button>
+				</form>
+			</section>
+
+			<section class="card">
+				<h2>Site settings</h2>
+				<p class="hint">Accent color applies site-wide on the homepage and About page immediately.</p>
+				<form method="POST" action="/api/admin/settings">
+					<label for="accent_color">Accent color</label>
+					<input
+						id="accent_color"
+						name="accent_color"
+						type="color"
+						value={settings.accent_color ?? '#2337ff'}
+					/>
+
+					<label for="site_title">Homepage title</label>
+					<input id="site_title" name="site_title" type="text" value={settings.site_title ?? ''} placeholder="Buzzyfly" />
+
+					<label for="site_description">Homepage description</label>
+					<input
+						id="site_description"
+						name="site_description"
+						type="text"
+						value={settings.site_description ?? ''}
+						placeholder="The official Buzzyfly blog."
+					/>
+
+					<button type="submit">Save settings</button>
+				</form>
+			</section>
+
+			<section class="card">
+				<h2>Media library</h2>
+				<p class="hint">
+					Upload an image, then copy its URL into a hero image field above (or into a blog
+					post). PNG, JPEG, WebP, GIF, or SVG — 8MB max.
+				</p>
+				<form method="POST" action="/api/admin/media" enctype="multipart/form-data" class="upload-form">
+					<input type="file" name="file" accept="image/png,image/jpeg,image/webp,image/gif,image/svg+xml" required />
+					<button type="submit">Upload</button>
+				</form>
+
+				{mediaItems.length > 0 && (
+					<div class="media-grid">
+						{mediaItems.map((item) => (
+							<div class="media-item">
+								<img src={item.url} alt={item.key} loading="lazy" />
+								<code>{item.url}</code>
+							</div>
+						))}
+					</div>
+				)}
+			</section>
+		</main>
+	</body>
+</html>
+
+<style>
+	.admin-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1em 1.5em;
+		background: #fff;
+		box-shadow: 0 2px 8px rgba(var(--black), 5%);
+	}
+	.admin-header h1 {
+		margin: 0;
+		font-size: 1.1em;
+	}
+	.admin-header button {
+		padding: 0.5em 1em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		background: #fff;
+		cursor: pointer;
+		font-family: inherit;
+	}
+	.admin-main {
+		max-width: 760px;
+		margin: 0 auto;
+		padding: 2em 1em 4em;
+		display: flex;
+		flex-direction: column;
+		gap: 1.5em;
+	}
+	.banner {
+		margin: 0;
+		padding: 0.8em 1em;
+		border-radius: 8px;
+		font-size: 0.9em;
+	}
+	.banner-ok {
+		background: #e6f6ec;
+		color: #1a7a3c;
+	}
+	.banner-error {
+		background: #fdecea;
+		color: #b3261e;
+	}
+	.banner-error code {
+		display: inline-block;
+		margin-top: 0.3em;
+		word-break: break-all;
+	}
+	.card {
+		padding: 1.5em;
+		border-radius: 16px;
+		background: #fff;
+		box-shadow: var(--box-shadow);
+	}
+	.card h2 {
+		margin: 0 0 0.3em;
+		font-size: 1.3em;
+	}
+	.hint {
+		margin: 0 0 1em;
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+	}
+	.card form {
+		display: flex;
+		flex-direction: column;
+		gap: 0.4em;
+	}
+	.card label {
+		font-size: 0.85em;
+		font-weight: 700;
+		color: rgb(var(--gray-dark));
+		margin-top: 0.6em;
+	}
+	.card input[type='text'],
+	.card input[type='color'],
+	.card textarea {
+		padding: 0.6em 0.8em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		font-family: inherit;
+		font-size: 1em;
+	}
+	.card input[type='color'] {
+		padding: 0.2em;
+		width: 4em;
+	}
+	.card textarea {
+		resize: vertical;
+	}
+	.card button {
+		align-self: flex-start;
+		margin-top: 1em;
+		padding: 0.65em 1.4em;
+		border: none;
+		border-radius: 8px;
+		background: var(--accent);
+		color: #fff;
+		font-weight: 700;
+		font-family: inherit;
+		cursor: pointer;
+	}
+	.card button:hover {
+		background: var(--accent-dark);
+	}
+	.upload-form {
+		flex-direction: row !important;
+		align-items: center;
+		gap: 0.8em !important;
+	}
+	.media-grid {
+		margin-top: 1.5em;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+		gap: 1em;
+	}
+	.media-item img {
+		width: 100%;
+		height: 90px;
+		object-fit: cover;
+		border-radius: 8px;
+		background: rgb(var(--gray-light));
+	}
+	.media-item code {
+		display: block;
+		margin-top: 0.3em;
+		font-size: 0.7em;
+		word-break: break-all;
+		color: rgb(var(--gray));
+	}
+</style>

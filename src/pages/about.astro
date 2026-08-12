@@ -1,66 +1,100 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
+
+// Editable from /admin (About page content), stored in D1's `site_content`
+// table. Until it's been edited there, the page renders the copy below
+// as-is; after a save, it renders the saved plain-text body instead (split
+// into paragraphs on blank lines).
+export const prerender = false;
+
+type AboutRow = { title: string; description: string; hero_image: string; body: string };
+
+let saved: AboutRow | null = null;
+const db = Astro.locals?.runtime?.env?.DB;
+if (db) {
+	try {
+		const row = await db
+			.prepare(`SELECT title, description, hero_image, body FROM site_content WHERE slug = 'about'`)
+			.first<AboutRow>();
+		if (row && row.body) saved = row;
+	} catch {
+		// site_content table may not exist yet if the admin migration hasn't
+		// been applied — fall back to the built-in copy silently.
+	}
+}
+
+const paragraphs = saved ? saved.body.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean) : [];
 ---
 
 <Layout
-	title="About Me"
-	description="How a mosquito bite, a broken spreadsheet, and one very annoying fly turned into Buzzyfly."
+	title={saved?.title || 'About Me'}
+	description={saved?.description ||
+		'How a mosquito bite, a broken spreadsheet, and one very annoying fly turned into Buzzyfly.'}
 	pubDate={new Date('August 08 2021')}
 	updatedDate={new Date('August 12 2026')}
-	heroImage="/buzzyfly-about-hero.svg"
+	heroImage={saved?.hero_image || '/buzzyfly-about-hero.svg'}
 >
-	<p>
-		Buzzyfly started on a July afternoon in 2021, in a sublet apartment with a window unit that
-		couldn't keep up and a screen door that didn't quite close. I was three years into freelance
-		design work, running everything — invoices, client onboarding, project files, the whole
-		mess — out of a single Google Sheet that had grown fourteen tabs and a naming convention only
-		I understood. I'd just lost a week of billing history to a broken formula, and I was rebuilding
-		it by hand when a fly got in through that screen door and would not leave me alone. It landed
-		on my monitor, on my coffee, on the sheet itself, mid-cell-reference, over and over, for two
-		hours straight.
-	</p>
+	{
+		saved ? (
+			paragraphs.map((p) => <p>{p}</p>)
+		) : (
+			<>
+				<p>
+					Buzzyfly started on a July afternoon in 2021, in a sublet apartment with a window unit
+					that couldn't keep up and a screen door that didn't quite close. I was three years into
+					freelance design work, running everything — invoices, client onboarding, project
+					files, the whole mess — out of a single Google Sheet that had grown fourteen tabs and a
+					naming convention only I understood. I'd just lost a week of billing history to a
+					broken formula, and I was rebuilding it by hand when a fly got in through that screen
+					door and would not leave me alone. It landed on my monitor, on my coffee, on the sheet
+					itself, mid-cell-reference, over and over, for two hours straight.
+				</p>
 
-	<p>
-		I never caught it. But somewhere around hour two, fixing the same formula for the third time, I
-		typed a note to myself at the top of a blank tab: "buzzy fly system — stop rebuilding this
-		every quarter." It was meant as a joke, a little dig at both of us — the fly and the spreadsheet
-		— for being equally impossible to get rid of. I didn't touch that tab again for six weeks. But
-		the name stuck in a way the actual problem hadn't. Every time I opened the file, there it was,
-		daring me to actually fix it.
-	</p>
+				<p>
+					I never caught it. But somewhere around hour two, fixing the same formula for the
+					third time, I typed a note to myself at the top of a blank tab: "buzzy fly system —
+					stop rebuilding this every quarter." It was meant as a joke, a little dig at both of us
+					— the fly and the spreadsheet — for being equally impossible to get rid of. I didn't
+					touch that tab again for six weeks. But the name stuck in a way the actual problem
+					hadn't. Every time I opened the file, there it was, daring me to actually fix it.
+				</p>
 
-	<p>
-		So I did — slowly, and only for myself at first. I pulled the invoicing logic out into its own
-		templated system. I built a client-intake checklist that didn't depend on me remembering
-		anything. I wrote down the pricing rules I'd been keeping in my head so I'd stop second-guessing
-		myself on every new quote. None of it was clever. It was just the boring, repeatable scaffolding
-		I'd been too busy putting out fires to build. By the end of that year my own client work took
-		roughly half the time it used to, and I had stopped dreading Sundays, which is when I used to do
-		the books.
-	</p>
+				<p>
+					So I did — slowly, and only for myself at first. I pulled the invoicing logic out into
+					its own templated system. I built a client-intake checklist that didn't depend on me
+					remembering anything. I wrote down the pricing rules I'd been keeping in my head so I'd
+					stop second-guessing myself on every new quote. None of it was clever. It was just the
+					boring, repeatable scaffolding I'd been too busy putting out fires to build. By the end
+					of that year my own client work took roughly half the time it used to, and I had
+					stopped dreading Sundays, which is when I used to do the books.
+				</p>
 
-	<p>
-		A few other freelancers I knew asked what had changed, and I gave two of them the templates,
-		half expecting them to point out how obvious it all was. Instead one came back a month later and
-		said it had saved her an entire weekend during her busiest stretch of the year. That was the
-		moment this stopped being a private fix and became something worth building properly — cleaning
-		up the templates, writing the parts down that had only ever lived in my head, and putting a
-		name on the folder I'd already been using for a year. There was really only ever one option.
-	</p>
+				<p>
+					A few other freelancers I knew asked what had changed, and I gave two of them the
+					templates, half expecting them to point out how obvious it all was. Instead one came
+					back a month later and said it had saved her an entire weekend during her busiest
+					stretch of the year. That was the moment this stopped being a private fix and became
+					something worth building properly — cleaning up the templates, writing the parts down
+					that had only ever lived in my head, and putting a name on the folder I'd already been
+					using for a year. There was really only ever one option.
+				</p>
 
-	<p>
-		Buzzyfly is still, at its core, that same annoyance turned into infrastructure: the small,
-		repeatable stuff that's easy to put off and expensive to keep improvising. The <a
-			href="/">Buzzyfly Digital System</a
-		> on this site is the direct descendant of that first cleaned-up spreadsheet — rebuilt, rewritten,
-		and tested against a lot more businesses than just mine, but built on the same idea. I still keep
-		a fly emoji next to the brand name as a reminder of where it came from, and I still don't love flies.
-	</p>
+				<p>
+					Buzzyfly is still, at its core, that same annoyance turned into infrastructure: the
+					small, repeatable stuff that's easy to put off and expensive to keep improvising. The{' '}
+					<a href="/">Buzzyfly Digital System</a> on this site is the direct descendant of that
+					first cleaned-up spreadsheet — rebuilt, rewritten, and tested against a lot more
+					businesses than just mine, but built on the same idea. I still keep a fly emoji next to
+					the brand name as a reminder of where it came from, and I still don't love flies.
+				</p>
 
-	<p>
-		I write about what I'm building and what I'm learning in the <a href="/blog">Buzzyfly
-			Dispatch</a
-		> — mostly practical notes from actually running this, not theory. If you're dealing with your
-		own version of that fourteen-tab spreadsheet, you're exactly who this is for.
-	</p>
+				<p>
+					I write about what I'm building and what I'm learning in the{' '}
+					<a href="/blog">Buzzyfly Dispatch</a> — mostly practical notes from actually running
+					this, not theory. If you're dealing with your own version of that fourteen-tab
+					spreadsheet, you're exactly who this is for.
+				</p>
+			</>
+		)
+	}
 </Layout>

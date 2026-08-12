@@ -1,0 +1,94 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+
+export const prerender = false;
+
+const hasError = Astro.url.searchParams.get('error') === '1';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="Admin Login — Buzzyfly" description="Buzzyfly admin console login." />
+		<meta name="robots" content="noindex, nofollow" />
+	</head>
+	<body>
+		<main class="login-main">
+			<form class="login-card" method="POST" action="/api/admin/login">
+				<h1>🪰 Buzzyfly Admin</h1>
+				<p class="subtitle">Sign in to manage your site.</p>
+				{hasError && <p class="error">Incorrect username or password.</p>}
+				<label for="username">Username</label>
+				<input id="username" name="username" type="text" autocomplete="username" required autofocus />
+				<label for="password">Password</label>
+				<input id="password" name="password" type="password" autocomplete="current-password" required />
+				<button type="submit">Sign in</button>
+			</form>
+		</main>
+	</body>
+</html>
+
+<style>
+	.login-main {
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(var(--gray-gradient)) no-repeat;
+	}
+	.login-card {
+		width: 100%;
+		max-width: 360px;
+		padding: 2em;
+		border-radius: 16px;
+		background: #fff;
+		box-shadow: var(--box-shadow);
+		display: flex;
+		flex-direction: column;
+		gap: 0.6em;
+	}
+	.login-card h1 {
+		margin: 0;
+		font-size: 1.5em;
+		text-align: center;
+	}
+	.subtitle {
+		margin: 0 0 0.5em;
+		text-align: center;
+		color: rgb(var(--gray));
+	}
+	.error {
+		margin: 0 0 0.5em;
+		padding: 0.6em 0.8em;
+		border-radius: 8px;
+		background: #fdecea;
+		color: #b3261e;
+		font-size: 0.9em;
+	}
+	label {
+		font-size: 0.85em;
+		font-weight: 700;
+		color: rgb(var(--gray-dark));
+	}
+	input {
+		padding: 0.6em 0.8em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		font-family: inherit;
+	}
+	button {
+		margin-top: 0.8em;
+		padding: 0.7em;
+		border: none;
+		border-radius: 8px;
+		background: var(--accent);
+		color: #fff;
+		font-weight: 700;
+		font-size: 1em;
+		font-family: inherit;
+		cursor: pointer;
+	}
+	button:hover {
+		background: var(--accent-dark);
+	}
+</style>

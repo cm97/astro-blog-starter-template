@@ -12,6 +12,35 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+
+// Accent color is editable from /admin (Site settings) and stored in D1.
+// Only available on pages rendered on-demand (prerender = false); prerendered
+// pages fall back to the default defined in styles/global.css.
+const HEX_COLOR_RE = /^#[0-9a-fA-F]{6}$/;
+
+function darken(hex: string, factor: number): string {
+	const n = parseInt(hex.slice(1), 16);
+	const r = Math.round(((n >> 16) & 255) * factor);
+	const g = Math.round(((n >> 8) & 255) * factor);
+	const b = Math.round((n & 255) * factor);
+	return `#${[r, g, b].map((c) => c.toString(16).padStart(2, '0')).join('')}`;
+}
+
+let accentColor: string | null = null;
+const db = Astro.locals?.runtime?.env?.DB;
+if (db) {
+	try {
+		const row = await db
+			.prepare(`SELECT value FROM site_settings WHERE key = 'accent_color'`)
+			.first<{ value: string }>();
+		if (row?.value && HEX_COLOR_RE.test(row.value)) {
+			accentColor = row.value;
+		}
+	} catch {
+		// site_settings table may not exist yet if the admin migration hasn't
+		// been applied — fall back to the default accent color silently.
+	}
+}
 ---
 
 <!-- Global Metadata -->
@@ -45,3 +74,9 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+{
+	accentColor && (
+		<style set:html={`:root{--accent: ${accentColor}; --accent-dark: ${darken(accentColor, 0.6)};}`} />
+	)
+}

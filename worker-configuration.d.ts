@@ -18,6 +18,10 @@ declare namespace Cloudflare {
 		DOWNLOAD_TOKEN_SECRET?: string;
 		NEWSLETTER_API_URL?: string;
 		NEWSLETTER_API_KEY?: string;
+		// Admin console login (/admin) — see scripts/generate-admin-credentials.mjs.
+		ADMIN_USERNAME?: string;
+		ADMIN_PASSWORD_SALT?: string;
+		ADMIN_PASSWORD_HASH?: string;
 	}
 }
 interface Env extends Cloudflare.Env {}

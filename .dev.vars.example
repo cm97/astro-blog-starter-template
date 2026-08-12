@@ -6,3 +6,9 @@ LEMONSQUEEZY_WEBHOOK_SECRET=...
 DOWNLOAD_TOKEN_SECRET=change-me-to-a-long-random-string
 NEWSLETTER_API_URL=
 NEWSLETTER_API_KEY=
+
+# Admin console login (/admin). Generate with:
+#   node scripts/generate-admin-credentials.mjs
+ADMIN_USERNAME=
+ADMIN_PASSWORD_SALT=
+ADMIN_PASSWORD_HASH=

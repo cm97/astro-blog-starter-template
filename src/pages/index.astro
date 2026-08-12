@@ -3,17 +3,40 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+
+// Site title/description are editable from /admin (Site settings) and
+// stored in D1; fall back to the consts.ts defaults when unset or when the
+// DB binding isn't available.
+export const prerender = false;
+
+let siteTitle: string = SITE_TITLE;
+let siteDescription: string = SITE_DESCRIPTION;
+const db = Astro.locals?.runtime?.env?.DB;
+if (db) {
+	try {
+		const rows = await db
+			.prepare(`SELECT key, value FROM site_settings WHERE key IN ('site_title', 'site_description')`)
+			.all<{ key: string; value: string }>();
+		for (const row of rows.results ?? []) {
+			if (row.key === 'site_title' && row.value) siteTitle = row.value;
+			if (row.key === 'site_description' && row.value) siteDescription = row.value;
+		}
+	} catch {
+		// site_settings table may not exist yet if the admin migration hasn't
+		// been applied — fall back to the consts.ts defaults silently.
+	}
+}
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={siteTitle} description={siteDescription} />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<h1>🪰 Buzzyfly Welcome/h1>
+			<h1>🪰 Buzzyfly Welcome</h1>
 			<p>
 				Welcome to the official <a href="https://astro.build/">buzzyfly space</a>.
 			</p>
