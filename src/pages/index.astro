@@ -5,10 +5,7 @@ import Footer from '../components/Footer.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 
 // The wordmark is split into letters so each one can be tinted individually.
-const wordmark = [
-	{ text: 'Buddy', letters: 'Buddy'.split('') },
-	{ text: 'Fly', letters: 'Fly'.split('') },
-];
+const wordmarkLetters = SITE_TITLE.split('');
 
 // Palettes the wordmark rotates through. Muted, not neon — one swap every few
 // seconds, letters staggered so the change reads as a drift rather than a blink.
@@ -39,28 +36,23 @@ const taglines = [
 
 			<section class="hero">
 				<h1 class="wordmark" data-wordmark>
-					<span class="sr-only">Buddy Fly</span>
-					{
-						wordmark.map((word, wordIndex) => (
-							<span class="word" aria-hidden="true">
-								{word.letters.map((letter, letterIndex) => (
-									<span
-										class="letter"
-										style={`--i: ${wordIndex * 5 + letterIndex}`}
-									>
-										{letter}
-									</span>
-								))}
-							</span>
-						))
-					}
+					<span class="sr-only">{SITE_TITLE}</span>
+					<span class="word" aria-hidden="true">
+						{
+							wordmarkLetters.map((letter, i) => (
+								<span class="letter" style={`--i: ${i}`}>
+									{letter}
+								</span>
+							))
+						}
+					</span>
 				</h1>
 
 				<p class="tagline" data-tagline aria-live="polite">{taglines[0]}</p>
 
 				<div class="actions">
 					<a class="btn btn-primary" href="/blog">Read the blog</a>
-					<a class="btn btn-ghost" href="/about">About Buddy Fly</a>
+					<a class="btn btn-ghost" href="/about">About {SITE_TITLE}</a>
 				</div>
 			</section>
 		</main>
@@ -159,10 +151,6 @@ const taglines = [
 			.word {
 				display: inline-block;
 				white-space: nowrap;
-			}
-
-			.word + .word {
-				margin-left: 0.28em;
 			}
 
 			.letter {
