@@ -4,10 +4,24 @@ import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import ProductCallout from '../components/ProductCallout.astro';
+import EmailOptin from '../components/EmailOptin.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const {
+	title,
+	description,
+	pubDate,
+	updatedDate,
+	heroImage,
+	featuredProductTitle,
+	featuredProductPrice,
+	featuredProductUrl,
+	featuredProductDescription,
+} = Astro.props;
+
+const hasFeaturedProduct = Boolean(featuredProductTitle || featuredProductUrl);
 ---
 
 <html lang="en">
@@ -77,6 +91,17 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 						<hr />
 					</div>
 					<slot />
+					{
+						hasFeaturedProduct && (
+							<ProductCallout
+								title={featuredProductTitle}
+								price={featuredProductPrice}
+								url={featuredProductUrl}
+								description={featuredProductDescription}
+							/>
+						)
+					}
+					<EmailOptin />
 				</div>
 			</article>
 		</main>

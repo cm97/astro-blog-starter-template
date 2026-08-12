@@ -1,0 +1,114 @@
+---
+import { BUZZYFLY_CONFIG } from "../data/monetization";
+
+interface Props {
+	title?: string;
+	price?: string;
+	url?: string;
+	description?: string;
+	features?: string[];
+}
+
+const {
+	title = BUZZYFLY_CONFIG.defaultProductTitle,
+	price = BUZZYFLY_CONFIG.defaultProductPrice,
+	url,
+	description = BUZZYFLY_CONFIG.defaultProductDescription,
+	features = [],
+} = Astro.props;
+---
+
+<aside class="product-callout" aria-label={`${BUZZYFLY_CONFIG.brandName} product`}>
+	<div class="product-callout__badge">{BUZZYFLY_CONFIG.brandName}</div>
+	<h3 class="product-callout__title">{title}</h3>
+	<p class="product-callout__description">{description}</p>
+	{
+		features.length > 0 && (
+			<ul class="product-callout__features">
+				{features.map((feature) => (
+					<li>{feature}</li>
+				))}
+			</ul>
+		)
+	}
+	<div class="product-callout__footer">
+		<span class="product-callout__price">{price}</span>
+		{
+			url && (
+				<a
+					class="product-callout__cta"
+					href={url}
+					target="_blank"
+					rel="noopener noreferrer"
+				>
+					Get it now
+				</a>
+			)
+		}
+	</div>
+</aside>
+
+<style>
+	.product-callout {
+		margin: 2.5em 0;
+		padding: 1.75em;
+		border-radius: 16px;
+		border: 1px solid rgb(var(--gray-light));
+		background: #fff;
+		box-shadow: var(--box-shadow);
+	}
+	.product-callout__badge {
+		display: inline-block;
+		padding: 0.25em 0.75em;
+		margin-bottom: 0.75em;
+		border-radius: 999px;
+		background: var(--accent);
+		color: #fff;
+		font-size: 0.75em;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+	.product-callout__title {
+		margin: 0 0 0.4em 0;
+		color: rgb(var(--black));
+	}
+	.product-callout__description {
+		margin: 0 0 1em 0;
+		color: rgb(var(--gray-dark));
+	}
+	.product-callout__features {
+		margin: 0 0 1.25em 0;
+		padding-left: 1.25em;
+		color: rgb(var(--gray-dark));
+	}
+	.product-callout__features li {
+		margin-bottom: 0.35em;
+	}
+	.product-callout__footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1em;
+		flex-wrap: wrap;
+	}
+	.product-callout__price {
+		font-size: 1.5em;
+		font-weight: 700;
+		color: rgb(var(--black));
+	}
+	.product-callout__cta {
+		display: inline-block;
+		padding: 0.65em 1.5em;
+		border-radius: 8px;
+		background: var(--accent);
+		color: #fff;
+		font-weight: 700;
+		text-decoration: none;
+		transition: background-color 0.15s ease-in-out;
+	}
+	.product-callout__cta:hover {
+		background: var(--accent-dark);
+		color: #fff;
+	}
+</style>
