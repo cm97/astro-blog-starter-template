@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1020 510" width="1020" height="510" role="img" aria-label="Buzzyfly">
+	<defs>
+		<linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+			<stop offset="0%" stop-color="#2337ff" />
+			<stop offset="100%" stop-color="#000d8a" />
+		</linearGradient>
+		<radialGradient id="glow" cx="50%" cy="50%" r="50%">
+			<stop offset="0%" stop-color="#ffffff" stop-opacity="0.16" />
+			<stop offset="100%" stop-color="#ffffff" stop-opacity="0" />
+		</radialGradient>
+	</defs>
+
+	<rect width="1020" height="510" fill="url(#bg)" />
+
+	<!-- soft spotlight behind the mark -->
+	<circle cx="620" cy="255" r="300" fill="url(#glow)" />
+
+	<!-- faint dot grid texture -->
+	<g fill="#ffffff" opacity="0.08">
+		<circle cx="80" cy="70" r="3" />
+		<circle cx="140" cy="70" r="3" />
+		<circle cx="200" cy="70" r="3" />
+		<circle cx="80" cy="130" r="3" />
+		<circle cx="140" cy="130" r="3" />
+		<circle cx="80" cy="190" r="3" />
+		<circle cx="920" cy="420" r="3" />
+		<circle cx="860" cy="420" r="3" />
+		<circle cx="920" cy="360" r="3" />
+		<circle cx="860" cy="360" r="3" />
+		<circle cx="800" cy="360" r="3" />
+		<circle cx="920" cy="300" r="3" />
+	</g>
+
+	<!-- buzzing flight-path trail -->
+	<g stroke="#ffffff" stroke-width="3" fill="none" opacity="0.35" stroke-linecap="round">
+		<path d="M 90 300 Q 220 220 330 290 T 520 260" stroke-dasharray="1 16" />
+	</g>
+	<circle cx="90" cy="300" r="5" fill="#ffffff" opacity="0.25" />
+	<circle cx="230" cy="250" r="7" fill="#ffffff" opacity="0.35" />
+	<circle cx="360" cy="285" r="9" fill="#ffffff" opacity="0.5" />
+
+	<!-- the fly mark -->
+	<g transform="translate(620 255)">
+		<!-- wings -->
+		<ellipse cx="-34" cy="-30" rx="46" ry="26" fill="#ffffff" opacity="0.55" transform="rotate(-18 -34 -30)" />
+		<ellipse cx="34" cy="-30" rx="46" ry="26" fill="#ffffff" opacity="0.55" transform="rotate(18 34 -30)" />
+
+		<!-- body -->
+		<ellipse cx="0" cy="8" rx="26" ry="40" fill="#0b1020" />
+		<ellipse cx="0" cy="-22" rx="19" ry="18" fill="#0b1020" />
+
+		<!-- body highlight -->
+		<ellipse cx="-7" cy="4" rx="8" ry="20" fill="#2337ff" opacity="0.6" />
+
+		<!-- antennae -->
+		<circle cx="-9" cy="-38" r="4" fill="#0b1020" />
+		<circle cx="9" cy="-38" r="4" fill="#0b1020" />
+		<line x1="-9" y1="-38" x2="-4" y2="-28" stroke="#0b1020" stroke-width="3" />
+		<line x1="9" y1="-38" x2="4" y2="-28" stroke="#0b1020" stroke-width="3" />
+
+		<!-- legs -->
+		<g stroke="#0b1020" stroke-width="4" stroke-linecap="round">
+			<line x1="-22" y1="0" x2="-52" y2="-14" />
+			<line x1="-22" y1="14" x2="-56" y2="14" />
+			<line x1="-22" y1="28" x2="-50" y2="46" />
+			<line x1="22" y1="0" x2="52" y2="-14" />
+			<line x1="22" y1="14" x2="56" y2="14" />
+			<line x1="22" y1="28" x2="50" y2="46" />
+		</g>
+	</g>
+</svg>
