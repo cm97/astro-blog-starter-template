@@ -1,0 +1,91 @@
+---
+---
+
+<dialog id="video-lightbox" aria-labelledby="video-lightbox-title">
+	<div class="video-lightbox-header">
+		<h2 id="video-lightbox-title"></h2>
+		<button type="button" id="video-lightbox-close" aria-label="Close video">&times;</button>
+	</div>
+	<video id="video-lightbox-player" controls></video>
+</dialog>
+
+<style>
+	#video-lightbox {
+		width: min(880px, calc(100% - 2em));
+		border: none;
+		border-radius: 12px;
+		padding: 1em;
+		box-shadow: var(--box-shadow);
+	}
+	#video-lightbox::backdrop {
+		background: rgba(var(--black), 60%);
+	}
+	.video-lightbox-header {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1em;
+		margin-bottom: 0.75em;
+	}
+	.video-lightbox-header h2 {
+		margin: 0;
+		font-size: 1.1em;
+	}
+	#video-lightbox-close {
+		flex-shrink: 0;
+		width: 2em;
+		height: 2em;
+		border: none;
+		border-radius: 50%;
+		background: rgb(var(--gray-light));
+		font-size: 1.2em;
+		line-height: 1;
+		cursor: pointer;
+	}
+	#video-lightbox-close:hover {
+		background: rgb(var(--gray));
+		color: white;
+	}
+	#video-lightbox-player {
+		display: block;
+		width: 100%;
+		max-height: 70vh;
+		border-radius: 8px;
+		background: black;
+	}
+</style>
+
+<script>
+	const dialog = document.getElementById('video-lightbox') as HTMLDialogElement | null;
+	const player = document.getElementById('video-lightbox-player') as HTMLVideoElement | null;
+	const title = document.getElementById('video-lightbox-title');
+	const closeButton = document.getElementById('video-lightbox-close');
+
+	function closeLightbox() {
+		player?.pause();
+		if (player) player.removeAttribute('src');
+		dialog?.close();
+	}
+
+	document.addEventListener('click', (event) => {
+		const trigger = (event.target as HTMLElement)?.closest<HTMLElement>('[data-video-trigger]');
+		if (!trigger || !dialog || !player) return;
+
+		const src = trigger.dataset.videoSrc;
+		if (!src) return;
+
+		if (title) title.textContent = trigger.dataset.videoTitle ?? '';
+		player.src = src;
+		dialog.showModal();
+		player.play().catch(() => {
+			// Autoplay can be blocked by the browser — the visible controls
+			// still let the visitor press play themselves.
+		});
+	});
+
+	closeButton?.addEventListener('click', closeLightbox);
+	dialog?.addEventListener('close', closeLightbox);
+	dialog?.addEventListener('click', (event) => {
+		if (event.target === dialog) closeLightbox();
+	});
+</script>
