@@ -1,0 +1,78 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+import { getGitHubConfig, getFile, parsePostMarkdown } from "../../../lib/github";
+
+const env = Astro.locals.runtime.env;
+const githubConfig = getGitHubConfig(env);
+const { slug } = Astro.params;
+const error = Astro.url.searchParams.get("error");
+
+if (!githubConfig || !slug) {
+	return Astro.redirect("/admin/posts");
+}
+
+const path = `src/content/blog/${slug}.md`;
+const file = await getFile(githubConfig, path);
+
+if (!file) {
+	return Astro.redirect("/admin/posts?error=Post+file+not+found");
+}
+
+const { fields, body } = parsePostMarkdown(file.content);
+const pubDateValue = fields.pubDate ? new Date(fields.pubDate).toISOString().slice(0, 10) : "";
+---
+
+<AdminLayout title={`Edit — ${fields.title}`} active="posts">
+	<h1>Edit post</h1>
+	<p class="admin-subtitle">
+		<code>{path}</code> — saving commits directly to <code>{githubConfig.branch}</code> and triggers a redeploy.
+	</p>
+
+	{error && <p class="admin-notice admin-notice--error">{error}</p>}
+
+	<div class="admin-card">
+		<form class="admin-form" method="POST" action={`/api/admin/posts/${slug}/update`}>
+			<input type="hidden" name="sha" value={file.sha} />
+
+			<label for="title">Title</label>
+			<input id="title" name="title" type="text" value={fields.title} required />
+
+			<label for="description">Description</label>
+			<input id="description" name="description" type="text" value={fields.description} required />
+
+			<label for="pubDate">Publish date</label>
+			<input id="pubDate" name="pubDate" type="date" value={pubDateValue} required />
+
+			<label for="heroImage">Hero image path</label>
+			<input id="heroImage" name="heroImage" type="text" value={fields.heroImage ?? ""} />
+
+			<label for="featuredProductTitle">Featured product title (optional)</label>
+			<input id="featuredProductTitle" name="featuredProductTitle" type="text" value={fields.featuredProductTitle ?? ""} />
+
+			<label for="featuredProductPrice">Featured product price (optional)</label>
+			<input id="featuredProductPrice" name="featuredProductPrice" type="text" value={fields.featuredProductPrice ?? ""} />
+
+			<label for="featuredProductUrl">Featured product URL (optional)</label>
+			<input id="featuredProductUrl" name="featuredProductUrl" type="url" value={fields.featuredProductUrl ?? ""} />
+
+			<label for="featuredProductDescription">Featured product description (optional)</label>
+			<input id="featuredProductDescription" name="featuredProductDescription" type="text" value={fields.featuredProductDescription ?? ""} />
+
+			<label for="body">Body (Markdown)</label>
+			<textarea id="body" name="body" rows="16" required>{body}</textarea>
+
+			<p style="margin-top:1.5em;">
+				<button class="admin-btn admin-btn--primary" type="submit">Save changes</button>
+				<a class="admin-btn" href={`/blog/${slug}/`} target="_blank">Preview live</a>
+				<a class="admin-btn" href="/admin/posts">Cancel</a>
+			</p>
+		</form>
+
+		<form method="POST" action={`/api/admin/posts/${slug}/delete`} onsubmit="return confirm('Delete this post? This commits a deletion to the repo.')" style="margin-top:1.5em; padding-top:1.5em; border-top:1px solid rgb(var(--gray-light));">
+			<input type="hidden" name="sha" value={file.sha} />
+			<button class="admin-btn admin-btn--danger" type="submit">Delete post</button>
+		</form>
+	</div>
+</AdminLayout>

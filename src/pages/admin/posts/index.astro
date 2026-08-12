@@ -1,0 +1,62 @@
+---
+export const prerender = false;
+
+import { getCollection } from "astro:content";
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+import { getGitHubConfig } from "../../../lib/github";
+
+const env = Astro.locals.runtime.env;
+const githubConfig = getGitHubConfig(env);
+const created = Astro.url.searchParams.get("created");
+const deleted = Astro.url.searchParams.get("deleted");
+
+const posts = (await getCollection("blog")).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+---
+
+<AdminLayout title="Posts" active="posts">
+	<h1>Posts</h1>
+	<p class="admin-subtitle">{posts.length} post{posts.length === 1 ? "" : "s"} in <code>src/content/blog/</code>.</p>
+
+	{
+		!githubConfig && (
+			<p class="admin-notice admin-notice--info">
+				Read-only: set <code>GITHUB_TOKEN</code>, <code>GITHUB_OWNER</code> and{" "}
+				<code>GITHUB_REPO</code> to create, edit, or delete posts from here. This list reflects
+				the last deploy — new posts appear here after the next build.
+			</p>
+		)
+	}
+	{created && <p class="admin-notice admin-notice--success">Post published. It'll appear on the live site after the redeploy finishes.</p>}
+	{deleted && <p class="admin-notice admin-notice--success">Post deleted. It'll disappear from the live site after the redeploy finishes.</p>}
+
+	<div class="admin-card">
+		<p><a class="admin-btn admin-btn--primary" href="/admin/posts/new" aria-disabled={!githubConfig}>+ New post</a></p>
+		<table>
+			<thead>
+				<tr>
+					<th>Title</th>
+					<th>Published</th>
+					<th>Slug</th>
+					<th />
+				</tr>
+			</thead>
+			<tbody>
+				{
+					posts.map((post) => (
+						<tr>
+							<td>{post.data.title}</td>
+							<td>{post.data.pubDate.toLocaleDateString()}</td>
+							<td><code>{post.id}</code></td>
+							<td style="display:flex; gap:0.5em;">
+								<a class="admin-btn" href={`/blog/${post.id}/`} target="_blank">View</a>
+								{githubConfig && <a class="admin-btn" href={`/admin/posts/${post.id}`}>Edit</a>}
+							</td>
+						</tr>
+					))
+				}
+			</tbody>
+		</table>
+	</div>
+</AdminLayout>

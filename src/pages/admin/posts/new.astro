@@ -1,0 +1,76 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+import { getGitHubConfig } from "../../../lib/github";
+
+const env = Astro.locals.runtime.env;
+const githubConfig = getGitHubConfig(env);
+const error = Astro.url.searchParams.get("error");
+const today = new Date().toISOString().slice(0, 10);
+
+if (!githubConfig) {
+	return Astro.redirect("/admin/posts");
+}
+---
+
+<AdminLayout title="New post" active="posts">
+	<h1>New post</h1>
+	<p class="admin-subtitle">Publishing commits a new file to <code>src/content/blog/</code> and triggers a redeploy.</p>
+
+	{error && <p class="admin-notice admin-notice--error">{error}</p>}
+
+	<div class="admin-card">
+		<form class="admin-form" method="POST" action="/api/admin/posts">
+			<label for="title">Title</label>
+			<input id="title" name="title" type="text" required />
+
+			<label for="slug">Slug (URL path, letters/numbers/hyphens)</label>
+			<input id="slug" name="slug" type="text" pattern="[a-z0-9-]+" placeholder="auto-generated from title if left blank" />
+
+			<label for="description">Description</label>
+			<input id="description" name="description" type="text" required />
+
+			<label for="pubDate">Publish date</label>
+			<input id="pubDate" name="pubDate" type="date" value={today} required />
+
+			<label for="heroImage">Hero image path</label>
+			<input id="heroImage" name="heroImage" type="text" placeholder="/blog-placeholder-1.jpg" />
+
+			<label for="featuredProductTitle">Featured product title (optional)</label>
+			<input id="featuredProductTitle" name="featuredProductTitle" type="text" />
+
+			<label for="featuredProductPrice">Featured product price (optional)</label>
+			<input id="featuredProductPrice" name="featuredProductPrice" type="text" placeholder="$49" />
+
+			<label for="featuredProductUrl">Featured product URL (optional)</label>
+			<input id="featuredProductUrl" name="featuredProductUrl" type="url" />
+
+			<label for="featuredProductDescription">Featured product description (optional)</label>
+			<input id="featuredProductDescription" name="featuredProductDescription" type="text" />
+
+			<label for="body">Body (Markdown)</label>
+			<textarea id="body" name="body" rows="16" required></textarea>
+
+			<p style="margin-top:1.5em;">
+				<button class="admin-btn admin-btn--primary" type="submit">Publish</button>
+				<a class="admin-btn" href="/admin/posts">Cancel</a>
+			</p>
+		</form>
+	</div>
+</AdminLayout>
+
+<script>
+	const titleInput = document.getElementById("title") as HTMLInputElement | null;
+	const slugInput = document.getElementById("slug") as HTMLInputElement | null;
+	let slugTouched = false;
+	slugInput?.addEventListener("input", () => (slugTouched = true));
+	titleInput?.addEventListener("input", () => {
+		if (slugTouched || !slugInput) return;
+		slugInput.value = titleInput.value
+			.toLowerCase()
+			.trim()
+			.replace(/[^a-z0-9]+/g, "-")
+			.replace(/^-+|-+$/g, "");
+	});
+</script>

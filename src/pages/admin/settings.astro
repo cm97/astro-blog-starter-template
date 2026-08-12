@@ -1,0 +1,61 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import { getSettings } from "../../lib/settings";
+import { getGitHubConfig } from "../../lib/github";
+
+const env = Astro.locals.runtime.env;
+const settings = await getSettings(env);
+const githubConfig = getGitHubConfig(env);
+const status = Astro.url.searchParams.get("status");
+const error = Astro.url.searchParams.get("error");
+---
+
+<AdminLayout title="Settings" active="settings">
+	<h1>Site settings</h1>
+	<p class="admin-subtitle">Buzzyfly branding &amp; monetization copy.</p>
+
+	{
+		!githubConfig && (
+			<p class="admin-notice admin-notice--info">
+				GitHub integration isn't configured, so changes save to the admin console's records but
+				won't update the live site's copy until <code>src/data/monetization.ts</code> is edited by
+				hand. Set <code>GITHUB_TOKEN</code>, <code>GITHUB_OWNER</code> and <code>GITHUB_REPO</code>{" "}
+				to publish changes automatically.
+			</p>
+		)
+	}
+	{status === "saved" && <p class="admin-notice admin-notice--success">Saved to admin records.</p>}
+	{status === "published" && <p class="admin-notice admin-notice--success">Saved and committed — the live site will update after the redeploy finishes.</p>}
+	{error && <p class="admin-notice admin-notice--error">{error}</p>}
+
+	<div class="admin-card">
+		<form class="admin-form" method="POST" action="/api/admin/settings">
+			<label for="brandName">Brand name</label>
+			<input id="brandName" name="brandName" type="text" value={settings.brandName} required />
+
+			<label for="siteUrl">Site URL</label>
+			<input id="siteUrl" name="siteUrl" type="url" value={settings.siteUrl} required />
+
+			<label for="newsletterTitle">Newsletter title</label>
+			<input id="newsletterTitle" name="newsletterTitle" type="text" value={settings.newsletterTitle} required />
+
+			<label for="newsletterDescription">Newsletter description</label>
+			<input id="newsletterDescription" name="newsletterDescription" type="text" value={settings.newsletterDescription} required />
+
+			<label for="defaultProductTitle">Default product title</label>
+			<input id="defaultProductTitle" name="defaultProductTitle" type="text" value={settings.defaultProductTitle} required />
+
+			<label for="defaultProductPrice">Default product price</label>
+			<input id="defaultProductPrice" name="defaultProductPrice" type="text" value={settings.defaultProductPrice} required />
+
+			<label for="defaultProductDescription">Default product description</label>
+			<input id="defaultProductDescription" name="defaultProductDescription" type="text" value={settings.defaultProductDescription} required />
+
+			<p style="margin-top:1.5em;">
+				<button class="admin-btn admin-btn--primary" type="submit">Save settings</button>
+			</p>
+		</form>
+	</div>
+</AdminLayout>

@@ -18,6 +18,17 @@ declare namespace Cloudflare {
 		DOWNLOAD_TOKEN_SECRET?: string;
 		NEWSLETTER_API_URL?: string;
 		NEWSLETTER_API_KEY?: string;
+		// Admin console (/admin) — single-operator login + signed session cookie.
+		ADMIN_USERNAME?: string;
+		ADMIN_PASSWORD?: string;
+		ADMIN_SESSION_SECRET?: string;
+		// Optional: lets the admin console commit blog post / settings changes
+		// straight to this repo via the GitHub Contents API. Omit to run the
+		// admin console in read-only content mode.
+		GITHUB_TOKEN?: string;
+		GITHUB_OWNER?: string;
+		GITHUB_REPO?: string;
+		GITHUB_BRANCH?: string;
 	}
 }
 interface Env extends Cloudflare.Env {}
