@@ -4,12 +4,15 @@ import { SITE_TITLE } from '../consts';
 ---
 
 <header>
-	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+	<nav class="container">
+		<h2><a href="/">🪰 {SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
+		</div>
+		<div class="header-actions">
+			<a class="btn btn-primary btn-sm" href="/#subscribe">Subscribe</a>
 		</div>
 		<div class="social-links">
 			<a href="https://m.webtoo.ls/@astro" target="_blank">
@@ -44,40 +47,71 @@ import { SITE_TITLE } from '../consts';
 </header>
 <style>
 	header {
+		position: sticky;
+		top: 0;
+		z-index: 50;
 		margin: 0;
-		padding: 0 1em;
-		background: white;
+		padding: 0;
+		background: rgba(255, 255, 255, 0.85);
+		backdrop-filter: blur(8px);
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 	}
 	h2 {
 		margin: 0;
-		font-size: 1em;
+		font-size: 1.1em;
+		font-weight: 800;
 	}
 
 	h2 a,
 	h2 a.active {
+		color: rgb(var(--black));
 		text-decoration: none;
 	}
 	nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		gap: 1em;
 	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
+	.internal-links {
+		display: flex;
+	}
+	nav .internal-links a {
+		padding: 1.3em 0.6em;
+		color: rgb(var(--gray-dark));
+		font-weight: 600;
+		border-bottom: 3px solid transparent;
 		text-decoration: none;
+		transition: color 0.15s ease-in-out;
 	}
-	nav a.active {
+	nav .internal-links a:hover {
+		color: var(--accent);
+	}
+	nav .internal-links a.active {
+		color: rgb(var(--black));
 		text-decoration: none;
 		border-bottom-color: var(--accent);
+	}
+	.header-actions {
+		flex: 1;
+		display: flex;
+		justify-content: flex-end;
+	}
+	.btn-sm {
+		padding: 0.55em 1.25em;
+		font-size: 0.9em;
 	}
 	.social-links,
 	.social-links a {
 		display: flex;
 	}
+	.social-links {
+		align-items: center;
+		gap: 0.75em;
+		color: rgb(var(--gray));
+	}
 	@media (max-width: 720px) {
+		.header-actions,
 		.social-links {
 			display: none;
 		}

@@ -17,7 +17,20 @@ const posts = (await getCollection('blog')).sort(
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			main {
-				width: 960px;
+				width: var(--container-width);
+			}
+			.page-header {
+				margin-bottom: 3em;
+				text-align: center;
+			}
+			.page-header h1 {
+				margin: 0 0 0.4em 0;
+			}
+			.page-header p {
+				margin: 0 auto;
+				max-width: 55ch;
+				color: rgb(var(--gray-dark));
+				font-size: 1.1em;
 			}
 			ul {
 				display: flex;
@@ -88,6 +101,11 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main>
+			<div class="page-header">
+				<span class="eyebrow">The Buzzyfly Dispatch</span>
+				<h1>Blog</h1>
+				<p>Practical systems, templates, and honest write-ups on building a better workflow.</p>
+			</div>
 			<section>
 				<ul>
 					{
