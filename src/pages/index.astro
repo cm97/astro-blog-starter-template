@@ -2,7 +2,10 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import PortalSearch from '../components/PortalSearch.astro';
+import VideoCard from '../components/VideoCard.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { VIDEOS } from '../data/videos';
 
 // Placeholder copy below — swap in real brand messaging whenever it's ready.
 const pillars = [
@@ -19,6 +22,14 @@ const pillars = [
 		description: 'Built with — and for — the people who follow along.',
 	},
 ];
+
+const quickLinks = [
+	{ href: '/blog', label: 'Blog', description: 'Latest posts and updates.' },
+	{ href: '/videos', label: 'Videos', description: 'Watch the latest from the team.' },
+	{ href: '/about', label: 'About', description: 'The story so far.' },
+];
+
+const featuredVideos = VIDEOS.slice(0, 3);
 ---
 
 <!doctype html>
@@ -30,12 +41,22 @@ const pillars = [
 		<Header />
 		<main>
 			<section class="hero">
+				<div class="hero-glow" aria-hidden="true"></div>
 				<div class="hero-badge-frame">
 					<img class="hero-badge" src="/buzzyfly-badge.webp" alt="Buzzy Fly badge logo" width="260" height="141" />
 				</div>
 				<h1>Buzzy Fly</h1>
 				<p class="tagline">{SITE_DESCRIPTION}</p>
-				<a class="cta" href="/blog">Read the Blog</a>
+				<PortalSearch />
+				<div class="hero-links">
+					{
+						quickLinks.map((link) => (
+							<a class="hero-link" href={link.href}>
+								{link.label}
+							</a>
+						))
+					}
+				</div>
 			</section>
 
 			<section class="pillars">
@@ -47,6 +68,16 @@ const pillars = [
 						</div>
 					))
 				}
+			</section>
+
+			<section class="videos-teaser">
+				<div class="videos-teaser-header">
+					<h2>Watch</h2>
+					<a class="see-all" href="/videos">See all videos &rarr;</a>
+				</div>
+				<div class="video-grid">
+					{featuredVideos.map((video) => <VideoCard video={video} />)}
+				</div>
 			</section>
 
 			<section class="about-teaser">
@@ -72,14 +103,24 @@ const pillars = [
 		padding: 0;
 	}
 	.hero {
+		position: relative;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		gap: 0.75em;
-		padding: 4em 1em 5em;
+		gap: 1em;
+		padding: 4.5em 1em 5.5em;
 		text-align: center;
-		background: linear-gradient(180deg, #123230 0%, #1c4b49 100%);
+		background: linear-gradient(180deg, #0d2422 0%, #123230 45%, #1c4b49 100%);
 		color: white;
+		overflow: hidden;
+	}
+	.hero-glow {
+		position: absolute;
+		inset: -20% -10% auto -10%;
+		height: 60%;
+		z-index: -1;
+		background: radial-gradient(50% 50% at 50% 0%, rgba(255, 255, 255, 0.18) 0%, rgba(255, 255, 255, 0) 70%);
+		pointer-events: none;
 	}
 	.hero-badge-frame {
 		display: inline-block;
@@ -104,21 +145,21 @@ const pillars = [
 		font-size: 1.25em;
 		color: rgba(255, 255, 255, 0.85);
 	}
-	.hero .cta {
-		display: inline-block;
+	.hero-links {
+		display: flex;
+		gap: 1.5em;
 		margin-top: 0.5em;
-		padding: 0.75em 1.75em;
-		border-radius: 999px;
-		background: white;
-		color: #123230;
+	}
+	.hero-link {
+		color: rgba(255, 255, 255, 0.85);
 		font-weight: 700;
 		text-decoration: none;
-		box-shadow: var(--box-shadow);
-		transition: transform 0.15s ease;
+		border-bottom: 2px solid transparent;
+		padding-bottom: 0.2em;
 	}
-	.hero .cta:hover {
-		transform: translateY(-2px);
-		color: #123230;
+	.hero-link:hover {
+		color: white;
+		border-bottom-color: white;
 	}
 
 	.pillars {
@@ -145,6 +186,30 @@ const pillars = [
 		color: rgb(var(--gray-dark));
 	}
 
+	.videos-teaser {
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 1em 1.5em 3.5em;
+	}
+	.videos-teaser-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		margin-bottom: 1.25em;
+	}
+	.videos-teaser-header h2 {
+		margin: 0;
+	}
+	.see-all {
+		font-weight: 700;
+		white-space: nowrap;
+	}
+	.video-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5em;
+	}
+
 	.about-teaser {
 		display: flex;
 		align-items: center;
@@ -165,6 +230,12 @@ const pillars = [
 		color: rgb(var(--gray-dark));
 	}
 
+	@media (max-width: 900px) {
+		.video-grid {
+			grid-template-columns: repeat(2, 1fr);
+		}
+	}
+
 	@media (max-width: 720px) {
 		.hero {
 			padding: 3em 1em 3.5em;
@@ -172,9 +243,21 @@ const pillars = [
 		.hero h1 {
 			font-size: 2.2em;
 		}
+		.hero-links {
+			flex-wrap: wrap;
+			justify-content: center;
+		}
 		.pillars {
 			grid-template-columns: 1fr;
 			padding: 2.5em 1em;
+		}
+		.videos-teaser-header {
+			flex-direction: column;
+			align-items: flex-start;
+			gap: 0.35em;
+		}
+		.video-grid {
+			grid-template-columns: 1fr;
 		}
 		.about-teaser {
 			flex-direction: column;
