@@ -20,8 +20,8 @@
 	"d1_databases": [
 		{
 			"binding": "DB",
-			"database_name": "buzzyfly-db",
-			"database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+			"database_name": "buzzy-fly_db",
+			"database_id": "c4ff4255-c51b-45a7-85a5-4583328b26c4"
 		}
 	]
 }
