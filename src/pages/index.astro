@@ -2,7 +2,43 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import FormattedDate from '../components/FormattedDate.astro';
+import ProductCallout from '../components/ProductCallout.astro';
+import EmailOptin from '../components/EmailOptin.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { BUZZYFLY_CONFIG } from '../data/monetization';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+	.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+	.slice(0, 3);
+
+const values = [
+	{
+		icon: '🧭',
+		title: 'Field-tested systems',
+		description:
+			'Not theory — workflows and templates pulled straight out of real projects, then cleaned up so you can drop them into yours.',
+	},
+	{
+		icon: '🧰',
+		title: 'Tools that stick',
+		description:
+			'Every dispatch comes with something usable: a template, a checklist, a script. Less reading about productivity, more doing it.',
+	},
+	{
+		icon: '✉️',
+		title: 'Honest, no fluff',
+		description:
+			'Short, direct write-ups instead of 3,000-word listicles. If it doesn’t save you time, it doesn’t make the cut.',
+	},
+];
+
+const productFeatures = [
+	'Every Buzzyfly template and system in one bundle',
+	'Lifetime access to future updates',
+	'Built for people who ship, not people who plan forever',
+];
 ---
 
 <!doctype html>
@@ -13,36 +49,304 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 	<body>
 		<Header />
 		<main>
-			<h1>🪰 Buzzyfly Welcome/h1>
-			<p>
-				Welcome to the official <a href="https://astro.build/">buzzyfly space</a>.
-			</p>
-			<p>
-				This template comes with a few integrations already configured in your
-				<code>astro.config.mjs</code> file. You can customize your setup with
-				<a href="https://astro.build/integrations">Astro Integrations</a> to add tools like Tailwind,
-				React, or Vue to your project.
-			</p>
-			<p>Here are a few ideas on how to get started with the template:</p>
-			<ul>
-				<li>Edit this page in <code>src/pages/index.astro</code></li>
-				<li>Edit the site header items in <code>src/components/Header.astro</code></li>
-				<li>Add your name to the footer in <code>src/components/Footer.astro</code></li>
-				<li>Check out the included blog posts in <code>src/content/blog/</code></li>
-				<li>Customize the blog post page layout in <code>src/layouts/BlogPost.astro</code></li>
-			</ul>
-			<p>
-				Have fun! If you get stuck, remember to <a href="https://docs.astro.build/"
-					>read the docs
-				</a> or <a href="https://astro.build/chat">join us on Discord</a> to ask questions.
-			</p>
-			<p>
-				Looking for a blog template with a bit more personality? Check out <a
-					href="https://github.com/Charca/astro-blog-template"
-					>astro-blog-template
-				</a> by <a href="https://www.buzzyfly.com">buzzy-fly</a>.
-			</p>
+			<section class="hero">
+				<div class="container hero-inner">
+					<span class="eyebrow">🪰 Welcome to Buzzyfly</span>
+					<h1>Build a sharper workflow, one dispatch at a time.</h1>
+					<p class="hero-lede">
+						Practical systems, reusable templates, and honest write-ups on getting things done —
+						sent straight from the Buzzyfly notebook to your inbox.
+					</p>
+					<div class="hero-actions">
+						<a class="btn btn-primary" href="/blog">Read the blog</a>
+						<a class="btn btn-secondary" href="#subscribe">Join the Dispatch</a>
+					</div>
+				</div>
+			</section>
+
+			<section class="section values">
+				<div class="container">
+					<span class="eyebrow">Why Buzzyfly</span>
+					<h2>What you’ll find here</h2>
+					<div class="values-grid">
+						{
+							values.map((value) => (
+								<div class="card value-card">
+									<div class="value-icon" aria-hidden="true">
+										{value.icon}
+									</div>
+									<h3>{value.title}</h3>
+									<p>{value.description}</p>
+								</div>
+							))
+						}
+					</div>
+				</div>
+			</section>
+
+			{
+				posts.length > 0 && (
+					<section class="section latest">
+						<div class="container">
+							<div class="section-heading">
+								<div>
+									<span class="eyebrow">Fresh off the press</span>
+									<h2>Latest dispatches</h2>
+								</div>
+								<a class="see-all" href="/blog">
+									View all posts →
+								</a>
+							</div>
+							<div class="latest-grid">
+								{posts.map((post) => (
+									<a class="card post-card" href={`/blog/${post.id}/`}>
+										{post.data.heroImage && (
+											<img
+												width={480}
+												height={270}
+												src={post.data.heroImage}
+												alt=""
+											/>
+										)}
+										<div class="post-card-body">
+											<p class="post-date">
+												<FormattedDate date={post.data.pubDate} />
+											</p>
+											<h3>{post.data.title}</h3>
+											<p class="post-description">{post.data.description}</p>
+										</div>
+									</a>
+								))}
+							</div>
+						</div>
+					</section>
+				)
+			}
+
+			<section class="section product" id="toolkit">
+				<div class="container">
+					<span class="eyebrow">The toolkit</span>
+					<h2>{BUZZYFLY_CONFIG.defaultProductTitle}</h2>
+					<p class="product-lede">
+						Everything from the blog, organized into one system — so you're not hunting through
+						old posts to find the template you need.
+					</p>
+					<ProductCallout features={productFeatures} />
+				</div>
+			</section>
+
+			<section class="section subscribe" id="subscribe">
+				<div class="container subscribe-inner">
+					<div class="subscribe-copy">
+						<span class="eyebrow">Stay in the loop</span>
+						<h2>Get the next dispatch</h2>
+						<p>
+							Practical tools and honest write-ups, sent only when there's something worth
+							sharing. No spam, unsubscribe anytime.
+						</p>
+					</div>
+					<div class="subscribe-form">
+						<EmailOptin />
+					</div>
+				</div>
+			</section>
+
+			<section class="section cta-banner">
+				<div class="container cta-banner-inner">
+					<h2>Ready to build smarter?</h2>
+					<p>Start with the blog, or jump straight to the system.</p>
+					<div class="hero-actions">
+						<a class="btn btn-primary" href="/blog">Browse the blog</a>
+						<a class="btn btn-secondary" href="/about">About Buzzyfly</a>
+					</div>
+				</div>
+			</section>
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	main {
+		width: 100%;
+		max-width: 100%;
+		margin: 0;
+		padding: 0;
+	}
+	.hero {
+		padding: 6em 0 5em 0;
+		background:
+			radial-gradient(circle at 15% 20%, var(--accent-light), transparent 45%),
+			linear-gradient(var(--gray-gradient)) no-repeat;
+		text-align: center;
+	}
+	.hero-inner {
+		max-width: 760px;
+	}
+	.hero h1 {
+		margin: 0 0 0.5em 0;
+		font-size: 3.2em;
+	}
+	.hero-lede {
+		margin: 0 auto 1.75em auto;
+		max-width: 55ch;
+		color: rgb(var(--gray-dark));
+		font-size: 1.15em;
+	}
+	.hero-actions {
+		display: flex;
+		gap: 1em;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+
+	.section-heading {
+		display: flex;
+		align-items: flex-end;
+		justify-content: space-between;
+		gap: 1em;
+		flex-wrap: wrap;
+		margin-bottom: 2em;
+	}
+	.section-heading h2 {
+		margin: 0;
+	}
+	.see-all {
+		font-weight: 700;
+		text-decoration: none;
+		color: var(--accent);
+		white-space: nowrap;
+	}
+
+	.values h2,
+	.product h2 {
+		margin-bottom: 1.5em;
+	}
+	.values-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5em;
+	}
+	.value-card {
+		padding: 1.75em;
+	}
+	.value-icon {
+		font-size: 2em;
+		margin-bottom: 0.5em;
+	}
+	.value-card h3 {
+		margin: 0 0 0.4em 0;
+	}
+	.value-card p {
+		margin: 0;
+		color: rgb(var(--gray-dark));
+	}
+
+	.latest-grid {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		gap: 1.5em;
+	}
+	.post-card {
+		display: block;
+		overflow: hidden;
+		text-decoration: none;
+		color: inherit;
+		transition:
+			transform 0.15s ease-in-out,
+			box-shadow 0.15s ease-in-out;
+	}
+	.post-card:hover {
+		transform: translateY(-3px);
+		box-shadow: var(--box-shadow);
+	}
+	.post-card img {
+		width: 100%;
+		aspect-ratio: 16 / 9;
+		object-fit: cover;
+		border-radius: 0;
+		margin: 0;
+		display: block;
+	}
+	.post-card-body {
+		padding: 1.25em 1.5em 1.5em 1.5em;
+	}
+	.post-date {
+		margin: 0 0 0.4em 0;
+		font-size: 0.85em;
+		color: rgb(var(--gray));
+	}
+	.post-card h3 {
+		margin: 0 0 0.4em 0;
+		font-size: 1.25em;
+	}
+	.post-description {
+		margin: 0;
+		color: rgb(var(--gray-dark));
+		font-size: 0.95em;
+	}
+
+	.product {
+		background: linear-gradient(var(--gray-gradient)) no-repeat;
+	}
+	.product-lede {
+		max-width: 60ch;
+		margin: 0 0 2em 0;
+		color: rgb(var(--gray-dark));
+	}
+
+	.subscribe {
+		scroll-margin-top: 5em;
+	}
+	.subscribe-inner {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 3em;
+		align-items: center;
+	}
+	.subscribe-copy p {
+		color: rgb(var(--gray-dark));
+		max-width: 45ch;
+	}
+	.subscribe-form :global(.email-optin) {
+		margin: 0;
+		text-align: left;
+	}
+	.subscribe-form :global(.email-optin__form) {
+		justify-content: flex-start;
+	}
+
+	.cta-banner {
+		text-align: center;
+		padding-bottom: 6em;
+	}
+	.cta-banner-inner h2 {
+		margin-bottom: 0.3em;
+	}
+	.cta-banner-inner p {
+		color: rgb(var(--gray-dark));
+		margin-bottom: 1.5em;
+	}
+
+	@media (max-width: 900px) {
+		.values-grid,
+		.latest-grid {
+			grid-template-columns: 1fr 1fr;
+		}
+		.subscribe-inner {
+			grid-template-columns: 1fr;
+		}
+	}
+	@media (max-width: 720px) {
+		.hero {
+			padding: 4em 0 3em 0;
+		}
+		.hero h1 {
+			font-size: 2.2em;
+		}
+		.values-grid,
+		.latest-grid {
+			grid-template-columns: 1fr;
+		}
+	}
+</style>
