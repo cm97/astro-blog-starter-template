@@ -10,5 +10,18 @@
 	"observability": {
 		"enabled": true
 	},
-	"upload_source_maps": true
+	"upload_source_maps": true,
+	"r2_buckets": [
+		{
+			"binding": "MY_PRODUCTS",
+			"bucket_name": "buzzyfly-products"
+		}
+	],
+	"d1_databases": [
+		{
+			"binding": "DB",
+			"database_name": "buzzyfly-db",
+			"database_id": "REPLACE_WITH_YOUR_D1_DATABASE_ID"
+		}
+	]
 }

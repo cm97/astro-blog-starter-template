@@ -7,6 +7,17 @@ declare namespace Cloudflare {
 	}
 	interface Env {
 		ASSETS: Fetcher;
+		// Private R2 bucket holding purchasable Buzzyfly digital assets.
+		MY_PRODUCTS: R2Bucket;
+		// Optional D1 database for newsletter subscribers / fulfillment records.
+		DB?: D1Database;
+		// Secrets — set via `wrangler secret put <NAME>` or the Cloudflare
+		// dashboard. Never committed to source control.
+		STRIPE_WEBHOOK_SECRET?: string;
+		LEMONSQUEEZY_WEBHOOK_SECRET?: string;
+		DOWNLOAD_TOKEN_SECRET?: string;
+		NEWSLETTER_API_URL?: string;
+		NEWSLETTER_API_KEY?: string;
 	}
 }
 interface Env extends Cloudflare.Env {}

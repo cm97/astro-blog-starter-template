@@ -24,6 +24,20 @@ import HeaderLink from "../../components/HeaderLink.astro";
 	Embedded component in MDX
 </HeaderLink>
 
+## Buzzyfly components in MDX
+
+The Buzzyfly `ProductCallout` and `EmailOptin` components can also be imported and placed anywhere inside an `.mdx` post, not just automatically at the bottom of the layout:
+
+import ProductCallout from "../../components/ProductCallout.astro";
+
+<ProductCallout
+	title="Buzzyfly Digital System"
+	price="$49"
+	url="https://buzzyfly.lemonsqueezy.com/checkout"
+	description="The complete Buzzyfly operating framework to streamline your workflow."
+	features={["Lifetime access", "Instant download", "Free updates"]}
+/>
+
 ## More Links
 
 - [MDX Syntax Documentation](https://mdxjs.com/docs/what-is-mdx)

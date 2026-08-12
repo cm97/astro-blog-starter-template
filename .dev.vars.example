@@ -1,0 +1,8 @@
+# Copy to `.dev.vars` for local `astro dev` / `wrangler dev` testing.
+# `.dev.vars` is gitignored — never commit real secrets.
+
+STRIPE_WEBHOOK_SECRET=whsec_...
+LEMONSQUEEZY_WEBHOOK_SECRET=...
+DOWNLOAD_TOKEN_SECRET=change-me-to-a-long-random-string
+NEWSLETTER_API_URL=
+NEWSLETTER_API_KEY=

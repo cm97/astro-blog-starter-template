@@ -1,0 +1,144 @@
+---
+import { BUZZYFLY_CONFIG } from "../data/monetization";
+
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const {
+	title = BUZZYFLY_CONFIG.newsletterTitle,
+	description = BUZZYFLY_CONFIG.newsletterDescription,
+} = Astro.props;
+---
+
+<section class="email-optin" aria-label={`${BUZZYFLY_CONFIG.brandName} newsletter signup`}>
+	<h3 class="email-optin__title">{title}</h3>
+	<p class="email-optin__description">{description}</p>
+	<form class="email-optin__form" data-email-optin-form method="POST" action="/api/subscribe">
+		<label class="sr-only" for="email-optin-input">Email address</label>
+		<input
+			id="email-optin-input"
+			class="email-optin__input"
+			type="email"
+			name="email"
+			placeholder="you@example.com"
+			autocomplete="email"
+			required
+		/>
+		<button class="email-optin__submit" type="submit">Subscribe</button>
+	</form>
+	<p class="email-optin__status" data-email-optin-status role="status" aria-live="polite"></p>
+</section>
+
+<script>
+	const forms = document.querySelectorAll<HTMLFormElement>("[data-email-optin-form]");
+
+	forms.forEach((form) => {
+		form.addEventListener("submit", async (event) => {
+			event.preventDefault();
+
+			const statusEl = form.parentElement?.querySelector<HTMLElement>(
+				"[data-email-optin-status]",
+			);
+			const submitButton = form.querySelector<HTMLButtonElement>(
+				".email-optin__submit",
+			);
+			const emailInput = form.querySelector<HTMLInputElement>("input[name=email]");
+			const email = emailInput?.value ?? "";
+
+			if (submitButton) submitButton.disabled = true;
+			if (statusEl) {
+				statusEl.textContent = "Subscribing…";
+				statusEl.dataset.state = "pending";
+			}
+
+			try {
+				const response = await fetch(form.action, {
+					method: "POST",
+					headers: { "Content-Type": "application/json" },
+					body: JSON.stringify({ email }),
+				});
+
+				if (!response.ok) throw new Error("Request failed");
+
+				if (statusEl) {
+					statusEl.textContent = "You're in! Check your inbox soon.";
+					statusEl.dataset.state = "success";
+				}
+				form.reset();
+			} catch {
+				if (statusEl) {
+					statusEl.textContent = "Something went wrong. Please try again.";
+					statusEl.dataset.state = "error";
+				}
+			} finally {
+				if (submitButton) submitButton.disabled = false;
+			}
+		});
+	});
+</script>
+
+<style>
+	.email-optin {
+		margin: 2.5em 0;
+		padding: 1.75em;
+		border-radius: 16px;
+		background: linear-gradient(var(--gray-gradient)) no-repeat;
+		border: 1px solid rgb(var(--gray-light));
+		text-align: center;
+	}
+	.email-optin__title {
+		margin: 0 0 0.4em 0;
+		color: rgb(var(--black));
+	}
+	.email-optin__description {
+		margin: 0 0 1.25em 0;
+		color: rgb(var(--gray-dark));
+	}
+	.email-optin__form {
+		display: flex;
+		gap: 0.75em;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	.email-optin__input {
+		flex: 1 1 260px;
+		max-width: 320px;
+		padding: 0.65em 0.9em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		font-family: inherit;
+	}
+	.email-optin__submit {
+		padding: 0.65em 1.5em;
+		border: none;
+		border-radius: 8px;
+		background: var(--accent);
+		color: #fff;
+		font-weight: 700;
+		font-size: 1em;
+		font-family: inherit;
+		cursor: pointer;
+		transition: background-color 0.15s ease-in-out;
+	}
+	.email-optin__submit:hover {
+		background: var(--accent-dark);
+	}
+	.email-optin__submit:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+	.email-optin__status {
+		margin: 0.75em 0 0 0;
+		min-height: 1.2em;
+		font-size: 0.9em;
+		color: rgb(var(--gray));
+	}
+	.email-optin__status[data-state="success"] {
+		color: #1a7a3c;
+	}
+	.email-optin__status[data-state="error"] {
+		color: #b3261e;
+	}
+</style>
