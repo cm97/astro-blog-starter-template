@@ -2,6 +2,7 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import SiteSearch from '../components/SiteSearch.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 ---
 
@@ -9,17 +10,37 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 <html lang="en">
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<style>
+			.home {
+				text-align: center;
+			}
+			.home h1 {
+				margin-bottom: 0.15em;
+			}
+			.tagline {
+				margin: 0;
+				color: rgb(var(--gray));
+				font-size: 1.1em;
+			}
+			.home__intro {
+				max-width: 620px;
+				margin: 0 auto 1em;
+			}
+		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
+		<main class="home">
 			<h1>🪰 Buzzyfly</h1>
-			<p>Small ideas, long distances.</p>
-			<p>
+			<p class="tagline">Small ideas, long distances.</p>
+
+			<SiteSearch />
+
+			<p class="home__intro">
 				Practical systems, reusable templates, and honest write-ups on getting things
 				done — sent straight from the Buzzyfly notebook.
 			</p>
-			<p>
+			<p class="home__intro">
 				<a href="/blog">Read the blog</a> or <a href="/about">find out what this is</a>.
 			</p>
 		</main>
