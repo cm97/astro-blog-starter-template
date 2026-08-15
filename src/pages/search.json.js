@@ -11,6 +11,17 @@ import { getCollection } from "astro:content";
 
 const STATIC_PAGES = [
 	{
+		title: "Buzzyfly Digital System",
+		description: "The complete Buzzyfly operating framework — $49, one-time.",
+		url: "/store/",
+		type: "Store",
+		text:
+			"Buy the Buzzyfly Digital System. $49 one-time payment, no subscription, " +
+			"secure checkout by Stripe. The core operating framework: onboarding, weekly " +
+			"planning, and follow-up workflows, plus the 20-minute weekly reset checklist " +
+			"and lifetime access with future updates. Price, order, buy, checkout, purchase.",
+	},
+	{
 		title: "Home",
 		description: "Small ideas, long distances.",
 		url: "/",
