@@ -5,7 +5,6 @@ pubDate: "Jun 20 2026"
 heroImage: "/blog-placeholder-2.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductUrl: "https://buzzyfly.lemonsqueezy.com/checkout"
 featuredProductDescription: "The complete Buzzyfly operating framework to streamline your workflow."
 ---
 
