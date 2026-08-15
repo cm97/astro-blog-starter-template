@@ -32,9 +32,27 @@ export function parseStripeOrder(payload: any): FulfillmentOrder | null {
 
 	const session = payload?.data?.object;
 	const orderId = session?.id;
-	const itemId = session?.metadata?.item_id ?? session?.line_items?.data?.[0]?.price?.id;
 
-	if (!orderId || !itemId) return null;
+	// `metadata.item_id` is the only reliable source here. Stripe does NOT
+	// include `line_items` on a `checkout.session.completed` event unless the
+	// endpoint explicitly expands it, so the previous fallback to
+	// `line_items.data[0].price.id` was always undefined in production — a
+	// session created without metadata would silently fail to fulfill and the
+	// customer would be charged with nothing delivered.
+	//
+	// Set `metadata: { item_id: "<key from PRODUCT_FILE_MAP>" }` when creating
+	// the Checkout Session. If that's missing we log rather than return a bare
+	// null, because "no item_id" and "not a purchase event" are very different
+	// problems and only one of them means someone lost money.
+	const itemId = session?.metadata?.item_id;
+
+	if (!orderId) return null;
+	if (!itemId) {
+		console.error(
+			`Buzzyfly fulfillment: Stripe session ${orderId} completed with no metadata.item_id — cannot resolve a product to deliver. Set metadata.item_id when creating the Checkout Session.`,
+		);
+		return null;
+	}
 
 	return {
 		provider: "stripe",
