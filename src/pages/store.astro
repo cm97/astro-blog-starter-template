@@ -1,0 +1,208 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import EmailOptin from "../components/EmailOptin.astro";
+import { BUZZYFLY_CONFIG, getOrderAction } from "../data/monetization";
+
+const title = BUZZYFLY_CONFIG.defaultProductTitle;
+const price = BUZZYFLY_CONFIG.defaultProductPrice;
+const order = getOrderAction(title);
+
+/**
+ * OWNER: confirm these bullets match what is actually inside
+ * products/buzzyfly-digital-system.zip in the buzzyfly-products R2 bucket.
+ * They mirror what the blog already says about the product. If the zip
+ * contains something different, edit this list — a storefront that
+ * over-describes the file is a refund waiting to happen.
+ */
+const INCLUDED = [
+	"The core operating framework — the onboarding, weekly planning, and follow-up workflows",
+	"The 20-minute weekly reset checklist, ready to run instead of rebuilt from scratch",
+	"Lifetime access, including future updates to the system",
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`${title} — ${BUZZYFLY_CONFIG.brandName}`}
+			description={BUZZYFLY_CONFIG.defaultProductDescription}
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="store-hero">
+				<p class="store-eyebrow">One product. It does one job well.</p>
+				<h1>{title}</h1>
+				<p class="store-lede">{BUZZYFLY_CONFIG.defaultProductDescription}</p>
+
+				<div class="store-buy">
+					<span class="store-price">{price}</span>
+					{
+						order.external ? (
+							<a
+								class="store-cta"
+								href={order.href}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								{order.label}
+							</a>
+						) : (
+							<a class="store-cta" href={order.href}>
+								{order.label}
+							</a>
+						)
+					}
+				</div>
+				<p class="store-microcopy">One-time payment. No subscription.</p>
+			</section>
+
+			<section class="store-section">
+				<h2>What you get</h2>
+				<ul class="store-list">
+					{INCLUDED.map((item) => <li>{item}</li>)}
+				</ul>
+				<p>
+					The long version of why this exists is in
+					<a href="/blog/first-post/">Why I Built the Buzzyfly Digital System</a>, and a
+					plain contents list is in
+					<a href="/blog/using-mdx/">What’s Actually Inside</a>.
+				</p>
+			</section>
+
+			<section class="store-section">
+				<h2>Who it’s for</h2>
+				<p>
+					One- or few-person businesses where the process lives in someone’s head. If
+					onboarding a new client means rebuilding the same steps from memory, or
+					follow-ups only happen when you remember them, this is aimed squarely at you.
+				</p>
+				<p>
+					It is <strong>not</strong> for you if you already run a documented, working
+					system — you’d be buying something you’ve already built.
+				</p>
+			</section>
+
+			<section class="store-section">
+				<h2>How ordering works</h2>
+				{
+					order.live ? (
+						<ol class="store-list">
+							<li>Pay securely through Stripe.</li>
+							<li>A private download link is sent to the email you check out with.</li>
+							<li>The link is good for 3 days; the files are yours to keep.</li>
+						</ol>
+					) : (
+						<>
+							<p class="store-notice">
+								<strong>Card checkout isn’t switched on yet.</strong> Rather than show you
+								a buy button that goes nowhere, orders are handled by email right now —
+								and they are real orders, not a waiting list.
+							</p>
+							<ol class="store-list">
+								<li>
+									Hit <a href={order.href}>{order.label}</a> — it opens a prefilled message.
+								</li>
+								<li>You get payment details back, and the files once payment clears.</li>
+								<li>
+									When card checkout goes live, this page switches over automatically.
+								</li>
+							</ol>
+						</>
+					)
+				}
+			</section>
+
+			<section class="store-section">
+				<h2>Questions</h2>
+				<p>
+					Anything at all —
+					<a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a>.
+					It’s a small operation, so you’re emailing the person who built it.
+				</p>
+			</section>
+
+			<EmailOptin />
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.store-hero {
+		text-align: center;
+		padding-bottom: 1em;
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+	.store-eyebrow {
+		margin: 0 0 0.4em;
+		font-size: 0.8em;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+	}
+	.store-hero h1 {
+		font-size: 2.6em;
+		margin-bottom: 0.3em;
+	}
+	.store-lede {
+		max-width: 32em;
+		margin: 0 auto 1.4em;
+		color: rgb(var(--gray-dark));
+	}
+	.store-buy {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 1em;
+		flex-wrap: wrap;
+	}
+	.store-price {
+		font-size: 2em;
+		font-weight: 700;
+		color: rgb(var(--black));
+	}
+	.store-cta {
+		display: inline-block;
+		padding: 0.7em 1.8em;
+		border-radius: 999px;
+		background: var(--accent);
+		color: #fff;
+		font-weight: 700;
+		text-decoration: none;
+		transition: background-color 0.15s ease-in-out;
+	}
+	.store-cta:hover {
+		background: var(--accent-dark);
+		color: #fff;
+	}
+	.store-microcopy {
+		margin: 0.9em 0 0;
+		font-size: 0.8em;
+		color: rgb(var(--gray));
+	}
+	.store-section {
+		margin-top: 2.5em;
+	}
+	.store-section h2 {
+		font-size: 1.6em;
+	}
+	.store-list {
+		padding-left: 1.2em;
+		color: rgb(var(--gray-dark));
+	}
+	.store-list li {
+		margin-bottom: 0.5em;
+	}
+	.store-notice {
+		padding: 1em 1.2em;
+		border-radius: 12px;
+		border: 1px solid rgb(var(--gray-light));
+		background: rgba(var(--gray-light), 40%);
+		font-size: 0.95em;
+	}
+</style>
