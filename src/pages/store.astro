@@ -3,7 +3,11 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import EmailOptin from "../components/EmailOptin.astro";
-import { BUZZYFLY_CONFIG, getOrderAction } from "../data/monetization";
+import {
+	AUTOMATIC_DELIVERY_ENABLED,
+	BUZZYFLY_CONFIG,
+	getOrderAction,
+} from "../data/monetization";
 
 const title = BUZZYFLY_CONFIG.defaultProductTitle;
 const price = BUZZYFLY_CONFIG.defaultProductPrice;
@@ -58,7 +62,9 @@ const INCLUDED = [
 						)
 					}
 				</div>
-				<p class="store-microcopy">One-time payment. No subscription.</p>
+				<p class="store-microcopy">
+					One-time payment. No subscription. Secure checkout by Stripe.
+				</p>
 			</section>
 
 			<section class="store-section">
@@ -88,30 +94,33 @@ const INCLUDED = [
 			</section>
 
 			<section class="store-section">
-				<h2>How ordering works</h2>
+				<h2>How it arrives</h2>
 				{
-					order.live ? (
+					AUTOMATIC_DELIVERY_ENABLED ? (
 						<ol class="store-list">
 							<li>Pay securely through Stripe.</li>
-							<li>A private download link is sent to the email you check out with.</li>
+							<li>A private download link lands in the inbox you checked out with.</li>
 							<li>The link is good for 3 days; the files are yours to keep.</li>
 						</ol>
 					) : (
 						<>
-							<p class="store-notice">
-								<strong>Card checkout isn’t switched on yet.</strong> Rather than show you
-								a buy button that goes nowhere, orders are handled by email right now —
-								and they are real orders, not a waiting list.
-							</p>
 							<ol class="store-list">
+								<li>Pay securely through Stripe.</li>
 								<li>
-									Hit <a href={order.href}>{order.label}</a> — it opens a prefilled message.
+									Your download is emailed to the address you checked out with — sent by
+									hand right now, not instantly, while automatic delivery is being
+									finished.
 								</li>
-								<li>You get payment details back, and the files once payment clears.</li>
-								<li>
-									When card checkout goes live, this page switches over automatically.
-								</li>
+								<li>The files are yours to keep.</li>
 							</ol>
+							<p class="store-notice">
+								Being straight with you: delivery isn’t automated yet, so there’s a short
+								wait between paying and getting the file. If anything looks wrong, email
+								<a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>
+									{BUZZYFLY_CONFIG.orderEmail}
+								</a>{" "}
+								and you’ll get a person, not a ticket queue.
+							</p>
 						</>
 					)
 				}
