@@ -1,0 +1,352 @@
+---
+// Shell for every admin console page: nav, flash messages, and the shared
+// styles. Styles are global rather than scoped so the individual admin pages
+// can use these class names in their own markup.
+//
+// Access control lives in src/middleware.ts, not here — a layout is the wrong
+// place for it, since forgetting to use the layout would silently make a page
+// public.
+
+interface Props {
+	title: string;
+	/** Optional short description under the page heading. */
+	subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+
+const path = Astro.url.pathname;
+const notice = Astro.url.searchParams.get("notice");
+const error = Astro.url.searchParams.get("error");
+
+const navItems = [
+	{ href: "/admin", label: "Dashboard" },
+	{ href: "/admin/products", label: "Products" },
+	{ href: "/admin/content", label: "Landing page" },
+	{ href: "/admin/orders", label: "Orders" },
+];
+
+function isActive(href: string): boolean {
+	if (href === "/admin") return path === "/admin" || path === "/admin/";
+	return path.startsWith(href);
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<!-- The console must never be indexed or previewed by a crawler. -->
+		<meta name="robots" content="noindex, nofollow" />
+		<title>{title} · Buzzyfly admin</title>
+	</head>
+	<body>
+		<header class="admin-header">
+			<div class="admin-header__inner">
+				<a class="admin-header__brand" href="/admin">🪰 Buzzyfly admin</a>
+				<nav class="admin-nav">
+					{
+						navItems.map((item) => (
+							<a href={item.href} class={isActive(item.href) ? "is-active" : ""}>
+								{item.label}
+							</a>
+						))
+					}
+				</nav>
+				<div class="admin-header__right">
+					<a class="admin-header__view" href="/" target="_blank" rel="noopener">View site ↗</a>
+					<form method="POST" action="/api/admin/logout">
+						<button type="submit" class="btn btn--ghost">Sign out</button>
+					</form>
+				</div>
+			</div>
+		</header>
+
+		<main class="admin-main">
+			<div class="admin-page-head">
+				<h1>{title}</h1>
+				{subtitle && <p class="admin-page-head__sub">{subtitle}</p>}
+			</div>
+
+			{notice && <div class="flash flash--ok">{notice}</div>}
+			{error && <div class="flash flash--error">{error}</div>}
+
+			<slot />
+		</main>
+
+		<style is:global>
+			:root {
+				--admin-accent: #2337ff;
+				--admin-accent-dark: #000d8a;
+				--admin-border: #e2e6ef;
+				--admin-text: #16181d;
+				--admin-muted: #6b7280;
+				--admin-bg: #f6f7fb;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				margin: 0;
+				background: var(--admin-bg);
+				color: var(--admin-text);
+				font-family:
+					ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+				font-size: 15px;
+				line-height: 1.55;
+			}
+
+			.admin-header {
+				background: #fff;
+				border-bottom: 1px solid var(--admin-border);
+			}
+			.admin-header__inner {
+				display: flex;
+				align-items: center;
+				gap: 1.5rem;
+				flex-wrap: wrap;
+				max-width: 1100px;
+				margin: 0 auto;
+				padding: 0.85rem 1.25rem;
+			}
+			.admin-header__brand {
+				font-weight: 700;
+				text-decoration: none;
+				color: var(--admin-text);
+			}
+			.admin-nav {
+				display: flex;
+				gap: 0.35rem;
+				flex-wrap: wrap;
+				margin-right: auto;
+			}
+			.admin-nav a {
+				padding: 0.4rem 0.75rem;
+				border-radius: 7px;
+				color: var(--admin-muted);
+				text-decoration: none;
+				font-weight: 600;
+			}
+			.admin-nav a:hover {
+				background: var(--admin-bg);
+				color: var(--admin-text);
+			}
+			.admin-nav a.is-active {
+				background: #eef0ff;
+				color: var(--admin-accent-dark);
+			}
+			.admin-header__right {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+			}
+			.admin-header__view {
+				color: var(--admin-muted);
+				text-decoration: none;
+				font-size: 0.9rem;
+			}
+
+			.admin-main {
+				max-width: 1100px;
+				margin: 0 auto;
+				padding: 2rem 1.25rem 4rem 1.25rem;
+			}
+			.admin-page-head h1 {
+				margin: 0;
+				font-size: 1.75rem;
+			}
+			.admin-page-head__sub {
+				margin: 0.35rem 0 0 0;
+				color: var(--admin-muted);
+			}
+			.admin-page-head {
+				margin-bottom: 1.5rem;
+			}
+
+			.flash {
+				padding: 0.8rem 1rem;
+				border-radius: 9px;
+				margin-bottom: 1.5rem;
+				font-weight: 500;
+			}
+			.flash--ok {
+				background: #e7f8ef;
+				border: 1px solid #b7e6cd;
+				color: #145c37;
+			}
+			.flash--error {
+				background: #fdecec;
+				border: 1px solid #f5c2c2;
+				color: #8a1c1c;
+			}
+
+			.card {
+				background: #fff;
+				border: 1px solid var(--admin-border);
+				border-radius: 12px;
+				padding: 1.5rem;
+				margin-bottom: 1.5rem;
+			}
+			.card h2 {
+				margin: 0 0 1rem 0;
+				font-size: 1.15rem;
+			}
+
+			.field {
+				margin-bottom: 1.15rem;
+			}
+			.field label {
+				display: block;
+				font-weight: 600;
+				margin-bottom: 0.3rem;
+			}
+			.field input[type="text"],
+			.field input[type="url"],
+			.field input[type="number"],
+			.field input[type="password"],
+			.field textarea,
+			.field select {
+				width: 100%;
+				padding: 0.6rem 0.7rem;
+				border: 1px solid var(--admin-border);
+				border-radius: 8px;
+				font: inherit;
+				background: #fff;
+				color: inherit;
+			}
+			.field textarea {
+				min-height: 6.5rem;
+				resize: vertical;
+			}
+			.field input:focus,
+			.field textarea:focus,
+			.field select:focus {
+				outline: 2px solid var(--admin-accent);
+				outline-offset: 1px;
+				border-color: var(--admin-accent);
+			}
+			.field__hint {
+				margin: 0.3rem 0 0 0;
+				font-size: 0.85rem;
+				color: var(--admin-muted);
+			}
+			.field-row {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+				gap: 1rem;
+			}
+
+			.btn {
+				display: inline-block;
+				padding: 0.55rem 1.2rem;
+				border: 1px solid transparent;
+				border-radius: 8px;
+				background: var(--admin-accent);
+				color: #fff;
+				font: inherit;
+				font-weight: 600;
+				text-decoration: none;
+				cursor: pointer;
+			}
+			.btn:hover {
+				background: var(--admin-accent-dark);
+			}
+			.btn--ghost {
+				background: transparent;
+				border-color: var(--admin-border);
+				color: var(--admin-text);
+			}
+			.btn--ghost:hover {
+				background: var(--admin-bg);
+			}
+			.btn--danger {
+				background: #c62828;
+			}
+			.btn--danger:hover {
+				background: #8e1f1f;
+			}
+			.btn-row {
+				display: flex;
+				gap: 0.75rem;
+				align-items: center;
+				flex-wrap: wrap;
+			}
+
+			table.admin-table {
+				width: 100%;
+				border-collapse: collapse;
+				background: #fff;
+			}
+			.admin-table th,
+			.admin-table td {
+				padding: 0.7rem 0.85rem;
+				border-bottom: 1px solid var(--admin-border);
+				text-align: left;
+				vertical-align: middle;
+			}
+			.admin-table th {
+				font-size: 0.8rem;
+				text-transform: uppercase;
+				letter-spacing: 0.04em;
+				color: var(--admin-muted);
+			}
+			.admin-table tr:last-child td {
+				border-bottom: none;
+			}
+
+			.pill {
+				display: inline-block;
+				padding: 0.15rem 0.6rem;
+				border-radius: 999px;
+				font-size: 0.78rem;
+				font-weight: 700;
+			}
+			.pill--active {
+				background: #e7f8ef;
+				color: #145c37;
+			}
+			.pill--draft {
+				background: #fff4e0;
+				color: #8a5a00;
+			}
+			.pill--warn {
+				background: #fdecec;
+				color: #8a1c1c;
+			}
+
+			.empty {
+				padding: 2rem;
+				text-align: center;
+				color: var(--admin-muted);
+			}
+			.stat-grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+				gap: 1rem;
+				margin-bottom: 1.5rem;
+			}
+			.stat {
+				background: #fff;
+				border: 1px solid var(--admin-border);
+				border-radius: 12px;
+				padding: 1.25rem;
+			}
+			.stat__value {
+				font-size: 1.9rem;
+				font-weight: 700;
+				line-height: 1.1;
+			}
+			.stat__label {
+				color: var(--admin-muted);
+				font-size: 0.9rem;
+			}
+			code {
+				background: var(--admin-bg);
+				padding: 0.1rem 0.35rem;
+				border-radius: 5px;
+				font-size: 0.88em;
+			}
+		</style>
+	</body>
+</html>
