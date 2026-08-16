@@ -1,3 +1,12 @@
+# Buzzyfly
+
+> **Running the shop?** See **[SHOP.md](./SHOP.md)** for the admin console, how to
+> add a product, and the one-time setup steps.
+
+Built on the Astro blog starter, below.
+
+---
+
 # Astro Starter Kit:  Blog
 
 [![Deploy to Cloudflare](https://deploy.workers.cloudflare.com/button)](https://deploy.workers.cloudflare.com/?url=https://github.com/cloudflare/templates/tree/main/astro-blog-starter-template)
