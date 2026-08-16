@@ -3,9 +3,11 @@
 // regenerated wholesale by Wrangler, so anything added directly to it is lost
 // on the next `npm run cf-typegen`.
 //
-// These two are set as Worker secrets, never committed:
+// These are set as Worker secrets, never committed:
 //   npx wrangler secret put EMAIL_API_KEY
 //   npx wrangler secret put EMAIL_FROM
+//   npx wrangler secret put ADMIN_PASSWORD
+//   npx wrangler secret put ADMIN_SESSION_SECRET
 
 declare namespace Cloudflare {
 	interface Env {
@@ -13,5 +15,14 @@ declare namespace Cloudflare {
 		// mint a download link but has no way to send it to the customer.
 		EMAIL_API_KEY?: string;
 		EMAIL_FROM?: string;
+
+		// Admin console credentials. ADMIN_PASSWORD is what the operator types
+		// at /admin/login; ADMIN_SESSION_SECRET signs the resulting session
+		// cookie. They are separate so the session secret can be rotated —
+		// logging every session out — without changing the password, and so a
+		// leaked cookie secret does not reveal the password. The console
+		// refuses all logins unless both are present.
+		ADMIN_PASSWORD?: string;
+		ADMIN_SESSION_SECRET?: string;
 	}
 }
