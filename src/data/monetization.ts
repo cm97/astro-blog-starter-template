@@ -14,12 +14,16 @@ export const BUZZYFLY_CONFIG = {
 		"Get exclusive Buzzyfly digital tools, templates, and insights delivered to your inbox.",
 };
 
-// Maps a purchased item/variant identifier (Lemon Squeezy `variant_id`, or a
-// Stripe `price_id` / `product_id`) to the private object key inside the
-// `MY_PRODUCTS` R2 bucket that should be delivered on fulfillment, plus the
-// filename presented to the customer in the `Content-Disposition` header.
+// LEGACY — do not add new products here.
 //
-// Extend this map with every sellable Buzzyfly digital product.
+// Products now live in the D1 `products` table and are managed at /admin, which
+// means adding one no longer needs a code change or a deploy. See SHOP.md.
+//
+// This map is retained only as the last fallback inside `resolveDeliverable`
+// (src/lib/fulfillment.ts), so that any checkout link created before the
+// catalog existed still delivers a file instead of failing silently on a
+// customer who has already paid. It can be deleted once no live checkout link
+// references these keys.
 export const PRODUCT_FILE_MAP: Record<
 	string,
 	{ r2Key: string; fileName: string; contentType: string }
