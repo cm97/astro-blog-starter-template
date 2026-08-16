@@ -7,6 +7,10 @@ import { getCollection } from "astro:content";
  * costs nothing at runtime: the browser downloads this once and filters it
  * locally. Every blog post is indexed automatically — to make a non-blog page
  * findable, add an entry to STATIC_PAGES below.
+ *
+ * `keywords` is an optional high-weight field for words a visitor is likely to
+ * type that do not appear in the page's own title or copy. Use it sparingly:
+ * it outranks everything except a title hit.
  */
 
 const STATIC_PAGES = [
@@ -15,6 +19,9 @@ const STATIC_PAGES = [
 		description: "The complete Buzzyfly operating framework — $49, one-time.",
 		url: "/store/",
 		type: "Store",
+		keywords:
+			"buy price cost pricing order checkout purchase pay payment $49 49 " +
+			"how much refund license download get it",
 		text:
 			"Buy the Buzzyfly Digital System. $49 one-time payment, no subscription, " +
 			"secure checkout by Stripe. The core operating framework: onboarding, weekly " +

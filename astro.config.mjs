@@ -8,7 +8,9 @@ import cloudflare from "@astrojs/cloudflare";
 // https://astro.build/config
 export default defineConfig({
 	site: "https://buzzyfly.com",
-	integrations: [mdx(), sitemap()],
+	// /search renders its results in the browser and is marked noindex, so it
+	// has nothing to offer a crawler — keep it out of the sitemap.
+	integrations: [mdx(), sitemap({ filter: (page) => !page.includes("/search") })],
 	adapter: cloudflare({
 		platformProxy: {
 			enabled: true,

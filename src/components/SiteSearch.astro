@@ -7,21 +7,36 @@
  * live results with highlighted matches. No server call, no dependencies.
  *
  * Drop `<SiteSearch />` on any page. Optional props below.
+ *
+ * By default (compact mode) pressing Enter hands off to the /search results
+ * page. Set `standalone` on /search itself: it reads ?q= from the URL, keeps
+ * its results open, and writes the query back to the URL so results are
+ * linkable and survive a refresh.
  */
 interface Props {
 	heading?: string;
 	placeholder?: string;
 	hint?: string;
+	limit?: number;
+	standalone?: boolean;
 }
 
 const {
 	heading = "What are you looking for?",
 	placeholder = "Search Buzzyfly…",
 	hint = "Try “weekly reset”, “templates”, or “onboarding”.",
+	limit = 8,
+	standalone = false,
 } = Astro.props;
 ---
 
-<section class="site-search" data-search aria-label="Search this site">
+<section
+	class="site-search"
+	data-search
+	data-search-limit={String(limit)}
+	data-search-standalone={standalone ? "true" : null}
+	aria-label="Search this site"
+>
 	{heading && <h2 class="site-search__heading">{heading}</h2>}
 
 	<form class="site-search__form" role="search" autocomplete="off" data-search-form>
@@ -195,6 +210,9 @@ const {
 		const results = root.querySelector("[data-search-results]");
 		if (!form || !input || !results) return;
 
+		const limit = Number(root.dataset.searchLimit) || 8;
+		const standalone = root.dataset.searchStandalone === "true";
+
 		let index = null;
 		let pending = null;
 		let matches = [];
@@ -241,9 +259,12 @@ const {
 			return out;
 		}
 
-		/** Every term must appear somewhere; titles outrank descriptions outrank body. */
+		/** Every term must appear somewhere; titles outrank keywords outrank
+		 *  descriptions outrank body. `keywords` lets a page claim words a
+		 *  visitor types but the page never says (e.g. "buy" on the store). */
 		function scoreDoc(doc) {
 			const title = (doc.title || "").toLowerCase();
+			const keywords = (doc.keywords || "").toLowerCase();
 			const description = (doc.description || "").toLowerCase();
 			const text = (doc.text || "").toLowerCase();
 			let total = 0;
@@ -251,6 +272,7 @@ const {
 				let points = 0;
 				if (title.includes(term)) points += 10;
 				if (title.startsWith(term)) points += 5;
+				if (keywords.includes(term)) points += 8;
 				if (description.includes(term)) points += 4;
 				if (text.includes(term)) points += 1;
 				if (points === 0) return 0;
@@ -326,9 +348,18 @@ const {
 				.map((doc) => ({ doc: doc, score: scoreDoc(doc) }))
 				.filter((entry) => entry.score > 0)
 				.sort((a, b) => b.score - a.score)
-				.slice(0, 8)
+				.slice(0, limit)
 				.map((entry) => Object.assign({}, entry.doc, { snippet: buildSnippet(entry.doc) }));
 			render();
+			if (standalone) syncUrl(input.value.trim());
+		}
+
+		/** Keep ?q= in step with the box so results can be linked and refreshed. */
+		function syncUrl(query) {
+			const url = new URL(window.location.href);
+			if (query) url.searchParams.set("q", query);
+			else url.searchParams.delete("q");
+			window.history.replaceState({}, "", url);
 		}
 
 		function reset() {
@@ -360,8 +391,16 @@ const {
 
 		form.addEventListener("submit", (event) => {
 			event.preventDefault();
-			const target = matches[active < 0 ? 0 : active];
-			if (target) window.location.href = target.url;
+			const query = input.value.trim();
+			// An arrow-key pick always wins; otherwise a compact box hands the
+			// query off to the full results page rather than guessing for you.
+			if (active >= 0 && matches[active]) {
+				window.location.href = matches[active].url;
+			} else if (standalone) {
+				input.blur();
+			} else if (query) {
+				window.location.href = "/search/?q=" + encodeURIComponent(query);
+			}
 		});
 
 		clearBtn.addEventListener("click", () => {
@@ -369,9 +408,21 @@ const {
 			input.focus();
 		});
 
-		document.addEventListener("click", (event) => {
-			if (!root.contains(event.target)) results.hidden = true;
-		});
+		// The results page owns its whole viewport, so its list stays put.
+		if (!standalone) {
+			document.addEventListener("click", (event) => {
+				if (!root.contains(event.target)) results.hidden = true;
+			});
+		}
+
+		if (standalone) {
+			const initial = new URL(window.location.href).searchParams.get("q");
+			if (initial) {
+				input.value = initial;
+				run();
+			}
+			input.focus();
+		}
 	}
 
 	document.querySelectorAll("[data-search]").forEach((root) => initSiteSearch(root));
