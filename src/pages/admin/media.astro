@@ -1,0 +1,212 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import {
+	ALLOWED_EXTENSIONS,
+	MAX_UPLOAD_BYTES,
+	formatBytes,
+	listMedia,
+	type MediaItem,
+} from "../../lib/media";
+
+const env = Astro.locals.runtime.env;
+const params = Astro.url.searchParams;
+const uploaded = params.get("uploaded");
+const deleted = params.get("deleted");
+const error = params.get("error");
+
+let items: MediaItem[] = [];
+let listFailed = false;
+
+try {
+	items = await listMedia(env.MY_PRODUCTS);
+} catch (err) {
+	console.error("Buzzyfly admin media: failed to list bucket", err);
+	listFailed = true;
+}
+
+const totalBytes = items.reduce((sum, item) => sum + item.size, 0);
+---
+
+<AdminLayout title="Media" active="media">
+	<h1>Media</h1>
+	<p class="admin-subtitle">
+		{items.length} file{items.length === 1 ? "" : "s"} · {formatBytes(totalBytes)} · paste a link
+		into any post or page.
+	</p>
+
+	{error && <p class="admin-notice admin-notice--error">{error}</p>}
+	{uploaded && <p class="admin-notice admin-notice--success">Uploaded <code>{uploaded}</code>.</p>}
+	{deleted && <p class="admin-notice admin-notice--success">Deleted <code>{deleted}</code>.</p>}
+	{
+		listFailed && (
+			<p class="admin-notice admin-notice--warn">
+				Could not read the storage bucket. Check the <code>MY_PRODUCTS</code> R2 binding.
+			</p>
+		)
+	}
+
+	<div class="admin-card">
+		<h2>Upload</h2>
+		<form method="POST" action="/api/admin/media" enctype="multipart/form-data" class="media-upload">
+			<input type="file" name="file" required accept={ALLOWED_EXTENSIONS.map((e) => `.${e}`).join(",")} />
+			<button class="admin-btn admin-btn--primary" type="submit">Upload</button>
+		</form>
+		<p class="media-hint">
+			Up to {formatBytes(MAX_UPLOAD_BYTES)}. Allowed: {ALLOWED_EXTENSIONS.join(", ")}. For long
+			videos, embed YouTube or Vimeo instead of uploading here.
+		</p>
+	</div>
+
+	{
+		items.length > 0 && (
+			<div class="admin-card">
+				<h2>Library</h2>
+				<ul class="media-grid">
+					{items.map((item) => (
+						<li class="media-item">
+							<div class="media-thumb">
+								{item.isImage ? (
+									<img src={item.url} alt={item.name} loading="lazy" />
+								) : (
+									<span class="media-ext">{item.name.split(".").pop()}</span>
+								)}
+							</div>
+							<div class="media-meta">
+								<a href={item.url} target="_blank" rel="noopener noreferrer" class="media-name">
+									{item.name}
+								</a>
+								<span class="media-size">{formatBytes(item.size)}</span>
+							</div>
+							<div class="media-actions">
+								<button class="admin-btn" type="button" data-copy={item.url}>
+									Copy link
+								</button>
+								<form
+									method="POST"
+									action="/api/admin/media/delete"
+									onsubmit="return confirm('Delete this file? Anything linking to it will break.')"
+								>
+									<input type="hidden" name="name" value={item.name} />
+									<button class="admin-btn admin-btn--danger" type="submit">
+										Delete
+									</button>
+								</form>
+							</div>
+						</li>
+					))}
+				</ul>
+			</div>
+		)
+	}
+
+	{
+		items.length === 0 && !listFailed && (
+			<div class="admin-card">
+				<p>Nothing uploaded yet. Add an image above and it'll appear here.</p>
+			</div>
+		)
+	}
+</AdminLayout>
+
+<script>
+	// Copy the absolute URL, since that's what you'd paste into a post.
+	document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((button) => {
+		button.addEventListener("click", async () => {
+			const path = button.dataset.copy;
+			if (!path) return;
+			const absolute = new URL(path, window.location.origin).href;
+			const original = button.textContent;
+			try {
+				await navigator.clipboard.writeText(absolute);
+				button.textContent = "Copied";
+			} catch {
+				// Clipboard is blocked in some mobile browsers without a secure
+				// context or permission — show the URL so it can be copied by hand.
+				window.prompt("Copy this link:", absolute);
+				return;
+			}
+			setTimeout(() => (button.textContent = original), 1500);
+		});
+	});
+</script>
+
+<style>
+	.media-upload {
+		display: flex;
+		gap: 0.75em;
+		flex-wrap: wrap;
+		align-items: center;
+	}
+	.media-upload input[type="file"] {
+		flex: 1 1 220px;
+		font-size: 0.9em;
+	}
+	.media-hint {
+		margin: 0.75em 0 0 0;
+		font-size: 0.85em;
+		color: rgb(var(--gray));
+	}
+	.media-grid {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+		display: grid;
+		grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+		gap: 1em;
+	}
+	.media-item {
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 10px;
+		overflow: hidden;
+		display: flex;
+		flex-direction: column;
+	}
+	.media-thumb {
+		aspect-ratio: 4 / 3;
+		background: #f4f5f9;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+	}
+	.media-thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		border-radius: 0;
+	}
+	.media-ext {
+		font-family: monospace;
+		font-weight: 700;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+	}
+	.media-meta {
+		padding: 0.6em 0.7em 0.2em;
+		display: flex;
+		flex-direction: column;
+		gap: 0.15em;
+		min-width: 0;
+	}
+	.media-name {
+		font-size: 0.85em;
+		word-break: break-all;
+	}
+	.media-size {
+		font-size: 0.75em;
+		color: rgb(var(--gray));
+	}
+	.media-actions {
+		margin-top: auto;
+		padding: 0.5em 0.7em 0.7em;
+		display: flex;
+		gap: 0.4em;
+		flex-wrap: wrap;
+	}
+	.media-actions :global(.admin-btn) {
+		font-size: 0.8em;
+		padding: 0.35em 0.7em;
+	}
+</style>

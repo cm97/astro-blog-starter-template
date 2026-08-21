@@ -61,6 +61,9 @@ A private admin console lives at `/admin`, protected by a username/password logi
 
 - **Dashboard** — subscriber/order counts and recent activity.
 - **Posts** — list posts; create, edit, and delete them (commits Markdown files straight to this repo via the GitHub API).
+- **Media** — upload images, documents and short clips, browse them, copy a link to paste
+  into a post, and delete them. Files are stored in the `MY_PRODUCTS` R2 bucket under a
+  `public/` prefix and served from `/media/<name>`.
 - **Subscribers** — search, remove, and CSV-export the newsletter list.
 - **Orders** — search fulfilled orders and reissue a customer's download link. Re-issued
   links are random tokens stored in `download_tokens` (valid 3 days, revocable by deleting
@@ -91,6 +94,24 @@ Without the GitHub token set, the console still runs — Posts becomes a read-on
 
 > **Note:** `site_content` is shared with other tooling, so the console reads and writes
 > only the setting keys it owns and leaves any other rows in that table untouched.
+
+### Media storage and the paid-product boundary
+
+The `MY_PRODUCTS` bucket holds two kinds of object and they must not mix:
+
+| Prefix      | Contents                       | Served by                                  |
+| ----------- | ------------------------------ | ------------------------------------------ |
+| `products/` | files customers **pay for**    | `/api/download`, only with a valid token    |
+| `public/`   | site media, public to everyone | `/media/<name>`, no authentication          |
+
+`/media/[...key].ts` is public and unauthenticated, so it is written so that reaching
+`products/` is impossible rather than unlikely: `resolvePublicKey()` in `src/lib/media.ts`
+is the only thing permitted to prepend the prefix, and it rejects any name containing a
+path separator, `..`, a null byte, or an extension outside the allowlist. Multi-segment
+requests are refused outright rather than normalised.
+
+If you extend the media features, route every bucket access through that helper rather
+than composing keys by hand.
 
 ## 👀 Want to learn more?
 
