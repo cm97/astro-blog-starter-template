@@ -4,6 +4,21 @@ export const prerender = false;
 const url = Astro.url;
 const error = url.searchParams.get("error");
 const next = url.searchParams.get("next") ?? "/admin";
+
+// Report which of the required values the Worker can actually see, so a
+// misconfiguration says which one is wrong instead of just "not configured".
+// Only presence is ever reported — never a value, not even its length.
+const env = Astro.locals.runtime.env;
+const required = ["ADMIN_USERNAME", "ADMIN_PASSWORD", "ADMIN_SESSION_SECRET"] as const;
+const missing = required.filter((name) => !env[name]);
+
+// A name that is present but surrounded by whitespace is invisible in the
+// Cloudflare dashboard, so surface any near-miss key that differs only by
+// trimming or capitalisation.
+const lookalikes = Object.keys(env ?? {}).filter((key) => {
+	const normalised = key.trim().toUpperCase();
+	return (required as readonly string[]).includes(normalised) && !(required as readonly string[]).includes(key);
+});
 ---
 
 <!doctype html>
@@ -20,6 +35,28 @@ const next = url.searchParams.get("next") ?? "/admin";
 				<h1>🪰 Buzzyfly Admin</h1>
 				<p class="login-subtitle">Sign in to manage the site.</p>
 				{error && <p class="login-error">{error}</p>}
+				{
+					missing.length > 0 && (
+						<div class="login-diag">
+							<strong>The Worker cannot see:</strong>
+							<ul>
+								{missing.map((name) => (
+									<li>{name}</li>
+								))}
+							</ul>
+							{lookalikes.length > 0 && (
+								<p>
+									Found a near-match, so the name is probably mistyped or has a stray
+									space: <code>{lookalikes.join(", ")}</code>
+								</p>
+							)}
+							<p>
+								Everything else is set correctly. Check these exact names under the
+								buzzyfly Worker → Settings → Variables and Secrets, then deploy.
+							</p>
+						</div>
+					)
+				}
 				<input type="hidden" name="next" value={next} />
 				<label for="username">Username</label>
 				<input id="username" name="username" type="text" autocomplete="username" required autofocus />
@@ -71,6 +108,24 @@ const next = url.searchParams.get("next") ?? "/admin";
 		border-radius: 8px;
 		font-size: 0.85em;
 		margin: 0 0 1em 0;
+	}
+	.login-diag {
+		background: #fff4e0;
+		color: #8a5a00;
+		padding: 0.65em 0.85em;
+		border-radius: 8px;
+		font-size: 0.8em;
+		margin: 0 0 1em 0;
+	}
+	.login-diag ul {
+		margin: 0.4em 0;
+		padding-left: 1.2em;
+	}
+	.login-diag li {
+		font-family: monospace;
+	}
+	.login-diag p {
+		margin: 0.4em 0 0 0;
 	}
 	label {
 		display: block;
