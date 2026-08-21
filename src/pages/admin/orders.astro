@@ -6,9 +6,11 @@ import AdminLayout from "../../layouts/AdminLayout.astro";
 const env = Astro.locals.runtime.env;
 const q = Astro.url.searchParams.get("q")?.trim() ?? "";
 const resent = Astro.url.searchParams.get("resent");
+const resendError = Astro.url.searchParams.get("error");
 
+// `fulfillments` has no surrogate id column; (provider, order_id) is unique
+// (see the index in migrations/0001_init.sql) and identifies a row.
 interface Fulfillment {
-	id: number;
 	provider: string;
 	order_id: string;
 	item_id: string;
@@ -24,7 +26,7 @@ if (env.DB) {
 		const like = `%${q}%`;
 		const [rows, count] = await Promise.all([
 			env.DB.prepare(
-				`SELECT id, provider, order_id, item_id, customer_email, created_at FROM fulfillments
+				`SELECT provider, order_id, item_id, customer_email, created_at FROM fulfillments
 				 WHERE order_id LIKE ? OR customer_email LIKE ? OR item_id LIKE ?
 				 ORDER BY created_at DESC LIMIT 200`,
 			)
@@ -49,11 +51,11 @@ if (env.DB) {
 	<p class="admin-subtitle">{total} fulfilled order{total === 1 ? "" : "s"}.</p>
 
 	{!env.DB && <p class="admin-notice admin-notice--warn">No D1 database bound — orders can't be listed.</p>}
-	{!env.DOWNLOAD_TOKEN_SECRET && <p class="admin-notice admin-notice--warn">DOWNLOAD_TOKEN_SECRET isn't set — resending download links won't work.</p>}
+	{resendError && <p class="admin-notice admin-notice--error">{resendError}</p>}
 	{
 		resent && (
 			<p class="admin-notice admin-notice--success">
-				New download link: <a href={resent}>{resent}</a>
+				New download link (valid 3 days): <a href={resent}>{resent}</a>
 			</p>
 		)
 	}
@@ -89,7 +91,8 @@ if (env.DB) {
 								<td>{new Date(o.created_at).toLocaleString()}</td>
 								<td>
 									<form method="POST" action="/api/admin/orders/resend">
-										<input type="hidden" name="id" value={o.id} />
+										<input type="hidden" name="provider" value={o.provider} />
+										<input type="hidden" name="order_id" value={o.order_id} />
 										<input type="hidden" name="q" value={q} />
 										<button class="admin-btn" type="submit">Resend link</button>
 									</form>

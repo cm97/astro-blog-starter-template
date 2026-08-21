@@ -1,37 +1,40 @@
--- Buzzyfly admin console schema.
+-- Schema for the D1 database bound as `DB` (buzzy-fly_db).
+--
+-- The tables already exist in production (created by hand on 2026-08-12), but
+-- there was no migration in version control, so the schema could not be
+-- recreated or reviewed. This file records it.
+--
 -- Apply with:
---   wrangler d1 execute buzzy-fly_db --file=migrations/0001_init.sql --local
---   wrangler d1 execute buzzy-fly_db --file=migrations/0001_init.sql --remote
+--   npx wrangler d1 execute buzzy-fly_db --remote --file=./migrations/0001_init.sql
 
 CREATE TABLE IF NOT EXISTS subscribers (
-	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	email TEXT NOT NULL UNIQUE,
-	created_at INTEGER NOT NULL
+  email      TEXT PRIMARY KEY,
+  created_at INTEGER
 );
 
 CREATE TABLE IF NOT EXISTS fulfillments (
-	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	provider TEXT NOT NULL,
-	order_id TEXT NOT NULL,
-	item_id TEXT NOT NULL,
-	customer_email TEXT,
-	created_at INTEGER NOT NULL
+  provider       TEXT,
+  order_id       TEXT,
+  item_id        TEXT,
+  customer_email TEXT,
+  created_at     INTEGER
 );
 
-CREATE TABLE IF NOT EXISTS settings (
-	key TEXT PRIMARY KEY,
-	value TEXT NOT NULL,
-	updated_at INTEGER NOT NULL
-);
+-- Payment providers retry webhooks on any non-200, and a retry must not
+-- create a second fulfillment row for the same purchase.
+CREATE UNIQUE INDEX IF NOT EXISTS idx_fulfillments_provider_order
+  ON fulfillments (provider, order_id);
 
-CREATE TABLE IF NOT EXISTS admin_audit_log (
-	id INTEGER PRIMARY KEY AUTOINCREMENT,
-	actor TEXT NOT NULL,
-	action TEXT NOT NULL,
-	detail TEXT,
-	created_at INTEGER NOT NULL
-);
+-- Supports re-sending a download link from the order record instead of
+-- replaying the webhook.
+CREATE INDEX IF NOT EXISTS idx_fulfillments_email
+  ON fulfillments (customer_email);
 
-CREATE INDEX IF NOT EXISTS idx_fulfillments_created_at ON fulfillments (created_at);
-CREATE INDEX IF NOT EXISTS idx_subscribers_created_at ON subscribers (created_at);
-CREATE INDEX IF NOT EXISTS idx_admin_audit_log_created_at ON admin_audit_log (created_at);
+-- Dedupe store for the hourly order-watch task, so a pending order is only
+-- alerted on once.
+CREATE TABLE IF NOT EXISTS fulfillment_alerts (
+  provider   TEXT NOT NULL,
+  order_id   TEXT NOT NULL,
+  alerted_at INTEGER NOT NULL,
+  PRIMARY KEY (provider, order_id)
+);

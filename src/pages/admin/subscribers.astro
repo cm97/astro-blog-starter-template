@@ -7,8 +7,9 @@ const env = Astro.locals.runtime.env;
 const q = Astro.url.searchParams.get("q")?.trim() ?? "";
 const deleted = Astro.url.searchParams.get("deleted");
 
+// `subscribers` is keyed by email (see migrations/0001_init.sql) — there is no
+// surrogate id column, so email is what identifies a row here.
 interface Subscriber {
-	id: number;
 	email: string;
 	created_at: number;
 }
@@ -21,7 +22,7 @@ if (env.DB) {
 		const like = `%${q}%`;
 		const [rows, count] = await Promise.all([
 			env.DB.prepare(
-				`SELECT id, email, created_at FROM subscribers WHERE email LIKE ? ORDER BY created_at DESC LIMIT 200`,
+				`SELECT email, created_at FROM subscribers WHERE email LIKE ? ORDER BY created_at DESC LIMIT 200`,
 			)
 				.bind(like)
 				.all<Subscriber>(),
@@ -70,7 +71,7 @@ if (env.DB) {
 								<td>{new Date(s.created_at).toLocaleString()}</td>
 								<td>
 									<form method="POST" action="/api/admin/subscribers/delete" onsubmit="return confirm('Remove this subscriber?')">
-										<input type="hidden" name="id" value={s.id} />
+										<input type="hidden" name="email" value={s.email} />
 										<input type="hidden" name="q" value={q} />
 										<button class="admin-btn admin-btn--danger" type="submit">Remove</button>
 									</form>

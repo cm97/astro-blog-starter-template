@@ -62,23 +62,35 @@ A private admin console lives at `/admin`, protected by a username/password logi
 - **Dashboard** — subscriber/order counts and recent activity.
 - **Posts** — list posts; create, edit, and delete them (commits Markdown files straight to this repo via the GitHub API).
 - **Subscribers** — search, remove, and CSV-export the newsletter list.
-- **Orders** — search fulfilled orders and reissue a customer's download link.
+- **Orders** — search fulfilled orders and reissue a customer's download link. Re-issued
+  links are random tokens stored in `download_tokens` (valid 3 days, revocable by deleting
+  the row), so this works without `DOWNLOAD_TOKEN_SECRET` being set.
 - **Settings** — edit Buzzyfly branding/copy (mirrors `src/data/monetization.ts`).
 - **Activity log** — every login and admin change, audited in D1.
 
 ### Setup
 
-1. Apply the D1 schema (subscribers/fulfillments already used by the site, plus `settings` and `admin_audit_log` for the console):
+1. Apply the D1 migrations. The console reads the `subscribers`, `fulfillments`, and
+   `download_tokens` tables the site already uses, reuses the existing `site_content`
+   key/value table for editable settings, and adds only `admin_audit_log` of its own
+   (`migrations/0003_admin_console.sql`):
    ```bash
-   wrangler d1 execute buzzy-fly_db --file=migrations/0001_init.sql --local   # for `wrangler dev`
-   wrangler d1 execute buzzy-fly_db --file=migrations/0001_init.sql --remote  # for production
+   for f in migrations/*.sql; do
+     wrangler d1 execute buzzy-fly_db --file="$f" --local    # for `wrangler dev`
+     wrangler d1 execute buzzy-fly_db --file="$f" --remote   # for production
+   done
    ```
+   Every migration is `CREATE TABLE IF NOT EXISTS`, so re-running them against a
+   database that already has the tables is a no-op.
 2. Set the login secrets (copy `.dev.vars.example` to `.dev.vars` for local dev, or `wrangler secret put <NAME>` in production):
    - `ADMIN_USERNAME`, `ADMIN_PASSWORD` — the credentials you'll sign in with.
    - `ADMIN_SESSION_SECRET` — a long random string used to sign the login session cookie.
 3. *(Optional)* To let Posts/Settings publish changes instead of running read-only, set `GITHUB_TOKEN` (a fine-grained PAT with **Contents: Read and write** on this repo), `GITHUB_OWNER`, `GITHUB_REPO`, and `GITHUB_BRANCH`. Every save commits directly to that branch and triggers a normal redeploy — there's no draft/review step, so treat the admin password as production-sensitive.
 
 Without the GitHub token set, the console still runs — Posts becomes a read-only list and Settings only records changes in D1 — everything else (auth, subscribers, orders, activity log) works regardless.
+
+> **Note:** `site_content` is shared with other tooling, so the console reads and writes
+> only the setting keys it owns and leaves any other rows in that table untouched.
 
 ## 👀 Want to learn more?
 

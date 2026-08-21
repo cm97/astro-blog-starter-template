@@ -1,5 +1,5 @@
 ---
-import { BUZZYFLY_CONFIG } from "../data/monetization";
+import { BUZZYFLY_CONFIG, getOrderAction } from "../data/monetization";
 
 interface Props {
 	title?: string;
@@ -16,6 +16,14 @@ const {
 	description = BUZZYFLY_CONFIG.defaultProductDescription,
 	features = [],
 } = Astro.props;
+
+// An explicitly passed `url` wins. Otherwise fall back to the shared order
+// action, which resolves to the live Stripe checkout when one is configured
+// and to a real mailto order path when it is not — so this component can
+// never render a button that goes nowhere.
+const order = url
+	? { live: true, href: url, label: "Get it now", external: true }
+	: getOrderAction(title);
 ---
 
 <aside class="product-callout" aria-label={`${BUZZYFLY_CONFIG.brandName} product`}>
@@ -34,18 +42,29 @@ const {
 	<div class="product-callout__footer">
 		<span class="product-callout__price">{price}</span>
 		{
-			url && (
+			order.external ? (
 				<a
 					class="product-callout__cta"
-					href={url}
+					href={order.href}
 					target="_blank"
 					rel="noopener noreferrer"
 				>
-					Get it now
+					{order.label}
+				</a>
+			) : (
+				<a class="product-callout__cta" href={order.href}>
+					{order.label}
 				</a>
 			)
 		}
 	</div>
+	{
+		!order.live && (
+			<p class="product-callout__note">
+				Card checkout isn’t switched on yet — email orders are handled by hand.
+			</p>
+		)
+	}
 </aside>
 
 <style>
@@ -110,5 +129,10 @@ const {
 	.product-callout__cta:hover {
 		background: var(--accent-dark);
 		color: #fff;
+	}
+	.product-callout__note {
+		margin: 1em 0 0;
+		font-size: 0.8em;
+		color: rgb(var(--gray));
 	}
 </style>

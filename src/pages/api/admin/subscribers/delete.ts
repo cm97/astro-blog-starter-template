@@ -6,16 +6,14 @@ export const prerender = false;
 export const POST: APIRoute = async ({ request, locals }) => {
 	const env = locals.runtime.env;
 	const form = await request.formData().catch(() => null);
-	const id = form?.get("id");
+	// `subscribers` has no surrogate id — email is the primary key.
+	const email = String(form?.get("email") ?? "");
 	const q = String(form?.get("q") ?? "");
 
-	if (id && env.DB) {
+	if (email && env.DB) {
 		try {
-			const row = await env.DB.prepare(`SELECT email FROM subscribers WHERE id = ?`)
-				.bind(id)
-				.first<{ email: string }>();
-			await env.DB.prepare(`DELETE FROM subscribers WHERE id = ?`).bind(id).run();
-			await logAdminAction(env, locals.adminUser ?? "unknown", "subscriber_delete", row?.email);
+			await env.DB.prepare(`DELETE FROM subscribers WHERE email = ?`).bind(email).run();
+			await logAdminAction(env, locals.adminUser ?? "unknown", "subscriber_delete", email);
 		} catch (error) {
 			console.error("Buzzyfly admin: failed to delete subscriber", error);
 		}

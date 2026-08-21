@@ -1,0 +1,378 @@
+---
+/**
+ * Buzzyfly site search.
+ *
+ * Centered, Google-style search box. Reads the prerendered /search.json index
+ * (built by src/pages/search.json.js), filters it in the browser, and shows
+ * live results with highlighted matches. No server call, no dependencies.
+ *
+ * Drop `<SiteSearch />` on any page. Optional props below.
+ */
+interface Props {
+	heading?: string;
+	placeholder?: string;
+	hint?: string;
+}
+
+const {
+	heading = "What are you looking for?",
+	placeholder = "Search Buzzyfly…",
+	hint = "Try “weekly reset”, “templates”, or “onboarding”.",
+} = Astro.props;
+---
+
+<section class="site-search" data-search aria-label="Search this site">
+	{heading && <h2 class="site-search__heading">{heading}</h2>}
+
+	<form class="site-search__form" role="search" autocomplete="off" data-search-form>
+		<svg class="site-search__icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+			<circle cx="11" cy="11" r="7"></circle>
+			<line x1="16.5" y1="16.5" x2="21" y2="21"></line>
+		</svg>
+		<input
+			class="site-search__input"
+			type="search"
+			name="q"
+			placeholder={placeholder}
+			aria-label="Search Buzzyfly"
+			data-search-input
+		/>
+		<button
+			class="site-search__clear"
+			type="button"
+			aria-label="Clear search"
+			hidden
+			data-search-clear
+		>&times;</button>
+	</form>
+
+	<p class="site-search__hint">{hint}</p>
+	<ul class="site-search__results" data-search-results hidden></ul>
+</section>
+
+<style is:global>
+	/* Global (not scoped) because result rows are created by JS at runtime and
+	   would not receive Astro's scoping attribute. Every selector is prefixed
+	   with .site-search to keep it contained. */
+	.site-search {
+		max-width: 620px;
+		margin: 2.5em auto 3em;
+		text-align: center;
+	}
+	.site-search__heading {
+		margin: 0 0 0.7em;
+		font-size: 1.2em;
+		font-weight: 400;
+		color: rgb(var(--gray-dark));
+	}
+	.site-search__form {
+		display: flex;
+		align-items: center;
+		gap: 0.6em;
+		padding: 0.5em 1em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 999px;
+		background: #fff;
+		box-shadow: 0 1px 4px rgba(var(--gray), 20%);
+		transition:
+			box-shadow 0.15s ease,
+			border-color 0.15s ease;
+	}
+	.site-search__form:focus-within {
+		border-color: var(--accent);
+		box-shadow: 0 2px 12px rgba(var(--gray), 30%);
+	}
+	.site-search__icon {
+		flex: none;
+		width: 22px;
+		height: 22px;
+		fill: none;
+		stroke: rgb(var(--gray));
+		stroke-width: 2;
+		stroke-linecap: round;
+	}
+	.site-search__input {
+		flex: 1 1 auto;
+		min-width: 0;
+		padding: 0.15em 0;
+		border: 0;
+		outline: none;
+		background: transparent;
+		font-family: inherit;
+		font-size: 18px;
+		line-height: 1.6;
+		color: rgb(var(--gray-dark));
+	}
+	.site-search__input::-webkit-search-cancel-button {
+		display: none;
+	}
+	.site-search__clear {
+		flex: none;
+		padding: 0 0.1em;
+		border: 0;
+		background: transparent;
+		color: rgb(var(--gray));
+		font-size: 24px;
+		line-height: 1;
+		cursor: pointer;
+	}
+	.site-search__clear:hover {
+		color: rgb(var(--gray-dark));
+	}
+	.site-search__hint {
+		margin: 0.8em 0 0;
+		font-size: 0.8em;
+		color: rgb(var(--gray));
+	}
+	.site-search__results {
+		margin: 1.2em 0 0;
+		padding: 0;
+		list-style: none;
+		text-align: left;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 14px;
+		background: #fff;
+		overflow: hidden;
+		box-shadow: var(--box-shadow);
+	}
+	.site-search__results[hidden] {
+		display: none;
+	}
+	.site-search__result + .site-search__result {
+		border-top: 1px solid rgb(var(--gray-light));
+	}
+	.site-search__link {
+		display: block;
+		padding: 0.85em 1.1em;
+		color: inherit;
+		text-decoration: none;
+	}
+	.site-search__link:hover,
+	.site-search__result[data-active="true"] .site-search__link {
+		background: rgba(var(--gray-light), 55%);
+	}
+	.site-search__type {
+		display: inline-block;
+		font-size: 0.65em;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+	}
+	.site-search__title {
+		display: block;
+		font-size: 1em;
+		font-weight: 700;
+		line-height: 1.3;
+		color: var(--accent);
+	}
+	.site-search__snippet {
+		display: block;
+		margin-top: 0.2em;
+		font-size: 0.8em;
+		line-height: 1.5;
+		color: rgb(var(--gray-dark));
+	}
+	.site-search__title mark,
+	.site-search__snippet mark {
+		padding: 0 0.1em;
+		border-radius: 3px;
+		background: rgba(35, 55, 255, 0.14);
+		color: inherit;
+	}
+	.site-search__empty {
+		padding: 1em 1.1em;
+		font-size: 0.85em;
+		text-align: center;
+		color: rgb(var(--gray));
+	}
+</style>
+
+<script>
+	function initSiteSearch(root) {
+		const form = root.querySelector("[data-search-form]");
+		const input = root.querySelector("[data-search-input]");
+		const clearBtn = root.querySelector("[data-search-clear]");
+		const results = root.querySelector("[data-search-results]");
+		if (!form || !input || !results) return;
+
+		let index = null;
+		let pending = null;
+		let matches = [];
+		let terms = [];
+		let active = -1;
+
+		function loadIndex() {
+			if (pending) return pending;
+			pending = fetch("/search.json")
+				.then((res) => (res.ok ? res.json() : []))
+				.then((data) => {
+					index = Array.isArray(data) ? data : [];
+				})
+				.catch(() => {
+					index = [];
+				});
+			return pending;
+		}
+
+		function escapeHtml(value) {
+			return String(value).replace(
+				/[&<>"']/g,
+				(ch) =>
+					({
+						"&": "&amp;",
+						"<": "&lt;",
+						">": "&gt;",
+						'"': "&quot;",
+						"'": "&#39;",
+					})[ch],
+			);
+		}
+
+		function escapeRegExp(value) {
+			return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+		}
+
+		function highlight(value) {
+			let out = escapeHtml(value);
+			for (const term of terms) {
+				const pattern = new RegExp("(" + escapeRegExp(escapeHtml(term)) + ")", "gi");
+				out = out.replace(pattern, "<mark>$1</mark>");
+			}
+			return out;
+		}
+
+		/** Every term must appear somewhere; titles outrank descriptions outrank body. */
+		function scoreDoc(doc) {
+			const title = (doc.title || "").toLowerCase();
+			const description = (doc.description || "").toLowerCase();
+			const text = (doc.text || "").toLowerCase();
+			let total = 0;
+			for (const term of terms) {
+				let points = 0;
+				if (title.includes(term)) points += 10;
+				if (title.startsWith(term)) points += 5;
+				if (description.includes(term)) points += 4;
+				if (text.includes(term)) points += 1;
+				if (points === 0) return 0;
+				total += points;
+			}
+			return total;
+		}
+
+		function buildSnippet(doc) {
+			const body = doc.text || doc.description || "";
+			const lower = body.toLowerCase();
+			let at = -1;
+			for (const term of terms) {
+				const found = lower.indexOf(term);
+				if (found > -1) {
+					at = found;
+					break;
+				}
+			}
+			if (at < 0) return (doc.description || body).slice(0, 150);
+			const start = Math.max(0, at - 60);
+			const end = Math.min(body.length, at + 110);
+			return (
+				(start > 0 ? "…" : "") +
+				body.slice(start, end).trim() +
+				(end < body.length ? "…" : "")
+			);
+		}
+
+		function render() {
+			if (!input.value.trim()) {
+				results.hidden = true;
+				results.innerHTML = "";
+				return;
+			}
+			if (!matches.length) {
+				results.hidden = false;
+				results.innerHTML =
+					'<li class="site-search__empty">No matches on Buzzyfly for that yet.</li>';
+				return;
+			}
+			results.hidden = false;
+			results.innerHTML = matches
+				.map(
+					(doc, i) =>
+						'<li class="site-search__result" data-active="' +
+						(i === active) +
+						'"><a class="site-search__link" href="' +
+						escapeHtml(doc.url) +
+						'"><span class="site-search__type">' +
+						escapeHtml(doc.type || "Page") +
+						'</span><span class="site-search__title">' +
+						highlight(doc.title || "") +
+						'</span><span class="site-search__snippet">' +
+						highlight(doc.snippet || "") +
+						"</span></a></li>",
+				)
+				.join("");
+		}
+
+		async function run() {
+			const query = input.value.trim().toLowerCase();
+			clearBtn.hidden = query.length === 0;
+			active = -1;
+			if (!query) {
+				matches = [];
+				render();
+				return;
+			}
+			await loadIndex();
+			terms = query.split(/\s+/).filter(Boolean);
+			matches = (index || [])
+				.map((doc) => ({ doc: doc, score: scoreDoc(doc) }))
+				.filter((entry) => entry.score > 0)
+				.sort((a, b) => b.score - a.score)
+				.slice(0, 8)
+				.map((entry) => Object.assign({}, entry.doc, { snippet: buildSnippet(entry.doc) }));
+			render();
+		}
+
+		function reset() {
+			input.value = "";
+			matches = [];
+			active = -1;
+			clearBtn.hidden = true;
+			render();
+		}
+
+		input.addEventListener("focus", loadIndex, { once: true });
+		input.addEventListener("input", run);
+
+		input.addEventListener("keydown", (event) => {
+			if (event.key === "ArrowDown" || event.key === "ArrowUp") {
+				if (!matches.length) return;
+				event.preventDefault();
+				active =
+					event.key === "ArrowDown"
+						? (active + 1) % matches.length
+						: active <= 0
+							? matches.length - 1
+							: active - 1;
+				render();
+			} else if (event.key === "Escape") {
+				reset();
+			}
+		});
+
+		form.addEventListener("submit", (event) => {
+			event.preventDefault();
+			const target = matches[active < 0 ? 0 : active];
+			if (target) window.location.href = target.url;
+		});
+
+		clearBtn.addEventListener("click", () => {
+			reset();
+			input.focus();
+		});
+
+		document.addEventListener("click", (event) => {
+			if (!root.contains(event.target)) results.hidden = true;
+		});
+	}
+
+	document.querySelectorAll("[data-search]").forEach((root) => initSiteSearch(root));
+</script>
