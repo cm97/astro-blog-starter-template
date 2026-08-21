@@ -1,6 +1,13 @@
 ---
 export const prerender = false;
 
+// Needed for the design tokens (--accent, --gray, --gray-light) and the
+// Atkinson @font-face this page's styles rely on. Without it those custom
+// properties are undefined, which silently invalidates the declarations that
+// use them — the submit button loses its background and renders white on
+// white, and the inputs lose their borders.
+import "../../styles/global.css";
+
 const url = Astro.url;
 const error = url.searchParams.get("error");
 const next = url.searchParams.get("next") ?? "/admin";
