@@ -1,0 +1,44 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import { listAuditLog } from "../../lib/audit";
+
+const env = Astro.locals.runtime.env;
+const entries = await listAuditLog(env, 300);
+---
+
+<AdminLayout title="Activity log" active="log">
+	<h1>Activity log</h1>
+	<p class="admin-subtitle">Every admin login and change, most recent first.</p>
+
+	{!env.DB && <p class="admin-notice admin-notice--warn">No D1 database bound — activity isn't being recorded.</p>}
+
+	<div class="admin-card">
+		{entries.length === 0 && <p>No activity recorded yet.</p>}
+		{
+			entries.length > 0 && (
+				<table>
+					<thead>
+						<tr>
+							<th>When</th>
+							<th>Who</th>
+							<th>Action</th>
+							<th>Detail</th>
+						</tr>
+					</thead>
+					<tbody>
+						{entries.map((entry) => (
+							<tr>
+								<td>{new Date(entry.created_at).toLocaleString()}</td>
+								<td>{entry.actor}</td>
+								<td>{entry.action}</td>
+								<td>{entry.detail ?? "—"}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)
+		}
+	</div>
+</AdminLayout>

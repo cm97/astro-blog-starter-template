@@ -141,3 +141,44 @@ export async function verifyDownloadToken(
 		return null;
 	}
 }
+
+/**
+ * Issues a random, revocable download token stored in the D1 `download_tokens`
+ * table — the secret-free delivery path that `/api/download` checks first.
+ *
+ * Used by the admin console to re-issue a link for an existing order. Prefer
+ * this over `createDownloadToken`: it works whether or not
+ * `DOWNLOAD_TOKEN_SECRET` is configured, and the link can be revoked by
+ * deleting the row.
+ *
+ * Returns null when there is no D1 binding to store the token in.
+ */
+export async function issueStoredDownloadToken(
+	env: Env,
+	order: { orderId: string; itemId: string; customerEmail?: string | null },
+	ttlSeconds = 60 * 60 * 24 * 3, // 3 days
+): Promise<string | null> {
+	if (!env.DB) return null;
+
+	const bytes = new Uint8Array(32);
+	crypto.getRandomValues(bytes);
+	const token = [...bytes].map((b) => b.toString(16).padStart(2, "0")).join("");
+
+	const now = Date.now();
+	await env.DB.prepare(
+		`INSERT INTO download_tokens
+		   (token, order_id, item_id, customer_email, expires_at, created_at, used_count)
+		 VALUES (?, ?, ?, ?, ?, ?, 0)`,
+	)
+		.bind(
+			token,
+			order.orderId,
+			order.itemId,
+			order.customerEmail ?? null,
+			now + ttlSeconds * 1000,
+			now,
+		)
+		.run();
+
+	return token;
+}

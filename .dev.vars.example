@@ -6,3 +6,16 @@ LEMONSQUEEZY_WEBHOOK_SECRET=...
 DOWNLOAD_TOKEN_SECRET=change-me-to-a-long-random-string
 NEWSLETTER_API_URL=
 NEWSLETTER_API_KEY=
+
+# Admin console (/admin) — required to log in.
+ADMIN_USERNAME=change-me
+ADMIN_PASSWORD=change-me-to-something-only-you-know
+ADMIN_SESSION_SECRET=change-me-to-a-long-random-string
+
+# Optional — lets the admin console commit blog post / settings changes
+# straight to this repo (Contents API) instead of running read-only.
+# Token needs "Contents: Read and write" on this repo.
+GITHUB_TOKEN=
+GITHUB_OWNER=cm97
+GITHUB_REPO=astro-blog-starter-template
+GITHUB_BRANCH=main

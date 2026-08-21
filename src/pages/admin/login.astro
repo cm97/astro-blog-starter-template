@@ -1,0 +1,167 @@
+---
+export const prerender = false;
+
+// Needed for the design tokens (--accent, --gray, --gray-light) and the
+// Atkinson @font-face this page's styles rely on. Without it those custom
+// properties are undefined, which silently invalidates the declarations that
+// use them — the submit button loses its background and renders white on
+// white, and the inputs lose their borders.
+import "../../styles/global.css";
+
+const url = Astro.url;
+const error = url.searchParams.get("error");
+const next = url.searchParams.get("next") ?? "/admin";
+
+// Report which of the required values the Worker can actually see, so a
+// misconfiguration says which one is wrong instead of just "not configured".
+// Only presence is ever reported — never a value, not even its length.
+const env = Astro.locals.runtime.env;
+const required = ["ADMIN_USERNAME", "ADMIN_PASSWORD", "ADMIN_SESSION_SECRET"] as const;
+const missing = required.filter((name) => !env[name]);
+
+// A name that is present but surrounded by whitespace is invisible in the
+// Cloudflare dashboard, so surface any near-miss key that differs only by
+// trimming or capitalisation.
+const lookalikes = Object.keys(env ?? {}).filter((key) => {
+	const normalised = key.trim().toUpperCase();
+	return (required as readonly string[]).includes(normalised) && !(required as readonly string[]).includes(key);
+});
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="robots" content="noindex, nofollow" />
+		<title>Sign in · Buzzyfly Admin</title>
+	</head>
+	<body>
+		<div class="login-shell">
+			<form class="login-card" method="POST" action="/api/admin/login">
+				<h1>🪰 Buzzyfly Admin</h1>
+				<p class="login-subtitle">Sign in to manage the site.</p>
+				{error && <p class="login-error">{error}</p>}
+				{
+					missing.length > 0 && (
+						<div class="login-diag">
+							<strong>The Worker cannot see:</strong>
+							<ul>
+								{missing.map((name) => (
+									<li>{name}</li>
+								))}
+							</ul>
+							{lookalikes.length > 0 && (
+								<p>
+									Found a near-match, so the name is probably mistyped or has a stray
+									space: <code>{lookalikes.join(", ")}</code>
+								</p>
+							)}
+							<p>
+								Everything else is set correctly. Check these exact names under the
+								buzzyfly Worker → Settings → Variables and Secrets, then deploy.
+							</p>
+						</div>
+					)
+				}
+				<input type="hidden" name="next" value={next} />
+				<label for="username">Username</label>
+				<input id="username" name="username" type="text" autocomplete="username" required autofocus />
+				<label for="password">Password</label>
+				<input id="password" name="password" type="password" autocomplete="current-password" required />
+				<button type="submit">Sign in</button>
+			</form>
+		</div>
+	</body>
+</html>
+
+<style>
+	body {
+		font-family: "Atkinson", sans-serif;
+		margin: 0;
+		min-height: 100vh;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: linear-gradient(135deg, #10121a, #1c2140);
+	}
+	.login-shell {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		padding: 1em;
+	}
+	.login-card {
+		width: 100%;
+		max-width: 340px;
+		background: #fff;
+		border-radius: 16px;
+		padding: 2em;
+		box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+	}
+	.login-card h1 {
+		margin: 0 0 0.2em 0;
+		font-size: 1.4em;
+	}
+	.login-subtitle {
+		margin: 0 0 1.25em 0;
+		color: rgb(var(--gray));
+		font-size: 0.9em;
+	}
+	.login-error {
+		background: #fdeceb;
+		color: #b3261e;
+		padding: 0.65em 0.85em;
+		border-radius: 8px;
+		font-size: 0.85em;
+		margin: 0 0 1em 0;
+	}
+	.login-diag {
+		background: #fff4e0;
+		color: #8a5a00;
+		padding: 0.65em 0.85em;
+		border-radius: 8px;
+		font-size: 0.8em;
+		margin: 0 0 1em 0;
+	}
+	.login-diag ul {
+		margin: 0.4em 0;
+		padding-left: 1.2em;
+	}
+	.login-diag li {
+		font-family: monospace;
+	}
+	.login-diag p {
+		margin: 0.4em 0 0 0;
+	}
+	label {
+		display: block;
+		font-weight: 700;
+		font-size: 0.85em;
+		margin: 0.9em 0 0.35em 0;
+	}
+	input {
+		width: 100%;
+		box-sizing: border-box;
+		padding: 0.6em 0.75em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		font-family: inherit;
+	}
+	button {
+		width: 100%;
+		margin-top: 1.5em;
+		padding: 0.7em;
+		border: none;
+		border-radius: 8px;
+		background: var(--accent);
+		color: #fff;
+		font-weight: 700;
+		font-family: inherit;
+		font-size: 1em;
+		cursor: pointer;
+	}
+	button:hover {
+		background: var(--accent-dark);
+	}
+</style>

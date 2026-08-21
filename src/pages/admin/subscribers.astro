@@ -1,0 +1,86 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../layouts/AdminLayout.astro";
+
+const env = Astro.locals.runtime.env;
+const q = Astro.url.searchParams.get("q")?.trim() ?? "";
+const deleted = Astro.url.searchParams.get("deleted");
+
+// `subscribers` is keyed by email (see migrations/0001_init.sql) — there is no
+// surrogate id column, so email is what identifies a row here.
+interface Subscriber {
+	email: string;
+	created_at: number;
+}
+
+let subscribers: Subscriber[] = [];
+let total = 0;
+
+if (env.DB) {
+	try {
+		const like = `%${q}%`;
+		const [rows, count] = await Promise.all([
+			env.DB.prepare(
+				`SELECT email, created_at FROM subscribers WHERE email LIKE ? ORDER BY created_at DESC LIMIT 200`,
+			)
+				.bind(like)
+				.all<Subscriber>(),
+			env.DB.prepare(`SELECT COUNT(*) as n FROM subscribers WHERE email LIKE ?`)
+				.bind(like)
+				.first<{ n: number }>(),
+		]);
+		subscribers = rows.results ?? [];
+		total = count?.n ?? 0;
+	} catch (error) {
+		console.error("Buzzyfly admin subscribers: failed to read D1", error);
+	}
+}
+---
+
+<AdminLayout title="Subscribers" active="subscribers">
+	<h1>Subscribers</h1>
+	<p class="admin-subtitle">{total} subscriber{total === 1 ? "" : "s"} on the Buzzyfly Dispatch list.</p>
+
+	{deleted && <p class="admin-notice admin-notice--success">Subscriber removed.</p>}
+	{!env.DB && <p class="admin-notice admin-notice--warn">No D1 database bound — subscribers can't be listed.</p>}
+
+	<div class="admin-card">
+		<form method="GET" style="display:flex; gap: 0.75em; margin-bottom: 1em;">
+			<input type="search" name="q" placeholder="Search by email…" value={q} style="flex:1; padding:0.5em 0.75em; border:1px solid rgb(var(--gray-light)); border-radius:8px;" />
+			<button class="admin-btn admin-btn--primary" type="submit">Search</button>
+			{q && <a class="admin-btn" href="/admin/subscribers">Clear</a>}
+			<a class="admin-btn" href={`/api/admin/subscribers/export?q=${encodeURIComponent(q)}`}>Export CSV</a>
+		</form>
+
+		{subscribers.length === 0 && <p>No subscribers found.</p>}
+		{
+			subscribers.length > 0 && (
+				<table>
+					<thead>
+						<tr>
+							<th>Email</th>
+							<th>Subscribed</th>
+							<th />
+						</tr>
+					</thead>
+					<tbody>
+						{subscribers.map((s) => (
+							<tr>
+								<td>{s.email}</td>
+								<td>{new Date(s.created_at).toLocaleString()}</td>
+								<td>
+									<form method="POST" action="/api/admin/subscribers/delete" onsubmit="return confirm('Remove this subscriber?')">
+										<input type="hidden" name="email" value={s.email} />
+										<input type="hidden" name="q" value={q} />
+										<button class="admin-btn admin-btn--danger" type="submit">Remove</button>
+									</form>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)
+		}
+	</div>
+</AdminLayout>

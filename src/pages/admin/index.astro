@@ -1,0 +1,113 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import { listAuditLog } from "../../lib/audit";
+
+const env = Astro.locals.runtime.env;
+
+let subscriberCount = 0;
+let orderCount = 0;
+let subscribersLast7d = 0;
+let ordersLast7d = 0;
+const sevenDaysAgo = Date.now() - 7 * 24 * 60 * 60 * 1000;
+
+if (env.DB) {
+	try {
+		const [subs, orders, subs7d, orders7d] = await Promise.all([
+			env.DB.prepare(`SELECT COUNT(*) as n FROM subscribers`).first<{ n: number }>(),
+			env.DB.prepare(`SELECT COUNT(*) as n FROM fulfillments`).first<{ n: number }>(),
+			env.DB
+				.prepare(`SELECT COUNT(*) as n FROM subscribers WHERE created_at >= ?`)
+				.bind(sevenDaysAgo)
+				.first<{ n: number }>(),
+			env.DB
+				.prepare(`SELECT COUNT(*) as n FROM fulfillments WHERE created_at >= ?`)
+				.bind(sevenDaysAgo)
+				.first<{ n: number }>(),
+		]);
+		subscriberCount = subs?.n ?? 0;
+		orderCount = orders?.n ?? 0;
+		subscribersLast7d = subs7d?.n ?? 0;
+		ordersLast7d = orders7d?.n ?? 0;
+	} catch (error) {
+		console.error("Buzzyfly admin dashboard: failed to read D1 stats", error);
+	}
+}
+
+const recentActivity = await listAuditLog(env, 8);
+const githubConfigured = Boolean(env.GITHUB_TOKEN && env.GITHUB_OWNER && env.GITHUB_REPO);
+---
+
+<AdminLayout title="Dashboard" active="dashboard">
+	<h1>Dashboard</h1>
+	<p class="admin-subtitle">Buzzyfly, at a glance.</p>
+
+	{
+		!env.DB && (
+			<p class="admin-notice admin-notice--warn">
+				No D1 database bound — subscriber and order stats are unavailable. Bind the{" "}
+				<code>DB</code> binding in <code>wrangler.json</code> and run the migration in{" "}
+				<code>migrations/0001_init.sql</code>.
+			</p>
+		)
+	}
+	{
+		!githubConfigured && (
+			<p class="admin-notice admin-notice--info">
+				GitHub integration isn't configured, so Posts and Settings run in read-only mode. Set{" "}
+				<code>GITHUB_TOKEN</code>, <code>GITHUB_OWNER</code> and <code>GITHUB_REPO</code> to enable
+				publishing changes.
+			</p>
+		)
+	}
+
+	<div class="admin-stats">
+		<div class="admin-stat">
+			<div class="admin-stat__value">{subscriberCount}</div>
+			<div class="admin-stat__label">Total subscribers</div>
+		</div>
+		<div class="admin-stat">
+			<div class="admin-stat__value">{subscribersLast7d}</div>
+			<div class="admin-stat__label">New subscribers (7d)</div>
+		</div>
+		<div class="admin-stat">
+			<div class="admin-stat__value">{orderCount}</div>
+			<div class="admin-stat__label">Total orders</div>
+		</div>
+		<div class="admin-stat">
+			<div class="admin-stat__value">{ordersLast7d}</div>
+			<div class="admin-stat__label">Orders (7d)</div>
+		</div>
+	</div>
+
+	<div class="admin-card">
+		<h2>Recent activity</h2>
+		{recentActivity.length === 0 && <p>No admin activity recorded yet.</p>}
+		{
+			recentActivity.length > 0 && (
+				<table>
+					<thead>
+						<tr>
+							<th>When</th>
+							<th>Who</th>
+							<th>Action</th>
+							<th>Detail</th>
+						</tr>
+					</thead>
+					<tbody>
+						{recentActivity.map((entry) => (
+							<tr>
+								<td>{new Date(entry.created_at).toLocaleString()}</td>
+								<td>{entry.actor}</td>
+								<td>{entry.action}</td>
+								<td>{entry.detail ?? "—"}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)
+		}
+		<p><a class="admin-btn" href="/admin/log">View full activity log →</a></p>
+	</div>
+</AdminLayout>
