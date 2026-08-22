@@ -1,0 +1,75 @@
+---
+// Collapsible "how to use this page" panel for the admin console.
+//
+// Uses <details> so it works with no JavaScript, stays closed by default once
+// you know the page, and costs nothing when ignored.
+
+interface Props {
+	/** Short label, e.g. "How to use Media". */
+	title?: string;
+	/** Open on first paint — for pages where the workflow isn't obvious. */
+	open?: boolean;
+}
+
+const { title = "How to use this page", open = false } = Astro.props;
+---
+
+<details class="admin-help" open={open}>
+	<summary>{title}</summary>
+	<div class="admin-help__body">
+		<slot />
+	</div>
+</details>
+
+<style>
+	.admin-help {
+		background: #eef1ff;
+		border: 1px solid #d6ddff;
+		border-radius: 10px;
+		margin-bottom: 1.5em;
+		font-size: 0.9em;
+	}
+	.admin-help summary {
+		cursor: pointer;
+		padding: 0.75em 1em;
+		font-weight: 700;
+		color: #2337ff;
+		list-style: none;
+	}
+	.admin-help summary::-webkit-details-marker {
+		display: none;
+	}
+	.admin-help summary::before {
+		content: "▸ ";
+		display: inline-block;
+		transition: transform 0.15s ease;
+	}
+	.admin-help[open] summary::before {
+		content: "▾ ";
+	}
+	.admin-help__body {
+		padding: 0 1em 1em;
+		color: rgb(var(--gray-dark));
+	}
+	.admin-help__body :global(p) {
+		margin: 0 0 0.75em 0;
+	}
+	.admin-help__body :global(p:last-child) {
+		margin-bottom: 0;
+	}
+	.admin-help__body :global(ol),
+	.admin-help__body :global(ul) {
+		margin: 0 0 0.75em 0;
+		padding-left: 1.3em;
+	}
+	.admin-help__body :global(li) {
+		margin-bottom: 0.3em;
+	}
+	.admin-help__body :global(code) {
+		background: #fff;
+		border: 1px solid #d6ddff;
+		padding: 1px 4px;
+		border-radius: 3px;
+		font-size: 0.9em;
+	}
+</style>

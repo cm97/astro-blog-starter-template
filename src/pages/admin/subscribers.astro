@@ -2,6 +2,7 @@
 export const prerender = false;
 
 import AdminLayout from "../../layouts/AdminLayout.astro";
+import AdminHelp from "../../components/AdminHelp.astro";
 
 const env = Astro.locals.runtime.env;
 const q = Astro.url.searchParams.get("q")?.trim() ?? "";
@@ -41,6 +42,23 @@ if (env.DB) {
 <AdminLayout title="Subscribers" active="subscribers">
 	<h1>Subscribers</h1>
 	<p class="admin-subtitle">{total} subscriber{total === 1 ? "" : "s"} on the Buzzyfly Dispatch list.</p>
+
+	<AdminHelp title="How to use Subscribers">
+		<p>
+			Everyone who signed up through the opt-in form on your site. They're added automatically —
+			there's no way to add someone by hand here, which is deliberate: people should opt in
+			themselves.
+		</p>
+		<ul>
+			<li><strong>Search</strong> — type part of an email address to find someone.</li>
+			<li><strong>Export CSV</strong> — downloads the list as a spreadsheet file, which is what you'd upload to a mail service like Mailchimp or Buttondown when you want to send a newsletter.</li>
+			<li><strong>Remove</strong> — deletes someone permanently. Use it when a person asks to be taken off the list. It cannot be undone.</li>
+		</ul>
+		<p>
+			This console does not send email. Exporting to a mail service is the way to actually write to
+			these people.
+		</p>
+	</AdminHelp>
 
 	{deleted && <p class="admin-notice admin-notice--success">Subscriber removed.</p>}
 	{!env.DB && <p class="admin-notice admin-notice--warn">No D1 database bound — subscribers can't be listed.</p>}

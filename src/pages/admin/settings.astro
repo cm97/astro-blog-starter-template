@@ -2,6 +2,7 @@
 export const prerender = false;
 
 import AdminLayout from "../../layouts/AdminLayout.astro";
+import AdminHelp from "../../components/AdminHelp.astro";
 import { getSettings } from "../../lib/settings";
 import { getGitHubConfig } from "../../lib/github";
 
@@ -16,16 +17,28 @@ const error = Astro.url.searchParams.get("error");
 	<h1>Site settings</h1>
 	<p class="admin-subtitle">Buzzyfly branding &amp; monetization copy.</p>
 
-	{
-		!githubConfig && (
-			<p class="admin-notice admin-notice--info">
-				GitHub integration isn't configured, so changes save to the admin console's records but
-				won't update the live site's copy until <code>src/data/monetization.ts</code> is edited by
-				hand. Set <code>GITHUB_TOKEN</code>, <code>GITHUB_OWNER</code> and <code>GITHUB_REPO</code>{" "}
-				to publish changes automatically.
-			</p>
-		)
-	}
+	<AdminHelp title="How to use Settings" open={!githubConfig}>
+		<p>
+			The brand name, product blurb and newsletter wording that appear in several places across the
+			site. Editing them here changes them everywhere at once, instead of hunting through pages.
+		</p>
+		{
+			githubConfig ? (
+				<p>
+					Press <strong>Save settings</strong> and the change is written to your repository, which
+					rebuilds the site. Give it about a minute to show up publicly.
+				</p>
+			) : (
+				<p>
+					<strong>Careful: saving does not change your live site yet.</strong> Your public pages
+					read this wording from a file in the repository, and only GitHub publishing can rewrite
+					that file. Right now Save records the value here and nothing visible changes. Add{" "}
+					<code>GITHUB_TOKEN</code>, <code>GITHUB_OWNER</code> and <code>GITHUB_REPO</code> as
+					Worker secrets to make it real.
+				</p>
+			)
+		}
+	</AdminHelp>
 	{status === "saved" && <p class="admin-notice admin-notice--success">Saved to admin records.</p>}
 	{status === "published" && <p class="admin-notice admin-notice--success">Saved and committed — the live site will update after the redeploy finishes.</p>}
 	{error && <p class="admin-notice admin-notice--error">{error}</p>}

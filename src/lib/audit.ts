@@ -25,6 +25,26 @@ export async function logAdminAction(
 	}
 }
 
+/**
+ * Whether the `admin_audit_log` table has actually been created.
+ *
+ * Without this, a missing table and a genuinely empty log both render as
+ * "nothing recorded yet", which hides the fact that a migration still needs
+ * running.
+ */
+export async function auditTableExists(env: Env): Promise<boolean> {
+	if (!env.DB) return false;
+	try {
+		const row = await env.DB.prepare(
+			`SELECT name FROM sqlite_master WHERE type = 'table' AND name = 'admin_audit_log'`,
+		).first<{ name: string }>();
+		return Boolean(row);
+	} catch (error) {
+		console.error("Buzzyfly admin: could not check for the audit log table", error);
+		return false;
+	}
+}
+
 export async function listAuditLog(env: Env, limit = 100): Promise<AuditLogEntry[]> {
 	if (!env.DB) return [];
 	try {
