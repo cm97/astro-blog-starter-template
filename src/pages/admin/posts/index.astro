@@ -3,6 +3,7 @@ export const prerender = false;
 
 import { getCollection } from "astro:content";
 import AdminLayout from "../../../layouts/AdminLayout.astro";
+import AdminHelp from "../../../components/AdminHelp.astro";
 import { getGitHubConfig } from "../../../lib/github";
 
 const env = Astro.locals.runtime.env;
@@ -19,20 +20,71 @@ const posts = (await getCollection("blog")).sort(
 	<h1>Posts</h1>
 	<p class="admin-subtitle">{posts.length} post{posts.length === 1 ? "" : "s"} in <code>src/content/blog/</code>.</p>
 
-	{
-		!githubConfig && (
-			<p class="admin-notice admin-notice--info">
-				Read-only: set <code>GITHUB_TOKEN</code>, <code>GITHUB_OWNER</code> and{" "}
-				<code>GITHUB_REPO</code> to create, edit, or delete posts from here. This list reflects
-				the last deploy — new posts appear here after the next build.
-			</p>
-		)
-	}
+	<AdminHelp title="How to write and publish a post" open={!githubConfig}>
+		{
+			githubConfig ? (
+				<Fragment>
+					<ol>
+						<li>Press <strong>+ New post</strong>.</li>
+						<li>Fill in the title, a short description, and the body.</li>
+						<li>
+							To add a picture, upload it under <strong>Media</strong>, press Copy link there, and
+							paste it into the body as <code>![description](the-link)</code>.
+						</li>
+						<li>Press <strong>Publish</strong>.</li>
+					</ol>
+					<p>
+						Publishing saves the post to your GitHub repository, which rebuilds the site. It takes
+						about a minute to appear at <code>/blog</code>. There is no draft step — publishing goes
+						straight to the live site.
+					</p>
+				</Fragment>
+			) : (
+				<Fragment>
+					<p>
+						<strong>This page is read-only right now.</strong> You can see your posts and open them
+						on the live site, but you cannot write, edit or delete them here yet.
+					</p>
+					<p>
+						Publishing works by saving posts into your GitHub repository, which rebuilds the site.
+						To switch it on, add three more secrets to the <code>buzzyfly</code> Worker (Settings →
+						Variables and Secrets), then deploy:
+					</p>
+					<ul>
+						<li><code>GITHUB_TOKEN</code> — a GitHub token with permission to write to this repo</li>
+						<li><code>GITHUB_OWNER</code> — <code>cm97</code></li>
+						<li><code>GITHUB_REPO</code> — <code>astro-blog-starter-template</code></li>
+					</ul>
+					<p>
+						The list below reflects the last deploy, so a post added elsewhere shows up here after
+						the next build.
+					</p>
+				</Fragment>
+			)
+		}
+	</AdminHelp>
 	{created && <p class="admin-notice admin-notice--success">Post published. It'll appear on the live site after the redeploy finishes.</p>}
 	{deleted && <p class="admin-notice admin-notice--success">Post deleted. It'll disappear from the live site after the redeploy finishes.</p>}
 
 	<div class="admin-card">
-		<p><a class="admin-btn admin-btn--primary" href="/admin/posts/new" aria-disabled={!githubConfig}>+ New post</a></p>
+		<p>
+			{
+				githubConfig ? (
+					<a class="admin-btn admin-btn--primary" href="/admin/posts/new">
+						+ New post
+					</a>
+				) : (
+					// Rendered as a real disabled control rather than a link that
+					// silently bounces back here, which is what it used to do.
+					<Fragment>
+						<button class="admin-btn" type="button" disabled title="Requires GitHub publishing">
+							+ New post
+						</button>
+						<span class="admin-disabled-why">Needs GitHub publishing — see above</span>
+					</Fragment>
+				)
+			}
+		</p>
 		<table>
 			<thead>
 				<tr>

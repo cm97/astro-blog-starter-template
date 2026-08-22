@@ -2,6 +2,8 @@
 export const prerender = false;
 
 import AdminLayout from "../../layouts/AdminLayout.astro";
+import AdminHelp from "../../components/AdminHelp.astro";
+import { getGitHubConfig } from "../../lib/github";
 import {
 	ALLOWED_EXTENSIONS,
 	MAX_UPLOAD_BYTES,
@@ -27,6 +29,7 @@ try {
 }
 
 const totalBytes = items.reduce((sum, item) => sum + item.size, 0);
+const canPublish = Boolean(getGitHubConfig(env));
 ---
 
 <AdminLayout title="Media" active="media">
@@ -35,6 +38,34 @@ const totalBytes = items.reduce((sum, item) => sum + item.size, 0);
 		{items.length} file{items.length === 1 ? "" : "s"} · {formatBytes(totalBytes)} · paste a link
 		into any post or page.
 	</p>
+
+	<AdminHelp title="How to put an image on the site" open={!canPublish}>
+		<ol>
+			<li>Upload the file below. It appears in the Library.</li>
+			<li>Press <strong>Copy link</strong> on it. That copies a web address like <code>https://buzzyfly.com/media/photo.png</code>.</li>
+			<li>
+				Go to <strong>Posts</strong>, open or create a post, and paste the link into the body
+				using this: <code>![description](paste-the-link-here)</code>
+			</li>
+			<li>Press <strong>Publish</strong>. The post goes live with the image in it.</li>
+		</ol>
+		{
+			canPublish ? (
+				<p>
+					Uploading here does not put anything on the site by itself — a file is only visible to
+					visitors once you link to it from a post or page.
+				</p>
+			) : (
+				<p>
+					<strong>Steps 3 and 4 aren't available yet.</strong> Posts is read-only until GitHub
+					publishing is configured, so right now you can upload files and copy links, but there is
+					nowhere in this console to paste them. Set <code>GITHUB_TOKEN</code>,{" "}
+					<code>GITHUB_OWNER</code> and <code>GITHUB_REPO</code> as Worker secrets to turn Posts
+					into a real editor.
+				</p>
+			)
+		}
+	</AdminHelp>
 
 	{error && <p class="admin-notice admin-notice--error">{error}</p>}
 	{uploaded && <p class="admin-notice admin-notice--success">Uploaded <code>{uploaded}</code>.</p>}

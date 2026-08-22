@@ -218,6 +218,24 @@ const adminUser = Astro.locals.adminUser;
 		border-color: #b3261e;
 		color: #b3261e;
 	}
+	/* A control that cannot act should look inert and say why, rather than
+	   appearing live and doing nothing when pressed. */
+	.admin-main :global(.admin-btn:disabled),
+	.admin-main :global(.admin-btn[disabled]) {
+		opacity: 0.5;
+		cursor: not-allowed;
+		background: #f0f1f5;
+	}
+	.admin-main :global(.admin-btn:disabled:hover),
+	.admin-main :global(.admin-btn[disabled]:hover) {
+		border-color: rgb(var(--gray-light));
+		color: rgb(var(--black));
+	}
+	.admin-main :global(.admin-disabled-why) {
+		margin-left: 0.6em;
+		font-size: 0.85em;
+		color: rgb(var(--gray));
+	}
 	.admin-main :global(.admin-btn--danger:hover) {
 		background: #b3261e;
 		color: #fff;

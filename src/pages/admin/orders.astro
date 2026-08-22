@@ -2,6 +2,7 @@
 export const prerender = false;
 
 import AdminLayout from "../../layouts/AdminLayout.astro";
+import AdminHelp from "../../components/AdminHelp.astro";
 
 const env = Astro.locals.runtime.env;
 const q = Astro.url.searchParams.get("q")?.trim() ?? "";
@@ -51,6 +52,26 @@ if (env.DB) {
 	<p class="admin-subtitle">{total} fulfilled order{total === 1 ? "" : "s"}.</p>
 
 	{!env.DB && <p class="admin-notice admin-notice--warn">No D1 database bound — orders can't be listed.</p>}
+	<AdminHelp title="How to use Orders">
+		<p>
+			Every completed purchase. Orders land here automatically when a payment goes through — you
+			never add one by hand.
+		</p>
+		<p>
+			<strong>The main job of this page is fixing a broken download.</strong> When a customer emails
+			saying their link expired or never arrived:
+		</p>
+		<ol>
+			<li>Search their email address or order number.</li>
+			<li>Press <strong>Resend link</strong> on their order.</li>
+			<li>A fresh link appears at the top of this page. Copy it and email it to them.</li>
+		</ol>
+		<p>
+			The new link works for 3 days. The console does not email it for you — you paste it into your
+			own reply. Old links keep working until they expire on their own.
+		</p>
+	</AdminHelp>
+
 	{resendError && <p class="admin-notice admin-notice--error">{resendError}</p>}
 	{
 		resent && (

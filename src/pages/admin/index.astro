@@ -2,7 +2,8 @@
 export const prerender = false;
 
 import AdminLayout from "../../layouts/AdminLayout.astro";
-import { listAuditLog } from "../../lib/audit";
+import AdminHelp from "../../components/AdminHelp.astro";
+import { auditTableExists, listAuditLog } from "../../lib/audit";
 
 const env = Astro.locals.runtime.env;
 
@@ -35,32 +36,94 @@ if (env.DB) {
 	}
 }
 
-const recentActivity = await listAuditLog(env, 8);
+const auditReady = await auditTableExists(env);
+const recentActivity = auditReady ? await listAuditLog(env, 8) : [];
 const githubConfigured = Boolean(env.GITHUB_TOKEN && env.GITHUB_OWNER && env.GITHUB_REPO);
+
+// One honest place to see what is switched on, what isn't, and what each
+// missing piece actually costs you — rather than discovering a dead button.
+const setup = [
+	{
+		label: "Sign-in",
+		ok: true,
+		unlocks: "You're here, so this works.",
+		fix: null,
+	},
+	{
+		label: "Database",
+		ok: Boolean(env.DB),
+		unlocks: "Subscribers, Orders and the counts above.",
+		fix: "Bind the DB (buzzy-fly_db) D1 database to this Worker.",
+	},
+	{
+		label: "File storage",
+		ok: Boolean(env.MY_PRODUCTS),
+		unlocks: "The Media library, and delivering files customers buy.",
+		fix: "Bind the MY_PRODUCTS R2 bucket to this Worker.",
+	},
+	{
+		label: "Activity log",
+		ok: auditReady,
+		unlocks: "A record of every sign-in and change.",
+		fix: "Run: wrangler d1 execute buzzy-fly_db --remote --file=./migrations/0003_admin_console.sql",
+	},
+	{
+		label: "Publishing",
+		ok: githubConfigured,
+		unlocks: "Writing, editing and publishing posts, and making Settings affect the live site.",
+		fix: "Add GITHUB_TOKEN, GITHUB_OWNER and GITHUB_REPO as Worker secrets, then deploy.",
+	},
+];
+
+const missing = setup.filter((item) => !item.ok);
 ---
 
 <AdminLayout title="Dashboard" active="dashboard">
 	<h1>Dashboard</h1>
 	<p class="admin-subtitle">Buzzyfly, at a glance.</p>
 
-	{
-		!env.DB && (
-			<p class="admin-notice admin-notice--warn">
-				No D1 database bound — subscriber and order stats are unavailable. Bind the{" "}
-				<code>DB</code> binding in <code>wrangler.json</code> and run the migration in{" "}
-				<code>migrations/0001_init.sql</code>.
-			</p>
-		)
-	}
-	{
-		!githubConfigured && (
-			<p class="admin-notice admin-notice--info">
-				GitHub integration isn't configured, so Posts and Settings run in read-only mode. Set{" "}
-				<code>GITHUB_TOKEN</code>, <code>GITHUB_OWNER</code> and <code>GITHUB_REPO</code> to enable
-				publishing changes.
-			</p>
-		)
-	}
+	<AdminHelp title="What this console can do" open={missing.length > 0}>
+		<ul>
+			<li><strong>Posts</strong> — write and publish to your blog.</li>
+			<li><strong>Media</strong> — upload images and files, and copy links to use in posts.</li>
+			<li><strong>Subscribers</strong> — your mailing list; search, remove, export.</li>
+			<li><strong>Orders</strong> — purchases; re-send a customer's download link.</li>
+			<li><strong>Settings</strong> — brand name and product wording used across the site.</li>
+			<li><strong>Activity log</strong> — a record of everything done here.</li>
+		</ul>
+		<p>
+			Each page has its own "How to use" panel like this one. Anything not switched on is listed
+			below with what it would unlock.
+		</p>
+	</AdminHelp>
+
+	<div class="admin-card">
+		<h2>Setup</h2>
+		{
+			missing.length === 0 ? (
+				<p>Everything is switched on. Nothing needs doing.</p>
+			) : (
+				<p>
+					{missing.length} thing{missing.length === 1 ? "" : "s"} not switched on yet — each one
+					below says what it would give you.
+				</p>
+			)
+		}
+		<ul class="setup-list">
+			{
+				setup.map((item) => (
+					<li class:list={["setup-item", { "setup-item--off": !item.ok }]}>
+						<span class="setup-mark">{item.ok ? "✓" : "○"}</span>
+						<span class="setup-body">
+							<strong>{item.label}</strong>
+							<span class="setup-unlocks">{item.unlocks}</span>
+							{!item.ok && item.fix && <code class="setup-fix">{item.fix}</code>}
+						</span>
+					</li>
+				))
+			}
+		</ul>
+	</div>
 
 	<div class="admin-stats">
 		<div class="admin-stat">
@@ -111,3 +174,48 @@ const githubConfigured = Boolean(env.GITHUB_TOKEN && env.GITHUB_OWNER && env.GIT
 		<p><a class="admin-btn" href="/admin/log">View full activity log →</a></p>
 	</div>
 </AdminLayout>
+
+<style>
+	.setup-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.setup-item {
+		display: flex;
+		gap: 0.7em;
+		padding: 0.6em 0;
+		border-top: 1px solid rgb(var(--gray-light));
+		font-size: 0.92em;
+	}
+	.setup-item:first-child {
+		border-top: none;
+	}
+	.setup-mark {
+		flex: none;
+		width: 1.2em;
+		font-weight: 700;
+		color: #1a7a3c;
+	}
+	.setup-item--off .setup-mark {
+		color: rgb(var(--gray));
+	}
+	.setup-body {
+		display: flex;
+		flex-direction: column;
+		gap: 0.15em;
+		min-width: 0;
+	}
+	.setup-unlocks {
+		color: rgb(var(--gray));
+	}
+	.setup-fix {
+		margin-top: 0.3em;
+		font-size: 0.85em;
+		word-break: break-word;
+		background: #fff4e0;
+		color: #8a5a00;
+		padding: 0.35em 0.5em;
+		border-radius: 4px;
+	}
+</style>

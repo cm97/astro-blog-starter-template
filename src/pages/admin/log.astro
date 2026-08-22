@@ -2,20 +2,43 @@
 export const prerender = false;
 
 import AdminLayout from "../../layouts/AdminLayout.astro";
-import { listAuditLog } from "../../lib/audit";
+import AdminHelp from "../../components/AdminHelp.astro";
+import { auditTableExists, listAuditLog } from "../../lib/audit";
 
 const env = Astro.locals.runtime.env;
-const entries = await listAuditLog(env, 300);
+const tableReady = await auditTableExists(env);
+const entries = tableReady ? await listAuditLog(env, 300) : [];
 ---
 
 <AdminLayout title="Activity log" active="log">
 	<h1>Activity log</h1>
 	<p class="admin-subtitle">Every admin login and change, most recent first.</p>
 
+	<AdminHelp title="What this page is for" open={!tableReady}>
+		<p>
+			A record of every sign-in and every change made through this console — who did it, what they
+			did, and when. Nothing here needs maintaining; it fills itself in.
+		</p>
+		<p>
+			It's worth checking if something on the site changed and you don't remember doing it, or to
+			confirm a sign-in was yours.
+		</p>
+	</AdminHelp>
+
 	{!env.DB && <p class="admin-notice admin-notice--warn">No D1 database bound — activity isn't being recorded.</p>}
+	{
+		env.DB && !tableReady && (
+			<p class="admin-notice admin-notice--warn">
+				<strong>Not recording yet.</strong> The <code>admin_audit_log</code> table hasn't been
+				created, so nothing is being saved — actions you take now won't appear here later. Create it
+				by running: <code>wrangler d1 execute buzzy-fly_db --remote --file=./migrations/0003_admin_console.sql</code>
+			</p>
+		)
+	}
 
 	<div class="admin-card">
-		{entries.length === 0 && <p>No activity recorded yet.</p>}
+		{tableReady && entries.length === 0 && <p>No activity recorded yet.</p>}
+		{!tableReady && <p>Nothing to show until the table above is created.</p>}
 		{
 			entries.length > 0 && (
 				<table>
