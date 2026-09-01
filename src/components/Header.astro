@@ -1,6 +1,6 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import { SITE_TITLE, BUZZYFLY_CONFIG } from '../consts';
 ---
 
 <header>
@@ -8,7 +8,7 @@ import { SITE_TITLE } from '../consts';
 		<h2><a href="/">{SITE_TITLE}</a></h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/store">Store</HeaderLink>
+			<HeaderLink href="/store" class="store-pill">Store · {BUZZYFLY_CONFIG.defaultProductPrice}</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
@@ -44,5 +44,17 @@ import { SITE_TITLE } from '../consts';
 	nav a.active {
 		text-decoration: none;
 		border-bottom-color: var(--accent);
+	}
+	.store-pill {
+		background: var(--accent) !important;
+		color: #fff !important;
+		border-radius: 999px;
+		padding: 0.5em 1em !important;
+		font-weight: 700;
+		margin-left: 0.3em;
+	}
+	.store-pill:hover {
+		background: var(--accent-dark) !important;
+		color: #fff !important;
 	}
 </style>
