@@ -2,7 +2,10 @@
 	"name": "astro-blog-starter-template",
 	"main": "@astrojs/cloudflare/entrypoints/server",
 	"compatibility_date": "2026-09-01",
-	"compatibility_flags": [],
+	"compatibility_flags": [
+		"nodejs_compat",
+		"disable_nodejs_process_v2"
+	],
 	"observability": {
 		"enabled": true
 	},
