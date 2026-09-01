@@ -9,21 +9,22 @@ import {
 	getOrderAction,
 } from "../data/monetization";
 
+export const prerender = false;
+
 const title = BUZZYFLY_CONFIG.defaultProductTitle;
 const price = BUZZYFLY_CONFIG.defaultProductPrice;
 const order = getOrderAction(title);
 
-/**
- * OWNER: confirm these bullets match what is actually inside
- * products/buzzyfly-digital-system.zip in the buzzyfly-products R2 bucket.
- * They mirror what the blog already says about the product. If the zip
- * contains something different, edit this list — a storefront that
- * over-describes the file is a refund waiting to happen.
- */
 const INCLUDED = [
 	"The core operating framework — the onboarding, weekly planning, and follow-up workflows",
 	"The 20-minute weekly reset checklist, ready to run instead of rebuilt from scratch",
 	"Lifetime access, including future updates to the system",
+];
+
+const CONTENTS = [
+	{ folder: "checklists/", items: "onboarding, weekly reset, follow-up, intake, scope-creep, retention" },
+	{ folder: "templates/", items: "proposal, discovery questions, follow-up emails, one-page plan" },
+	{ folder: "scripts/", items: "the 'how to say no' lines that don't lose the client" },
 ];
 ---
 
@@ -34,6 +35,26 @@ const INCLUDED = [
 			title={`${title} — ${BUZZYFLY_CONFIG.brandName}`}
 			description={BUZZYFLY_CONFIG.defaultProductDescription}
 		/>
+		<style>
+			.store-hero { text-align: center; padding-bottom: 1em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.store-eyebrow { margin: 0 0 0.4em 0; font-size: 0.8em; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(var(--gray)); }
+			.store-hero h1 { font-size: 2.6em; margin-bottom: 0.3em; }
+			.store-lede { max-width: 32em; margin: 0 auto 1.4em; color: rgb(var(--gray-dark)); }
+			.store-buy { display: flex; align-items: center; justify-content: center; gap: 1em; flex-wrap: wrap; }
+			.store-price { font-size: 2em; font-weight: 700; color: rgb(var(--black)); }
+			.store-cta { display: inline-block; padding: 0.7em 1.8em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; transition: background-color 0.15s ease-in-out; }
+			.store-cta:hover { background: var(--accent-dark); color: #fff; }
+			.store-microcopy { margin: 0.9em 0 0; font-size: 0.8em; color: rgb(var(--gray)); }
+			.store-section { margin-top: 2.5em; }
+			.store-section h2 { font-size: 1.6em; }
+			.store-list { padding-left: 1.2em; color: rgb(var(--gray-dark)); }
+			.store-list li { margin-bottom: 0.5em; }
+			.store-notice { padding: 1em 1.2em; border-radius: 12px; border: 1px solid rgb(var(--gray-light)); background: rgba(var(--gray-light), 40%); font-size: 0.95em; }
+			.contents-table { width: 100%; border-collapse: collapse; margin-top: 1em; }
+			.contents-table th, .contents-table td { text-align: left; padding: 0.6em 0.8em; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.95em; }
+			.contents-table th { color: rgb(var(--gray)); font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.05em; }
+			.contents-table code { background: rgb(var(--gray-light)); padding: 0.1em 0.4em; border-radius: 4px; }
+		</style>
 	</head>
 	<body>
 		<Header />
@@ -47,18 +68,9 @@ const INCLUDED = [
 					<span class="store-price">{price}</span>
 					{
 						order.external ? (
-							<a
-								class="store-cta"
-								href={order.href}
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								{order.label}
-							</a>
+							<a class="store-cta" href={order.href} target="_blank" rel="noopener noreferrer">{order.label}</a>
 						) : (
-							<a class="store-cta" href={order.href}>
-								{order.label}
-							</a>
+							<a class="store-cta" href={order.href}>{order.label}</a>
 						)
 					}
 				</div>
@@ -76,20 +88,32 @@ const INCLUDED = [
 					The long version of why this exists is in
 					<a href="/blog/first-post/">Why I Built the Buzzyfly Digital System</a>, and a
 					plain contents list is in
-					<a href="/blog/using-mdx/">What’s Actually Inside</a>.
+					<a href="/blog/using-mdx/">What's Actually Inside</a>.
 				</p>
 			</section>
 
 			<section class="store-section">
-				<h2>Who it’s for</h2>
+				<h2>What's actually in the zip</h2>
+				<table class="contents-table">
+					<thead><tr><th>Folder</th><th>Contains</th></tr></thead>
+					<tbody>
+						{CONTENTS.map((c) => (
+							<tr><td><code>{c.folder}</code></td><td>{c.items}</td></tr>
+						))}
+					</tbody>
+				</table>
+			</section>
+
+			<section class="store-section">
+				<h2>Who it's for</h2>
 				<p>
-					One- or few-person businesses where the process lives in someone’s head. If
+					One- or few-person businesses where the process lives in someone's head. If
 					onboarding a new client means rebuilding the same steps from memory, or
 					follow-ups only happen when you remember them, this is aimed squarely at you.
 				</p>
 				<p>
 					It is <strong>not</strong> for you if you already run a documented, working
-					system — you’d be buying something you’ve already built.
+					system — you'd be buying something you've already built.
 				</p>
 			</section>
 
@@ -114,12 +138,12 @@ const INCLUDED = [
 								<li>The files are yours to keep.</li>
 							</ol>
 							<p class="store-notice">
-								Being straight with you: delivery isn’t automated yet, so there’s a short
+								Being straight with you: delivery isn't automated yet, so there's a short
 								wait between paying and getting the file. If anything looks wrong, email
 								<a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>
 									{BUZZYFLY_CONFIG.orderEmail}
 								</a>{" "}
-								and you’ll get a person, not a ticket queue. {BUZZYFLY_CONFIG.guarantee}
+								and you'll get a person, not a ticket queue. {BUZZYFLY_CONFIG.guarantee}
 							</p>
 						</>
 					)
@@ -131,7 +155,7 @@ const INCLUDED = [
 				<p>
 					Anything at all —
 					<a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a>.
-					It’s a small operation, so you’re emailing the person who built it.
+					It's a small operation, so you're emailing the person who built it.
 				</p>
 			</section>
 
@@ -140,78 +164,3 @@ const INCLUDED = [
 		<Footer />
 	</body>
 </html>
-
-<style>
-	.store-hero {
-		text-align: center;
-		padding-bottom: 1em;
-		border-bottom: 1px solid rgb(var(--gray-light));
-	}
-	.store-eyebrow {
-		margin: 0 0 0.4em 0;
-		font-size: 0.8em;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		color: rgb(var(--gray));
-	}
-	.store-hero h1 {
-		font-size: 2.6em;
-		margin-bottom: 0.3em;
-	}
-	.store-lede {
-		max-width: 32em;
-		margin: 0 auto 1.4em;
-		color: rgb(var(--gray-dark));
-	}
-	.store-buy {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 1em;
-		flex-wrap: wrap;
-	}
-	.store-price {
-		font-size: 2em;
-		font-weight: 700;
-		color: rgb(var(--black));
-	}
-	.store-cta {
-		display: inline-block;
-		padding: 0.7em 1.8em;
-		border-radius: 999px;
-		background: var(--accent);
-		color: #fff;
-		font-weight: 700;
-		text-decoration: none;
-		transition: background-color 0.15s ease-in-out;
-	}
-	.store-cta:hover {
-		background: var(--accent-dark);
-		color: #fff;
-	}
-	.store-microcopy {
-		margin: 0.9em 0 0;
-		font-size: 0.8em;
-		color: rgb(var(--gray));
-	}
-	.store-section {
-		margin-top: 2.5em;
-	}
-	.store-section h2 {
-		font-size: 1.6em;
-	}
-	.store-list {
-		padding-left: 1.2em;
-		color: rgb(var(--gray-dark));
-	}
-	.store-list li {
-		margin-bottom: 0.5em;
-	}
-	.store-notice {
-		padding: 1em 1.2em;
-		border-radius: 12px;
-		border: 1px solid rgb(var(--gray-light));
-		background: rgba(var(--gray-light), 40%);
-		font-size: 0.95em;
-	}
-</style>
