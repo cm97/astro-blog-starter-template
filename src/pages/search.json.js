@@ -23,12 +23,13 @@ const STATIC_PAGES = [
 	},
 	{
 		title: "Home",
-		description: "Small ideas, long distances.",
+		description: "Stop rebuilding client onboarding from memory. $49 one-time.",
 		url: "/",
 		type: "Page",
 		text:
-			"Buzzyfly home. Practical systems, reusable templates, and honest write-ups " +
-			"on getting things done, sent straight from the Buzzyfly notebook.",
+			"Buzzyfly home. Stop rebuilding your client onboarding from memory every time " +
+			"someone new shows up. The Buzzyfly Digital System turns onboarding, weekly " +
+			"planning, and follow-ups into checklists you run in twenty minutes.",
 	},
 	{
 		title: "About Buzzyfly",
