@@ -1,5 +1,7 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
+import ProductCallout from '../components/ProductCallout.astro';
+import { BUZZYFLY_CONFIG } from '../data/monetization';
 ---
 
 <Layout
@@ -37,8 +39,11 @@ import Layout from '../layouts/BlogPost.astro';
 		you work.
 	</p>
 
+	<ProductCallout />
+
 	<p>
-		Questions, feedback, or something broken? Reach out — this is a small operation and
-		real notes from real users are how it gets better.
+		Questions, feedback, or something broken? Reach out at
+		<a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a>
+		— this is a small operation and real notes from real users are how it gets better.
 	</p>
 </Layout>

@@ -12,7 +12,7 @@ const {
 } = Astro.props;
 ---
 
-<section class="email-optin" aria-label={`${BUZZYFLY_CONFIG.brandName} newsletter signup`}>
+<section class="email-optin" aria-label={`${BUZZYFLY_CONFIG.brandName} free checklist signup`}>
 	<h3 class="email-optin__title">{title}</h3>
 	<p class="email-optin__description">{description}</p>
 	<form class="email-optin__form" data-email-optin-form method="POST" action="/api/subscribe">
@@ -26,7 +26,7 @@ const {
 			autocomplete="email"
 			required
 		/>
-		<button class="email-optin__submit" type="submit">Subscribe</button>
+		<button class="email-optin__submit" type="submit">Send me the checklist</button>
 	</form>
 	<p class="email-optin__status" data-email-optin-status role="status" aria-live="polite"></p>
 </section>
@@ -49,7 +49,7 @@ const {
 
 			if (submitButton) submitButton.disabled = true;
 			if (statusEl) {
-				statusEl.textContent = "Subscribing…";
+				statusEl.textContent = "Sending…";
 				statusEl.dataset.state = "pending";
 			}
 
@@ -63,7 +63,7 @@ const {
 				if (!response.ok) throw new Error("Request failed");
 
 				if (statusEl) {
-					statusEl.textContent = "You're in! Check your inbox soon.";
+					statusEl.textContent = "You're in! Check your inbox for the checklist.";
 					statusEl.dataset.state = "success";
 				}
 				form.reset();
