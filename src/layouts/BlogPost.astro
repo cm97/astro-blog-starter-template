@@ -6,8 +6,14 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import ProductCallout from '../components/ProductCallout.astro';
 import EmailOptin from '../components/EmailOptin.astro';
+import { BUZZYFLY_CONFIG } from '../data/monetization';
 
-type Props = CollectionEntry<'blog'>['data'];
+type Props = CollectionEntry<'blog'>['data'] & {
+	prev?: CollectionEntry<'blog'> | null;
+	next?: CollectionEntry<'blog'> | null;
+	related?: CollectionEntry<'blog'>[];
+	currentId?: string;
+};
 
 const {
 	title,
@@ -15,10 +21,14 @@ const {
 	pubDate,
 	updatedDate,
 	heroImage,
+	category,
 	featuredProductTitle,
 	featuredProductPrice,
 	featuredProductUrl,
 	featuredProductDescription,
+	prev,
+	next,
+	related = [],
 } = Astro.props;
 
 const hasFeaturedProduct = Boolean(featuredProductTitle || featuredProductUrl);
@@ -26,45 +36,32 @@ const hasFeaturedProduct = Boolean(featuredProductTitle || featuredProductUrl);
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} />
+		<BaseHead title={title} description={description} image={heroImage} />
 		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
-			}
-			.prose {
-				width: 720px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				text-align: center;
-				line-height: 1;
-			}
-			.title h1 {
-				margin: 0 0 0.5em 0;
-			}
-			.date {
-				margin-bottom: 0.5em;
-				color: rgb(var(--gray));
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
+			main { width: calc(100% - 2em); max-width: 100%; margin: 0; }
+			.hero-image { width: 100%; }
+			.hero-image img { display: block; margin: 0 auto; border-radius: 12px; box-shadow: var(--box-shadow); }
+			.prose { width: 720px; max-width: calc(100% - 2em); margin: auto; padding: 1em; color: rgb(var(--gray-dark)); }
+			.title { margin-bottom: 1em; padding: 1em 0; text-align: center; line-height: 1; }
+			.title h1 { margin: 0 0 0.5em 0; }
+			.date { margin-bottom: 0.5em; color: rgb(var(--gray)); }
+			.last-updated-on { font-style: italic; }
+			.tag-line { text-align: center; margin-bottom: 0.5em; }
+			.tag-line span { display: inline-block; padding: 0.2em 0.7em; border-radius: 999px; background: rgb(var(--gray-light)); color: rgb(var(--gray-dark)); font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
+			.nav-posts { display: flex; justify-content: space-between; gap: 1em; margin: 2.5em 0 1em; padding-top: 1.5em; border-top: 1px solid rgb(var(--gray-light)); }
+			.nav-posts a { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.95em; }
+			.nav-posts a:hover { text-decoration: underline; }
+			.nav-posts .dir { display: block; font-size: 0.75em; color: rgb(var(--gray)); font-weight: 400; margin-bottom: 0.2em; }
+			.related { margin: 2em 0; }
+			.related h3 { font-size: 1.2em; margin-bottom: 0.8em; }
+			.related ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6em; }
+			.related a { color: rgb(var(--black)); text-decoration: none; font-weight: 600; }
+			.related a:hover { color: var(--accent); }
+			.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid rgb(var(--gray-light)); box-shadow: 0 -4px 16px rgba(0,0,0,0.08); padding: 0.7em 1em; display: flex; align-items: center; justify-content: space-between; gap: 1em; z-index: 50; }
+			.sticky-cta .price { font-weight: 700; }
+			.sticky-cta a { padding: 0.6em 1.4em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; }
+			.sticky-cta a:hover { background: var(--accent-dark); }
+			@media (max-width: 720px) { .sticky-cta span:first-child { display: none; } }
 		</style>
 	</head>
 
@@ -76,6 +73,7 @@ const hasFeaturedProduct = Boolean(featuredProductTitle || featuredProductUrl);
 					{heroImage && <img width={1020} height={510} src={heroImage} alt="" />}
 				</div>
 				<div class="prose">
+					{category && <div class="tag-line"><span>{category}</span></div>}
 					<div class="title">
 						<div class="date">
 							<FormattedDate date={pubDate} />
@@ -101,10 +99,39 @@ const hasFeaturedProduct = Boolean(featuredProductTitle || featuredProductUrl);
 							/>
 						)
 					}
+					{
+						(prev || next) && (
+							<nav class="nav-posts" aria-label="Post navigation">
+								<div>
+									{prev && <><span class="dir">← Previous</span><a href={`/blog/${prev.id}/`}>{prev.data.title}</a></>}
+								</div>
+								<div style="text-align:right">
+									{next && <><span class="dir">Next →</span><a href={`/blog/${next.id}/`}>{next.data.title}</a></>}
+								</div>
+							</nav>
+						)
+					}
+					{
+						related.length > 0 && (
+							<section class="related">
+								<h3>Related reads</h3>
+								<ul>
+									{related.map((r) => (
+										<li><a href={`/blog/${r.id}/`}>{r.data.title}</a></li>
+									))}
+								</ul>
+							</section>
+						)
+					}
 					<EmailOptin />
 				</div>
 			</article>
 		</main>
 		<Footer />
+		<div class="sticky-cta">
+			<span>The checklists for this are in the Digital System.</span>
+			<span class="price">{BUZZYFLY_CONFIG.defaultProductPrice}</span>
+			<a href="/store">Get it</a>
+		</div>
 	</body>
 </html>

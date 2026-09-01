@@ -13,6 +13,7 @@ const blog = defineCollection({
 		pubDate: z.coerce.date(),
 		updatedDate: z.coerce.date().optional(),
 		heroImage: z.string().optional(),
+		category: z.string().optional(),
 		// Optional Buzzyfly product callout, rendered in BlogPost.astro when present.
 		featuredProductTitle: z.string().optional(),
 		featuredProductPrice: z.string().optional(),
