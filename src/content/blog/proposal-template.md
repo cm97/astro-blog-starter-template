@@ -1,24 +1,54 @@
 ---
-title: "The Proposal Template That Closes"
-description: "A one-page proposal that gets signed instead of ignored."
-category: "Sales"
-pubDate: "Sep 01 2026"
+title: "Proposal Template That Closes"
+description: "The structure that turns a conversation into a signed deal."
+pubDate: "2026-09-01"
+category: "free"
 heroImage: "/buzzyfly-brand-about.jpg"
-featuredProductTitle: "Buzzyfly Digital System"
-featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you're slammed."
 ---
 
-Long proposals get ignored. Short ones get signed.
+# Proposal Template
 
-## The one-page structure
+This is the actual template. Copy it, fill it in, send it.
 
-1. **The problem** — one sentence.
-2. **The fix** — one sentence.
-3. **The deliverables** — bullet list, 3 max.
-4. **The price** — one number.
-5. **The next step** — "Reply yes and I'll start Monday."
+## The structure
 
-That's it. The template is in the Digital System.
+1. **The hook** — one sentence about their problem, in their words.
+2. **The approach** — 2-3 sentences on how you'll solve it. No jargon.
+3. **The deliverables** — bullet list. Specific. No "and more."
+4. **The timeline** — milestones with dates, not "ASAP."
+5. **The investment** — the price. One number. No range.
+6. **The next step** — exactly what they do to say yes.
 
-[Get the Digital System — $49](/store/)
+## The template
+
+**Subject: Proposal for [Project Name]**
+
+Hi [Name],
+
+You mentioned [their problem in their words]. Here's how I'd solve it.
+
+**Approach:** [2-3 sentences.]
+
+**Deliverables:**
+- [Specific thing 1]
+- [Specific thing 2]
+- [Specific thing 3]
+
+**Timeline:**
+- [Milestone 1] — [Date]
+- [Milestone 2] — [Date]
+- [Final delivery] — [Date]
+
+**Investment:** $[Amount], due [terms].
+
+**Next step:** Reply to this email with "yes" and I'll send the agreement.
+
+[Your name]
+
+## The rule
+
+If your proposal is longer than one page, cut it. They don't want to read. They want to decide.
+
+---
+
+This template plus the full system is the [Buzzyfly Digital System](/store) — $49.
