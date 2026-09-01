@@ -14,13 +14,9 @@ const {
 	price = BUZZYFLY_CONFIG.defaultProductPrice,
 	url,
 	description = BUZZYFLY_CONFIG.defaultProductDescription,
-	features = [],
+	features = ["Lifetime access", "Download emailed after payment (usually same day)", "Free updates"],
 } = Astro.props;
 
-// An explicitly passed `url` wins. Otherwise fall back to the shared order
-// action, which resolves to the live Stripe checkout when one is configured
-// and to a real mailto order path when it is not — so this component can
-// never render a button that goes nowhere.
 const order = url
 	? { live: true, href: url, label: "Get it now", external: true }
 	: getOrderAction(title);
@@ -61,10 +57,11 @@ const order = url
 	{
 		!order.live && (
 			<p class="product-callout__note">
-				Card checkout isn’t switched on yet — email orders are handled by hand.
+				Card checkout isn't switched on yet — email orders are handled by hand.
 			</p>
 		)
 	}
+	<p class="product-callout__guarantee">7-day email refund if the files aren't what the store lists.</p>
 </aside>
 
 <style>
@@ -132,6 +129,11 @@ const order = url
 	}
 	.product-callout__note {
 		margin: 1em 0 0;
+		font-size: 0.8em;
+		color: rgb(var(--gray));
+	}
+	.product-callout__guarantee {
+		margin: 0.75em 0 0;
 		font-size: 0.8em;
 		color: rgb(var(--gray));
 	}

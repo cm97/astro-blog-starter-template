@@ -2,47 +2,122 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import SiteSearch from '../components/SiteSearch.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import EmailOptin from '../components/EmailOptin.astro';
+import ProductCallout from '../components/ProductCallout.astro';
+import { getCollection } from 'astro:content';
+import { BUZZYFLY_CONFIG, getOrderAction } from '../data/monetization';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const order = getOrderAction();
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={BUZZYFLY_CONFIG.brandName} description={BUZZYFLY_CONFIG.defaultProductDescription} />
 		<style>
 			.home {
+				max-width: 760px;
+				margin: 0 auto;
+				padding: 0 1em;
+			}
+			.home-hero {
 				text-align: center;
+				padding: 2.5em 0 1.5em;
+				border-bottom: 1px solid rgb(var(--gray-light));
 			}
-			.home h1 {
-				margin-bottom: 0.15em;
+			.home-hero h1 {
+				font-size: clamp(1.8em, 5vw, 2.8em);
+				margin: 0 0 0.4em;
+				line-height: 1.1;
 			}
-			.tagline {
-				margin: 0;
+			.home-hero p {
+				font-size: 1.15em;
+				color: rgb(var(--gray-dark));
+				max-width: 34em;
+				margin: 0 auto;
+			}
+			.home-cta {
+				display: flex;
+				gap: 1em;
+				justify-content: center;
+				flex-wrap: wrap;
+				margin-top: 1.5em;
+			}
+			.home-cta a {
+				display: inline-block;
+				padding: 0.75em 1.8em;
+				border-radius: 999px;
+				font-weight: 700;
+				text-decoration: none;
+			}
+			.home-cta .primary {
+				background: var(--accent);
+				color: #fff;
+			}
+			.home-cta .primary:hover { background: var(--accent-dark); color: #fff; }
+			.home-cta .secondary {
+				border: 1px solid rgb(var(--gray-light));
+				color: rgb(var(--black));
+			}
+			.home-cta .secondary:hover { border-color: var(--accent); }
+			.home-price {
+				font-size: 0.9em;
 				color: rgb(var(--gray));
-				font-size: 1.1em;
+				margin-top: 0.8em;
 			}
-			.home__intro {
-				max-width: 620px;
-				margin: 0 auto 1em;
-			}
+			.home-section { margin-top: 2.5em; }
+			.home-section h2 { font-size: 1.5em; margin-bottom: 0.6em; }
+			.home-posts { list-style: none; padding: 0; margin: 0; }
+			.home-posts li { margin-bottom: 0.8em; }
+			.home-posts a { font-weight: 600; }
+			.home-posts span { color: rgb(var(--gray)); font-size: 0.85em; }
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main class="home">
-			<h1>🪰 Buzzyfly</h1>
-			<p class="tagline">Small ideas, long distances.</p>
+			<section class="home-hero">
+				<h1>Stop rebuilding your client onboarding from memory every time someone new shows up.</h1>
+				<p>Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.</p>
+				<div class="home-cta">
+					{
+						order.external ? (
+							<a class="primary" href={order.href} target="_blank" rel="noopener noreferrer">{order.label} — {BUZZYFLY_CONFIG.defaultProductPrice}</a>
+						) : (
+							<a class="primary" href={order.href}>{order.label} — {BUZZYFLY_CONFIG.defaultProductPrice}</a>
+						)
+					}
+					<a class="secondary" href="/store">See what's inside</a>
+				</div>
+				<p class="home-price">One-time payment. 7-day refund if the files aren't what the store lists.</p>
+			</section>
 
-			<SiteSearch />
+			<section class="home-section">
+				<ProductCallout />
+			</section>
 
-			<p class="home__intro">
-				Practical systems, reusable templates, and honest write-ups on getting things
-				done — sent straight from the Buzzyfly notebook.
-			</p>
-			<p class="home__intro">
-				<a href="/blog">Read the blog</a> or <a href="/about">find out what this is</a>.
-			</p>
+			<section class="home-section">
+				<h2>Latest from the notebook</h2>
+				<ul class="home-posts">
+					{posts.map((post) => (
+						<li>
+							<a href={`/blog/${post.id}/`}>{post.data.title}</a>
+							<span> — {post.data.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+						</li>
+					))}
+				</ul>
+				<p><a href="/blog">Read all posts →</a></p>
+			</section>
+
+			<EmailOptin
+				title="Send me the 20-minute weekly reset checklist"
+				description="Free. No spam. Just the checklist, plus one email a week with the next piece of the system."
+			/>
 		</main>
 		<Footer />
 	</body>
