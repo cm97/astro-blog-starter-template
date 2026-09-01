@@ -24,6 +24,12 @@ const posts = activeCategory
 
 const featured = posts[0];
 const rest = posts.slice(1);
+
+const categoryCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
+	const c = p.data.category;
+	if (c) acc[c] = (acc[c] ?? 0) + 1;
+	return acc;
+}, {});
 ---
 
 <!doctype html>
@@ -31,7 +37,7 @@ const rest = posts.slice(1);
 	<head>
 		<BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
-			.blog-page { max-width: 1100px; margin: 0 auto; padding: 2em 1em 4em; }
+			.blog-page { max-width: 1100px; margin: 0 auto; padding: 2em 1em 5em; }
 			.blog-hero { text-align: center; margin-bottom: 2.5em; }
 			.blog-hero h1 { font-size: 2.6em; margin: 0 0 0.4em; }
 			.blog-hero p { max-width: 46em; margin: 0 auto; color: rgb(var(--gray-dark)); font-size: 1.1em; }
@@ -77,9 +83,9 @@ const rest = posts.slice(1);
 			{
 				categories.length > 0 && (
 					<nav class="cat-bar" aria-label="Categories">
-						<a class:list={["cat-pill", { active: !activeCategory }]} href="/blog">All</a>
+						<a class:list={["cat-pill", { active: !activeCategory }]} href="/blog">All ({allPosts.length})</a>
 						{categories.map((c) => (
-							<a class:list={["cat-pill", { active: activeCategory === c }]} href={`/blog?category=${encodeURIComponent(c)}`}>{c}</a>
+							<a class:list={["cat-pill", { active: activeCategory === c }]} href={`/blog?category=${encodeURIComponent(c)}`}>{c} ({categoryCounts[c] ?? 0})</a>
 						))}
 					</nav>
 				)
