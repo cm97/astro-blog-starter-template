@@ -182,3 +182,43 @@ export async function issueStoredDownloadToken(
 
 	return token;
 }
+
+/**
+ * In-memory rate limiter for download attempts. Caps attempts per IP per
+ * rolling minute to stop bucket hammering. Returns true if the request is
+ * allowed, false if it should be rejected with 429.
+ */
+const rateBuckets = new Map<string, { count: number; resetAt: number }>();
+const RATE_LIMIT = 10;
+const WINDOW_MS = 60_000;
+
+export function checkDownloadRateLimit(ip: string): boolean {
+	const now = Date.now();
+	const bucket = rateBuckets.get(ip);
+	if (!bucket || now > bucket.resetAt) {
+		rateBuckets.set(ip, { count: 1, resetAt: now + WINDOW_MS });
+		return true;
+	}
+	bucket.count += 1;
+	return bucket.count <= RATE_LIMIT;
+}
+
+/** Best-effort analytics log of a download into D1. Never throws. */
+export async function logDownloadEvent(
+	env: any,
+	orderId: string,
+	itemId: string,
+	ip: string,
+): Promise<void> {
+	if (!env?.DB) return;
+	try {
+		await env.DB.prepare(
+			`INSERT INTO download_events (order_id, item_id, ip, created_at)
+			 VALUES (?, ?, ?, ?)`,
+		)
+			.bind(orderId, itemId, ip, Date.now())
+			.run();
+	} catch (error) {
+		console.error("Buzzyfly download: analytics log failed", error);
+	}
+}
