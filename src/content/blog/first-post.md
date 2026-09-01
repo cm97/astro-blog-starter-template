@@ -5,7 +5,7 @@ pubDate: "Jun 02 2026"
 heroImage: "/blog-placeholder-1.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "The complete Buzzyfly operating framework to streamline your workflow."
+featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
 Most business advice sounds the same after a while: get organized, be consistent, follow up faster. All true, and all pretty useless without something to hold that advice in place once the week actually gets busy.
@@ -21,3 +21,7 @@ So instead of another productivity app or a 200-tab template pack, I built the s
 Each one is built to still work on the days you don't feel like running it — because those are exactly the days it matters most.
 
 That's the whole pitch, really. Not "do more," just "stop losing what you already built." If that sounds familiar, the Digital System is below.
+
+import ProductCallout from "../../components/ProductCallout.astro";
+
+<ProductCallout />
