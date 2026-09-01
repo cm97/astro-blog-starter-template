@@ -2,121 +2,129 @@
 import BaseHead from '../../components/BaseHead.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import EmailOptin from '../../components/EmailOptin.astro';
+import ProductCallout from '../../components/ProductCallout.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../../consts';
 import { getCollection } from 'astro:content';
 import FormattedDate from '../../components/FormattedDate.astro';
+import { BUZZYFLY_CONFIG } from '../../data/monetization';
 
-const posts = (await getCollection('blog')).sort(
+export const prerender = false;
+
+const allPosts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+const categories = [...new Set(allPosts.map((p) => p.data.category).filter(Boolean))];
+const activeCategory = Astro.url.searchParams.get('category');
+
+const posts = activeCategory
+	? allPosts.filter((p) => p.data.category === activeCategory)
+	: allPosts;
+
+const featured = posts[0];
+const rest = posts.slice(1);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
-			main {
-				width: 960px;
-			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
-				margin: 0;
-				padding: 0;
-			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-				border-radius: 12px;
-			}
-			ul li a {
-				display: block;
-			}
-			.title {
-				margin: 0;
-				color: rgb(var(--black));
-				line-height: 1;
-			}
-			.date {
-				margin: 0;
-				color: rgb(var(--gray));
-			}
-			.description {
-				margin: 0.6rem 0 0 0;
-				color: rgb(var(--gray-dark));
-				line-height: 1.4;
-			}
-			ul li:first-child .description {
-				max-width: 640px;
-				margin-left: auto;
-				margin-right: auto;
-			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
-			ul a:hover img {
-				box-shadow: var(--box-shadow);
-			}
-			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
-				}
-				ul li {
-					width: 100%;
-					text-align: center;
-				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
-				}
+			.blog-page { max-width: 1100px; margin: 0 auto; padding: 2em 1em 4em; }
+			.blog-hero { text-align: center; margin-bottom: 2.5em; }
+			.blog-hero h1 { font-size: 2.6em; margin: 0 0 0.4em; }
+			.blog-hero p { max-width: 46em; margin: 0 auto; color: rgb(var(--gray-dark)); font-size: 1.1em; }
+			.cat-bar { display: flex; flex-wrap: wrap; gap: 0.5em; justify-content: center; margin: 1.5em 0 2.5em; }
+			.cat-pill { padding: 0.4em 0.9em; border-radius: 999px; border: 1px solid rgb(var(--gray-light)); text-decoration: none; color: rgb(var(--gray-dark)); font-size: 0.9em; font-weight: 600; }
+			.cat-pill.active, .cat-pill:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+			.featured { display: grid; grid-template-columns: 1.1fr 1fr; gap: 1.5em; align-items: center; padding: 1.5em; border: 1px solid rgb(var(--gray-light)); border-radius: 16px; background: #fff; box-shadow: var(--box-shadow); margin-bottom: 2.5em; }
+			.featured img { width: 100%; border-radius: 12px; }
+			.featured .tag { display: inline-block; font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); margin-bottom: 0.5em; }
+			.featured h2 { margin: 0 0 0.4em; font-size: 1.8em; }
+			.featured h2 a { color: rgb(var(--black)); text-decoration: none; }
+			.featured p { color: rgb(var(--gray-dark)); margin: 0 0 1em; }
+			.featured .meta { font-size: 0.85em; color: rgb(var(--gray)); }
+			.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 1.25em; }
+			.card { border: 1px solid rgb(var(--gray-light)); border-radius: 14px; overflow: hidden; background: #fff; display: flex; flex-direction: column; transition: transform 0.15s ease, box-shadow 0.15s ease; }
+			.card:hover { transform: translateY(-3px); box-shadow: var(--box-shadow); }
+			.card img { width: 100%; height: 160px; object-fit: cover; }
+			.card-body { padding: 1em 1.1em 1.25em; display: flex; flex-direction: column; flex: 1; }
+			.card .tag { font-size: 0.7em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); }
+			.card h3 { margin: 0.3em 0 0.4em; font-size: 1.15em; }
+			.card h3 a { color: rgb(var(--black)); text-decoration: none; }
+			.card p { margin: 0 0 0.8em; color: rgb(var(--gray-dark)); font-size: 0.92em; flex: 1; }
+			.card .meta { font-size: 0.8em; color: rgb(var(--gray)); }
+			.card .read { margin-top: 0.6em; font-weight: 700; font-size: 0.85em; color: var(--accent); }
+			.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid rgb(var(--gray-light)); box-shadow: 0 -4px 16px rgba(0,0,0,0.08); padding: 0.7em 1em; display: flex; align-items: center; justify-content: space-between; gap: 1em; z-index: 50; }
+			.sticky-cta .price { font-weight: 700; font-size: 1.1em; }
+			.sticky-cta a { padding: 0.6em 1.4em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; }
+			.sticky-cta a:hover { background: var(--accent-dark); }
+			@media (max-width: 760px) {
+				.featured { grid-template-columns: 1fr; }
+				.sticky-cta span:first-child { display: none; }
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-									<p class="description">{post.data.description}</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
+		<main class="blog-page">
+			<section class="blog-hero">
+				<h1>The Buzzyfly Notebook</h1>
+				<p>Real workflows, checklists, and the ugly truths about running a one-person business — written so you stop rebuilding everything from memory.</p>
 			</section>
+
+			{
+				categories.length > 0 && (
+					<nav class="cat-bar" aria-label="Categories">
+						<a class:list={["cat-pill", { active: !activeCategory }]} href="/blog">All</a>
+						{categories.map((c) => (
+							<a class:list={["cat-pill", { active: activeCategory === c }]} href={`/blog?category=${encodeURIComponent(c)}`}>{c}</a>
+						))}
+					</nav>
+				)
+			}
+
+			{
+				featured && (
+					<article class="featured">
+						{featured.data.heroImage && <img src={featured.data.heroImage} alt="" width={640} height={360} />}
+						<div>
+							{featured.data.category && <span class="tag">{featured.data.category}</span>}
+							<h2><a href={`/blog/${featured.id}/`}>{featured.data.title}</a></h2>
+							<p>{featured.data.description}</p>
+							<p class="meta"><FormattedDate date={featured.data.pubDate} /></p>
+							<a class="read" href={`/blog/${featured.id}/`}>Read it →</a>
+						</div>
+					</article>
+				)
+			}
+
+			<section class="grid">
+				{
+					rest.map((post) => (
+						<article class="card">
+							{post.data.heroImage && <img src={post.data.heroImage} alt="" width={400} height={200} />}
+							<div class="card-body">
+								{post.data.category && <span class="tag">{post.data.category}</span>}
+								<h3><a href={`/blog/${post.id}/`}>{post.data.title}</a></h3>
+								<p>{post.data.description}</p>
+								<p class="meta"><FormattedDate date={post.data.pubDate} /></p>
+								<a class="read" href={`/blog/${post.id}/`}>Read →</a>
+							</div>
+						</article>
+					))
+				}
+			</section>
+
+			<ProductCallout />
+			<EmailOptin />
 		</main>
 		<Footer />
+		<div class="sticky-cta">
+			<span>Stop rebuilding onboarding from memory.</span>
+			<span class="price">{BUZZYFLY_CONFIG.defaultProductPrice}</span>
+			<a href="/store">Get the Digital System</a>
+		</div>
 	</body>
 </html>

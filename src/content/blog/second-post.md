@@ -1,6 +1,7 @@
 ---
 title: "3 Signs Your Business Is Running You"
 description: "The quiet tells that your workflow has become the thing in charge, not you."
+category: "Workflow"
 pubDate: "Jun 20 2026"
 heroImage: "/blog-placeholder-2.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -26,4 +27,4 @@ The scariest one. Nothing forgets like a busy brain. If a lead or a client only 
 
 None of these get fixed by trying harder. They get fixed by moving the process out of your head and into something that runs whether or not you're having a good week — which is the entire point of the Digital System below.
 
-The checklists for these three problems are in the Digital System → [see what's inside](/blog/using-mdx/).
+The checklists for these three problems are in the Digital System → [see what's inside](/store/).

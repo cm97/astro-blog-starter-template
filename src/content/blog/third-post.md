@@ -1,6 +1,7 @@
 ---
 title: "The 20-Minute Weekly Reset"
 description: "One short weekly habit, and the actual checklist behind it."
+category: "Workflow"
 pubDate: "Jul 10 2026"
 heroImage: "/blog-placeholder-3.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
