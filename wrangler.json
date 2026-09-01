@@ -1,8 +1,8 @@
 {
 	"name": "astro-blog-starter-template",
 	"main": "@astrojs/cloudflare/entrypoints/server",
-	"compatibility_date": "2025-10-08",
-	"compatibility_flags": ["nodejs_compat"],
+	"compatibility_date": "2026-02-19",
+	"compatibility_flags": ["nodejs_compat", "fetch_iterable_type_support"],
 	"observability": {
 		"enabled": true
 	},
