@@ -2,8 +2,10 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import SiteSearch from '../components/SiteSearch.astro';
+import ProductCallout from '../components/ProductCallout.astro';
+import EmailOptin from '../components/EmailOptin.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { BUZZYFLY_CONFIG } from '../data/monetization';
 ---
 
 <!doctype html>
@@ -12,37 +14,135 @@ import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			.home {
+				text-align: left;
+			}
+			.home-hero {
 				text-align: center;
+				padding: 1.5em 0 2em;
+				border-bottom: 1px solid rgb(var(--gray-light));
 			}
-			.home h1 {
-				margin-bottom: 0.15em;
+			.home-hero h1 {
+				font-size: 2.4em;
+				margin: 0 0 0.4em 0;
+				line-height: 1.15;
 			}
-			.tagline {
-				margin: 0;
-				color: rgb(var(--gray));
+			.home-hero .lede {
+				max-width: 38em;
+				margin: 0 auto 1.4em;
+				color: rgb(var(--gray-dark));
 				font-size: 1.1em;
 			}
-			.home__intro {
-				max-width: 620px;
-				margin: 0 auto 1em;
+			.home-hero .buy-row {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 1em;
+				flex-wrap: wrap;
+			}
+			.home-hero .price {
+				font-size: 1.8em;
+				font-weight: 700;
+				color: rgb(var(--black));
+			}
+			.home-hero .cta {
+				display: inline-block;
+				padding: 0.7em 1.8em;
+				border-radius: 999px;
+				background: var(--accent);
+				color: #fff;
+				font-weight: 700;
+				text-decoration: none;
+				transition: background-color 0.15s ease-in-out;
+			}
+			.home-hero .cta:hover {
+				background: var(--accent-dark);
+				color: #fff;
+			}
+			.home-hero .micro {
+				margin: 0.9em 0 0;
+				font-size: 0.8em;
+				color: rgb(var(--gray));
+			}
+			.home-section {
+				margin-top: 2.5em;
+			}
+			.home-section h2 {
+				font-size: 1.5em;
+			}
+			.home-list {
+				padding-left: 1.2em;
+				color: rgb(var(--gray-dark));
+			}
+			.home-list li {
+				margin-bottom: 0.5em;
+			}
+			.home-posts {
+				display: grid;
+				gap: 1em;
+				margin-top: 1em;
+			}
+			.home-post {
+				padding: 1em 1.2em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				background: #fff;
+			}
+			.home-post a {
+				font-weight: 700;
+				text-decoration: none;
+			}
+			.home-post p {
+				margin: 0.4em 0 0;
+				font-size: 0.95em;
+				color: rgb(var(--gray));
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main class="home">
-			<h1>🪰 Buzzyfly</h1>
-			<p class="tagline">Small ideas, long distances.</p>
+			<section class="home-hero">
+				<h1>Stop rebuilding your client onboarding from memory every time someone new shows up.</h1>
+				<p class="lede">
+					The Buzzyfly Digital System turns onboarding, weekly planning, and follow-ups into checklists you run in twenty minutes — so the process still exists on the weeks you're slammed.
+				</p>
+				<div class="buy-row">
+					<span class="price">{BUZZYFLY_CONFIG.defaultProductPrice}</span>
+					<a class="cta" href="/store">Get the Digital System</a>
+				</div>
+				<p class="micro">One-time payment. No subscription. 7-day refund if the files aren't what the store lists.</p>
+			</section>
 
-			<SiteSearch />
+			<section class="home-section">
+				<h2>What's inside</h2>
+				<ul class="home-list">
+					<li>The core operating framework — onboarding, weekly planning, and follow-up workflows</li>
+					<li>The 20-minute weekly reset checklist, ready to run instead of rebuilt from scratch</li>
+					<li>Lifetime access, including future updates to the system</li>
+				</ul>
+			</section>
 
-			<p class="home__intro">
-				Practical systems, reusable templates, and honest write-ups on getting things
-				done — sent straight from the Buzzyfly notebook.
-			</p>
-			<p class="home__intro">
-				<a href="/blog">Read the blog</a> or <a href="/about">find out what this is</a>.
-			</p>
+			<ProductCallout />
+
+			<section class="home-section">
+				<h2>From the notebook</h2>
+				<div class="home-posts">
+					<div class="home-post">
+						<a href="/blog/first-post/">Why I Built the Buzzyfly Digital System</a>
+						<p>The pain that started it — and the fix that stuck.</p>
+					</div>
+					<div class="home-post">
+						<a href="/blog/second-post/">3 Signs Your Business Is Running You</a>
+						<p>The quiet tells your workflow has become the thing in charge.</p>
+					</div>
+					<div class="home-post">
+						<a href="/blog/third-post/">The 20-Minute Weekly Reset</a>
+						<p>One short weekly habit, and the actual checklist behind it.</p>
+					</div>
+				</div>
+			</section>
+
+			<EmailOptin />
 		</main>
 		<Footer />
 	</body>

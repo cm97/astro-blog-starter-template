@@ -63,7 +63,7 @@ const INCLUDED = [
 					}
 				</div>
 				<p class="store-microcopy">
-					One-time payment. No subscription. Secure checkout by Stripe.
+					One-time payment. No subscription. Secure checkout by Stripe. {BUZZYFLY_CONFIG.guarantee}
 				</p>
 			</section>
 
@@ -119,7 +119,7 @@ const INCLUDED = [
 								<a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>
 									{BUZZYFLY_CONFIG.orderEmail}
 								</a>{" "}
-								and you’ll get a person, not a ticket queue.
+								and you’ll get a person, not a ticket queue. {BUZZYFLY_CONFIG.guarantee}
 							</p>
 						</>
 					)
@@ -148,7 +148,7 @@ const INCLUDED = [
 		border-bottom: 1px solid rgb(var(--gray-light));
 	}
 	.store-eyebrow {
-		margin: 0 0 0.4em;
+		margin: 0 0 0.4em 0;
 		font-size: 0.8em;
 		letter-spacing: 0.06em;
 		text-transform: uppercase;
