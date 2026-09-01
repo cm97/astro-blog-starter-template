@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { resolveProductFile, verifyDownloadToken } from "../../lib/fulfillment";
+import { resolveProductFile, verifyDownloadToken, checkDownloadRateLimit, logDownloadEvent } from "../../lib/fulfillment";
 
 export const prerender = false;
 
@@ -22,13 +22,21 @@ export const prerender = false;
  *     automatically once that secret is set in production.
  *
  * Checked in that order. Both resolve to the same product lookup and stream.
+ *
+ * Rate limited per IP to prevent abuse at scale.
  */
 export const GET: APIRoute = async ({ request, locals }) => {
 	const env = locals.runtime.env;
 	const url = new URL(request.url);
 	const token = url.searchParams.get("token");
+	const ip = request.headers.get("cf-connecting-ip") ?? request.headers.get("x-forwarded-for") ?? "unknown";
 
 	if (!token) return new Response("Missing download token", { status: 400 });
+
+	// Rate limit to protect the bucket at scale.
+	if (!checkDownloadRateLimit(ip)) {
+		return new Response("Too many download attempts. Slow down.", { status: 429 });
+	}
 
 	let claims: { orderId: string; itemId: string } | null = null;
 
@@ -83,6 +91,9 @@ export const GET: APIRoute = async ({ request, locals }) => {
 		console.error(`Buzzyfly download: R2 object missing for key ${productFile.r2Key}`);
 		return new Response("File not found", { status: 404 });
 	}
+
+	// Log the download for analytics.
+	await logDownloadEvent(env, claims.orderId, claims.itemId, ip);
 
 	return new Response(object.body, {
 		status: 200,

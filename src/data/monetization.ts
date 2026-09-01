@@ -97,3 +97,46 @@ export const PRODUCT_FILE_MAP: Record<
 		contentType: "application/zip",
 	},
 };
+
+/**
+ * Simple in-memory rate limiter for download endpoints.
+ * Tracks requests per IP in a sliding window. For true scale, move to D1 or KV.
+ */
+const downloadAttempts = new Map<string, { count: number; resetAt: number }>();
+const WINDOW_MS = 60_000; // 1 minute
+const MAX_ATTEMPTS = 10;
+
+export function checkDownloadRateLimit(ip: string): boolean {
+	const now = Date.now();
+	const entry = downloadAttempts.get(ip);
+	if (!entry || now > entry.resetAt) {
+		downloadAttempts.set(ip, { count: 1, resetAt: now + WINDOW_MS });
+		return true;
+	}
+	if (entry.count >= MAX_ATTEMPTS) {
+		return false;
+	}
+	entry.count += 1;
+	return true;
+}
+
+/**
+ * Log a download event to D1 for analytics and scaling insights.
+ */
+export async function logDownloadEvent(
+	env: any,
+	orderId: string,
+	itemId: string,
+	ip: string,
+): Promise<void> {
+	if (!env.DB) return;
+	try {
+		await env.DB.prepare(
+			`INSERT INTO download_events (order_id, item_id, ip, created_at) VALUES (?, ?, ?, ?)`,
+		)
+			.bind(orderId, itemId, ip, Date.now())
+			.run();
+	} catch (error) {
+		console.error("Buzzyfly download: failed to log event", error);
+	}
+}
