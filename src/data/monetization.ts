@@ -14,6 +14,8 @@ export const BUZZYFLY_CONFIG = {
 		"Free. No spam. Just the checklist, plus one email a week with the next piece of the system.",
 	// Where product support and manual delivery go.
 	orderEmail: "coachmanager@gmail.com",
+	// Hard guarantee shown on store and callouts. Keep the wording identical everywhere.
+	guarantee: "7-day email refund if the files aren't what the store lists.",
 };
 
 /**
