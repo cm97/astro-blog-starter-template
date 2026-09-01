@@ -1,4 +1,4 @@
-name = "buzzyfly-analytics"
+name = "buzzyfly-fulfillment"
 main = "src/index.ts"
 compatibility_date = "2024-09-01"
 
@@ -6,3 +6,7 @@ compatibility_date = "2024-09-01"
 binding = "DB"
 database_name = "buzzyfly-db"
 database_id = "REPLACE_WITH_D1_ID"
+
+[[r2_buckets]]
+binding = "R2"
+bucket_name = "buzzyfly-assets"

@@ -1,4 +1,4 @@
-name = "buzzyfly-analytics"
+name = "buzzyfly-checkout"
 main = "src/index.ts"
 compatibility_date = "2024-09-01"
 

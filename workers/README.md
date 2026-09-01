@@ -1,20 +1,16 @@
 # Buzzyfly Workers
 
-Named Cloudflare Workers that run the revenue machine. Each one owns one job. No overlap.
+Four Cloudflare Workers that run the revenue machine:
 
-## 1. buzzyfly-deploy
-Keeps the live site in sync with GitHub main. Builds the Astro site and deploys to Cloudflare Pages/Workers. Runs on every push to main and on a schedule as a safety net.
+1. **buzzyfly-fulfillment** — serves the $49 zip, rate-limits downloads, logs to D1.
+2. **buzzyfly-checkout** — creates Stripe Checkout sessions, handles webhooks, records paid orders.
+3. **buzzyfly-analytics** — tracks pageviews and events, exposes a simple dashboard endpoint.
+4. **buzzyfly-email** — captures opt-in emails, sends the free checklist via Resend.
 
-## 2. buzzyfly-download
-Serves the $49 digital system zip. Rate-limited, logged, signed URLs. This is the money endpoint.
+All share one D1 database (`buzzyfly-db`) and the R2 bucket (`buzzyfly-assets`).
 
-## 3. buzzyfly-analytics
-Logs every download, page view, and opt-in to D1. Powers the daily revenue report.
-
-## 4. buzzyfly-content
-Generates and publishes new pain-first blog posts and product files on a schedule so the site never goes stale.
-
-## 5. buzzyfly-traffic
-Finds and posts the free checklist and blog content to places where buyers actually hang out. Drives the eyeballs that turn into $49 sales.
-
-Deploy order: analytics first, then download, then deploy, then content, then traffic.
+Deploy each with:
+```
+npx wrangler deploy
+```
+from its own folder after filling in the D1 database id and secrets.
