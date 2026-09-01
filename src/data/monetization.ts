@@ -8,10 +8,10 @@ export const BUZZYFLY_CONFIG = {
 	defaultProductTitle: "Buzzyfly Digital System",
 	defaultProductPrice: "$49",
 	defaultProductDescription:
-		"The complete Buzzyfly operating framework to streamline your workflow.",
-	newsletterTitle: "Join the Buzzyfly Dispatch",
+		"Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.",
+	newsletterTitle: "Send me the 20-minute weekly reset",
 	newsletterDescription:
-		"Get exclusive Buzzyfly digital tools, templates, and insights delivered to your inbox.",
+		"Get the free checklist that keeps your week from collapsing by Thursday. No spam, no course — just the reset, then the full system when you're ready.",
 	// Where product support and manual delivery go.
 	orderEmail: "coachmanager@gmail.com",
 };
@@ -62,7 +62,7 @@ export function getOrderAction(productTitle: string = BUZZYFLY_CONFIG.defaultPro
 		return {
 			live: true,
 			href: STRIPE_CHECKOUT_URL,
-			label: "Buy now",
+			label: "Get the Digital System — $49",
 			external: true,
 		};
 	}
