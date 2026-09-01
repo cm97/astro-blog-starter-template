@@ -1,0 +1,36 @@
+---
+title: "What's Actually Inside the Buzzyfly Digital System"
+description: "A plain look at what you get when you buy it — no hype, just the contents."
+pubDate: "Aug 10 2026"
+heroImage: "/blog-placeholder-5.jpg"
+featuredProductTitle: "Buzzyfly Digital System"
+featuredProductPrice: "$49"
+featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+---
+
+A lot of digital products describe themselves in feelings ("unlock your potential") instead of contents ("here's literally what's in the folder"). This is the second kind of post.
+
+## What you get
+
+- The core operating framework — the onboarding, weekly planning, and follow-up workflows described in [Why I Built the Buzzyfly Digital System](/blog/first-post/)
+- The weekly reset checklist from [this post](/blog/third-post/), ready to use instead of rebuilt from scratch
+- Lifetime access and free updates as the system changes — you don't rebuy it when something improves
+
+## What you don't get
+
+- A 40-tab "ultimate" template you'll open once
+- A course you're supposed to "finish" before it's useful
+- Vague promises with no actual checklist behind them
+
+Here's the product card itself:
+
+import ProductCallout from "../../components/ProductCallout.astro";
+
+<ProductCallout
+	title="Buzzyfly Digital System"
+	price="$49"
+	description="Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+	features={["Lifetime access", "Download emailed after payment (usually same day)", "Free updates", "7-day refund if the files aren't what the store lists"]}
+/>
+
+If you've read this far and you're still not sure, that's a completely fair place to land — go read the [About page](/about/) for the longer version of why this exists, or see the [store page](/store/) for the short one. No pressure either way.
