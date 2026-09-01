@@ -5,7 +5,7 @@ pubDate: "Jul 10 2026"
 heroImage: "/blog-placeholder-3.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "The complete Buzzyfly operating framework to streamline your workflow."
+featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
 This is the single habit that's done the most for how I run Buzzyfly, and it costs about 20 minutes. No app required, though the Digital System has a version of this built in with the checklist ready to go.
@@ -18,3 +18,9 @@ This is the single habit that's done the most for how I run Buzzyfly, and it cos
 4. **Look one week back.** What actually got done? What kept getting pushed? A pattern of the same task sliding twice usually means it doesn't belong on your list — it belongs on someone else's, or in the trash.
 
 That's it. It's not clever. It's just consistent, and consistency is the entire game. The reason most people don't keep it up isn't the 20 minutes — it's that there's no system reminding them to sit down and do it. That's the part worth automating.
+
+The free, copy-paste version of this checklist is in [The 20-Minute Weekly Reset Checklist (Free)](/blog/weekly-reset-checklist/). The full system — onboarding, follow-ups, and this reset as one pack — is below.
+
+import ProductCallout from "../../components/ProductCallout.astro";
+
+<ProductCallout />
