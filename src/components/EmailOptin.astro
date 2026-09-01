@@ -4,15 +4,17 @@ import { BUZZYFLY_CONFIG } from "../data/monetization";
 interface Props {
 	title?: string;
 	description?: string;
+	buttonLabel?: string;
 }
 
 const {
 	title = BUZZYFLY_CONFIG.newsletterTitle,
 	description = BUZZYFLY_CONFIG.newsletterDescription,
+	buttonLabel = "Send me the checklist",
 } = Astro.props;
 ---
 
-<section class="email-optin" aria-label={`${BUZZYFLY_CONFIG.brandName} free checklist signup`}>
+<section class="email-optin" aria-label={`${BUZZYFLY_CONFIG.brandName} newsletter signup`}>
 	<h3 class="email-optin__title">{title}</h3>
 	<p class="email-optin__description">{description}</p>
 	<form class="email-optin__form" data-email-optin-form method="POST" action="/api/subscribe">
@@ -26,7 +28,7 @@ const {
 			autocomplete="email"
 			required
 		/>
-		<button class="email-optin__submit" type="submit">Send me the checklist</button>
+		<button class="email-optin__submit" type="submit">{buttonLabel}</button>
 	</form>
 	<p class="email-optin__status" data-email-optin-status role="status" aria-live="polite"></p>
 </section>
@@ -63,7 +65,7 @@ const {
 				if (!response.ok) throw new Error("Request failed");
 
 				if (statusEl) {
-					statusEl.textContent = "You're in! Check your inbox for the checklist.";
+					statusEl.textContent = "You're in! Check your inbox soon.";
 					statusEl.dataset.state = "success";
 				}
 				form.reset();

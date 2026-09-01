@@ -8,13 +8,12 @@ export const BUZZYFLY_CONFIG = {
 	defaultProductTitle: "Buzzyfly Digital System",
 	defaultProductPrice: "$49",
 	defaultProductDescription:
-		"Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you're slammed.",
-	newsletterTitle: "Get the 20-minute weekly reset checklist",
+		"Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.",
+	newsletterTitle: "Send me the 20-minute weekly reset checklist",
 	newsletterDescription:
-		"Free checklist. First email sells nothing — it just hands you the reset so you can see the system works before you buy.",
+		"Free. No spam. Just the checklist, plus one email a week with the next piece of the system.",
 	// Where product support and manual delivery go.
 	orderEmail: "coachmanager@gmail.com",
-	guarantee: "7-day email refund if the files aren't what the store lists.",
 };
 
 /**

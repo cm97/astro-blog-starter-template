@@ -1,32 +1,76 @@
 ---
-title: "What's Actually Inside the Buzzyfly Digital System"
-description: "A plain look at what you get when you buy it — no hype, just the contents."
-pubDate: "Aug 10 2026"
-heroImage: "/blog-placeholder-5.jpg"
+title: 'Markdown Style Guide'
+description: 'A starter guide to using Markdown with Astro'
+pubDate: 'Jun 02 2026'
+heroImage: '/blog-placeholder-3.jpg'
+featuredProductTitle: 'Buzzyfly Digital System'
+featuredProductPrice: '$49'
+featuredProductDescription: 'Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.'
 ---
 
-A lot of digital products describe themselves in feelings ("unlock your potential") instead of contents ("here's literally what's in the folder"). This is the second kind of post.
+This theme comes with basic styles for typography and other elements — all crafted to match the kitschy-cozy aesthetic of the blog. Use this page as a reference for how your Markdown content will look.
 
-## What you get
+## Headings
 
-- The core operating framework — the onboarding, weekly planning, and follow-up workflows described in [Why I Built the Buzzyfly Digital System](/blog/first-post/)
-- The weekly reset checklist from [this post](/blog/third-post/), ready to use instead of rebuilt from scratch
-- Lifetime access and free updates as the system changes — you don't rebuy it when something improves
+Use headings to break up long sections. This helps readers scan and find what they need.
 
-## What you don't get
+### Sub-headings
 
-- A 40-tab "ultimate" template you'll open once
-- A course you're supposed to "finish" before it's useful
-- Vague promises with no actual checklist behind them
+Sub-headings work the same way. Nest them under main headings to create a clear hierarchy.
 
-Here's the product card itself:
+## Emphasis
+
+**Bold** and *italic* text draw attention to key points. Use them sparingly so they still stand out.
+
+## Lists
+
+- First item
+- Second item
+- Third item
+
+1. Numbered list
+2. Keeps things organized
+3. Easy to follow
+
+## Blockquotes
+
+> Pull quotes or important notes can be highlighted with blockquotes.
+
+## Code
+
+Inline `code` and fenced code blocks are supported:
+
+```js
+console.log('Hello, world!');
+```
+
+## Images
+
+Images are centered and responsive. Add captions with the standard Markdown syntax.
+
+## Tables
+
+| Feature | Supported |
+| --- | --- |
+| Headings | Yes |
+| Lists | Yes |
+| Code blocks | Yes |
+| Tables | Yes |
+
+## Horizontal Rule
+
+A horizontal rule creates a clean break between sections.
+
+---
+
+## Product
 
 import ProductCallout from "../../components/ProductCallout.astro";
 
 <ProductCallout
 	title="Buzzyfly Digital System"
 	price="$49"
-	description="Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you're slammed."
+	description="Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 	features={["Lifetime access", "Download emailed after payment (usually same day)", "Free updates", "7-day refund if the files aren't what the store lists"]}
 />
 
