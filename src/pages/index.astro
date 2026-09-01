@@ -2,47 +2,134 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import SiteSearch from '../components/SiteSearch.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import EmailOptin from '../components/EmailOptin.astro';
+import ProductCallout from '../components/ProductCallout.astro';
+import { BUZZYFLY_CONFIG, getOrderAction } from '../data/monetization';
+
+const order = getOrderAction();
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`${BUZZYFLY_CONFIG.brandName} — ${BUZZYFLY_CONFIG.defaultProductTitle}`} description={BUZZYFLY_CONFIG.defaultProductDescription} />
 		<style>
 			.home {
+				max-width: 760px;
+				margin: 0 auto;
+				padding: 0 1em;
+			}
+			.home-hero {
 				text-align: center;
+				padding: 2.5em 0 1.5em;
+				border-bottom: 1px solid rgb(var(--gray-light));
 			}
-			.home h1 {
-				margin-bottom: 0.15em;
+			.home-hero h1 {
+				font-size: clamp(1.8em, 5vw, 2.8em);
+				margin: 0 0 0.4em;
+				line-height: 1.15;
 			}
-			.tagline {
-				margin: 0;
-				color: rgb(var(--gray));
+			.home-hero p {
+				max-width: 38em;
+				margin: 0 auto;
+				color: rgb(var(--gray-dark));
 				font-size: 1.1em;
 			}
-			.home__intro {
-				max-width: 620px;
-				margin: 0 auto 1em;
+			.home-cta {
+				display: flex;
+				gap: 1em;
+				justify-content: center;
+				flex-wrap: wrap;
+				margin-top: 1.5em;
+			}
+			.home-cta a {
+				display: inline-block;
+				padding: 0.8em 1.8em;
+				border-radius: 999px;
+				font-weight: 700;
+				text-decoration: none;
+			}
+			.home-cta .primary {
+				background: var(--accent);
+				color: #fff;
+			}
+			.home-cta .primary:hover { background: var(--accent-dark); color: #fff; }
+			.home-cta .secondary {
+				border: 1px solid rgb(var(--gray-light));
+				color: rgb(var(--black));
+			}
+			.home-section {
+				margin-top: 2.5em;
+			}
+			.home-section h2 {
+				font-size: 1.4em;
+				margin-bottom: 0.6em;
+			}
+			.home-inclusions {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+			.home-inclusions li {
+				padding: 0.5em 0 0.5em 1.6em;
+				position: relative;
+				color: rgb(var(--gray-dark));
+			}
+			.home-inclusions li::before {
+				content: "✓";
+				position: absolute;
+				left: 0;
+				color: var(--accent);
+				font-weight: 700;
+			}
+			.home-guarantee {
+				margin-top: 1em;
+				font-size: 0.85em;
+				color: rgb(var(--gray));
+				text-align: center;
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main class="home">
-			<h1>🪰 Buzzyfly</h1>
-			<p class="tagline">Small ideas, long distances.</p>
+			<section class="home-hero">
+				<h1>Stop rebuilding your client onboarding from memory every time someone new shows up.</h1>
+				<p>The Buzzyfly Digital System turns onboarding, weekly planning, and follow-ups into checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.</p>
+				<div class="home-cta">
+					{
+						order.external ? (
+							<a class="primary" href={order.href} target="_blank" rel="noopener noreferrer">{order.label}</a>
+						) : (
+							<a class="primary" href={order.href}>{order.label}</a>
+						)
+					}
+					<a class="secondary" href="/store">See what's inside</a>
+				</div>
+				<p class="home-guarantee">7-day refund if the files aren't what the store lists. One-time $49. No subscription.</p>
+			</section>
 
-			<SiteSearch />
+			<section class="home-section">
+				<h2>What's in the $49 system</h2>
+				<ul class="home-inclusions">
+					<li>Onboarding, weekly planning, and follow-up workflows as ready-to-run checklists</li>
+					<li>The 20-minute weekly reset checklist — so the process survives a slammed Thursday</li>
+					<li>Lifetime access, including future updates</li>
+				</ul>
+			</section>
 
-			<p class="home__intro">
-				Practical systems, reusable templates, and honest write-ups on getting things
-				done — sent straight from the Buzzyfly notebook.
-			</p>
-			<p class="home__intro">
-				<a href="/blog">Read the blog</a> or <a href="/about">find out what this is</a>.
-			</p>
+			<ProductCallout />
+
+			<section class="home-section">
+				<h2>From the notebook</h2>
+				<p style="color: rgb(var(--gray-dark));">
+					<a href="/blog/client-onboarding-checklist">The onboarding checklist that survives a busy week</a> ·
+					<a href="/blog/follow-up-system">A follow-up system that doesn't forget</a> ·
+					<a href="/blog/weekly-reset-checklist">The free 20-minute reset</a>
+				</p>
+			</section>
+
+			<EmailOptin />
 		</main>
 		<Footer />
 	</body>
