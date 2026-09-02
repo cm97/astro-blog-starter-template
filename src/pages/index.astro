@@ -2,48 +2,260 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import SiteSearch from '../components/SiteSearch.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import EmailOptin from '../components/EmailOptin.astro';
+import { SITE_TITLE } from '../consts';
+import { BUZZYFLY_CONFIG, getOrderAction } from '../data/monetization';
+import { getCollection } from 'astro:content';
+import FormattedDate from '../components/FormattedDate.astro';
+
+const order = getOrderAction();
+const allPosts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+).slice(0, 3);
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
-		<style>
-			.home {
-				text-align: center;
-			}
-			.home h1 {
-				margin-bottom: 0.15em;
-			}
-			.tagline {
-				margin: 0;
-				color: rgb(var(--gray));
-				font-size: 1.1em;
-			}
-			.home__intro {
-				max-width: 620px;
-				margin: 0 auto 1em;
-			}
-		</style>
+		<BaseHead
+			title={`${SITE_TITLE} — Systems for small businesses that actually stick`}
+			description="Practical operating systems and templates for one- and few-person businesses. Stop rebuilding the same workflows from memory every week."
+		/>
 	</head>
 	<body>
 		<Header />
-		<main class="home">
-			<h1>🪰 Buzzyfly</h1>
-			<p class="tagline">Small ideas, long distances.</p>
+		<main>
 
-			<SiteSearch />
+			<!-- Hero -->
+			<section class="hero">
+				<p class="hero__eyebrow">For small business owners</p>
+				<h1 class="hero__headline">Your workflow shouldn't fall apart every busy week.</h1>
+				<p class="hero__subhead">
+					The Buzzyfly Digital System gives you the onboarding, weekly planning, and
+					follow-up workflows a one-person business actually needs — built to still work
+					on the days you're too slammed to think.
+				</p>
+				<div class="hero__cta-group">
+					<a
+						class="btn btn--primary"
+						href={order.href}
+						{...(order.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+					>
+						Get the Digital System — $49
+					</a>
+					<a class="btn btn--secondary" href="/blog">Read the blog</a>
+				</div>
+				<p class="hero__reassurance">One-time payment. No subscription. Instant Stripe checkout.</p>
+			</section>
 
-			<p class="home__intro">
-				Practical systems, reusable templates, and honest write-ups on getting things
-				done — sent straight from the Buzzyfly notebook.
-			</p>
-			<p class="home__intro">
-				<a href="/blog">Read the blog</a> or <a href="/about">find out what this is</a>.
-			</p>
+			<!-- Social proof bar -->
+			<section class="proof-bar">
+				<div class="proof-bar__item">✔ One-time $49 — own it forever</div>
+				<div class="proof-bar__item">✔ Built for solo &amp; small-team businesses</div>
+				<div class="proof-bar__item">✔ Works week one, not just week one</div>
+			</section>
+
+			<!-- What it solves -->
+			<section class="section">
+				<h2 class="section__title">If any of this sounds familiar…</h2>
+				<ul class="pain-list">
+					<li>Every new client means rebuilding the same onboarding steps from memory</li>
+					<li>Follow-ups only happen when you suddenly remember them</li>
+					<li>You build a clean system on Monday and it's gone by Thursday</li>
+					<li>Your process lives in your head — and that's a single point of failure</li>
+				</ul>
+				<p class="section__body">
+					The Buzzyfly Digital System is the small set of workflows that fixes exactly
+					this — onboarding, weekly planning, and follow-ups — packaged as reusable
+					templates you run instead of rebuild.
+				</p>
+				<p>
+					<a
+						class="btn btn--primary"
+						href={order.href}
+						{...(order.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+					>
+						Get it for $49 →
+					</a>
+				</p>
+			</section>
+
+			<!-- Recent posts -->
+			{allPosts.length > 0 && (
+				<section class="section">
+					<h2 class="section__title">From the blog</h2>
+					<p class="section__body">Practical systems thinking — free, no signup.</p>
+					<ul class="post-list">
+						{allPosts.map(post => (
+							<li class="post-list__item">
+								<a class="post-list__link" href={`/blog/${post.id}/`}>
+									<span class="post-list__title">{post.data.title}</span>
+									<span class="post-list__date"><FormattedDate date={post.data.pubDate} /></span>
+								</a>
+							</li>
+						))}
+					</ul>
+					<p><a href="/blog">All posts →</a></p>
+				</section>
+			)}
+
+			<!-- Email optin -->
+			<EmailOptin />
+
 		</main>
 		<Footer />
 	</body>
 </html>
+
+<style>
+	/* Hero */
+	.hero {
+		text-align: center;
+		padding: 3em 1em 2em;
+		max-width: 680px;
+		margin: 0 auto;
+	}
+	.hero__eyebrow {
+		font-size: 0.8em;
+		letter-spacing: 0.07em;
+		text-transform: uppercase;
+		color: rgb(var(--gray));
+		margin: 0 0 0.75em;
+	}
+	.hero__headline {
+		font-size: clamp(1.8em, 5vw, 2.8em);
+		line-height: 1.15;
+		margin: 0 0 0.5em;
+		color: rgb(var(--black));
+	}
+	.hero__subhead {
+		font-size: 1.1em;
+		color: rgb(var(--gray-dark));
+		max-width: 540px;
+		margin: 0 auto 1.75em;
+		line-height: 1.65;
+	}
+	.hero__cta-group {
+		display: flex;
+		gap: 0.75em;
+		justify-content: center;
+		flex-wrap: wrap;
+		margin-bottom: 0.9em;
+	}
+	.hero__reassurance {
+		font-size: 0.8em;
+		color: rgb(var(--gray));
+		margin: 0;
+	}
+
+	/* Buttons */
+	.btn {
+		display: inline-block;
+		padding: 0.75em 1.75em;
+		border-radius: 999px;
+		font-weight: 700;
+		font-size: 1em;
+		text-decoration: none;
+		transition: background-color 0.15s ease-in-out, color 0.15s;
+	}
+	.btn--primary {
+		background: var(--accent);
+		color: #fff;
+	}
+	.btn--primary:hover {
+		background: var(--accent-dark);
+		color: #fff;
+	}
+	.btn--secondary {
+		background: transparent;
+		border: 2px solid rgb(var(--gray-light));
+		color: rgb(var(--gray-dark));
+	}
+	.btn--secondary:hover {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+
+	/* Proof bar */
+	.proof-bar {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 1.5em;
+		padding: 1.25em 1em;
+		background: rgba(var(--gray-light), 40%);
+		border-top: 1px solid rgb(var(--gray-light));
+		border-bottom: 1px solid rgb(var(--gray-light));
+		font-size: 0.9em;
+		color: rgb(var(--gray-dark));
+		font-weight: 600;
+	}
+
+	/* Sections */
+	.section {
+		max-width: 680px;
+		margin: 0 auto;
+		padding: 2.5em 1em;
+	}
+	.section__title {
+		font-size: 1.6em;
+		margin: 0 0 0.5em;
+	}
+	.section__body {
+		color: rgb(var(--gray-dark));
+		margin-bottom: 1.25em;
+		line-height: 1.65;
+	}
+
+	/* Pain list */
+	.pain-list {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1.5em;
+	}
+	.pain-list li {
+		padding: 0.6em 0 0.6em 1.75em;
+		position: relative;
+		color: rgb(var(--gray-dark));
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+	.pain-list li::before {
+		content: "→";
+		position: absolute;
+		left: 0;
+		color: var(--accent);
+		font-weight: 700;
+	}
+
+	/* Post list */
+	.post-list {
+		list-style: none;
+		padding: 0;
+		margin: 0 0 1em;
+	}
+	.post-list__item {
+		border-bottom: 1px solid rgb(var(--gray-light));
+	}
+	.post-list__link {
+		display: flex;
+		justify-content: space-between;
+		align-items: baseline;
+		gap: 1em;
+		padding: 0.9em 0;
+		text-decoration: none;
+		color: rgb(var(--black));
+		flex-wrap: wrap;
+	}
+	.post-list__link:hover .post-list__title {
+		color: var(--accent);
+	}
+	.post-list__title {
+		font-weight: 600;
+		transition: color 0.12s;
+	}
+	.post-list__date {
+		font-size: 0.85em;
+		color: rgb(var(--gray));
+		white-space: nowrap;
+	}
+</style>

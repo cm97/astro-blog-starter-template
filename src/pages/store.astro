@@ -126,6 +126,92 @@ const INCLUDED = [
 				}
 			</section>
 
+			<!-- Guarantee -->
+			<section class="store-section store-guarantee">
+				<div class="guarantee-badge">30-day guarantee</div>
+				<h2>If it doesn’t work for you, you get your money back.</h2>
+				<p>
+					Use the system for 30 days. If it doesn’t help you run onboarding, weekly
+					planning, or follow-ups more reliably — email me and I’ll refund you in full.
+					No form. No questions. Just reply to your order email.
+				</p>
+				<p>
+					I’d rather you get your $49 back than keep it for something that wasn’t right
+					for your situation.
+				</p>
+			</section>
+
+			<!-- FAQ -->
+			<section class="store-section">
+				<h2>Common questions</h2>
+				<dl class="store-faq">
+					<div class="faq-item">
+						<dt>What format is the system in?</dt>
+						<dd>
+							A zip file with document templates in formats you can open without new
+							software — designed to be imported into whatever tool you already use
+							(Notion, Google Docs, plain text, your task manager).
+						</dd>
+					</div>
+					<div class="faq-item">
+						<dt>Do I need a specific app to use this?</dt>
+						<dd>
+							No. The templates are format-agnostic. If you already have a place where
+							you manage tasks or documents, these work there. If you don’t, the system
+							includes a recommendation for a simple, free setup.
+						</dd>
+					</div>
+					<div class="faq-item">
+						<dt>How long does it take to set up?</dt>
+						<dd>
+							Most people are running their first workflow within an hour of downloading.
+							There’s no complex configuration — you’re importing templates, not building
+							a system from scratch.
+						</dd>
+					</div>
+					<div class="faq-item">
+						<dt>Is this for service businesses specifically?</dt>
+						<dd>
+							It was built for service businesses — coaches, consultants, freelancers,
+							agency owners — where the work is relationship-driven and the process tends
+							to live in someone’s head. It won’t be the right fit for product businesses
+							or larger teams.
+						</dd>
+					</div>
+					<div class="faq-item">
+						<dt>What if it doesn’t work for me?</dt>
+						<dd>
+							30-day refund, no questions. See above.
+						</dd>
+					</div>
+				</dl>
+			</section>
+
+			<!-- Final CTA -->
+			<section class="store-section store-final-cta">
+				<h2>Ready to stop rebuilding the same process from memory?</h2>
+				<div class="store-buy">
+					<span class="store-price">{price}</span>
+					{
+						order.external ? (
+							<a
+								class="store-cta"
+								href={order.href}
+								target="_blank"
+								rel="noopener noreferrer"
+							>
+								{order.label}
+							</a>
+						) : (
+							<a class="store-cta" href={order.href}>
+								{order.label}
+							</a>
+						)
+					}
+				</div>
+				<p class="store-microcopy">One-time $49. 30-day guarantee. Secure checkout by Stripe.</p>
+			</section>
+
 			<section class="store-section">
 				<h2>Questions</h2>
 				<p>
@@ -207,6 +293,61 @@ const INCLUDED = [
 	.store-list li {
 		margin-bottom: 0.5em;
 	}
+	/* Guarantee */
+	.store-guarantee {
+		border: 2px solid #1a7a3c;
+		border-radius: 12px;
+		padding: 1.75em;
+		background: rgba(26, 122, 60, 0.04);
+	}
+	.guarantee-badge {
+		display: inline-block;
+		padding: 0.3em 0.85em;
+		border-radius: 999px;
+		background: #1a7a3c;
+		color: #fff;
+		font-size: 0.78em;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		margin-bottom: 0.75em;
+	}
+
+	/* FAQ */
+	.store-faq {
+		margin: 0;
+		padding: 0;
+	}
+	.faq-item {
+		border-bottom: 1px solid rgb(var(--gray-light));
+		padding: 1em 0;
+	}
+	.faq-item:last-child {
+		border-bottom: none;
+	}
+	.faq-item dt {
+		font-weight: 700;
+		color: rgb(var(--black));
+		margin-bottom: 0.4em;
+	}
+	.faq-item dd {
+		margin: 0;
+		color: rgb(var(--gray-dark));
+		line-height: 1.65;
+	}
+
+	/* Final CTA */
+	.store-final-cta {
+		text-align: center;
+		padding: 2em;
+		background: rgba(var(--gray-light), 30%);
+		border-radius: 16px;
+		border: 1px solid rgb(var(--gray-light));
+	}
+	.store-final-cta h2 {
+		font-size: 1.5em;
+	}
+
 	.store-notice {
 		padding: 1em 1.2em;
 		border-radius: 12px;
