@@ -7,10 +7,7 @@ import Footer from '../components/Footer.astro';
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead
-			title="Buzzyfly Videos"
-			description="Original explainer videos for the Buzzyfly Digital System."
-		/>
+		<BaseHead title="Buzzyfly Videos" description="Original explainer videos for the Buzzyfly Digital System." />
 		<style>
 			body.yt-page { background:#0f0f0f; color:#f1f1f1; margin:0; }
 			body.yt-page header, body.yt-page footer { background:#0f0f0f !important; box-shadow:none !important; color:#f1f1f1; }
@@ -46,13 +43,11 @@ import Footer from '../components/Footer.astro';
 			<section class="yt-stage">
 				<div>
 					<div class="player">
-						<video id="vid" controls playsinline poster="/videos/meet-buzzyfly.jpg">
-							<source src="/videos/meet-buzzyfly.mp4" type="video/mp4" />
-						</video>
+						<video id="vid" controls playsinline poster="/videos/meet-buzzyfly.svg"></video>
 					</div>
 					<div class="meta">
-						<h1 id="title">Meet Buzzyfly — stop rebuilding onboarding from memory</h1>
-						<p class="stats" id="stats">Original · 0:09 · Sep 11, 2026</p>
+						<h1 id="title">Meet Buzzyfly</h1>
+						<p class="stats" id="stats">Original explainer</p>
 						<div class="channel">
 							<div class="avatar">B</div>
 							<div>
@@ -70,17 +65,31 @@ import Footer from '../components/Footer.astro';
 			</section>
 		</main>
 		<Footer />
+		<script src="/videos/meet-buzzyfly.js"></script>
+		<script src="/videos/how-to-use.js"></script>
+		<script src="/videos/whats-in-the-zip.js"></script>
+		<script src="/videos/advantages.js"></script>
+		<script src="/videos/weekly-reset.js"></script>
+		<script src="/videos/onboarding-kit.js"></script>
+		<script src="/videos/follow-up-emails.js"></script>
+		<script src="/videos/complete-bundle.js"></script>
 		<script is:inline>
-			const videos = [
-				{ src: '/videos/meet-buzzyfly.mp4', poster: '/videos/meet-buzzyfly.jpg', title: 'Meet Buzzyfly — stop rebuilding onboarding from memory', dur: '0:09' },
-				{ src: '/videos/how-to-use.mp4', poster: '/videos/how-to-use.jpg', title: 'How to use Buzzyfly after you download the zip', dur: '0:09' },
-				{ src: '/videos/whats-in-the-zip.mp4', poster: '/videos/whats-in-the-zip.jpg', title: 'What is actually in the Digital System zip', dur: '0:09' },
-				{ src: '/videos/advantages.mp4', poster: '/videos/advantages.jpg', title: 'Why people buy Buzzyfly — the advantages', dur: '0:09' },
-				{ src: '/videos/weekly-reset.mp4', poster: '/videos/weekly-reset.jpg', title: 'Weekly Reset Checklist — $15, 20 minutes', dur: '0:09' },
-				{ src: '/videos/onboarding-kit.mp4', poster: '/videos/onboarding-kit.jpg', title: 'Client Onboarding Kit — $29 walkthrough', dur: '0:09' },
-				{ src: '/videos/follow-up-emails.mp4', poster: '/videos/follow-up-emails.jpg', title: 'Follow-Up Email Templates — $19', dur: '0:09' },
-				{ src: '/videos/complete-bundle.mp4', poster: '/videos/complete-bundle.jpg', title: 'Complete Business Bundle — $97, everything', dur: '0:09' }
+			const catalog = [
+				{ id: 'meet-buzzyfly', title: 'Meet Buzzyfly — stop rebuilding onboarding from memory' },
+				{ id: 'how-to-use', title: 'How to use Buzzyfly after you download the zip' },
+				{ id: 'whats-in-the-zip', title: 'What is actually in the Digital System zip' },
+				{ id: 'advantages', title: 'Why people buy Buzzyfly — the advantages' },
+				{ id: 'weekly-reset', title: 'Weekly Reset Checklist — $15, 20 minutes' },
+				{ id: 'onboarding-kit', title: 'Client Onboarding Kit — $29 walkthrough' },
+				{ id: 'follow-up-emails', title: 'Follow-Up Email Templates — $19' },
+				{ id: 'complete-bundle', title: 'Complete Business Bundle — $97, everything' }
 			];
+			const videos = catalog.map((v) => ({
+				...v,
+				src: (window.BFV && window.BFV[v.id]) || '/videos/' + v.id + '.mp4',
+				poster: '/videos/' + v.id + '.svg',
+				dur: '0:06'
+			}));
 			let current = 0;
 			const vid = document.getElementById('vid');
 			function load(i, play) {
@@ -88,12 +97,12 @@ import Footer from '../components/Footer.astro';
 				vid.poster = videos[i].poster;
 				vid.src = videos[i].src;
 				document.getElementById('title').textContent = videos[i].title;
-				document.getElementById('stats').textContent = 'Original \u00b7 ' + videos[i].dur + ' \u00b7 Sep 11, 2026';
+				document.getElementById('stats').textContent = 'Original · ' + videos[i].dur + ' · on buzzyfly.com';
 				render();
 				if (play) vid.play();
 			}
 			function card(v, i, cls) {
-				return '<button class="' + cls + (i === current ? ' active' : '') + '" data-i="' + i + '"><div class="thumb"><img src="' + v.poster + '" alt=""><span class="dur">' + v.dur + '</span></div>' + (cls === 'card' ? '<div>' : '') + '<h3>' + v.title + '</h3><p>Buzzyfly \u00b7 original</p>' + (cls === 'card' ? '</div>' : '') + '</button>';
+				return '<button class="' + cls + (i === current ? ' active' : '') + '" data-i="' + i + '"><div class="thumb"><img src="' + v.poster + '" alt=""><span class="dur">' + v.dur + '</span></div>' + (cls === 'card' ? '<div>' : '') + '<h3>' + v.title + '</h3><p>Buzzyfly · original</p>' + (cls === 'card' ? '</div>' : '') + '</button>';
 			}
 			function render() {
 				document.getElementById('queue').innerHTML = videos.map((v, i) => card(v, i, 'card')).join('');
@@ -106,6 +115,7 @@ import Footer from '../components/Footer.astro';
 			});
 			vid.addEventListener('ended', () => { if (current < videos.length - 1) load(current + 1, true); });
 			render();
+			load(0, false);
 		</script>
 	</body>
 </html>
