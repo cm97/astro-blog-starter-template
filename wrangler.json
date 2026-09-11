@@ -29,5 +29,14 @@
 	],
 	"triggers": {
 		"crons": ["0 * * * *"]
+	},
+	"send_email": [
+		{
+			"name": "EMAIL",
+			"allowed_sender_addresses": ["orders@buzzyfly.com"]
+		}
+	],
+	"vars": {
+		"EMAIL_FROM": "Buzzyfly <orders@buzzyfly.com>"
 	}
 }
