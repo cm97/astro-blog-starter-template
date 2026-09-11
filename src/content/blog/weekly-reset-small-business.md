@@ -8,8 +8,6 @@ featuredProductPrice: "$49"
 featuredProductDescription: "Includes the 20-minute weekly reset checklist — ready to run, not rebuild each week."
 ---
 
-import ProductCallout from '../../components/ProductCallout.astro';
-
 The hardest part of running a small business isn't the work. It's keeping track of what the work is.
 
 Most solo and small-team businesses I know operate in one of two modes: either there's a real planning system that takes 45 minutes on Sunday night and slowly gets abandoned over time, or there's no system at all and priorities live entirely in someone's head.
@@ -69,12 +67,3 @@ Not a document you have to open. Not a system you have to remember to check. A c
 That's the difference between a practice you intend to have and a practice you actually run.
 
 ---
-
-<ProductCallout
-  features={[
-    "The 20-minute weekly reset checklist — ready to run",
-    "Weekly priority-setting template",
-    "Thursday mid-week check-in format",
-    "Inbox-to-task-list clearing routine"
-  ]}
-/>

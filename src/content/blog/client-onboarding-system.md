@@ -8,8 +8,6 @@ featuredProductPrice: "$49"
 featuredProductDescription: "Includes the complete onboarding workflow template — ready to run, not rebuild."
 ---
 
-import ProductCallout from '../../components/ProductCallout.astro';
-
 Every small business owner I've talked to has the same problem with onboarding: they've done it twenty times, they're good at it, and they still rebuild the whole process from memory every single time.
 
 It's not incompetence. It's that the process was never written down anywhere that survived past the last client.
@@ -69,12 +67,3 @@ Total: under 20 minutes. No decisions. No "what did I do last time?"
 The reason it takes 20 minutes instead of 45 is that none of those steps require thinking — just doing.
 
 ---
-
-<ProductCallout
-  features={[
-    "Complete onboarding workflow template — ready to run",
-    "Welcome message template with fill-in variables",
-    "Client intake sequence with built-in follow-up",
-    "Internal client notes format"
-  ]}
-/>

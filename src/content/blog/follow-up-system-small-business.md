@@ -8,8 +8,6 @@ featuredProductPrice: "$49"
 featuredProductDescription: "Includes the complete follow-up workflow — so nothing quietly dies in your inbox."
 ---
 
-import ProductCallout from '../../components/ProductCallout.astro';
-
 Here's the follow-up problem in one sentence: you're relying on memory, and memory doesn't work reliably under pressure.
 
 Most small business owners miss follow-ups not because they're careless. They miss them because they stored the reminder in their head at a moment when their head was full of something else. By the time they surface, the moment has passed.
@@ -76,12 +74,3 @@ One missed proposal follow-up probably costs you a client every month or two. At
 More than the money: knowing your follow-ups are handled reduces the background anxiety of "what am I forgetting?" That's worth a lot to a small business owner running everything themselves.
 
 ---
-
-<ProductCallout
-  features={[
-    "Complete follow-up workflow with capture habit and review system",
-    "Three pre-written follow-up templates (proposal, mid-project, re-engagement)",
-    "Daily follow-up review checklist",
-    "Single-place follow-up log format"
-  ]}
-/>
