@@ -200,3 +200,7 @@ dist
 
 ### Astro ###
 .astro/
+
+### Product files (stored in D1, not git) ###
+product-files/
+products/*.zip
