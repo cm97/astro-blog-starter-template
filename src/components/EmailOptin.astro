@@ -4,11 +4,13 @@ import { BUZZYFLY_CONFIG } from "../data/monetization";
 interface Props {
 	title?: string;
 	description?: string;
+	buttonLabel?: string;
 }
 
 const {
 	title = BUZZYFLY_CONFIG.newsletterTitle,
 	description = BUZZYFLY_CONFIG.newsletterDescription,
+	buttonLabel = "Send me the checklist",
 } = Astro.props;
 ---
 
@@ -26,7 +28,7 @@ const {
 			autocomplete="email"
 			required
 		/>
-		<button class="email-optin__submit" type="submit">Subscribe</button>
+		<button class="email-optin__submit" type="submit">{buttonLabel}</button>
 	</form>
 	<p class="email-optin__status" data-email-optin-status role="status" aria-live="polite"></p>
 </section>
@@ -49,7 +51,7 @@ const {
 
 			if (submitButton) submitButton.disabled = true;
 			if (statusEl) {
-				statusEl.textContent = "Subscribing…";
+				statusEl.textContent = "Sending…";
 				statusEl.dataset.state = "pending";
 			}
 

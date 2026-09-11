@@ -9,21 +9,22 @@ import {
 	getOrderAction,
 } from "../data/monetization";
 
+export const prerender = false;
+
 const title = BUZZYFLY_CONFIG.defaultProductTitle;
 const price = BUZZYFLY_CONFIG.defaultProductPrice;
 const order = getOrderAction(title);
 
-/**
- * OWNER: confirm these bullets match what is actually inside
- * products/buzzyfly-digital-system.zip in the buzzyfly-products R2 bucket.
- * They mirror what the blog already says about the product. If the zip
- * contains something different, edit this list — a storefront that
- * over-describes the file is a refund waiting to happen.
- */
 const INCLUDED = [
 	"The core operating framework — the onboarding, weekly planning, and follow-up workflows",
 	"The 20-minute weekly reset checklist, ready to run instead of rebuilt from scratch",
 	"Lifetime access, including future updates to the system",
+];
+
+const CONTENTS = [
+	{ folder: "checklists/", items: "onboarding, weekly reset, follow-up, intake, scope-creep, retention" },
+	{ folder: "templates/", items: "proposal, discovery questions, follow-up emails, one-page plan" },
+	{ folder: "scripts/", items: "the 'how to say no' lines that don't lose the client" },
 ];
 ---
 
@@ -34,6 +35,26 @@ const INCLUDED = [
 			title={`${title} — ${BUZZYFLY_CONFIG.brandName}`}
 			description={BUZZYFLY_CONFIG.defaultProductDescription}
 		/>
+		<style>
+			.store-hero { text-align: center; padding-bottom: 1em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.store-eyebrow { margin: 0 0 0.4em 0; font-size: 0.8em; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(var(--gray)); }
+			.store-hero h1 { font-size: 2.6em; margin-bottom: 0.3em; }
+			.store-lede { max-width: 32em; margin: 0 auto 1.4em; color: rgb(var(--gray-dark)); }
+			.store-buy { display: flex; align-items: center; justify-content: center; gap: 1em; flex-wrap: wrap; }
+			.store-price { font-size: 2em; font-weight: 700; color: rgb(var(--black)); }
+			.store-cta { display: inline-block; padding: 0.7em 1.8em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; transition: background-color 0.15s ease-in-out; }
+			.store-cta:hover { background: var(--accent-dark); color: #fff; }
+			.store-microcopy { margin: 0.9em 0 0; font-size: 0.8em; color: rgb(var(--gray)); }
+			.store-section { margin-top: 2.5em; }
+			.store-section h2 { font-size: 1.6em; }
+			.store-list { padding-left: 1.2em; color: rgb(var(--gray-dark)); }
+			.store-list li { margin-bottom: 0.5em; }
+			.store-notice { padding: 1em 1.2em; border-radius: 12px; border: 1px solid rgb(var(--gray-light)); background: rgba(var(--gray-light), 40%); font-size: 0.95em; }
+			.contents-table { width: 100%; border-collapse: collapse; margin-top: 1em; }
+			.contents-table th, .contents-table td { text-align: left; padding: 0.6em 0.8em; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.95em; }
+			.contents-table th { color: rgb(var(--gray)); font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.05em; }
+			.contents-table code { background: rgb(var(--gray-light)); padding: 0.1em 0.4em; border-radius: 4px; }
+		</style>
 	</head>
 	<body>
 		<Header />
@@ -47,23 +68,14 @@ const INCLUDED = [
 					<span class="store-price">{price}</span>
 					{
 						order.external ? (
-							<a
-								class="store-cta"
-								href={order.href}
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								{order.label}
-							</a>
+							<a class="store-cta" href={order.href} target="_blank" rel="noopener noreferrer">{order.label}</a>
 						) : (
-							<a class="store-cta" href={order.href}>
-								{order.label}
-							</a>
+							<a class="store-cta" href={order.href}>{order.label}</a>
 						)
 					}
 				</div>
 				<p class="store-microcopy">
-					One-time payment. No subscription. Secure checkout by Stripe.
+					One-time payment. No subscription. Secure checkout by Stripe. {BUZZYFLY_CONFIG.guarantee}
 				</p>
 			</section>
 
@@ -76,20 +88,32 @@ const INCLUDED = [
 					The long version of why this exists is in
 					<a href="/blog/first-post/">Why I Built the Buzzyfly Digital System</a>, and a
 					plain contents list is in
-					<a href="/blog/using-mdx/">What’s Actually Inside</a>.
+					<a href="/blog/product-contents/">What's Actually Inside</a>.
 				</p>
 			</section>
 
 			<section class="store-section">
-				<h2>Who it’s for</h2>
+				<h2>What's actually in the zip</h2>
+				<table class="contents-table">
+					<thead><tr><th>Folder</th><th>Contains</th></tr></thead>
+					<tbody>
+						{CONTENTS.map((c) => (
+							<tr><td><code>{c.folder}</code></td><td>{c.items}</td></tr>
+						))}
+					</tbody>
+				</table>
+			</section>
+
+			<section class="store-section">
+				<h2>Who it's for</h2>
 				<p>
-					One- or few-person businesses where the process lives in someone’s head. If
+					One- or few-person businesses where the process lives in someone's head. If
 					onboarding a new client means rebuilding the same steps from memory, or
 					follow-ups only happen when you remember them, this is aimed squarely at you.
 				</p>
 				<p>
 					It is <strong>not</strong> for you if you already run a documented, working
-					system — you’d be buying something you’ve already built.
+					system — you'd be buying something you've already built.
 				</p>
 			</section>
 
@@ -114,102 +138,16 @@ const INCLUDED = [
 								<li>The files are yours to keep.</li>
 							</ol>
 							<p class="store-notice">
-								Being straight with you: delivery isn’t automated yet, so there’s a short
+								Being straight with you: delivery isn't automated yet, so there's a short
 								wait between paying and getting the file. If anything looks wrong, email
 								<a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>
 									{BUZZYFLY_CONFIG.orderEmail}
 								</a>{" "}
-								and you’ll get a person, not a ticket queue.
+								and you'll get a person, not a ticket queue. {BUZZYFLY_CONFIG.guarantee}
 							</p>
 						</>
 					)
 				}
-			</section>
-
-			<!-- Guarantee -->
-			<section class="store-section store-guarantee">
-				<div class="guarantee-badge">30-day guarantee</div>
-				<h2>If it doesn’t work for you, you get your money back.</h2>
-				<p>
-					Use the system for 30 days. If it doesn’t help you run onboarding, weekly
-					planning, or follow-ups more reliably — email me and I’ll refund you in full.
-					No form. No questions. Just reply to your order email.
-				</p>
-				<p>
-					I’d rather you get your $49 back than keep it for something that wasn’t right
-					for your situation.
-				</p>
-			</section>
-
-			<!-- FAQ -->
-			<section class="store-section">
-				<h2>Common questions</h2>
-				<dl class="store-faq">
-					<div class="faq-item">
-						<dt>What format is the system in?</dt>
-						<dd>
-							A zip file with document templates in formats you can open without new
-							software — designed to be imported into whatever tool you already use
-							(Notion, Google Docs, plain text, your task manager).
-						</dd>
-					</div>
-					<div class="faq-item">
-						<dt>Do I need a specific app to use this?</dt>
-						<dd>
-							No. The templates are format-agnostic. If you already have a place where
-							you manage tasks or documents, these work there. If you don’t, the system
-							includes a recommendation for a simple, free setup.
-						</dd>
-					</div>
-					<div class="faq-item">
-						<dt>How long does it take to set up?</dt>
-						<dd>
-							Most people are running their first workflow within an hour of downloading.
-							There’s no complex configuration — you’re importing templates, not building
-							a system from scratch.
-						</dd>
-					</div>
-					<div class="faq-item">
-						<dt>Is this for service businesses specifically?</dt>
-						<dd>
-							It was built for service businesses — coaches, consultants, freelancers,
-							agency owners — where the work is relationship-driven and the process tends
-							to live in someone’s head. It won’t be the right fit for product businesses
-							or larger teams.
-						</dd>
-					</div>
-					<div class="faq-item">
-						<dt>What if it doesn’t work for me?</dt>
-						<dd>
-							30-day refund, no questions. See above.
-						</dd>
-					</div>
-				</dl>
-			</section>
-
-			<!-- Final CTA -->
-			<section class="store-section store-final-cta">
-				<h2>Ready to stop rebuilding the same process from memory?</h2>
-				<div class="store-buy">
-					<span class="store-price">{price}</span>
-					{
-						order.external ? (
-							<a
-								class="store-cta"
-								href={order.href}
-								target="_blank"
-								rel="noopener noreferrer"
-							>
-								{order.label}
-							</a>
-						) : (
-							<a class="store-cta" href={order.href}>
-								{order.label}
-							</a>
-						)
-					}
-				</div>
-				<p class="store-microcopy">One-time $49. 30-day guarantee. Secure checkout by Stripe.</p>
 			</section>
 
 			<section class="store-section">
@@ -217,7 +155,7 @@ const INCLUDED = [
 				<p>
 					Anything at all —
 					<a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a>.
-					It’s a small operation, so you’re emailing the person who built it.
+					It's a small operation, so you're emailing the person who built it.
 				</p>
 			</section>
 
@@ -226,133 +164,3 @@ const INCLUDED = [
 		<Footer />
 	</body>
 </html>
-
-<style>
-	.store-hero {
-		text-align: center;
-		padding-bottom: 1em;
-		border-bottom: 1px solid rgb(var(--gray-light));
-	}
-	.store-eyebrow {
-		margin: 0 0 0.4em;
-		font-size: 0.8em;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		color: rgb(var(--gray));
-	}
-	.store-hero h1 {
-		font-size: 2.6em;
-		margin-bottom: 0.3em;
-	}
-	.store-lede {
-		max-width: 32em;
-		margin: 0 auto 1.4em;
-		color: rgb(var(--gray-dark));
-	}
-	.store-buy {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		gap: 1em;
-		flex-wrap: wrap;
-	}
-	.store-price {
-		font-size: 2em;
-		font-weight: 700;
-		color: rgb(var(--black));
-	}
-	.store-cta {
-		display: inline-block;
-		padding: 0.7em 1.8em;
-		border-radius: 999px;
-		background: var(--accent);
-		color: #fff;
-		font-weight: 700;
-		text-decoration: none;
-		transition: background-color 0.15s ease-in-out;
-	}
-	.store-cta:hover {
-		background: var(--accent-dark);
-		color: #fff;
-	}
-	.store-microcopy {
-		margin: 0.9em 0 0;
-		font-size: 0.8em;
-		color: rgb(var(--gray));
-	}
-	.store-section {
-		margin-top: 2.5em;
-	}
-	.store-section h2 {
-		font-size: 1.6em;
-	}
-	.store-list {
-		padding-left: 1.2em;
-		color: rgb(var(--gray-dark));
-	}
-	.store-list li {
-		margin-bottom: 0.5em;
-	}
-	/* Guarantee */
-	.store-guarantee {
-		border: 2px solid #1a7a3c;
-		border-radius: 12px;
-		padding: 1.75em;
-		background: rgba(26, 122, 60, 0.04);
-	}
-	.guarantee-badge {
-		display: inline-block;
-		padding: 0.3em 0.85em;
-		border-radius: 999px;
-		background: #1a7a3c;
-		color: #fff;
-		font-size: 0.78em;
-		font-weight: 700;
-		letter-spacing: 0.05em;
-		text-transform: uppercase;
-		margin-bottom: 0.75em;
-	}
-
-	/* FAQ */
-	.store-faq {
-		margin: 0;
-		padding: 0;
-	}
-	.faq-item {
-		border-bottom: 1px solid rgb(var(--gray-light));
-		padding: 1em 0;
-	}
-	.faq-item:last-child {
-		border-bottom: none;
-	}
-	.faq-item dt {
-		font-weight: 700;
-		color: rgb(var(--black));
-		margin-bottom: 0.4em;
-	}
-	.faq-item dd {
-		margin: 0;
-		color: rgb(var(--gray-dark));
-		line-height: 1.65;
-	}
-
-	/* Final CTA */
-	.store-final-cta {
-		text-align: center;
-		padding: 2em;
-		background: rgba(var(--gray-light), 30%);
-		border-radius: 16px;
-		border: 1px solid rgb(var(--gray-light));
-	}
-	.store-final-cta h2 {
-		font-size: 1.5em;
-	}
-
-	.store-notice {
-		padding: 1em 1.2em;
-		border-radius: 12px;
-		border: 1px solid rgb(var(--gray-light));
-		background: rgba(var(--gray-light), 40%);
-		font-size: 0.95em;
-	}
-</style>

@@ -9,7 +9,7 @@ import { SITE_TITLE } from '../consts';
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/products">Products</HeaderLink>
-			<HeaderLink href="/store">Store</HeaderLink>
+			<HeaderLink href="/store" class="store-pill">Store · $49</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
@@ -46,4 +46,13 @@ import { SITE_TITLE } from '../consts';
 		text-decoration: none;
 		border-bottom-color: var(--accent);
 	}
+	.store-pill {
+		background: var(--accent);
+		color: #fff !important;
+		border-radius: 999px;
+		padding: 0.4em 0.9em !important;
+		font-weight: 700;
+		font-size: 0.9em;
+	}
+	.store-pill:hover { background: var(--accent-dark); }
 </style>

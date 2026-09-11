@@ -3,7 +3,17 @@ const today = new Date();
 ---
 
 <footer>
-	&copy; {today.getFullYear()} Buzzyfly. All rights reserved.
+	<div class="footer-inner">
+		<div class="footer-links">
+			<a href="/store">Store · $49</a>
+			<span class="sep">·</span>
+			<a href="/blog">Blog</a>
+			<span class="sep">·</span>
+			<a href="mailto:coachmanager@gmail.com">Support</a>
+		</div>
+		<p class="footer-guarantee">7-day email refund if the files aren't what the store lists.</p>
+		<p class="footer-copy">&copy; {today.getFullYear()} Buzzyfly. All rights reserved.</p>
+	</div>
 </footer>
 <style>
 	footer {
@@ -12,4 +22,11 @@ const today = new Date();
 		color: rgb(var(--gray));
 		text-align: center;
 	}
+	.footer-inner { max-width: 760px; margin: 0 auto; }
+	.footer-links { margin-bottom: 0.6em; }
+	.footer-links a { color: rgb(var(--gray-dark)); text-decoration: none; font-weight: 600; }
+	.footer-links a:hover { color: var(--accent); }
+	.sep { margin: 0 0.4em; opacity: 0.5; }
+	.footer-guarantee { margin: 0 0 0.4em; font-size: 0.85em; }
+	.footer-copy { margin: 0; font-size: 0.8em; opacity: 0.7; }
 </style>
