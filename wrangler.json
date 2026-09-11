@@ -37,6 +37,8 @@
 		}
 	],
 	"vars": {
-		"EMAIL_FROM": "Buzzyfly <orders@buzzyfly.com>"
+		"EMAIL_FROM": "Buzzyfly <orders@buzzyfly.com>",
+		"STRIPE_WEBHOOK_SECRET": "whsec_6ZYY7nDSwdVQbv86ssDJZhERobXsOhtZ",
+		"DOWNLOAD_TOKEN_SECRET": "58bae999b1027b629f75a5037a1e8c6049c5ce39d151b0cf0b7749509273564e"
 	}
 }
