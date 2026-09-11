@@ -15,7 +15,7 @@ export const BUZZYFLY_CONFIG = {
 	// Where product support and manual delivery go.
 	orderEmail: "coachmanager@gmail.com",
 	// Hard guarantee shown on store and callouts. Keep the wording identical everywhere.
-	guarantee: "7-day email refund if the files aren't what the store lists.",
+	guarantee: "30-day money-back guarantee — email us if it doesn't deliver.",
 };
 
 /**
@@ -118,6 +118,15 @@ export const PRODUCT_FILE_MAP: Record<
 		fileName: "complete-business-bundle.zip",
 		contentType: "application/zip",
 	},
+};
+
+// Maps each product to the next logical upsell product id (null = top of funnel, they own everything).
+export const UPSELL_MAP: Record<string, string | null> = {
+	"weekly-reset-checklist": "client-onboarding-kit",
+	"follow-up-email-templates": "buzzyfly-digital-system",
+	"client-onboarding-kit": "buzzyfly-digital-system",
+	"buzzyfly-digital-system": "complete-business-bundle",
+	"complete-business-bundle": null,
 };
 
 export const ALL_PRODUCTS = [

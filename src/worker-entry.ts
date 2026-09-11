@@ -8,9 +8,11 @@
 
 import worker from "astro/app/cloudflare";
 import { BUZZYFLY_CONFIG } from "./data/monetization";
+import { sendFollowUpEmail } from "./lib/email";
 
 interface Env {
 	DB?: D1Database;
+	EMAIL?: { send(msg: { from: string; to: string; subject: string; html?: string; text?: string }): Promise<{ messageId: string }> };
 	EMAIL_API_KEY?: string;
 	EMAIL_FROM?: string;
 }
@@ -74,7 +76,7 @@ const cronHandler = {
 
 		ctx.waitUntil(
 			(async () => {
-				// Find fulfillments that haven't been alerted yet
+				// 1. Owner alert for any new fulfilled orders
 				const result = await env.DB!.prepare(
 					`SELECT f.provider, f.order_id, f.item_id, f.customer_email, f.created_at
 					 FROM fulfillments f
@@ -86,19 +88,54 @@ const cronHandler = {
 				).all<FulfillmentRow>();
 
 				const newOrders = result.results ?? [];
-				if (newOrders.length === 0) return;
+				if (newOrders.length > 0) {
+					await sendOwnerAlert(newOrders, env);
+					const now = Date.now();
+					const stmts = newOrders.map((o) =>
+						env.DB!.prepare(
+							`INSERT OR IGNORE INTO fulfillment_alerts (provider, order_id, alerted_at)
+							 VALUES (?, ?, ?)`,
+						).bind(o.provider, o.order_id, now),
+					);
+					await env.DB!.batch(stmts);
+				}
 
-				await sendOwnerAlert(newOrders, env);
+				// 2. 2-day follow-up emails for buyers who haven't received one yet
+				if (env.EMAIL) {
+					const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
+					const cutoff = Date.now() - TWO_DAYS_MS;
 
-				// Mark each as alerted so next run skips it
-				const now = Date.now();
-				const stmts = newOrders.map((o) =>
-					env.DB!.prepare(
-						`INSERT OR IGNORE INTO fulfillment_alerts (provider, order_id, alerted_at)
-						 VALUES (?, ?, ?)`,
-					).bind(o.provider, o.order_id, now),
-				);
-				await env.DB!.batch(stmts);
+					const pending = await env.DB!.prepare(
+						`SELECT f.provider, f.order_id, f.item_id, f.customer_email
+						 FROM fulfillments f
+						 LEFT JOIN followup_emails fe ON f.provider = fe.provider AND f.order_id = fe.order_id
+						 WHERE fe.order_id IS NULL
+						   AND f.customer_email IS NOT NULL
+						   AND f.created_at <= ?
+						 ORDER BY f.created_at ASC
+						 LIMIT 20`,
+					).bind(cutoff).all<FulfillmentRow>();
+
+					const toFollowUp = pending.results ?? [];
+					if (toFollowUp.length > 0) {
+						const now = Date.now();
+						for (const order of toFollowUp) {
+							if (!order.customer_email) continue;
+							const result = await sendFollowUpEmail(
+								{ to: order.customer_email, itemId: order.item_id, orderId: order.order_id },
+								env,
+							);
+							console.log(
+								`Buzzyfly follow-up: order ${order.order_id} -> sent=${result.sent}${result.reason ? ` (${result.reason})` : ""}`,
+							);
+							// Record attempt regardless of send result so we don't retry forever
+							await env.DB!.prepare(
+								`INSERT OR IGNORE INTO followup_emails (provider, order_id, sent_at, success)
+								 VALUES (?, ?, ?, ?)`,
+							).bind(order.provider, order.order_id, now, result.sent ? 1 : 0).run();
+						}
+					}
+				}
 			})(),
 		);
 	},
