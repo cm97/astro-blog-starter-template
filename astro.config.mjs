@@ -13,6 +13,7 @@ export default defineConfig({
 		platformProxy: {
 			enabled: true,
 		},
+		workerEntrypoint: "./src/worker-entry.ts",
 	}),
 	integrations: [mdx(), sitemap()],
 });

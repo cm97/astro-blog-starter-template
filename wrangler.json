@@ -1,6 +1,6 @@
 {
 	"name": "astro-blog-starter-template",
-	"main": "@astrojs/cloudflare/entrypoints/server",
+	"main": "./dist/_worker.js/index.js",
 	"compatibility_date": "2026-09-01",
 	"compatibility_flags": [
 		"nodejs_compat",
@@ -26,5 +26,8 @@
 			"database_name": "buzzy-fly_db",
 			"database_id": "c4ff4255-c51b-45a7-85a5-4583328b26c4"
 		}
-	]
+	],
+	"triggers": {
+		"crons": ["0 * * * *"]
+	}
 }
