@@ -10,29 +10,36 @@ import Footer from '../components/Footer.astro';
 		<BaseHead title="Buzzyfly Videos" description="Original explainer videos for the Buzzyfly Digital System." />
 		<style>
 			body.yt-page { background:#0f0f0f; color:#f1f1f1; margin:0; }
-			body.yt-page header, body.yt-page footer { background:#0f0f0f !important; box-shadow:none !important; color:#f1f1f1; }
+			body.yt-page header, body.yt-page footer { background:#0f0f0f !important; box-shadow:none !important; }
 			body.yt-page header nav a, body.yt-page header h2 a, body.yt-page footer a, body.yt-page footer p { color:#f1f1f1 !important; }
 			.yt { max-width:1280px; margin:0 auto; padding:16px 16px 48px; }
-			.yt-stage { display:grid; grid-template-columns:minmax(0,1fr) 402px; gap:24px; align-items:start; }
-			.player { background:#000; border-radius:12px; overflow:hidden; aspect-ratio:16/9; }
-			.player video { width:100%; height:100%; display:block; object-fit:contain; background:#000; }
+			.yt-stage { display:grid; grid-template-columns:minmax(0,1fr) 402px; gap:24px; }
+			.player { background:#000; border-radius:12px; overflow:hidden; position:relative; aspect-ratio:16/9; cursor:pointer; }
+			.slide { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:8%; background:linear-gradient(135deg,#1a1208,#3d2a12 55%,#0f0f0f); }
+			.kicker { color:#f4c27a; letter-spacing:.12em; text-transform:uppercase; font-size:.85rem; margin:0 0 .6rem; }
+			.line { font-size:clamp(1.4rem,3.2vw,2.4rem); font-weight:700; line-height:1.2; margin:0 0 .7rem; }
+			.sub { color:#d4d4d4; font-size:clamp(.95rem,1.6vw,1.15rem); max-width:36rem; margin:0; }
+			.controls { position:absolute; left:0; right:0; bottom:0; padding:8px 12px 10px; background:linear-gradient(transparent,rgba(0,0,0,.75)); display:flex; align-items:center; gap:10px; }
+			.play-btn { width:36px; height:36px; border:0; border-radius:50%; background:#fff; color:#111; font-weight:800; cursor:pointer; }
+			.bar { flex:1; height:4px; background:#555; border-radius:99px; overflow:hidden; }
+			.bar > span { display:block; height:100%; width:0; background:#ff0000; }
+			.time { font-size:12px; color:#fff; min-width:72px; text-align:right; }
 			.meta h1 { font-size:1.25rem; margin:14px 0 6px; }
-			.stats { color:#aaa; font-size:0.9rem; margin:0 0 10px; }
+			.stats { color:#aaa; font-size:.9rem; margin:0 0 10px; }
 			.channel { display:flex; align-items:center; gap:10px; }
 			.avatar { width:40px; height:40px; border-radius:50%; background:#c97820; display:grid; place-items:center; font-weight:800; }
 			.queue { display:flex; flex-direction:column; gap:10px; max-height:78vh; overflow:auto; }
-			.card, .tile { background:transparent; border:0; color:inherit; text-align:left; cursor:pointer; padding:4px; border-radius:10px; }
-			.card { display:grid; grid-template-columns:168px 1fr; gap:8px; }
+			.card { display:grid; grid-template-columns:168px 1fr; gap:8px; background:transparent; border:0; color:inherit; text-align:left; cursor:pointer; padding:4px; border-radius:10px; }
 			.card:hover, .card.active, .tile:hover { background:#3d3d3d; }
-			.thumb { position:relative; aspect-ratio:16/9; border-radius:8px; overflow:hidden; background:#2b1c0d; }
-			.thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-			.thumb span.dur { position:absolute; right:6px; bottom:6px; background:rgba(0,0,0,.8); color:#fff; font-size:11px; padding:1px 4px; border-radius:3px; }
-			.card h3, .tile h3 { font-size:0.92rem; margin:0 0 4px; line-height:1.3; }
-			.card p, .tile p { margin:0; color:#aaa; font-size:0.78rem; }
+			.thumb { position:relative; aspect-ratio:16/9; border-radius:8px; background:linear-gradient(135deg,#2b1c0d,#6b3e16); }
+			.thumb .mark { position:absolute; inset:0; display:grid; place-items:center; color:#fff; font-size:22px; }
+			.thumb .dur { position:absolute; right:6px; bottom:6px; background:rgba(0,0,0,.8); color:#fff; font-size:11px; padding:1px 4px; border-radius:3px; }
+			.card h3, .tile h3 { font-size:.92rem; margin:0 0 4px; line-height:1.3; }
+			.card p, .tile p { margin:0; color:#aaa; font-size:.78rem; }
 			.grid-wrap { margin-top:36px; }
 			.grid-wrap h2 { font-size:1.05rem; margin:0 0 14px; }
 			.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:18px; }
-			.tile { padding:0; }
+			.tile { background:transparent; border:0; color:inherit; text-align:left; padding:0; cursor:pointer; }
 			.tile .thumb { margin-bottom:8px; }
 			@media (max-width:960px) { .yt-stage { grid-template-columns:1fr; } .queue { max-height:none; } }
 		</style>
@@ -42,19 +49,22 @@ import Footer from '../components/Footer.astro';
 		<main class="yt">
 			<section class="yt-stage">
 				<div>
-					<div class="player">
-						<video id="vid" controls playsinline poster="/videos/meet-buzzyfly.svg"></video>
+					<div class="player" id="player">
+						<div class="slide">
+							<p class="kicker" id="kicker">BUZZYFLY</p>
+							<p class="line" id="line">Meet Buzzyfly</p>
+							<p class="sub" id="sub">Press play.</p>
+						</div>
+						<div class="controls">
+							<button class="play-btn" id="play" type="button">▶</button>
+							<div class="bar"><span id="prog"></span></div>
+							<div class="time" id="clock">0:00 / 0:00</div>
+						</div>
 					</div>
 					<div class="meta">
 						<h1 id="title">Meet Buzzyfly</h1>
-						<p class="stats" id="stats">Original explainer</p>
-						<div class="channel">
-							<div class="avatar">B</div>
-							<div>
-								<strong>Buzzyfly</strong>
-								<div style="color:#aaa;font-size:0.8rem">Official explainers</div>
-							</div>
-						</div>
+						<p class="stats" id="stats">buzzyfly.com/videos</p>
+						<div class="channel"><div class="avatar">B</div><div><strong>Buzzyfly</strong><div style="color:#aaa;font-size:.8rem">Official explainers</div></div></div>
 					</div>
 				</div>
 				<aside class="queue" id="queue"></aside>
@@ -65,57 +75,43 @@ import Footer from '../components/Footer.astro';
 			</section>
 		</main>
 		<Footer />
-		<script src="/videos/meet-buzzyfly.js"></script>
-		<script src="/videos/how-to-use.js"></script>
-		<script src="/videos/whats-in-the-zip.js"></script>
-		<script src="/videos/advantages.js"></script>
-		<script src="/videos/weekly-reset.js"></script>
-		<script src="/videos/onboarding-kit.js"></script>
-		<script src="/videos/follow-up-emails.js"></script>
-		<script src="/videos/complete-bundle.js"></script>
 		<script is:inline>
-			const catalog = [
-				{ id: 'meet-buzzyfly', title: 'Meet Buzzyfly — stop rebuilding onboarding from memory' },
-				{ id: 'how-to-use', title: 'How to use Buzzyfly after you download the zip' },
-				{ id: 'whats-in-the-zip', title: 'What is actually in the Digital System zip' },
-				{ id: 'advantages', title: 'Why people buy Buzzyfly — the advantages' },
-				{ id: 'weekly-reset', title: 'Weekly Reset Checklist — $15, 20 minutes' },
-				{ id: 'onboarding-kit', title: 'Client Onboarding Kit — $29 walkthrough' },
-				{ id: 'follow-up-emails', title: 'Follow-Up Email Templates — $19' },
-				{ id: 'complete-bundle', title: 'Complete Business Bundle — $97, everything' }
+			const videos = [
+				{ title:'Meet Buzzyfly — stop rebuilding onboarding from memory', seconds:36, slides:[['BUZZYFLY','Meet Buzzyfly','Onboarding. Weekly planning. Follow-ups.'],['PROBLEM','It lives in your head','New client. Same steps. Rebuilt from memory.'],['FIX','Run it in 20 minutes','Open. Tick. Close.']] },
+				{ title:'How to use Buzzyfly after you download the zip', seconds:36, slides:[['HOW','Pay. Inbox. Unzip.','Stripe checkout. Link lasts 3 days.'],['FOLDERS','checklists / templates / scripts','Open the folder that matches the job.'],['RUN','Do not rebuild Monday','Tick the list. Send the template.']] },
+				{ title:'What is actually in the Digital System zip', seconds:36, slides:[['ZIP','Three folders. That is the product.','Not a course. Not a 200-tab sheet.'],['CHECKLISTS','Onboard. Reset. Follow up.','Intake. Scope-creep. Retention.'],['TEMPLATES','Proposal. Emails. Say-no lines.','Fill blanks. Send. Keep the scope.']] },
+				{ title:'Why people buy Buzzyfly — the advantages', seconds:36, slides:[['WHY','Onboarding leaves your head','Same steps every new client.'],['FOLLOW-UPS','They get sent','Five ready emails. Name in. Send.'],['PRICE','$49 one-time','7-day refund if files mismatch the store.']] },
+				{ title:'Weekly Reset Checklist — $15', seconds:30, slides:[['$15','Weekly Reset Checklist','Monday routine. Twenty minutes.'],['YOU GET','Reset + one priority + Thursday check','Plus inbox-clearing.'],['HOW','Same way every week','Clear inbox. Set one priority. Plan.']] },
+				{ title:'Client Onboarding Kit — $29', seconds:30, slides:[['$29','Client Onboarding Kit','New client in twenty minutes.'],['YOU GET','Welcome. Intake. Kickoff agenda.','Notes format. 48-hour reminder.'],['RESULT','Week one is not improvised','Same welcome every time.']] },
+				{ title:'Follow-Up Email Templates — $19', seconds:30, slides:[['$19','Five ready follow-up emails','Fill a name. Hit send.'],['THE SET','Proposal. Mid-project. Quiet leads.','Referral. Wrap-up.'],['POINT','Pipeline dies without follow-up','These exist so it does not.']] },
+				{ title:'Complete Business Bundle — $97', seconds:30, slides:[['$97','Every Buzzyfly product','System + Onboarding + Follow-ups + Reset.'],['PLUS','Future product updates','One-time payment.'],['OR','Digital System alone is $49','Onboarding, weekly planning, follow-up.']] }
 			];
-			const videos = catalog.map((v) => ({
-				...v,
-				src: (window.BFV && window.BFV[v.id]) || '/videos/' + v.id + '.mp4',
-				poster: '/videos/' + v.id + '.svg',
-				dur: '0:06'
-			}));
-			let current = 0;
-			const vid = document.getElementById('vid');
-			function load(i, play) {
-				current = i;
-				vid.poster = videos[i].poster;
-				vid.src = videos[i].src;
-				document.getElementById('title').textContent = videos[i].title;
-				document.getElementById('stats').textContent = 'Original · ' + videos[i].dur + ' · on buzzyfly.com';
-				render();
-				if (play) vid.play();
+			const fmt = (s) => Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0');
+			let current=0, playing=false, t=0, timer=null;
+			const el = { kicker:document.getElementById('kicker'), line:document.getElementById('line'), sub:document.getElementById('sub'), title:document.getElementById('title'), stats:document.getElementById('stats'), prog:document.getElementById('prog'), clock:document.getElementById('clock'), play:document.getElementById('play'), queue:document.getElementById('queue'), grid:document.getElementById('grid') };
+			function paint() {
+				const v=videos[current];
+				const i=Math.min(v.slides.length-1, Math.floor((t/v.seconds)*v.slides.length));
+				const s=v.slides[i];
+				el.kicker.textContent=s[0]; el.line.textContent=s[1]; el.sub.textContent=s[2];
+				el.title.textContent=v.title;
+				el.stats.textContent='buzzyfly.com/videos · original · '+fmt(v.seconds);
+				el.prog.style.width=(t/v.seconds)*100+'%';
+				el.clock.textContent=fmt(t)+' / '+fmt(v.seconds);
+				el.play.textContent=playing?'⏸':'▶';
 			}
-			function card(v, i, cls) {
-				return '<button class="' + cls + (i === current ? ' active' : '') + '" data-i="' + i + '"><div class="thumb"><img src="' + v.poster + '" alt=""><span class="dur">' + v.dur + '</span></div>' + (cls === 'card' ? '<div>' : '') + '<h3>' + v.title + '</h3><p>Buzzyfly · original</p>' + (cls === 'card' ? '</div>' : '') + '</button>';
+			function lists() {
+				el.queue.innerHTML=videos.map((v,i)=>'<button class="card'+(i===current?' active':'')+'" data-i="'+i+'"><div class="thumb"><div class="mark">▶</div><span class="dur">'+fmt(v.seconds)+'</span></div><div><h3>'+v.title+'</h3><p>Buzzyfly · original</p></div></button>').join('');
+				el.grid.innerHTML=videos.map((v,i)=>'<button class="tile" data-i="'+i+'"><div class="thumb"><div class="mark">▶</div><span class="dur">'+fmt(v.seconds)+'</span></div><h3>'+v.title+'</h3><p>Buzzyfly · original</p></button>').join('');
 			}
-			function render() {
-				document.getElementById('queue').innerHTML = videos.map((v, i) => card(v, i, 'card')).join('');
-				document.getElementById('grid').innerHTML = videos.map((v, i) => card(v, i, 'tile')).join('');
-			}
-			document.addEventListener('click', (e) => {
-				const b = e.target.closest('[data-i]');
-				if (!b) return;
-				load(Number(b.getAttribute('data-i')), true);
-			});
-			vid.addEventListener('ended', () => { if (current < videos.length - 1) load(current + 1, true); });
-			render();
-			load(0, false);
+			function select(i, autoplay){ current=i; t=0; paint(); lists(); if(autoplay) start(); }
+			function tick(){ const v=videos[current]; t+=0.25; if(t>=v.seconds){ t=v.seconds; stop(); if(current<videos.length-1) select(current+1,true);} paint(); }
+			function start(){ if(playing) return; playing=true; timer=setInterval(tick,250); paint(); }
+			function stop(){ playing=false; if(timer) clearInterval(timer); timer=null; paint(); }
+			document.getElementById('player').addEventListener('click', (e)=>{ if(e.target.closest('.play-btn')) return; playing?stop():start(); });
+			el.play.addEventListener('click', (e)=>{ e.stopPropagation(); playing?stop():start(); });
+			document.addEventListener('click', (e)=>{ const b=e.target.closest('[data-i]'); if(!b) return; select(Number(b.getAttribute('data-i')), true); });
+			lists(); paint();
 		</script>
 	</body>
 </html>
