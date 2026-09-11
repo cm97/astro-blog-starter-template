@@ -52,7 +52,7 @@ export const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa
  *
  * Flip to true once a real test purchase has arrived by email end to end.
  */
-export const AUTOMATIC_DELIVERY_ENABLED = false;
+export const AUTOMATIC_DELIVERY_ENABLED = true;
 
 /**
  * Resolves the buy action for a product. Returns the live Stripe checkout when
