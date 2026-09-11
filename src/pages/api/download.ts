@@ -88,6 +88,27 @@ export const GET: APIRoute = async ({ request, locals }) => {
 
 	const object = await env.MY_PRODUCTS.get(productFile.r2Key);
 	if (!object) {
+		// Fallback: serve from D1 product_files table (populated when R2 is unavailable).
+		if (env.DB) {
+			const row = await env.DB.prepare(
+				`SELECT content_b64, file_name, content_type FROM product_files WHERE item_id = ?`,
+			)
+				.bind(claims.itemId)
+				.first<{ content_b64: string; file_name: string; content_type: string }>();
+			if (row) {
+				const bytes = Uint8Array.from(atob(row.content_b64), (c) => c.charCodeAt(0));
+				await logDownloadEvent(env, claims.orderId, claims.itemId, ip);
+				return new Response(bytes, {
+					status: 200,
+					headers: {
+						"Content-Type": row.content_type,
+						"Content-Disposition": `attachment; filename="${row.file_name}"`,
+						"Content-Length": String(bytes.length),
+						"Cache-Control": "private, no-store",
+					},
+				});
+			}
+		}
 		console.error(`Buzzyfly download: R2 object missing for key ${productFile.r2Key}`);
 		return new Response("File not found", { status: 404 });
 	}
