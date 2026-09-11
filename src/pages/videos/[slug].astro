@@ -1,0 +1,169 @@
+---
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { EXPLAINER_VIDEOS, getVideo, fmtTime } from '../../data/videos';
+
+export const prerender = false;
+
+const slug = Astro.params.slug ?? '';
+const video = getVideo(slug);
+if (!video) {
+	return Astro.redirect('/videos');
+}
+const queue = EXPLAINER_VIDEOS.filter((v) => v.slug !== video.slug);
+---
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${video.title} — Buzzyfly Videos`} description={video.description} />
+		<style>
+			body.yt-page { background:#0f0f0f; color:#f1f1f1; margin:0; }
+			body.yt-page header, body.yt-page footer { background:#0f0f0f !important; box-shadow:none !important; }
+			body.yt-page header nav a, body.yt-page header h2 a, body.yt-page footer a, body.yt-page footer p { color:#f1f1f1 !important; }
+			.yt { max-width:1280px; margin:0 auto; padding:16px 16px 48px; }
+			.yt-stage { display:grid; grid-template-columns:minmax(0,1fr) 402px; gap:24px; }
+			.player { background:#000; border-radius:12px; overflow:hidden; position:relative; aspect-ratio:16/9; }
+			video { width:100%; height:100%; object-fit:cover; display:block; background:#000; }
+			.slide { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:8%; background:linear-gradient(135deg,#1a1208,#3d2a12 55%,#0f0f0f); pointer-events:none; }
+			.slide.hidden { display:none; }
+			.kicker { color:#f4c27a; letter-spacing:.12em; text-transform:uppercase; font-size:.85rem; margin:0 0 .6rem; }
+			.line { font-size:clamp(1.4rem,3.2vw,2.4rem); font-weight:700; line-height:1.2; margin:0 0 .7rem; }
+			.sub { color:#d4d4d4; font-size:clamp(.95rem,1.6vw,1.15rem); max-width:36rem; margin:0; }
+			.meta h1 { font-size:1.25rem; margin:14px 0 6px; }
+			.stats { color:#aaa; font-size:.9rem; margin:0 0 10px; }
+			.channel { display:flex; align-items:center; gap:10px; }
+			.avatar { width:40px; height:40px; border-radius:50%; background:#c97820; display:grid; place-items:center; font-weight:800; }
+			.desc { color:#ccc; margin:14px 0 0; max-width:46rem; line-height:1.5; }
+			.queue { display:flex; flex-direction:column; gap:10px; max-height:78vh; overflow:auto; }
+			.card { display:grid; grid-template-columns:168px 1fr; gap:8px; color:inherit; text-decoration:none; padding:4px; border-radius:10px; }
+			.card:hover { background:#3d3d3d; }
+			.thumb { position:relative; aspect-ratio:16/9; border-radius:8px; background:#2b1c0d; overflow:hidden; }
+			.thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+			.thumb .dur { position:absolute; right:6px; bottom:6px; background:rgba(0,0,0,.8); color:#fff; font-size:11px; padding:1px 4px; border-radius:3px; }
+			.card h3 { font-size:.92rem; margin:0 0 4px; line-height:1.3; color:#fff; }
+			.card p { margin:0; color:#aaa; font-size:.78rem; }
+			.note { color:#888; font-size:.8rem; margin-top:10px; }
+			@media (max-width:960px) { .yt-stage { grid-template-columns:1fr; } .queue { max-height:none; } }
+		</style>
+	</head>
+	<body class="yt-page">
+		<Header />
+		<main class="yt">
+			<section class="yt-stage">
+				<div>
+					<div class="player" id="player">
+						<video id="vid" controls playsinline poster={video.poster} preload="metadata">
+							<source src={video.src} type="video/mp4" />
+						</video>
+						<div class="slide" id="slide">
+							<p class="kicker" id="kicker">{video.slides[0][0]}</p>
+							<p class="line" id="line">{video.slides[0][1]}</p>
+							<p class="sub" id="sub">{video.slides[0][2]}</p>
+						</div>
+					</div>
+					<div class="meta">
+						<h1>{video.title}</h1>
+						<p class="stats">{video.views} views · {video.date} · {fmtTime(video.seconds)}</p>
+						<div class="channel"><div class="avatar">B</div><div><strong>Buzzyfly</strong><div style="color:#aaa;font-size:.8rem">Official explainers</div></div></div>
+						<p class="desc">{video.description}</p>
+						<p class="note" id="modeNote">If an mp4 is uploaded to public/videos/{video.slug}.mp4, the native player takes over. Until then this page speaks the explainer and flips slides.</p>
+					</div>
+				</div>
+				<aside class="queue">
+					{queue.map((v) => (
+						<a class="card" href={`/videos/${v.slug}`}>
+							<div class="thumb">
+								<img src={v.poster} alt="" />
+								<span class="dur">{fmtTime(v.seconds)}</span>
+							</div>
+							<div>
+								<h3>{v.title}</h3>
+								<p>Buzzyfly · {v.views} views · {v.date}</p>
+							</div>
+						</a>
+					))}
+				</aside>
+			</section>
+		</main>
+		<Footer />
+		<script is:inline define:vars={{ slides: video.slides, seconds: video.seconds }}>
+			const vid = document.getElementById('vid');
+			const slide = document.getElementById('slide');
+			const kicker = document.getElementById('kicker');
+			const line = document.getElementById('line');
+			const sub = document.getElementById('sub');
+			const note = document.getElementById('modeNote');
+			let fallback = true;
+			let t = 0;
+			let raf = null;
+			let last = 0;
+			let playing = false;
+
+			function paint(at) {
+				const i = Math.min(slides.length - 1, Math.floor((at / seconds) * slides.length));
+				const s = slides[i];
+				kicker.textContent = s[0];
+				line.textContent = s[1];
+				sub.textContent = s[2];
+			}
+
+			function speak() {
+				if (!('speechSynthesis' in window)) return;
+				speechSynthesis.cancel();
+				const txt = slides.map((s) => s[0] + '. ' + s[1] + '. ' + s[2]).join(' ... ');
+				const u = new SpeechSynthesisUtterance(txt);
+				u.rate = 1.05;
+				u.pitch = 0.95;
+				const voices = speechSynthesis.getVoices();
+				const pref = voices.find((x) => /en/i.test(x.lang)) || voices[0];
+				if (pref) u.voice = pref;
+				speechSynthesis.speak(u);
+			}
+
+			function loop(now) {
+				if (!playing || !fallback) return;
+				if (!last) last = now;
+				t += (now - last) / 1000;
+				last = now;
+				if (t >= seconds) {
+					t = seconds;
+					playing = false;
+					paint(t);
+					return;
+				}
+				paint(t);
+				raf = requestAnimationFrame(loop);
+			}
+
+			function startFallback() {
+				if (playing) return;
+				playing = true;
+				last = 0;
+				speak();
+				raf = requestAnimationFrame(loop);
+			}
+
+			vid.addEventListener('loadeddata', () => {
+				if (vid.readyState >= 2 && vid.videoWidth > 0) {
+					fallback = false;
+					slide.classList.add('hidden');
+					note.textContent = 'Playing the uploaded mp4.';
+				}
+			});
+			vid.addEventListener('error', () => {
+				fallback = true;
+				slide.classList.remove('hidden');
+				note.textContent = 'No mp4 at this path yet. Slides + voiceover are the explainer until you drop the file in public/videos.';
+			});
+			vid.addEventListener('play', () => {
+				if (fallback) startFallback();
+			});
+			slide.addEventListener('click', startFallback);
+			vid.addEventListener('click', () => {
+				if (fallback) startFallback();
+			});
+			if ('speechSynthesis' in window) speechSynthesis.onvoiceschanged = () => {};
+		</script>
+	</body>
+</html>
