@@ -15,14 +15,14 @@ import Footer from '../components/Footer.astro';
 			.yt { max-width:1280px; margin:0 auto; padding:16px 16px 48px; }
 			.yt-stage { display:grid; grid-template-columns:minmax(0,1fr) 402px; gap:24px; }
 			.player { background:#000; border-radius:12px; overflow:hidden; position:relative; aspect-ratio:16/9; cursor:pointer; }
-			.slide { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:8%; background:linear-gradient(135deg,#1a1208,#3d2a12 55%,#0f0f0f); }
+			.slide { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:8%; background:linear-gradient(135deg,#1a1208,#3d2a12 55%,#0f0f0f); transition:opacity .3s ease; }
 			.kicker { color:#f4c27a; letter-spacing:.12em; text-transform:uppercase; font-size:.85rem; margin:0 0 .6rem; }
 			.line { font-size:clamp(1.4rem,3.2vw,2.4rem); font-weight:700; line-height:1.2; margin:0 0 .7rem; }
 			.sub { color:#d4d4d4; font-size:clamp(.95rem,1.6vw,1.15rem); max-width:36rem; margin:0; }
 			.controls { position:absolute; left:0; right:0; bottom:0; padding:8px 12px 10px; background:linear-gradient(transparent,rgba(0,0,0,.75)); display:flex; align-items:center; gap:10px; }
 			.play-btn { width:36px; height:36px; border:0; border-radius:50%; background:#fff; color:#111; font-weight:800; cursor:pointer; }
 			.bar { flex:1; height:4px; background:#555; border-radius:99px; overflow:hidden; }
-			.bar > span { display:block; height:100%; width:0; background:#ff0000; }
+			.bar > span { display:block; height:100%; width:0; background:#ff0000; transition:width .2s linear; }
 			.time { font-size:12px; color:#fff; min-width:72px; text-align:right; }
 			.meta h1 { font-size:1.25rem; margin:14px 0 6px; }
 			.stats { color:#aaa; font-size:.9rem; margin:0 0 10px; }
@@ -87,7 +87,7 @@ import Footer from '../components/Footer.astro';
 				{ title:'Complete Bundle — $97, every Buzzyfly product', views:'5.1K', date:'5 days ago', seconds:32, slides:[['BUNDLE','$97 Complete Bundle','System + Onboarding Kit + Follow-ups + Weekly Reset.'],['ONE PAY','One-time. No subscription.','Lifetime product updates included.'],['OR','Digital System alone is $49','Onboarding, weekly planning, follow-up workflows.']] }
 			];
 			const fmt = (s) => Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0');
-			let current=0, playing=false, t=0, timer=null;
+			let current=0, playing=false, t=0, timer=null, voice=null;
 			const el = { kicker:document.getElementById('kicker'), line:document.getElementById('line'), sub:document.getElementById('sub'), title:document.getElementById('title'), stats:document.getElementById('stats'), prog:document.getElementById('prog'), clock:document.getElementById('clock'), play:document.getElementById('play'), queue:document.getElementById('queue'), grid:document.getElementById('grid') };
 			function paint() {
 				const v=videos[current];
@@ -106,12 +106,13 @@ import Footer from '../components/Footer.astro';
 			}
 			function select(i, autoplay){ current=i; t=0; paint(); lists(); if(autoplay) start(); }
 			function tick(){ const v=videos[current]; t+=0.25; if(t>=v.seconds){ t=v.seconds; stop(); if(current<videos.length-1) select(current+1,true);} paint(); }
-			function start(){ if(playing) return; playing=true; timer=setInterval(tick,250); paint(); }
-			function stop(){ playing=false; if(timer) clearInterval(timer); timer=null; paint(); }
+			function start(){ if(playing) return; playing=true; timer=setInterval(tick,250); if('speechSynthesis' in window){ try { speechSynthesis.cancel(); const v=videos[current]; const txt = v.slides.map(s=>s[0]+'. '+s[1]+'. '+s[2]).join(' ... '); voice = new SpeechSynthesisUtterance(txt); voice.rate = 1.05; voice.pitch = 0.95; const voices = speechSynthesis.getVoices(); const pref = voices.find(x=>/en/i.test(x.lang)) || voices[0]; if(pref) voice.voice = pref; speechSynthesis.speak(voice); } catch(e){} } paint(); }
+			function stop(){ playing=false; if(timer) clearInterval(timer); timer=null; if('speechSynthesis' in window) speechSynthesis.cancel(); paint(); }
 			document.getElementById('player').addEventListener('click', (e)=>{ if(e.target.closest('.play-btn')) return; playing?stop():start(); });
 			el.play.addEventListener('click', (e)=>{ e.stopPropagation(); playing?stop():start(); });
 			document.addEventListener('click', (e)=>{ const b=e.target.closest('[data-i]'); if(!b) return; select(Number(b.getAttribute('data-i')), true); });
 			lists(); paint();
+			if('speechSynthesis' in window){ speechSynthesis.onvoiceschanged = () => {}; }
 		</script>
 	</body>
 </html>
