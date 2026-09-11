@@ -1,17 +1,14 @@
 import { BUZZYFLY_CONFIG } from "../data/monetization";
 
 /**
- * Transactional email for order fulfillment.
+ * Transactional email for order fulfillment via the Cloudflare Email Service
+ * Workers binding (env.EMAIL). No external account or API key required —
+ * authentication is handled natively by the platform.
  *
- * This exists because minting a download URL is not delivery. Before this
- * module, the webhook created a signed link and wrote it to the console —
- * which means a paying customer received nothing and the only copy of their
- * download link sat in a Cloudflare log. Payment succeeded, fulfillment
- * silently did not.
- *
- * Configure with EMAIL_API_KEY and EMAIL_FROM. The implementation targets
- * Resend's REST API because it needs no SDK and works on Workers, but any
- * provider with a JSON send endpoint can be swapped in below.
+ * Prerequisites (one-time, per domain):
+ *   1. Cloudflare dashboard → Compute → Email Service → Email Sending
+ *   2. Click "Onboard Domain" and select buzzyfly.com
+ *   Cloudflare adds all required DNS records automatically.
  */
 
 export interface DeliveryEmail {
@@ -24,6 +21,12 @@ export interface DeliveryEmail {
 export interface EmailResult {
 	sent: boolean;
 	reason?: string;
+}
+
+function parseFrom(from: string): { email: string; name?: string } {
+	const match = from.match(/^(.+?)\s*<([^>]+)>$/);
+	if (match) return { name: match[1].trim(), email: match[2].trim() };
+	return { email: from.trim() };
 }
 
 function escapeHtml(value: string): string {
@@ -65,49 +68,41 @@ function renderText({ downloadUrl, productName }: DeliveryEmail): string {
 	].join("\n");
 }
 
-/**
- * Sends the download link. Returns a result rather than throwing so the
- * webhook can still return 200 — a provider retry would re-run fulfillment
- * and mint a second token, which is worse than one failed send that we log.
- *
- * The caller is expected to surface `sent: false` loudly. A delivery failure
- * means someone paid and is waiting, so it needs to be visibly different from
- * a successful fulfillment in the logs.
- */
+interface EmailBinding {
+	send(message: {
+		from: string;
+		to: string;
+		subject: string;
+		html?: string;
+		text?: string;
+	}): Promise<{ messageId: string }>;
+}
+
 export async function sendDeliveryEmail(
 	message: DeliveryEmail,
-	env: { EMAIL_API_KEY?: string; EMAIL_FROM?: string },
+	env: { EMAIL?: EmailBinding; EMAIL_FROM?: string; EMAIL_API_KEY?: string },
 ): Promise<EmailResult> {
-	if (!env.EMAIL_API_KEY || !env.EMAIL_FROM) {
-		return { sent: false, reason: "EMAIL_API_KEY or EMAIL_FROM is not configured" };
+	if (!env.EMAIL) {
+		return { sent: false, reason: "EMAIL binding is not configured in wrangler.json" };
 	}
 	if (!message.to) {
 		return { sent: false, reason: "no customer email on the order" };
 	}
 
+	const fromStr = env.EMAIL_FROM ?? `${BUZZYFLY_CONFIG.brandName} <orders@buzzyfly.com>`;
+	const { email: fromEmail, name: fromName } = parseFrom(fromStr);
+	const from = fromName ? `${fromName} <${fromEmail}>` : fromEmail;
+
 	try {
-		const response = await fetch("https://api.resend.com/emails", {
-			method: "POST",
-			headers: {
-				Authorization: `Bearer ${env.EMAIL_API_KEY}`,
-				"Content-Type": "application/json",
-			},
-			body: JSON.stringify({
-				from: env.EMAIL_FROM,
-				to: [message.to],
-				subject: `Your ${message.productName} download`,
-				html: renderHtml(message),
-				text: renderText(message),
-			}),
+		await env.EMAIL.send({
+			from,
+			to: message.to,
+			subject: `Your ${message.productName} download`,
+			html: renderHtml(message),
+			text: renderText(message),
 		});
-
-		if (!response.ok) {
-			const detail = await response.text().catch(() => "");
-			return { sent: false, reason: `provider returned ${response.status}: ${detail.slice(0, 200)}` };
-		}
-
 		return { sent: true };
 	} catch (error) {
-		return { sent: false, reason: `request failed: ${String(error)}` };
+		return { sent: false, reason: `send failed: ${String(error)}` };
 	}
 }
