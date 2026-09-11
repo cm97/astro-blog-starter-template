@@ -2,127 +2,88 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
----
+import { EXPLAINER_VIDEOS, fmtTime } from '../data/videos';
 
+export const prerender = false;
+
+const featured = EXPLAINER_VIDEOS[0];
+const rest = EXPLAINER_VIDEOS.slice(1);
+---
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title="Buzzyfly Videos" description="Original explainer videos for the Buzzyfly Digital System, Weekly Reset, Onboarding Kit, Follow-Up Templates, and Complete Bundle." />
+		<BaseHead title="Buzzyfly Videos" description="Official explainer videos for the Buzzyfly Digital System." />
 		<style>
 			body.yt-page { background:#0f0f0f; color:#f1f1f1; margin:0; }
 			body.yt-page header, body.yt-page footer { background:#0f0f0f !important; box-shadow:none !important; }
 			body.yt-page header nav a, body.yt-page header h2 a, body.yt-page footer a, body.yt-page footer p { color:#f1f1f1 !important; }
 			.yt { max-width:1280px; margin:0 auto; padding:16px 16px 48px; }
 			.yt-stage { display:grid; grid-template-columns:minmax(0,1fr) 402px; gap:24px; }
-			.player { background:#000; border-radius:12px; overflow:hidden; position:relative; aspect-ratio:16/9; cursor:pointer; }
-			.slide { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:8%; background:linear-gradient(135deg,#1a1208,#3d2a12 55%,#0f0f0f); opacity:1; transition:opacity .25s ease; }
-			.slide.fade { opacity:0; }
-			.kicker { color:#f4c27a; letter-spacing:.12em; text-transform:uppercase; font-size:.85rem; margin:0 0 .6rem; }
-			.line { font-size:clamp(1.4rem,3.2vw,2.4rem); font-weight:700; line-height:1.2; margin:0 0 .7rem; }
-			.sub { color:#d4d4d4; font-size:clamp(.95rem,1.6vw,1.15rem); max-width:36rem; margin:0; }
-			.controls { position:absolute; left:0; right:0; bottom:0; padding:8px 12px 10px; background:linear-gradient(transparent,rgba(0,0,0,.75)); display:flex; align-items:center; gap:10px; z-index:5; }
-			.play-btn { width:36px; height:36px; border:0; border-radius:50%; background:#fff; color:#111; font-weight:800; cursor:pointer; }
-			.bar { flex:1; height:4px; background:#555; border-radius:99px; overflow:hidden; }
-			.bar > span { display:block; height:100%; width:0%; background:#ff0000; transition:width .1s linear; }
-			.time { font-size:12px; color:#fff; min-width:72px; text-align:right; }
-			.meta h1 { font-size:1.25rem; margin:14px 0 6px; }
+			.hero { display:block; color:inherit; text-decoration:none; }
+			.hero-thumb { position:relative; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#1a1208; }
+			.hero-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+			.hero-thumb .play { position:absolute; inset:0; display:grid; place-items:center; font-size:48px; color:#fff; text-shadow:0 2px 12px #000; }
+			.hero h1 { font-size:1.25rem; margin:14px 0 6px; color:#fff; }
 			.stats { color:#aaa; font-size:.9rem; margin:0 0 10px; }
-			.channel { display:flex; align-items:center; gap:10px; }
-			.avatar { width:40px; height:40px; border-radius:50%; background:#c97820; display:grid; place-items:center; font-weight:800; }
-			.queue { display:flex; flex-direction:column; gap:10px; max-height:78vh; overflow:auto; }
-			.card { display:grid; grid-template-columns:168px 1fr; gap:8px; background:transparent; border:0; color:inherit; text-align:left; cursor:pointer; padding:4px; border-radius:10px; }
-			.card:hover, .card.active, .tile:hover { background:#3d3d3d; }
-			.thumb { position:relative; aspect-ratio:16/9; border-radius:8px; background:linear-gradient(135deg,#2b1c0d,#6b3e16); }
-			.thumb .mark { position:absolute; inset:0; display:grid; place-items:center; color:#fff; font-size:22px; }
-			.thumb .dur { position:absolute; right:6px; bottom:6px; background:rgba(0,0,0,.8); color:#fff; font-size:11px; padding:1px 4px; border-radius:3px; }
-			.card h3, .tile h3 { font-size:.92rem; margin:0 0 4px; line-height:1.3; }
+			.queue, .grid { display:flex; flex-direction:column; gap:10px; }
+			.card { display:grid; grid-template-columns:168px 1fr; gap:8px; color:inherit; text-decoration:none; padding:4px; border-radius:10px; }
+			.card:hover, .tile:hover { background:#3d3d3d; }
+			.thumb { position:relative; aspect-ratio:16/9; border-radius:8px; overflow:hidden; background:#2b1c0d; }
+			.thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+			.dur { position:absolute; right:6px; bottom:6px; background:rgba(0,0,0,.8); color:#fff; font-size:11px; padding:1px 4px; border-radius:3px; }
+			.card h3, .tile h3 { font-size:.92rem; margin:0 0 4px; line-height:1.3; color:#fff; }
 			.card p, .tile p { margin:0; color:#aaa; font-size:.78rem; }
 			.grid-wrap { margin-top:36px; }
 			.grid-wrap h2 { font-size:1.05rem; margin:0 0 14px; }
 			.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:18px; }
-			.tile { background:transparent; border:0; color:inherit; text-align:left; padding:0; cursor:pointer; }
+			.tile { text-decoration:none; color:inherit; }
 			.tile .thumb { margin-bottom:8px; }
-			@media (max-width:960px) { .yt-stage { grid-template-columns:1fr; } .queue { max-height:none; } }
+			@media (max-width:960px) { .yt-stage { grid-template-columns:1fr; } }
 		</style>
 	</head>
 	<body class="yt-page">
 		<Header />
 		<main class="yt">
 			<section class="yt-stage">
-				<div>
-					<div class="player" id="player">
-						<div class="slide" id="slide">
-							<p class="kicker" id="kicker">BUZZYFLY</p>
-							<p class="line" id="line">Meet Buzzyfly</p>
-							<p class="sub" id="sub">Press play.</p>
-						</div>
-						<div class="controls">
-							<button class="play-btn" id="play" type="button">▶</button>
-							<div class="bar"><span id="prog"></span></div>
-							<div class="time" id="clock">0:00 / 0:00</div>
-						</div>
+				<a class="hero" href={`/videos/${featured.slug}`}>
+					<div class="hero-thumb">
+						<img src={featured.poster} alt="" />
+						<div class="play">▶</div>
 					</div>
-					<div class="meta">
-						<h1 id="title">Meet Buzzyfly</h1>
-						<p class="stats" id="stats">4.1K views · 4 hours ago</p>
-						<div class="channel"><div class="avatar">B</div><div><strong>Buzzyfly</strong><div style="color:#aaa;font-size:.8rem">Official explainers</div></div></div>
-					</div>
-				</div>
-				<aside class="queue" id="queue"></aside>
+					<h1>{featured.title}</h1>
+					<p class="stats">{featured.views} views · {featured.date} · {fmtTime(featured.seconds)}</p>
+				</a>
+				<aside class="queue">
+					{rest.map((v) => (
+						<a class="card" href={`/videos/${v.slug}`}>
+							<div class="thumb">
+								<img src={v.poster} alt="" />
+								<span class="dur">{fmtTime(v.seconds)}</span>
+							</div>
+							<div>
+								<h3>{v.title}</h3>
+								<p>Buzzyfly · {v.views} views · {v.date}</p>
+							</div>
+						</a>
+					))}
+				</aside>
 			</section>
 			<section class="grid-wrap">
 				<h2>More from Buzzyfly</h2>
-				<div class="grid" id="grid"></div>
+				<div class="grid">
+					{EXPLAINER_VIDEOS.map((v) => (
+						<a class="tile" href={`/videos/${v.slug}`}>
+							<div class="thumb">
+								<img src={v.poster} alt="" />
+								<span class="dur">{fmtTime(v.seconds)}</span>
+							</div>
+							<h3>{v.title}</h3>
+							<p>Buzzyfly · {v.views} views · {v.date}</p>
+						</a>
+					))}
+				</div>
 			</section>
 		</main>
 		<Footer />
-		<script is:inline>
-			const videos = [
-				{ title:'Meet Buzzyfly — the 20-minute operating system for client work', views:'4.1K', date:'4 hours ago', seconds:36, slides:[['BUZZYFLY','Meet Buzzyfly','Onboarding, weekly planning, follow-ups.'],['PROBLEM','It still lives in your head','New client. Same steps. Rebuilt from memory every time.'],['FIX','Run the checklists in 20 minutes','Open. Tick. Close. The process stays on the hard weeks.']] },
-				{ title:'What is actually inside the $49 Digital System zip', views:'3.3K', date:'7 hours ago', seconds:34, slides:[['ZIP','Three folders. That is the product.','checklists / templates / scripts'],['CHECKLISTS','Onboard. Weekly reset. Follow up.','Intake, scope-creep, retention included.'],['TEMPLATES','Proposal. Emails. Say-no lines.','Fill blanks. Send. Keep the scope.']] },
-				{ title:'How to use Buzzyfly the day after you buy', views:'2.6K', date:'11 hours ago', seconds:34, slides:[['HOW','Pay. Inbox. Unzip.','Stripe. Private download link good for 3 days.'],['FOLDERS','Match the folder to the job','checklists for the run, templates for the send.'],['RUN','Do not rebuild Monday','Tick the list. Send the template. Move on.']] },
-				{ title:'Weekly Reset Checklist — $15 for a 20-minute Monday', views:'5.7K', date:'1 day ago', seconds:30, slides:[['$15','Weekly Reset Checklist','The 20-minute Monday routine.'],['YOU GET','Reset + one priority + Thursday check-in','Plus the inbox-clearing routine.'],['RESULT','Same way every week','Clear inbox. Set one priority. Plan the week.']] },
-				{ title:'Client Onboarding Kit — $29 so week one is documented', views:'4.0K', date:'2 days ago', seconds:30, slides:[['$29','Client Onboarding Kit','New client without improvising week one.'],['YOU GET','Welcome. Intake. Kickoff agenda.','Notes format + 48-hour reminder.'],['RESULT','Week one is documented','Same welcome sequence every client.']] },
-				{ title:'Follow-Up Templates — $19, five emails ready to send', views:'2.9K', date:'3 days ago', seconds:28, slides:[['$19','Five ready-to-send follow-ups','Fill a name. Hit send.'],['THE SET','Proposal 5–7 days. Mid-project. Quiet leads.','Referral. End-of-project wrap-up.'],['POINT','Pipeline dies without follow-up','These keep the follow-up happening.']] },
-				{ title:'Why the Digital System is $49 one-time', views:'6.8K', date:'4 days ago', seconds:36, slides:[['WHY','Onboarding leaves your head','Same steps every new client.'],['FOLLOW-UPS','They actually get sent','Five ready emails. Name in. Send.'],['PRICE','Digital System $49 one-time','7-day refund if the files are not what the store lists.']] },
-				{ title:'Complete Bundle — $97, every Buzzyfly product', views:'5.1K', date:'5 days ago', seconds:32, slides:[['BUNDLE','$97 Complete Bundle','System + Onboarding Kit + Follow-ups + Weekly Reset.'],['ONE PAY','One-time. No subscription.','Lifetime product updates included.'],['OR','Digital System alone is $49','Onboarding, weekly planning, follow-up workflows.']] }
-			];
-			const fmt = (s) => Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0');
-			let current=0, playing=false, t=0, raf=null, last=0, voice=null;
-			const el = { kicker:document.getElementById('kicker'), line:document.getElementById('line'), sub:document.getElementById('sub'), title:document.getElementById('title'), stats:document.getElementById('stats'), prog:document.getElementById('prog'), clock:document.getElementById('clock'), play:document.getElementById('play'), queue:document.getElementById('queue'), grid:document.getElementById('grid'), slide:document.getElementById('slide') };
-			function paint() {
-				const v=videos[current];
-				const i=Math.min(v.slides.length-1, Math.floor((t/v.seconds)*v.slides.length));
-				const s=v.slides[i];
-				el.kicker.textContent=s[0]; el.line.textContent=s[1]; el.sub.textContent=s[2];
-				el.title.textContent=v.title;
-				el.stats.textContent=v.views+' views · '+v.date+' · '+fmt(v.seconds);
-				el.prog.style.width=(t/v.seconds)*100+'%';
-				el.clock.textContent=fmt(t)+' / '+fmt(v.seconds);
-				el.play.textContent=playing?'⏸':'▶';
-			}
-			function lists() {
-				el.queue.innerHTML=videos.map((v,i)=>'<button class="card'+(i===current?' active':'')+'" data-i="'+i+'"><div class="thumb"><div class="mark">▶</div><span class="dur">'+fmt(v.seconds)+'</span></div><div><h3>'+v.title+'</h3><p>Buzzyfly · '+v.views+' views · '+v.date+'</p></div></button>').join('');
-				el.grid.innerHTML=videos.map((v,i)=>'<button class="tile" data-i="'+i+'"><div class="thumb"><div class="mark">▶</div><span class="dur">'+fmt(v.seconds)+'</span></div><h3>'+v.title+'</h3><p>Buzzyfly · '+v.views+' views · '+v.date+'</p></button>').join('');
-			}
-			function select(i, autoplay){ current=i; t=0; paint(); lists(); if(autoplay) start(); }
-			function loop(now){
-				if(!playing) return;
-				if(!last) last=now;
-				const dt=(now-last)/1000; last=now;
-				t+=dt;
-				const v=videos[current];
-				if(t>=v.seconds){ t=v.seconds; stop(); if(current<videos.length-1) select(current+1,true); else { paint(); return; } }
-				paint();
-				raf=requestAnimationFrame(loop);
-			}
-			function start(){ if(playing) return; playing=true; last=0; raf=requestAnimationFrame(loop); if('speechSynthesis' in window){ try { speechSynthesis.cancel(); const v=videos[current]; const txt = v.slides.map(s=>s[0]+'. '+s[1]+'. '+s[2]).join(' ... '); voice = new SpeechSynthesisUtterance(txt); voice.rate = 1.05; voice.pitch = 0.95; const voices = speechSynthesis.getVoices(); const pref = voices.find(x=>/en/i.test(x.lang)) || voices[0]; if(pref) voice.voice = pref; speechSynthesis.speak(voice); } catch(e){} } paint(); }
-			function stop(){ playing=false; if(raf) cancelAnimationFrame(raf); raf=null; last=0; if('speechSynthesis' in window) speechSynthesis.cancel(); paint(); }
-			document.getElementById('player').addEventListener('click', (e)=>{ if(e.target.closest('.play-btn')) return; playing?stop():start(); });
-			el.play.addEventListener('click', (e)=>{ e.stopPropagation(); playing?stop():start(); });
-			document.addEventListener('click', (e)=>{ const b=e.target.closest('[data-i]'); if(!b) return; select(Number(b.getAttribute('data-i')), true); });
-			lists(); paint();
-			if('speechSynthesis' in window){ speechSynthesis.onvoiceschanged = () => {}; }
-		</script>
 	</body>
 </html>
