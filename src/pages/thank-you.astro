@@ -1,0 +1,107 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { BUZZYFLY_CONFIG } from "../data/monetization";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Order confirmed — ${BUZZYFLY_CONFIG.brandName}`}
+			description="Your order is confirmed. Check your email for your download link."
+		/>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="ty-hero">
+				<div class="ty-check">✓</div>
+				<h1>You're all set.</h1>
+				<p class="ty-lede">
+					Your download link is on its way to the email address you checked out with.
+					It should arrive within a few minutes.
+				</p>
+				<p class="ty-note">
+					If you don't see it, check your spam folder. Still nothing after 10 minutes?
+					Email <a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a>
+					and you'll get a person, not a ticket queue.
+				</p>
+				<div class="ty-actions">
+					<a class="btn btn--primary" href="/products">See all products</a>
+					<a class="btn btn--secondary" href="/blog">Read the blog</a>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
+
+<style>
+	.ty-hero {
+		text-align: center;
+		max-width: 540px;
+		margin: 4em auto;
+		padding: 0 1em;
+	}
+	.ty-check {
+		width: 64px;
+		height: 64px;
+		background: #1a7a3c;
+		color: #fff;
+		font-size: 2em;
+		font-weight: 700;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		margin: 0 auto 1em;
+	}
+	.ty-hero h1 {
+		font-size: 2.2em;
+		margin: 0 0 0.4em;
+	}
+	.ty-lede {
+		font-size: 1.1em;
+		color: rgb(var(--gray-dark));
+		line-height: 1.65;
+		margin: 0 0 1em;
+	}
+	.ty-note {
+		font-size: 0.9em;
+		color: rgb(var(--gray));
+		line-height: 1.6;
+		margin: 0 0 2em;
+	}
+	.ty-actions {
+		display: flex;
+		gap: 0.75em;
+		justify-content: center;
+		flex-wrap: wrap;
+	}
+	.btn {
+		display: inline-block;
+		padding: 0.75em 1.75em;
+		border-radius: 999px;
+		font-weight: 700;
+		text-decoration: none;
+		transition: background-color 0.15s;
+	}
+	.btn--primary {
+		background: var(--accent);
+		color: #fff;
+	}
+	.btn--primary:hover {
+		background: var(--accent-dark);
+		color: #fff;
+	}
+	.btn--secondary {
+		border: 2px solid rgb(var(--gray-light));
+		color: rgb(var(--gray-dark));
+	}
+	.btn--secondary:hover {
+		border-color: var(--accent);
+		color: var(--accent);
+	}
+</style>
