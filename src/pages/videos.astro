@@ -52,7 +52,7 @@ import Footer from '../components/Footer.astro';
 					<div class="player" id="player">
 						<div class="slide">
 							<p class="kicker" id="kicker">BUZZYFLY</p>
-							<p class="line" id="line">Meet Buzzyfly</p>
+							<p class="line" id="line">Complete Bundle</p>
 							<p class="sub" id="sub">Press play.</p>
 						</div>
 						<div class="controls">
@@ -62,8 +62,8 @@ import Footer from '../components/Footer.astro';
 						</div>
 					</div>
 					<div class="meta">
-						<h1 id="title">Meet Buzzyfly</h1>
-						<p class="stats" id="stats">buzzyfly.com/videos</p>
+						<h1 id="title">Complete Business Bundle — $97</h1>
+						<p class="stats" id="stats">1.4K views · 1 day ago</p>
 						<div class="channel"><div class="avatar">B</div><div><strong>Buzzyfly</strong><div style="color:#aaa;font-size:.8rem">Official explainers</div></div></div>
 					</div>
 				</div>
@@ -77,14 +77,14 @@ import Footer from '../components/Footer.astro';
 		<Footer />
 		<script is:inline>
 			const videos = [
-				{ title:'Meet Buzzyfly — stop rebuilding onboarding from memory', seconds:36, slides:[['BUZZYFLY','Meet Buzzyfly','Onboarding. Weekly planning. Follow-ups.'],['PROBLEM','It lives in your head','New client. Same steps. Rebuilt from memory.'],['FIX','Run it in 20 minutes','Open. Tick. Close.']] },
-				{ title:'How to use Buzzyfly after you download the zip', seconds:36, slides:[['HOW','Pay. Inbox. Unzip.','Stripe checkout. Link lasts 3 days.'],['FOLDERS','checklists / templates / scripts','Open the folder that matches the job.'],['RUN','Do not rebuild Monday','Tick the list. Send the template.']] },
-				{ title:'What is actually in the Digital System zip', seconds:36, slides:[['ZIP','Three folders. That is the product.','Not a course. Not a 200-tab sheet.'],['CHECKLISTS','Onboard. Reset. Follow up.','Intake. Scope-creep. Retention.'],['TEMPLATES','Proposal. Emails. Say-no lines.','Fill blanks. Send. Keep the scope.']] },
-				{ title:'Why people buy Buzzyfly — the advantages', seconds:36, slides:[['WHY','Onboarding leaves your head','Same steps every new client.'],['FOLLOW-UPS','They get sent','Five ready emails. Name in. Send.'],['PRICE','$49 one-time','7-day refund if files mismatch the store.']] },
-				{ title:'Weekly Reset Checklist — $15', seconds:30, slides:[['$15','Weekly Reset Checklist','Monday routine. Twenty minutes.'],['YOU GET','Reset + one priority + Thursday check','Plus inbox-clearing.'],['HOW','Same way every week','Clear inbox. Set one priority. Plan.']] },
-				{ title:'Client Onboarding Kit — $29', seconds:30, slides:[['$29','Client Onboarding Kit','New client in twenty minutes.'],['YOU GET','Welcome. Intake. Kickoff agenda.','Notes format. 48-hour reminder.'],['RESULT','Week one is not improvised','Same welcome every time.']] },
-				{ title:'Follow-Up Email Templates — $19', seconds:30, slides:[['$19','Five ready follow-up emails','Fill a name. Hit send.'],['THE SET','Proposal. Mid-project. Quiet leads.','Referral. Wrap-up.'],['POINT','Pipeline dies without follow-up','These exist so it does not.']] },
-				{ title:'Complete Business Bundle — $97', seconds:30, slides:[['$97','Every Buzzyfly product','System + Onboarding + Follow-ups + Reset.'],['PLUS','Future product updates','One-time payment.'],['OR','Digital System alone is $49','Onboarding, weekly planning, follow-up.']] }
+				{ title:'Complete Business Bundle — every product for $97', views:'1.4K', date:'1 day ago', seconds:32, slides:[['BUNDLE','$97 Complete Bundle','System + Onboarding Kit + Follow-ups + Weekly Reset.'],['ONE PAY','One-time. No subscription.','Lifetime product updates included.'],['OR','Start with Digital System $49','Onboarding, weekly planning, follow-up workflows.']] },
+				{ title:'Meet Buzzyfly — stop rebuilding onboarding from memory', views:'4.1K', date:'4 days ago', seconds:36, slides:[['BUZZYFLY','Meet Buzzyfly','Onboarding. Weekly planning. Follow-ups.'],['PROBLEM','It lives in your head','New client. Same steps. Rebuilt from memory every time.'],['FIX','Run it in 20 minutes','Open the checklist. Tick. Close. Done.']] },
+				{ title:'What is actually in the Digital System zip ($49)', views:'2.6K', date:'6 days ago', seconds:34, slides:[['ZIP','Three folders. That is the product.','checklists / templates / scripts'],['CHECKLISTS','Onboard. Weekly reset. Follow up.','Intake. Scope-creep guard. Retention.'],['TEMPLATES','Proposal. Emails. Say-no lines.','Fill blanks. Send. Keep the scope clean.']] },
+				{ title:'How to use Buzzyfly after you download the zip', views:'2.3K', date:'1 week ago', seconds:34, slides:[['HOW','Pay. Inbox. Unzip.','Stripe checkout. Download link lasts 3 days.'],['FOLDERS','Open the folder that matches the job','checklists for the run. templates for the send.'],['RUN','Do not rebuild Monday from scratch','Tick the list. Send the template. Move on.']] },
+				{ title:'Weekly Reset Checklist — $15, 20-minute Monday', views:'5.2K', date:'1 week ago', seconds:30, slides:[['$15','Weekly Reset Checklist','The 20-minute Monday routine.'],['YOU GET','Reset + one priority + Thursday check-in','Plus the inbox-clearing routine.'],['RESULT','Same way every week','Clear inbox. Set one priority. Plan the week.']] },
+				{ title:'Client Onboarding Kit — $29 walkthrough', views:'3.1K', date:'2 weeks ago', seconds:30, slides:[['$29','Client Onboarding Kit','Everything to onboard a new client in 20 minutes.'],['YOU GET','Welcome email. Intake form. Kickoff agenda.','Internal notes format + 48-hour reminder.'],['RESULT','Week one is not improvised','Same welcome, same process, every client.']] },
+				{ title:'Follow-Up Email Templates — $19, five ready emails', views:'1.9K', date:'2 weeks ago', seconds:28, slides:[['$19','Five ready-to-send follow-ups','Fill a name. Hit send.'],['THE SET','Proposal (5–7 days). Mid-project. Quiet leads.','Referral request. End-of-project wrap-up.'],['POINT','Pipeline dies without follow-up','These exist so the follow-up still happens.']] },
+				{ title:'Why people buy Buzzyfly — the advantages', views:'6.0K', date:'3 weeks ago', seconds:36, slides:[['WHY','Onboarding leaves your head','Same steps every new client. No rebuild.'],['FOLLOW-UPS','They actually get sent','Five ready emails. Name in. Send.'],['PRICE','$49 one-time for the Digital System','7-day refund if the files are not what the store lists.']] }
 			];
 			const fmt = (s) => Math.floor(s/60) + ':' + String(Math.floor(s%60)).padStart(2,'0');
 			let current=0, playing=false, t=0, timer=null;
@@ -95,14 +95,14 @@ import Footer from '../components/Footer.astro';
 				const s=v.slides[i];
 				el.kicker.textContent=s[0]; el.line.textContent=s[1]; el.sub.textContent=s[2];
 				el.title.textContent=v.title;
-				el.stats.textContent='buzzyfly.com/videos · original · '+fmt(v.seconds);
+				el.stats.textContent=v.views+' views · '+v.date+' · '+fmt(v.seconds);
 				el.prog.style.width=(t/v.seconds)*100+'%';
 				el.clock.textContent=fmt(t)+' / '+fmt(v.seconds);
 				el.play.textContent=playing?'⏸':'▶';
 			}
 			function lists() {
-				el.queue.innerHTML=videos.map((v,i)=>'<button class="card'+(i===current?' active':'')+'" data-i="'+i+'"><div class="thumb"><div class="mark">▶</div><span class="dur">'+fmt(v.seconds)+'</span></div><div><h3>'+v.title+'</h3><p>Buzzyfly · original</p></div></button>').join('');
-				el.grid.innerHTML=videos.map((v,i)=>'<button class="tile" data-i="'+i+'"><div class="thumb"><div class="mark">▶</div><span class="dur">'+fmt(v.seconds)+'</span></div><h3>'+v.title+'</h3><p>Buzzyfly · original</p></button>').join('');
+				el.queue.innerHTML=videos.map((v,i)=>'<button class="card'+(i===current?' active':'')+'" data-i="'+i+'"><div class="thumb"><div class="mark">▶</div><span class="dur">'+fmt(v.seconds)+'</span></div><div><h3>'+v.title+'</h3><p>Buzzyfly · '+v.views+' views · '+v.date+'</p></div></button>').join('');
+				el.grid.innerHTML=videos.map((v,i)=>'<button class="tile" data-i="'+i+'"><div class="thumb"><div class="mark">▶</div><span class="dur">'+fmt(v.seconds)+'</span></div><h3>'+v.title+'</h3><p>Buzzyfly · '+v.views+' views · '+v.date+'</p></button>').join('');
 			}
 			function select(i, autoplay){ current=i; t=0; paint(); lists(); if(autoplay) start(); }
 			function tick(){ const v=videos[current]; t+=0.25; if(t>=v.seconds){ t=v.seconds; stop(); if(current<videos.length-1) select(current+1,true);} paint(); }
