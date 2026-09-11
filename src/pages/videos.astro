@@ -1,0 +1,517 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Buzzyfly Videos"
+			description="Explainer and how-to videos for the Buzzyfly Digital System."
+		/>
+		<style>
+			:root {
+				--yt-bg: #0f0f0f;
+				--yt-card: #212121;
+				--yt-elev: #272727;
+				--yt-text: #f1f1f1;
+				--yt-muted: #aaaaaa;
+				--yt-red: #ff0000;
+				--yt-hover: #3d3d3d;
+			}
+			body.yt-page {
+				background: var(--yt-bg);
+				color: var(--yt-text);
+				margin: 0;
+			}
+			body.yt-page header,
+			body.yt-page footer {
+				background: #0f0f0f !important;
+				box-shadow: none !important;
+				color: var(--yt-text);
+			}
+			body.yt-page header nav a,
+			body.yt-page header h2 a,
+			body.yt-page footer a,
+			body.yt-page footer p {
+				color: var(--yt-text) !important;
+			}
+			.yt {
+				max-width: 1280px;
+				margin: 0 auto;
+				padding: 16px 16px 48px;
+			}
+			.yt-stage {
+				display: grid;
+				grid-template-columns: minmax(0, 1fr) 402px;
+				gap: 24px;
+				align-items: start;
+			}
+			.player {
+				background: #000;
+				border-radius: 12px;
+				overflow: hidden;
+				position: relative;
+				aspect-ratio: 16 / 9;
+				cursor: pointer;
+			}
+			.player-slide {
+				position: absolute;
+				inset: 0;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				padding: 8%;
+				background: linear-gradient(135deg, #1a1208, #3d2a12 55%, #0f0f0f);
+			}
+			.player-kicker {
+				color: #f4c27a;
+				font-size: 0.85rem;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				margin: 0 0 0.6rem;
+			}
+			.player-line {
+				font-size: clamp(1.4rem, 3.2vw, 2.4rem);
+				font-weight: 700;
+				line-height: 1.2;
+				margin: 0 0 0.7rem;
+			}
+			.player-sub {
+				color: #d4d4d4;
+				font-size: clamp(0.95rem, 1.6vw, 1.15rem);
+				max-width: 36rem;
+				margin: 0;
+			}
+			.controls {
+				position: absolute;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				padding: 8px 12px 10px;
+				background: linear-gradient(transparent, rgba(0, 0, 0, 0.75));
+				display: flex;
+				align-items: center;
+				gap: 10px;
+			}
+			.play-btn {
+				width: 36px;
+				height: 36px;
+				border: 0;
+				border-radius: 50%;
+				background: #fff;
+				color: #111;
+				font-weight: 800;
+				cursor: pointer;
+			}
+			.bar {
+				flex: 1;
+				height: 4px;
+				background: #555;
+				border-radius: 99px;
+				overflow: hidden;
+			}
+			.bar > span {
+				display: block;
+				height: 100%;
+				width: 0%;
+				background: var(--yt-red);
+			}
+			.time {
+				font-size: 12px;
+				color: #fff;
+				min-width: 72px;
+				text-align: right;
+			}
+			.meta h1 {
+				font-size: 1.25rem;
+				margin: 14px 0 6px;
+			}
+			.meta .stats {
+				color: var(--yt-muted);
+				font-size: 0.9rem;
+				margin: 0 0 10px;
+			}
+			.channel {
+				display: flex;
+				align-items: center;
+				gap: 10px;
+			}
+			.avatar {
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				background: #c97820;
+				display: grid;
+				place-items: center;
+				font-weight: 800;
+			}
+			.queue {
+				display: flex;
+				flex-direction: column;
+				gap: 10px;
+				max-height: 78vh;
+				overflow: auto;
+			}
+			.card {
+				display: grid;
+				grid-template-columns: 168px 1fr;
+				gap: 8px;
+				background: transparent;
+				border: 0;
+				color: inherit;
+				text-align: left;
+				cursor: pointer;
+				padding: 4px;
+				border-radius: 10px;
+			}
+			.card:hover,
+			.card.active {
+				background: var(--yt-hover);
+			}
+			.thumb {
+				position: relative;
+				aspect-ratio: 16 / 9;
+				border-radius: 8px;
+				background: linear-gradient(135deg, #2b1c0d, #6b3e16);
+				overflow: hidden;
+			}
+			.thumb span.dur {
+				position: absolute;
+				right: 6px;
+				bottom: 6px;
+				background: rgba(0, 0, 0, 0.8);
+				color: #fff;
+				font-size: 11px;
+				padding: 1px 4px;
+				border-radius: 3px;
+			}
+			.thumb .mark {
+				position: absolute;
+				inset: 0;
+				display: grid;
+				place-items: center;
+				font-size: 22px;
+				color: #fff;
+			}
+			.card h3 {
+				font-size: 0.92rem;
+				margin: 0 0 4px;
+				line-height: 1.3;
+			}
+			.card p {
+				margin: 0;
+				color: var(--yt-muted);
+				font-size: 0.78rem;
+			}
+			.grid-wrap {
+				margin-top: 36px;
+			}
+			.grid-wrap h2 {
+				font-size: 1.05rem;
+				margin: 0 0 14px;
+			}
+			.grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+				gap: 18px;
+			}
+			.tile {
+				background: transparent;
+				border: 0;
+				color: inherit;
+				text-align: left;
+				padding: 0;
+				cursor: pointer;
+			}
+			.tile .thumb {
+				margin-bottom: 8px;
+			}
+			.tile h3 {
+				font-size: 0.95rem;
+				margin: 0 0 4px;
+			}
+			.tile p {
+				margin: 0;
+				color: var(--yt-muted);
+				font-size: 0.8rem;
+			}
+			@media (max-width: 960px) {
+				.yt-stage {
+					grid-template-columns: 1fr;
+				}
+				.queue {
+					max-height: none;
+				}
+			}
+		</style>
+	</head>
+	<body class="yt-page">
+		<Header />
+		<main class="yt">
+			<section class="yt-stage">
+				<div>
+					<div class="player" id="player" aria-label="Video player">
+						<div class="player-slide" id="slide">
+							<p class="player-kicker" id="kicker">Buzzyfly</p>
+							<p class="player-line" id="line">Meet Buzzyfly</p>
+							<p class="player-sub" id="sub">Explainer videos only. Press play.</p>
+						</div>
+						<div class="controls">
+							<button class="play-btn" id="play" type="button" aria-label="Play">▶</button>
+							<div class="bar"><span id="prog"></span></div>
+							<div class="time" id="clock">0:00 / 0:00</div>
+						</div>
+					</div>
+					<div class="meta">
+						<h1 id="title">Meet Buzzyfly</h1>
+						<p class="stats" id="stats">1,204 views · Sep 11, 2026</p>
+						<div class="channel">
+							<div class="avatar">B</div>
+							<div>
+								<strong>Buzzyfly</strong>
+								<div style="color:#aaa;font-size:0.8rem">Official explainers</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<aside class="queue" id="queue"></aside>
+			</section>
+			<section class="grid-wrap">
+				<h2>More from Buzzyfly</h2>
+				<div class="grid" id="grid"></div>
+			</section>
+		</main>
+		<Footer />
+		<script is:inline>
+			const videos = [
+				{
+					id: 'intro',
+					title: 'Meet Buzzyfly — stop rebuilding onboarding from memory',
+					views: '1.2K views',
+					date: 'Sep 11, 2026',
+					seconds: 48,
+					slides: [
+						['BUZZYFLY', 'Meet Buzzyfly', 'A small system for onboarding, weekly planning, and follow-ups.'],
+						['THE PROBLEM', 'The process lives in your head', 'New client shows up. You rebuild the same steps from memory.'],
+						['THE FIX', 'Checklists you run in 20 minutes', 'Open. Tick. Close. The process still exists on slammed weeks.'],
+						['WHO IT IS FOR', 'One- or few-person shops', 'If follow-ups only happen when you remember them, this is aimed at you.'],
+					],
+				},
+				{
+					id: 'how',
+					title: 'How to use Buzzyfly after you download the zip',
+					views: '864 views',
+					date: 'Sep 10, 2026',
+					seconds: 54,
+					slides: [
+						['HOW TO USE IT', 'Pay. Inbox. Unzip.', 'Stripe checkout. Private download link. Link lasts 3 days. Files are yours.'],
+						['FOLDERS', 'checklists / templates / scripts', 'Open the folder that matches the job in front of you.'],
+						['RUN IT', 'Tick the list. Send the template.', 'Do not rebuild. Do not invent a new system on Monday.'],
+						['KEEP IT', 'Lifetime access + updates', 'One-time payment. No subscription.'],
+					],
+				},
+				{
+					id: 'inside',
+					title: 'What is actually in the Digital System zip',
+					views: '2.1K views',
+					date: 'Sep 8, 2026',
+					seconds: 42,
+					slides: [
+						['INSIDE THE ZIP', 'Three folders. That is the product.', 'Not a course. Not a 200-tab spreadsheet.'],
+						['CHECKLISTS', 'Onboarding, weekly reset, follow-up, intake, scope-creep, retention', 'Open, tick, close.'],
+						['TEMPLATES', 'Proposal, discovery, follow-up emails, one-page plan', 'Fill the blanks. Send.'],
+						['SCRIPTS', 'How to say no without losing the client', 'Scope-creep lines that hold the line.'],
+					],
+				},
+				{
+					id: 'why',
+					title: 'Why people buy Buzzyfly — the advantages',
+					views: '1.7K views',
+					date: 'Sep 7, 2026',
+					seconds: 40,
+					slides: [
+						['ADVANTAGES', 'Onboarding leaves your head', 'Same steps every new client. Not rebuilt from memory.'],
+						['FOLLOW-UPS', 'They get sent instead of rotting', 'Five ready emails. Name in. Send.'],
+						['WEEKLY RESET', 'Survives a slammed Thursday', '20 minutes. One priority. Inbox clear.'],
+						['PRICE', '$49 one-time. 7-day refund.', 'If the files are not what the store lists, email for a refund.'],
+					],
+				},
+				{
+					id: 'reset',
+					title: 'Weekly Reset Checklist — $15, 20 minutes',
+					views: '933 views',
+					date: 'Sep 6, 2026',
+					seconds: 36,
+					slides: [
+						['$15 PRODUCT', 'Weekly Reset Checklist', 'The Monday routine that keeps the week on track.'],
+						['YOU GET', 'Reset list + priority template + Thursday check-in', 'Plus an inbox-clearing routine.'],
+						['HOW', 'Same 20 minutes every week', 'Clear inbox. Set one priority. Plan the week.'],
+					],
+				},
+				{
+					id: 'onboard',
+					title: 'Client Onboarding Kit — $29 walkthrough',
+					views: '711 views',
+					date: 'Sep 5, 2026',
+					seconds: 38,
+					slides: [
+						['$29 PRODUCT', 'Client Onboarding Kit', 'Everything to onboard a new client in 20 minutes.'],
+						['YOU GET', 'Welcome email, intake questions, kickoff agenda', 'Plus notes format and a 48-hour follow-up reminder.'],
+						['RESULT', 'The first week stops living in your head', 'Same welcome every time.'],
+					],
+				},
+				{
+					id: 'follow',
+					title: 'Follow-Up Email Templates — $19',
+					views: '640 views',
+					date: 'Sep 4, 2026',
+					seconds: 34,
+					slides: [
+						['$19 PRODUCT', 'Five ready follow-up emails', 'Fill in a name. Hit send.'],
+						['THE SET', 'Proposal, mid-project, quiet leads, referral, wrap-up', 'No blank screen.'],
+						['POINT', 'Pipeline dies when follow-up stops', 'These exist so it does not.'],
+					],
+				},
+				{
+					id: 'bundle',
+					title: 'Complete Business Bundle — $97, everything',
+					views: '1.0K views',
+					date: 'Sep 3, 2026',
+					seconds: 32,
+					slides: [
+						['$97 BUNDLE', 'Every Buzzyfly product in one download', 'System + Onboarding Kit + Follow-Ups + Weekly Reset.'],
+						['PLUS', 'All future product updates', 'One-time payment. 30-day guarantee on the bundle.'],
+						['OR', 'Digital System alone is $49', 'Core onboarding, weekly planning, follow-up workflows.'],
+					],
+				},
+			];
+
+			const fmt = (s) => {
+				const m = Math.floor(s / 60);
+				const r = Math.floor(s % 60);
+				return m + ':' + String(r).padStart(2, '0');
+			};
+
+			let current = 0;
+			let playing = false;
+			let t = 0;
+			let timer = null;
+
+			const el = {
+				kicker: document.getElementById('kicker'),
+				line: document.getElementById('line'),
+				sub: document.getElementById('sub'),
+				title: document.getElementById('title'),
+				stats: document.getElementById('stats'),
+				prog: document.getElementById('prog'),
+				clock: document.getElementById('clock'),
+				play: document.getElementById('play'),
+				queue: document.getElementById('queue'),
+				grid: document.getElementById('grid'),
+			};
+
+			function paintSlide() {
+				const v = videos[current];
+				const i = Math.min(v.slides.length - 1, Math.floor((t / v.seconds) * v.slides.length));
+				const s = v.slides[i];
+				el.kicker.textContent = s[0];
+				el.line.textContent = s[1];
+				el.sub.textContent = s[2];
+				el.title.textContent = v.title;
+				el.stats.textContent = v.views + ' \u00b7 ' + v.date;
+				el.prog.style.width = (t / v.seconds) * 100 + '%';
+				el.clock.textContent = fmt(t) + ' / ' + fmt(v.seconds);
+				el.play.textContent = playing ? '\u23f8' : '\u25b6';
+			}
+
+			function renderLists() {
+				el.queue.innerHTML = videos
+					.map((v, i) => {
+						return (
+							'<button class="card' +
+							(i === current ? ' active' : '') +
+							'" data-i="' +
+							i +
+							'"><div class="thumb"><div class="mark">\u25b6</div><span class="dur">' +
+							fmt(v.seconds) +
+							'</span></div><div><h3>' +
+							v.title +
+							'</h3><p>Buzzyfly \u00b7 ' +
+							v.views +
+							'</p></div></button>'
+						);
+					})
+					.join('');
+				el.grid.innerHTML = videos
+					.map((v, i) => {
+						return (
+							'<button class="tile" data-i="' +
+							i +
+							'"><div class="thumb"><div class="mark">\u25b6</div><span class="dur">' +
+							fmt(v.seconds) +
+							'</span></div><h3>' +
+							v.title +
+							'</h3><p>Buzzyfly \u00b7 ' +
+							v.views +
+							' \u00b7 ' +
+							v.date +
+							'</p></button>'
+						);
+					})
+					.join('');
+			}
+
+			function select(i, autoplay) {
+				current = i;
+				t = 0;
+				paintSlide();
+				renderLists();
+				if (autoplay) start();
+			}
+
+			function tick() {
+				const v = videos[current];
+				t += 0.25;
+				if (t >= v.seconds) {
+					t = v.seconds;
+					stop();
+					if (current < videos.length - 1) select(current + 1, true);
+				}
+				paintSlide();
+			}
+
+			function start() {
+				if (playing) return;
+				playing = true;
+				timer = setInterval(tick, 250);
+				paintSlide();
+			}
+			function stop() {
+				playing = false;
+				if (timer) clearInterval(timer);
+				timer = null;
+				paintSlide();
+			}
+
+			document.getElementById('player').addEventListener('click', (e) => {
+				if (e.target.closest('.play-btn')) return;
+				playing ? stop() : start();
+			});
+			el.play.addEventListener('click', (e) => {
+				e.stopPropagation();
+				playing ? stop() : start();
+			});
+			document.addEventListener('click', (e) => {
+				const btn = e.target.closest('[data-i]');
+				if (!btn) return;
+				select(Number(btn.getAttribute('data-i')), true);
+			});
+
+			renderLists();
+			paintSlide();
+		</script>
+	</body>
+</html>
