@@ -2,7 +2,7 @@
 title: 'The Weekly Reset That Survives Thursday (Not the One That Dies by Noon)'
 description: 'Your weekly reset collapses by Thursday. Here is the version that does not.'
 pubDate: '2026-09-01'
-category: 'productivity'
+category: "planning"
 heroImage: '/blog-placeholder-3.jpg'
 ---
 

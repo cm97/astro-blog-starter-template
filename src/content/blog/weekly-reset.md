@@ -1,7 +1,7 @@
 ---
 title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
 description: "A short weekly habit and the actual checklist behind it."
-category: "Planning"
+category: "planning"
 pubDate: "Sep 01 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"

@@ -1,7 +1,7 @@
 ---
 title: "The Client Onboarding Checklist That Survives a Busy Week"
 description: "A stealable, step-by-step onboarding checklist so you stop rebuilding the same process from memory."
-category: "Onboarding"
+category: "onboarding"
 pubDate: "Sep 01 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"

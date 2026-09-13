@@ -2,7 +2,7 @@
 title: 'The Intake Form That Stops Clients From Ghosting You'
 description: 'They fill out a form, they are invested. They skip it, they were never serious. Here is the form.'
 pubDate: '2026-09-01'
-category: 'operations'
+category: "onboarding"
 heroImage: '/blog-placeholder-2.jpg'
 ---
 

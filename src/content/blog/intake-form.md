@@ -1,7 +1,7 @@
 ---
 title: "The Intake Form That Stops Ghosting"
 description: "5 questions that filter serious clients and kill time-wasters."
-category: "Onboarding"
+category: "onboarding"
 pubDate: "Sep 01 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"

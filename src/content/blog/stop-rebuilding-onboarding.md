@@ -2,7 +2,7 @@
 title: 'Stop Rebuilding Onboarding From Memory (The Checklist That Fixes It)'
 description: 'Every new client means starting from scratch. Here is the checklist that ends that.'
 pubDate: '2026-09-01'
-category: 'operations'
+category: "onboarding"
 heroImage: '/blog-placeholder-4.jpg'
 ---
 

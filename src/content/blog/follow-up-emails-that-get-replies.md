@@ -2,7 +2,7 @@
 title: 'Follow-Up Emails That Actually Get Replies (3 Templates)'
 description: 'Your follow-ups are dying in the inbox. Here are three templates that get opened.'
 pubDate: '2026-09-01'
-category: 'sales'
+category: "follow-up"
 heroImage: '/blog-placeholder-5.jpg'
 ---
 
