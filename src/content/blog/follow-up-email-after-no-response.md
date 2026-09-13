@@ -3,6 +3,7 @@ title: "Follow-Up Email After No Response: 5 Templates That Actually Get Replies
 description: "Five ready-to-send follow-up email templates for when a prospect or client goes quiet — for proposals, check-ins, re-engagement, referral requests, and project wrap-ups."
 pubDate: "Sep 13 2026"
 heroImage: "/blog-placeholder-3.jpg"
+category: "follow-up"
 featuredProductTitle: "Follow-Up Email Templates"
 featuredProductPrice: "$19"
 featuredProductDescription: "5 done follow-up emails — fill in a name, hit send. Proposal follow-up, mid-project check-in, re-engagement, referral request, and end-of-project wrap-up."

@@ -1,7 +1,7 @@
 ---
 title: "Why I Built the Buzzyfly Digital System"
 description: "Too many tools, no system holding them together — so I built one."
-category: "Systems"
+category: "systems"
 pubDate: "Jun 02 2026"
 heroImage: "/blog-placeholder-1.jpg"
 featuredProductTitle: "Buzzyfly Digital System"

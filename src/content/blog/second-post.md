@@ -1,7 +1,7 @@
 ---
 title: "3 Signs Your Business Is Running You"
 description: "The quiet tells that your workflow has become the thing in charge, not you."
-category: "Workflow"
+category: "systems"
 pubDate: "Jun 20 2026"
 heroImage: "/blog-placeholder-2.jpg"
 featuredProductTitle: "Buzzyfly Digital System"

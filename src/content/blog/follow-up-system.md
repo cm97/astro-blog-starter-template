@@ -1,7 +1,7 @@
 ---
 title: "The Follow-Up System That Doesn't Die in Your Inbox"
 description: "A simple follow-up workflow so nothing quietly rots."
-category: "Follow-ups"
+category: "follow-up"
 pubDate: "Sep 01 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
