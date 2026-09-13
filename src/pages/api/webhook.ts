@@ -98,6 +98,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			downloadUrl,
 			productName: productFile.fileName.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "),
 			orderId: order.orderId,
+			itemId: order.itemId,
 		},
 		env,
 	);

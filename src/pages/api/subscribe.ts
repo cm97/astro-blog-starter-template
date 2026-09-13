@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { sendWelcomeEmail } from "../../lib/email";
 
 export const prerender = false;
 
@@ -61,6 +62,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		} catch (error) {
 			console.error("Buzzyfly subscribe: failed to forward lead to email provider", error);
 		}
+	}
+
+	// Welcome email — best-effort, never fail the signup over it.
+	if (env.EMAIL) {
+		sendWelcomeEmail({ to: email }, env).catch((err) =>
+			console.error("Buzzyfly subscribe: welcome email failed", err),
+		);
 	}
 
 	return new Response(JSON.stringify({ received: true }), {

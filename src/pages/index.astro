@@ -76,6 +76,63 @@ import { BUZZYFLY_CONFIG } from '../data/monetization';
 			.home-list li {
 				margin-bottom: 0.5em;
 			}
+			.home-entry {
+				margin-top: 2.5em;
+				padding: 1.75em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 14px;
+				background: rgba(var(--gray-light), 20%);
+			}
+			.home-entry__label {
+				font-size: 0.8em;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: rgb(var(--gray));
+				margin: 0 0 1em;
+				font-weight: 600;
+			}
+			.home-entry__cards {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
+				gap: 0.75em;
+				margin-bottom: 1em;
+			}
+			.home-entry__card {
+				display: flex;
+				flex-direction: column;
+				gap: 0.25em;
+				padding: 1em 1.1em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 10px;
+				background: #fff;
+				text-decoration: none;
+				color: rgb(var(--black));
+				transition: border-color 0.15s, box-shadow 0.15s;
+				font-size: 0.9em;
+			}
+			.home-entry__card:hover {
+				border-color: var(--accent);
+				box-shadow: 0 0 0 2px var(--accent);
+			}
+			.home-entry__card span:last-child {
+				color: rgb(var(--gray));
+				font-size: 0.85em;
+				line-height: 1.4;
+				margin-top: 0.1em;
+			}
+			.home-entry__price {
+				font-size: 1.3em;
+				font-weight: 700;
+				color: var(--accent);
+			}
+			.home-entry__footer {
+				font-size: 0.82em;
+				color: rgb(var(--gray));
+				margin: 0;
+			}
+			.home-entry__footer a {
+				color: var(--accent);
+			}
 			.home-posts {
 				display: grid;
 				gap: 1em;
@@ -120,6 +177,28 @@ import { BUZZYFLY_CONFIG } from '../data/monetization';
 					<li>The 20-minute weekly reset checklist, ready to run instead of rebuilt from scratch</li>
 					<li>Lifetime access, including future updates to the system</li>
 				</ul>
+			</section>
+
+			<section class="home-entry">
+				<p class="home-entry__label">Not ready for the full system?</p>
+				<div class="home-entry__cards">
+					<a class="home-entry__card" href="https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05">
+						<span class="home-entry__price">$15</span>
+						<strong>Weekly Reset Checklist</strong>
+						<span>The 20-minute Monday routine — run it instead of rebuilding it.</span>
+					</a>
+					<a class="home-entry__card" href="https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07">
+						<span class="home-entry__price">$29</span>
+						<strong>Client Onboarding Kit</strong>
+						<span>Welcome email, intake form, kickoff agenda — ready in one download.</span>
+					</a>
+					<a class="home-entry__card" href="https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06">
+						<span class="home-entry__price">$19</span>
+						<strong>Follow-Up Email Templates</strong>
+						<span>5 done follow-up emails — fill in a name, hit send.</span>
+					</a>
+				</div>
+				<p class="home-entry__footer">One-time payment. 30-day money-back guarantee. <a href="/products">See all products →</a></p>
 			</section>
 
 			<ProductCallout />
