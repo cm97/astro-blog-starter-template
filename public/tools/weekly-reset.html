@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The 20-Minute Weekly Reset — Free Tool | Buzzyfly</title>
+<meta name="description" content="A free, working version of the 20-minute Monday reset: four timed passes that clear the decks, close last week, set one priority, and block the week.">
+<link rel="canonical" href="https://buzzyfly.com/tools/weekly-reset.html">
+<meta property="og:title" content="The 20-Minute Weekly Reset — Free Tool">
+<meta property="og:description" content="Four timed passes that put the week back under control. Free, no sign-up.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://buzzyfly.com/tools/weekly-reset.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=JetBrains+Mono:wght@500;700&display=swap">
+<style>
+:root{--ink:#0E1F1C;--paper:#F0F4F2;--surface:#fff;--line:#D2DCD8;--muted:#5C6E6A;--accent:#0D7A6B;--accent-soft:#DCEDE9;--signal:#B45309;--display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;--body:"Newsreader",Georgia,serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+@media(prefers-color-scheme:dark){:root{--ink:#E8EFEC;--paper:#0B1614;--surface:#12211E;--line:#243833;--muted:#90A49F;--accent:#4FC2AF;--accent-soft:#14302B;--signal:#E8A33D}}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0;padding-inline:20px;padding-block:32px 64px}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:32px}
+.brand{font-family:var(--display);font-weight:700;font-size:15px;letter-spacing:-.01em;color:var(--ink);text-decoration:none}
+.eyebrow{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(32px,7vw,50px);line-height:1.02;letter-spacing:-.02em;text-wrap:balance;margin:8px 0 0}
+.lede{margin:14px 0 0;max-width:60ch;color:var(--muted);font-size:18px}
+.clock{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:24px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:20px}
+.clock[data-running="true"]{border-color:var(--signal)}
+.readout{font-family:var(--mono);font-weight:700;font-size:clamp(40px,10vw,56px);line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-.03em}
+.clock[data-running="true"] .readout{color:var(--signal)}
+.clock-seg{font-family:var(--display);font-weight:700;font-size:17px;margin:0}
+.clock-sub{margin:2px 0 0;font-size:14px;color:var(--muted);font-variant-numeric:tabular-nums}
+button{font-family:var(--display);font-weight:700;font-size:15px;border-radius:3px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);padding:11px 20px;cursor:pointer}
+button:hover{opacity:.85}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+button.ghost{background:transparent;color:var(--ink);border-color:var(--line)}
+.segments{display:flex;flex-direction:column;gap:12px}
+.seg{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:18px 20px;display:flex;flex-direction:column;gap:4px}
+.seg[data-state="active"]{border-color:var(--signal);border-left-width:4px}
+.seg[data-state="done"]{opacity:.62}
+.seg-head{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.seg-n{font-family:var(--mono);font-size:13px;font-weight:700;color:var(--muted)}
+.seg-title{font-family:var(--display);font-weight:700;font-size:19px;margin:0;flex:1;min-width:0}
+.seg-budget{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap}
+.seg[data-state="active"] .seg-budget{color:var(--signal)}
+.seg-why{margin:2px 0 0;font-size:15px;color:var(--muted)}
+.items{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:2px}
+.seg[data-state="upcoming"] .items,.seg[data-state="upcoming"] .seg-why{display:none}
+.items label{display:flex;gap:11px;align-items:flex-start;padding:7px 0;cursor:pointer;font-size:16px}
+.items input{margin:4px 0 0;width:17px;height:17px;accent-color:var(--accent);flex:none}
+.items input:checked+span{color:var(--muted);text-decoration:line-through}
+.seg-actions{margin-top:14px;display:flex;gap:10px;flex-wrap:wrap}
+.seg[data-state="upcoming"] .seg-actions,.seg[data-state="done"] .seg-actions{display:none}
+.finish{border:1px solid var(--accent);background:var(--accent-soft);border-radius:4px;padding:24px}
+.finish h2{font-family:var(--display);font-weight:700;font-size:24px;margin:0 0 8px}
+.finish p{margin:0 0 14px;font-size:16px}
+.finish p:last-child{margin-bottom:0}
+.thursday{border-left:3px solid var(--accent);padding:2px 0 2px 16px;margin:0;font-style:italic;color:var(--muted)}
+.next-step{border-top:1px solid var(--line);padding-top:24px;display:flex;flex-direction:column;gap:10px}
+.next-step h2{font-family:var(--display);font-weight:700;font-size:20px;margin:0}
+.next-step p{margin:0;color:var(--muted);font-size:16px}
+a.cta{font-family:var(--display);font-weight:700;font-size:15px;color:var(--paper);background:var(--accent);border-radius:3px;padding:12px 20px;text-decoration:none;align-self:flex-start;margin-top:6px}
+footer{color:var(--muted);font-size:14px}
+footer a{color:inherit}
+[hidden]{display:none!important}
+@media(max-width:540px){.clock{grid-template-columns:1fr;gap:14px}.clock>button{justify-self:start}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="brand" href="/">Buzzyfly</a>
+<header>
+<p class="eyebrow">Free tool</p>
+<h1>The 20-Minute Reset</h1>
+<p class="lede">Four timed passes that put the week back under control. Run it Monday morning before anything else opens. The clock does the deciding, so you stop negotiating with yourself about how long each part takes.</p>
+</header>
+<div class="clock" id="clock" data-running="false">
+<div class="readout" id="readout">05:00</div>
+<div>
+<p class="clock-seg" id="clockSeg">Clear the decks</p>
+<p class="clock-sub" id="clockSub">Pass 1 of 4 &middot; 20:00 total remaining</p>
+</div>
+<button id="toggle" type="button">Start</button>
+</div>
+<div class="segments" id="segments"></div>
+<section class="finish" id="finish" hidden>
+<h2>Week set.</h2>
+<p>You closed out last week, named one priority, and put it in the calendar before anyone else could claim the time. That's the whole job.</p>
+<p class="thursday">Thursday, take four minutes: is the priority still the priority, and is it actually scheduled? If it slipped, move it now rather than writing it off on Friday.</p>
+</section>
+<section class="next-step">
+<h2>Keep it after today</h2>
+<p>This page resets when you close it. The paid version is the same routine as a checklist you keep, plus the onboarding and follow-up systems that sit either side of it.</p>
+<a class="cta" href="/products">See the Buzzyfly products</a>
+</section>
+<footer><p>Free to use and share &mdash; no sign-up. <a href="/">buzzyfly.com</a></p></footer>
+</div>
+<script>
+var SEGMENTS=[{title:"Clear the decks",seconds:300,why:"Get the loose ends out of your head and into one place. You are not answering anything yet — only capturing.",items:["Skim the inbox top to bottom, no replies","Write down every commitment you spot","Note anyone still waiting on you","Close every tab that isn't this one"]},{title:"Close last week",seconds:240,why:"Name what actually happened before planning what's next. Unfinished work that goes unnamed reappears as Thursday panic.",items:["What shipped? Write the list","What slipped, and does it still matter?","Any client owed an update right now?","Anything you can drop entirely"]},{title:"Set the one priority",seconds:300,why:"One outcome that defines the week. Not three. If the week goes sideways and only this gets done, it was still a good week.",items:["Write the single outcome in one sentence","Say how you'll know it's done","Name what you'll say no to for it","Check it isn't just the loudest thing"]},{title:"Block the week",seconds:360,why:"The priority goes in the calendar first. Client work fills in around it, not over it.",items:["Book the priority before anything else","Place client and delivery work around it","Leave one unbooked recovery block","Set the Thursday check-in"]}];
+function fmt(s){return String(Math.floor(s/60)).padStart(2,"0")+":"+String(s%60).padStart(2,"0")}
+var state={index:0,remaining:SEGMENTS[0].seconds,running:false,finished:false,ticker:null};
+var els={clock:document.getElementById("clock"),readout:document.getElementById("readout"),clockSeg:document.getElementById("clockSeg"),clockSub:document.getElementById("clockSub"),toggle:document.getElementById("toggle"),segments:document.getElementById("segments"),finish:document.getElementById("finish")};
+function buildSegments(){els.segments.innerHTML="";SEGMENTS.forEach(function(seg,i){var card=document.createElement("section");card.className="seg";card.dataset.state=i===0?"active":"upcoming";card.id="seg-"+i;var head=document.createElement("div");head.className="seg-head";var n=document.createElement("span");n.className="seg-n";n.textContent=String(i+1).padStart(2,"0");var t=document.createElement("h2");t.className="seg-title";t.textContent=seg.title;var b=document.createElement("span");b.className="seg-budget";b.textContent=Math.round(seg.seconds/60)+" min";head.appendChild(n);head.appendChild(t);head.appendChild(b);card.appendChild(head);var why=document.createElement("p");why.className="seg-why";why.textContent=seg.why;card.appendChild(why);var ul=document.createElement("ul");ul.className="items";seg.items.forEach(function(item,j){var li=document.createElement("li");var label=document.createElement("label");var box=document.createElement("input");box.type="checkbox";box.id="item-"+i+"-"+j;var span=document.createElement("span");span.textContent=item;label.appendChild(box);label.appendChild(span);li.appendChild(label);ul.appendChild(li)});card.appendChild(ul);var actions=document.createElement("div");actions.className="seg-actions";var next=document.createElement("button");next.type="button";next.className="ghost";next.textContent=i===SEGMENTS.length-1?"Finish reset":"Done — next pass";next.addEventListener("click",advance);actions.appendChild(next);card.appendChild(actions);els.segments.appendChild(card)})}
+function totalRemaining(){var total=state.remaining;for(var i=state.index+1;i<SEGMENTS.length;i++)total+=SEGMENTS[i].seconds;return total}
+function render(){if(state.finished){els.readout.textContent="00:00";els.clockSeg.textContent="Reset complete";els.clockSub.textContent="All four passes done";els.toggle.textContent="Run it again";els.clock.dataset.running="false";return}els.readout.textContent=fmt(state.remaining);els.clockSeg.textContent=SEGMENTS[state.index].title;els.clockSub.textContent="Pass "+(state.index+1)+" of "+SEGMENTS.length+" · "+fmt(totalRemaining())+" total remaining";els.toggle.textContent=state.running?"Pause":(state.remaining===SEGMENTS[state.index].seconds?"Start":"Resume");els.clock.dataset.running=state.running?"true":"false";Array.prototype.forEach.call(els.segments.children,function(card,i){card.dataset.state=i<state.index?"done":i===state.index?"active":"upcoming"})}
+function tick(){if(state.remaining>0){state.remaining-=1;render();return}advance()}
+function stop(){if(state.ticker)clearInterval(state.ticker);state.ticker=null;state.running=false}
+function advance(){if(state.index<SEGMENTS.length-1){state.index+=1;state.remaining=SEGMENTS[state.index].seconds;render();document.getElementById("seg-"+state.index).scrollIntoView({behavior:"smooth",block:"center"});return}stop();state.finished=true;els.finish.hidden=false;render();els.finish.scrollIntoView({behavior:"smooth",block:"center"})}
+function reset(){stop();state.index=0;state.remaining=SEGMENTS[0].seconds;state.finished=false;els.finish.hidden=true;buildSegments();render()}
+els.toggle.addEventListener("click",function(){if(state.finished){reset();return}if(state.running){stop();render();return}state.running=true;state.ticker=setInterval(tick,1000);render()});
+buildSegments();render();
+</script>
+</body>
+</html>
