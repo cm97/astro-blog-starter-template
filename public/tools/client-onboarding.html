@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Client Onboarding Pack — Free Tool | Buzzyfly</title>
+<meta name="description" content="Free client onboarding pack. Type a name and project, get a welcome email, intake questions, kickoff agenda and notes format — ready to copy and send.">
+<link rel="canonical" href="https://buzzyfly.com/tools/client-onboarding.html">
+<meta property="og:title" content="Client Onboarding Pack — Free Tool">
+<meta property="og:description" content="Onboard a new client in twenty minutes. Four documents, filled in, ready to send.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://buzzyfly.com/tools/client-onboarding.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--ink:#0E1F1C;--paper:#F0F4F2;--surface:#fff;--line:#D2DCD8;--muted:#5C6E6A;--accent:#0D7A6B;--accent-soft:#DCEDE9;--display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;--body:"Newsreader",Georgia,serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+@media(prefers-color-scheme:dark){:root{--ink:#E8EFEC;--paper:#0B1614;--surface:#12211E;--line:#243833;--muted:#90A49F;--accent:#4FC2AF;--accent-soft:#14302B}}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0;padding-inline:20px;padding-block:32px 64px}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:28px}
+.brand{font-family:var(--display);font-weight:700;font-size:15px;color:var(--ink);text-decoration:none}
+.eyebrow{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(32px,7vw,48px);line-height:1.03;letter-spacing:-.02em;text-wrap:balance;margin:8px 0 0}
+.lede{margin:14px 0 0;max-width:60ch;color:var(--muted);font-size:18px}
+.flabel{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);display:block;margin-bottom:10px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:540px){.fields{grid-template-columns:1fr}}
+input[type=text]{font-family:var(--body);font-size:16px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:11px 12px;width:100%}
+input[type=text]:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.card{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:20px}
+.card-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+.card h2{font-family:var(--display);font-weight:700;font-size:19px;letter-spacing:-.01em;margin:0}
+.mins{font-family:var(--mono);font-size:13px;color:var(--muted);white-space:nowrap}
+.card .note{margin:0 0 14px;font-size:15px;color:var(--muted)}
+pre.out{font-family:var(--mono);font-size:14px;line-height:1.65;white-space:pre-wrap;margin:0;padding-top:14px;border-top:1px solid var(--line);color:var(--ink)}
+button{font-family:var(--display);font-weight:700;font-size:13px;border-radius:3px;border:1px solid var(--line);background:transparent;color:var(--ink);padding:7px 13px;cursor:pointer}
+button:hover{border-color:var(--accent);color:var(--accent)}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.reminder{border-left:3px solid var(--accent);background:var(--accent-soft);padding:16px 18px;border-radius:0 3px 3px 0}
+.reminder h2{font-family:var(--display);font-weight:700;font-size:17px;margin:0 0 6px}
+.reminder p{margin:0;font-size:16px}
+.next-step{border-top:1px solid var(--line);padding-top:24px;display:flex;flex-direction:column;gap:10px}
+.next-step h2{font-family:var(--display);font-weight:700;font-size:20px;margin:0}
+.next-step p{margin:0;color:var(--muted);font-size:16px}
+a.cta{font-family:var(--display);font-weight:700;font-size:15px;color:var(--paper);background:var(--accent);border-radius:3px;padding:12px 20px;text-decoration:none;align-self:flex-start;margin-top:6px}
+footer{color:var(--muted);font-size:14px}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="brand" href="/">Buzzyfly</a>
+<header>
+<p class="eyebrow">Free tool</p>
+<h1>Client Onboarding Pack</h1>
+<p class="lede">Everything you send a new client in the first forty-eight hours, filled in and ready to copy. The point of onboarding the same way every time isn't tidiness — it's that the client can tell, immediately, that they picked someone who has done this before.</p>
+</header>
+<div>
+<span class="flabel">Who's starting</span>
+<div class="fields">
+<input type="text" id="name" placeholder="Client first name" value="Sam" autocomplete="off">
+<input type="text" id="project" placeholder="The project" value="the website refresh" autocomplete="off">
+</div>
+</div>
+
+<article class="card">
+<div class="card-head"><h2>1. Welcome email</h2><span class="mins">5 min</span></div>
+<p class="note">Send within a few hours of them saying yes, while the decision still feels good.</p>
+<pre class="out" id="welcome"></pre>
+<div style="margin-top:14px"><button type="button" data-copy="welcome">Copy</button></div>
+</article>
+
+<article class="card">
+<div class="card-head"><h2>2. Intake questions</h2><span class="mins">5 min</span></div>
+<p class="note">Send as a form or paste straight into the welcome email. Six questions, no more — long intake forms don't get filled in.</p>
+<pre class="out" id="intake"></pre>
+<div style="margin-top:14px"><button type="button" data-copy="intake">Copy</button></div>
+</article>
+
+<article class="card">
+<div class="card-head"><h2>3. Kickoff agenda</h2><span class="mins">5 min</span></div>
+<p class="note">Send before the call, not after. People prepare when they can see the shape of it.</p>
+<pre class="out" id="agenda"></pre>
+<div style="margin-top:14px"><button type="button" data-copy="agenda">Copy</button></div>
+</article>
+
+<article class="card">
+<div class="card-head"><h2>4. Internal notes</h2><span class="mins">5 min</span></div>
+<p class="note">Not for the client. This is the file you'll be glad exists in four months when they ask why something was decided.</p>
+<pre class="out" id="notes"></pre>
+<div style="margin-top:14px"><button type="button" data-copy="notes">Copy</button></div>
+</article>
+
+<section class="reminder">
+<h2>Then: the 48-hour check</h2>
+<p id="reminder"></p>
+</section>
+
+<section class="next-step">
+<h2>The full kit</h2>
+<p>This is the sequence. The paid kit has the full templates with variants, the complete intake set, and the timeline for running it in twenty minutes flat.</p>
+<a class="cta" href="/products">See the Buzzyfly products</a>
+</section>
+<footer><p>Free to use and share &mdash; no sign-up. <a href="/">buzzyfly.com</a></p></footer>
+</div>
+<script>
+var TPL={
+welcome:"Subject: Welcome — here's what happens next\n\nHi {name},\n\nReally glad we're doing {project} together.\n\nSo you know what to expect, here's the shape of the next few days:\n\n1. A few questions below — takes about five minutes\n2. A kickoff call, [date and time]\n3. First work starts [date]\n\nYou won't need to chase me for updates. I'll send one at the halfway point and again when it's done, and I'll flag anything I need from you clearly rather than burying it.\n\nAnything you want to ask before we start, just reply here.\n\nBest,",
+intake:"A few questions before we start on {project}:\n\n1. What does this needing to go well look like for you? Be specific if you can.\n2. What's prompted doing this now rather than six months ago?\n3. Who else needs to be happy with the result, and do they need to be in the loop?\n4. Is there anything that's been tried before that didn't work?\n5. Any hard dates — launches, events, deadlines I should build around?\n6. How do you prefer to hear from me: email, calls, or a shared doc?",
+agenda:"Kickoff — {project}\n30 minutes\n\n1. What success looks like (5 min)\n   {name} talks, I take notes.\n\n2. Scope — what's in and what isn't (10 min)\n   Including the things we're deliberately not doing.\n\n3. How we work (5 min)\n   Updates, turnaround on questions, who decides what.\n\n4. Dates (5 min)\n   Milestones, and what would need to move if something slips.\n\n5. Anything unsaid (5 min)\n   Last chance for the thing someone's been sitting on.",
+notes:"{project} — {name}\nStarted: [date]\n\nWHAT THEY ACTUALLY WANT\n[In their words, not yours. Quote them.]\n\nDECIDED\n[Date] — [decision] — [who decided, and why]\n\nOUT OF SCOPE\n[Things raised and agreed not to do. Saves an argument later.]\n\nWATCH FOR\n[Anything that felt unresolved, or a stakeholder who wasn't in the room.]\n\nCONTACT\n[Preferred channel, timezone, who else to copy]",
+reminder:"Forty-eight hours after kickoff, send {name} one short message: here's what I've started, here's what I need from you, here's when you'll next hear from me. It costs two minutes and it is the single thing that stops a new client quietly wondering whether they made a mistake."
+};
+function fill(str){var n=document.getElementById("name").value.trim()||"there";var p=document.getElementById("project").value.trim()||"the project";return str.split("{name}").join(n).split("{project}").join(p)}
+function render(){["welcome","intake","agenda","notes"].forEach(function(k){document.getElementById(k).textContent=fill(TPL[k])});document.getElementById("reminder").textContent=fill(TPL.reminder)}
+document.getElementById("name").addEventListener("input",render);
+document.getElementById("project").addEventListener("input",render);
+Array.prototype.forEach.call(document.querySelectorAll("[data-copy]"),function(btn){btn.addEventListener("click",function(){var text=document.getElementById(btn.getAttribute("data-copy")).textContent;function done(){btn.textContent="Copied";setTimeout(function(){btn.textContent="Copy"},1600)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,done)}else{var ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done()}})});
+render();
+</script>
+</body>
+</html>
