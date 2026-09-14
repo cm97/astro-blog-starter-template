@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Follow-Up Email Writer — Free Tool | Buzzyfly</title>
+<meta name="description" content="Free follow-up email writer. Pick the situation, fill in two fields, get an email you can send — proposal chasers, check-ins, re-engagement, referral asks and project wrap-ups.">
+<link rel="canonical" href="https://buzzyfly.com/tools/follow-up-writer.html">
+<meta property="og:title" content="Follow-Up Email Writer — Free Tool">
+<meta property="og:description" content="Stop staring at a blank screen. Pick the situation, get the email.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://buzzyfly.com/tools/follow-up-writer.html">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700&family=Newsreader:opsz,wght@6..72,400;6..72,500&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+:root{--ink:#0E1F1C;--paper:#F0F4F2;--surface:#fff;--line:#D2DCD8;--muted:#5C6E6A;--accent:#0D7A6B;--accent-soft:#DCEDE9;--display:"Bricolage Grotesque","Helvetica Neue",Arial,sans-serif;--body:"Newsreader",Georgia,serif;--mono:"JetBrains Mono",ui-monospace,Menlo,monospace}
+@media(prefers-color-scheme:dark){:root{--ink:#E8EFEC;--paper:#0B1614;--surface:#12211E;--line:#243833;--muted:#90A49F;--accent:#4FC2AF;--accent-soft:#14302B}}
+*{box-sizing:border-box}
+body{background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.6;margin:0;padding-inline:20px;padding-block:32px 64px}
+.wrap{max-width:720px;margin:0 auto;display:flex;flex-direction:column;gap:30px}
+.brand{font-family:var(--display);font-weight:700;font-size:15px;color:var(--ink);text-decoration:none}
+.eyebrow{font-family:var(--display);font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin:0}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(32px,7vw,48px);line-height:1.03;letter-spacing:-.02em;text-wrap:balance;margin:8px 0 0}
+.lede{margin:14px 0 0;max-width:60ch;color:var(--muted);font-size:18px}
+fieldset{border:0;margin:0;padding:0}
+legend,.flabel{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:0;margin-bottom:10px;display:block}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip input{position:absolute;opacity:0;pointer-events:none}
+.chip span{display:block;font-family:var(--display);font-weight:500;font-size:15px;border:1px solid var(--line);background:var(--surface);border-radius:3px;padding:9px 14px;cursor:pointer}
+.chip input:checked+span{background:var(--accent);border-color:var(--accent);color:var(--paper);font-weight:700}
+.chip input:focus-visible+span{outline:3px solid var(--accent);outline-offset:2px}
+.fields{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+@media(max-width:540px){.fields{grid-template-columns:1fr}}
+input[type=text]{font-family:var(--body);font-size:16px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:11px 12px;width:100%}
+input[type=text]:focus-visible{outline:3px solid var(--accent);outline-offset:1px}
+.out{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:20px}
+.out-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.out-sub{font-family:var(--display);font-weight:700;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+button{font-family:var(--display);font-weight:700;font-size:14px;border-radius:3px;border:1px solid var(--ink);background:var(--ink);color:var(--paper);padding:9px 16px;cursor:pointer}
+button:hover{opacity:.85}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.subject{font-family:var(--display);font-weight:700;font-size:17px;margin:0 0 12px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+pre.email{font-family:var(--mono);font-size:14px;line-height:1.65;white-space:pre-wrap;margin:0;color:var(--ink)}
+.when{margin:14px 0 0;font-size:15px;color:var(--muted);border-left:3px solid var(--accent);padding-left:14px}
+.next-step{border-top:1px solid var(--line);padding-top:24px;display:flex;flex-direction:column;gap:10px}
+.next-step h2{font-family:var(--display);font-weight:700;font-size:20px;margin:0}
+.next-step p{margin:0;color:var(--muted);font-size:16px}
+a.cta{font-family:var(--display);font-weight:700;font-size:15px;color:var(--paper);background:var(--accent);border-radius:3px;padding:12px 20px;text-decoration:none;align-self:flex-start;margin-top:6px}
+footer{color:var(--muted);font-size:14px}
+footer a{color:inherit}
+</style>
+</head>
+<body>
+<div class="wrap">
+<a class="brand" href="/">Buzzyfly</a>
+<header>
+<p class="eyebrow">Free tool</p>
+<h1>Follow-Up Email Writer</h1>
+<p class="lede">The email you keep not sending because you don't know how to start it. Pick the situation, fill in two fields, send. Nothing here guilt-trips the other person — the reason follow-ups get ignored is usually that they made someone feel bad, not that they arrived too soon.</p>
+</header>
+<fieldset>
+<legend>The situation</legend>
+<div class="chips" id="chips"></div>
+</fieldset>
+<fieldset>
+<span class="flabel">Details</span>
+<div class="fields">
+<input type="text" id="name" placeholder="Their first name" value="Sam" autocomplete="off">
+<input type="text" id="thing" placeholder="The project or proposal" value="the website refresh" autocomplete="off">
+</div>
+</fieldset>
+<div class="out">
+<div class="out-head">
+<span class="out-sub">Ready to send</span>
+<button id="copy" type="button">Copy email</button>
+</div>
+<p class="subject" id="subject"></p>
+<pre class="email" id="body"></pre>
+<p class="when" id="when"></p>
+</div>
+<section class="next-step">
+<h2>The full set</h2>
+<p>This writes one version of each. The paid pack has all five written out with variants, plus the usage guide on timing — when to send, how long to wait, and when to stop.</p>
+<a class="cta" href="/products">See the Buzzyfly products</a>
+</section>
+<footer><p>Free to use and share &mdash; no sign-up. <a href="/">buzzyfly.com</a></p></footer>
+</div>
+<script>
+var T=[
+{id:"proposal",label:"Proposal gone quiet",subject:"Quick one on {thing}",when:"Send 5–7 days after the proposal. If nothing comes back, one more after two weeks, then stop — a third chase costs you more than the job is worth.",body:"Hi {name},\n\nJust floating this back to the top of your inbox — I sent over the proposal for {thing} last week.\n\nNo rush at all if the timing has shifted. If it has, tell me and I'll check back when it suits you better. And if anything in there needs changing before you can say yes, I'd rather hear that than have it sit.\n\nEither way, a one-line reply is plenty.\n\nBest,"},
+{id:"checkin",label:"Mid-project check-in",subject:"Where we are on {thing}",when:"Send at roughly the halfway point, before anyone has to ask. The point is that they never wonder what is happening.",body:"Hi {name},\n\nQuick update on {thing} so you're not wondering.\n\nDone so far: [what's finished]\nIn progress: [what you're on now]\nNext up: [what's coming]\n\nNothing needed from you right now — I'll flag it clearly if that changes. On track for [date].\n\nBest,"},
+{id:"quiet",label:"Re-engaging a quiet lead",subject:"Still thinking about {thing}?",when:"Send 4–6 weeks after they went quiet. Give them an easy exit — it makes a yes more likely, not less.",body:"Hi {name},\n\nWe talked about {thing} a while back and then life got in the way — mine as much as yours, probably.\n\nNot chasing. Just checking whether it's still on your list. If it isn't, say so and I'll stop cluttering your inbox, no hard feelings at all.\n\nIf it is, I've got room in [timeframe] and can pick it straight back up.\n\nBest,"},
+{id:"referral",label:"Asking for a referral",subject:"A small ask",when:"Send 2–4 weeks after a project lands well, once they've seen the result. Never in the same breath as an invoice.",body:"Hi {name},\n\nHope {thing} is still holding up well.\n\nSmall ask, and a genuine no is fine: do you know anyone else who'd get something out of the same kind of work? Most of what I do comes through people passing my name along, and yours would carry weight.\n\nHappy to write the intro so it's a forward rather than a favour.\n\nBest,"},
+{id:"wrap",label:"Project wrap-up",subject:"{thing} — wrapped",when:"Send the day you finish, not a week later. This is the email that makes people come back.",body:"Hi {name},\n\n{thing} is done and everything's handed over.\n\nWhat you've got: [deliverables and where they live]\nIf you need to change something later: [how]\nStill open: [anything outstanding, or \"nothing\"]\n\nIt was a good one to work on. If anything comes up in the next few weeks, just reply here — you don't need to start a new thread.\n\nBest,"}
+];
+var current=T[0];
+var chips=document.getElementById("chips");
+T.forEach(function(t,i){var l=document.createElement("label");l.className="chip";var r=document.createElement("input");r.type="radio";r.name="situation";r.id="sit-"+t.id;r.value=t.id;r.checked=i===0;var s=document.createElement("span");s.textContent=t.label;r.addEventListener("change",function(){current=t;render()});l.appendChild(r);l.appendChild(s);chips.appendChild(l)});
+function fill(str){var n=document.getElementById("name").value.trim()||"there";var th=document.getElementById("thing").value.trim()||"the project";return str.split("{name}").join(n).split("{thing}").join(th)}
+function render(){document.getElementById("subject").textContent=fill(current.subject);document.getElementById("body").textContent=fill(current.body);document.getElementById("when").textContent=current.when}
+document.getElementById("name").addEventListener("input",render);
+document.getElementById("thing").addEventListener("input",render);
+document.getElementById("copy").addEventListener("click",function(){var text=fill(current.subject)+"\n\n"+fill(current.body);var btn=this;function done(){btn.textContent="Copied";setTimeout(function(){btn.textContent="Copy email"},1600)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,function(){done()})}else{var ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done()}});
+render();
+</script>
+</body>
+</html>
