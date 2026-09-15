@@ -1,0 +1,534 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+export const prerender = true;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Kids Club — Meet Buzzy, your buddy"
+			description="A kids corner on Buzzyfly. Meet Buzzy the fly, play a garden game, and collect nectar. Grown-ups, the shop is on the main site."
+			image="/kids/buzzy-buddy.jpg"
+		/>
+	</head>
+	<body class="kids-page">
+		<Header />
+		<main class="kids">
+			<section class="meet">
+				<img
+					class="buddy"
+					src="/kids/buzzy-buddy.jpg"
+					width="640"
+					height="640"
+					alt="Buzzy the cream cartoon fly waving in a flower garden"
+				/>
+				<div class="hello">
+					<p class="eyebrow">Kids Club</p>
+					<h1>Hi. I’m Buzzy.<br />I’m your buddy.</h1>
+					<p class="lede">
+						This is the kids corner. Tap Start, flap through the garden, and grab the
+						golden nectar drops. A is left. D is right. Space or tap to flap.
+					</p>
+					<a class="go" href="#play">Play with Buzzy</a>
+				</div>
+			</section>
+
+			<section id="play" class="cabinet" aria-label="Buzzy's garden game">
+				<div class="stage">
+					<canvas id="buzzy-kids" width="960" height="540"></canvas>
+					<div id="kids-overlay" class="overlay">
+						<img src="/kids/buzzy-face.jpg" width="88" height="88" alt="" class="face" />
+						<p class="overlay-kicker">Garden flight</p>
+						<h2>Help Buzzy grab nectar</h2>
+						<p>A left · D right · Space or tap to flap</p>
+						<button id="kids-start" type="button">Start flying</button>
+					</div>
+				</div>
+				<div class="hud-hint">
+					<p><strong>Phone:</strong> Left · Flap · Right</p>
+					<p><strong>Keyboard:</strong> A / D / Space</p>
+				</div>
+			</section>
+
+			<section class="stories">
+				<h2>Three tiny stories</h2>
+				<div class="cards">
+					<article>
+						<h3>Morning nectar</h3>
+						<p>
+							Buzzy wakes up on a daisy. The sun is warm. The first flower of the day
+							always tastes like honey and a little bit like yesterday’s joke.
+						</p>
+					</article>
+					<article>
+						<h3>Flower friends</h3>
+						<p>
+							Daisies are chatty. Tulips are shy. Sunflowers just point at the sky and
+							say “that way.” Buzzy visits all three before lunch.
+						</p>
+					</article>
+					<article>
+						<h3>Nap on a petal</h3>
+						<p>
+							When the wind gets sleepy, Buzzy folds both wings and sits still. That’s
+							how a fly says “I’m full, and I’m happy, and I’ll fly again later.”
+						</p>
+					</article>
+				</div>
+			</section>
+
+			<p class="parents">
+				Grown-ups: this page is for kids. The Digital System, store, and notebooks live on
+				the <a href="/">main Buzzyfly site</a>.
+			</p>
+		</main>
+		<Footer />
+
+		<script is:inline>
+			(() => {
+				const canvas = document.getElementById('buzzy-kids');
+				if (!(canvas instanceof HTMLCanvasElement)) return;
+				const gfx = canvas.getContext('2d');
+				if (!gfx) return;
+
+				const overlay = document.getElementById('kids-overlay');
+				const startBtn = document.getElementById('kids-start');
+				const W = 960;
+				const H = 540;
+				const keys = new Set();
+				let playing = false;
+				let score = 0;
+				let best = 0;
+				try {
+					best = Number(localStorage.getItem('buzzy-kids-best') || 0) || 0;
+				} catch {
+					best = 0;
+				}
+
+				const flyImg = new Image();
+				flyImg.crossOrigin = 'anonymous';
+				flyImg.src = '/kids/buzzy-face.jpg';
+				const gardenImg = new Image();
+				gardenImg.crossOrigin = 'anonymous';
+				gardenImg.src = '/kids/garden.jpg';
+
+				const sim = {
+					x: 0.32,
+					y: 0.5,
+					vy: 0,
+					vx: 0,
+					flap: 0,
+					t: 0,
+					flowers: /** @type {{x:number,y:number,r:number,got:boolean}[]} */ ([]),
+					stems: /** @type {{x:number,gap:number}[]} */ ([]),
+				};
+
+				function reset() {
+					sim.x = 0.32;
+					sim.y = 0.5;
+					sim.vy = 0;
+					sim.vx = 0;
+					sim.flap = 0;
+					sim.t = 0;
+					score = 0;
+					sim.flowers = [];
+					sim.stems = [];
+					for (let i = 0; i < 4; i++) spawnStem(1.1 + i * 0.42);
+				}
+
+				function spawnStem(x) {
+					const gap = 0.28 + Math.random() * 0.18;
+					sim.stems.push({ x, gap });
+					sim.flowers.push({
+						x: x + 0.04,
+						y: gap + (Math.random() * 0.18 - 0.04),
+						r: 0.028,
+						got: false,
+					});
+				}
+
+				function flap() {
+					if (!playing) return;
+					sim.vy = -0.62;
+					sim.flap = 1;
+				}
+
+				window.addEventListener('keydown', (e) => {
+					keys.add(e.code);
+					if (e.code === 'Space') {
+						e.preventDefault();
+						if (!playing) start();
+						else flap();
+					}
+				});
+				window.addEventListener('keyup', (e) => keys.delete(e.code));
+				window.addEventListener('blur', () => keys.clear());
+
+				canvas.addEventListener('pointerdown', (e) => {
+					const rect = canvas.getBoundingClientRect();
+					const nx = (e.clientX - rect.left) / rect.width;
+					if (!playing) {
+						start();
+						return;
+					}
+					if (nx < 0.28) sim.vx = -0.55;
+					else if (nx > 0.72) sim.vx = 0.55;
+					else flap();
+				});
+
+				startBtn?.addEventListener('click', (e) => {
+					e.stopPropagation();
+					start();
+				});
+
+				function start() {
+					reset();
+					playing = true;
+					if (overlay) overlay.hidden = true;
+				}
+
+				function bump(n) {
+					score += n;
+					if (score > best) {
+						best = score;
+						try {
+							localStorage.setItem('buzzy-kids-best', String(best));
+						} catch {}
+					}
+				}
+
+				function crash() {
+					playing = false;
+					if (overlay) {
+						overlay.hidden = false;
+						const h2 = overlay.querySelector('h2');
+						const p = overlay.querySelector('p:nth-of-type(2)');
+						const btn = overlay.querySelector('button');
+						if (h2) h2.textContent = score >= 8 ? 'Sweet flight!' : 'Oops — try again';
+						if (p) p.textContent = 'Nectar ' + score + ' · best ' + best;
+						if (btn) btn.textContent = 'Fly again';
+					}
+				}
+
+				let last = performance.now();
+				function frame(now) {
+					const dt = Math.min(0.05, (now - last) / 1000);
+					last = now;
+					sim.t += dt;
+
+					if (playing) {
+						let ax = 0;
+						if (keys.has('KeyA') || keys.has('ArrowLeft')) ax -= 1;
+						if (keys.has('KeyD') || keys.has('ArrowRight')) ax += 1;
+						sim.vx += ax * 1.8 * dt;
+						sim.vx *= Math.pow(0.12, dt);
+						sim.x += sim.vx * dt;
+						if (sim.x < 0.08) {
+							sim.x = 0.08;
+							sim.vx = 0;
+						}
+						if (sim.x > 0.78) {
+							sim.x = 0.78;
+							sim.vx = 0;
+						}
+
+						sim.vy += 1.55 * dt;
+						sim.y += sim.vy * dt;
+						sim.flap = Math.max(0, sim.flap - dt * 3);
+						if (sim.y < 0.08 || sim.y > 0.92) crash();
+
+						const scroll = 0.18 * dt;
+						for (const s of sim.stems) s.x -= scroll;
+						for (const f of sim.flowers) f.x -= scroll;
+						while (sim.stems.length && sim.stems[0].x < -0.2) sim.stems.shift();
+						while (sim.flowers.length && sim.flowers[0].x < -0.2) sim.flowers.shift();
+						if (!sim.stems.length || sim.stems[sim.stems.length - 1].x < 1.05) {
+							spawnStem(1.25);
+						}
+
+						const fx = sim.x;
+						const fy = sim.y;
+						for (const s of sim.stems) {
+							const inX = fx > s.x - 0.03 && fx < s.x + 0.09;
+							const inGap = fy > s.gap - 0.02 && fy < s.gap + 0.34;
+							if (inX && !inGap) crash();
+						}
+						for (const f of sim.flowers) {
+							if (f.got) continue;
+							const dx = fx - f.x;
+							const dy = fy - f.y;
+							if (dx * dx + dy * dy < 0.006) {
+								f.got = true;
+								bump(1);
+							}
+						}
+					}
+
+					draw();
+					requestAnimationFrame(frame);
+				}
+
+				function draw() {
+					gfx.clearRect(0, 0, W, H);
+					if (gardenImg.complete && gardenImg.naturalWidth) {
+						gfx.drawImage(gardenImg, 0, 0, W, H);
+					} else {
+						const sky = gfx.createLinearGradient(0, 0, 0, H);
+						sky.addColorStop(0, '#9fd0ef');
+						sky.addColorStop(1, '#f3eee4');
+						gfx.fillStyle = sky;
+						gfx.fillRect(0, 0, W, H);
+					}
+					gfx.fillStyle = 'rgba(243,238,228,0.18)';
+					gfx.fillRect(0, 0, W, H);
+
+					for (const s of sim.stems) {
+						const x = s.x * W;
+						gfx.fillStyle = '#2c5e4a';
+						gfx.fillRect(x, 0, 18, s.gap * H - 8);
+						gfx.fillRect(x, (s.gap + 0.34) * H, 18, H);
+						gfx.beginPath();
+						gfx.fillStyle = '#e8a317';
+						gfx.arc(x + 9, s.gap * H - 10, 16, 0, Math.PI * 2);
+						gfx.fill();
+					}
+
+					for (const f of sim.flowers) {
+						if (f.got) continue;
+						const x = f.x * W;
+						const y = f.y * H;
+						gfx.beginPath();
+						gfx.fillStyle = '#ffd166';
+						gfx.arc(x, y, 14, 0, Math.PI * 2);
+						gfx.fill();
+						gfx.beginPath();
+						gfx.fillStyle = '#fff8e7';
+						gfx.arc(x, y, 6, 0, Math.PI * 2);
+						gfx.fill();
+					}
+
+					const px = sim.x * W;
+					const py = sim.y * H;
+					const squash = 1 + sim.flap * 0.18;
+					gfx.save();
+					gfx.translate(px, py);
+					gfx.scale(squash, 2 - squash);
+					if (flyImg.complete && flyImg.naturalWidth) {
+						gfx.beginPath();
+						gfx.arc(0, 0, 34, 0, Math.PI * 2);
+						gfx.clip();
+						gfx.drawImage(flyImg, -34, -34, 68, 68);
+					} else {
+						gfx.fillStyle = '#f3eee4';
+						gfx.beginPath();
+						gfx.arc(0, 0, 28, 0, Math.PI * 2);
+						gfx.fill();
+					}
+					gfx.restore();
+
+					gfx.fillStyle = '#1a1612';
+					gfx.font = '700 22px Atkinson, sans-serif';
+					gfx.fillText('Nectar ' + score, 18, 34);
+					gfx.fillStyle = '#5c5348';
+					gfx.font = '600 16px Atkinson, sans-serif';
+					gfx.fillText('Best ' + best, 18, 56);
+				}
+
+				window.__controlsTest = {
+					getYaw: () => sim.x,
+					getSpeed: () => Math.abs(sim.vx) + (playing ? 0.3 : 0),
+					setKeys: (codes) => {
+						keys.clear();
+						for (const c of codes) keys.add(c);
+					},
+					setSteer: (v) => {
+						sim.vx = v * 0.4;
+					},
+				};
+
+				reset();
+				requestAnimationFrame(frame);
+			})();
+		</script>
+	</body>
+</html>
+
+<style>
+	.kids-page {
+		background: #f6efe3;
+	}
+	.kids {
+		width: min(1100px, calc(100% - 2em));
+		max-width: 1100px;
+		margin: 0 auto;
+		padding: 1.5em 0 4em;
+	}
+	.meet {
+		display: grid;
+		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+		gap: 1.75em;
+		align-items: center;
+		margin-bottom: 2.5em;
+	}
+	.buddy {
+		width: 100%;
+		border-radius: 28px;
+		box-shadow: 0 18px 40px rgba(42, 36, 28, 0.18);
+		background: #efe6d4;
+	}
+	.eyebrow {
+		margin: 0 0 0.4em;
+		font-size: 0.8em;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #2c5e4a;
+	}
+	.hello h1 {
+		font-size: clamp(2rem, 5vw, 3.4rem);
+		line-height: 1.05;
+		margin: 0 0 0.5em;
+		color: #1a1612;
+	}
+	.lede {
+		font-size: 1.15em;
+		color: #3d372f;
+		max-width: 32em;
+	}
+	.go {
+		display: inline-block;
+		margin-top: 0.4em;
+		padding: 0.75em 1.4em;
+		border-radius: 999px;
+		background: #2c5e4a;
+		color: #fff8e7 !important;
+		font-weight: 700;
+		text-decoration: none;
+	}
+	.go:hover {
+		background: #1f4636;
+		color: #fff;
+	}
+	.cabinet {
+		margin: 0 0 2.5em;
+	}
+	.stage {
+		position: relative;
+		border-radius: 20px;
+		overflow: hidden;
+		background: #8ec5e8;
+		box-shadow: 0 16px 36px rgba(42, 36, 28, 0.16);
+	}
+	#buzzy-kids {
+		display: block;
+		width: 100%;
+		height: auto;
+		vertical-align: middle;
+	}
+	.overlay {
+		position: absolute;
+		inset: 0;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		padding: 1.5em;
+		background: rgba(246, 239, 227, 0.82);
+		backdrop-filter: blur(6px);
+		color: #1a1612;
+	}
+	.overlay[hidden] {
+		display: none;
+	}
+	.face {
+		width: 88px;
+		height: 88px;
+		border-radius: 50%;
+		object-fit: cover;
+		margin-bottom: 0.6em;
+		box-shadow: 0 8px 20px rgba(42, 36, 28, 0.2);
+	}
+	.overlay-kicker {
+		margin: 0;
+		font-size: 0.8em;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: #2c5e4a;
+	}
+	.overlay h2 {
+		margin: 0.2em 0 0.3em;
+		font-size: 1.8em;
+	}
+	.overlay p {
+		margin: 0 0 1em;
+		color: #3d372f;
+	}
+	.overlay button {
+		padding: 0.8em 1.5em;
+		border: 0;
+		border-radius: 999px;
+		background: #e8a317;
+		color: #1a1612;
+		font-weight: 700;
+		font-size: 1em;
+		cursor: pointer;
+		min-height: 44px;
+	}
+	.overlay button:hover {
+		background: #d49412;
+	}
+	.hud-hint {
+		display: flex;
+		gap: 1.5em;
+		flex-wrap: wrap;
+		margin: 0.8em 0.2em 0;
+		color: #5c5348;
+		font-size: 0.92em;
+	}
+	.hud-hint p {
+		margin: 0;
+	}
+	.stories h2 {
+		margin: 0 0 0.8em;
+		font-size: 1.6em;
+	}
+	.cards {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 1em;
+	}
+	.cards article {
+		background: #fffaf1;
+		border: 1px solid #e6dcc8;
+		border-radius: 16px;
+		padding: 1.1em 1.2em 0.4em;
+	}
+	.cards h3 {
+		margin: 0 0 0.4em;
+		font-size: 1.15em;
+	}
+	.cards p {
+		color: #3d372f;
+		font-size: 0.98em;
+	}
+	.parents {
+		margin: 2.5em 0 0;
+		font-size: 0.9em;
+		color: #5c5348;
+	}
+	@media (max-width: 760px) {
+		.meet,
+		.cards {
+			grid-template-columns: 1fr;
+		}
+		.hello h1 {
+			font-size: 2.1em;
+		}
+	}
+</style>

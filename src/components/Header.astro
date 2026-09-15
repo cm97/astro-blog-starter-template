@@ -13,6 +13,7 @@ import { SITE_TITLE } from '../consts';
 		</h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
+			<HeaderLink href="/kids" class="kids-pill">Kids</HeaderLink>
 			<HeaderLink href="/videos">Videos</HeaderLink>
 			<HeaderLink href="/products">Products</HeaderLink>
 			<HeaderLink href="/store" class="store-pill">Store · $49</HeaderLink>
@@ -80,6 +81,15 @@ import { SITE_TITLE } from '../consts';
 		font-size: 0.9em;
 	}
 	.store-pill:hover { background: var(--accent-dark); }
+	.kids-pill {
+		background: #e8a317;
+		color: #1a1612 !important;
+		border-radius: 999px;
+		padding: 0.4em 0.85em !important;
+		font-weight: 700;
+		font-size: 0.9em;
+	}
+	.kids-pill:hover { background: #d49412; }
 	@media (max-width: 640px) {
 		header { padding: 0 0.6em; }
 		.brand span { display: none; }

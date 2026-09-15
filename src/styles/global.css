@@ -58,6 +58,9 @@ body.yt-page::after {
 	opacity: 0.3;
 	mix-blend-mode: screen;
 }
+body.kids-page::after {
+	opacity: 0.08;
+}
 header {
 	position: relative;
 	z-index: 20;
