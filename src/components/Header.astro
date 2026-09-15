@@ -5,7 +5,12 @@ import { SITE_TITLE } from '../consts';
 
 <header>
 	<nav>
-		<h2><a href="/">{SITE_TITLE}</a></h2>
+		<h2>
+			<a href="/" class="brand">
+				<img src="/buzzyfly-logo.svg" alt="" width="40" height="40" />
+				<span>{SITE_TITLE}</span>
+			</a>
+		</h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/videos">Videos</HeaderLink>
@@ -32,10 +37,29 @@ import { SITE_TITLE } from '../consts';
 	h2 a.active {
 		text-decoration: none;
 	}
+	.brand {
+		display: flex;
+		align-items: center;
+		gap: 0.5em;
+		padding: 0.55em 0.4em !important;
+		border-bottom-color: transparent !important;
+	}
+	.brand img {
+		width: 40px;
+		height: 40px;
+		border-radius: 10px;
+		flex-shrink: 0;
+		display: block;
+	}
+	.brand span {
+		font-weight: 700;
+		letter-spacing: 0.01em;
+	}
 	nav {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
+		gap: 0.75em;
 	}
 	nav a {
 		padding: 1em 0.5em;
@@ -56,4 +80,9 @@ import { SITE_TITLE } from '../consts';
 		font-size: 0.9em;
 	}
 	.store-pill:hover { background: var(--accent-dark); }
+	@media (max-width: 640px) {
+		header { padding: 0 0.6em; }
+		.brand span { display: none; }
+		nav a { padding: 0.9em 0.35em; font-size: 0.92em; }
+	}
 </style>
