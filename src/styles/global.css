@@ -43,6 +43,30 @@ body {
 	font-size: 20px;
 	line-height: 1.7;
 }
+/* One Buzzyfly watermark on every page — big enough to mark it as yours, not tiled. */
+body::after {
+	content: "";
+	position: fixed;
+	inset: 0;
+	pointer-events: none;
+	z-index: 1;
+	background: url("/buzzyfly-watermark.svg") center 42% / min(420px, 62vw) no-repeat;
+	opacity: 0.2;
+	mix-blend-mode: multiply;
+}
+body.yt-page::after {
+	opacity: 0.28;
+	mix-blend-mode: screen;
+}
+header {
+	position: relative;
+	z-index: 20;
+}
+main,
+footer {
+	position: relative;
+	z-index: 2;
+}
 main {
 	width: 720px;
 	max-width: calc(100% - 2em);
@@ -133,6 +157,10 @@ hr {
 	}
 	main {
 		padding: 1em;
+	}
+	body::after {
+		background-size: min(300px, 78vw);
+		opacity: 0.18;
 	}
 }
 
