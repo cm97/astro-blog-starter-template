@@ -11,6 +11,13 @@ import { BUZZYFLY_CONFIG } from '../../data/monetization';
 
 export const prerender = false;
 
+const brandHero = '/buzzyfly-brand-about.svg';
+function cardImage(src?: string) {
+	if (!src) return brandHero;
+	if (src.includes('blog-placeholder') || src.includes('buzzyfly-brand-about.jpg')) return brandHero;
+	return src;
+}
+
 const allPosts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
@@ -94,7 +101,7 @@ const categoryCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
 			{
 				featured && (
 					<article class="featured">
-						{featured.data.heroImage && <img src={featured.data.heroImage} alt="" width={640} height={360} />}
+						<img src={cardImage(featured.data.heroImage)} alt="" width={640} height={360} />
 						<div>
 							{featured.data.category && <span class="tag">{featured.data.category}</span>}
 							<h2><a href={`/blog/${featured.id}/`}>{featured.data.title}</a></h2>
@@ -110,7 +117,7 @@ const categoryCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
 				{
 					rest.map((post) => (
 						<article class="card">
-							{post.data.heroImage && <img src={post.data.heroImage} alt="" width={400} height={200} />}
+							<img src={cardImage(post.data.heroImage)} alt="" width={400} height={200} />
 							<div class="card-body">
 								{post.data.category && <span class="tag">{post.data.category}</span>}
 								<h3><a href={`/blog/${post.id}/`}>{post.data.title}</a></h3>

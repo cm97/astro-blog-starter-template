@@ -1,16 +1,17 @@
 ---
-import { type CollectionEntry, getCollection, getEntryBySlug } from 'astro:content';
+import { getCollection, getEntry, render } from 'astro:content';
 import BlogPost from '../../layouts/BlogPost.astro';
-import { render } from 'astro:content';
 
 export const prerender = false;
 
-export async function getStaticPaths() {
-	return [];
-}
+const raw = Astro.params.slug;
+const id = decodeURIComponent(String(raw ?? '')).replace(/\/+$/, '');
 
-const slug = Astro.params.slug;
-const post = slug ? await getEntryBySlug('blog', slug) : undefined;
+let post = id ? await getEntry('blog', id) : undefined;
+if (!post && id) {
+	const allPosts = await getCollection('blog');
+	post = allPosts.find((p) => p.id === id || p.id.endsWith(`/${id}`));
+}
 
 if (!post) {
 	return Astro.redirect('/blog');
@@ -23,7 +24,7 @@ const all = (await getCollection('blog')).sort(
 );
 const idx = all.findIndex((p) => p.id === post.id);
 const prev = idx > 0 ? all[idx - 1] : null;
-const next = idx < all.length - 1 ? all[idx + 1] : null;
+const next = idx >= 0 && idx < all.length - 1 ? all[idx + 1] : null;
 const related = all
 	.filter((p) => p.id !== post.id && p.data.category && p.data.category === post.data.category)
 	.slice(0, 3);
