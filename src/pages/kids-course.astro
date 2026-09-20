@@ -1,0 +1,82 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+export const prerender = true;
+
+const ORDER = "coachmanager@gmail.com";
+const packSubject = encodeURIComponent("Order: K-8 Complete Learning Pack $29");
+const packBody = encodeURIComponent(
+	"Hi,\n\nI want the K-8 Complete Learning Pack ($29).\n\nSend payment details and the download.\n\nThanks,\n",
+);
+
+const ITEMS = [
+	{ title: "Morning Routine Chart", grades: "K–3", price: "$7" },
+	{ title: "Homework Planner Pack", grades: "2–8", price: "$9" },
+	{ title: "Reading Log Bundle", grades: "1–5", price: "$9" },
+	{ title: "Study Skills Toolkit", grades: "4–8", price: "$12" },
+	{ title: "Creative Writing Jumpstart", grades: "2–6", price: "$9" },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Kids Course — K–8 Learning Pack $29 | Buzzyfly"
+			description="Printable K–8 routines: morning chart, homework planner, reading log, study skills, writing jumpstart. $29 complete pack. One-time payment."
+			image="/kids/buzzy-buddy.jpg"
+		/>
+	</head>
+	<body>
+		<Header />
+		<main class="course">
+			<p class="eyebrow">Parents · K–8 printables</p>
+			<h1>Kids Course — the $29 pack</h1>
+			<p class="lede">
+				One download. Morning routine, homework planner, reading log, study skills, and writing jumpstart.
+				Print at home. No subscription.
+			</p>
+			<p class="price">$29</p>
+			<a class="cta" href={`mailto:${ORDER}?subject=${packSubject}&body=${packBody}`}>Email to order the $29 pack</a>
+			<p class="micro">Paid by the same inbox that runs the main store: {ORDER}. Files emailed after payment.</p>
+
+			<h2>Inside the pack</h2>
+			<ul class="grid">
+				{
+					ITEMS.map((item) => {
+						const s = encodeURIComponent(`Order: ${item.title} ${item.price}`);
+						const b = encodeURIComponent(
+							`Hi,\n\nI want the ${item.title} (${item.price}).\n\nSend payment details and the download.\n\nThanks,\n`,
+						);
+						return (
+							<li>
+								<strong>{item.title}</strong>
+								<span>{item.grades} · {item.price}</span>
+								<a href={`mailto:${ORDER}?subject=${s}&body=${b}`}>Email to order</a>
+							</li>
+						);
+					})
+				}
+			</ul>
+			<p class="note">Kids game stays free at <a href="/kids">/kids</a>. This page is the paid course for parents.</p>
+		</main>
+		<Footer />
+	</body>
+</html>
+<style>
+	.course { width: min(720px, calc(100% - 2em)); margin: 0 auto; padding: 2em 0 4em; }
+	.eyebrow { margin: 0 0 0.4em; font-size: 0.8em; letter-spacing: 0.08em; text-transform: uppercase; color: #2c5e4a; font-weight: 700; }
+	h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 0.4em; }
+	.lede { color: rgb(var(--gray-dark)); max-width: 36em; }
+	.price { font-size: 2.2em; font-weight: 700; margin: 0.4em 0; }
+	.cta { display: inline-block; padding: 0.75em 1.4em; border-radius: 999px; background: #2c5e4a; color: #fff !important; font-weight: 700; text-decoration: none; }
+	.cta:hover { background: #1f4636; }
+	.micro, .note { font-size: 0.9em; color: rgb(var(--gray)); }
+	h2 { margin-top: 2em; }
+	.grid { list-style: none; padding: 0; display: grid; gap: 0.8em; }
+	.grid li { border: 1px solid rgb(var(--gray-light)); border-radius: 12px; padding: 0.9em 1em; display: grid; gap: 0.25em; }
+	.grid span { color: rgb(var(--gray)); font-size: 0.92em; }
+	.grid a { font-weight: 700; }
+</style>
