@@ -5,84 +5,178 @@ import Footer from '../components/Footer.astro';
 import { EXPLAINER_VIDEOS, fmtTime } from '../data/videos';
 
 export const prerender = false;
-
-const featured = EXPLAINER_VIDEOS[0];
-const rest = EXPLAINER_VIDEOS.slice(1);
 ---
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title="Buzzyfly Videos" description="Official explainer videos for the Buzzyfly Digital System." />
+		<BaseHead title="Buzzyfly Videos" description="Short explainer videos for every part of the Buzzyfly system." />
 		<style>
 			body.yt-page { background:#0f0f0f; color:#f1f1f1; margin:0; }
-			body.yt-page header, body.yt-page footer { background:#0f0f0f !important; box-shadow:none !important; }
-			body.yt-page header nav a, body.yt-page header h2 a, body.yt-page footer a, body.yt-page footer p { color:#f1f1f1 !important; }
-			.yt { max-width:1280px; margin:0 auto; padding:16px 16px 48px; }
-			.yt-stage { display:grid; grid-template-columns:minmax(0,1fr) 402px; gap:24px; }
-			.hero { display:block; color:inherit; text-decoration:none; }
-			.hero-thumb { position:relative; aspect-ratio:16/9; border-radius:12px; overflow:hidden; background:#1a1208; }
-			.hero-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-			.hero-thumb .play { position:absolute; inset:0; display:grid; place-items:center; font-size:48px; color:#fff; text-shadow:0 2px 12px #000; }
-			.hero h1 { font-size:1.25rem; margin:14px 0 6px; color:#fff; }
-			.stats { color:#aaa; font-size:.9rem; margin:0 0 10px; }
-			.queue, .grid { display:flex; flex-direction:column; gap:10px; }
-			.card { display:grid; grid-template-columns:168px 1fr; gap:8px; color:inherit; text-decoration:none; padding:4px; border-radius:10px; }
-			.card:hover, .tile:hover { background:#3d3d3d; }
-			.thumb { position:relative; aspect-ratio:16/9; border-radius:8px; overflow:hidden; background:#2b1c0d; }
-			.thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-			.dur { position:absolute; right:6px; bottom:6px; background:rgba(0,0,0,.8); color:#fff; font-size:11px; padding:1px 4px; border-radius:3px; }
-			.card h3, .tile h3 { font-size:.92rem; margin:0 0 4px; line-height:1.3; color:#fff; }
-			.card p, .tile p { margin:0; color:#aaa; font-size:.78rem; }
-			.grid-wrap { margin-top:36px; }
-			.grid-wrap h2 { font-size:1.05rem; margin:0 0 14px; }
-			.grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr)); gap:18px; }
-			.tile { text-decoration:none; color:inherit; }
-			.tile .thumb { margin-bottom:8px; }
-			@media (max-width:960px) { .yt-stage { grid-template-columns:1fr; } }
+			body.yt-page header { background:#0f0f0f !important; box-shadow:none !important; border-bottom:1px solid #272727; }
+			body.yt-page footer { background:#0f0f0f !important; border-top:1px solid #272727; }
+			body.yt-page header nav a,
+			body.yt-page header h2 a,
+			body.yt-page footer a,
+			body.yt-page footer p { color:#f1f1f1 !important; }
+
+			.yt { max-width:1280px; margin:0 auto; padding:0 16px 48px; }
+
+			/* ── Channel banner ── */
+			.ch-banner {
+				display:flex;
+				align-items:center;
+				gap:20px;
+				padding:24px 0 20px;
+				border-bottom:1px solid #272727;
+				margin-bottom:24px;
+			}
+			.ch-logo {
+				width:64px; height:64px;
+				border-radius:50%;
+				background:#c97820;
+				display:grid;
+				place-items:center;
+				font-size:1.6rem;
+				font-weight:800;
+				flex-shrink:0;
+				overflow:hidden;
+			}
+			.ch-logo img { width:100%; height:100%; object-fit:cover; border-radius:50%; }
+			.ch-info h1 { font-size:1.4rem; margin:0 0 3px; color:#fff; font-weight:700; }
+			.ch-meta { font-size:.82rem; color:#aaa; margin:0 0 8px; }
+			.ch-desc { font-size:.85rem; color:#ccc; margin:0; max-width:500px; line-height:1.4; }
+
+			/* ── Filter pills ── */
+			.filters {
+				display:flex;
+				gap:8px;
+				margin-bottom:20px;
+				flex-wrap:wrap;
+			}
+			.pill {
+				padding:.3em .9em;
+				border-radius:999px;
+				font-size:.82rem;
+				font-weight:600;
+				background:#272727;
+				color:#f1f1f1;
+				border:none;
+				cursor:pointer;
+				transition:background .15s;
+			}
+			.pill.active, .pill:hover { background:#f1f1f1; color:#0f0f0f; }
+
+			/* ── Video grid ── */
+			.grid {
+				display:grid;
+				grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+				gap:20px;
+			}
+
+			/* ── Video card ── */
+			.vcard { text-decoration:none; color:inherit; display:block; }
+			.vcard:hover .vthumb img { transform:scale(1.04); }
+			.vthumb {
+				position:relative;
+				aspect-ratio:16/9;
+				border-radius:10px;
+				overflow:hidden;
+				background:#1a1a1a;
+				margin-bottom:10px;
+			}
+			.vthumb img {
+				width:100%; height:100%;
+				object-fit:cover;
+				display:block;
+				transition:transform .3s ease;
+			}
+			.vdur {
+				position:absolute;
+				right:7px; bottom:7px;
+				background:rgba(0,0,0,.85);
+				color:#fff;
+				font-size:11px;
+				font-weight:600;
+				padding:2px 5px;
+				border-radius:3px;
+				letter-spacing:.02em;
+			}
+			.vplay-overlay {
+				position:absolute;
+				inset:0;
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				opacity:0;
+				transition:opacity .2s;
+				background:rgba(0,0,0,.3);
+			}
+			.vcard:hover .vplay-overlay { opacity:1; }
+			.vplay-overlay svg { width:48px; height:48px; }
+
+			.vtitle {
+				font-size:.92rem;
+				font-weight:500;
+				color:#f1f1f1;
+				line-height:1.4;
+				margin:0 0 5px;
+				display:-webkit-box;
+				-webkit-line-clamp:2;
+				-webkit-box-orient:vertical;
+				overflow:hidden;
+			}
+			.vmeta { font-size:.78rem; color:#aaa; margin:0; }
+
+			@media (max-width:640px) {
+				.grid { grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
+				.ch-banner { flex-wrap:wrap; }
+			}
 		</style>
 	</head>
 	<body class="yt-page">
 		<Header />
 		<main class="yt">
-			<section class="yt-stage">
-				<a class="hero" href={`/videos/${featured.slug}`}>
-					<div class="hero-thumb">
-						<img src={featured.poster} alt="" />
-						<div class="play">▶</div>
-					</div>
-					<h1>{featured.title}</h1>
-					<p class="stats">{featured.views} views · {featured.date} · {fmtTime(featured.seconds)}</p>
-				</a>
-				<aside class="queue">
-					{rest.map((v) => (
-						<a class="card" href={`/videos/${v.slug}`}>
-							<div class="thumb">
-								<img src={v.poster} alt="" />
-								<span class="dur">{fmtTime(v.seconds)}</span>
-							</div>
-							<div>
-								<h3>{v.title}</h3>
-								<p>Buzzyfly · {v.views} views · {v.date}</p>
-							</div>
-						</a>
-					))}
-				</aside>
-			</section>
-			<section class="grid-wrap">
-				<h2>More from Buzzyfly</h2>
-				<div class="grid">
-					{EXPLAINER_VIDEOS.map((v) => (
-						<a class="tile" href={`/videos/${v.slug}`}>
-							<div class="thumb">
-								<img src={v.poster} alt="" />
-								<span class="dur">{fmtTime(v.seconds)}</span>
-							</div>
-							<h3>{v.title}</h3>
-							<p>Buzzyfly · {v.views} views · {v.date}</p>
-						</a>
-					))}
+
+			<!-- Channel header -->
+			<div class="ch-banner">
+				<div class="ch-logo">
+					<img src="/buzzyfly-logo.svg" alt="Buzzyfly" />
 				</div>
-			</section>
+				<div class="ch-info">
+					<h1>Buzzyfly</h1>
+					<p class="ch-meta">{EXPLAINER_VIDEOS.length} videos · Official explainers</p>
+					<p class="ch-desc">Short videos for every part of the Buzzyfly system — onboarding, weekly planning, follow-ups, and more.</p>
+				</div>
+			</div>
+
+			<!-- Filter pills -->
+			<div class="filters">
+				<button class="pill active">All</button>
+				<button class="pill">Systems</button>
+				<button class="pill">Templates</button>
+				<button class="pill">Quick tips</button>
+			</div>
+
+			<!-- Video grid -->
+			<div class="grid">
+				{EXPLAINER_VIDEOS.map((v) => (
+					<a class="vcard" href={`/videos/${v.slug}`}>
+						<div class="vthumb">
+							<img src={v.poster} alt={v.title} loading="lazy" />
+							<span class="vdur">{fmtTime(v.seconds)}</span>
+							<div class="vplay-overlay">
+								<svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+									<circle cx="24" cy="24" r="24" fill="rgba(0,0,0,0.6)"/>
+									<polygon points="19,14 38,24 19,34" fill="white"/>
+								</svg>
+							</div>
+						</div>
+						<p class="vtitle">{v.title}</p>
+						<p class="vmeta">Buzzyfly · {v.views} views · {v.date}</p>
+					</a>
+				))}
+			</div>
+
 		</main>
 		<Footer />
 	</body>

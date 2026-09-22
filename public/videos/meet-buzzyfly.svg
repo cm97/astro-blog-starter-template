@@ -1,11 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360">
   <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#1a1208"/><stop offset="100%" stop-color="#3d2a12"/></linearGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#0f0f0f"/><stop offset="100%" stop-color="#2a1a08"/></linearGradient>
+    <linearGradient id="a" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="rgba(0,0,0,0)"/><stop offset="100%" stop-color="rgba(0,0,0,0.75)"/></linearGradient>
   </defs>
-  <rect width="640" height="360" fill="url(#bg)"/>
-  <circle cx="320" cy="165" r="52" fill="rgba(244,194,122,0.18)" stroke="#f4c27a" stroke-width="2.5"/>
-  <polygon points="308,145 308,185 348,165" fill="#f4c27a"/>
-  <text x="320" y="258" text-anchor="middle" font-family="Arial,sans-serif" font-size="24" fill="#fff" font-weight="bold">Meet Buzzyfly</text>
-  <text x="320" y="285" text-anchor="middle" font-family="Arial,sans-serif" font-size="14" fill="#d4d4d4">The 20-minute operating system for client work</text>
-  <text x="320" y="340" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" fill="#f4c27a" letter-spacing="4">BUZZYFLY</text>
+  <rect width="640" height="360" fill="url(#g)"/>
+  <circle cx="180" cy="155" r="90" fill="rgba(201,120,32,0.18)"/>
+  <circle cx="460" cy="200" r="70" fill="rgba(35,55,255,0.15)"/>
+  <!-- Big B logo mark -->
+  <text x="320" y="195" text-anchor="middle" font-family="Arial Black,Arial,sans-serif" font-size="120" fill="rgba(244,194,122,0.12)" font-weight="900">B</text>
+  <!-- Play button -->
+  <circle cx="320" cy="155" r="44" fill="rgba(0,0,0,0.5)"/>
+  <polygon points="308,136 308,174 346,155" fill="white"/>
+  <!-- Bottom gradient -->
+  <rect width="640" height="130" y="230" fill="url(#a)"/>
+  <!-- Title -->
+  <text x="22" y="302" font-family="Arial,sans-serif" font-size="26" fill="#fff" font-weight="700">Meet Buzzyfly</text>
+  <text x="22" y="330" font-family="Arial,sans-serif" font-size="16" fill="rgba(255,255,255,0.65)">The 20-minute operating system</text>
+  <text x="616" y="342" text-anchor="end" font-family="Arial,sans-serif" font-size="12" fill="#f4c27a" font-weight="700" letter-spacing="2">BUZZYFLY</text>
 </svg>
