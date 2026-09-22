@@ -2,10 +2,13 @@
 import BaseHead from '../components/BaseHead.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
-import ProductCallout from '../components/ProductCallout.astro';
 import EmailOptin from '../components/EmailOptin.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { BUZZYFLY_CONFIG } from '../data/monetization';
+import { BUZZYFLY_CONFIG, ALL_PRODUCTS } from '../data/monetization';
+
+const digitalSystem = ALL_PRODUCTS.find(p => p.id === 'buzzyfly-digital-system')!;
+const bundle = ALL_PRODUCTS.find(p => p.id === 'complete-business-bundle')!;
+const starters = ALL_PRODUCTS.filter(p => p.price === '$15' || p.price === '$19' || p.price === '$29');
 ---
 
 <!doctype html>
@@ -13,215 +16,565 @@ import { BUZZYFLY_CONFIG } from '../data/monetization';
 	<head>
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
-			.home {
-				text-align: left;
-			}
-			.home-hero {
+			/* ── Hero ── */
+			.hero {
+				padding: 3.5em 0 3em;
 				text-align: center;
-				padding: 1.5em 0 2em;
 				border-bottom: 1px solid rgb(var(--gray-light));
 			}
-			.home-hero h1 {
-				font-size: 2.4em;
-				margin: 0 0 0.4em 0;
+			.hero__eyebrow {
+				display: inline-block;
+				font-size: 0.78em;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin-bottom: 1em;
+			}
+			.hero h1 {
+				font-size: clamp(1.8em, 5vw, 2.6em);
 				line-height: 1.15;
+				margin: 0 0 0.5em;
+				color: rgb(var(--black));
 			}
-			.home-hero .lede {
-				max-width: 38em;
-				margin: 0 auto 1.4em;
-				color: rgb(var(--gray-dark));
+			.hero__sub {
 				font-size: 1.1em;
+				color: rgb(var(--gray-dark));
+				max-width: 36em;
+				margin: 0 auto 2em;
+				line-height: 1.6;
 			}
-			.home-hero .buy-row {
+			.hero__cta-group {
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				gap: 1em;
+				gap: 0.9em;
 				flex-wrap: wrap;
-			}
-			.home-hero .price {
-				font-size: 1.8em;
-				font-weight: 700;
-				color: rgb(var(--black));
-			}
-			.home-hero .cta {
-				display: inline-block;
-				padding: 0.7em 1.8em;
-				border-radius: 999px;
-				background: var(--accent);
-				color: #fff;
-				font-weight: 700;
-				text-decoration: none;
-				transition: background-color 0.15s ease-in-out;
-			}
-			.home-hero .cta:hover {
-				background: var(--accent-dark);
-				color: #fff;
-			}
-			.home-hero .micro {
-				margin: 0.9em 0 0;
-				font-size: 0.8em;
-				color: rgb(var(--gray));
-			}
-			.home-section {
-				margin-top: 2.5em;
-			}
-			.home-section h2 {
-				font-size: 1.5em;
-			}
-			.home-list {
-				padding-left: 1.2em;
-				color: rgb(var(--gray-dark));
-			}
-			.home-list li {
-				margin-bottom: 0.5em;
-			}
-			.home-entry {
-				margin-top: 2.5em;
-				padding: 1.75em;
-				border: 1px solid rgb(var(--gray-light));
-				border-radius: 14px;
-				background: rgba(var(--gray-light), 20%);
-			}
-			.home-entry__label {
-				font-size: 0.8em;
-				letter-spacing: 0.06em;
-				text-transform: uppercase;
-				color: rgb(var(--gray));
-				margin: 0 0 1em;
-				font-weight: 600;
-			}
-			.home-entry__cards {
-				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(min(100%, 200px), 1fr));
-				gap: 0.75em;
 				margin-bottom: 1em;
 			}
-			.home-entry__card {
-				display: flex;
-				flex-direction: column;
-				gap: 0.25em;
-				padding: 1em 1.1em;
-				border: 1px solid rgb(var(--gray-light));
-				border-radius: 10px;
-				background: #fff;
-				text-decoration: none;
-				color: rgb(var(--black));
-				transition: border-color 0.15s, box-shadow 0.15s;
-				font-size: 0.9em;
-			}
-			.home-entry__card:hover {
-				border-color: var(--accent);
-				box-shadow: 0 0 0 2px var(--accent);
-			}
-			.home-entry__card span:last-child {
-				color: rgb(var(--gray));
-				font-size: 0.85em;
-				line-height: 1.4;
-				margin-top: 0.1em;
-			}
-			.home-entry__price {
-				font-size: 1.3em;
+			.btn-primary {
+				display: inline-block;
+				padding: 0.75em 2em;
+				border-radius: 999px;
+				background: var(--accent);
+				color: #fff !important;
 				font-weight: 700;
-				color: var(--accent);
+				font-size: 1.05em;
+				text-decoration: none;
+				transition: background 0.15s;
+				white-space: nowrap;
 			}
-			.home-entry__footer {
+			.btn-primary:hover { background: var(--accent-dark); }
+			.btn-secondary {
+				display: inline-block;
+				padding: 0.75em 1.6em;
+				border-radius: 999px;
+				border: 2px solid rgb(var(--gray-light));
+				color: rgb(var(--gray-dark)) !important;
+				font-weight: 600;
+				font-size: 1em;
+				text-decoration: none;
+				transition: border-color 0.15s;
+			}
+			.btn-secondary:hover { border-color: var(--accent); color: var(--accent) !important; }
+			.hero__price {
+				font-size: 1.5em;
+				font-weight: 700;
+				color: rgb(var(--black));
+			}
+			.hero__trust {
 				font-size: 0.82em;
 				color: rgb(var(--gray));
 				margin: 0;
 			}
-			.home-entry__footer a {
-				color: var(--accent);
+			.hero__trust strong { color: rgb(var(--gray-dark)); }
+
+			/* ── Pain points ── */
+			.pain {
+				padding: 3em 0 2.5em;
+				border-bottom: 1px solid rgb(var(--gray-light));
 			}
-			.home-posts {
+			.pain h2 {
+				font-size: 1.35em;
+				color: rgb(var(--gray));
+				font-weight: 400;
+				margin: 0 0 1.5em;
+				text-align: center;
+			}
+			.pain__grid {
 				display: grid;
-				gap: 1em;
-				margin-top: 1em;
+				grid-template-columns: 1fr 1fr;
+				gap: 0.75em;
 			}
-			.home-post {
-				padding: 1em 1.2em;
+			@media (max-width: 520px) {
+				.pain__grid { grid-template-columns: 1fr; }
+			}
+			.pain__item {
+				display: flex;
+				gap: 0.7em;
+				align-items: flex-start;
+				padding: 1em 1.1em;
+				background: rgba(var(--gray-light), 30%);
+				border-radius: 10px;
+			}
+			.pain__icon {
+				font-size: 1.1em;
+				line-height: 1.6;
+				flex-shrink: 0;
+			}
+			.pain__text {
+				font-size: 0.92em;
+				color: rgb(var(--gray-dark));
+				line-height: 1.5;
+				margin: 0;
+			}
+
+			/* ── What's inside ── */
+			.inside {
+				padding: 3em 0 2.5em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.section-label {
+				font-size: 0.75em;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin: 0 0 0.5em;
+			}
+			.section-title {
+				font-size: 1.5em;
+				color: rgb(var(--black));
+				margin: 0 0 0.4em;
+				line-height: 1.25;
+			}
+			.section-sub {
+				color: rgb(var(--gray));
+				font-size: 0.95em;
+				margin: 0 0 1.8em;
+			}
+			.inside__grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1em;
+			}
+			@media (max-width: 520px) {
+				.inside__grid { grid-template-columns: 1fr; }
+			}
+			.inside__card {
+				padding: 1.25em 1.3em;
 				border: 1px solid rgb(var(--gray-light));
 				border-radius: 12px;
 				background: #fff;
 			}
-			.home-post a {
-				font-weight: 700;
-				text-decoration: none;
+			.inside__card-icon {
+				font-size: 1.4em;
+				margin-bottom: 0.4em;
+				display: block;
 			}
-			.home-post p {
-				margin: 0.4em 0 0;
+			.inside__card h3 {
 				font-size: 0.95em;
+				margin: 0 0 0.35em;
+				color: rgb(var(--black));
+			}
+			.inside__card p {
+				font-size: 0.85em;
 				color: rgb(var(--gray));
+				margin: 0;
+				line-height: 1.5;
+			}
+
+			/* ── Products ── */
+			.products {
+				padding: 3em 0 2.5em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.products__featured {
+				background: rgb(var(--black));
+				color: #fff;
+				border-radius: 16px;
+				padding: 2em 2.2em;
+				margin-bottom: 1.25em;
+				position: relative;
+				overflow: hidden;
+			}
+			.products__featured::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(135deg, rgba(35,55,255,0.35) 0%, transparent 60%);
+				pointer-events: none;
+			}
+			.products__featured-badge {
+				display: inline-block;
+				background: var(--accent);
+				color: #fff;
+				font-size: 0.72em;
+				font-weight: 700;
+				letter-spacing: 0.07em;
+				text-transform: uppercase;
+				padding: 0.2em 0.7em;
+				border-radius: 999px;
+				margin-bottom: 0.8em;
+			}
+			.products__featured h3 {
+				color: #fff;
+				font-size: 1.3em;
+				margin: 0 0 0.4em;
+			}
+			.products__featured p {
+				color: rgba(255,255,255,0.75);
+				font-size: 0.9em;
+				margin: 0 0 1.2em;
+				line-height: 1.5;
+			}
+			.products__featured-features {
+				list-style: none;
+				padding: 0;
+				margin: 0 0 1.5em;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 0.5em;
+			}
+			@media (max-width: 480px) {
+				.products__featured-features { grid-template-columns: 1fr; }
+			}
+			.products__featured-features li {
+				display: flex;
+				align-items: flex-start;
+				gap: 0.4em;
+				font-size: 0.87em;
+				color: rgba(255,255,255,0.85);
+				line-height: 1.4;
+			}
+			.products__featured-features li::before {
+				content: "✓";
+				color: #4ade80;
+				font-weight: 700;
+				flex-shrink: 0;
+			}
+			.products__featured-buy {
+				display: flex;
+				align-items: center;
+				gap: 1em;
+				flex-wrap: wrap;
+			}
+			.products__featured-price {
+				font-size: 2em;
+				font-weight: 700;
+				color: #fff;
+			}
+			.btn-white {
+				display: inline-block;
+				padding: 0.65em 1.6em;
+				border-radius: 999px;
+				background: #fff;
+				color: rgb(var(--black)) !important;
+				font-weight: 700;
+				font-size: 0.95em;
+				text-decoration: none;
+				transition: opacity 0.15s;
+			}
+			.btn-white:hover { opacity: 0.9; }
+
+			.products__grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(min(100%, 195px), 1fr));
+				gap: 0.85em;
+			}
+			.products__card {
+				display: flex;
+				flex-direction: column;
+				padding: 1.2em 1.2em 1.1em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				background: #fff;
+				text-decoration: none;
+				color: inherit;
+				transition: border-color 0.15s, box-shadow 0.15s;
+			}
+			.products__card:hover {
+				border-color: var(--accent);
+				box-shadow: 0 0 0 2px rgba(35,55,255,0.12);
+			}
+			.products__card-price {
+				font-size: 1.4em;
+				font-weight: 700;
+				color: var(--accent);
+				margin-bottom: 0.3em;
+			}
+			.products__card h3 {
+				font-size: 0.9em;
+				margin: 0 0 0.4em;
+				color: rgb(var(--black));
+			}
+			.products__card p {
+				font-size: 0.82em;
+				color: rgb(var(--gray));
+				margin: 0;
+				line-height: 1.45;
+				flex: 1;
+			}
+			.products__card-badge {
+				display: inline-block;
+				font-size: 0.7em;
+				font-weight: 700;
+				letter-spacing: 0.06em;
+				text-transform: uppercase;
+				color: var(--accent);
+				border: 1px solid var(--accent);
+				padding: 0.15em 0.5em;
+				border-radius: 999px;
+				margin-bottom: 0.5em;
+			}
+			.products__footer {
+				margin-top: 0.9em;
+				font-size: 0.82em;
+				color: rgb(var(--gray));
+			}
+
+			/* ── Guarantee ── */
+			.guarantee {
+				padding: 2em 0 2.5em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.guarantee__box {
+				display: flex;
+				gap: 1.2em;
+				align-items: flex-start;
+				padding: 1.5em 1.6em;
+				background: rgba(35,55,255,0.04);
+				border: 1px solid rgba(35,55,255,0.15);
+				border-radius: 14px;
+			}
+			.guarantee__icon {
+				font-size: 2em;
+				flex-shrink: 0;
+				line-height: 1;
+			}
+			.guarantee__copy h3 {
+				font-size: 1em;
+				margin: 0 0 0.3em;
+				color: rgb(var(--black));
+			}
+			.guarantee__copy p {
+				font-size: 0.88em;
+				color: rgb(var(--gray-dark));
+				margin: 0;
+				line-height: 1.55;
+			}
+
+			/* ── Blog ── */
+			.blog-section {
+				padding: 3em 0 2.5em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.blog__grid {
+				display: grid;
+				gap: 0.75em;
+				margin-top: 1.2em;
+			}
+			.blog__post {
+				display: flex;
+				gap: 1em;
+				align-items: flex-start;
+				padding: 1em 1.2em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				background: #fff;
+				text-decoration: none;
+				color: inherit;
+				transition: border-color 0.15s;
+			}
+			.blog__post:hover { border-color: var(--accent); }
+			.blog__arrow {
+				color: var(--accent);
+				font-size: 1.1em;
+				flex-shrink: 0;
+				margin-top: 0.15em;
+			}
+			.blog__post h3 {
+				font-size: 0.95em;
+				margin: 0 0 0.25em;
+				color: rgb(var(--black));
+			}
+			.blog__post p {
+				font-size: 0.84em;
+				color: rgb(var(--gray));
+				margin: 0;
+				line-height: 1.45;
+			}
+
+			/* ── Optin padding ── */
+			.optin-wrap {
+				padding: 1em 0;
 			}
 		</style>
 	</head>
 	<body>
 		<Header />
-		<main class="home">
-			<section class="home-hero">
-				<h1>Stop rebuilding your client onboarding from memory every time someone new shows up.</h1>
-				<p class="lede">
-					The Buzzyfly Digital System turns onboarding, weekly planning, and follow-ups into checklists you run in twenty minutes — so the process still exists on the weeks you're slammed.
+		<main>
+
+			<!-- HERO -->
+			<section class="hero">
+				<span class="hero__eyebrow">For solo operators</span>
+				<h1>Stop rebuilding your client process from scratch every single week.</h1>
+				<p class="hero__sub">
+					The Buzzyfly Digital System gives you onboarding, weekly planning, and follow-up workflows as simple checklists — ready to run in 20 minutes, whether you're slammed or steady.
 				</p>
-				<div class="buy-row">
-					<span class="price">{BUZZYFLY_CONFIG.defaultProductPrice}</span>
-					<a class="cta" href="/store">Get the Digital System</a>
+				<div class="hero__cta-group">
+					<span class="hero__price">{digitalSystem.price}</span>
+					<a class="btn-primary" href={digitalSystem.stripeUrl} target="_blank" rel="noopener">Get the Digital System →</a>
+					<a class="btn-secondary" href="/products">See all products</a>
 				</div>
-				<p class="micro">One-time payment. No subscription. {BUZZYFLY_CONFIG.guarantee}</p>
+				<p class="hero__trust">
+					<strong>One-time payment. Instant download.</strong> &nbsp;·&nbsp; {BUZZYFLY_CONFIG.guarantee}
+				</p>
 			</section>
 
-			<section class="home-section">
-				<h2>What's inside</h2>
-				<ul class="home-list">
-					<li>The core operating framework — onboarding, weekly planning, and follow-up workflows</li>
-					<li>The 20-minute weekly reset checklist, ready to run instead of rebuilt from scratch</li>
-					<li>Lifetime access, including future updates to the system</li>
-				</ul>
-			</section>
-
-			<section class="home-entry">
-				<p class="home-entry__label">Not ready for the full system?</p>
-				<div class="home-entry__cards">
-					<a class="home-entry__card" href="https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05">
-						<span class="home-entry__price">$15</span>
-						<strong>Weekly Reset Checklist</strong>
-						<span>The 20-minute Monday routine — run it instead of rebuilding it.</span>
-					</a>
-					<a class="home-entry__card" href="https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07">
-						<span class="home-entry__price">$29</span>
-						<strong>Client Onboarding Kit</strong>
-						<span>Welcome email, intake form, kickoff agenda — ready in one download.</span>
-					</a>
-					<a class="home-entry__card" href="https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06">
-						<span class="home-entry__price">$19</span>
-						<strong>Follow-Up Email Templates</strong>
-						<span>5 done follow-up emails — fill in a name, hit send.</span>
-					</a>
-				</div>
-				<p class="home-entry__footer">One-time payment. {BUZZYFLY_CONFIG.guarantee} <a href="/products">See all products →</a></p>
-			</section>
-
-			<ProductCallout />
-
-			<section class="home-section">
-				<h2>From the notebook</h2>
-				<div class="home-posts">
-					<div class="home-post">
-						<a href="/blog/first-post/">Why I Built the Buzzyfly Digital System</a>
-						<p>The pain that started it — and the fix that stuck.</p>
+			<!-- PAIN POINTS -->
+			<section class="pain">
+				<h2>Sound familiar?</h2>
+				<div class="pain__grid">
+					<div class="pain__item">
+						<span class="pain__icon">😰</span>
+						<p class="pain__text">A new client signs and you spend two hours piecing together an onboarding email from old messages.</p>
 					</div>
-					<div class="home-post">
-						<a href="/blog/second-post/">3 Signs Your Business Is Running You</a>
-						<p>The quiet tells your workflow has become the thing in charge.</p>
+					<div class="pain__item">
+						<span class="pain__icon">📭</span>
+						<p class="pain__text">You sent a proposal 12 days ago. You haven't followed up because you don't know what to say.</p>
 					</div>
-					<div class="home-post">
-						<a href="/blog/third-post/">The 20-Minute Weekly Reset</a>
-						<p>One short weekly habit, and the actual checklist behind it.</p>
+					<div class="pain__item">
+						<span class="pain__icon">🌀</span>
+						<p class="pain__text">Monday arrives and you spend the first hour figuring out what you're supposed to be working on.</p>
+					</div>
+					<div class="pain__item">
+						<span class="pain__icon">💸</span>
+						<p class="pain__text">A client wrapped up three months ago. You've meant to check in — but you haven't, and now it's awkward.</p>
 					</div>
 				</div>
 			</section>
 
-			<EmailOptin />
+			<!-- WHAT'S INSIDE -->
+			<section class="inside">
+				<p class="section-label">What you get</p>
+				<h2 class="section-title">Six systems. One download.</h2>
+				<p class="section-sub">Everything a solo operator needs to run client work without reinventing the wheel every week.</p>
+				<div class="inside__grid">
+					<div class="inside__card">
+						<span class="inside__card-icon">📋</span>
+						<h3>Client Onboarding Checklist</h3>
+						<p>Four phases from signed contract to first delivery — with a red-flag detector built in.</p>
+					</div>
+					<div class="inside__card">
+						<span class="inside__card-icon">🔄</span>
+						<h3>Weekly Reset Checklist</h3>
+						<p>A 20-minute Monday routine: clear inboxes, set three priorities, check in on every client.</p>
+					</div>
+					<div class="inside__card">
+						<span class="inside__card-icon">📨</span>
+						<h3>Follow-Up Email System</h3>
+						<p>Five scenarios — leads, proposals, active projects, post-delivery, re-engagement — with word-for-word templates.</p>
+					</div>
+					<div class="inside__card">
+						<span class="inside__card-icon">🛡️</span>
+						<h3>Scope Guard Scripts</h3>
+						<p>Six word-for-word scripts for scope creep — so you never "sure, no problem" your way into free work again.</p>
+					</div>
+					<div class="inside__card">
+						<span class="inside__card-icon">🤝</span>
+						<h3>Client Retention Checklist</h3>
+						<p>The full client lifecycle — during the project, at delivery, post-delivery, and the quarterly re-engagement.</p>
+					</div>
+					<div class="inside__card">
+						<span class="inside__card-icon">📝</span>
+						<h3>Templates for Everything</h3>
+						<p>Welcome emails, proposals, check-ins, close-outs, intake forms, and a pricing worksheet — all fill-in-ready.</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- PRODUCTS -->
+			<section class="products">
+				<p class="section-label">All products</p>
+				<h2 class="section-title">Start anywhere. Own it forever.</h2>
+				<p class="section-sub">Every product is a one-time purchase with instant download. No subscriptions. No renewals.</p>
+
+				<!-- Featured: Digital System -->
+				<div class="products__featured">
+					<span class="products__featured-badge">Most popular</span>
+					<h3>{digitalSystem.title}</h3>
+					<p>{digitalSystem.description}</p>
+					<ul class="products__featured-features">
+						{digitalSystem.features.map(f => <li>{f}</li>)}
+					</ul>
+					<div class="products__featured-buy">
+						<span class="products__featured-price">{digitalSystem.price}</span>
+						<a class="btn-white" href={digitalSystem.stripeUrl} target="_blank" rel="noopener">Buy now — instant download</a>
+					</div>
+				</div>
+
+				<!-- Other products -->
+				<div class="products__grid">
+					{ALL_PRODUCTS.filter(p => p.id !== 'buzzyfly-digital-system').map(p => (
+						<a class="products__card" href={p.stripeUrl} target="_blank" rel="noopener">
+							{p.badge && <span class="products__card-badge">{p.badge}</span>}
+							<div class="products__card-price">{p.price}</div>
+							<h3>{p.title}</h3>
+							<p>{p.description}</p>
+						</a>
+					))}
+				</div>
+				<p class="products__footer">All prices in USD. Instant download after payment. {BUZZYFLY_CONFIG.guarantee}</p>
+			</section>
+
+			<!-- GUARANTEE -->
+			<section class="guarantee">
+				<div class="guarantee__box">
+					<span class="guarantee__icon">🛡</span>
+					<div class="guarantee__copy">
+						<h3>30-Day Money-Back Guarantee</h3>
+						<p>
+							If the system doesn't deliver — if the checklists don't work, the templates don't fit, or you just don't find it useful — email us within 30 days for a full refund. No questions, no forms, no hassle. The risk is ours.
+						</p>
+					</div>
+				</div>
+			</section>
+
+			<!-- BLOG -->
+			<section class="blog-section">
+				<p class="section-label">From the notebook</p>
+				<h2 class="section-title">How it works and why</h2>
+				<div class="blog__grid">
+					<a class="blog__post" href="/blog/onboarding-checklist-full">
+						<span class="blog__arrow">→</span>
+						<div>
+							<h3>The Client Onboarding Checklist Every Solo Operator Needs</h3>
+							<p>What to do in the first 48 hours after a client signs — and why most providers lose the relationship before the work even starts.</p>
+						</div>
+					</a>
+					<a class="blog__post" href="/blog/follow-up-templates">
+						<span class="blog__arrow">→</span>
+						<div>
+							<h3>The Follow-Up Emails That Actually Get Replies</h3>
+							<p>Why most follow-up emails get ignored — and the three things a reply-generating email always does.</p>
+						</div>
+					</a>
+					<a class="blog__post" href="/blog/scope-creep-script">
+						<span class="blog__arrow">→</span>
+						<div>
+							<h3>How to Stop Scope Creep Without Losing the Client</h3>
+							<p>The structure that gives the client two options — both of which respect your time — so the conversation ends without conflict.</p>
+						</div>
+					</a>
+				</div>
+			</section>
+
+			<!-- EMAIL OPT-IN -->
+			<div class="optin-wrap">
+				<EmailOptin />
+			</div>
+
 		</main>
 		<Footer />
 	</body>

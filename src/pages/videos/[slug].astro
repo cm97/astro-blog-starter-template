@@ -19,32 +19,54 @@ const queue = EXPLAINER_VIDEOS.filter((v) => v.slug !== video.slug);
 		<BaseHead title={`${video.title} — Buzzyfly Videos`} description={video.description} />
 		<style>
 			body.yt-page { background:#0f0f0f; color:#f1f1f1; margin:0; }
-			body.yt-page header, body.yt-page footer { background:#0f0f0f !important; box-shadow:none !important; }
+			body.yt-page header, body.yt-page footer { background:#111 !important; box-shadow:none !important; border-bottom:1px solid #222; }
 			body.yt-page header nav a, body.yt-page header h2 a, body.yt-page footer a, body.yt-page footer p { color:#f1f1f1 !important; }
 			.yt { max-width:1280px; margin:0 auto; padding:16px 16px 48px; }
 			.yt-stage { display:grid; grid-template-columns:minmax(0,1fr) 402px; gap:24px; }
-			.player { background:#000; border-radius:12px; overflow:hidden; position:relative; aspect-ratio:16/9; }
+
+			/* Player */
+			.player { background:#000; border-radius:12px; overflow:hidden; position:relative; aspect-ratio:16/9; cursor:pointer; user-select:none; }
 			video { width:100%; height:100%; object-fit:cover; display:block; background:#000; }
-			.slide { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:8%; background:linear-gradient(135deg,#1a1208,#3d2a12 55%,#0f0f0f); pointer-events:none; }
+
+			/* Slide overlay */
+			.slide { position:absolute; inset:0; display:flex; flex-direction:column; justify-content:center; padding:8%; background:linear-gradient(135deg,#1a1208,#3d2a12 55%,#0f0f0f); }
 			.slide.hidden { display:none; }
-			.kicker { color:#f4c27a; letter-spacing:.12em; text-transform:uppercase; font-size:.85rem; margin:0 0 .6rem; }
-			.line { font-size:clamp(1.4rem,3.2vw,2.4rem); font-weight:700; line-height:1.2; margin:0 0 .7rem; }
-			.sub { color:#d4d4d4; font-size:clamp(.95rem,1.6vw,1.15rem); max-width:36rem; margin:0; }
-			.meta h1 { font-size:1.25rem; margin:14px 0 6px; }
-			.stats { color:#aaa; font-size:.9rem; margin:0 0 10px; }
-			.channel { display:flex; align-items:center; gap:10px; }
-			.avatar { width:40px; height:40px; border-radius:50%; background:#c97820; display:grid; place-items:center; font-weight:800; }
-			.desc { color:#ccc; margin:14px 0 0; max-width:46rem; line-height:1.5; }
-			.queue { display:flex; flex-direction:column; gap:10px; max-height:78vh; overflow:auto; }
-			.card { display:grid; grid-template-columns:168px 1fr; gap:8px; color:inherit; text-decoration:none; padding:4px; border-radius:10px; }
-			.card:hover { background:#3d3d3d; }
-			.thumb { position:relative; aspect-ratio:16/9; border-radius:8px; background:#2b1c0d; overflow:hidden; }
+			.slide-inner { opacity:1; transition:opacity 0.5s ease; }
+			.slide-inner.fading { opacity:0; }
+			.kicker { color:#f4c27a; letter-spacing:.12em; text-transform:uppercase; font-size:.8rem; margin:0 0 .5rem; font-weight:700; }
+			.line { font-size:clamp(1.3rem,3.2vw,2.4rem); font-weight:700; line-height:1.2; margin:0 0 .6rem; color:#fff; }
+			.sub { color:#d4d4d4; font-size:clamp(.88rem,1.6vw,1.1rem); max-width:36rem; margin:0; line-height:1.5; }
+
+			/* Progress bar */
+			.progress-bar { position:absolute; bottom:0; left:0; right:0; height:3px; background:rgba(255,255,255,0.15); }
+			.progress-fill { height:100%; background:#f4c27a; width:0%; transition:width 0.1s linear; }
+
+			/* Pause/play overlay on click */
+			.pause-flash { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; opacity:0; transition:opacity 0.3s; }
+			.pause-flash-icon { font-size:4rem; color:rgba(255,255,255,0.85); }
+			.pause-flash.show { opacity:1; }
+
+			/* Meta */
+			.meta h1 { font-size:1.2rem; margin:14px 0 6px; color:#fff; line-height:1.35; }
+			.stats { color:#aaa; font-size:.88rem; margin:0 0 10px; }
+			.channel { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+			.avatar { width:40px; height:40px; border-radius:50%; background:#c97820; display:grid; place-items:center; font-weight:800; font-size:1.1rem; flex-shrink:0; }
+			.desc { color:#ccc; font-size:.9rem; margin:0; max-width:46rem; line-height:1.55; }
+
+			/* Queue */
+			.queue { display:flex; flex-direction:column; gap:8px; max-height:78vh; overflow:auto; }
+			.queue-label { font-size:.78rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:#777; margin:0 0 4px; }
+			.card { display:grid; grid-template-columns:168px 1fr; gap:10px; color:inherit; text-decoration:none; padding:6px; border-radius:10px; transition:background 0.15s; }
+			.card:hover { background:#2a2a2a; }
+			.card.active-card { background:#2a2a2a; border-left:2px solid #f4c27a; padding-left:4px; }
+			.thumb { position:relative; aspect-ratio:16/9; border-radius:8px; background:#2b1c0d; overflow:hidden; flex-shrink:0; }
 			.thumb img { width:100%; height:100%; object-fit:cover; display:block; }
-			.thumb .dur { position:absolute; right:6px; bottom:6px; background:rgba(0,0,0,.8); color:#fff; font-size:11px; padding:1px 4px; border-radius:3px; }
-			.card h3 { font-size:.92rem; margin:0 0 4px; line-height:1.3; color:#fff; }
-			.card p { margin:0; color:#aaa; font-size:.78rem; }
-			.note { color:#888; font-size:.8rem; margin-top:10px; }
+			.dur { position:absolute; right:5px; bottom:5px; background:rgba(0,0,0,.85); color:#fff; font-size:11px; padding:1px 4px; border-radius:3px; }
+			.card h3 { font-size:.88rem; margin:0 0 4px; line-height:1.3; color:#fff; }
+			.card p { margin:0; color:#999; font-size:.76rem; }
+
 			@media (max-width:960px) { .yt-stage { grid-template-columns:1fr; } .queue { max-height:none; } }
+			@media (max-width:540px) { .card { grid-template-columns:120px 1fr; } }
 		</style>
 	</head>
 	<body class="yt-page">
@@ -57,24 +79,36 @@ const queue = EXPLAINER_VIDEOS.filter((v) => v.slug !== video.slug);
 							<source src={video.src} type="video/mp4" />
 						</video>
 						<div class="slide" id="slide">
-							<p class="kicker" id="kicker">{video.slides[0][0]}</p>
-							<p class="line" id="line">{video.slides[0][1]}</p>
-							<p class="sub" id="sub">{video.slides[0][2]}</p>
+							<div class="slide-inner" id="slideInner">
+								<p class="kicker" id="kicker">{video.slides[0][0]}</p>
+								<p class="line" id="line">{video.slides[0][1]}</p>
+								<p class="sub" id="sub">{video.slides[0][2]}</p>
+							</div>
+							<div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
 						</div>
+						<div class="pause-flash" id="pauseFlash"><span class="pause-flash-icon" id="pauseIcon">⏸</span></div>
 					</div>
+
 					<div class="meta">
 						<h1>{video.title}</h1>
 						<p class="stats">{video.views} views · {video.date} · {fmtTime(video.seconds)}</p>
-						<div class="channel"><div class="avatar">B</div><div><strong>Buzzyfly</strong><div style="color:#aaa;font-size:.8rem">Official explainers</div></div></div>
+						<div class="channel">
+							<div class="avatar">B</div>
+							<div>
+								<strong>Buzzyfly</strong>
+								<div style="color:#aaa;font-size:.8rem">Official explainers</div>
+							</div>
+						</div>
 						<p class="desc">{video.description}</p>
-						<p class="note" id="modeNote">If an mp4 is uploaded to public/videos/{video.slug}.mp4, the native player takes over. Until then this page speaks the explainer and flips slides.</p>
 					</div>
 				</div>
+
 				<aside class="queue">
+					<p class="queue-label">Up next</p>
 					{queue.map((v) => (
-						<a class="card" href={`/videos/${v.slug}`}>
+						<a class={`card ${v.slug === slug ? 'active-card' : ''}`} href={`/videos/${v.slug}`}>
 							<div class="thumb">
-								<img src={v.poster} alt="" />
+								<img src={v.poster} alt="" loading="lazy" />
 								<span class="dur">{fmtTime(v.seconds)}</span>
 							</div>
 							<div>
@@ -87,83 +121,112 @@ const queue = EXPLAINER_VIDEOS.filter((v) => v.slug !== video.slug);
 			</section>
 		</main>
 		<Footer />
+
 		<script is:inline define:vars={{ slides: video.slides, seconds: video.seconds }}>
 			const vid = document.getElementById('vid');
 			const slide = document.getElementById('slide');
+			const slideInner = document.getElementById('slideInner');
 			const kicker = document.getElementById('kicker');
 			const line = document.getElementById('line');
 			const sub = document.getElementById('sub');
-			const note = document.getElementById('modeNote');
-			let fallback = true;
-			let t = 0;
-			let raf = null;
-			let last = 0;
+			const progressFill = document.getElementById('progressFill');
+			const pauseFlash = document.getElementById('pauseFlash');
+			const pauseIcon = document.getElementById('pauseIcon');
+
+			let useFallback = true;
 			let playing = false;
+			let paused = false;
+			let elapsed = 0;
+			let lastTick = null;
+			let rafId = null;
+			const slideDuration = seconds / slides.length;
+			let flashTimer = null;
 
-			function paint(at) {
-				const i = Math.min(slides.length - 1, Math.floor((at / seconds) * slides.length));
-				const s = slides[i];
-				kicker.textContent = s[0];
-				line.textContent = s[1];
-				sub.textContent = s[2];
+			function setSlide(idx) {
+				const s = slides[Math.min(idx, slides.length - 1)];
+				slideInner.classList.add('fading');
+				setTimeout(() => {
+					kicker.textContent = s[0];
+					line.textContent = s[1];
+					sub.textContent = s[2];
+					slideInner.classList.remove('fading');
+				}, 450);
 			}
 
-			function speak() {
-				if (!('speechSynthesis' in window)) return;
-				speechSynthesis.cancel();
-				const txt = slides.map((s) => s[0] + '. ' + s[1] + '. ' + s[2]).join(' ... ');
-				const u = new SpeechSynthesisUtterance(txt);
-				u.rate = 1.05;
-				u.pitch = 0.95;
-				const voices = speechSynthesis.getVoices();
-				const pref = voices.find((x) => /en/i.test(x.lang)) || voices[0];
-				if (pref) u.voice = pref;
-				speechSynthesis.speak(u);
-			}
+			function tick(ts) {
+				if (paused || !playing || !useFallback) return;
+				if (lastTick === null) lastTick = ts;
+				const dt = (ts - lastTick) / 1000;
+				lastTick = ts;
+				elapsed += dt;
 
-			function loop(now) {
-				if (!playing || !fallback) return;
-				if (!last) last = now;
-				t += (now - last) / 1000;
-				last = now;
-				if (t >= seconds) {
-					t = seconds;
-					playing = false;
-					paint(t);
-					return;
+				const total = seconds;
+				const pct = Math.min(100, (elapsed / total) * 100);
+				progressFill.style.width = pct + '%';
+
+				const idx = Math.floor((elapsed / total) * slides.length);
+				const prevIdx = Math.floor(((elapsed - dt) / total) * slides.length);
+				if (idx !== prevIdx && idx < slides.length) setSlide(idx);
+
+				if (elapsed >= total) {
+					elapsed = 0;
+					lastTick = null;
+					setSlide(0);
 				}
-				paint(t);
-				raf = requestAnimationFrame(loop);
+
+				rafId = requestAnimationFrame(tick);
 			}
 
 			function startFallback() {
-				if (playing) return;
+				if (!useFallback) return;
+				slide.classList.remove('hidden');
 				playing = true;
-				last = 0;
-				speak();
-				raf = requestAnimationFrame(loop);
+				paused = false;
+				lastTick = null;
+				rafId = requestAnimationFrame(tick);
+			}
+
+			function togglePause() {
+				if (!useFallback) return;
+				paused = !paused;
+				pauseIcon.textContent = paused ? '▶' : '⏸';
+				pauseFlash.classList.add('show');
+				if (flashTimer) clearTimeout(flashTimer);
+				flashTimer = setTimeout(() => pauseFlash.classList.remove('show'), 600);
+				if (!paused) {
+					lastTick = null;
+					rafId = requestAnimationFrame(tick);
+				} else {
+					cancelAnimationFrame(rafId);
+				}
 			}
 
 			vid.addEventListener('loadeddata', () => {
 				if (vid.readyState >= 2 && vid.videoWidth > 0) {
-					fallback = false;
+					useFallback = false;
 					slide.classList.add('hidden');
-					note.textContent = 'Playing the uploaded mp4.';
 				}
 			});
+
 			vid.addEventListener('error', () => {
-				fallback = true;
-				slide.classList.remove('hidden');
-				note.textContent = 'No mp4 at this path yet. Slides + voiceover are the explainer until you drop the file in public/videos.';
+				useFallback = true;
+				vid.style.display = 'none';
+				startFallback();
 			});
+
 			vid.addEventListener('play', () => {
-				if (fallback) startFallback();
+				if (useFallback) { vid.pause(); togglePause(); }
 			});
-			slide.addEventListener('click', startFallback);
-			vid.addEventListener('click', () => {
-				if (fallback) startFallback();
-			});
-			if ('speechSynthesis' in window) speechSynthesis.onvoiceschanged = () => {};
+
+			slide.addEventListener('click', togglePause);
+
+			/* Auto-start: after a short delay, if the real video hasn't loaded, start the slides */
+			setTimeout(() => {
+				if (useFallback && !playing) {
+					vid.style.display = 'none';
+					startFallback();
+				}
+			}, 800);
 		</script>
 	</body>
 </html>
