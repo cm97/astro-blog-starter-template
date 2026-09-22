@@ -30,7 +30,7 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 			.yt-wrap { max-width:1280px; margin:0 auto; padding:16px 16px 48px; }
 			.yt-layout { display:grid; grid-template-columns:minmax(0,1fr) 402px; gap:24px; align-items:start; }
 
-			/* ══ PLAYER ══ */
+			/* ══ PLAYER SHELL ══ */
 			.player-wrap { min-width:0; }
 			.player {
 				position:relative;
@@ -38,42 +38,75 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				background:#000;
 				border-radius:12px;
 				overflow:hidden;
+				cursor:pointer;
+				user-select:none;
 			}
 
-			/* Real video: hidden until canplay */
-			.player video {
-				display:none;
+			/* ── Poster state (default) ── */
+			.player-poster {
+				position:absolute;
+				inset:0;
+				z-index:10;
+				transition:opacity .35s;
+			}
+			.player-poster img {
 				width:100%; height:100%;
 				object-fit:cover;
+				display:block;
 			}
-			.player.has-video video { display:block; }
-			.player.has-video .explainer { display:none; }
+			/* Big play button centred on poster */
+			.poster-play {
+				position:absolute;
+				inset:0;
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				background:rgba(0,0,0,.35);
+				transition:background .2s;
+			}
+			.player:hover .poster-play { background:rgba(0,0,0,.5); }
+			.poster-play-btn {
+				width:72px; height:72px;
+				border-radius:50%;
+				background:rgba(255,255,255,.92);
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				box-shadow:0 4px 24px rgba(0,0,0,.5);
+				transition:transform .2s, background .2s;
+			}
+			.player:hover .poster-play-btn { transform:scale(1.08); background:#fff; }
+			.poster-play-btn svg { width:28px; height:28px; margin-left:4px; }
 
-			/* ── Explainer / slide player ── */
+			/* Poster hidden once playing */
+			.player.playing .player-poster,
+			.player.ended   .player-poster { opacity:0; pointer-events:none; }
+
+			/* ── Motion-graphics slide player ── */
 			.explainer {
 				position:absolute;
 				inset:0;
 				overflow:hidden;
-				cursor:pointer;
+				opacity:0;
+				transition:opacity .4s;
 			}
+			.player.playing .explainer,
+			.player.ended   .explainer { opacity:1; }
 
 			/* Animated background */
 			.exp-bg {
 				position:absolute;
 				inset:-20%;
-				background:
-					radial-gradient(ellipse 60% 50% at 20% 30%, rgba(201,120,32,0.35) 0%, transparent 70%),
-					radial-gradient(ellipse 50% 60% at 80% 70%, rgba(35,55,255,0.25) 0%, transparent 65%),
-					#0f0f0f;
 				animation:bgshift 8s ease-in-out infinite alternate;
 			}
+			/* bg color set per-slide via JS */
 			@keyframes bgshift {
 				0%   { transform:translate(0,0) scale(1); }
 				50%  { transform:translate(3%,2%) scale(1.04); }
 				100% { transform:translate(-2%,3%) scale(1.02); }
 			}
 
-			/* Grid lines overlay */
+			/* Grid lines */
 			.exp-grid {
 				position:absolute;
 				inset:0;
@@ -84,7 +117,7 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				pointer-events:none;
 			}
 
-			/* Content */
+			/* Slide content */
 			.exp-content {
 				position:absolute;
 				inset:0;
@@ -93,9 +126,6 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				justify-content:center;
 				padding:7% 8%;
 			}
-
-			/* Slide text — JS swaps class to trigger animations */
-			.slide-block { overflow:hidden; }
 			.slide-kicker {
 				font-size:clamp(.65rem,.9vw,.85rem);
 				font-weight:700;
@@ -103,7 +133,6 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				text-transform:uppercase;
 				color:#f4c27a;
 				margin:0 0 .55rem;
-				animation:lineIn .5s ease both;
 			}
 			.slide-headline {
 				font-size:clamp(1.2rem,3.5vw,2.6rem);
@@ -111,7 +140,6 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				color:#fff;
 				line-height:1.15;
 				margin:0 0 .6rem;
-				animation:lineIn .5s .08s ease both;
 			}
 			.slide-sub {
 				font-size:clamp(.82rem,1.5vw,1.05rem);
@@ -119,12 +147,6 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				line-height:1.55;
 				margin:0;
 				max-width:36rem;
-				animation:lineIn .5s .16s ease both;
-			}
-
-			@keyframes lineIn {
-				from { opacity:0; transform:translateY(18px); }
-				to   { opacity:1; transform:translateY(0); }
 			}
 
 			/* Buzzyfly brand mark */
@@ -136,43 +158,138 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				letter-spacing:.1em;
 				color:rgba(244,194,122,.6);
 				text-transform:uppercase;
+				z-index:2;
 			}
 
-			/* Progress bar */
-			.exp-progress {
-				position:absolute;
-				bottom:0; left:0; right:0;
-				height:3px;
-				background:rgba(255,255,255,.12);
-			}
-			.exp-fill {
-				height:100%;
-				background:#f4c27a;
-				width:0%;
-			}
-
-			/* Slide counter */
-			.exp-counter {
-				position:absolute;
-				bottom:10px; right:14px;
-				font-size:11px;
-				color:rgba(255,255,255,.4);
-				font-weight:600;
-			}
-
-			/* Pause overlay (shown on click) */
-			.exp-pause {
+			/* ── End card ── */
+			.end-card {
 				position:absolute;
 				inset:0;
-				display:grid;
-				place-items:center;
+				display:flex;
+				flex-direction:column;
+				align-items:center;
+				justify-content:center;
+				gap:16px;
+				background:rgba(0,0,0,.7);
+				opacity:0;
+				pointer-events:none;
+				transition:opacity .4s;
+			}
+			.player.ended .end-card { opacity:1; pointer-events:auto; }
+			.end-card h3 { font-size:1.4rem; font-weight:800; color:#fff; margin:0; text-align:center; }
+			.end-cta {
+				display:inline-flex;
+				align-items:center;
+				gap:8px;
+				padding:.6em 1.6em;
+				background:#f4c27a;
+				color:#0f0f0f;
+				font-weight:700;
+				font-size:1rem;
+				border-radius:999px;
+				text-decoration:none;
+				transition:background .15s;
+			}
+			.end-cta:hover { background:#f9d898; }
+			.end-replay {
+				background:none;
+				border:none;
+				color:rgba(255,255,255,.6);
+				font-size:.85rem;
+				cursor:pointer;
+				text-decoration:underline;
+				padding:0;
+			}
+			.end-replay:hover { color:#fff; }
+
+			/* ── Controls bar ── */
+			.controls {
+				position:absolute;
+				bottom:0; left:0; right:0;
+				padding:0 12px 10px;
+				background:linear-gradient(transparent, rgba(0,0,0,.8));
+				z-index:20;
 				opacity:0;
 				transition:opacity .25s;
-				background:rgba(0,0,0,.3);
+			}
+			.player:hover .controls,
+			.player.ended .controls  { opacity:1; }
+			.player.playing .controls { opacity:0; }
+			.player.playing:hover .controls { opacity:1; }
+
+			/* Progress / timeline */
+			.progress-rail {
+				width:100%;
+				height:4px;
+				background:rgba(255,255,255,.25);
+				border-radius:4px;
+				margin-bottom:8px;
+				cursor:pointer;
+				position:relative;
+			}
+			.progress-fill {
+				height:100%;
+				background:#f4c27a;
+				border-radius:4px;
+				width:0%;
+				transition:width 0s linear;
 				pointer-events:none;
 			}
-			.exp-pause.show { opacity:1; }
-			.exp-pause svg { width:56px; height:56px; }
+			.controls-row {
+				display:flex;
+				align-items:center;
+				gap:10px;
+			}
+			.ctrl-btn {
+				background:none;
+				border:none;
+				color:#fff;
+				cursor:pointer;
+				padding:0;
+				display:flex;
+				align-items:center;
+			}
+			.ctrl-btn svg { width:22px; height:22px; }
+			.ctrl-time {
+				font-size:.78rem;
+				color:rgba(255,255,255,.75);
+				font-variant-numeric:tabular-nums;
+				margin-left:2px;
+			}
+			.ctrl-title {
+				flex:1;
+				font-size:.78rem;
+				color:rgba(255,255,255,.6);
+				white-space:nowrap;
+				overflow:hidden;
+				text-overflow:ellipsis;
+				margin:0 8px;
+			}
+			.ctrl-fullscreen { margin-left:auto; }
+
+			/* Centre pause icon flash */
+			.centre-icon {
+				position:absolute;
+				inset:0;
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				pointer-events:none;
+				z-index:15;
+			}
+			.centre-icon span {
+				width:62px; height:62px;
+				border-radius:50%;
+				background:rgba(0,0,0,.55);
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				opacity:0;
+				transform:scale(.8);
+				transition:opacity .15s, transform .15s;
+			}
+			.centre-icon span.show { opacity:1; transform:scale(1); }
+			.centre-icon svg { width:30px; height:30px; fill:#fff; }
 
 			/* ══ Below player ══ */
 			.video-title {
@@ -206,6 +323,7 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				font-weight:600;
 				cursor:pointer;
 				transition:background .15s;
+				text-decoration:none;
 			}
 			.act-btn:hover { background:#3d3d3d; }
 			.act-btn svg { width:16px; height:16px; }
@@ -244,14 +362,12 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				cursor:pointer;
 				transition:background .15s;
 				white-space:nowrap;
+				text-decoration:none;
 			}
 			.subscribe-btn:hover { background:#ccc; }
 
 			/* Description */
-			.desc-box {
-				padding:12px 0;
-				border-bottom:1px solid #272727;
-			}
+			.desc-box { padding:12px 0; border-bottom:1px solid #272727; }
 			.desc-text { font-size:.88rem; color:#ccc; line-height:1.55; margin:0; }
 
 			/* ══ SIDEBAR ══ */
@@ -276,7 +392,6 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				transition:background .15s;
 			}
 			.qcard:hover { background:#1f1f1f; }
-			.qcard.now-playing { background:#1f1f1f; border-left:2px solid #f4c27a; padding-left:3px; }
 			.qthumb {
 				position:relative;
 				aspect-ratio:16/9;
@@ -319,56 +434,87 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				<div class="player-wrap">
 					<div class="player" id="player">
 
-						<!-- Real video (hidden until mp4 loads) -->
-						<video id="vid" controls playsinline poster={video.poster} preload="none">
-							<source src={video.src} type="video/mp4" />
-						</video>
+						<!-- Poster (shown until play is clicked) -->
+						<div class="player-poster" id="playerPoster">
+							<img src={video.poster} alt={video.title} />
+							<div class="poster-play" id="posterPlay">
+								<div class="poster-play-btn">
+									<!-- Play triangle -->
+									<svg viewBox="0 0 28 28" fill="none">
+										<polygon points="6,2 26,14 6,26" fill="#0f0f0f"/>
+									</svg>
+								</div>
+							</div>
+						</div>
 
-						<!-- Slide explainer player -->
+						<!-- Slide explainer (motion graphics) -->
 						<div class="explainer" id="explainer">
-							<div class="exp-bg"></div>
+							<div class="exp-bg" id="expBg"></div>
 							<div class="exp-grid"></div>
-
 							<span class="exp-brand">Buzzyfly</span>
 
 							<div class="exp-content">
-								<div class="slide-block" id="slideBlock">
+								<div id="slideBlock" style="will-change:opacity,transform;">
 									<p class="slide-kicker"   id="sKicker">{video.slides[0][0]}</p>
 									<p class="slide-headline" id="sLine"  >{video.slides[0][1]}</p>
 									<p class="slide-sub"      id="sSub"   >{video.slides[0][2]}</p>
 								</div>
 							</div>
+						</div>
 
-							<div class="exp-progress">
-								<div class="exp-fill" id="expFill"></div>
+						<!-- End card -->
+						<div class="end-card" id="endCard">
+							<h3>Get the full system</h3>
+							<a class="end-cta" href="/store">
+								<svg viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+								Buy now — from $15
+							</a>
+							<button class="end-replay" id="endReplay">Watch again</button>
+						</div>
+
+						<!-- Controls bar -->
+						<div class="controls" id="controls">
+							<div class="progress-rail" id="progressRail">
+								<div class="progress-fill" id="progressFill"></div>
 							</div>
-							<span class="exp-counter" id="expCounter">1 / {video.slides.length}</span>
-
-							<div class="exp-pause" id="expPause">
-								<svg viewBox="0 0 56 56" fill="none">
-									<circle cx="28" cy="28" r="27" fill="rgba(0,0,0,0.55)"/>
-									<rect x="20" y="16" width="5" height="24" rx="2" fill="white"/>
-									<rect x="31" y="16" width="5" height="24" rx="2" fill="white"/>
-								</svg>
+							<div class="controls-row">
+								<button class="ctrl-btn" id="ctrlPlayPause" title="Play / Pause">
+									<!-- Pause icon by default (shown while playing) -->
+									<svg id="iconPause" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+									<svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor" style="display:none"><polygon points="5,3 19,12 5,21"/></svg>
+								</button>
+								<span class="ctrl-time" id="ctrlTime">0:00 / {fmtTime(video.seconds)}</span>
+								<span class="ctrl-title">{video.title}</span>
+								<button class="ctrl-btn ctrl-fullscreen" id="ctrlFullscreen" title="Fullscreen">
+									<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/></svg>
+								</button>
 							</div>
 						</div>
-					</div>
+
+						<!-- Centre flash icon (pause/play indicator) -->
+						<div class="centre-icon">
+							<span id="centreIcon">
+								<svg id="centreIconSvg" viewBox="0 0 30 30"><polygon points="5,2 25,15 5,28"/></svg>
+							</span>
+						</div>
+
+					</div><!-- /.player -->
 
 					<!-- Title and actions -->
 					<h1 class="video-title">{video.title}</h1>
 					<div class="video-stats-row">
 						<p class="video-stats">{video.views} views · {video.date}</p>
 						<div class="action-btns">
-							<button class="act-btn" title="Like">
+							<button class="act-btn" id="likeBtn" title="Like">
 								<svg viewBox="0 0 24 24" fill="currentColor"><path d="M1 21h4V9H1v12zm22-11c0-1.1-.9-2-2-2h-6.31l.95-4.57.03-.32c0-.41-.17-.79-.44-1.06L14.17 1 7.59 7.59C7.22 7.95 7 8.45 7 9v10c0 1.1.9 2 2 2h9c.83 0 1.54-.5 1.84-1.22l3.02-7.05c.09-.23.14-.47.14-.73v-2z"/></svg>
 								Like
 							</button>
-							<button class="act-btn" title="Share">
+							<button class="act-btn" title="Share" onclick="navigator.share ? navigator.share({title:document.title,url:location.href}) : navigator.clipboard.writeText(location.href).then(()=>alert('Link copied!'))">
 								<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92-1.31-2.92-2.92-2.92z"/></svg>
 								Share
 							</button>
-							<a class="act-btn" href="/store" style="text-decoration:none">
-								<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+							<a class="act-btn" href="/store">
+								<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 9h2V6h3V4h-3V1h-2v3H8v2h3v3zm-1 11c-1.1 0-1.99.9-1.99 2S8.9 24 10 24s2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-1.99.9-1.99 2s.89 2 1.99 2 2-.9 2-2-.9-2-2-2zm-8.9-5h7.45c.75 0 1.41-.41 1.75-1.03l3.58-6.49A1 1 0 0 0 22 6h-16l-.94-2H2v2h2l3.6 7.59L6.25 16c-.16.28-.25.61-.25.96C6 18.1 6.9 19 8 19h14v-2H8.42c-.14 0-.25-.11-.25-.25l.03-.15.9-1.6z"/></svg>
 								Get the system
 							</a>
 						</div>
@@ -415,98 +561,258 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 		</main>
 		<Footer />
 
-		<script is:inline define:vars={{ slides: video.slides, perSlide }}>
-			const playerEl  = document.getElementById('player');
-			const vid        = document.getElementById('vid');
-			const expFill    = document.getElementById('expFill');
-			const expCounter = document.getElementById('expCounter');
-			const expPause   = document.getElementById('expPause');
-			const explainer  = document.getElementById('explainer');
-			const slideBlock = document.getElementById('slideBlock');
-			const sKicker    = document.getElementById('sKicker');
-			const sLine      = document.getElementById('sLine');
-			const sSub       = document.getElementById('sSub');
+		<script is:inline define:vars={{ slides, perSlide, totalSeconds: video.seconds, videoTitle: video.title }}>
+			const playerEl     = document.getElementById('player');
+			const playerPoster = document.getElementById('playerPoster');
+			const posterPlay   = document.getElementById('posterPlay');
+			const explainer    = document.getElementById('explainer');
+			const expBg        = document.getElementById('expBg');
+			const endCard      = document.getElementById('endCard');
+			const endReplay    = document.getElementById('endReplay');
+			const progressFill = document.getElementById('progressFill');
+			const progressRail = document.getElementById('progressRail');
+			const ctrlPlayPause= document.getElementById('ctrlPlayPause');
+			const iconPlay     = document.getElementById('iconPlay');
+			const iconPause    = document.getElementById('iconPause');
+			const ctrlTime     = document.getElementById('ctrlTime');
+			const ctrlFullscreen = document.getElementById('ctrlFullscreen');
+			const centreIcon   = document.getElementById('centreIcon');
+			const centreIconSvg= document.getElementById('centreIconSvg');
+			const slideBlock   = document.getElementById('slideBlock');
+			const sKicker      = document.getElementById('sKicker');
+			const sLine        = document.getElementById('sLine');
+			const sSub         = document.getElementById('sSub');
+			const likeBtn      = document.getElementById('likeBtn');
 
-			let idx = 0;
-			let paused = false;
+			/* Slide background colours (one per slide, cycling) */
+			const BG_SETS = [
+				'radial-gradient(ellipse 60% 50% at 20% 30%, rgba(201,120,32,0.4) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 80% 70%, rgba(35,55,255,0.28) 0%, transparent 65%), #0f0f0f',
+				'radial-gradient(ellipse 55% 55% at 75% 25%, rgba(35,200,120,0.3) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 20% 75%, rgba(120,35,255,0.25) 0%, transparent 65%), #0a0a0a',
+				'radial-gradient(ellipse 70% 50% at 50% 20%, rgba(255,60,80,0.28) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 80% 80%, rgba(201,120,32,0.3) 0%, transparent 65%), #0f0f0f',
+				'radial-gradient(ellipse 60% 60% at 10% 60%, rgba(35,55,255,0.35) 0%, transparent 70%), radial-gradient(ellipse 55% 50% at 85% 30%, rgba(35,200,200,0.2) 0%, transparent 65%), #0a0a12',
+			];
+
+			let idx     = 0;
+			let paused  = false;
+			let started = false;
+			let ended   = false;
 			let startMs = null;
 			let elapsed = 0;
-			let rafId = null;
+			let rafId   = null;
+			let totalElapsed = 0; /* ms elapsed across all slides */
 
-			function updateCounter() {
-				expCounter.textContent = (idx + 1) + ' / ' + slides.length;
+			function fmtMs(ms) {
+				const s = Math.floor(ms / 1000);
+				return Math.floor(s / 60) + ':' + String(s % 60).padStart(2,'0');
+			}
+			function fmtSecs(s) {
+				return Math.floor(s / 60) + ':' + String(s % 60).padStart(2,'0');
+			}
+
+			function setIcons(playing) {
+				iconPause.style.display = playing ? '' : 'none';
+				iconPlay.style.display  = playing ? 'none' : '';
+			}
+
+			function flashCentre(isPlay) {
+				centreIconSvg.innerHTML = isPlay
+					? '<polygon points="5,2 25,15 5,28"/>'
+					: '<rect x="6" y="4" width="5" height="22" rx="2"/><rect x="15" y="4" width="5" height="22" rx="2"/>';
+				centreIcon.classList.add('show');
+				setTimeout(() => centreIcon.classList.remove('show'), 600);
+			}
+
+			function setBg(i) {
+				expBg.style.background = BG_SETS[i % BG_SETS.length];
+			}
+
+			function animIn() {
+				slideBlock.style.transition = 'none';
+				slideBlock.style.opacity = '0';
+				slideBlock.style.transform = 'translateY(20px)';
+				requestAnimationFrame(() => requestAnimationFrame(() => {
+					slideBlock.style.transition = 'opacity .45s, transform .45s';
+					slideBlock.style.opacity = '1';
+					slideBlock.style.transform = 'translateY(0)';
+				}));
 			}
 
 			function animFrame(now) {
 				if (paused) return;
 				if (startMs === null) startMs = now;
-				const progress = Math.min(1, (elapsed + now - startMs) / perSlide);
-				expFill.style.width = (progress * 100) + '%';
-				if (progress < 1) {
+				const dt = now - startMs;
+				const slideProgress = Math.min(1, (elapsed + dt) / perSlide);
+				const overallProgress = Math.min(1, (totalElapsed + elapsed + dt) / (totalSeconds * 1000));
+
+				progressFill.style.width = (overallProgress * 100) + '%';
+				ctrlTime.textContent = fmtMs(totalElapsed + elapsed + dt) + ' / ' + fmtSecs(totalSeconds);
+
+				if (slideProgress < 1) {
 					rafId = requestAnimationFrame(animFrame);
 				} else {
+					totalElapsed += perSlide;
 					nextSlide();
 				}
 			}
 
 			function startAnim() {
 				startMs = null;
+				elapsed = 0;
 				rafId = requestAnimationFrame(animFrame);
 			}
 
 			function nextSlide() {
-				idx = (idx + 1) % slides.length;
-				elapsed = 0;
-				transitionTo(slides[idx]);
-			}
-
-			function transitionTo(s) {
-				/* Fade out by removing animation class, then swap content */
-				slideBlock.style.opacity = '0';
-				slideBlock.style.transform = 'translateY(-10px)';
-				slideBlock.style.transition = 'opacity .35s, transform .35s';
-				setTimeout(() => {
-					sKicker.textContent = s[0];
-					sLine.textContent   = s[1];
-					sSub.textContent    = s[2];
-					expFill.style.width = '0%';
-					updateCounter();
-					slideBlock.style.transition = 'none';
-					slideBlock.style.opacity = '0';
-					slideBlock.style.transform = 'translateY(14px)';
-					requestAnimationFrame(() => requestAnimationFrame(() => {
-						slideBlock.style.transition = 'opacity .4s, transform .4s';
-						slideBlock.style.opacity = '1';
-						slideBlock.style.transform = 'translateY(0)';
-					}));
-					startAnim();
-				}, 330);
-			}
-
-			function togglePause() {
-				paused = !paused;
-				expPause.classList.toggle('show', paused);
-				if (!paused) {
-					elapsed = parseFloat(expFill.style.width || '0') / 100 * perSlide;
-					startMs = null;
-					rafId = requestAnimationFrame(animFrame);
-				} else {
+				idx++;
+				if (idx >= slides.length) {
+					/* Video ended */
 					cancelAnimationFrame(rafId);
-					elapsed = parseFloat(expFill.style.width || '0') / 100 * perSlide;
+					ended = true;
+					paused = false;
+					setIcons(false);
+					playerEl.classList.remove('playing');
+					playerEl.classList.add('ended');
+					progressFill.style.width = '100%';
+					ctrlTime.textContent = fmtSecs(totalSeconds) + ' / ' + fmtSecs(totalSeconds);
+					return;
+				}
+				/* Transition to next slide */
+				slideBlock.style.transition = 'opacity .3s, transform .3s';
+				slideBlock.style.opacity = '0';
+				slideBlock.style.transform = 'translateY(-12px)';
+				setTimeout(() => {
+					sKicker.textContent = slides[idx][0];
+					sLine.textContent   = slides[idx][1];
+					sSub.textContent    = slides[idx][2];
+					setBg(idx);
+					animIn();
+					startAnim();
+				}, 280);
+			}
+
+			function play() {
+				if (ended) return;
+				paused = false;
+				started = true;
+				playerEl.classList.add('playing');
+				playerEl.classList.remove('ended');
+				setIcons(true);
+				setBg(idx);
+				if (startMs === null && elapsed === 0) animIn();
+				startMs = null;
+				rafId = requestAnimationFrame(animFrame);
+			}
+
+			function pause() {
+				paused = true;
+				cancelAnimationFrame(rafId);
+				elapsed += performance.now() - (startMs ?? performance.now());
+				startMs = null;
+				setIcons(false);
+			}
+
+			function togglePlayPause() {
+				if (!started || ended) return;
+				if (paused) {
+					play();
+					flashCentre(true);
+				} else {
+					pause();
+					flashCentre(false);
 				}
 			}
 
-			explainer.addEventListener('click', togglePause);
-
-			/* Real video takes over if it loads */
-			vid.addEventListener('canplay', () => {
-				playerEl.classList.add('has-video');
+			function reset() {
 				cancelAnimationFrame(rafId);
+				idx = 0; elapsed = 0; totalElapsed = 0; startMs = null;
+				paused = false; ended = false; started = false;
+				sKicker.textContent = slides[0][0];
+				sLine.textContent   = slides[0][1];
+				sSub.textContent    = slides[0][2];
+				progressFill.style.width = '0%';
+				ctrlTime.textContent = '0:00 / ' + fmtSecs(totalSeconds);
+				setIcons(false);
+				playerEl.classList.remove('playing','ended');
+			}
+
+			/* Click poster play button → start */
+			posterPlay.addEventListener('click', (e) => {
+				e.stopPropagation();
+				play();
 			});
 
-			/* Start immediately */
-			updateCounter();
-			startAnim();
+			/* Click explainer → toggle pause */
+			explainer.addEventListener('click', togglePlayPause);
+
+			/* Controls play/pause button */
+			ctrlPlayPause.addEventListener('click', (e) => {
+				e.stopPropagation();
+				if (!started) { play(); flashCentre(true); return; }
+				togglePlayPause();
+			});
+
+			/* End card replay */
+			endReplay.addEventListener('click', (e) => {
+				e.stopPropagation();
+				reset();
+				play();
+			});
+
+			/* Progress rail scrub */
+			progressRail.addEventListener('click', (e) => {
+				e.stopPropagation();
+				if (!started) return;
+				const rect = progressRail.getBoundingClientRect();
+				const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+				const targetMs = pct * totalSeconds * 1000;
+				/* Find which slide we should be on */
+				let cumMs = 0;
+				for (let i = 0; i < slides.length; i++) {
+					if (cumMs + perSlide >= targetMs || i === slides.length - 1) {
+						idx = i;
+						totalElapsed = cumMs;
+						elapsed = targetMs - cumMs;
+						sKicker.textContent = slides[i][0];
+						sLine.textContent   = slides[i][1];
+						sSub.textContent    = slides[i][2];
+						setBg(i);
+						animIn();
+						startMs = null;
+						if (!paused) {
+							cancelAnimationFrame(rafId);
+							rafId = requestAnimationFrame(animFrame);
+						}
+						break;
+					}
+					cumMs += perSlide;
+				}
+			});
+
+			/* Fullscreen */
+			ctrlFullscreen.addEventListener('click', (e) => {
+				e.stopPropagation();
+				if (!document.fullscreenElement) {
+					playerEl.requestFullscreen?.();
+				} else {
+					document.exitFullscreen?.();
+				}
+			});
+
+			/* Like button toggle */
+			likeBtn.addEventListener('click', () => {
+				const liked = likeBtn.dataset.liked === '1';
+				likeBtn.dataset.liked = liked ? '0' : '1';
+				likeBtn.style.color = liked ? '' : '#f4c27a';
+				likeBtn.style.background = liked ? '' : '#3d2e00';
+			});
+
+			/* Keyboard controls */
+			document.addEventListener('keydown', (e) => {
+				if (e.code === 'Space' && e.target === document.body) {
+					e.preventDefault();
+					if (!started) play();
+					else togglePlayPause();
+				}
+			});
 		</script>
 	</body>
 </html>
