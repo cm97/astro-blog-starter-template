@@ -1,41 +1,40 @@
 ---
 title: "The 20-Minute Weekly Reset Checklist"
-description: "The free checklist that keeps your business from collapsing by Thursday."
+description: "How to start every week with clarity instead of chaos — in 20 minutes or less."
 pubDate: "2026-09-01"
-category: "free"
+category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 ---
 
-# The 20-Minute Weekly Reset Checklist
+The problem with most planning systems is that they're designed for a different kind of work.
 
-This is the actual file. Not a teaser. Not a preview. The real thing.
+Blocking four hours on Sunday to review goals, update a personal OKR dashboard, and color-code your calendar is fine if you don't have clients to serve, proposals to write, and follow-ups to send on Monday morning.
 
-Print it. Stick it on your wall. Run it every Friday or every Monday — whenever your week usually goes to shit.
+For a solo operator, planning needs to be fast. 20 minutes. Same structure every week. Done.
 
-## Monday (or whenever you start)
+## Why 20 minutes
 
-- [ ] Open last week's notes. What actually got done?
-- [ ] List the 3 things that MUST move this week. Not 10. Three.
-- [ ] Block 2 hours for deep work. No meetings. No email. Calendar it.
-- [ ] Check the inbox. Anything older than 7 days gets archived or replied to.
+Long planning sessions create the illusion of productivity. You feel like you accomplished something because you thought about the week. But thinking about the week is not the same as running the week.
 
-## Midweek check (Wednesday)
+The 20-minute reset is maintenance, not strategy. It's clearing the decks, setting three priorities, and making sure nothing is rotting. That's all it's supposed to do.
 
-- [ ] Are the 3 things still on track? If not, cut one.
-- [ ] Any client follow-ups rotting? Send them today.
-- [ ] Did you say yes to something you should have said no to? Fix it now.
+If you need to think about strategy, that's a different meeting — scheduled separately, not crammed into your Monday morning.
 
-## Friday (or end of week)
+## The four parts
 
-- [ ] What got done? Write it down. You will forget.
-- [ ] What didn't? Why? Be honest.
-- [ ] What's the one thing to fix next week?
-- [ ] Close the laptop. Actually close it.
+The Buzzyfly weekly reset covers four 5-minute sections:
 
-## The rule
+- **Last week review** — what actually got done, what didn't, one honest reason why, and which clients went more than 5 days without contact
+- **This week's three priorities** — a simple decision framework for picking the three things that actually move the needle
+- **Calendar and inbox sweep** — the specific questions to ask about every meeting and email that's been sitting more than 7 days
+- **Admin sweep** — unpaid invoices, unsigned contracts, subscriptions you're not using, and a weekly revenue check
 
-If it takes more than 20 minutes, you're doing it wrong. This is a reset, not a strategy session.
+It also includes a midweek Wednesday check-in (5 minutes), an end-of-week Friday close, and a quarterly reset to run every 13 weeks.
+
+The timer is part of the system. When 20 minutes is up, you stop.
 
 ---
 
-Want the full system — onboarding, follow-ups, scope creep scripts, and the proposal template that closes? That's the [Buzzyfly Digital System](/store) for $49.
+**The complete weekly reset checklist is included in the [Buzzyfly Digital System](/store).**
+
+One-time payment. Instant download.

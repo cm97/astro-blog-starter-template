@@ -1,61 +1,41 @@
 ---
-title: "Follow-Up Email Templates That Get Replies"
-description: "Three templates that actually work. Copy, paste, send."
+title: "The Follow-Up Emails That Actually Get Replies"
+description: "Why most follow-up emails get ignored — and what to write instead."
 pubDate: "2026-09-01"
-category: "free"
+category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 ---
 
-# Follow-Up Email Templates
+Most follow-up emails fail for the same reason: they're about the sender, not the recipient.
 
-These are the actual templates. Not examples. The real ones.
+"Just checking in." "Circling back." "Wanted to follow up on my last email."
 
-## Template 1: The gentle nudge (3 days after no reply)
+These phrases exist to make the sender feel like they did something. They do nothing for the person reading them.
 
-Subject: Quick check-in
+## The emails that get replies
 
-Hi [Name],
+A follow-up that works does one of three things:
 
-Just floating this back to the top — wanted to make sure it didn't get buried.
+**1. Removes friction.** It makes the next step easier than ignoring you. "Reply 'yes' and I'll take it from there" is easier than whatever thinking they were putting off.
 
-[One sentence about what you sent.]
+**2. Delivers value.** Not a reminder that you exist — an actual useful thing. A resource, an observation, a piece of information that's relevant to their situation. No strings attached.
 
-No pressure either way. If now's not the time, totally fine — just let me know and I'll stop bugging you.
+**3. Creates gentle closure.** The "breakup email" — closing the thread on your end — works more often than it should. It forces a decision. Silence is comfortable; "I'm going to close this out" is not.
 
-[Your name]
+## What the full sequence looks like
 
-## Template 2: The value drop (7 days after no reply)
+The Buzzyfly follow-up system covers five complete scenarios:
 
-Subject: Thought you'd find this useful
+- **Lead follow-up** — the Day 3, Day 7, and Day 14 cadence with the exact email to send at each stage
+- **Proposal follow-up** — what to say at Days 3, 7, 12, and 18, plus what to do when they say "too expensive," "still deciding," or nothing at all
+- **Active client follow-up** — when a project stalls mid-engagement and you need to get it moving
+- **Post-project follow-up** — the 2-week, 30-day, and 60-day check-ins that generate testimonials and referrals
+- **Re-engagement** — the quarterly email to cold leads and past clients that converts more than you'd expect
 
-Hi [Name],
-
-Saw [something relevant] and immediately thought of you.
-
-[One sentence about why it matters to them.]
-
-Happy to chat if you want to dig in, or I can leave you alone. Your call.
-
-[Your name]
-
-## Template 3: The breakup (14 days after no reply)
-
-Subject: Should I close this out?
-
-Hi [Name],
-
-I've reached out a couple times and haven't heard back, so I'm going to assume the timing's off.
-
-I'll close this thread on my end. If things change, you know where to find me.
-
-No hard feelings either way.
-
-[Your name]
-
-## The rule
-
-Send the breakup. It works more often than you'd think, and it stops you from staring at a dead thread wondering.
+Each section includes word-for-word email templates, subject lines, and notes on when to use each variation.
 
 ---
 
-These three plus the full system — onboarding, weekly reset, scope creep scripts, proposal template — is the [Buzzyfly Digital System](/store) for $49.
+**The complete follow-up system and all templates are included in the [Buzzyfly Digital System](/store).**
+
+One-time payment. Instant download.
