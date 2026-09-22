@@ -1,36 +1,46 @@
 ---
-title: "The Scope Creep Script — How to Say No Without Losing the Client"
-description: "The exact words to use when a client asks for more than you agreed to."
+title: "How to Stop Scope Creep Without Losing the Client"
+description: "The words to use when a client asks for more than you agreed to — and why most providers handle it wrong."
 pubDate: "2026-09-01"
-category: "free"
+category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 ---
 
-# The Scope Creep Script
+Scope creep is not a client problem. It's a response problem.
 
-This is the actual script. Not a summary. The words.
+The client asks for one small thing outside the agreement. The provider says "sure, no problem" — because the ask seems small, and saying no feels awkward. A week later, there's another small ask. And another.
 
-## When they ask for something outside the agreement
+Six weeks in, the provider has done four extra hours of work for free and resents the client for it. The client has no idea.
 
-**Don't say:** "That's not in scope."
-**Don't say:** "I can't do that."
-**Don't say:** "That's extra."
+## Why "that's not in scope" doesn't work
 
-**Say this:**
+Telling a client something is out of scope without a path forward creates conflict. They don't know what to do with that information. They pushed back on the boundary you set, and you gave them nothing to push toward.
 
-"That's a great idea, and I want to make sure we do it right. It's outside what we agreed on for this phase, so here's what I'd suggest: [option 1 — add it as a new phase with its own timeline and price] or [option 2 — we keep the current scope and you can decide later]. Which feels better to you?"
+The answer is not a harder "no." It's a different structure — one that gives them two options, both of which respect your time.
 
-## Why this works
+## The structure that works
 
-- You didn't say no. You said "not in this phase."
-- You gave them two options, both of which respect your time.
-- You made them choose, which puts the decision back on them.
-- You didn't get emotional or defensive.
+When a client asks for something outside the agreement, the response that closes the conversation without losing the relationship follows one pattern:
 
-## The rule
+Acknowledge the idea. Name the situation clearly. Give two options — one to add the work properly (with a price), one to defer it. Make them choose.
 
-If you can't say this out loud without flinching, practice it in the mirror. It gets easier.
+This does three things: it validates their idea so they don't feel rejected, it sets the expectation that additional work has a cost, and it forces a decision instead of leaving the conversation hanging.
+
+## What the full Scope Guard covers
+
+The Buzzyfly scope scripts include six word-for-word scripts:
+
+- The standard scope creep response
+- What to say when they push back ("can't you just...?")
+- How to handle the revision loop after something's been approved
+- What to say when the brief fundamentally changes mid-project
+- How to address assumed scope ("I thought that was included")
+- How to decline additional work you don't want
+
+Each script includes the exact words, the reasoning behind them, and a practice protocol for getting comfortable saying them.
 
 ---
 
-This script plus the full system is the [Buzzyfly Digital System](/store) — $49.
+**The complete Scope Guard script library is included in the [Buzzyfly Digital System](/store).**
+
+One-time payment. Instant download.

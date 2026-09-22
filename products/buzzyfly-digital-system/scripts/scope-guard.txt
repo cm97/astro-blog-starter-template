@@ -1,7 +1,132 @@
-SCOPE GUARD — SAY THIS OUT LOUD
+SCOPE GUARD — WORD-FOR-WORD SCRIPTS FOR HARD CONVERSATIONS
+==========================================================
+
+Read these out loud until they don't make you flinch.
+The discomfort you feel is normal. It goes away with practice.
+
+
+---
+SCRIPT 1 — THE STANDARD SCOPE CREEP RESPONSE
+---
 
 When a client asks for something outside the agreement:
 
-"That's a great idea, and I want to make sure we do it right. It's outside what we agreed on for this phase, so here's what I'd suggest: [option 1 — add it as a new phase with its own timeline and price] or [option 2 — we keep the current scope and you can decide later]. Which feels better to you?"
+"That's a great idea, and I want to make sure we do it right.
+It's outside what we agreed on for this phase, so here's what I'd suggest:
 
-Practice it in the mirror until it doesn't make you flinch.
+Option 1: We add it as a separate piece of work — I can put together a quick
+quote, probably a day or two turnaround.
+
+Option 2: We keep the current scope as-is and you can decide about this later
+once you see how the first phase lands.
+
+Which feels better to you?"
+
+
+---
+SCRIPT 2 — WHEN THEY PUSH BACK ("CAN'T YOU JUST...?")
+---
+
+"I hear you — it seems like a small thing, and I get that.
+The challenge is that [brief honest reason: it's more complex than it looks /
+it sets a precedent for the rest of the project / it would push the timeline].
+
+I want to do right by you, and I want to do right by the project.
+Here's what I can do: [specific offer — small scope addition at a fair price,
+or an alternative that solves their underlying need within scope].
+
+Does that work?"
+
+
+---
+SCRIPT 3 — THE REVISION LOOP (CHANGES AFTER APPROVAL)
+---
+
+When they want to change something they already approved:
+
+"Happy to do that. Just want to flag that we're past the revision stage on this
+piece — we're on revision [X] of [X included].
+
+I can absolutely make this change. It'll be [Y] additional [hours/flat fee] on
+top of the original scope.
+
+Should I put that in writing and get your go-ahead before I start?"
+
+
+---
+SCRIPT 4 — THE MOVING TARGET (THEY CHANGED THE BRIEF)
+---
+
+When the project has fundamentally shifted from what you agreed to:
+
+"I want to make sure I understand what you're describing, because it sounds
+like the direction has shifted from where we started.
+
+Originally we agreed to [what was in the brief]. What you're describing now
+is [what they want now], which is meaningfully different.
+
+I'm not saying no — I just want to make sure we're both clear that this is
+essentially a new scope. That means a new timeline and a revised price.
+
+Can we get on a quick call so I can understand exactly what you're picturing?
+I want to make sure any new agreement reflects what we're actually doing."
+
+
+---
+SCRIPT 5 — THE ASSUMPTION CREEP (THEY EXPECTED SOMETHING YOU NEVER AGREED TO)
+---
+
+When a client insists something was "included" but it wasn't:
+
+"I want to get this right, so let me look back at our agreement.
+[Pause. Actually look.]
+
+Looking at what we signed, [deliverable they expected] isn't in what we agreed
+on — but I understand why you might have expected it.
+
+Here's what I'd like to do: [option 1 — add it at a fair cost, or option 2 —
+do a slimmer version of it within the current scope].
+
+Going forward, I'll be more explicit in the scope document so this doesn't
+come up again. What would you like to do here?"
+
+
+---
+SCRIPT 6 — DECLINING ADDITIONAL WORK YOU DON'T WANT
+---
+
+"Thanks for thinking of me for this. I want to be honest with you —
+I don't think I'm the right person for [this specific thing].
+
+[Optional: brief honest reason — "It's outside my core focus" or
+"I don't have bandwidth to do it well right now."]
+
+I'd rather tell you that clearly than take it on and not give it the
+attention it deserves."
+
+
+---
+PRACTICE PROTOCOL
+-----------------
+
+1. Read each script out loud three times.
+2. Record yourself saying Script 1 and listen back.
+3. Practice with a friend or partner playing the client.
+4. The goal is to say these without pausing, apologizing, or adding
+   qualifiers like "I mean..." or "I just..."
+
+The words are not the hard part. The hard part is believing you're
+allowed to say them.
+
+You are.
+
+
+---
+THE RULE
+---------
+
+Every scope creep conversation you avoid costs you money.
+Every one you handle well earns you respect — and usually more work.
+
+The clients who push back hardest on scope are often the ones who,
+once they see you hold your ground professionally, trust you most.
