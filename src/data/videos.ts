@@ -10,6 +10,7 @@ export type ExplainerVideo = {
 	src: string;
 	poster: string;
 	slides: ExplainerSlide[];
+	script: string;
 };
 
 export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
@@ -27,6 +28,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 			["PROBLEM", "It still lives in your head", "New client. Same steps. Rebuilt from memory."],
 			["FIX", "Run the checklists in 20 minutes", "Open. Tick. Close. Process holds on hard weeks."],
 		],
+		script: "Running your freelance business out of your head is costing you clients. Buzzyfly is a twenty-minute operating system for solo operators — checklists for onboarding, weekly planning, and follow-ups. Same process every week. Every client. Nothing falls through the cracks. Get the Digital System at buzzyfly dot com. Forty-nine dollars, one time.",
 	},
 	{
 		slug: "whats-in-the-zip",
@@ -42,6 +44,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 			["CHECKLISTS", "Onboard. Weekly reset. Follow up.", "Intake, scope-creep, retention included."],
 			["TEMPLATES", "Proposal. Emails. Say-no lines.", "Fill blanks. Send. Keep the scope."],
 		],
+		script: "Here is exactly what is in the forty-nine dollar Digital System. Three folders: checklists, templates, and scripts. An onboarding checklist, a weekly reset, a follow-up sequence, and a proposal template. Everything to run a client business without improvising from memory. One download. Yours forever. Forty-nine dollars at buzzyfly dot com.",
 	},
 	{
 		slug: "how-to-use",
@@ -57,6 +60,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 			["FOLDERS", "Match folder to the job", "checklists to run, templates to send."],
 			["RUN", "Do not rebuild Monday", "Tick the list. Send the template. Move on."],
 		],
+		script: "Most people buy systems and never open them. Here is how to use Buzzyfly the day you buy it. Pay — download link arrives in your email — unzip — open the onboarding checklist — run it with your next client. That is the whole setup. Stop rebuilding your process from scratch. Start at buzzyfly dot com.",
 	},
 	{
 		slug: "weekly-reset",
@@ -72,6 +76,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 			["YOU GET", "Reset + priority + Thursday check-in", "Plus inbox-clearing routine."],
 			["RESULT", "Same way every week", "Clear inbox. One priority. Plan the week."],
 		],
+		script: "Every Monday should start the same way. Twenty minutes. Four sections: last week review, this week's priorities, calendar sweep, admin check. Done. The Buzzyfly Weekly Reset holds the structure on your hard weeks so you do not have to think about it. Fifteen dollars at buzzyfly dot com.",
 	},
 	{
 		slug: "onboarding-kit",
@@ -87,6 +92,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 			["YOU GET", "Welcome. Intake. Kickoff agenda.", "Notes format + 48-hour reminder."],
 			["RESULT", "Week one is documented", "Same sequence every new client."],
 		],
+		script: "Week one with a new client should not feel improvised. The Client Onboarding Kit gives you a welcome email, intake form, kickoff agenda, and notes format — everything to start the relationship professionally. Same sequence every new client, from day one. Twenty-nine dollars at buzzyfly dot com.",
 	},
 	{
 		slug: "follow-up-emails",
@@ -102,6 +108,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 			["THE SET", "Proposal 5–7 days. Mid-project. Quiet leads.", "Referral. End-of-project wrap-up."],
 			["POINT", "Pipeline dies without follow-up", "These keep it moving."],
 		],
+		script: "Most proposals die because nobody followed up. Five ready-to-send emails: proposal follow-up, mid-project check-in, quiet leads, referral ask, and project wrap-up. Fill in a name. Hit send. Keep the pipeline alive. Nineteen dollars at buzzyfly dot com.",
 	},
 	{
 		slug: "advantages",
@@ -117,6 +124,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 			["FOLLOW-UPS", "They actually get sent", "Five ready emails. Name in. Send."],
 			["PRICE", "Digital System $49 one-time", "7-day refund if files are not as listed."],
 		],
+		script: "Why forty-nine dollars one time instead of a monthly subscription? Because it is files. Checklists and templates you download, keep, and use forever. No login, no renewal, no platform dependency. Your onboarding process leaves your head. Your follow-ups actually get sent. Your week runs the same way every time. Forty-nine dollars at buzzyfly dot com. One time. Yours forever.",
 	},
 	{
 		slug: "complete-bundle",
@@ -132,6 +140,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 			["ONE PAY", "One-time. No subscription.", "Lifetime product updates included."],
 			["OR", "Digital System alone is $49", "Onboarding, weekly planning, follow-up workflows."],
 		],
+		script: "If you are serious about running a tight solo business, the Complete Bundle has everything. Digital System, Client Onboarding Kit, Follow-Up Templates, and Weekly Reset Checklist. All four products. One download. Lifetime updates included. Ninety-seven dollars at buzzyfly dot com.",
 	},
 ];
 
