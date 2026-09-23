@@ -1,5 +1,5 @@
 {
-	"name": "astro-blog-starter-template",
+	"name": "buzzyfly",
 	"main": "./src/worker-entry.ts",
 	"compatibility_date": "2026-09-01",
 	"compatibility_flags": [
