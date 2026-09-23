@@ -85,6 +85,33 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return new Response("Fulfillment not configured", { status: 500 });
 	}
 
+	// Claim the order before doing anything visible. Providers redeliver
+	// webhooks (timeouts, retries, manual replays), and the unique index on
+	// (provider, order_id) makes this insert the idempotency check: if the row
+	// already exists this is a repeat, and we must not mint a second token or
+	// email the customer again. A failed send is recovered from the admin
+	// "resend" action, not by replaying the webhook. D1 stays optional — if it
+	// is missing or errors, we still deliver rather than leave a buyer empty-handed.
+	if (env.DB) {
+		try {
+			const claimed = await env.DB.prepare(
+				`INSERT OR IGNORE INTO fulfillments (provider, order_id, item_id, customer_email, created_at)
+				 VALUES (?, ?, ?, ?, ?)`,
+			)
+				.bind(order.provider, order.orderId, order.itemId, order.customerEmail, Date.now())
+				.run();
+			if (claimed.meta.changes === 0) {
+				console.log(`Buzzyfly webhook: order ${order.orderId} already fulfilled; ignoring redelivery`);
+				return new Response(JSON.stringify({ received: true, fulfilled: true, duplicate: true }), {
+					status: 200,
+					headers: { "content-type": "application/json" },
+				});
+			}
+		} catch (error) {
+			console.error("Buzzyfly webhook: failed to record fulfillment in D1", error);
+		}
+	}
+
 	const downloadToken = await createDownloadToken(order, env.DOWNLOAD_TOKEN_SECRET);
 	const downloadUrl = `${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${downloadToken}`;
 
@@ -111,21 +138,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		console.error(
 			`Buzzyfly webhook: DELIVERY FAILED for order ${order.orderId} (${order.customerEmail ?? "no email"}): ${delivery.reason}. Download URL: ${downloadUrl}`,
 		);
-	}
-
-	// Best-effort fulfillment record. D1 is optional — the webhook still
-	// succeeds if the `DB` binding isn't configured for this environment.
-	if (env.DB) {
-		try {
-			await env.DB.prepare(
-				`INSERT INTO fulfillments (provider, order_id, item_id, customer_email, created_at)
-				 VALUES (?, ?, ?, ?, ?)`,
-			)
-				.bind(order.provider, order.orderId, order.itemId, order.customerEmail, Date.now())
-				.run();
-		} catch (error) {
-			console.error("Buzzyfly webhook: failed to record fulfillment in D1", error);
-		}
 	}
 
 	console.log(
