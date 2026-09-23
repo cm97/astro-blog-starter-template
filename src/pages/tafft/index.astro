@@ -1,0 +1,155 @@
+---
+import { getCollection } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+import { AI_TOOL_CATEGORIES, AI_TOOL_PRICING } from '../../data/aiTools';
+
+export const prerender = true;
+
+const tools = (await getCollection('aitools')).sort((a, b) =>
+	a.data.name.localeCompare(b.data.name, 'en', { sensitivity: 'base' }),
+);
+
+// Only offer category filters that at least one tool uses, busiest first.
+const categoryCounts = new Map<string, number>();
+for (const t of tools) for (const c of t.data.categories) categoryCounts.set(c, (categoryCounts.get(c) ?? 0) + 1);
+const categories = [...categoryCounts.entries()].sort((a, b) => b[1] - a[1]);
+const label = (slug: string) => AI_TOOL_CATEGORIES[slug] ?? slug;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`AI Tools Directory | ${SITE_TITLE}`}
+			description={`Find the right AI tool for the job. ${tools.length} AI tools for writing, coding, video, images, audio and more, filterable by category and pricing.`}
+		/>
+		<style>
+			.dir { width: auto; max-width: 1120px; margin: 2rem auto; padding: 0 1rem; }
+			.dir-hero h1 { margin: 0 0 0.4rem; font-size: 2.2rem; line-height: 1.15; }
+			.dir-hero p { margin: 0 0 1.5rem; color: rgb(var(--gray)); font-size: 1.1rem; }
+			.controls { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 1rem; }
+			.controls input, .controls select {
+				padding: 0.75rem 1rem; border: 1px solid rgb(var(--gray-light)); border-radius: 8px;
+				font: inherit; font-size: 1rem; background: #fff;
+			}
+			.controls input { flex: 1; min-width: 220px; }
+			.controls input:focus, .controls select:focus { outline: 2px solid var(--accent); border-color: transparent; }
+			.chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+			.chip {
+				border: 1px solid rgb(var(--gray-light)); background: #fff; border-radius: 999px;
+				padding: 0.35rem 0.8rem; font: inherit; font-size: 0.88rem; cursor: pointer; color: rgb(var(--gray-dark));
+			}
+			.chip:hover { border-color: var(--accent); }
+			.chip[aria-pressed='true'] { background: var(--accent); border-color: var(--accent); color: #fff; }
+			.chip .n { opacity: 0.65; margin-left: 0.2rem; }
+			.count { color: rgb(var(--gray)); font-size: 0.95rem; margin: 0 0 1rem; }
+			.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; list-style: none; padding: 0; margin: 0; }
+			.card {
+				display: flex; flex-direction: column; gap: 0.5rem; height: 100%; box-sizing: border-box;
+				border: 1px solid rgb(var(--gray-light)); border-radius: 10px; padding: 1.1rem; background: #fff;
+				color: inherit; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease;
+			}
+			.card:hover { transform: translateY(-2px); box-shadow: 0 4px 14px rgba(var(--black), 8%); }
+			.card h2 { margin: 0; font-size: 1.15rem; color: rgb(var(--black)); }
+			.card p { margin: 0; font-size: 0.93rem; line-height: 1.45; color: rgb(var(--gray-dark)); flex: 1; }
+			.tags { display: flex; flex-wrap: wrap; gap: 0.35rem; }
+			.tag { font-size: 0.75rem; background: rgb(var(--gray-light)); color: rgb(var(--gray-dark)); padding: 0.15rem 0.5rem; border-radius: 4px; }
+			.tag.price { background: #e6f4ea; color: #137333; font-weight: 600; }
+			.empty { text-align: center; color: rgb(var(--gray)); padding: 2rem 0; }
+			.credit { margin-top: 2.5rem; font-size: 0.85rem; color: rgb(var(--gray)); }
+			[hidden] { display: none !important; }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="dir">
+			<section class="dir-hero">
+				<h1>There's an AI tool for that</h1>
+				<p>{tools.length} hand-picked AI tools for writing, coding, video, images, audio and more. Search or filter to find the right one.</p>
+			</section>
+
+			<div class="controls">
+				<input id="q" type="search" placeholder="Search tools, e.g. video, transcription, coding…" aria-label="Search AI tools" />
+				<select id="pricing" aria-label="Filter by pricing">
+					<option value="">Any pricing</option>
+					{Object.entries(AI_TOOL_PRICING).map(([value, text]) => <option value={value}>{text}</option>)}
+				</select>
+			</div>
+
+			<div class="chips" role="group" aria-label="Filter by category">
+				<button type="button" class="chip" data-cat="" aria-pressed="true">All</button>
+				{categories.map(([slug, n]) => (
+					<button type="button" class="chip" data-cat={slug} aria-pressed="false">
+						{label(slug)}<span class="n">{n}</span>
+					</button>
+				))}
+			</div>
+
+			<p class="count" id="count" aria-live="polite">{tools.length} tools</p>
+
+			<ul class="grid" id="grid">
+				{tools.map((t) => (
+					<li
+						data-cats={t.data.categories.join(' ')}
+						data-pricing={t.data.pricing}
+						data-text={[t.data.name, t.data.description, ...t.data.categories, ...t.data.use_cases, ...t.data.modalities].join(' ').toLowerCase()}
+					>
+						<a class="card" href={`/tafft/${t.id}/`}>
+							<h2>{t.data.name}</h2>
+							<p>{t.data.description}</p>
+							<div class="tags">
+								<span class="tag price">{AI_TOOL_PRICING[t.data.pricing]}</span>
+								{t.data.categories.slice(0, 2).map((c) => <span class="tag">{label(c)}</span>)}
+							</div>
+						</a>
+					</li>
+				))}
+			</ul>
+			<p class="empty" id="empty" hidden>No tools match. Try a different search or category.</p>
+
+			<p class="credit">
+				Tool listings adapted from the open-source
+				<a href="https://github.com/durofycom/ai-tools" rel="noopener">AI Tools directory</a> (MIT license).
+			</p>
+		</main>
+		<Footer />
+
+		<script>
+			const q = document.getElementById('q') as HTMLInputElement;
+			const pricing = document.getElementById('pricing') as HTMLSelectElement;
+			const count = document.getElementById('count')!;
+			const empty = document.getElementById('empty')!;
+			const items = [...document.querySelectorAll<HTMLLIElement>('#grid > li')];
+			const chips = [...document.querySelectorAll<HTMLButtonElement>('.chip')];
+			let category = '';
+
+			function apply() {
+				const words = q.value.toLowerCase().trim().split(/\s+/).filter(Boolean);
+				let shown = 0;
+				for (const li of items) {
+					const ok =
+						(!category || li.dataset.cats!.split(' ').includes(category)) &&
+						(!pricing.value || li.dataset.pricing === pricing.value) &&
+						words.every((w) => li.dataset.text!.includes(w));
+					li.hidden = !ok;
+					if (ok) shown++;
+				}
+				count.textContent = `${shown} tool${shown === 1 ? '' : 's'}`;
+				empty.hidden = shown > 0;
+			}
+
+			for (const chip of chips) {
+				chip.addEventListener('click', () => {
+					category = chip.dataset.cat ?? '';
+					for (const c of chips) c.setAttribute('aria-pressed', String(c === chip));
+					apply();
+				});
+			}
+			q.addEventListener('input', apply);
+			pricing.addEventListener('change', apply);
+		</script>
+	</body>
+</html>

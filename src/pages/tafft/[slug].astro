@@ -1,0 +1,108 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+import { AI_TOOL_CATEGORIES, AI_TOOL_MODALITIES, AI_TOOL_PRICING, AI_TOOL_USE_CASES } from '../../data/aiTools';
+
+export const prerender = true;
+
+export async function getStaticPaths() {
+	const tools = await getCollection('aitools');
+	return tools.map((tool) => ({
+		params: { slug: tool.id },
+		props: {
+			tool,
+			// Up to 4 other tools sharing the first category.
+			related: tools
+				.filter((t) => t.id !== tool.id && t.data.categories[0] === tool.data.categories[0])
+				.slice(0, 4),
+		},
+	}));
+}
+
+interface Props {
+	tool: CollectionEntry<'aitools'>;
+	related: CollectionEntry<'aitools'>[];
+}
+
+const { tool, related } = Astro.props;
+const d = tool.data;
+const { Content } = await render(tool);
+const labels = (slugs: string[], map: Record<string, string>) => slugs.map((s) => map[s] ?? s);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`${d.name} — AI Tool | ${SITE_TITLE}`} description={d.description} />
+		<style>
+			.tool { width: auto; max-width: 760px; margin: 2rem auto; padding: 0 1rem; }
+			.back { font-size: 0.95rem; text-decoration: none; }
+			.tool h1 { margin: 0.75rem 0 0.4rem; font-size: 2.2rem; line-height: 1.15; }
+			.lead { font-size: 1.15rem; color: rgb(var(--gray-dark)); margin: 0 0 1.25rem; }
+			.visit {
+				display: inline-block; background: var(--accent); color: #fff; padding: 0.7rem 1.3rem;
+				border-radius: 8px; font-weight: 700; text-decoration: none;
+			}
+			.visit:hover { background: var(--accent-dark); }
+			.facts { display: grid; grid-template-columns: max-content 1fr; gap: 0.5rem 1.25rem; margin: 2rem 0; padding: 1.25rem; border: 1px solid rgb(var(--gray-light)); border-radius: 10px; }
+			.facts dt { font-weight: 700; color: rgb(var(--gray-dark)); }
+			.facts dd { margin: 0; }
+			.body { line-height: 1.65; }
+			.tool h2 { font-size: 1.5rem; margin: 1.5rem 0 0.75rem; }
+			.related { margin-top: 2.5rem; }
+			.related ul { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 0.75rem; }
+			.related a { display: block; padding: 0.9rem; border: 1px solid rgb(var(--gray-light)); border-radius: 8px; text-decoration: none; color: inherit; height: 100%; box-sizing: border-box; }
+			.related a:hover { border-color: var(--accent); }
+			.related strong { display: block; margin-bottom: 0.25rem; }
+			.related span { font-size: 0.88rem; color: rgb(var(--gray)); }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="tool">
+			<a class="back" href="/tafft/">← All AI tools</a>
+			<h1>{d.name}</h1>
+			<p class="lead">{d.description}</p>
+			<a class="visit" href={d.website} target="_blank" rel="noopener nofollow">Visit {d.name} ↗</a>
+
+			<dl class="facts">
+				<dt>Pricing</dt><dd>{AI_TOOL_PRICING[d.pricing]}</dd>
+				<dt>Categories</dt><dd>{labels(d.categories, AI_TOOL_CATEGORIES).join(', ')}</dd>
+				{d.use_cases.length > 0 && <><dt>Good for</dt><dd>{labels(d.use_cases, AI_TOOL_USE_CASES).join(', ')}</dd></>}
+				{d.modalities.length > 0 && <><dt>Works with</dt><dd>{labels(d.modalities, AI_TOOL_MODALITIES).join(', ')}</dd></>}
+				<dt>API</dt><dd>{d.api ? 'Yes' : 'No'}</dd>
+				<dt>Self-hosted</dt><dd>{d.self_hosted ? 'Yes' : 'No'}</dd>
+				{d.launch_date && <><dt>Launched</dt><dd>{d.launch_date}</dd></>}
+			</dl>
+
+			{d.features.length > 0 && (
+				<section>
+					<h2>Key features</h2>
+					<ul>{d.features.map((f) => <li>{f}</li>)}</ul>
+				</section>
+			)}
+
+			<div class="body"><Content /></div>
+
+			{related.length > 0 && (
+				<section class="related">
+					<h2>Similar tools</h2>
+					<ul>
+						{related.map((r) => (
+							<li>
+								<a href={`/tafft/${r.id}/`}>
+									<strong>{r.data.name}</strong>
+									<span>{r.data.description}</span>
+								</a>
+							</li>
+						))}
+					</ul>
+				</section>
+			)}
+		</main>
+		<Footer />
+	</body>
+</html>

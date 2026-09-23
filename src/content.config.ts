@@ -22,4 +22,24 @@ const blog = defineCollection({
 	}),
 });
 
-export const collections = { blog };
+// AI tools directory. Entries adapted from github.com/durofycom/ai-tools (MIT, see LICENSE in the folder).
+const aitools = defineCollection({
+	loader: glob({ base: "./src/content/aitools", pattern: "*.md" }),
+	schema: z.object({
+		name: z.string(),
+		slug: z.string(),
+		website: z.string().url(),
+		description: z.string(),
+		categories: z.array(z.string()).default([]),
+		use_cases: z.array(z.string()).default([]),
+		modalities: z.array(z.string()).default([]),
+		pricing: z.enum(["free", "freemium", "paid", "open-source"]),
+		api: z.boolean().default(false),
+		self_hosted: z.boolean().default(false),
+		features: z.array(z.string()).default([]),
+		launch_date: z.coerce.string().optional(),
+		verified: z.boolean().default(false),
+	}),
+});
+
+export const collections = { blog, aitools };
