@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { buildPostMarkdown, getFile, getGitHubConfig, putFile, slugify } from "../../../lib/github";
 import { logAdminAction } from "../../../lib/audit";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -12,7 +13,6 @@ function backToNew(error: string): Response {
 }
 
 export const POST: APIRoute = async ({ request, locals }) => {
-	const env = locals.runtime.env;
 	const githubConfig = getGitHubConfig(env);
 	if (!githubConfig) return backToNew("GitHub integration isn't configured.");
 

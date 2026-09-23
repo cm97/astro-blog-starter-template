@@ -12,11 +12,11 @@
 		"publish": true
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "12.6.13",
-		"@astrojs/mdx": "4.3.14",
+		"@astrojs/cloudflare": "14.3.3",
+		"@astrojs/mdx": "8.0.2",
 		"@astrojs/rss": "4.0.19",
 		"@astrojs/sitemap": "3.7.4",
-		"astro": "5.18.2",
+		"astro": "7.3.4",
 		"typescript": "5.9.3"
 	},
 	"devDependencies": {

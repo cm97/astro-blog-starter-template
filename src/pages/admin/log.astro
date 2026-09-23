@@ -4,8 +4,8 @@ export const prerender = false;
 import AdminLayout from "../../layouts/AdminLayout.astro";
 import AdminHelp from "../../components/AdminHelp.astro";
 import { auditTableExists, listAuditLog } from "../../lib/audit";
+import { env } from "cloudflare:workers";
 
-const env = Astro.locals.runtime.env;
 const tableReady = await auditTableExists(env);
 const entries = tableReady ? await listAuditLog(env, 300) : [];
 ---

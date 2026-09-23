@@ -7,6 +7,7 @@ export const prerender = false;
 // use them — the submit button loses its background and renders white on
 // white, and the inputs lose their borders.
 import "../../styles/global.css";
+import { env } from "cloudflare:workers";
 
 const url = Astro.url;
 const error = url.searchParams.get("error");
@@ -15,7 +16,6 @@ const next = url.searchParams.get("next") ?? "/admin";
 // Report which of the required values the Worker can actually see, so a
 // misconfiguration says which one is wrong instead of just "not configured".
 // Only presence is ever reported — never a value, not even its length.
-const env = Astro.locals.runtime.env;
 const required = ["ADMIN_USERNAME", "ADMIN_PASSWORD", "ADMIN_SESSION_SECRET"] as const;
 const missing = required.filter((name) => !env[name]);
 

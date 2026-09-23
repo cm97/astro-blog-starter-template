@@ -6,18 +6,9 @@
  * the cron logic lives here and runs on a Cloudflare cron trigger.
  */
 
-import type { SSRManifest } from "astro";
-import { App } from "astro/app";
-import { handle } from "@astrojs/cloudflare/handler";
+import astroHandler from "@astrojs/cloudflare/entrypoints/server";
 import { BUZZYFLY_CONFIG } from "./data/monetization";
 import { sendFollowUpEmail } from "./lib/email";
-
-interface Env {
-	DB?: D1Database;
-	EMAIL?: { send(msg: { from: string; to: string; subject: string; html?: string; text?: string }): Promise<{ messageId: string }> };
-	EMAIL_API_KEY?: string;
-	EMAIL_FROM?: string;
-}
 
 interface FulfillmentRow {
 	provider: string;
@@ -68,7 +59,7 @@ async function sendOwnerAlert(orders: FulfillmentRow[], env: Env): Promise<void>
 	});
 }
 
-async function scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
+async function scheduled(_controller: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
 	if (!env.DB) return;
 
 	ctx.waitUntil(
@@ -137,20 +128,9 @@ async function scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext
 	);
 }
 
-/**
- * Entry point contract for `@astrojs/cloudflare` (`workerEntryPoint` in
- * astro.config.mjs): the adapter calls this with the SSR manifest and deploys
- * whatever it returns, so the cron handler ships in the same Worker as the site.
- */
-export function createExports(manifest: SSRManifest) {
-	const app = new App(manifest);
-	return {
-		default: {
-			async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-				// @ts-expect-error — Env carries the site's bindings; the adapter only needs ASSETS.
-				return handle(manifest, app, request, env, ctx);
-			},
-			scheduled,
-		},
-	};
-}
+// wrangler.json `main` points here. Astro serves every HTTP request; the
+// cron trigger lands in `scheduled` below.
+export default {
+	fetch: astroHandler.fetch,
+	scheduled,
+} satisfies ExportedHandler<Env>;

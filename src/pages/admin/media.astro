@@ -11,8 +11,8 @@ import {
 	listMedia,
 	type MediaItem,
 } from "../../lib/media";
+import { env } from "cloudflare:workers";
 
-const env = Astro.locals.runtime.env;
 const params = Astro.url.searchParams;
 const uploaded = params.get("uploaded");
 const deleted = params.get("deleted");

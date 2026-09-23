@@ -9,6 +9,7 @@ import {
 	uniqueMediaName,
 } from "../../../lib/media";
 import { logAdminAction } from "../../../lib/audit";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -29,7 +30,6 @@ function fail(message: string): Response {
  * overwrite something customers paid for.
  */
 export const POST: APIRoute = async ({ request, locals }) => {
-	const env = locals.runtime.env;
 
 	const form = await request.formData().catch(() => null);
 	const file = form?.get("file");

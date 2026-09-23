@@ -9,6 +9,7 @@ import {
 } from "../../lib/fulfillment";
 import { BUZZYFLY_CONFIG } from "../../data/monetization";
 import { sendDeliveryEmail } from "../../lib/email";
+import { env } from "cloudflare:workers";
 
 // This endpoint must run on-demand (a Cloudflare Pages Function / Worker),
 // never be statically prerendered, since it verifies a live request signature.
@@ -22,8 +23,7 @@ export const prerender = false;
  * from the private R2 bucket without ever exposing the bucket itself, then
  * emails them that link.
  */
-export const POST: APIRoute = async ({ request, locals }) => {
-	const env = locals.runtime.env;
+export const POST: APIRoute = async ({ request }) => {
 	const rawBody = await request.text();
 
 	const stripeSignature = request.headers.get("stripe-signature");
