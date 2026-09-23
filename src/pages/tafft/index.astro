@@ -97,7 +97,7 @@ const label = (slug: string) => AI_TOOL_CATEGORIES[slug] ?? slug;
 						data-pricing={t.data.pricing}
 						data-text={[t.data.name, t.data.description, ...t.data.categories, ...t.data.use_cases, ...t.data.modalities].join(' ').toLowerCase()}
 					>
-						<a class="card" href={`/ai-tools/${t.id}/`}>
+						<a class="card" href={`/tafft/${t.id}/`}>
 							<h2>{t.data.name}</h2>
 							<p>{t.data.description}</p>
 							<div class="tags">

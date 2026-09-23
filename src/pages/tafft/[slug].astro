@@ -63,7 +63,7 @@ const labels = (slugs: string[], map: Record<string, string>) => slugs.map((s) =
 	<body>
 		<Header />
 		<main class="tool">
-			<a class="back" href="/ai-tools/">← All AI tools</a>
+			<a class="back" href="/tafft/">← All AI tools</a>
 			<h1>{d.name}</h1>
 			<p class="lead">{d.description}</p>
 			<a class="visit" href={d.website} target="_blank" rel="noopener nofollow">Visit {d.name} ↗</a>
@@ -93,7 +93,7 @@ const labels = (slugs: string[], map: Record<string, string>) => slugs.map((s) =
 					<ul>
 						{related.map((r) => (
 							<li>
-								<a href={`/ai-tools/${r.id}/`}>
+								<a href={`/tafft/${r.id}/`}>
 									<strong>{r.data.name}</strong>
 									<span>{r.data.description}</span>
 								</a>
