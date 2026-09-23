@@ -1,6 +1,6 @@
 {
 	"name": "buzzyfly",
-	"main": "./dist/_worker.js/index.js",
+	"main": "./src/worker-entry.ts",
 	"compatibility_date": "2026-09-01",
 	"compatibility_flags": [
 		"nodejs_compat",

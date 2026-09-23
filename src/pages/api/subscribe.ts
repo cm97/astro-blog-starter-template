@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { sendWelcomeEmail } from "../../lib/email";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -25,8 +26,7 @@ async function readEmail(request: Request): Promise<string | null> {
  * forwards the lead to an external email provider when one is configured via
  * environment variables.
  */
-export const POST: APIRoute = async ({ request, locals }) => {
-	const env = locals.runtime.env;
+export const POST: APIRoute = async ({ request }) => {
 	const email = await readEmail(request);
 
 	if (!email || !EMAIL_RE.test(email)) {

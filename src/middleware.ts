@@ -1,5 +1,6 @@
 import { defineMiddleware } from "astro:middleware";
 import { ADMIN_SESSION_COOKIE, verifySessionToken } from "./lib/adminAuth";
+import { env } from "cloudflare:workers";
 
 const PUBLIC_ADMIN_PATHS = new Set(["/admin/login", "/admin/login/"]);
 const PUBLIC_ADMIN_API_PATHS = new Set(["/api/admin/login", "/api/admin/login/"]);
@@ -20,7 +21,6 @@ export const onRequest = defineMiddleware(async (context, next) => {
 	if (isAdminPage && PUBLIC_ADMIN_PATHS.has(pathname)) return next();
 	if (isAdminApi && PUBLIC_ADMIN_API_PATHS.has(pathname)) return next();
 
-	const env = context.locals.runtime.env;
 	const token = context.cookies.get(ADMIN_SESSION_COOKIE)?.value;
 	const session = await verifySessionToken(env, token);
 

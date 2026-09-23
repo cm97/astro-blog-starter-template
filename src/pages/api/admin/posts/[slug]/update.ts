@@ -1,11 +1,11 @@
 import type { APIRoute } from "astro";
 import { buildPostMarkdown, getGitHubConfig, putFile } from "../../../../../lib/github";
 import { logAdminAction } from "../../../../../lib/audit";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request, params, locals }) => {
-	const env = locals.runtime.env;
 	const githubConfig = getGitHubConfig(env);
 	const slug = params.slug;
 	if (!githubConfig || !slug) return new Response(null, { status: 303, headers: { Location: "/admin/posts" } });

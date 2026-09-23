@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { resolveProductFile, verifyDownloadToken, checkDownloadRateLimit, logDownloadEvent } from "../../lib/fulfillment";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -25,8 +26,7 @@ export const prerender = false;
  *
  * Rate limited per IP to prevent abuse at scale.
  */
-export const GET: APIRoute = async ({ request, locals }) => {
-	const env = locals.runtime.env;
+export const GET: APIRoute = async ({ request }) => {
 	const url = new URL(request.url);
 	const token = url.searchParams.get("token");
 	const ip = request.headers.get("cf-connecting-ip") ?? request.headers.get("x-forwarded-for") ?? "unknown";

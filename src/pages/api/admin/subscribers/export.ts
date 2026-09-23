@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -7,8 +8,7 @@ function csvEscape(value: string): string {
 	return value;
 }
 
-export const GET: APIRoute = async ({ url, locals }) => {
-	const env = locals.runtime.env;
+export const GET: APIRoute = async ({ url }) => {
 	const q = url.searchParams.get("q")?.trim() ?? "";
 
 	if (!env.DB) {

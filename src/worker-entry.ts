@@ -6,16 +6,9 @@
  * the cron logic lives here and runs on a Cloudflare cron trigger.
  */
 
-import worker from "astro/app/cloudflare";
+import astroHandler from "@astrojs/cloudflare/entrypoints/server";
 import { BUZZYFLY_CONFIG } from "./data/monetization";
 import { sendFollowUpEmail } from "./lib/email";
-
-interface Env {
-	DB?: D1Database;
-	EMAIL?: { send(msg: { from: string; to: string; subject: string; html?: string; text?: string }): Promise<{ messageId: string }> };
-	EMAIL_API_KEY?: string;
-	EMAIL_FROM?: string;
-}
 
 interface FulfillmentRow {
 	provider: string;
@@ -66,79 +59,78 @@ async function sendOwnerAlert(orders: FulfillmentRow[], env: Env): Promise<void>
 	});
 }
 
-const cronHandler = {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return worker.fetch(request, env, ctx);
-	},
+async function scheduled(_controller: ScheduledController, env: Env, ctx: ExecutionContext): Promise<void> {
+	if (!env.DB) return;
 
-	async scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
-		if (!env.DB) return;
+	ctx.waitUntil(
+		(async () => {
+			// 1. Owner alert for any new fulfilled orders
+			const result = await env.DB!.prepare(
+				`SELECT f.provider, f.order_id, f.item_id, f.customer_email, f.created_at
+				 FROM fulfillments f
+				 LEFT JOIN fulfillment_alerts a
+				   ON f.provider = a.provider AND f.order_id = a.order_id
+				 WHERE a.order_id IS NULL
+				 ORDER BY f.created_at DESC
+				 LIMIT 50`,
+			).all<FulfillmentRow>();
 
-		ctx.waitUntil(
-			(async () => {
-				// 1. Owner alert for any new fulfilled orders
-				const result = await env.DB!.prepare(
-					`SELECT f.provider, f.order_id, f.item_id, f.customer_email, f.created_at
+			const newOrders = result.results ?? [];
+			if (newOrders.length > 0) {
+				await sendOwnerAlert(newOrders, env);
+				const now = Date.now();
+				const stmts = newOrders.map((o) =>
+					env.DB!.prepare(
+						`INSERT OR IGNORE INTO fulfillment_alerts (provider, order_id, alerted_at)
+						 VALUES (?, ?, ?)`,
+					).bind(o.provider, o.order_id, now),
+				);
+				await env.DB!.batch(stmts);
+			}
+
+			// 2. 2-day follow-up emails for buyers who haven't received one yet
+			if (env.EMAIL) {
+				const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
+				const cutoff = Date.now() - TWO_DAYS_MS;
+
+				const pending = await env.DB!.prepare(
+					`SELECT f.provider, f.order_id, f.item_id, f.customer_email
 					 FROM fulfillments f
-					 LEFT JOIN fulfillment_alerts a
-					   ON f.provider = a.provider AND f.order_id = a.order_id
-					 WHERE a.order_id IS NULL
-					 ORDER BY f.created_at DESC
-					 LIMIT 50`,
-				).all<FulfillmentRow>();
+					 LEFT JOIN followup_emails fe ON f.provider = fe.provider AND f.order_id = fe.order_id
+					 WHERE fe.order_id IS NULL
+					   AND f.customer_email IS NOT NULL
+					   AND f.created_at <= ?
+					 ORDER BY f.created_at ASC
+					 LIMIT 20`,
+				).bind(cutoff).all<FulfillmentRow>();
 
-				const newOrders = result.results ?? [];
-				if (newOrders.length > 0) {
-					await sendOwnerAlert(newOrders, env);
+				const toFollowUp = pending.results ?? [];
+				if (toFollowUp.length > 0) {
 					const now = Date.now();
-					const stmts = newOrders.map((o) =>
-						env.DB!.prepare(
-							`INSERT OR IGNORE INTO fulfillment_alerts (provider, order_id, alerted_at)
-							 VALUES (?, ?, ?)`,
-						).bind(o.provider, o.order_id, now),
-					);
-					await env.DB!.batch(stmts);
-				}
-
-				// 2. 2-day follow-up emails for buyers who haven't received one yet
-				if (env.EMAIL) {
-					const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
-					const cutoff = Date.now() - TWO_DAYS_MS;
-
-					const pending = await env.DB!.prepare(
-						`SELECT f.provider, f.order_id, f.item_id, f.customer_email
-						 FROM fulfillments f
-						 LEFT JOIN followup_emails fe ON f.provider = fe.provider AND f.order_id = fe.order_id
-						 WHERE fe.order_id IS NULL
-						   AND f.customer_email IS NOT NULL
-						   AND f.created_at <= ?
-						 ORDER BY f.created_at ASC
-						 LIMIT 20`,
-					).bind(cutoff).all<FulfillmentRow>();
-
-					const toFollowUp = pending.results ?? [];
-					if (toFollowUp.length > 0) {
-						const now = Date.now();
-						for (const order of toFollowUp) {
-							if (!order.customer_email) continue;
-							const result = await sendFollowUpEmail(
-								{ to: order.customer_email, itemId: order.item_id, orderId: order.order_id },
-								env,
-							);
-							console.log(
-								`Buzzyfly follow-up: order ${order.order_id} -> sent=${result.sent}${result.reason ? ` (${result.reason})` : ""}`,
-							);
-							// Record attempt regardless of send result so we don't retry forever
-							await env.DB!.prepare(
-								`INSERT OR IGNORE INTO followup_emails (provider, order_id, sent_at, success)
-								 VALUES (?, ?, ?, ?)`,
-							).bind(order.provider, order.order_id, now, result.sent ? 1 : 0).run();
-						}
+					for (const order of toFollowUp) {
+						if (!order.customer_email) continue;
+						const result = await sendFollowUpEmail(
+							{ to: order.customer_email, itemId: order.item_id, orderId: order.order_id },
+							env,
+						);
+						console.log(
+							`Buzzyfly follow-up: order ${order.order_id} -> sent=${result.sent}${result.reason ? ` (${result.reason})` : ""}`,
+						);
+						// Record attempt regardless of send result so we don't retry forever
+						await env.DB!.prepare(
+							`INSERT OR IGNORE INTO followup_emails (provider, order_id, sent_at, success)
+							 VALUES (?, ?, ?, ?)`,
+						).bind(order.provider, order.order_id, now, result.sent ? 1 : 0).run();
 					}
 				}
-			})(),
-		);
-	},
-};
+			}
+		})(),
+	);
+}
 
-export default cronHandler;
+// wrangler.json `main` points here. Astro serves every HTTP request; the
+// cron trigger lands in `scheduled` below.
+export default {
+	fetch: astroHandler.fetch,
+	scheduled,
+} satisfies ExportedHandler<Env>;

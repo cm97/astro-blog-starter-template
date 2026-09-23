@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { contentTypeFor, resolvePublicKey } from "../../lib/media";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -21,8 +22,7 @@ export const prerender = false;
  * only be addressed by a key containing a slash — each of those is rejected
  * independently.
  */
-export const GET: APIRoute = async ({ params, locals }) => {
-	const env = locals.runtime.env;
+export const GET: APIRoute = async ({ params }) => {
 
 	// `[...key]` yields the whole trailing path. Media names are flat, so
 	// anything containing a separator is malformed and refused rather than

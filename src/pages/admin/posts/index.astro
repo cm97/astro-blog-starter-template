@@ -5,8 +5,8 @@ import { getCollection } from "astro:content";
 import AdminLayout from "../../../layouts/AdminLayout.astro";
 import AdminHelp from "../../../components/AdminHelp.astro";
 import { getGitHubConfig } from "../../../lib/github";
+import { env } from "cloudflare:workers";
 
-const env = Astro.locals.runtime.env;
 const githubConfig = getGitHubConfig(env);
 const created = Astro.url.searchParams.get("created");
 const deleted = Astro.url.searchParams.get("deleted");

@@ -12,6 +12,8 @@ declare namespace Cloudflare {
 		// Transactional email for order delivery. Without these the webhook can
 		// mint a download link but has no way to send it to the customer.
 		EMAIL_API_KEY?: string;
+		// send_email binding from wrangler.json.
+		EMAIL?: SendEmail;
 		EMAIL_FROM?: string;
 	}
 }
