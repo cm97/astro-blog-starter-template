@@ -105,9 +105,14 @@ export interface WelcomeEmail {
 	to: string;
 }
 
+// Cloudflare's send_email binding matches the sender against
+// `allowed_sender_addresses` literally, so a "Name <addr>" string is rejected.
+// The display name has to travel separately in the object form.
+type EmailSender = { email: string; name: string } | string;
+
 interface EmailBinding {
 	send(message: {
-		from: string;
+		from: EmailSender;
 		to: string;
 		subject: string;
 		html?: string;
@@ -115,8 +120,9 @@ interface EmailBinding {
 	}): Promise<{ messageId: string }>;
 }
 
-function resolveFrom(env: { EMAIL_FROM?: string }): string {
-	return env.EMAIL_FROM ?? `${BUZZYFLY_CONFIG.brandName} <orders@buzzyfly.com>`;
+function resolveFrom(env: { EMAIL_FROM?: string }): EmailSender {
+	const { email, name } = parseFrom(env.EMAIL_FROM ?? `${BUZZYFLY_CONFIG.brandName} <orders@buzzyfly.com>`);
+	return name ? { email, name } : email;
 }
 
 export async function sendWelcomeEmail(
@@ -262,9 +268,7 @@ export async function sendDeliveryEmail(
 		return { sent: false, reason: "no customer email on the order" };
 	}
 
-	const fromStr = env.EMAIL_FROM ?? `${BUZZYFLY_CONFIG.brandName} <orders@buzzyfly.com>`;
-	const { email: fromEmail, name: fromName } = parseFrom(fromStr);
-	const from = fromName ? `${fromName} <${fromEmail}>` : fromEmail;
+	const from = resolveFrom(env);
 
 	try {
 		await env.EMAIL.send({
