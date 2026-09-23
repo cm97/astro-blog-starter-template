@@ -453,13 +453,111 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 							<div class="exp-grid"></div>
 							<span class="exp-brand">Buzzyfly</span>
 
-							<div class="exp-content">
-								<div id="slideBlock" style="will-change:opacity,transform;">
-									<p class="slide-kicker"   id="sKicker">{video.slides[0][0]}</p>
-									<p class="slide-headline" id="sLine"  >{video.slides[0][1]}</p>
-									<p class="slide-sub"      id="sSub"   >{video.slides[0][2]}</p>
-								</div>
-							</div>
+							<!-- Animated talking character -->
+						<svg id="charSvg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360"
+							style="position:absolute;inset:0;width:100%;height:100%;display:block;" aria-hidden="true">
+							<defs>
+								<radialGradient id="skinGrad" cx="45%" cy="35%" r="65%">
+									<stop offset="0%" stop-color="#e8b887"/>
+									<stop offset="70%" stop-color="#d4956a"/>
+									<stop offset="100%" stop-color="#b87848"/>
+								</radialGradient>
+								<radialGradient id="hairGrad" cx="50%" cy="60%" r="55%">
+									<stop offset="0%" stop-color="#3a2010"/>
+									<stop offset="100%" stop-color="#150800"/>
+								</radialGradient>
+								<radialGradient id="blazerGrad" cx="50%" cy="30%" r="70%">
+									<stop offset="0%" stop-color="#252538"/>
+									<stop offset="100%" stop-color="#0a0a18"/>
+								</radialGradient>
+							</defs>
+
+							<!-- Shoulders / blazer -->
+							<path d="M 148 360 L 158 292 Q 192 265 248 255 L 265 296 L 320 280 L 375 296 L 392 255 Q 448 265 482 292 L 492 360 Z" fill="url(#blazerGrad)"/>
+							<!-- Lapel shadows -->
+							<path d="M 265 296 L 252 344 L 308 344 L 290 296 Z" fill="rgba(5,5,20,0.7)"/>
+							<path d="M 375 296 L 388 344 L 332 344 L 350 296 Z" fill="rgba(5,5,20,0.7)"/>
+							<!-- White shirt -->
+							<path d="M 290 296 L 320 336 L 350 296 L 320 280 Z" fill="#dde0ea"/>
+							<!-- Tie -->
+							<path d="M 314 283 L 323 334 L 326 283 L 323 272 L 317 272 Z" fill="#a86318"/>
+
+							<!-- Neck -->
+							<rect x="296" y="242" width="48" height="42" rx="8" fill="url(#skinGrad)"/>
+							<ellipse cx="296" cy="263" rx="6" ry="20" fill="rgba(0,0,0,0.12)"/>
+							<ellipse cx="344" cy="263" rx="6" ry="20" fill="rgba(0,0,0,0.12)"/>
+
+							<!-- Ears -->
+							<ellipse cx="244" cy="177" rx="15" ry="20" fill="url(#skinGrad)"/>
+							<ellipse cx="396" cy="177" rx="15" ry="20" fill="url(#skinGrad)"/>
+							<path d="M 247 164 Q 251 177 247 190" stroke="#c07848" stroke-width="2" fill="none"/>
+							<path d="M 393 164 Q 389 177 393 190" stroke="#c07848" stroke-width="2" fill="none"/>
+
+							<!-- Head -->
+							<ellipse cx="320" cy="174" rx="78" ry="87" fill="url(#skinGrad)"/>
+
+							<!-- Hair -->
+							<ellipse cx="320" cy="96" rx="78" ry="50" fill="url(#hairGrad)"/>
+							<path d="M 242 154 Q 248 107 280 89 Q 320 73 360 89 Q 392 107 398 154 Q 374 128 320 126 Q 266 128 242 154 Z" fill="url(#hairGrad)"/>
+							<path d="M 243 155 Q 246 172 250 188 Q 256 171 260 157 Z" fill="url(#hairGrad)"/>
+							<path d="M 397 155 Q 394 172 390 188 Q 384 171 380 157 Z" fill="url(#hairGrad)"/>
+
+							<!-- Eyebrows -->
+							<path d="M 274 143 Q 289 136 306 140" stroke="#2a1505" stroke-width="4" stroke-linecap="round" fill="none"/>
+							<path d="M 334 140 Q 351 136 366 143" stroke="#2a1505" stroke-width="4" stroke-linecap="round" fill="none"/>
+
+							<!-- Eye sockets -->
+							<ellipse cx="290" cy="161" rx="21" ry="17" fill="rgba(150,90,40,0.18)"/>
+							<ellipse cx="350" cy="161" rx="21" ry="17" fill="rgba(150,90,40,0.18)"/>
+
+							<!-- Sclera -->
+							<ellipse cx="290" cy="161" rx="18" ry="14" fill="white"/>
+							<ellipse cx="350" cy="161" rx="18" ry="14" fill="white"/>
+
+							<!-- Iris + pupil left -->
+							<circle cx="290" cy="162" r="9.5" fill="#5a6e8a"/>
+							<circle cx="290" cy="162" r="6" fill="#1a2030"/>
+							<circle cx="292.5" cy="159" r="2.5" fill="white"/>
+
+							<!-- Iris + pupil right -->
+							<circle cx="350" cy="162" r="9.5" fill="#5a6e8a"/>
+							<circle cx="350" cy="162" r="6" fill="#1a2030"/>
+							<circle cx="352.5" cy="159" r="2.5" fill="white"/>
+
+							<!-- Eyelids (blink) — pivot from top edge of eye -->
+							<ellipse id="eyelid-L" cx="290" cy="161" rx="19" ry="15"
+								fill="#d4956a" style="transform-origin:290px 146px;transform:scaleY(0);transition:transform 0.07s ease-in;"/>
+							<ellipse id="eyelid-R" cx="350" cy="161" rx="19" ry="15"
+								fill="#d4956a" style="transform-origin:350px 146px;transform:scaleY(0);transition:transform 0.07s ease-in;"/>
+
+							<!-- Nose -->
+							<path d="M 315 194 Q 312 207 309 212 Q 316 217 320 216 Q 324 217 331 212 Q 328 207 325 194" fill="rgba(160,95,50,0.32)"/>
+							<ellipse cx="313" cy="211" rx="5" ry="4" fill="rgba(120,70,40,0.38)"/>
+							<ellipse cx="327" cy="211" rx="5" ry="4" fill="rgba(120,70,40,0.38)"/>
+
+							<!-- Cheek warmth -->
+							<ellipse cx="266" cy="192" rx="22" ry="13" fill="rgba(220,130,80,0.18)"/>
+							<ellipse cx="374" cy="192" rx="22" ry="13" fill="rgba(220,130,80,0.18)"/>
+
+							<!-- Mouth CLOSED -->
+							<path id="mouth-closed" d="M 302 221 Q 311 228 320 226 Q 329 228 338 221"
+								stroke="#8a4c35" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+							<path d="M 306 225 Q 320 231 334 225 Q 320 235 306 225 Z" fill="rgba(180,110,80,0.3)"/>
+
+							<!-- Mouth OPEN -->
+							<g id="mouth-open" style="display:none">
+								<path d="M 300 219 Q 320 234 340 219 Q 334 243 320 247 Q 306 243 300 219 Z" fill="#8a3830"/>
+								<path d="M 303 223 Q 320 232 337 223 L 335 230 Q 320 235 305 230 Z" fill="#f0ede8"/>
+								<path d="M 306 230 Q 320 235 334 230 L 332 237 Q 320 241 308 237 Z" fill="#e8e5e0"/>
+								<ellipse cx="320" cy="238" rx="9" ry="5" fill="#c85050" opacity="0.55"/>
+								<path d="M 300 219 Q 311 214 320 216 Q 329 214 340 219" fill="#c07060" stroke="none"/>
+							</g>
+
+							<!-- BF badge -->
+							<rect x="370" y="314" width="38" height="28" rx="5" fill="#c97820"/>
+							<text x="389" y="332" text-anchor="middle" fill="white"
+								font-size="12" font-weight="800" font-family="system-ui,Arial,sans-serif">BF</text>
+						</svg>
 						</div>
 
 						<!-- End card -->
@@ -561,59 +659,56 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 		</main>
 		<Footer />
 
-		<script is:inline define:vars={{ slides, perSlide, totalSeconds: video.seconds, videoTitle: video.title }}>
-			const playerEl     = document.getElementById('player');
-			const playerPoster = document.getElementById('playerPoster');
-			const posterPlay   = document.getElementById('posterPlay');
-			const explainer    = document.getElementById('explainer');
-			const expBg        = document.getElementById('expBg');
-			const endCard      = document.getElementById('endCard');
-			const endReplay    = document.getElementById('endReplay');
-			const progressFill = document.getElementById('progressFill');
-			const progressRail = document.getElementById('progressRail');
-			const ctrlPlayPause= document.getElementById('ctrlPlayPause');
-			const iconPlay     = document.getElementById('iconPlay');
-			const iconPause    = document.getElementById('iconPause');
-			const ctrlTime     = document.getElementById('ctrlTime');
-			const ctrlFullscreen = document.getElementById('ctrlFullscreen');
-			const centreIcon   = document.getElementById('centreIcon');
-			const centreIconSvg= document.getElementById('centreIconSvg');
-			const slideBlock   = document.getElementById('slideBlock');
-			const sKicker      = document.getElementById('sKicker');
-			const sLine        = document.getElementById('sLine');
-			const sSub         = document.getElementById('sSub');
-			const likeBtn      = document.getElementById('likeBtn');
+		<script is:inline define:vars={{ script: video.script ?? '', totalSeconds: video.seconds, videoTitle: video.title }}>
+			const playerEl      = document.getElementById('player');
+			const posterPlay    = document.getElementById('posterPlay');
+			const explainer     = document.getElementById('explainer');
+			const expBg         = document.getElementById('expBg');
+			const endReplay     = document.getElementById('endReplay');
+			const progressFill  = document.getElementById('progressFill');
+			const progressRail  = document.getElementById('progressRail');
+			const ctrlPlayPause = document.getElementById('ctrlPlayPause');
+			const iconPlay      = document.getElementById('iconPlay');
+			const iconPause     = document.getElementById('iconPause');
+			const ctrlTime      = document.getElementById('ctrlTime');
+			const ctrlFullscreen= document.getElementById('ctrlFullscreen');
+			const centreIcon    = document.getElementById('centreIcon');
+			const centreIconSvg = document.getElementById('centreIconSvg');
+			const likeBtn       = document.getElementById('likeBtn');
+			const mouthClosed   = document.getElementById('mouth-closed');
+			const mouthOpen     = document.getElementById('mouth-open');
+			const eyelidL       = document.getElementById('eyelid-L');
+			const eyelidR       = document.getElementById('eyelid-R');
+			const charSvg       = document.getElementById('charSvg');
 
-			/* Slide background colours (one per slide, cycling) */
 			const BG_SETS = [
 				'radial-gradient(ellipse 60% 50% at 20% 30%, rgba(201,120,32,0.4) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 80% 70%, rgba(35,55,255,0.28) 0%, transparent 65%), #0f0f0f',
 				'radial-gradient(ellipse 55% 55% at 75% 25%, rgba(35,200,120,0.3) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 20% 75%, rgba(120,35,255,0.25) 0%, transparent 65%), #0a0a0a',
 				'radial-gradient(ellipse 70% 50% at 50% 20%, rgba(255,60,80,0.28) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 80% 80%, rgba(201,120,32,0.3) 0%, transparent 65%), #0f0f0f',
 				'radial-gradient(ellipse 60% 60% at 10% 60%, rgba(35,55,255,0.35) 0%, transparent 70%), radial-gradient(ellipse 55% 50% at 85% 30%, rgba(35,200,200,0.2) 0%, transparent 65%), #0a0a12',
 			];
+			let bgIdx = 0;
 
-			let idx     = 0;
-			let paused  = false;
 			let started = false;
 			let ended   = false;
-			let startMs = null;
-			let elapsed = 0;
-			let rafId   = null;
-			let totalElapsed = 0; /* ms elapsed across all slides */
+			let paused  = false;
+
+			/* Progress timer */
+			let timeRaf   = null;
+			let timeStart = null;
+			let timeAccum = 0;
 
 			function fmtMs(ms) {
 				const s = Math.floor(ms / 1000);
-				return Math.floor(s / 60) + ':' + String(s % 60).padStart(2,'0');
+				return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
 			}
 			function fmtSecs(s) {
-				return Math.floor(s / 60) + ':' + String(s % 60).padStart(2,'0');
+				return Math.floor(s / 60) + ':' + String(s % 60).padStart(2, '0');
 			}
-
 			function setIcons(playing) {
 				iconPause.style.display = playing ? '' : 'none';
 				iconPlay.style.display  = playing ? 'none' : '';
 			}
-
 			function flashCentre(isPlay) {
 				centreIconSvg.innerHTML = isPlay
 					? '<polygon points="5,2 25,15 5,28"/>'
@@ -622,196 +717,223 @@ const perSlide = Math.round((video.seconds / video.slides.length) * 1000);
 				setTimeout(() => centreIcon.classList.remove('show'), 600);
 			}
 
-			function setBg(i) {
-				expBg.style.background = BG_SETS[i % BG_SETS.length];
+			/* ── Mouth ── */
+			let mouthTimer = null;
+			function setMouth(open) {
+				if (mouthClosed) mouthClosed.style.display = open ? 'none' : '';
+				if (mouthOpen)   mouthOpen.style.display   = open ? '' : 'none';
 			}
 
-			function animIn() {
-				slideBlock.style.transition = 'none';
-				slideBlock.style.opacity = '0';
-				slideBlock.style.transform = 'translateY(20px)';
-				requestAnimationFrame(() => requestAnimationFrame(() => {
-					slideBlock.style.transition = 'opacity .45s, transform .45s';
-					slideBlock.style.opacity = '1';
-					slideBlock.style.transform = 'translateY(0)';
-				}));
-			}
-
-			function animFrame(now) {
-				if (paused) return;
-				if (startMs === null) startMs = now;
-				const dt = now - startMs;
-				const slideProgress = Math.min(1, (elapsed + dt) / perSlide);
-				const overallProgress = Math.min(1, (totalElapsed + elapsed + dt) / (totalSeconds * 1000));
-
-				progressFill.style.width = (overallProgress * 100) + '%';
-				ctrlTime.textContent = fmtMs(totalElapsed + elapsed + dt) + ' / ' + fmtSecs(totalSeconds);
-
-				if (slideProgress < 1) {
-					rafId = requestAnimationFrame(animFrame);
-				} else {
-					totalElapsed += perSlide;
-					nextSlide();
-				}
-			}
-
-			function startAnim() {
-				startMs = null;
-				elapsed = 0;
-				rafId = requestAnimationFrame(animFrame);
-			}
-
-			function nextSlide() {
-				idx++;
-				if (idx >= slides.length) {
-					/* Video ended */
-					cancelAnimationFrame(rafId);
-					ended = true;
-					paused = false;
-					setIcons(false);
-					playerEl.classList.remove('playing');
-					playerEl.classList.add('ended');
-					progressFill.style.width = '100%';
-					ctrlTime.textContent = fmtSecs(totalSeconds) + ' / ' + fmtSecs(totalSeconds);
-					return;
-				}
-				/* Transition to next slide */
-				slideBlock.style.transition = 'opacity .3s, transform .3s';
-				slideBlock.style.opacity = '0';
-				slideBlock.style.transform = 'translateY(-12px)';
+			/* ── Blink ── */
+			let blinkTimer = null;
+			function doBlink() {
+				if (!eyelidL || !eyelidR) return;
+				eyelidL.style.transition = 'transform 0.07s ease-in';
+				eyelidR.style.transition = 'transform 0.07s ease-in';
+				eyelidL.style.transform  = 'scaleY(1)';
+				eyelidR.style.transform  = 'scaleY(1)';
 				setTimeout(() => {
-					sKicker.textContent = slides[idx][0];
-					sLine.textContent   = slides[idx][1];
-					sSub.textContent    = slides[idx][2];
-					setBg(idx);
-					animIn();
-					startAnim();
-				}, 280);
+					eyelidL.style.transition = 'transform 0.10s ease-out';
+					eyelidR.style.transition = 'transform 0.10s ease-out';
+					eyelidL.style.transform  = 'scaleY(0)';
+					eyelidR.style.transform  = 'scaleY(0)';
+				}, 130);
+				blinkTimer = setTimeout(doBlink, 2600 + Math.random() * 3400);
+			}
+			function startBlink() { blinkTimer = setTimeout(doBlink, 1200 + Math.random() * 1800); }
+			function stopBlink()  { clearTimeout(blinkTimer); blinkTimer = null; }
+
+			/* ── Background cycle ── */
+			let bgTimer = null;
+			function cycleBg() {
+				expBg.style.background = BG_SETS[bgIdx % BG_SETS.length];
+				bgIdx++;
+			}
+			function startBgCycle() { cycleBg(); bgTimer = setInterval(cycleBg, 9000); }
+			function stopBgCycle()  { clearInterval(bgTimer); bgTimer = null; }
+
+			/* ── Progress RAF ── */
+			function timeFrame(now) {
+				if (timeStart === null) timeStart = now;
+				const dt  = timeAccum + (now - timeStart);
+				const pct = Math.min(1, dt / (totalSeconds * 1000));
+				progressFill.style.width  = (pct * 100) + '%';
+				ctrlTime.textContent = fmtMs(dt) + ' / ' + fmtSecs(totalSeconds);
+				if (pct < 1) timeRaf = requestAnimationFrame(timeFrame);
 			}
 
+			/* ── Speech synthesis ── */
+			const synth = window.speechSynthesis;
+			let utter       = null;
+			let chromePatch = null;
+
+			function pickVoice() {
+				const voices = synth.getVoices();
+				const names = [
+					'Google UK English Male',
+					'Microsoft Guy Online (Natural) - English (United States)',
+					'Microsoft David Desktop - English (United States)',
+					'Daniel', 'Alex', 'Fred',
+				];
+				for (const n of names) {
+					const v = voices.find(v => v.name === n);
+					if (v) return v;
+				}
+				return voices.find(v => v.lang && v.lang.toLowerCase().startsWith('en')) || null;
+			}
+
+			function startSpeech() {
+				if (!synth) return;
+				synth.cancel();
+				utter = new SpeechSynthesisUtterance(script);
+				utter.rate   = 0.92;
+				utter.pitch  = 1.0;
+				utter.volume = 1.0;
+
+				const applyVoice = () => { const v = pickVoice(); if (v) utter.voice = v; };
+				if (synth.getVoices().length > 0) applyVoice();
+				else synth.addEventListener('voiceschanged', applyVoice, { once: true });
+
+				utter.onboundary = (e) => {
+					if (e.name === 'word') {
+						setMouth(true);
+						clearTimeout(mouthTimer);
+						mouthTimer = setTimeout(() => setMouth(false), 185);
+					}
+				};
+				utter.onend   = () => { clearInterval(chromePatch); setMouth(false); onEnd(); };
+				utter.onerror = () => { clearInterval(chromePatch); setMouth(false); };
+
+				synth.speak(utter);
+
+				/* Chrome stops speech after ~15s without this */
+				chromePatch = setInterval(() => {
+					if (!synth.speaking) { clearInterval(chromePatch); return; }
+					synth.pause(); synth.resume();
+				}, 14000);
+			}
+
+			function pauseSpeech() {
+				if (synth.speaking && !synth.paused) synth.pause();
+				clearInterval(chromePatch);
+			}
+			function resumeSpeech() {
+				if (synth.paused) {
+					synth.resume();
+					chromePatch = setInterval(() => {
+						if (!synth.speaking) { clearInterval(chromePatch); return; }
+						synth.pause(); synth.resume();
+					}, 14000);
+				}
+			}
+			function stopSpeech() {
+				synth.cancel();
+				clearInterval(chromePatch);
+				setMouth(false);
+			}
+
+			function onEnd() {
+				ended = true; started = false; paused = false;
+				cancelAnimationFrame(timeRaf); timeRaf = null;
+				progressFill.style.width = '100%';
+				ctrlTime.textContent = fmtSecs(totalSeconds) + ' / ' + fmtSecs(totalSeconds);
+				setIcons(false);
+				playerEl.classList.remove('playing');
+				playerEl.classList.add('ended');
+				stopBlink(); stopBgCycle(); setMouth(false);
+			}
+
+			/* ── Play / Pause / Reset ── */
 			function play() {
 				if (ended) return;
-				paused = false;
-				started = true;
+				paused = false; started = true;
 				playerEl.classList.add('playing');
 				playerEl.classList.remove('ended');
 				setIcons(true);
-				setBg(idx);
-				if (startMs === null && elapsed === 0) animIn();
-				startMs = null;
-				rafId = requestAnimationFrame(animFrame);
+
+				if (!synth.speaking && !synth.paused) startSpeech();
+				else if (synth.paused) resumeSpeech();
+
+				timeStart = null;
+				timeRaf = requestAnimationFrame(timeFrame);
+				startBlink();
+				if (!bgTimer) startBgCycle();
 			}
 
 			function pause() {
 				paused = true;
-				cancelAnimationFrame(rafId);
-				elapsed += performance.now() - (startMs ?? performance.now());
-				startMs = null;
+				pauseSpeech();
+				setMouth(false);
+				if (timeStart !== null) { timeAccum += performance.now() - timeStart; timeStart = null; }
+				cancelAnimationFrame(timeRaf); timeRaf = null;
 				setIcons(false);
+				stopBlink();
 			}
 
 			function togglePlayPause() {
-				if (!started || ended) return;
-				if (paused) {
-					play();
-					flashCentre(true);
-				} else {
-					pause();
-					flashCentre(false);
-				}
+				if (ended || !started) return;
+				if (paused) { play(); flashCentre(true); }
+				else        { pause(); flashCentre(false); }
 			}
 
 			function reset() {
-				cancelAnimationFrame(rafId);
-				idx = 0; elapsed = 0; totalElapsed = 0; startMs = null;
-				paused = false; ended = false; started = false;
-				sKicker.textContent = slides[0][0];
-				sLine.textContent   = slides[0][1];
-				sSub.textContent    = slides[0][2];
+				stopSpeech();
+				cancelAnimationFrame(timeRaf);
+				stopBlink(); stopBgCycle();
+				timeStart = null; timeAccum = 0;
+				ended = false; paused = false; started = false; bgIdx = 0;
 				progressFill.style.width = '0%';
 				ctrlTime.textContent = '0:00 / ' + fmtSecs(totalSeconds);
 				setIcons(false);
-				playerEl.classList.remove('playing','ended');
+				playerEl.classList.remove('playing', 'ended');
+				setMouth(false);
 			}
 
-			/* Click poster play button → start */
-			posterPlay.addEventListener('click', (e) => {
-				e.stopPropagation();
-				play();
-			});
-
-			/* Click explainer → toggle pause */
+			/* ── Events ── */
+			posterPlay.addEventListener('click', (e) => { e.stopPropagation(); play(); });
 			explainer.addEventListener('click', togglePlayPause);
 
-			/* Controls play/pause button */
 			ctrlPlayPause.addEventListener('click', (e) => {
 				e.stopPropagation();
 				if (!started) { play(); flashCentre(true); return; }
 				togglePlayPause();
 			});
 
-			/* End card replay */
-			endReplay.addEventListener('click', (e) => {
-				e.stopPropagation();
-				reset();
-				play();
-			});
+			endReplay.addEventListener('click', (e) => { e.stopPropagation(); reset(); play(); });
 
-			/* Progress rail scrub */
 			progressRail.addEventListener('click', (e) => {
 				e.stopPropagation();
 				if (!started) return;
 				const rect = progressRail.getBoundingClientRect();
-				const pct = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
-				const targetMs = pct * totalSeconds * 1000;
-				/* Find which slide we should be on */
-				let cumMs = 0;
-				for (let i = 0; i < slides.length; i++) {
-					if (cumMs + perSlide >= targetMs || i === slides.length - 1) {
-						idx = i;
-						totalElapsed = cumMs;
-						elapsed = targetMs - cumMs;
-						sKicker.textContent = slides[i][0];
-						sLine.textContent   = slides[i][1];
-						sSub.textContent    = slides[i][2];
-						setBg(i);
-						animIn();
-						startMs = null;
-						if (!paused) {
-							cancelAnimationFrame(rafId);
-							rafId = requestAnimationFrame(animFrame);
-						}
-						break;
-					}
-					cumMs += perSlide;
-				}
+				const pct  = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+				timeAccum  = pct * totalSeconds * 1000;
+				if (timeStart !== null) timeStart = performance.now();
+				progressFill.style.width = (pct * 100) + '%';
+				ctrlTime.textContent = fmtMs(timeAccum) + ' / ' + fmtSecs(totalSeconds);
 			});
 
-			/* Fullscreen */
 			ctrlFullscreen.addEventListener('click', (e) => {
 				e.stopPropagation();
-				if (!document.fullscreenElement) {
-					playerEl.requestFullscreen?.();
-				} else {
-					document.exitFullscreen?.();
-				}
+				if (!document.fullscreenElement) playerEl.requestFullscreen?.();
+				else document.exitFullscreen?.();
 			});
 
-			/* Like button toggle */
 			likeBtn.addEventListener('click', () => {
 				const liked = likeBtn.dataset.liked === '1';
-				likeBtn.dataset.liked = liked ? '0' : '1';
-				likeBtn.style.color = liked ? '' : '#f4c27a';
+				likeBtn.dataset.liked    = liked ? '0' : '1';
+				likeBtn.style.color      = liked ? '' : '#f4c27a';
 				likeBtn.style.background = liked ? '' : '#3d2e00';
 			});
 
-			/* Keyboard controls */
 			document.addEventListener('keydown', (e) => {
 				if (e.code === 'Space' && e.target === document.body) {
 					e.preventDefault();
-					if (!started) play();
-					else togglePlayPause();
+					if (!started) play(); else togglePlayPause();
 				}
+			});
+
+			document.addEventListener('visibilitychange', () => {
+				if (document.hidden && started && !paused) pause();
 			});
 		</script>
 	</body>
