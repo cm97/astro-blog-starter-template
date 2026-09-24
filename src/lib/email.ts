@@ -279,3 +279,59 @@ export async function sendDeliveryEmail(
 		return { sent: false, reason: `send failed: ${String(error)}` };
 	}
 }
+
+export interface AiLoginEmail {
+	to: string;
+	loginUrl: string;
+	/** True right after checkout, false when the subscriber asked to sign in again. */
+	welcome: boolean;
+}
+
+/** Emails a Buzzyfly AI Pro subscriber a one-time sign-in link. */
+export async function sendAiLoginEmail(
+	message: AiLoginEmail,
+	env: { EMAIL?: EmailBinding; EMAIL_FROM?: string },
+): Promise<EmailResult> {
+	if (!env.EMAIL) return { sent: false, reason: "EMAIL binding not configured" };
+	if (!message.to) return { sent: false, reason: "no email address" };
+
+	const from = resolveFrom(env);
+	const subject = message.welcome
+		? "Welcome to Buzzyfly AI Pro — sign in here"
+		: "Your Buzzyfly AI sign-in link";
+	const intro = message.welcome
+		? "Thanks for subscribing to Buzzyfly AI Pro. Click below to unlock Pro on this device."
+		: "Here's your link to sign in to Buzzyfly AI Pro.";
+
+	const html = `<!doctype html>
+<html>
+  <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#16191c;max-width:520px;margin:0 auto;padding:24px">
+    <p style="margin:0 0 16px">${escapeHtml(intro)}</p>
+    <p style="margin:0 0 24px">
+      <a href="${message.loginUrl}" style="display:inline-block;background:#1f4d3a;color:#fff;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:600">Sign in to Buzzyfly AI</a>
+    </p>
+    <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
+      The link works once and expires in 24 hours. On another device, use
+      "Already subscribed?" on ${escapeHtml(BUZZYFLY_CONFIG.siteUrl)}/ai to get a new one.
+    </p>
+    <p style="margin:24px 0 0;color:#6b6a64;font-size:14px">— ${escapeHtml(BUZZYFLY_CONFIG.brandName)}</p>
+  </body>
+</html>`;
+
+	const text = [
+		intro,
+		"",
+		message.loginUrl,
+		"",
+		`The link works once and expires in 24 hours. On another device, use "Already subscribed?" on ${BUZZYFLY_CONFIG.siteUrl}/ai to get a new one.`,
+		"",
+		`— ${BUZZYFLY_CONFIG.brandName}`,
+	].join("\n");
+
+	try {
+		await env.EMAIL.send({ from, to: message.to, subject, html, text });
+		return { sent: true };
+	} catch (error) {
+		return { sent: false, reason: `send failed: ${String(error)}` };
+	}
+}

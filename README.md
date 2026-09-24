@@ -55,6 +55,28 @@ All commands are run from the root of the project, from a terminal:
 | `npm run build && npm run deploy` | Deploy your production site to Cloudflare        |
 | `npm wrangler tail`               | View real-time logs for all Workers              |
 
+## 🤖 Buzzyfly AI (`/ai`) — freemium + subscription
+
+`/ai` is an AI business assistant (follow-up emails, social posts, onboarding
+checklists, proposals) running on Cloudflare Workers AI.
+
+- **Free:** 3 generations per day per visitor (counted per hashed IP in D1), two tools.
+- **Pro ($9.99/month):** all four tools, longer answers, 200 generations/day fair use.
+
+Settings live in `AI_PRO` in `src/data/monetization.ts`. To start charging:
+
+1. Apply `migrations/0004_ai_paywall.sql` to D1 (see Setup below).
+2. In Stripe, create a Payment Link for a **recurring monthly** price and add the
+   metadata `item_id = buzzyfly-ai-pro`.
+3. Paste that link into `AI_PRO.checkoutUrl`. Until then the Pro button says
+   "Email to subscribe".
+4. On the existing Stripe webhook endpoint (`/api/webhook`), also enable the
+   `customer.subscription.updated` and `customer.subscription.deleted` events so
+   cancelled or unpaid subscriptions lose access.
+
+After checkout, the webhook records the subscription and emails a one-time sign-in
+link. Subscribers on a new device use "Already subscribed?" on `/ai` to get a new link.
+
 ## 🔐 Admin console
 
 A private admin console lives at `/admin`, protected by a username/password login. It covers:
