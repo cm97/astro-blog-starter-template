@@ -1,0 +1,265 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { AI_PRO, BUZZYFLY_CONFIG, getAiProAction } from "../data/monetization";
+import { AI_TOOLS } from "../data/aiTools";
+import { getAiAccess } from "../lib/aiAccess";
+
+export const prerender = false;
+
+const env = Astro.locals.runtime.env;
+const access = await getAiAccess(env, Astro.request, Astro.cookies);
+const subscribe = getAiProAction();
+const signin = Astro.url.searchParams.get("signin");
+const tools = Object.entries(AI_TOOLS).map(([id, t]) => ({ id, ...t }));
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Buzzyfly AI — ${BUZZYFLY_CONFIG.brandName}`}
+			description="Write follow-up emails, social posts, onboarding checklists and proposals in seconds. Free to try, Pro for unlimited use."
+		/>
+		<style>
+			.ai-hero { text-align: center; padding-bottom: 1em; }
+			.ai-eyebrow { margin: 0 0 0.4em; font-size: 0.8em; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(var(--gray)); }
+			.ai-hero h1 { font-size: 2.4em; margin-bottom: 0.3em; }
+			.ai-lede { max-width: 32em; margin: 0 auto; color: rgb(var(--gray-dark)); }
+			.ai-notice { padding: 0.8em 1em; border-radius: 12px; border: 1px solid rgb(var(--gray-light)); background: rgba(var(--gray-light), 40%); font-size: 0.95em; margin: 1em 0; }
+			.ai-status { display: flex; justify-content: space-between; align-items: center; gap: 1em; flex-wrap: wrap; font-size: 0.9em; color: rgb(var(--gray-dark)); margin: 1.5em 0 0.8em; }
+			.ai-badge { display: inline-block; padding: 0.2em 0.7em; border-radius: 999px; font-weight: 700; font-size: 0.85em; }
+			.ai-badge.pro { background: var(--accent); color: #fff; }
+			.ai-badge.free { background: rgb(var(--gray-light)); color: rgb(var(--black)); }
+			.ai-card { border: 1px solid rgb(var(--gray-light)); border-radius: 16px; padding: 1.2em; background: #fff; }
+			.ai-tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 0.5em; margin-bottom: 1em; }
+			.ai-tool { padding: 0.6em 0.8em; border-radius: 10px; border: 1px solid rgb(var(--gray-light)); background: #fff; cursor: pointer; font: inherit; font-size: 0.9em; text-align: left; }
+			.ai-tool[aria-pressed="true"] { border-color: var(--accent); box-shadow: 0 0 0 2px var(--accent) inset; }
+			.ai-tool .lock { font-size: 0.75em; color: rgb(var(--gray)); display: block; }
+			.ai-card textarea { width: 100%; min-height: 7em; box-sizing: border-box; padding: 0.7em; border-radius: 10px; border: 1px solid rgb(var(--gray-light)); font: inherit; font-size: 0.95em; resize: vertical; }
+			.ai-actions { display: flex; justify-content: flex-end; margin-top: 0.8em; }
+			.ai-btn { display: inline-block; padding: 0.65em 1.6em; border-radius: 999px; border: none; background: var(--accent); color: #fff; font: inherit; font-weight: 700; text-decoration: none; cursor: pointer; }
+			.ai-btn:hover { background: var(--accent-dark); color: #fff; }
+			.ai-btn[disabled] { opacity: 0.6; cursor: wait; }
+			.ai-output { white-space: pre-wrap; margin-top: 1em; padding: 1em; border-radius: 10px; background: rgba(var(--gray-light), 40%); font-size: 0.95em; }
+			.ai-error { color: #b42318; margin-top: 0.8em; font-size: 0.95em; }
+			.ai-paywall { margin-top: 1.2em; padding: 1.2em; border-radius: 16px; border: 2px solid var(--accent); text-align: center; }
+			.ai-paywall h3 { margin: 0 0 0.3em; }
+			.ai-plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1em; margin-top: 2.5em; }
+			.ai-plan { border: 1px solid rgb(var(--gray-light)); border-radius: 16px; padding: 1.2em; }
+			.ai-plan.featured { border: 2px solid var(--accent); }
+			.ai-plan h3 { margin: 0; }
+			.ai-plan .price { font-size: 1.8em; font-weight: 700; margin: 0.2em 0; color: rgb(var(--black)); }
+			.ai-plan .price small { font-size: 0.5em; font-weight: 400; color: rgb(var(--gray)); }
+			.ai-plan ul { padding-left: 1.2em; color: rgb(var(--gray-dark)); font-size: 0.95em; }
+			.ai-signin { margin-top: 2em; font-size: 0.95em; }
+			.ai-signin form { display: flex; gap: 0.5em; flex-wrap: wrap; margin-top: 0.5em; }
+			.ai-signin input { flex: 1 1 14em; padding: 0.6em 0.8em; border-radius: 999px; border: 1px solid rgb(var(--gray-light)); font: inherit; }
+			.ai-signout { background: none; border: none; padding: 0; color: var(--accent); cursor: pointer; font: inherit; text-decoration: underline; }
+			.ai-microcopy { margin: 0.6em 0 0; font-size: 0.8em; color: rgb(var(--gray)); }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="ai-hero">
+				<p class="ai-eyebrow">Buzzyfly AI · Free to try</p>
+				<h1>Your AI business assistant</h1>
+				<p class="ai-lede">
+					Follow-up emails, social posts, onboarding checklists and proposals, written in seconds.
+					{AI_PRO.freeDailyUses} free generations a day. Go Pro for unlimited use and every tool.
+				</p>
+			</section>
+
+			{signin === "ok" && <p class="ai-notice">You're signed in. Pro is unlocked on this device. 🎉</p>}
+			{signin === "expired" && (
+				<p class="ai-notice">That sign-in link has expired or was already used. Request a new one below.</p>
+			)}
+
+			<div class="ai-status">
+				<span>
+					{
+						access.pro ? (
+							<span class="ai-badge pro">PRO</span>
+						) : (
+							<span class="ai-badge free">FREE</span>
+						)
+					}{" "}
+					<span id="ai-remaining">
+						{access.pro
+							? `Signed in as ${access.email}`
+							: `${access.remaining} of ${access.limit} free generations left today`}
+					</span>
+				</span>
+				{
+					access.pro ? (
+						<form method="post" action="/api/ai/logout">
+							<button class="ai-signout" type="submit">Sign out</button>
+						</form>
+					) : (
+						<a href="#plans">See Pro</a>
+					)
+				}
+			</div>
+
+			<div class="ai-card">
+				<div class="ai-tools" role="group" aria-label="Choose a tool">
+					{
+						tools.map((t, i) => (
+							<button
+								type="button"
+								class="ai-tool"
+								data-tool={t.id}
+								data-pro={t.pro && !access.pro ? "locked" : ""}
+								data-placeholder={t.placeholder}
+								aria-pressed={i === 0 ? "true" : "false"}
+							>
+								{t.label}
+								{t.pro && !access.pro && <span class="lock">🔒 Pro</span>}
+							</button>
+						))
+					}
+				</div>
+				<label for="ai-input" class="sr-only">What do you need?</label>
+				<textarea id="ai-input" maxlength="2000" placeholder={tools[0].placeholder}></textarea>
+				<div class="ai-actions">
+					<button id="ai-go" class="ai-btn" type="button">Generate</button>
+				</div>
+				<p id="ai-error" class="ai-error" hidden></p>
+				<div id="ai-output" class="ai-output" hidden></div>
+
+				<div id="ai-paywall" class="ai-paywall" hidden>
+					<h3 id="ai-paywall-title">Unlock Buzzyfly AI Pro</h3>
+					<p>Unlimited generations, all four tools, and longer, more detailed answers.</p>
+					<a class="ai-btn" href={subscribe.href} target={subscribe.live ? "_blank" : undefined} rel="noopener noreferrer">
+						{subscribe.label}
+					</a>
+					<p class="ai-microcopy">Cancel anytime. Secure checkout by Stripe.</p>
+				</div>
+			</div>
+
+			<section id="plans" class="ai-plans">
+				<div class="ai-plan">
+					<h3>Free</h3>
+					<p class="price">$0</p>
+					<ul>
+						<li>{AI_PRO.freeDailyUses} generations per day</li>
+						<li>Follow-up emails &amp; social posts</li>
+						<li>Short answers</li>
+					</ul>
+				</div>
+				<div class="ai-plan featured">
+					<h3>{AI_PRO.name}</h3>
+					<p class="price">{AI_PRO.price} <small>/ {AI_PRO.interval}</small></p>
+					<ul>
+						<li>Unlimited generations (fair use)</li>
+						<li>All tools, including onboarding checklists &amp; proposals</li>
+						<li>Longer, more detailed answers</li>
+						<li>Cancel anytime</li>
+					</ul>
+					{
+						access.pro ? (
+							<p><strong>You're on Pro.</strong></p>
+						) : (
+							<a class="ai-btn" href={subscribe.href} target={subscribe.live ? "_blank" : undefined} rel="noopener noreferrer">
+								{subscribe.label}
+							</a>
+						)
+					}
+				</div>
+			</section>
+
+			{
+				!access.pro && (
+					<section class="ai-signin">
+						<strong>Already subscribed?</strong> Enter the email you paid with and we'll send you a sign-in link.
+						<form id="ai-signin-form">
+							<input type="email" name="email" required placeholder="you@example.com" aria-label="Email" />
+							<button class="ai-btn" type="submit">Email me a link</button>
+						</form>
+						<p id="ai-signin-msg" class="ai-microcopy" hidden></p>
+					</section>
+				)
+			}
+		</main>
+		<Footer />
+
+		<script>
+			const toolButtons = [...document.querySelectorAll<HTMLButtonElement>(".ai-tool")];
+			const input = document.getElementById("ai-input") as HTMLTextAreaElement;
+			const go = document.getElementById("ai-go") as HTMLButtonElement;
+			const output = document.getElementById("ai-output") as HTMLDivElement;
+			const error = document.getElementById("ai-error") as HTMLParagraphElement;
+			const paywall = document.getElementById("ai-paywall") as HTMLDivElement;
+			const paywallTitle = document.getElementById("ai-paywall-title") as HTMLHeadingElement;
+			const remaining = document.getElementById("ai-remaining") as HTMLSpanElement;
+			let tool = toolButtons[0]?.dataset.tool ?? "";
+
+			function showPaywall(title: string) {
+				paywallTitle.textContent = title;
+				paywall.hidden = false;
+			}
+
+			toolButtons.forEach((btn) =>
+				btn.addEventListener("click", () => {
+					toolButtons.forEach((b) => b.setAttribute("aria-pressed", String(b === btn)));
+					tool = btn.dataset.tool ?? "";
+					input.placeholder = btn.dataset.placeholder ?? "";
+					paywall.hidden = true;
+					if (btn.dataset.pro === "locked") showPaywall(`${btn.textContent?.replace("🔒 Pro", "").trim()} is a Pro tool`);
+				}),
+			);
+
+			go.addEventListener("click", async () => {
+				error.hidden = true;
+				paywall.hidden = true;
+				go.disabled = true;
+				go.textContent = "Writing…";
+				try {
+					const res = await fetch("/api/ai/generate", {
+						method: "POST",
+						headers: { "content-type": "application/json" },
+						body: JSON.stringify({ tool, input: input.value }),
+					});
+					const data = await res.json();
+					if (data.paywall) {
+						showPaywall(data.error ?? "Unlock Buzzyfly AI Pro");
+					} else if (!res.ok) {
+						error.textContent = data.error ?? "Something went wrong.";
+						error.hidden = false;
+					} else {
+						output.textContent = data.output;
+						output.hidden = false;
+						if (!data.pro) {
+							remaining.textContent = `${data.remaining} of ${data.limit} free generations left today`;
+						}
+					}
+				} catch {
+					error.textContent = "Couldn't reach the AI. Check your connection and try again.";
+					error.hidden = false;
+				} finally {
+					go.disabled = false;
+					go.textContent = "Generate";
+				}
+			});
+
+			const signinForm = document.getElementById("ai-signin-form") as HTMLFormElement | null;
+			const signinMsg = document.getElementById("ai-signin-msg") as HTMLParagraphElement | null;
+			signinForm?.addEventListener("submit", async (event) => {
+				event.preventDefault();
+				const email = new FormData(signinForm).get("email");
+				const res = await fetch("/api/ai/login", {
+					method: "POST",
+					headers: { "content-type": "application/json" },
+					body: JSON.stringify({ email }),
+				});
+				const data = await res.json().catch(() => ({}));
+				if (signinMsg) {
+					signinMsg.textContent = data.message ?? data.error ?? "Please try again.";
+					signinMsg.hidden = false;
+				}
+			});
+		</script>
+	</body>
+</html>

@@ -219,3 +219,51 @@ export async function logDownloadEvent(
 		console.error("Buzzyfly download: failed to log event", error);
 	}
 }
+
+/**
+ * Buzzyfly AI (/ai) — freemium + monthly subscription paywall.
+ *
+ * Free visitors get FREE_DAILY_USES generations per day (counted per IP in
+ * D1). Past that, the page shows the paywall and the subscribe button.
+ *
+ * To turn on paid subscriptions:
+ *   1. Stripe dashboard → Payment Links → New → a *recurring* monthly price
+ *      (e.g. $9.99/month).
+ *   2. Under the link's metadata add  item_id = buzzyfly-ai-pro  — the webhook
+ *      uses it to recognise an AI subscription instead of a file purchase.
+ *   3. Paste the link below as `checkoutUrl`.
+ *   4. Make sure the Stripe webhook endpoint (/api/webhook) also sends
+ *      `customer.subscription.updated` and `customer.subscription.deleted`, so
+ *      cancelled or unpaid subscriptions lose access.
+ *
+ * While `checkoutUrl` is "", the subscribe button falls back to an email order
+ * so the page never shows a dead checkout button.
+ */
+export const AI_PRO = {
+	itemId: "buzzyfly-ai-pro",
+	name: "Buzzyfly AI Pro",
+	price: "$9.99",
+	interval: "month",
+	checkoutUrl: "",
+	freeDailyUses: 3,
+	// Soft cap so one subscriber can't run up an unbounded AI bill.
+	proDailyUses: 200,
+	freeMaxTokens: 400,
+	proMaxTokens: 1200,
+};
+
+/** Subscribe action for AI Pro — live Stripe link when set, email order otherwise. */
+export function getAiProAction() {
+	if (AI_PRO.checkoutUrl) {
+		return { live: true, href: AI_PRO.checkoutUrl, label: `Go Pro — ${AI_PRO.price}/${AI_PRO.interval}` };
+	}
+	const subject = encodeURIComponent(`Subscribe: ${AI_PRO.name}`);
+	const body = encodeURIComponent(
+		`Hi,\n\nI'd like to subscribe to ${AI_PRO.name} (${AI_PRO.price}/${AI_PRO.interval}).\n\nThanks,\n`,
+	);
+	return {
+		live: false,
+		href: `mailto:${BUZZYFLY_CONFIG.orderEmail}?subject=${subject}&body=${body}`,
+		label: "Email to subscribe",
+	};
+}

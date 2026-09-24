@@ -13,5 +13,9 @@ declare namespace Cloudflare {
 		// mint a download link but has no way to send it to the customer.
 		EMAIL_API_KEY?: string;
 		EMAIL_FROM?: string;
+		// Workers AI binding ("ai" in wrangler.json) used by /api/ai/generate.
+		AI?: Ai;
+		// Cloudflare Email Service binding ("send_email" in wrangler.json).
+		EMAIL?: { send(message: { from: string; to: string; subject: string; html?: string; text?: string }): Promise<{ messageId: string }> };
 	}
 }

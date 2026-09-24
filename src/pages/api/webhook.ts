@@ -7,8 +7,9 @@ import {
 	resolveProductFile,
 	type FulfillmentOrder,
 } from "../../lib/fulfillment";
-import { BUZZYFLY_CONFIG } from "../../data/monetization";
-import { sendDeliveryEmail } from "../../lib/email";
+import { AI_PRO, BUZZYFLY_CONFIG } from "../../data/monetization";
+import { sendAiLoginEmail, sendDeliveryEmail } from "../../lib/email";
+import { issueLoginToken, updateSubscriptionStatus, upsertSubscription } from "../../lib/aiAccess";
 
 // This endpoint must run on-demand (a Cloudflare Pages Function / Worker),
 // never be statically prerendered, since it verifies a live request signature.
@@ -30,6 +31,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	const lemonSqueezySignature = request.headers.get("x-signature");
 
 	let order: FulfillmentOrder | null = null;
+	let stripePayload: any = null;
 
 	if (stripeSignature) {
 		if (!env.STRIPE_WEBHOOK_SECRET) {
@@ -43,7 +45,18 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		);
 		if (!valid) return new Response("Invalid signature", { status: 401 });
 
-		order = parseStripeOrder(JSON.parse(rawBody));
+		stripePayload = JSON.parse(rawBody);
+
+		// Buzzyfly AI Pro: renewals failing, cancellations, reactivations.
+		const eventType = stripePayload?.type;
+		if (eventType === "customer.subscription.updated" || eventType === "customer.subscription.deleted") {
+			const subscription = stripePayload?.data?.object;
+			const status = eventType === "customer.subscription.deleted" ? "canceled" : String(subscription?.status ?? "");
+			const known = subscription?.id ? await updateSubscriptionStatus(env, subscription.id, status) : false;
+			return json({ received: true, subscription: known ? status : "unknown" });
+		}
+
+		order = parseStripeOrder(stripePayload);
 	} else if (lemonSqueezySignature) {
 		if (!env.LEMONSQUEEZY_WEBHOOK_SECRET) {
 			console.error("Buzzyfly webhook: LEMONSQUEEZY_WEBHOOK_SECRET is not configured");
@@ -69,6 +82,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			status: 200,
 			headers: { "content-type": "application/json" },
 		});
+	}
+
+	if (order.itemId === AI_PRO.itemId) {
+		return fulfillAiSubscription(env, order, stripePayload?.data?.object);
 	}
 
 	const productFile = resolveProductFile(order.itemId);
@@ -137,3 +154,63 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		{ status: 200, headers: { "content-type": "application/json" } },
 	);
 };
+
+function json(body: unknown, status = 200) {
+	return new Response(JSON.stringify(body), {
+		status,
+		headers: { "content-type": "application/json" },
+	});
+}
+
+/**
+ * A completed checkout for Buzzyfly AI Pro: record the subscription and email
+ * the customer a one-time link that signs them in to Pro on /ai.
+ */
+async function fulfillAiSubscription(env: Env, order: FulfillmentOrder, session: any) {
+	if (!order.customerEmail) {
+		console.error(`Buzzyfly webhook: AI Pro checkout ${order.orderId} has no customer email — cannot grant access`);
+		return json({ received: true, fulfilled: false });
+	}
+	if (!env.DB) {
+		console.error(`Buzzyfly webhook: AI Pro checkout ${order.orderId} paid but DB is not bound — cannot grant access`);
+		return new Response("Subscriptions not configured", { status: 500 });
+	}
+
+	await upsertSubscription(env, {
+		email: order.customerEmail,
+		customerId: session?.customer ? String(session.customer) : null,
+		subscriptionId: session?.subscription ? String(session.subscription) : null,
+		status: "active",
+	});
+
+	const token = await issueLoginToken(env, order.customerEmail);
+	const delivery = token
+		? await sendAiLoginEmail(
+				{
+					to: order.customerEmail,
+					loginUrl: `${BUZZYFLY_CONFIG.siteUrl}/api/ai/verify?token=${token}`,
+					welcome: true,
+				},
+				env,
+			)
+		: { sent: false, reason: "could not issue login token" };
+
+	if (!delivery.sent) {
+		// Not fatal: the subscriber can still sign in from "Already subscribed?" on /ai.
+		console.error(`Buzzyfly webhook: AI Pro welcome email to ${order.customerEmail} failed: ${delivery.reason}`);
+	}
+
+	try {
+		await env.DB.prepare(
+			`INSERT INTO fulfillments (provider, order_id, item_id, customer_email, created_at)
+			 VALUES (?, ?, ?, ?, ?)`,
+		)
+			.bind(order.provider, order.orderId, order.itemId, order.customerEmail, Date.now())
+			.run();
+	} catch (error) {
+		console.error("Buzzyfly webhook: failed to record AI Pro fulfillment in D1", error);
+	}
+
+	console.log(`Buzzyfly webhook: AI Pro activated for ${order.customerEmail} (${order.orderId}) -> emailed=${delivery.sent}`);
+	return json({ received: true, fulfilled: true, subscription: "active", delivered: delivery.sent });
+}
