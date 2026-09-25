@@ -1,0 +1,413 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { TLDS } from "../lib/domains";
+
+const title = "Domain names — Buzzyfly";
+const description = "Invent a domain name and see if the registry still has it.";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={title} description={description} />
+		<style>
+			body.domains-page main {
+				width: min(960px, calc(100% - 2em));
+			}
+			.desk-kicker {
+				font-size: 0.78em;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin: 0 0 0.4em;
+			}
+			.desk h1 {
+				font-size: clamp(1.8em, 4vw, 2.4em);
+				margin-bottom: 0.35em;
+			}
+			.desk-lead {
+				color: rgb(var(--gray));
+				max-width: 38em;
+				margin-top: 0;
+			}
+			.panel {
+				background: #fff;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 16px;
+				padding: 1em;
+				margin: 1.2em 0;
+			}
+			.modes {
+				display: flex;
+				gap: 0.4em;
+				margin-bottom: 0.6em;
+			}
+			.modes button,
+			.filters button,
+			.hold,
+			.chip {
+				font: inherit;
+				cursor: pointer;
+				border-radius: 999px;
+				border: 1px solid rgb(var(--gray-light));
+				background: #fff;
+				color: rgb(var(--gray-dark));
+			}
+			.modes button,
+			.filters button,
+			.hold {
+				min-height: 44px;
+				padding: 0.35em 1em;
+			}
+			.modes button[aria-selected="true"],
+			.filters button[aria-pressed="true"] {
+				background: rgb(var(--black));
+				color: #fff;
+				border-color: rgb(var(--black));
+			}
+			.panel input {
+				width: 100%;
+				border: 0;
+				border-top: 1px solid rgb(var(--gray-light));
+				border-bottom: 1px solid rgb(var(--gray-light));
+				padding: 0.8em 0.2em;
+				font: inherit;
+				background: transparent;
+				color: rgb(var(--black));
+			}
+			.panel input:focus {
+				outline: none;
+			}
+			.panel-row {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				gap: 0.8em;
+				flex-wrap: wrap;
+				margin-top: 0.8em;
+			}
+			.hint {
+				margin: 0;
+				color: rgb(var(--gray));
+				font-size: 0.85em;
+			}
+			.go {
+				min-height: 48px;
+				padding: 0.5em 1.3em;
+				border: 0;
+				border-radius: 999px;
+				background: var(--accent);
+				color: #fff;
+				font: inherit;
+				font-weight: 700;
+				cursor: pointer;
+			}
+			.go:disabled {
+				opacity: 0.6;
+				cursor: wait;
+			}
+			.chips {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.45em;
+				margin-bottom: 1.4em;
+			}
+			.chip {
+				min-height: 44px;
+				padding: 0.35em 0.85em;
+				font-size: 0.82em;
+				text-align: left;
+			}
+			.ledger-head {
+				display: flex;
+				justify-content: space-between;
+				align-items: flex-end;
+				gap: 1em;
+				flex-wrap: wrap;
+			}
+			.filters {
+				display: flex;
+				gap: 0.4em;
+			}
+			.status {
+				margin: 0.2em 0 0.8em;
+				color: rgb(var(--gray));
+				font-size: 0.9em;
+			}
+			.error {
+				color: #9f1239;
+			}
+			.row {
+				display: flex;
+				justify-content: space-between;
+				gap: 1em;
+				align-items: center;
+				padding: 0.9em 0;
+				border-top: 1px solid rgb(var(--gray-light));
+			}
+			.row h2 {
+				font-size: 1.25em;
+				margin: 0;
+			}
+			.row p {
+				margin: 0.15em 0 0;
+				color: rgb(var(--gray));
+				font-size: 0.85em;
+			}
+			.meta {
+				text-align: right;
+				font-size: 0.85em;
+				min-width: 7em;
+			}
+			.meta strong {
+				display: block;
+				font-size: 1.05em;
+			}
+			.open {
+				color: #166534;
+			}
+			.side {
+				display: flex;
+				align-items: center;
+				gap: 0.8em;
+			}
+			.rates {
+				display: grid;
+				grid-template-columns: repeat(4, 1fr);
+				gap: 0.6em;
+				margin-top: 0.6em;
+			}
+			.rate {
+				background: #fff;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				padding: 0.8em;
+			}
+			.rate strong {
+				display: block;
+				font-size: 1.15em;
+			}
+			.rate span {
+				color: rgb(var(--gray));
+				font-size: 0.8em;
+			}
+			@media (max-width: 700px) {
+				.rates {
+					grid-template-columns: 1fr 1fr;
+				}
+				.row,
+				.side {
+					align-items: flex-start;
+					flex-direction: column;
+				}
+				.meta {
+					text-align: left;
+				}
+			}
+		</style>
+	</head>
+	<body class="domains-page">
+		<Header />
+		<main class="desk">
+			<p class="desk-kicker">Domain desk</p>
+			<h1>Find a name. See if the registry still has it.</h1>
+			<p class="desk-lead">
+				Describe the business, or type one word. Buzzyfly checks the live registries. Holding a name here does not register it and does not charge you.
+			</p>
+
+			<form class="panel" id="desk-form">
+				<div class="modes" role="tablist">
+					<button type="button" id="mode-invent" aria-selected="true">Invent</button>
+					<button type="button" id="mode-lookup" aria-selected="false">Lookup</button>
+				</div>
+				<label class="sr-only" for="desk-query">Name or description</label>
+				<input id="desk-query" name="query" maxlength="280" autocomplete="off" placeholder="A bakery that only sells morning bread" />
+				<div class="panel-row">
+					<p class="hint" id="mode-hint">One sentence is enough.</p>
+					<button class="go" type="submit" id="go">Invent names</button>
+				</div>
+			</form>
+
+			<div class="chips">
+				<button class="chip" type="button" data-example="a quiet studio for ceramic lamps">a quiet studio for ceramic lamps</button>
+				<button class="chip" type="button" data-example="field notes for climbers">field notes for climbers</button>
+				<button class="chip" type="button" data-example="payroll for film crews">payroll for film crews</button>
+			</div>
+
+			<section id="results" hidden>
+				<div class="ledger-head">
+					<h2>Results</h2>
+					<div class="filters">
+						<button type="button" data-filter="all" aria-pressed="true">All</button>
+						<button type="button" data-filter="open" aria-pressed="false">Open</button>
+						<button type="button" data-filter="taken" aria-pressed="false">Taken</button>
+					</div>
+				</div>
+				<p class="status" id="status"></p>
+				<p class="error" id="error"></p>
+				<div id="rows"></div>
+			</section>
+
+			<section>
+				<p class="desk-kicker">Desk rates</p>
+				<h2>Typical yearly prices</h2>
+				<p class="desk-lead">For comparison only. Not a quote and not a charge.</p>
+				<div class="rates">
+					{
+						TLDS.map((item) => (
+							<div class="rate">
+								<strong>.{item.tld}</strong>
+								<span>${item.price.toFixed(2)} / yr</span>
+								<span>{item.note}</span>
+							</div>
+						))
+					}
+				</div>
+			</section>
+		</main>
+		<Footer />
+		<script>
+			const form = document.querySelector("#desk-form") as HTMLFormElement;
+			const input = document.querySelector("#desk-query") as HTMLInputElement;
+			const go = document.querySelector("#go") as HTMLButtonElement;
+			const hint = document.querySelector("#mode-hint") as HTMLParagraphElement;
+			const inventBtn = document.querySelector("#mode-invent") as HTMLButtonElement;
+			const lookupBtn = document.querySelector("#mode-lookup") as HTMLButtonElement;
+			const results = document.querySelector("#results") as HTMLElement;
+			const statusEl = document.querySelector("#status") as HTMLParagraphElement;
+			const errorEl = document.querySelector("#error") as HTMLParagraphElement;
+			const rowsEl = document.querySelector("#rows") as HTMLElement;
+			const KEY = "buzzyfly-domain-desk";
+
+			type Row = {
+				domain: string;
+				price: number | null;
+				line: string;
+				availability: "open" | "taken" | "unknown";
+			};
+
+			let mode: "invent" | "lookup" = "invent";
+			let filter: "all" | "open" | "taken" = "all";
+			let rows: Row[] = [];
+			let holds = new Set<string>();
+
+			try {
+				const saved = JSON.parse(localStorage.getItem(KEY) || "[]") as string[];
+				if (Array.isArray(saved)) holds = new Set(saved);
+			} catch {
+				holds = new Set();
+			}
+
+			function money(price: number | null) {
+				return price == null ? "—" : `$${price.toFixed(2)}`;
+			}
+
+			function setMode(next: "invent" | "lookup") {
+				mode = next;
+				inventBtn.setAttribute("aria-selected", String(next === "invent"));
+				lookupBtn.setAttribute("aria-selected", String(next === "lookup"));
+				hint.textContent = next === "invent" ? "One sentence is enough." : "One word, or a full domain.";
+				go.textContent = next === "invent" ? "Invent names" : "Check the registry";
+				input.placeholder = next === "invent" ? "A bakery that only sells morning bread" : "morningbread or morningbread.com";
+			}
+
+			function paint() {
+				const shown = rows.filter((row) => filter === "all" || row.availability === filter);
+				const open = rows.filter((row) => row.availability === "open").length;
+				statusEl.textContent = rows.length ? `${open} open of ${rows.length}` : "";
+				rowsEl.innerHTML = "";
+				for (const row of shown) {
+					const wrap = document.createElement("div");
+					wrap.className = "row";
+					const copy = document.createElement("div");
+					const title = document.createElement("h2");
+					title.textContent = row.domain;
+					copy.append(title);
+					if (row.line) {
+						const line = document.createElement("p");
+						line.textContent = row.line;
+						copy.append(line);
+					}
+					const side = document.createElement("div");
+					side.className = "side";
+					const meta = document.createElement("div");
+					meta.className = "meta" + (row.availability === "open" ? " open" : "");
+					const label = document.createElement("strong");
+					label.textContent = row.availability === "open" ? "Open" : row.availability === "taken" ? "Taken" : "Unconfirmed";
+					meta.append(label, document.createTextNode(`${money(row.price)} / yr`));
+					const button = document.createElement("button");
+					button.type = "button";
+					button.className = "hold";
+					const held = holds.has(row.domain);
+					button.textContent = row.availability === "taken" ? "Taken" : held ? "Held" : "Hold";
+					button.disabled = row.availability === "taken";
+					button.addEventListener("click", () => {
+						if (holds.has(row.domain)) holds.delete(row.domain);
+						else holds.add(row.domain);
+						localStorage.setItem(KEY, JSON.stringify([...holds]));
+						paint();
+					});
+					side.append(meta, button);
+					wrap.append(copy, side);
+					rowsEl.append(wrap);
+				}
+			}
+
+			async function run(query: string) {
+				errorEl.textContent = "";
+				results.hidden = false;
+				statusEl.textContent = mode === "invent" ? "Writing names, then checking each one." : "Asking the registries.";
+				rows = [];
+				paint();
+				go.disabled = true;
+				try {
+					const response = await fetch("/api/domains", {
+						method: "POST",
+						headers: { "content-type": "application/json" },
+						body: JSON.stringify({ mode, query }),
+					});
+					const data = (await response.json()) as { ok: boolean; error?: string; names?: Row[]; note?: string; source?: string };
+					if (!data.ok) {
+						errorEl.textContent = data.error || "The desk could not check that.";
+						statusEl.textContent = "";
+						return;
+					}
+					rows = data.names ?? [];
+					statusEl.textContent = data.note || (data.source === "model" ? "Named by the model." : "");
+					paint();
+				} catch {
+					errorEl.textContent = "The desk could not reach the registries.";
+					statusEl.textContent = "";
+				} finally {
+					go.disabled = false;
+				}
+			}
+
+			inventBtn.addEventListener("click", () => setMode("invent"));
+			lookupBtn.addEventListener("click", () => setMode("lookup"));
+			form.addEventListener("submit", (event) => {
+				event.preventDefault();
+				void run(input.value);
+			});
+			document.querySelectorAll<HTMLButtonElement>("[data-example]").forEach((chip) => {
+				chip.addEventListener("click", () => {
+					setMode("invent");
+					input.value = chip.dataset.example || "";
+					void run(input.value);
+				});
+			});
+			document.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((button) => {
+				button.addEventListener("click", () => {
+					filter = (button.dataset.filter as typeof filter) || "all";
+					document.querySelectorAll<HTMLButtonElement>("[data-filter]").forEach((item) => {
+						item.setAttribute("aria-pressed", String(item === button));
+					});
+					paint();
+				});
+			});
+		</script>
+	</body>
+</html>
