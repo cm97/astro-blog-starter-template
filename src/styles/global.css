@@ -49,7 +49,7 @@ body::after {
 	position: fixed;
 	inset: 0;
 	pointer-events: none;
-	z-index: 8;
+	z-index: 0;
 	background: url("/buzzyfly-watermark.svg") center 42% / min(420px, 62vw) no-repeat;
 	opacity: 0.22;
 	mix-blend-mode: multiply;

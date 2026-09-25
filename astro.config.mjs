@@ -16,4 +16,5 @@ export default defineConfig({
 		workerEntrypoint: "./src/worker-entry.ts",
 	}),
 	integrations: [mdx(), sitemap()],
+	devToolbar: { enabled: false },
 });

@@ -181,10 +181,17 @@ const description = "Invent a domain name and see if the registry still has it."
 				margin-top: 0.6em;
 			}
 			.rate {
+				font: inherit;
+				text-align: left;
+				cursor: pointer;
 				background: #fff;
 				border: 1px solid rgb(var(--gray-light));
 				border-radius: 12px;
 				padding: 0.8em;
+			}
+			.rate[aria-pressed="true"] {
+				border-color: var(--accent);
+				box-shadow: 0 0 0 2px rgba(35, 55, 255, 0.15);
 			}
 			.rate strong {
 				display: block;
@@ -269,15 +276,15 @@ const description = "Invent a domain name and see if the registry still has it."
 			<section>
 				<p class="desk-kicker">Desk rates</p>
 				<h2>Typical yearly prices</h2>
-				<p class="desk-lead">For comparison only. Not a quote and not a charge.</p>
+				<p class="desk-lead">Press an ending to check it. These are not a quote and not a charge.</p>
 				<div class="rates">
 					{
 						TLDS.map((item) => (
-							<div class="rate">
+							<button class="rate" type="button" data-tld={item.tld} aria-pressed="false">
 								<strong>.{item.tld}</strong>
 								<span>${item.price.toFixed(2)} / yr</span>
 								<span>{item.note}</span>
-							</div>
+							</button>
 						))
 					}
 				</div>
@@ -307,6 +314,7 @@ const description = "Invent a domain name and see if the registry still has it."
 
 			let mode: "invent" | "lookup" = "invent";
 			let filter: "all" | "open" | "taken" = "all";
+			let tldFilter = "";
 			let rows: Row[] = [];
 
 			function money(price: number | null) {
@@ -323,9 +331,13 @@ const description = "Invent a domain name and see if the registry still has it."
 			}
 
 			function paint() {
-				const shown = rows.filter((row) => filter === "all" || row.availability === filter);
-				const open = rows.filter((row) => row.availability === "open").length;
-				statusEl.textContent = rows.length ? `${open} open of ${rows.length}` : "";
+				const shown = rows.filter((row) => {
+					if (filter !== "all" && row.availability !== filter) return false;
+					if (tldFilter && !row.domain.endsWith("." + tldFilter)) return false;
+					return true;
+				});
+				const open = shown.filter((row) => row.availability === "open").length;
+				statusEl.textContent = shown.length ? `${open} open of ${shown.length}` : "Nothing in this view.";
 				rowsEl.innerHTML = "";
 				for (const row of shown) {
 					const wrap = document.createElement("div");
@@ -349,15 +361,26 @@ const description = "Invent a domain name and see if the registry still has it."
 					const button = document.createElement("button");
 					button.type = "button";
 					button.className = "hold";
-					button.textContent = row.availability === "taken" ? "Taken" : "Request";
+					const price = `${money(row.price)} / yr`;
+					button.textContent =
+						row.availability === "taken" ? "Taken" : row.availability === "open" ? `Request · ${price}` : `Check · ${price}`;
 					button.disabled = row.availability === "taken";
-					button.addEventListener("click", () => {
+					const openRequest = () => {
+						if (row.availability === "taken") return;
 						const box = document.querySelector("#interest") as HTMLFormElement;
 						const domainInput = document.querySelector("#interest-domain") as HTMLInputElement;
 						box.hidden = false;
 						domainInput.value = row.domain;
+						statusEl.textContent = `Request opened for ${row.domain}.`;
+						box.scrollIntoView({ behavior: "smooth", block: "center" });
 						(document.querySelector("#interest-email") as HTMLInputElement).focus();
+					};
+					button.addEventListener("click", openRequest);
+					wrap.addEventListener("click", (event) => {
+						if (event.target === button) return;
+						openRequest();
 					});
+					if (row.availability !== "taken") wrap.style.cursor = "pointer";
 					side.append(meta, button);
 					wrap.append(copy, side);
 					rowsEl.append(wrap);
@@ -414,6 +437,28 @@ const description = "Invent a domain name and see if the registry still has it."
 						item.setAttribute("aria-pressed", String(item === button));
 					});
 					paint();
+				});
+			});
+			document.querySelectorAll<HTMLButtonElement>("[data-tld]").forEach((button) => {
+				button.addEventListener("click", () => {
+					const tld = button.dataset.tld || "";
+					const word = input.value.trim().toLowerCase().split(/\s+/)[0]?.replace(/\..*$/, "") || "";
+					const canSearch = /^[a-z0-9-]{1,63}$/.test(word);
+					tldFilter = !canSearch && tldFilter === tld ? "" : tld;
+					document.querySelectorAll<HTMLButtonElement>("[data-tld]").forEach((item) => {
+						item.setAttribute("aria-pressed", String(item.dataset.tld === tldFilter && tldFilter !== ""));
+					});
+					if (canSearch && tldFilter) {
+						setMode("lookup");
+						void run(`${word}.${tldFilter}`);
+						return;
+					}
+					if (rows.length) paint();
+					else if (tldFilter) {
+						setMode("lookup");
+						hint.textContent = `Type one word. .${tldFilter} is selected.`;
+						input.focus();
+					}
 				});
 			});
 			interest.addEventListener("submit", async (event) => {
