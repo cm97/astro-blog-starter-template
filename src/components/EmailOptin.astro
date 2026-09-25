@@ -1,5 +1,6 @@
 ---
 import { BUZZYFLY_CONFIG } from "../data/monetization";
+import { getSettings } from "../lib/settings";
 
 interface Props {
 	title?: string;
@@ -7,14 +8,16 @@ interface Props {
 	buttonLabel?: string;
 }
 
+const settings = await getSettings(Astro.locals.runtime?.env);
 const {
-	title = BUZZYFLY_CONFIG.newsletterTitle,
-	description = BUZZYFLY_CONFIG.newsletterDescription,
+	title = settings.newsletterTitle || BUZZYFLY_CONFIG.newsletterTitle,
+	description = settings.newsletterDescription || BUZZYFLY_CONFIG.newsletterDescription,
 	buttonLabel = "Send me the checklist",
 } = Astro.props;
+const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 ---
 
-<section class="email-optin" aria-label={`${BUZZYFLY_CONFIG.brandName} newsletter signup`}>
+<section class="email-optin" aria-label={`${brand} newsletter signup`}>
 	<h3 class="email-optin__title">{title}</h3>
 	<p class="email-optin__description">{description}</p>
 	<form class="email-optin__form" data-email-optin-form method="POST" action="/api/subscribe">

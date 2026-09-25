@@ -5,6 +5,9 @@ import Footer from '../components/Footer.astro';
 import EmailOptin from '../components/EmailOptin.astro';
 import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
 import { BUZZYFLY_CONFIG, ALL_PRODUCTS } from '../data/monetization';
+import { getSettings } from '../lib/settings';
+
+const settings = await getSettings(Astro.locals.runtime?.env);
 
 const digitalSystem = ALL_PRODUCTS.find(p => p.id === 'buzzyfly-digital-system')!;
 const bundle = ALL_PRODUCTS.find(p => p.id === 'complete-business-bundle')!;
@@ -14,7 +17,7 @@ const starters = ALL_PRODUCTS.filter(p => p.price === '$15' || p.price === '$19'
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={settings.brandName || SITE_TITLE} description={settings.defaultProductDescription || SITE_DESCRIPTION} />
 		<style>
 			/* ── Hero ── */
 			.hero {
@@ -420,7 +423,7 @@ const starters = ALL_PRODUCTS.filter(p => p.price === '$15' || p.price === '$19'
 				<span class="hero__eyebrow">For solo operators</span>
 				<h1>Stop rebuilding your client process from scratch every single week.</h1>
 				<p class="hero__sub">
-					The Buzzyfly Digital System gives you onboarding, weekly planning, and follow-up workflows as simple checklists — ready to run in 20 minutes, whether you're slammed or steady.
+					{settings.defaultProductDescription || BUZZYFLY_CONFIG.defaultProductDescription}
 				</p>
 				<div class="hero__cta-group">
 					<span class="hero__price">{digitalSystem.price}</span>

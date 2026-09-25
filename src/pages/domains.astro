@@ -251,6 +251,21 @@ const description = "Invent a domain name and see if the registry still has it."
 				<div id="rows"></div>
 			</section>
 
+			<form class="panel" id="interest" hidden>
+				<h2>Request this name</h2>
+				<p class="hint">
+					Buzzyfly emails you about payment and registration. Sending this does not charge you and does not register the domain.
+				</p>
+				<label class="sr-only" for="interest-domain">Domain</label>
+				<input id="interest-domain" name="domain" required placeholder="name.com" />
+				<label class="sr-only" for="interest-email">Email</label>
+				<input id="interest-email" name="email" type="email" required placeholder="you@email.com" />
+				<div class="panel-row">
+					<p class="hint" id="interest-status"></p>
+					<button class="go" type="submit">Send the request</button>
+				</div>
+			</form>
+
 			<section>
 				<p class="desk-kicker">Desk rates</p>
 				<h2>Typical yearly prices</h2>
@@ -280,7 +295,8 @@ const description = "Invent a domain name and see if the registry still has it."
 			const statusEl = document.querySelector("#status") as HTMLParagraphElement;
 			const errorEl = document.querySelector("#error") as HTMLParagraphElement;
 			const rowsEl = document.querySelector("#rows") as HTMLElement;
-			const KEY = "buzzyfly-domain-desk";
+			const interest = document.querySelector("#interest") as HTMLFormElement;
+			const interestStatus = document.querySelector("#interest-status") as HTMLParagraphElement;
 
 			type Row = {
 				domain: string;
@@ -292,14 +308,6 @@ const description = "Invent a domain name and see if the registry still has it."
 			let mode: "invent" | "lookup" = "invent";
 			let filter: "all" | "open" | "taken" = "all";
 			let rows: Row[] = [];
-			let holds = new Set<string>();
-
-			try {
-				const saved = JSON.parse(localStorage.getItem(KEY) || "[]") as string[];
-				if (Array.isArray(saved)) holds = new Set(saved);
-			} catch {
-				holds = new Set();
-			}
 
 			function money(price: number | null) {
 				return price == null ? "—" : `$${price.toFixed(2)}`;
@@ -341,14 +349,14 @@ const description = "Invent a domain name and see if the registry still has it."
 					const button = document.createElement("button");
 					button.type = "button";
 					button.className = "hold";
-					const held = holds.has(row.domain);
-					button.textContent = row.availability === "taken" ? "Taken" : held ? "Held" : "Hold";
+					button.textContent = row.availability === "taken" ? "Taken" : "Request";
 					button.disabled = row.availability === "taken";
 					button.addEventListener("click", () => {
-						if (holds.has(row.domain)) holds.delete(row.domain);
-						else holds.add(row.domain);
-						localStorage.setItem(KEY, JSON.stringify([...holds]));
-						paint();
+						const box = document.querySelector("#interest") as HTMLFormElement;
+						const domainInput = document.querySelector("#interest-domain") as HTMLInputElement;
+						box.hidden = false;
+						domainInput.value = row.domain;
+						(document.querySelector("#interest-email") as HTMLInputElement).focus();
 					});
 					side.append(meta, button);
 					wrap.append(copy, side);
@@ -407,6 +415,25 @@ const description = "Invent a domain name and see if the registry still has it."
 					});
 					paint();
 				});
+			});
+			interest.addEventListener("submit", async (event) => {
+				event.preventDefault();
+				const domain = (document.querySelector("#interest-domain") as HTMLInputElement).value;
+				const email = (document.querySelector("#interest-email") as HTMLInputElement).value;
+				interestStatus.textContent = "Sending…";
+				try {
+					const response = await fetch("/api/domain-interest", {
+						method: "POST",
+						headers: { "content-type": "application/json" },
+						body: JSON.stringify({ domain, email }),
+					});
+					const data = (await response.json()) as { ok: boolean; error?: string };
+					interestStatus.textContent = data.ok
+						? "Request saved. Buzzyfly will reply by email."
+						: data.error || "Could not send that.";
+				} catch {
+					interestStatus.textContent = "Could not send that. Email coachmanager@gmail.com.";
+				}
 			});
 		</script>
 	</body>

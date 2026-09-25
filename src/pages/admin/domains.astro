@@ -1,0 +1,80 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../layouts/AdminLayout.astro";
+
+const env = Astro.locals.runtime.env;
+
+interface Lead {
+	id: number;
+	domain: string;
+	email: string;
+	note: string | null;
+	created_at: number;
+}
+
+let leads: Lead[] = [];
+let error = "";
+
+if (!env.DB) {
+	error = "No database is connected, so domain requests cannot be listed.";
+} else {
+	try {
+		await env.DB.prepare(
+			`CREATE TABLE IF NOT EXISTS domain_leads (
+				id INTEGER PRIMARY KEY AUTOINCREMENT,
+				domain TEXT NOT NULL,
+				email TEXT NOT NULL,
+				note TEXT,
+				created_at INTEGER NOT NULL
+			)`,
+		).run();
+		const rows = await env.DB.prepare(
+			`SELECT id, domain, email, note, created_at FROM domain_leads ORDER BY created_at DESC LIMIT 200`,
+		).all<Lead>();
+		leads = rows.results ?? [];
+	} catch (err) {
+		console.error("domain leads", err);
+		error = "Could not read domain requests.";
+	}
+}
+
+function when(ms: number) {
+	return new Date(ms).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
+}
+---
+
+<AdminLayout title="Domain requests" active="domains">
+	<h1>Domain requests</h1>
+	<p class="admin-subtitle">
+		People who asked you to follow up on a name. Reply from your own email. Nothing here charges a card or registers a domain.
+	</p>
+	{error && <p class="admin-notice admin-notice--error">{error}</p>}
+	<div class="admin-card">
+		{leads.length === 0 && !error && <p>No requests yet.</p>}
+		{
+			leads.length > 0 && (
+				<table>
+					<thead>
+						<tr>
+							<th>When</th>
+							<th>Domain</th>
+							<th>Email</th>
+							<th>Note</th>
+						</tr>
+					</thead>
+					<tbody>
+						{leads.map((lead) => (
+							<tr>
+								<td>{when(lead.created_at)}</td>
+								<td>{lead.domain}</td>
+								<td><a href={`mailto:${lead.email}?subject=${encodeURIComponent("Your domain request: " + lead.domain)}`}>{lead.email}</a></td>
+								<td>{lead.note || "—"}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)
+		}
+	</div>
+</AdminLayout>

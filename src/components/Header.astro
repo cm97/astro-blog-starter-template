@@ -1,6 +1,14 @@
 ---
 import HeaderLink from './HeaderLink.astro';
-import { SITE_TITLE } from '../consts';
+import { getSettings } from '../lib/settings';
+
+let brand = 'Buzzyfly';
+try {
+	const settings = await getSettings(Astro.locals.runtime?.env);
+	if (settings.brandName) brand = settings.brandName;
+} catch {
+	brand = 'Buzzyfly';
+}
 ---
 
 <header>
@@ -8,7 +16,7 @@ import { SITE_TITLE } from '../consts';
 		<h2>
 			<a href="/" class="brand">
 				<img src="/buzzyfly-logo.svg" alt="" width="40" height="40" />
-				<span>{SITE_TITLE}</span>
+				<span>{brand}</span>
 			</a>
 		</h2>
 		<div class="internal-links">
@@ -64,6 +72,12 @@ import { SITE_TITLE } from '../consts';
 		align-items: center;
 		justify-content: space-between;
 		gap: 0.75em;
+		flex-wrap: wrap;
+	}
+	.internal-links {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
 	}
 	nav a {
 		padding: 1em 0.5em;

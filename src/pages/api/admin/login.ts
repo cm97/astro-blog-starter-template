@@ -42,7 +42,7 @@ export const POST: APIRoute = async ({ request, cookies, locals }) => {
 
 	cookies.set(ADMIN_SESSION_COOKIE, token, {
 		httpOnly: true,
-		secure: true,
+		secure: new URL(request.url).protocol === "https:",
 		sameSite: "lax",
 		path: "/",
 		maxAge: SESSION_COOKIE_MAX_AGE,

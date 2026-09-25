@@ -24,8 +24,8 @@ function isSettingsKey(key: string): key is PatchableSettingsKey {
 }
 
 /** Site settings as currently recorded in the admin console (D1), falling back to the shipped defaults. */
-export async function getSettings(env: Env): Promise<SiteSettings> {
-	if (!env.DB) return { ...DEFAULTS };
+export async function getSettings(env?: { DB?: Env["DB"] } | null): Promise<SiteSettings> {
+	if (!env?.DB) return { ...DEFAULTS };
 
 	try {
 		const rows = await env.DB.prepare(`SELECT key, value FROM site_content`).all<{
