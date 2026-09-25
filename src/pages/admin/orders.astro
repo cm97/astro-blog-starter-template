@@ -110,6 +110,7 @@ if (env.DB) {
 							<th>When</th>
 							<th>Product</th>
 							<th>Email</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -119,6 +120,10 @@ if (env.DB) {
 								<td>{item.title} · {item.price}</td>
 								<td>
 									<a href={`mailto:${item.email}?subject=${encodeURIComponent("Payment for " + item.title)}`}>{item.email}</a>
+								</td>
+								<td>
+									<button class="admin-btn" type="button" data-draft data-kind="order" data-email={item.email} data-detail={item.title} data-price={item.price}>Write reply</button>
+									<div data-draft-out hidden></div>
 								</td>
 							</tr>
 						))}

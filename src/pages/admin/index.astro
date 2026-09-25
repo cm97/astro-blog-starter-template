@@ -73,9 +73,41 @@ const setup = [
 		unlocks: "Writing, editing and publishing posts, and making Settings affect the live site.",
 		fix: "Add GITHUB_TOKEN, GITHUB_OWNER and GITHUB_REPO as Worker secrets, then deploy.",
 	},
+	{
+		label: "Grok replies",
+		ok: Boolean((env as { XAI_API_KEY?: string }).XAI_API_KEY || process.env.XAI_API_KEY),
+		unlocks: "A written email for each domain request and unpaid order. You still send it.",
+		fix: "Set XAI_API_KEY on the Worker.",
+	},
 ];
 
 const missing = setup.filter((item) => !item.ok);
+
+type QueueItem = { kind: "domain" | "order"; email: string; detail: string; price: string; when: number };
+const queue: QueueItem[] = [];
+if (env.DB) {
+	try {
+		const domains = await env.DB.prepare(
+			`SELECT domain, email, created_at FROM domain_leads ORDER BY created_at DESC LIMIT 8`,
+		).all<{ domain: string; email: string; created_at: number }>();
+		for (const row of domains.results ?? []) {
+			queue.push({ kind: "domain", email: row.email, detail: row.domain, price: "", when: row.created_at });
+		}
+	} catch {
+		/* table may not exist yet */
+	}
+	try {
+		const asked = await env.DB.prepare(
+			`SELECT title, price, email, created_at FROM purchase_requests ORDER BY created_at DESC LIMIT 8`,
+		).all<{ title: string; price: string; email: string; created_at: number }>();
+		for (const row of asked.results ?? []) {
+			queue.push({ kind: "order", email: row.email, detail: row.title, price: row.price, when: row.created_at });
+		}
+	} catch {
+		/* table may not exist yet */
+	}
+}
+queue.sort((a, b) => b.when - a.when);
 ---
 
 <AdminLayout title="Dashboard" active="dashboard">
@@ -84,6 +116,7 @@ const missing = setup.filter((item) => !item.ok);
 
 	<AdminHelp title="What this console can do" open={missing.length > 0}>
 		<ul>
+			<li><strong>Needs you</strong> — domain requests and unpaid orders, with a Grok-written reply you can send.</li>
 			<li><strong>Posts</strong> — write and publish to your blog.</li>
 			<li><strong>Media</strong> — upload images and files, and copy links to use in posts.</li>
 			<li><strong>Subscribers</strong> — your mailing list; search, remove, export.</li>
@@ -123,6 +156,34 @@ const missing = setup.filter((item) => !item.ok);
 				))
 			}
 		</ul>
+	</div>
+
+	<div class="admin-card">
+		<h2>Needs you</h2>
+		{queue.length === 0 && <p>Nothing waiting. New domain requests and kids-course orders show up here.</p>}
+		{
+			queue.map((item) => (
+				<div class="queue-item">
+					<p>
+						<strong>{item.kind === "domain" ? item.detail : `${item.detail} · ${item.price}`}</strong>
+						<br />
+						{item.email}
+					</p>
+					<button
+						class="admin-btn"
+						type="button"
+						data-draft
+						data-kind={item.kind}
+						data-email={item.email}
+						data-detail={item.detail}
+						data-price={item.price}
+					>
+						Write the reply
+					</button>
+					<div data-draft-out hidden></div>
+				</div>
+			))
+		}
 	</div>
 
 	<div class="admin-stats">
@@ -176,6 +237,11 @@ const missing = setup.filter((item) => !item.ok);
 </AdminLayout>
 
 <style>
+	.queue-item {
+		padding: 0.8em 0;
+		border-top: 1px solid rgb(var(--gray-light));
+	}
+	.queue-item p { margin: 0 0 0.4em; }
 	.setup-list {
 		list-style: none;
 		margin: 0;

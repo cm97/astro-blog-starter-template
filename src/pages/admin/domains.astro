@@ -61,6 +61,7 @@ function when(ms: number) {
 							<th>Domain</th>
 							<th>Email</th>
 							<th>Note</th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -70,6 +71,10 @@ function when(ms: number) {
 								<td>{lead.domain}</td>
 								<td><a href={`mailto:${lead.email}?subject=${encodeURIComponent("Your domain request: " + lead.domain)}`}>{lead.email}</a></td>
 								<td>{lead.note || "—"}</td>
+								<td>
+									<button class="admin-btn" type="button" data-draft data-kind="domain" data-email={lead.email} data-detail={lead.domain}>Write reply</button>
+									<div data-draft-out hidden></div>
+								</td>
 							</tr>
 						))}
 					</tbody>

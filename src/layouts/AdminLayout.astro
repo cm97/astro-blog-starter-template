@@ -54,6 +54,48 @@ const adminUser = Astro.locals.adminUser;
 				<slot />
 			</main>
 		</div>
+		<script>
+			document.querySelectorAll<HTMLButtonElement>("[data-draft]").forEach((button) => {
+				button.addEventListener("click", async () => {
+					const slot = button.parentElement?.querySelector<HTMLElement>("[data-draft-out]");
+					if (!slot) return;
+					slot.hidden = false;
+					slot.textContent = "Writing…";
+					button.disabled = true;
+					try {
+						const response = await fetch("/api/admin/draft", {
+							method: "POST",
+							headers: { "content-type": "application/json" },
+							body: JSON.stringify({
+								kind: button.dataset.kind,
+								email: button.dataset.email,
+								detail: button.dataset.detail,
+								price: button.dataset.price,
+							}),
+						});
+						const data = (await response.json()) as { ok: boolean; error?: string; subject?: string; body?: string };
+						slot.textContent = "";
+						if (!data.ok || !data.subject || !data.body) {
+							slot.textContent = data.error || "Could not write that.";
+							return;
+						}
+						const subject = document.createElement("strong");
+						subject.textContent = data.subject;
+						const copy = document.createElement("p");
+						copy.textContent = data.body;
+						const mail = document.createElement("a");
+						mail.className = "admin-btn";
+						mail.href = `mailto:${button.dataset.email}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(data.body)}`;
+						mail.textContent = "Open in email";
+						slot.append(subject, copy, mail);
+					} catch {
+						slot.textContent = "Could not write that.";
+					} finally {
+						button.disabled = false;
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
 
@@ -82,6 +124,16 @@ const adminUser = Astro.locals.adminUser;
 		font-size: 1.1em;
 		margin-bottom: 1.5em;
 	}
+	[data-draft-out] {
+		margin-top: 0.6em;
+		padding: 0.7em 0.8em;
+		background: #fff;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		font-size: 0.9em;
+		white-space: pre-wrap;
+	}
+	[data-draft-out] p { margin: 0.4em 0; }
 	.admin-nav {
 		display: flex;
 		flex-direction: column;
