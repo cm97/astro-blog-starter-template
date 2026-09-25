@@ -23,7 +23,7 @@ export default {
           'line_items[0][price_data][unit_amount]': String(amount),
           'line_items[0][quantity]': '1',
           mode: 'payment',
-          success_url: 'https://buzzyfly.com/success',
+          success_url: 'https://buzzyfly.com/thank-you?s={CHECKOUT_SESSION_ID}',
           cancel_url: 'https://buzzyfly.com/store',
         }),
       });

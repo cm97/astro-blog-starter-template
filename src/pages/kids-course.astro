@@ -39,7 +39,24 @@ const ITEMS = [
 				Print at home. No subscription.
 			</p>
 			<p class="price">$29</p>
-			<a class="cta" href={`mailto:${ORDER}?subject=${packSubject}&body=${packBody}`}>Email to order the $29 pack</a>
+			<form class="order" id="order-form">
+				<label for="order-email">Email</label>
+				<input id="order-email" name="email" type="email" required placeholder="you@email.com" />
+				<label for="order-product">What you want</label>
+				<select id="order-product" name="product">
+					<option value="K-8 Complete Learning Pack|$29">K-8 Complete Learning Pack — $29</option>
+					{
+						ITEMS.map((item) => (
+							<option value={`${item.title}|${item.price}`}>
+								{item.title} — {item.price}
+							</option>
+						))
+					}
+				</select>
+				<button type="submit">Request this order</button>
+				<p id="order-status"></p>
+			</form>
+			<a class="cta" href={`mailto:${ORDER}?subject=${packSubject}&body=${packBody}`}>Or email to order the $29 pack</a>
 			<p class="micro">Paid by the same inbox that runs the main store: {ORDER}. Files emailed after payment.</p>
 
 			<h2>Inside the pack</h2>
@@ -63,6 +80,29 @@ const ITEMS = [
 			<p class="note">Kids game stays free at <a href="/kids">/kids</a>. This page is the paid course for parents.</p>
 		</main>
 		<Footer />
+		<script>
+			const form = document.querySelector("#order-form") as HTMLFormElement;
+			const status = document.querySelector("#order-status") as HTMLParagraphElement;
+			form.addEventListener("submit", async (event) => {
+				event.preventDefault();
+				const data = new FormData(form);
+				const [title, price] = String(data.get("product") ?? "").split("|");
+				status.textContent = "Sending…";
+				try {
+					const response = await fetch("/api/purchase-request", {
+						method: "POST",
+						headers: { "content-type": "application/json" },
+						body: JSON.stringify({ email: data.get("email"), title, price }),
+					});
+					const body = (await response.json()) as { ok: boolean; error?: string };
+					status.textContent = body.ok
+						? "Request saved. Buzzyfly will email payment details. Nothing has been charged."
+						: body.error || "Could not save that.";
+				} catch {
+					status.textContent = "Could not save that. Use the email link below.";
+				}
+			});
+		</script>
 	</body>
 </html>
 <style>
@@ -71,7 +111,10 @@ const ITEMS = [
 	h1 { font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0 0 0.4em; }
 	.lede { color: rgb(var(--gray-dark)); max-width: 36em; }
 	.price { font-size: 2.2em; font-weight: 700; margin: 0.4em 0; }
-	.cta { display: inline-block; padding: 0.75em 1.4em; border-radius: 999px; background: #2c5e4a; color: #fff !important; font-weight: 700; text-decoration: none; }
+	.cta { display: inline-block; margin-top: 0.8em; padding: 0.75em 1.4em; border-radius: 999px; background: #2c5e4a; color: #fff !important; font-weight: 700; text-decoration: none; }
+	.order { display: grid; gap: 0.4em; max-width: 28em; margin: 0.6em 0 0.4em; }
+	.order input, .order select { font: inherit; padding: 0.55em 0.7em; border: 1px solid rgb(var(--gray-light)); border-radius: 10px; }
+	.order button { justify-self: start; min-height: 48px; padding: 0.55em 1.2em; border: 0; border-radius: 999px; background: #2c5e4a; color: #fff; font: inherit; font-weight: 700; cursor: pointer; }
 	.cta:hover { background: #1f4636; }
 	.micro, .note { font-size: 0.9em; color: rgb(var(--gray)); }
 	h2 { margin-top: 2em; }

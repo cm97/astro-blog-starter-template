@@ -254,7 +254,7 @@ const description = "Invent a domain name and see if the registry still has it."
 			<form class="panel" id="interest" hidden>
 				<h2>Request this name</h2>
 				<p class="hint">
-					Buzzyfly emails you about payment and registration. Sending this does not charge you and does not register the domain.
+					We save your email with the name. The card payment that works today is the $49 Digital System. It does not register the domain.
 				</p>
 				<label class="sr-only" for="interest-domain">Domain</label>
 				<input id="interest-domain" name="domain" required placeholder="name.com" />
@@ -427,10 +427,21 @@ const description = "Invent a domain name and see if the registry still has it."
 						headers: { "content-type": "application/json" },
 						body: JSON.stringify({ domain, email }),
 					});
-					const data = (await response.json()) as { ok: boolean; error?: string };
-					interestStatus.textContent = data.ok
-						? "Request saved. Buzzyfly will reply by email."
-						: data.error || "Could not send that.";
+					const data = (await response.json()) as { ok: boolean; error?: string; checkoutUrl?: string; checkoutLabel?: string };
+					interestStatus.textContent = "";
+					if (!data.ok) {
+						interestStatus.textContent = data.error || "Could not send that.";
+						return;
+					}
+					interestStatus.append("Request saved. That does not register the domain. ");
+					if (data.checkoutUrl?.startsWith("https://buy.stripe.com/")) {
+						const link = document.createElement("a");
+						link.href = data.checkoutUrl;
+						link.target = "_blank";
+						link.rel = "noopener";
+						link.textContent = data.checkoutLabel || "Pay on Stripe";
+						interestStatus.append(link);
+					}
 				} catch {
 					interestStatus.textContent = "Could not send that. Email coachmanager@gmail.com.";
 				}

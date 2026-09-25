@@ -21,26 +21,52 @@ interface Fulfillment {
 
 let orders: Fulfillment[] = [];
 let total = 0;
+let requests: { id: number; title: string; price: string; email: string; created_at: number }[] = [];
 
 if (env.DB) {
 	try {
+		await env.DB.prepare(
+			`CREATE TABLE IF NOT EXISTS purchase_requests (
+				id INTEGER PRIMARY KEY AUTOINCREMENT,
+				title TEXT NOT NULL,
+				price TEXT NOT NULL,
+				email TEXT NOT NULL,
+				created_at INTEGER NOT NULL
+			)`,
+		).run();
 		const like = `%${q}%`;
-		const [rows, count] = await Promise.all([
-			env.DB.prepare(
-				`SELECT provider, order_id, item_id, customer_email, created_at FROM fulfillments
-				 WHERE order_id LIKE ? OR customer_email LIKE ? OR item_id LIKE ?
-				 ORDER BY created_at DESC LIMIT 200`,
+		try {
+			const asked = await env.DB.prepare(
+				`SELECT id, title, price, email, created_at FROM purchase_requests
+				 WHERE email LIKE ? OR title LIKE ?
+				 ORDER BY created_at DESC LIMIT 100`,
 			)
-				.bind(like, like, like)
-				.all<Fulfillment>(),
-			env.DB.prepare(
-				`SELECT COUNT(*) as n FROM fulfillments WHERE order_id LIKE ? OR customer_email LIKE ? OR item_id LIKE ?`,
-			)
-				.bind(like, like, like)
-				.first<{ n: number }>(),
-		]);
-		orders = rows.results ?? [];
-		total = count?.n ?? 0;
+				.bind(like, like)
+				.all<{ id: number; title: string; price: string; email: string; created_at: number }>();
+			requests = asked.results ?? [];
+		} catch (error) {
+			console.error("Buzzyfly admin orders: failed to read purchase requests", error);
+		}
+		try {
+			const [rows, count] = await Promise.all([
+				env.DB.prepare(
+					`SELECT provider, order_id, item_id, customer_email, created_at FROM fulfillments
+					 WHERE order_id LIKE ? OR customer_email LIKE ? OR item_id LIKE ?
+					 ORDER BY created_at DESC LIMIT 200`,
+				)
+					.bind(like, like, like)
+					.all<Fulfillment>(),
+				env.DB.prepare(
+					`SELECT COUNT(*) as n FROM fulfillments WHERE order_id LIKE ? OR customer_email LIKE ? OR item_id LIKE ?`,
+				)
+					.bind(like, like, like)
+					.first<{ n: number }>(),
+			]);
+			orders = rows.results ?? [];
+			total = count?.n ?? 0;
+		} catch (error) {
+			console.error("Buzzyfly admin orders: failed to read fulfillments", error);
+		}
 	} catch (error) {
 		console.error("Buzzyfly admin orders: failed to read D1", error);
 	}
@@ -49,7 +75,7 @@ if (env.DB) {
 
 <AdminLayout title="Orders" active="orders">
 	<h1>Orders</h1>
-	<p class="admin-subtitle">{total} fulfilled order{total === 1 ? "" : "s"}.</p>
+	<p class="admin-subtitle">{total} paid order{total === 1 ? "" : "s"}. {requests.length} unpaid request{requests.length === 1 ? "" : "s"}.</p>
 
 	{!env.DB && <p class="admin-notice admin-notice--warn">No D1 database bound — orders can't be listed.</p>}
 	<AdminHelp title="How to use Orders">
@@ -73,6 +99,34 @@ if (env.DB) {
 	</AdminHelp>
 
 	{resendError && <p class="admin-notice admin-notice--error">{resendError}</p>}
+	<div class="admin-card">
+		<h2>Waiting on payment</h2>
+		{requests.length === 0 && <p>No unpaid requests.</p>}
+		{
+			requests.length > 0 && (
+				<table>
+					<thead>
+						<tr>
+							<th>When</th>
+							<th>Product</th>
+							<th>Email</th>
+						</tr>
+					</thead>
+					<tbody>
+						{requests.map((item) => (
+							<tr>
+								<td>{new Date(item.created_at).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" })}</td>
+								<td>{item.title} · {item.price}</td>
+								<td>
+									<a href={`mailto:${item.email}?subject=${encodeURIComponent("Payment for " + item.title)}`}>{item.email}</a>
+								</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)
+		}
+	</div>
 	{
 		resent && (
 			<p class="admin-notice admin-notice--success">

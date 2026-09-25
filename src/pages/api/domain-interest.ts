@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { STRIPE_CHECKOUT_URL } from "../../data/monetization";
 
 export const prerender = false;
 
@@ -48,5 +49,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		);
 	}
 
-	return Response.json({ ok: true });
+	const checkout = new URL(STRIPE_CHECKOUT_URL);
+	checkout.searchParams.set("prefilled_email", email);
+	checkout.searchParams.set("client_reference_id", domain.replace(/[^a-z0-9_-]/g, "_").slice(0, 180));
+
+	return Response.json({
+		ok: true,
+		checkoutUrl: checkout.toString(),
+		checkoutLabel: "Pay $49 for the Digital System",
+	});
 };
