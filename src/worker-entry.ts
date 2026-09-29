@@ -1,14 +1,18 @@
 /**
  * Custom Cloudflare Worker entry point.
  *
- * Wraps the Astro-generated worker so we can add a `scheduled` handler
- * alongside the HTTP `fetch` handler. Astro handles all web requests;
- * the cron logic lives here and runs on a Cloudflare cron trigger.
+ * Registered in astro.config.mjs as `workerEntryPoint`. Astro calls
+ * `createExports` with the build manifest; we return the usual `fetch`
+ * handler plus a `scheduled` handler for the hourly cron trigger in
+ * wrangler.json.
  */
 
-import worker from "astro/app/cloudflare";
+import type { SSRManifest } from "astro";
+import { App } from "astro/app";
+import { handle } from "@astrojs/cloudflare/handler";
 import { BUZZYFLY_CONFIG } from "./data/monetization";
 import { sendFollowUpEmail } from "./lib/email";
+import { sendDueSequenceEmails } from "./lib/emailSequence";
 
 interface Env {
 	DB?: D1Database;
@@ -66,79 +70,116 @@ async function sendOwnerAlert(orders: FulfillmentRow[], env: Env): Promise<void>
 	});
 }
 
-const cronHandler = {
-	async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-		return worker.fetch(request, env, ctx);
-	},
+async function runJob(name: string, job: () => Promise<void>): Promise<void> {
+	try {
+		await job();
+	} catch (error) {
+		console.error(`Buzzyfly cron: ${name} failed`, error);
+	}
+}
 
-	async scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
-		if (!env.DB) return;
+// 1. Owner alert for any new fulfilled orders.
+async function alertNewOrders(db: D1Database, env: Env): Promise<void> {
+	const result = await db
+		.prepare(
+			`SELECT f.provider, f.order_id, f.item_id, f.customer_email, f.created_at
+			 FROM fulfillments f
+			 LEFT JOIN fulfillment_alerts a
+			   ON f.provider = a.provider AND f.order_id = a.order_id
+			 WHERE a.order_id IS NULL
+			 ORDER BY f.created_at DESC
+			 LIMIT 50`,
+		)
+		.all<FulfillmentRow>();
 
-		ctx.waitUntil(
-			(async () => {
-				// 1. Owner alert for any new fulfilled orders
-				const result = await env.DB!.prepare(
-					`SELECT f.provider, f.order_id, f.item_id, f.customer_email, f.created_at
-					 FROM fulfillments f
-					 LEFT JOIN fulfillment_alerts a
-					   ON f.provider = a.provider AND f.order_id = a.order_id
-					 WHERE a.order_id IS NULL
-					 ORDER BY f.created_at DESC
-					 LIMIT 50`,
-				).all<FulfillmentRow>();
+	const newOrders = result.results ?? [];
+	if (newOrders.length === 0) return;
 
-				const newOrders = result.results ?? [];
-				if (newOrders.length > 0) {
-					await sendOwnerAlert(newOrders, env);
-					const now = Date.now();
-					const stmts = newOrders.map((o) =>
-						env.DB!.prepare(
-							`INSERT OR IGNORE INTO fulfillment_alerts (provider, order_id, alerted_at)
-							 VALUES (?, ?, ?)`,
-						).bind(o.provider, o.order_id, now),
-					);
-					await env.DB!.batch(stmts);
-				}
+	await sendOwnerAlert(newOrders, env);
+	const now = Date.now();
+	await db.batch(
+		newOrders.map((o) =>
+			db
+				.prepare(
+					`INSERT OR IGNORE INTO fulfillment_alerts (provider, order_id, alerted_at)
+					 VALUES (?, ?, ?)`,
+				)
+				.bind(o.provider, o.order_id, now),
+		),
+	);
+}
 
-				// 2. 2-day follow-up emails for buyers who haven't received one yet
-				if (env.EMAIL) {
-					const TWO_DAYS_MS = 2 * 24 * 60 * 60 * 1000;
-					const cutoff = Date.now() - TWO_DAYS_MS;
+// 2. Two-day follow-up email for recent buyers who haven't had one yet.
+async function followUpRecentBuyers(db: D1Database, env: Env): Promise<void> {
+	if (!env.EMAIL) return;
 
-					const pending = await env.DB!.prepare(
-						`SELECT f.provider, f.order_id, f.item_id, f.customer_email
-						 FROM fulfillments f
-						 LEFT JOIN followup_emails fe ON f.provider = fe.provider AND f.order_id = fe.order_id
-						 WHERE fe.order_id IS NULL
-						   AND f.customer_email IS NOT NULL
-						   AND f.created_at <= ?
-						 ORDER BY f.created_at ASC
-						 LIMIT 20`,
-					).bind(cutoff).all<FulfillmentRow>();
+	const DAY_MS = 24 * 60 * 60 * 1000;
+	const cutoff = Date.now() - 2 * DAY_MS;
+	// The email says "a couple of days ago", so skip orders older than a week.
+	const oldest = Date.now() - 7 * DAY_MS;
 
-					const toFollowUp = pending.results ?? [];
-					if (toFollowUp.length > 0) {
-						const now = Date.now();
-						for (const order of toFollowUp) {
-							if (!order.customer_email) continue;
-							const result = await sendFollowUpEmail(
-								{ to: order.customer_email, itemId: order.item_id, orderId: order.order_id },
-								env,
-							);
-							console.log(
-								`Buzzyfly follow-up: order ${order.order_id} -> sent=${result.sent}${result.reason ? ` (${result.reason})` : ""}`,
-							);
-							// Record attempt regardless of send result so we don't retry forever
-							await env.DB!.prepare(
-								`INSERT OR IGNORE INTO followup_emails (provider, order_id, sent_at, success)
-								 VALUES (?, ?, ?, ?)`,
-							).bind(order.provider, order.order_id, now, result.sent ? 1 : 0).run();
-						}
-					}
-				}
-			})(),
+	const pending = await db
+		.prepare(
+			`SELECT f.provider, f.order_id, f.item_id, f.customer_email
+			 FROM fulfillments f
+			 LEFT JOIN followup_emails fe ON f.provider = fe.provider AND f.order_id = fe.order_id
+			 WHERE fe.order_id IS NULL
+			   AND f.customer_email IS NOT NULL
+			   AND f.created_at <= ?
+			   AND f.created_at >= ?
+			 ORDER BY f.created_at ASC
+			 LIMIT 20`,
+		)
+		.bind(cutoff, oldest)
+		.all<FulfillmentRow>();
+
+	const now = Date.now();
+	for (const order of pending.results ?? []) {
+		if (!order.customer_email) continue;
+		const result = await sendFollowUpEmail(
+			{ to: order.customer_email, itemId: order.item_id, orderId: order.order_id },
+			env,
 		);
-	},
-};
+		console.log(
+			`Buzzyfly follow-up: order ${order.order_id} -> sent=${result.sent}${result.reason ? ` (${result.reason})` : ""}`,
+		);
+		// Record attempt regardless of send result so we don't retry forever
+		await db
+			.prepare(
+				`INSERT OR IGNORE INTO followup_emails (provider, order_id, sent_at, success)
+				 VALUES (?, ?, ?, ?)`,
+			)
+			.bind(order.provider, order.order_id, now, result.sent ? 1 : 0)
+			.run();
+	}
+}
 
-export default cronHandler;
+async function scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
+	const db = env.DB;
+	if (!db) return;
+
+	// Each job is isolated so one failure (e.g. a missing table) doesn't stop the others.
+	ctx.waitUntil(
+		(async () => {
+			await runJob("owner alert", () => alertNewOrders(db, env));
+			await runJob("buyer follow-up", () => followUpRecentBuyers(db, env));
+			// 3. Weekly email sequence for free-checklist subscribers.
+			await runJob("email sequence", async () => {
+				const { sent, failed } = await sendDueSequenceEmails(env);
+				if (sent || failed) console.log(`Buzzyfly sequence: sent=${sent} failed=${failed}`);
+			});
+		})(),
+	);
+}
+
+export function createExports(manifest: SSRManifest) {
+	const app = new App(manifest);
+	return {
+		default: {
+			async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+				return handle(manifest, app, request as never, env as never, ctx as never);
+			},
+			scheduled,
+		},
+	};
+}

@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { sendWelcomeEmail } from "../../lib/email";
+import { sendSequenceEmail } from "../../lib/emailSequence";
 
 export const prerender = false;
 
@@ -36,16 +36,35 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		});
 	}
 
+	let unsubscribeToken: string | undefined;
 	if (env.DB) {
+		const token = crypto.randomUUID();
 		try {
-			await env.DB.prepare(
-				`INSERT INTO subscribers (email, created_at) VALUES (?, ?)
-				 ON CONFLICT(email) DO NOTHING`,
+			// Signing up again after unsubscribing counts as opting back in.
+			const row = await env.DB.prepare(
+				`INSERT INTO subscribers (email, created_at, unsubscribe_token, sequence_step, sequence_sent_at)
+				 VALUES (?, ?, ?, 0, ?)
+				 ON CONFLICT(email) DO UPDATE SET
+				   unsubscribed_at = NULL,
+				   unsubscribe_token = COALESCE(subscribers.unsubscribe_token, excluded.unsubscribe_token)
+				 RETURNING unsubscribe_token`,
 			)
-				.bind(email, Date.now())
-				.run();
+				.bind(email, Date.now(), token, Date.now())
+				.first<{ unsubscribe_token: string | null }>();
+			unsubscribeToken = row?.unsubscribe_token ?? undefined;
 		} catch (error) {
-			console.error("Buzzyfly subscribe: failed to store subscriber in D1", error);
+			// Sequence columns missing (migration 0006 not applied yet): still keep the lead.
+			console.error("Buzzyfly subscribe: sequence insert failed, falling back", error);
+			try {
+				await env.DB.prepare(
+					`INSERT INTO subscribers (email, created_at) VALUES (?, ?)
+					 ON CONFLICT(email) DO NOTHING`,
+				)
+					.bind(email, Date.now())
+					.run();
+			} catch (fallbackError) {
+				console.error("Buzzyfly subscribe: failed to store subscriber in D1", fallbackError);
+			}
 		}
 	}
 
@@ -64,11 +83,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		}
 	}
 
-	// Welcome email — best-effort, never fail the signup over it.
+	// Welcome email (sequence email 0) — best-effort, never fail the signup over it.
 	if (env.EMAIL) {
-		sendWelcomeEmail({ to: email }, env).catch((err) =>
-			console.error("Buzzyfly subscribe: welcome email failed", err),
-		);
+		const result = await sendSequenceEmail(0, email, unsubscribeToken, env);
+		if (!result.sent) console.error("Buzzyfly subscribe: welcome email failed", result.reason);
 	}
 
 	return new Response(JSON.stringify({ received: true }), {
