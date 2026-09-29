@@ -1,6 +1,7 @@
 import { BUZZYFLY_CONFIG } from "../data/monetization";
 import { EMAIL_SEQUENCE, SEQUENCE_INTERVAL_MS, type SequenceEmail } from "../data/emailSequence";
 import { escapeHtml, resolveFrom, type EmailBinding, type EmailResult } from "./email";
+import { getSettings } from "./settings";
 
 const CHECKLIST_URL = `${BUZZYFLY_CONFIG.siteUrl}/blog/weekly-reset/`;
 const STORE_URL = `${BUZZYFLY_CONFIG.siteUrl}/store`;
@@ -55,12 +56,13 @@ function bodyToHtml(body: string): string {
 export function renderSequenceEmail(
 	email: SequenceEmail,
 	unsubscribeToken?: string,
+	mailingAddress = "",
 ): { subject: string; html: string; text: string } {
 	const body = fillVars(email.body);
 	const signature = `— ${BUZZYFLY_CONFIG.emailSignature}`;
 	const reason = `You're getting this because you signed up for the free weekly reset checklist at ${BUZZYFLY_CONFIG.siteUrl.replace(/^https?:\/\//, "")}.`;
 	const unsub = unsubscribeToken ? unsubscribeUrl(unsubscribeToken) : null;
-	const address = BUZZYFLY_CONFIG.mailingAddress;
+	const address = mailingAddress.trim();
 
 	const footerText = [reason, unsub ? `Unsubscribe: ${unsub}` : null, address || null]
 		.filter(Boolean)
@@ -90,13 +92,16 @@ export async function sendSequenceEmail(
 	step: number,
 	to: string,
 	unsubscribeToken: string | undefined,
-	env: { EMAIL?: EmailBinding; EMAIL_FROM?: string },
+	env: { DB?: D1Database; EMAIL?: EmailBinding; EMAIL_FROM?: string },
+	// Pass when sending in bulk to avoid re-reading settings per email.
+	mailingAddress?: string,
 ): Promise<EmailResult> {
 	if (!env.EMAIL) return { sent: false, reason: "EMAIL binding not configured" };
 	const email = EMAIL_SEQUENCE[step];
 	if (!email) return { sent: false, reason: `no sequence email at step ${step}` };
 
-	const { subject, html, text } = renderSequenceEmail(email, unsubscribeToken);
+	const address = mailingAddress ?? (await getSettings(env)).mailingAddress;
+	const { subject, html, text } = renderSequenceEmail(email, unsubscribeToken, address);
 	try {
 		await env.EMAIL.send({ from: resolveFrom(env), to, subject, html, text });
 		return { sent: true };
@@ -126,9 +131,11 @@ export async function sendDueSequenceEmails(env: {
 }): Promise<{ sent: number; failed: number }> {
 	if (!env.DB || !env.EMAIL) return { sent: 0, failed: 0 };
 	// US anti-spam law (CAN-SPAM) requires a postal address in marketing
-	// email. Hold the weekly emails until one is set; nobody loses their place.
-	if (!BUZZYFLY_CONFIG.mailingAddress.trim()) {
-		console.log("Buzzyfly sequence: paused until BUZZYFLY_CONFIG.mailingAddress is set");
+	// email. Hold the weekly emails until one is set (Admin > Settings);
+	// nobody loses their place.
+	const { mailingAddress } = await getSettings(env);
+	if (!mailingAddress.trim()) {
+		console.log("Buzzyfly sequence: paused until a mailing address is set in Admin > Settings");
 		return { sent: 0, failed: 0 };
 	}
 
@@ -169,7 +176,7 @@ export async function sendDueSequenceEmails(env: {
 				.run();
 		}
 
-		const result = await sendSequenceEmail(step, sub.email, token, env);
+		const result = await sendSequenceEmail(step, sub.email, token, env, mailingAddress);
 		if (result.sent) sent++;
 		else {
 			failed++;

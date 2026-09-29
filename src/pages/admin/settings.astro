@@ -49,6 +49,21 @@ const error = Astro.url.searchParams.get("error");
 			<label for="defaultProductDescription">Default product description</label>
 			<input id="defaultProductDescription" name="defaultProductDescription" type="text" value={settings.defaultProductDescription} required />
 
+			<label for="mailingAddress">Mailing address (for email footers)</label>
+			<input
+				id="mailingAddress"
+				name="mailingAddress"
+				type="text"
+				value={settings.mailingAddress}
+				placeholder="123 Main St, Springfield, IL 62701"
+				autocomplete="street-address"
+			/>
+			<p class="admin-hint" style="margin:0.3em 0 0;font-size:0.9em;opacity:0.8;">
+				{settings.mailingAddress.trim()
+					? "Shown at the bottom of every subscriber email. Weekly emails are sending."
+					: "Required by US anti-spam law in marketing email. Weekly subscriber emails are paused until this is filled in; the welcome email still sends. Home, business, or PO box address all work."}
+			</p>
+
 			<p style="margin-top:1.5em;">
 				<button class="admin-btn admin-btn--primary" type="submit">Save settings</button>
 			</p>
