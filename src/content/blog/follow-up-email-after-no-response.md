@@ -140,6 +140,42 @@ Use when: A project has ended and you want to close it properly, leave a good im
 
 Why it works: It confirms the work is done (which matters — some clients worry about invoices or lingering obligations). It restates the result in concrete terms. It opens the door to future work without being salesy. And it's short enough that they'll actually read it.
 
+## When a proposal still gets no reply: the bump and the break-up
+
+Template 1 goes out at 5–7 days. If that gets silence too, two short emails finish the job.
+
+**The bump (3 days after Template 1)**
+
+**Subject:** Re: [project name] proposal
+
+> Hi [Name],
+>
+> Wanted to make sure the [project name] proposal did not get buried.
+>
+> Still want to move forward, or should I take it off my list?
+>
+> Happy to answer anything that is blocking the decision.
+>
+> [Your name]
+
+Job: confirm they saw it. Not a novel. Not a second pitch.
+
+**The break-up (about 14 days after the proposal)**
+
+**Subject:** Closing the file on [project name]
+
+> Hi [Name],
+>
+> I am going to assume [project name] is not the right time and close the file on my side.
+>
+> If that is wrong, reply this week and I will reopen it.
+>
+> If not, no hard feelings. You know where to find me later.
+>
+> [Your name]
+
+Job: create a deadline without a fake countdown. This is the email people actually answer.
+
 ## What still breaks when the templates only live in your notes app
 
 You can copy the five emails above into a Google Doc right now and they will work. Until Thursday hits and you are slammed. Then the process collapses because there is no single place that also holds the onboarding checklist, the weekly reset, and the exact sequence for quiet leads.

@@ -2,6 +2,7 @@
 title: 'Client Discovery Questions That Stop You From Guessing What They Need'
 description: 'Stop pitching blind. Ask these questions before you quote a price.'
 pubDate: '2026-09-01'
+updatedDate: "Sep 29 2026"
 category: 'sales'
 heroImage: '/blog-placeholder-1.jpg'
 ---
@@ -28,6 +29,14 @@ Here's the fix. Before you quote anything, ask these five questions. They take t
 
 5. **What happens if this doesn't get done in the next 30 days?**
    This is the pain question. If the answer is "nothing, really," you don't have a client. You have a tire-kicker.
+
+## Three more if you have time
+
+- **What does success look like in 90 days?** Gives you the finish line to write into the proposal.
+- **What's your timeline?** Separates "someday" from "this month."
+- **Is there anything that would make you walk away?** Surfaces the deal-breaker now instead of after you've done the work.
+
+If they can't answer the first question on this page, they're not ready. Walk away politely.
 
 ## Why this matters
 

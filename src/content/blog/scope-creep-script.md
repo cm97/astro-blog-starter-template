@@ -2,6 +2,7 @@
 title: "How to Stop Scope Creep Without Losing the Client"
 description: "The words to use when a client asks for more than you agreed to — and why most providers handle it wrong."
 pubDate: "2026-09-01"
+updatedDate: "Sep 29 2026"
 category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 ---
@@ -25,6 +26,20 @@ When a client asks for something outside the agreement, the response that closes
 Acknowledge the idea. Name the situation clearly. Give two options — one to add the work properly (with a price), one to defer it. Make them choose.
 
 This does three things: it validates their idea so they don't feel rejected, it sets the expectation that additional work has a cost, and it forces a decision instead of leaving the conversation hanging.
+
+## The script
+
+When they ask for something outside scope:
+
+> "I can do that. It is outside what we agreed on, so it is a separate line item. Here is what it costs: [price]. Want me to add it, or should we keep it for after this project wraps?"
+
+No apology. No "I would love to but." No rambling explanation. One sentence, one price, one choice.
+
+## The three rules
+
+1. **Never say yes in the moment.** Buy time. "Let me check my calendar and get back to you in an hour."
+2. **Always name the price.** Even if it is small. Even if it is $25. Naming it resets the frame.
+3. **Always give them the out.** "If it is not worth it, no worries — we stick to the original scope."
 
 ## What the full Scope Guard covers
 

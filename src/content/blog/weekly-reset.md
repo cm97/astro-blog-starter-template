@@ -3,6 +3,7 @@ title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
 description: "A short weekly habit and the actual checklist behind it — so your priorities still exist when the week gets messy."
 category: "planning"
 pubDate: "Sep 01 2026"
+updatedDate: "Sep 29 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -64,6 +65,18 @@ If a client request or a fire knocked one off, replace it. Do not add a fourth.
 Send any follow-up that is now overdue. One clear sentence each.
 
 A Wednesday check that is not on the calendar never happens. Put it on the calendar the same way you put the Monday reset.
+
+## The Friday close (10 minutes)
+
+1. Close the week: what got done, what rolls to next Monday, what dies.
+2. Capture open loops in one place (same note or checklist every week). Do not invent a new system.
+3. Update the checklist if a step failed twice. Then close the laptop.
+
+## Exact phrases that keep it short
+
+- "Still the priority, or does this move?"
+- "One clear next step: [date] or off the list."
+- "This week's three: 1) 2) 3). Everything else waits."
 
 ## What this does not do
 
