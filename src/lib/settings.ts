@@ -11,6 +11,7 @@ const DEFAULTS: SiteSettings = {
 	defaultProductDescription: BUZZYFLY_CONFIG.defaultProductDescription,
 	newsletterTitle: BUZZYFLY_CONFIG.newsletterTitle,
 	newsletterDescription: BUZZYFLY_CONFIG.newsletterDescription,
+	mailingAddress: BUZZYFLY_CONFIG.mailingAddress,
 };
 
 // Editable settings live in the existing `site_content` key/value table rather

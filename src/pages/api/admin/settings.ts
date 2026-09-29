@@ -20,7 +20,12 @@ const KEYS: PatchableSettingsKey[] = [
 	"defaultProductDescription",
 	"newsletterTitle",
 	"newsletterDescription",
+	"mailingAddress",
 ];
+
+// Settings that may be saved blank. An empty mailing address keeps the
+// weekly subscriber emails paused.
+const OPTIONAL_KEYS: PatchableSettingsKey[] = ["mailingAddress"];
 
 export const POST: APIRoute = async ({ request, locals }) => {
 	const env = locals.runtime.env;
@@ -29,7 +34,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	const updates: Partial<Record<PatchableSettingsKey, string>> = {};
 	for (const key of KEYS) {
 		const value = String(form?.get(key) ?? "").trim();
-		if (!value) {
+		if (!value && !OPTIONAL_KEYS.includes(key)) {
 			return redirect({ error: `${key} is required.` });
 		}
 		updates[key] = value;

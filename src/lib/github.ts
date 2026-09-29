@@ -196,6 +196,7 @@ const PATCHABLE_SETTINGS_KEYS = [
 	"defaultProductDescription",
 	"newsletterTitle",
 	"newsletterDescription",
+	"mailingAddress",
 ] as const;
 
 export type PatchableSettingsKey = (typeof PATCHABLE_SETTINGS_KEYS)[number];
