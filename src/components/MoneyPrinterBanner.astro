@@ -1,0 +1,53 @@
+---
+interface Props {
+	bundleUrl: string;
+	bundlePrice: string;
+}
+const { bundleUrl, bundlePrice } = Astro.props;
+---
+
+<div class="printer-banner">
+	<p class="printer-banner__kicker">One-time. Instant download. No subscription.</p>
+	<p class="printer-banner__line">
+		Get every checklist, template, and script in one zip — {bundlePrice} Complete Bundle.
+	</p>
+	<a class="printer-banner__cta" href={bundleUrl} target="_blank" rel="noopener">Buy the bundle →</a>
+</div>
+
+<style>
+	.printer-banner {
+		background: #111;
+		color: #fff;
+		text-align: center;
+		padding: 0.85em 1.2em;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		justify-content: center;
+		gap: 0.65em 1.1em;
+	}
+	.printer-banner__kicker {
+		margin: 0;
+		font-size: 0.72em;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: #facc15;
+	}
+	.printer-banner__line {
+		margin: 0;
+		font-size: 0.95em;
+		font-weight: 600;
+	}
+	.printer-banner__cta {
+		display: inline-block;
+		background: #facc15;
+		color: #111 !important;
+		font-weight: 800;
+		font-size: 0.85em;
+		padding: 0.4em 0.95em;
+		border-radius: 999px;
+		text-decoration: none;
+	}
+	.printer-banner__cta:hover { opacity: 0.9; }
+</style>
