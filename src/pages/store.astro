@@ -63,7 +63,7 @@ const CONTENTS = [
 		<Header />
 		<main>
 			<section class="store-hero">
-				<p class="store-eyebrow">One product. It does one job well.</p>
+				<p class="store-eyebrow">The core system. Everything most people need, in one download.</p>
 				<h1>{title}</h1>
 				<p class="store-lede">{description}</p>
 
@@ -151,6 +151,23 @@ const CONTENTS = [
 						</>
 					)
 				}
+			</section>
+
+			<section class="store-section">
+				<h2>Ready to stop rebuilding it from memory?</h2>
+				<div class="store-buy">
+					<span class="store-price">{price}</span>
+					{
+						order.external ? (
+							<a class="store-cta" href={order.href} target="_blank" rel="noopener noreferrer">{order.label}</a>
+						) : (
+							<a class="store-cta" href={order.href}>{order.label}</a>
+						)
+					}
+				</div>
+				<p class="store-microcopy">
+					Want every Buzzyfly kit too? The <a href="/products">Complete Business Bundle</a> has it all.
+				</p>
 			</section>
 
 			<section class="store-section">
