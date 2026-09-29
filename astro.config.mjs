@@ -13,7 +13,7 @@ export default defineConfig({
 		platformProxy: {
 			enabled: true,
 		},
-		workerEntrypoint: "./src/worker-entry.ts",
+		workerEntryPoint: { path: "./src/worker-entry.ts" },
 	}),
 	// Duplicate posts merged into one post per topic. Keep these so old links
 	// and search results still land on the merged post.

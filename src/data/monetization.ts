@@ -16,6 +16,12 @@ export const BUZZYFLY_CONFIG = {
 	orderEmail: "coachmanager@gmail.com",
 	// Hard guarantee shown on store and callouts. Keep the wording identical everywhere.
 	guarantee: "30-day money-back guarantee — email us if it doesn't deliver.",
+	// How the subscriber email sequence is signed.
+	emailSignature: "Buzzyfly",
+	// Postal address for the footer of subscriber emails. US anti-spam law
+	// (CAN-SPAM) requires one in marketing email; a PO box is fine. Left
+	// empty, the footer omits it.
+	mailingAddress: "",
 };
 
 /**

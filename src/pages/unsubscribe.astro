@@ -1,0 +1,97 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { BUZZYFLY_CONFIG } from "../data/monetization";
+
+export const prerender = false;
+
+// GET shows a confirm button; POST does the unsubscribe. Email security
+// scanners open every link in a message, so a GET must never unsubscribe.
+const env = Astro.locals.runtime?.env;
+let token = Astro.url.searchParams.get("token") ?? "";
+let state: "confirm" | "done" | "invalid" | "error" = token ? "confirm" : "invalid";
+
+if (Astro.request.method === "POST") {
+	const form = await Astro.request.formData().catch(() => null);
+	token = (form?.get("token") as string) ?? "";
+	if (!token || !env?.DB) {
+		state = token ? "error" : "invalid";
+	} else {
+		try {
+			const found = await env.DB.prepare(`SELECT email FROM subscribers WHERE unsubscribe_token = ?`)
+				.bind(token)
+				.first();
+			if (!found) {
+				state = "invalid";
+			} else {
+				await env.DB.prepare(
+					`UPDATE subscribers SET unsubscribed_at = ? WHERE unsubscribe_token = ? AND unsubscribed_at IS NULL`,
+				)
+					.bind(Date.now(), token)
+					.run();
+				state = "done";
+			}
+		} catch (error) {
+			console.error("Buzzyfly unsubscribe failed", error);
+			state = "error";
+		}
+	}
+}
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={`Unsubscribe — ${BUZZYFLY_CONFIG.brandName}`} description="Stop the Buzzyfly weekly emails." />
+		<meta name="robots" content="noindex, nofollow" />
+		<style>
+			.unsub { max-width: 520px; margin: 3em auto; text-align: center; }
+			.unsub button {
+				background: var(--accent); color: #fff; border: none; border-radius: 6px;
+				padding: 0.8em 1.6em; font-size: 1em; font-weight: 600; cursor: pointer;
+			}
+			.unsub button:hover { background: var(--accent-dark); }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="unsub">
+			{state === "confirm" && (
+				<>
+					<h1>Stop the weekly emails?</h1>
+					<p>You'll stop getting the Buzzyfly weekly emails. Order and download emails aren't affected.</p>
+					<form method="post">
+						<input type="hidden" name="token" value={token} />
+						<button type="submit">Unsubscribe</button>
+					</form>
+				</>
+			)}
+			{state === "done" && (
+				<>
+					<h1>You're unsubscribed.</h1>
+					<p>No more weekly emails. If you change your mind, sign up again anywhere on the site.</p>
+				</>
+			)}
+			{state === "invalid" && (
+				<>
+					<h1>That link didn't work.</h1>
+					<p>
+						Email <a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a> and
+						we'll take you off the list by hand.
+					</p>
+				</>
+			)}
+			{state === "error" && (
+				<>
+					<h1>Something went wrong.</h1>
+					<p>
+						Please try again, or email <a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a>
+						and we'll take you off the list by hand.
+					</p>
+				</>
+			)}
+		</main>
+		<Footer />
+	</body>
+</html>
