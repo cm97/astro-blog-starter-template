@@ -1,0 +1,80 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import AdminHelp from "../../components/AdminHelp.astro";
+import { BUZZYFLY_CONFIG } from "../../data/monetization";
+import { listOutbox } from "../../lib/outbox";
+
+const env = Astro.locals.runtime.env;
+const status = Astro.url.searchParams.get("status");
+const sentTo = Astro.url.searchParams.get("to");
+const error = Astro.url.searchParams.get("error");
+const outbox = await listOutbox(env);
+---
+
+<AdminLayout title="Send email" active="compose">
+	<h1>Send email</h1>
+	<p class="admin-subtitle">Sends from <strong>{BUZZYFLY_CONFIG.brandEmail}</strong> through Cloudflare. Free, and your personal address never appears.</p>
+
+	<AdminHelp title="How replies reach you" open={outbox.length === 0}>
+		<p>
+			Replies go to {BUZZYFLY_CONFIG.brandEmail}. To receive them, turn on Cloudflare Email Routing once (free):
+			Cloudflare dashboard → buzzyfly.com → Email → Email Routing → forward <code>hello@</code> to your inbox.
+			Until then, replies bounce.
+		</p>
+		<p>Use it for one-to-one emails like podcast pitches, not bulk mail. Weekly subscriber emails send on their own.</p>
+	</AdminHelp>
+
+	{status === "sent" && <p class="admin-notice admin-notice--success">Sent to {sentTo}.</p>}
+	{error && <p class="admin-notice admin-notice--error">{error}</p>}
+
+	<div class="admin-card">
+		<form class="admin-form" method="POST" action="/api/admin/send-email">
+			<label for="fromName">From name (your pen name or "Buzzyfly")</label>
+			<input id="fromName" name="fromName" type="text" value={BUZZYFLY_CONFIG.brandName} maxlength="60" required />
+
+			<label for="to">To</label>
+			<input id="to" name="to" type="email" placeholder="host@example.com" required />
+
+			<label for="subject">Subject</label>
+			<input id="subject" name="subject" type="text" maxlength="200" required />
+
+			<label for="body">Message</label>
+			<textarea id="body" name="body" rows="14" required></textarea>
+
+			<p style="margin-top:1.5em;">
+				<button class="admin-btn admin-btn--primary" type="submit">Send</button>
+			</p>
+		</form>
+	</div>
+
+	<div class="admin-card">
+		<h2>Sent</h2>
+		{outbox.length === 0 && <p>Nothing sent yet.</p>}
+		{
+			outbox.length > 0 && (
+				<table>
+					<thead>
+						<tr>
+							<th>When</th>
+							<th>To</th>
+							<th>Subject</th>
+							<th>Status</th>
+						</tr>
+					</thead>
+					<tbody>
+						{outbox.map((e) => (
+							<tr>
+								<td>{new Date(e.created_at).toLocaleString()}</td>
+								<td>{e.to_address}</td>
+								<td>{e.subject}</td>
+								<td>{e.sent ? "Sent" : `Failed: ${e.error ?? "unknown"}`}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)
+		}
+	</div>
+</AdminLayout>
