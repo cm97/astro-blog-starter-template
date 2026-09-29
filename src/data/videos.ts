@@ -122,7 +122,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 		slides: [
 			["WHY", "Onboarding leaves your head", "Same steps every new client."],
 			["FOLLOW-UPS", "They actually get sent", "Five ready emails. Name in. Send."],
-			["PRICE", "Digital System $49 one-time", "7-day refund if files are not as listed."],
+			["PRICE", "Digital System $49 one-time", "30-day money-back guarantee."],
 		],
 		script: "Why forty-nine dollars one time instead of a monthly subscription? Because it is files. Checklists and templates you download, keep, and use forever. No login, no renewal, no platform dependency. Your onboarding process leaves your head. Your follow-ups actually get sent. Your week runs the same way every time. Forty-nine dollars at buzzyfly dot com. One time. Yours forever.",
 	},

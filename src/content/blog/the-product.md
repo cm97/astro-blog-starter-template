@@ -61,8 +61,8 @@ buzzyfly-digital-system/
 
 Personal and commercial use. You can use these in your business. You cannot resell them as your own.
 
-## 7-day guarantee
+## 30-day guarantee
 
-If the files aren't what the store lists, email for a refund. No questions.
+If it doesn't deliver, email within 30 days for a full refund. No questions.
 
 [Get it now — $49](/store)
