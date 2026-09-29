@@ -125,6 +125,12 @@ export async function sendDueSequenceEmails(env: {
 	EMAIL_FROM?: string;
 }): Promise<{ sent: number; failed: number }> {
 	if (!env.DB || !env.EMAIL) return { sent: 0, failed: 0 };
+	// US anti-spam law (CAN-SPAM) requires a postal address in marketing
+	// email. Hold the weekly emails until one is set; nobody loses their place.
+	if (!BUZZYFLY_CONFIG.mailingAddress.trim()) {
+		console.log("Buzzyfly sequence: paused until BUZZYFLY_CONFIG.mailingAddress is set");
+		return { sent: 0, failed: 0 };
+	}
 
 	const now = Date.now();
 	const lastStep = EMAIL_SEQUENCE.length - 1;

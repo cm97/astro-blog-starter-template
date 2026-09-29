@@ -19,8 +19,8 @@ export const BUZZYFLY_CONFIG = {
 	// How the subscriber email sequence is signed.
 	emailSignature: "Buzzyfly",
 	// Postal address for the footer of subscriber emails. US anti-spam law
-	// (CAN-SPAM) requires one in marketing email; a PO box is fine. Left
-	// empty, the footer omits it.
+	// (CAN-SPAM) requires one in marketing email; a PO box is fine. While it
+	// is empty, the weekly emails are paused (the welcome email still sends).
 	mailingAddress: "",
 };
 
