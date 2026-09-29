@@ -1,0 +1,36 @@
+---
+// Remembers which tracking link brought a visitor and tags Stripe buy links
+// with it. See src/lib/trafficSource.ts.
+---
+
+<script>
+	import { SOURCE_STORAGE_KEY, SOURCE_TTL_MS, cleanSource } from "../lib/trafficSource";
+
+	try {
+		const params = new URLSearchParams(location.search);
+		const utmSource = cleanSource(params.get("utm_source"));
+		if (utmSource) {
+			const parts = [utmSource, cleanSource(params.get("utm_medium")), cleanSource(params.get("utm_campaign"))];
+			const source = parts.map((p) => p ?? "").join("__").replace(/(__)+$/, "");
+			localStorage.setItem(SOURCE_STORAGE_KEY, JSON.stringify({ source, ts: Date.now() }));
+		}
+
+		const saved = JSON.parse(localStorage.getItem(SOURCE_STORAGE_KEY) ?? "null") as
+			| { source: string; ts: number }
+			| null;
+		if (saved && Date.now() - saved.ts < SOURCE_TTL_MS) {
+			const [source, medium, campaign] = saved.source.split("__");
+			document.querySelectorAll<HTMLAnchorElement>('a[href^="https://buy.stripe.com/"]').forEach((link) => {
+				const url = new URL(link.href);
+				url.searchParams.set("client_reference_id", saved.source);
+				// Stripe's payment-link report also groups by these.
+				url.searchParams.set("utm_source", source);
+				if (medium) url.searchParams.set("utm_medium", medium);
+				if (campaign) url.searchParams.set("utm_campaign", campaign);
+				link.href = url.toString();
+			});
+		}
+	} catch {
+		// Storage blocked (private mode etc.): tracking is best-effort only.
+	}
+</script>

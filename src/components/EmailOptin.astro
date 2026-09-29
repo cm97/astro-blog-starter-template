@@ -37,6 +37,17 @@ const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 </section>
 
 <script>
+	import { SOURCE_STORAGE_KEY, SOURCE_TTL_MS } from "../lib/trafficSource";
+
+	function savedSource(): string | null {
+		try {
+			const saved = JSON.parse(localStorage.getItem(SOURCE_STORAGE_KEY) ?? "null");
+			return saved && Date.now() - saved.ts < SOURCE_TTL_MS ? saved.source : null;
+		} catch {
+			return null;
+		}
+	}
+
 	const forms = document.querySelectorAll<HTMLFormElement>("[data-email-optin-form]");
 
 	forms.forEach((form) => {
@@ -62,7 +73,7 @@ const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 				const response = await fetch(form.action, {
 					method: "POST",
 					headers: { "Content-Type": "application/json" },
-					body: JSON.stringify({ email }),
+					body: JSON.stringify({ email, source: savedSource() }),
 				});
 
 				if (!response.ok) throw new Error("Request failed");

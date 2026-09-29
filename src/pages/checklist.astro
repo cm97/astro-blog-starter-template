@@ -1,0 +1,69 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import EmailOptin from "../components/EmailOptin.astro";
+
+// Landing page for ads and social posts: one job, get the free checklist.
+const STEPS = [
+	{ time: "5 min", title: "Clear the board", text: "Inbox and to-dos. Under 2 minutes, do it. Everything else gets a date or gets deleted." },
+	{ time: "5 min", title: "Three priorities only", text: "Not ten. If everything is a priority, nothing moves." },
+	{ time: "5 min", title: "Follow-ups", text: "Who's waiting on you, and who you're waiting on. One line each." },
+	{ time: "5 min", title: "Tomorrow's first move", text: "Written down, so you don't spend the morning deciding." },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Free 20-Minute Weekly Reset Checklist — Buzzyfly"
+			description="The weekly reset for freelancers and solo operators that still works by Thursday. Free checklist, one email a week."
+		/>
+		<style>
+			.lp { max-width: 640px; margin: 0 auto; }
+			.lp-hero { text-align: center; padding: 2em 0 1em; }
+			.lp-hero h1 { font-size: 2.3em; line-height: 1.15; margin-bottom: 0.4em; }
+			.lp-hero p { font-size: 1.15em; color: rgb(var(--gray-dark)); }
+			.lp-steps { list-style: none; padding: 0; margin: 1.5em 0; }
+			.lp-steps li { display: flex; gap: 1em; padding: 0.9em 0; border-top: 1px solid rgb(var(--gray-light)); }
+			.lp-steps li:first-child { border-top: none; }
+			.lp-time { flex: 0 0 4.5em; font-weight: 700; color: var(--accent); }
+			.lp-steps strong { display: block; }
+			.lp-for { background: rgb(var(--gray-light)); border-radius: 8px; padding: 1em 1.2em; margin: 1.5em 0; }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="lp">
+			<section class="lp-hero">
+				<h1>A weekly reset that still works by Thursday.</h1>
+				<p>20 minutes on Monday. A free checklist for freelancers, coaches and one-person businesses.</p>
+			</section>
+
+			<EmailOptin
+				title="Get the free checklist"
+				description="Free. One email a week with the next piece of the system. Unsubscribe any time."
+				buttonLabel="Send me the checklist"
+			/>
+
+			<h2>What's in it</h2>
+			<ul class="lp-steps">
+				{STEPS.map((s) => (
+					<li>
+						<span class="lp-time">{s.time}</span>
+						<span><strong>{s.title}</strong>{s.text}</span>
+					</li>
+				))}
+			</ul>
+
+			<div class="lp-for">
+				<strong>For you if</strong> your client process lives in your head, Monday starts with an hour of
+				figuring out what to do, and follow-ups only happen when you remember them.
+			</div>
+
+			<p style="text-align:center;margin:2em 0;"><a href="#email-optin-input">Get the checklist ↑</a></p>
+		</main>
+		<Footer />
+	</body>
+</html>
