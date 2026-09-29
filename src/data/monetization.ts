@@ -12,6 +12,9 @@ export const BUZZYFLY_CONFIG = {
 	newsletterTitle: "Send me the 20-minute weekly reset checklist",
 	newsletterDescription:
 		"Free. No spam. Just the checklist, plus one email a week with the next piece of the system.",
+	// Public-facing brand address for email sent from Admin > Send email.
+	// Replies reach you once Cloudflare Email Routing forwards it to your inbox.
+	brandEmail: "hello@buzzyfly.com",
 	// Where product support and manual delivery go.
 	orderEmail: "coachmanager@gmail.com",
 	// Hard guarantee shown on store and callouts. Keep the wording identical everywhere.
