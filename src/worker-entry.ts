@@ -13,6 +13,7 @@ import { handle } from "@astrojs/cloudflare/handler";
 import { BUZZYFLY_CONFIG } from "./data/monetization";
 import { sendFollowUpEmail } from "./lib/email";
 import { sendDueSequenceEmails } from "./lib/emailSequence";
+import { ensureEmailSequenceSchema } from "./lib/schema";
 
 interface Env {
 	DB?: D1Database;
@@ -161,6 +162,11 @@ async function scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext
 	// Each job is isolated so one failure (e.g. a missing table) doesn't stop the others.
 	ctx.waitUntil(
 		(async () => {
+			// 0. Apply the email-sequence schema if it's missing (no-op once applied).
+			await runJob("schema", async () => {
+				const added = await ensureEmailSequenceSchema(db);
+				if (added.length) console.log(`Buzzyfly schema: added ${added.join(", ")}`);
+			});
 			await runJob("owner alert", () => alertNewOrders(db, env));
 			await runJob("buyer follow-up", () => followUpRecentBuyers(db, env));
 			// 3. Weekly email sequence for free-checklist subscribers.

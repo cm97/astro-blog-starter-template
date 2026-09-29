@@ -6,7 +6,9 @@
 -- sequence_sent_at: when the last sequence email went out. NULL falls back
 --   to created_at when working out whether the next one is due.
 --
--- ALTER TABLE ... ADD COLUMN is not idempotent in SQLite: run this once.
+-- The Worker applies this itself on the hourly cron (src/lib/schema.ts), so
+-- running it by hand is optional. ALTER TABLE ... ADD COLUMN is not
+-- idempotent in SQLite: if you do run it by hand, run it once.
 -- Apply with:
 --   npx wrangler d1 execute buzzy-fly_db --remote --file=./migrations/0006_email_sequence.sql
 
