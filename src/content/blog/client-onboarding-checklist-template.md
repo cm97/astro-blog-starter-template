@@ -2,6 +2,7 @@
 title: "Client Onboarding Checklist Template (Copy and Use Today)"
 description: "A complete client onboarding checklist template for coaches and consultants — every step from signed contract to kickoff call, ready to run without rebuilding from memory."
 pubDate: "Sep 13 2026"
+updatedDate: "Sep 29 2026"
 heroImage: "/blog-placeholder-2.jpg"
 category: "onboarding"
 featuredProductTitle: "Client Onboarding Kit"
@@ -49,6 +50,15 @@ A checklist that works has three layers:
 - [ ] Send kickoff summary (what you covered, next steps, who owns what, next check-in date)
 - [ ] Add client to any recurring communication (weekly update, report, etc.)
 - [ ] Set internal milestone reminders for the first 30 days
+
+### Week one: four touches
+
+- [ ] Day 2: confirm you have everything from intake. One paragraph.
+- [ ] Day 4: first milestone, or a status line if the milestone is later.
+- [ ] Day 6: mid-project check-in. Three questions: on track, blocked, change in priority.
+- [ ] Day 7: add them to your retention list so week two is not silence.
+
+If a touch is late, send the late version. Do not skip it because you are embarrassed.
 
 ### Two weeks in
 

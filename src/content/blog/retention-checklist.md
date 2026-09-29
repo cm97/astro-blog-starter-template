@@ -2,6 +2,7 @@
 title: "The Client Retention Checklist"
 description: "How to keep clients, get referrals, and build a business that doesn't start from zero every month."
 pubDate: "2026-09-01"
+updatedDate: "Sep 29 2026"
 category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 ---
@@ -21,6 +22,16 @@ Just contact. Consistent, professional, human contact at the right moments.
 A Friday update during an active project. A two-week check-in after delivery. A testimonial ask 30 days out. A referral ask at 60 days. A quarterly re-engagement email to everyone who's gone quiet.
 
 That's the whole system. Most people just don't run it consistently.
+
+## The first month, week by week
+
+**Week 1:** Send a welcome message. Not a form letter. One sentence about what you are excited to build together. Ask one question that shows you listened.
+
+**Week 2:** Send a mid-project check-in. "How is this feeling so far? Anything you want to adjust?" This is not a status update. It is a pulse check. It catches problems before they become ghosting.
+
+**Week 3:** Send a value recap. Three bullets of what you have delivered so far. Not a brag. A reminder. People forget what you did for them.
+
+**Week 4:** Send the next-step proposal. "Here is what comes next. Here is what it costs. Here is when we start." Do not wait for them to ask. Lead.
 
 ## The five phases
 

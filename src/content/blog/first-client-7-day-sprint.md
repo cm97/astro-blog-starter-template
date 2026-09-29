@@ -2,6 +2,7 @@
 title: 'The 7-Day Sprint to Land Your First Paying Client'
 description: 'No audience. No following. No problem. Here is the sprint that gets you a first client in a week.'
 pubDate: '2026-09-01'
+updatedDate: "Sep 29 2026"
 category: 'sales'
 heroImage: '/blog-placeholder-2.jpg'
 ---
@@ -35,6 +36,12 @@ Do it well. Be specific. Show them exactly what is broken and exactly how you wo
 ## Day 7: Close or move on
 
 If they say yes, send the invoice. If they say no, thank them and move to the next prospect. Do not beg. Do not discount. Move on.
+
+## When they say yes
+
+- Run your onboarding checklist the same day. First impressions happen in the first 48 hours.
+- Send the first deliverable fast, even if it is small.
+- When it lands well, ask for a testimonial. Your second client is easier with the first one's words on your site.
 
 ## Why this works
 
