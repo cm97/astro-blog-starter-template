@@ -21,14 +21,10 @@ try {
 		</h2>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
-			<HeaderLink href="/domains">Domains</HeaderLink>
-			<HeaderLink href="/kids" class="kids-pill">Kids</HeaderLink>
-			<HeaderLink href="/kids-course" class="course-pill">Kids Course · $29</HeaderLink>
-			<HeaderLink href="/videos">Videos</HeaderLink>
+			<HeaderLink href="/kids">Kids</HeaderLink>
 			<HeaderLink href="/products">Products</HeaderLink>
-			<HeaderLink href="/store" class="store-pill">Store · $49</HeaderLink>
+			<HeaderLink href="/store" class="store-pill">Get the $49 System</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
-			<HeaderLink href="/jobs">Jobs</HeaderLink>
 			<HeaderLink href="/about">About</HeaderLink>
 		</div>
 	</nav>
@@ -40,82 +36,24 @@ try {
 		background: white;
 		box-shadow: 0 2px 8px rgba(var(--black), 5%);
 	}
-	h2 {
-		margin: 0;
-		font-size: 1em;
-	}
-
-	h2 a,
-	h2 a.active {
-		text-decoration: none;
-	}
+	h2 { margin: 0; font-size: 1em; }
+	h2 a, h2 a.active { text-decoration: none; }
 	.brand {
-		display: flex;
-		align-items: center;
-		gap: 0.5em;
+		display: flex; align-items: center; gap: 0.5em;
 		padding: 0.55em 0.4em !important;
 		border-bottom-color: transparent !important;
 	}
-	.brand img {
-		width: 40px;
-		height: 40px;
-		border-radius: 10px;
-		flex-shrink: 0;
-		display: block;
-	}
-	.brand span {
-		font-weight: 700;
-		letter-spacing: 0.01em;
-	}
-	nav {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		gap: 0.75em;
-		flex-wrap: wrap;
-	}
-	.internal-links {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-	}
-	nav a {
-		padding: 1em 0.5em;
-		color: var(--black);
-		border-bottom: 4px solid transparent;
-		text-decoration: none;
-	}
-	nav a.active {
-		text-decoration: none;
-		border-bottom-color: var(--accent);
-	}
+	.brand img { width: 40px; height: 40px; border-radius: 10px; flex-shrink: 0; display: block; }
+	.brand span { font-weight: 700; letter-spacing: 0.01em; }
+	nav { display: flex; align-items: center; justify-content: space-between; gap: 0.75em; flex-wrap: wrap; }
+	.internal-links { display: flex; flex-wrap: wrap; align-items: center; }
+	nav a { padding: 1em 0.5em; color: var(--black); border-bottom: 4px solid transparent; text-decoration: none; }
+	nav a.active { text-decoration: none; border-bottom-color: var(--accent); }
 	.store-pill {
-		background: var(--accent);
-		color: #fff !important;
-		border-radius: 999px;
-		padding: 0.4em 0.9em !important;
-		font-weight: 700;
-		font-size: 0.9em;
+		background: var(--accent); color: #fff !important; border-radius: 999px;
+		padding: 0.4em 0.9em !important; font-weight: 700; font-size: 0.9em;
 	}
 	.store-pill:hover { background: var(--accent-dark); }
-	.kids-pill {
-		background: #e8a317;
-		color: #1a1612 !important;
-		border-radius: 999px;
-		padding: 0.4em 0.85em !important;
-		font-weight: 700;
-		font-size: 0.9em;
-	}
-	.kids-pill:hover { background: #d49412; }
-	.course-pill {
-		background: #2c5e4a;
-		color: #fff8e7 !important;
-		border-radius: 999px;
-		padding: 0.4em 0.85em !important;
-		font-weight: 700;
-		font-size: 0.9em;
-	}
-	.course-pill:hover { background: #1f4636; }
 	@media (max-width: 640px) {
 		header { padding: 0 0.6em; }
 		.brand span { display: none; }

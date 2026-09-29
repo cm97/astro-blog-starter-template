@@ -2,11 +2,12 @@
 title: "Follow-Up Email After No Response: 5 Templates That Actually Get Replies"
 description: "Five ready-to-send follow-up email templates for when a prospect or client goes quiet — for proposals, check-ins, re-engagement, referral requests, and project wrap-ups."
 pubDate: "Sep 13 2026"
+updatedDate: "Sep 29 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
-featuredProductTitle: "Follow-Up Email Templates"
-featuredProductPrice: "$19"
-featuredProductDescription: "5 done follow-up emails — fill in a name, hit send. Proposal follow-up, mid-project check-in, re-engagement, referral request, and end-of-project wrap-up."
+featuredProductTitle: "Buzzyfly Digital System"
+featuredProductPrice: "$49"
+featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
 You sent the proposal. Or you finished the project. Or you had a great call and said you'd follow up. And then: nothing.
@@ -26,6 +27,20 @@ Before the templates: a follow-up email that gets a reply does three things.
 **It asks one clear question.** The reason most follow-ups don't get replies is that they don't make it obvious what the person should do next. "Wanted to check in" requires the reader to decide what to do with that. "Is this still something you want to move forward with, or should I take it off my plate?" makes it easy to respond.
 
 **It gives them an easy out.** The fear of looking pushy makes people write follow-ups that hedge so much the point disappears. Paradoxically, giving someone a clear "it's okay to say no" makes them more likely to engage. People respond to easy.
+
+## The 7-step follow-up process that stops the silence
+
+Most people treat follow-up as a one-off email. That is why it fails. Run this instead:
+
+1. **Log the send date and channel.** Proposal sent Tuesday 10:14am via email. Write it down. If it only lives in your head, Thursday wipes it.
+2. **Set the first nudge for day 5–7.** Not day 2 (too soon) and not day 14 (they forgot you). Tuesday or Wednesday morning gets the highest reply rate.
+3. **Use the exact subject line below.** "Re: [Project name] proposal" outperforms "Just checking in" every time.
+4. **Ask one binary question.** Yes/no or "still interested / take it off my plate." Never "thoughts?"
+5. **Offer one concrete next step.** "Happy to adjust scope" or "I can send a shorter version" — not "let me know how I can help."
+6. **If no reply after the first nudge, send template 3 on day 21.** Same problem, different frame. Do not invent a new novel.
+7. **Close the loop on day 35.** One final note that archives the opportunity. Protects your mental bandwidth and keeps the door open without chasing.
+
+Run those seven steps the same way every time and the awkwardness disappears. The templates below are the words. The process above is the system.
 
 ## Template 1: Proposal follow-up (5–7 days after sending)
 
@@ -125,14 +140,12 @@ Use when: A project has ended and you want to close it properly, leave a good im
 
 Why it works: It confirms the work is done (which matters — some clients worry about invoices or lingering obligations). It restates the result in concrete terms. It opens the door to future work without being salesy. And it's short enough that they'll actually read it.
 
-## The follow-up that doesn't get sent
+## What still breaks when the templates only live in your notes app
 
-The most expensive follow-up is the one that doesn't happen.
+You can copy the five emails above into a Google Doc right now and they will work. Until Thursday hits and you are slammed. Then the process collapses because there is no single place that also holds the onboarding checklist, the weekly reset, and the exact sequence for quiet leads.
 
-A proposal you sent and never followed up on has a conversion rate of near zero. The same proposal followed up on once, specifically and briefly, converts at a meaningfully higher rate — industry data consistently puts it at two to three times higher, depending on the business.
-
-Most service providers don't follow up because writing the email feels uncomfortable. But the discomfort is in the anticipation, not the doing. Once you have templates — actual sentences you know work — the follow-up email takes three minutes and happens on time, every time.
+That is the gap the full system closes. The templates are the words. The Digital System is the 20-minute checklists that keep the words getting sent even when the week is on fire.
 
 ---
 
-The Follow-Up Email Templates pack includes all five templates above as editable documents — proposal follow-up, mid-project check-in, re-engagement, referral request, and end-of-project wrap-up. Fill in the variable fields, send, and done. [Get the templates →](/store)
+The Buzzyfly Digital System includes the follow-up templates plus the onboarding checklists and weekly reset so the whole client process still runs when you are slammed. One-time payment. Instant download. 30-day money-back guarantee. [Get the $49 system →](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

@@ -11,6 +11,7 @@ const settings = await getSettings(Astro.locals.runtime?.env);
 
 const digitalSystem = ALL_PRODUCTS.find(p => p.id === 'buzzyfly-digital-system')!;
 const bundle = ALL_PRODUCTS.find(p => p.id === 'complete-business-bundle')!;
+const starters = ALL_PRODUCTS.filter(p => p.price === '$15' || p.price === '$19' || p.price === '$29');
 ---
 
 <!doctype html>
@@ -565,25 +566,16 @@ const bundle = ALL_PRODUCTS.find(p => p.id === 'complete-business-bundle')!;
 					<a class="blog__post" href="/blog/scope-creep-script">
 						<span class="blog__arrow">→</span>
 						<div>
-							<h3>How to Stop Scope Creep Without Losing the Client</h3>
-							<p>The structure that gives the client two options — both of which respect your time — so the conversation ends without conflict.</p>
+							<h3>Scope Creep Script: Exact Words When a Client Asks for Just One More Thing</h3>
+							<p>The six scripts that stop free work before it starts.</p>
 						</div>
 					</a>
 				</div>
 			</section>
 
-			<section class="inside">
-				<p class="section-label">Domain names</p>
-				<h2 class="section-title">Need a name before the checklist?</h2>
-				<p class="section-sub">Invent a domain and check it against the live registries. Search only — it does not register the name.</p>
-				<a class="btn-secondary" href="/domains">Open the domain desk</a>
-			</section>
-
-			<!-- EMAIL OPT-IN -->
 			<div class="optin-wrap">
 				<EmailOptin />
 			</div>
-
 		</main>
 		<Footer />
 	</body>

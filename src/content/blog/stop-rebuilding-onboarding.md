@@ -1,42 +1,77 @@
 ---
 title: 'Stop Rebuilding Onboarding From Memory (The Checklist That Fixes It)'
-description: 'Every new client means starting from scratch. Here is the checklist that ends that.'
+description: 'Every new client means a blank doc. Here is the first-week checklist you run instead of rebuilding from scratch.'
+category: systems
 pubDate: '2026-09-01'
-category: "onboarding"
+updatedDate: '2026-09-28'
 heroImage: '/blog-placeholder-4.jpg'
+featuredProductTitle: Buzzyfly Digital System
+featuredProductPrice: $49
+featuredProductDescription: Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.
 ---
 
-A new client signs. You feel good for about an hour. Then you realize you have no idea what to do next. You open a blank doc. You start typing. You remember half the steps. You forget the other half. By the end of the week the client is confused and you are exhausted.
+A new client signs. You feel good for about an hour. Then you open a blank doc. You remember half the steps. You forget the invoice line. By Friday the client is waiting and you are rebuilding the same welcome email you wrote last month.
 
-This is not a you problem. It is a system problem. You have no onboarding checklist. You have a memory that is full of holes.
+That is not a motivation problem. The process lives in your head. Heads drop steps on slammed weeks.
 
-## The onboarding checklist
+Run this instead. Same sequence every client. Timer on. Do not invent a new packet.
 
-**Before the kickoff call:**
-- Send the intake form (5 questions, 2 minutes to fill)
-- Review their answers
-- Prepare the proposal based on their answers
+## Day 0 — same day they pay (15 minutes)
 
-**During the kickoff call:**
-- Confirm the outcome (not the deliverable)
-- Confirm the scope (what is in, what is not)
-- Confirm the price and timeline
-- Get a verbal yes
+- Send the invoice if it is not already paid.
+- Send the intake. Five questions only. Two minutes for them to fill.
+- Put the kickoff on the calendar within 5 business days.
+- Add their name to a single running list: paid / intake in / kickoff booked.
 
-**After the kickoff call:**
-- Send the welcome email (template in the system)
-- Send the invoice
-- Add them to your retention checklist
+Intake questions that are enough:
 
-**Week 1:**
-- Send the mid-project check-in
-- Deliver the first milestone
-- Ask for feedback
+1. What does done look like in 30 days?
+2. What is out of scope on purpose?
+3. Who has to approve work besides you?
+4. Where should files and messages live?
+5. What would make this a waste of money?
 
-## Why this works
+If they skip a question, do not start work. Resend the same five lines. Do not write a custom essay.
 
-It turns onboarding from a panic into a process. You are not remembering. You are running. The checklist holds the steps so your brain does not have to.
+## Kickoff (25 minutes, not an hour)
 
-The full onboarding checklist — with the intake form, the proposal template, and the welcome email — is in the Buzzyfly Digital System. Stop rebuilding from memory.
+- Confirm the outcome in one sentence. Write it in the notes while they are talking.
+- Confirm what is in and what is not. Read the out-of-scope line out loud.
+- Confirm price, first milestone date, and how they request extras.
+- Get a verbal yes on those four items.
+- End on time.
+
+Line when they add “just one more thing” on the call:
+
+> That is a separate request. I can quote it after we lock this scope. Do you want this kickoff to stay as written?
+
+## After the call (10 minutes)
+
+Send one welcome email. Same skeleton every time:
+
+- Outcome sentence from the call
+- First milestone date
+- Where to send files
+- Next time they will hear from you (put the actual day)
+- Invoice status
+
+Then stop. Do not attach a 12-page PDF you will not update.
+
+## Week 1 — four touches, not a vibe
+
+- Day 2: confirm you have everything from intake. One paragraph.
+- Day 4: first milestone or a status line if the milestone is later.
+- Day 6: mid-project check-in. Three questions: on track, blocked, change in priority.
+- Day 7: add them to the retention list so week two is not silence.
+
+If a touch is late, send the late version. Do not skip it because you are embarrassed.
+
+## Why this dies when it only lives in your head
+
+Thursday lands. Another client pays. You skip intake because you “know them.” Scope creeps on the kickoff because you did not read the out-of-scope line. Follow-up becomes a blank compose window. That is how week-two chaos starts.
+
+The checklist has to exist as a file you open, not a memory you reconstruct.
+
+The intake form, welcome email, kickoff agenda, first-week sequence, follow-up set, and 20-minute weekly reset are in the Buzzyfly Digital System. One-time $49. Files plus lifetime updates. 30-day money-back guarantee — email us if it doesn’t deliver.
 
 [Get the Digital System — $49 →](/store/)
