@@ -1,1 +1,31 @@
-PLACEHOLDER
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import EmailOptin from '../components/EmailOptin.astro';
+import MoneyPrinterBanner from '../components/MoneyPrinterBanner.astro';
+import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
+import { BUZZYFLY_CONFIG, ALL_PRODUCTS } from '../data/monetization';
+import { getSettings } from '../lib/settings';
+
+const settings = await getSettings(Astro.locals.runtime?.env);
+
+const digitalSystem = ALL_PRODUCTS.find(p => p.id === 'buzzyfly-digital-system')!;
+const bundle = ALL_PRODUCTS.find(p => p.id === 'complete-business-bundle')!;
+const starters = ALL_PRODUCTS.filter(p => p.price === '$15' || p.price === '$19' || p.price === '$29');
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title={settings.brandName || SITE_TITLE} description={settings.defaultProductDescription || SITE_DESCRIPTION} />
+	</head>
+	<body>
+		<Header />
+		<MoneyPrinterBanner bundleUrl={bundle.stripeUrl} bundlePrice={bundle.price} />
+		<main>
+			<p><a href="/products">See all products</a></p>
+		</main>
+		<Footer />
+	</body>
+</html>
