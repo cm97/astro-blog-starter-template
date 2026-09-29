@@ -1,21 +1,27 @@
 import type { APIRoute } from "astro";
 import { sendSequenceEmail } from "../../lib/emailSequence";
+import { ensureEmailSequenceSchema } from "../../lib/schema";
+import { cleanSource } from "../../lib/trafficSource";
 
 export const prerender = false;
 
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-async function readEmail(request: Request): Promise<string | null> {
+async function readSignup(request: Request): Promise<{ email: string | null; source: string | null }> {
 	const contentType = request.headers.get("content-type") ?? "";
 
 	if (contentType.includes("application/json")) {
-		const body = (await request.json().catch(() => null)) as { email?: string } | null;
-		return body?.email ?? null;
+		const body = (await request.json().catch(() => null)) as { email?: string; source?: string } | null;
+		// Source is "source__medium__campaign"; clean each part so the separator survives.
+		const source = typeof body?.source === "string"
+			? body.source.split("__").map((p) => cleanSource(p) ?? "").join("__").replace(/(__)+$/, "") || null
+			: null;
+		return { email: body?.email ?? null, source };
 	}
 
 	// Native <form> fallback when JavaScript is unavailable.
 	const form = await request.formData().catch(() => null);
-	return (form?.get("email") as string) ?? null;
+	return { email: (form?.get("email") as string) ?? null, source: null };
 }
 
 /**
@@ -27,7 +33,7 @@ async function readEmail(request: Request): Promise<string | null> {
  */
 export const POST: APIRoute = async ({ request, locals }) => {
 	const env = locals.runtime.env;
-	const email = await readEmail(request);
+	const { email, source } = await readSignup(request);
 
 	if (!email || !EMAIL_RE.test(email)) {
 		return new Response(JSON.stringify({ error: "A valid email address is required." }), {
@@ -39,17 +45,22 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	let unsubscribeToken: string | undefined;
 	if (env.DB) {
 		const token = crypto.randomUUID();
+		// Add any columns the hourly cron hasn't added yet, so this insert can't miss them.
+		await ensureEmailSequenceSchema(env.DB).catch((error) =>
+			console.error("Buzzyfly subscribe: schema check failed", error),
+		);
 		try {
 			// Signing up again after unsubscribing counts as opting back in.
 			const row = await env.DB.prepare(
-				`INSERT INTO subscribers (email, created_at, unsubscribe_token, sequence_step, sequence_sent_at)
-				 VALUES (?, ?, ?, 0, ?)
+				`INSERT INTO subscribers (email, created_at, unsubscribe_token, sequence_step, sequence_sent_at, source)
+				 VALUES (?, ?, ?, 0, ?, ?)
 				 ON CONFLICT(email) DO UPDATE SET
 				   unsubscribed_at = NULL,
-				   unsubscribe_token = COALESCE(subscribers.unsubscribe_token, excluded.unsubscribe_token)
+				   unsubscribe_token = COALESCE(subscribers.unsubscribe_token, excluded.unsubscribe_token),
+				   source = COALESCE(subscribers.source, excluded.source)
 				 RETURNING unsubscribe_token`,
 			)
-				.bind(email, Date.now(), token, Date.now())
+				.bind(email, Date.now(), token, Date.now(), source)
 				.first<{ unsubscribe_token: string | null }>();
 			unsubscribeToken = row?.unsubscribe_token ?? undefined;
 		} catch (error) {

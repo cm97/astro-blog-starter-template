@@ -123,6 +123,13 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			)
 				.bind(order.provider, order.orderId, order.itemId, order.customerEmail, Date.now())
 				.run();
+			// Separate, best-effort: a missing source column must never lose the order record.
+			if (order.source) {
+				await env.DB.prepare(`UPDATE fulfillments SET source = ? WHERE provider = ? AND order_id = ?`)
+					.bind(order.source, order.provider, order.orderId)
+					.run()
+					.catch((error) => console.error("Buzzyfly webhook: failed to record source", error));
+			}
 		} catch (error) {
 			console.error("Buzzyfly webhook: failed to record fulfillment in D1", error);
 		}

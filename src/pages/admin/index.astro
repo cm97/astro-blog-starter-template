@@ -4,6 +4,7 @@ export const prerender = false;
 import AdminLayout from "../../layouts/AdminLayout.astro";
 import AdminHelp from "../../components/AdminHelp.astro";
 import { auditTableExists, listAuditLog } from "../../lib/audit";
+import { describeSource } from "../../lib/trafficSource";
 
 const env = Astro.locals.runtime.env;
 
@@ -33,6 +34,32 @@ if (env.DB) {
 		ordersLast7d = orders7d?.n ?? 0;
 	} catch (error) {
 		console.error("Buzzyfly admin dashboard: failed to read D1 stats", error);
+	}
+}
+
+// Signups and orders by the tracking link that brought them (src/lib/trafficSource.ts).
+type SourceRow = { source: string | null; signups: number; orders: number };
+let sourceRows: SourceRow[] = [];
+if (env.DB) {
+	try {
+		const [subsBySource, ordersBySource] = await Promise.all([
+			env.DB.prepare(`SELECT source, COUNT(*) AS n FROM subscribers GROUP BY source`).all<{
+				source: string | null;
+				n: number;
+			}>(),
+			env.DB.prepare(`SELECT source, COUNT(*) AS n FROM fulfillments GROUP BY source`).all<{
+				source: string | null;
+				n: number;
+			}>(),
+		]);
+		const bySource = new Map<string | null, SourceRow>();
+		const row = (source: string | null) =>
+			bySource.get(source) ?? bySource.set(source, { source, signups: 0, orders: 0 }).get(source)!;
+		for (const r of subsBySource.results ?? []) row(r.source).signups = r.n;
+		for (const r of ordersBySource.results ?? []) row(r.source).orders = r.n;
+		sourceRows = [...bySource.values()].sort((a, b) => b.orders - a.orders || b.signups - a.signups);
+	} catch {
+		// source columns not added yet (the hourly cron adds them): show nothing
 	}
 }
 
@@ -203,6 +230,37 @@ queue.sort((a, b) => b.when - a.when);
 			<div class="admin-stat__value">{ordersLast7d}</div>
 			<div class="admin-stat__label">Orders (7d)</div>
 		</div>
+	</div>
+
+	<div class="admin-card">
+		<h2>Where signups and orders come from</h2>
+		{sourceRows.length === 0 && <p>No data yet.</p>}
+		{
+			sourceRows.length > 0 && (
+				<table>
+					<thead>
+						<tr>
+							<th>Source</th>
+							<th>Signups</th>
+							<th>Orders</th>
+						</tr>
+					</thead>
+					<tbody>
+						{sourceRows.map((r) => (
+							<tr>
+								<td>{describeSource(r.source)}</td>
+								<td>{r.signups}</td>
+								<td>{r.orders}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)
+		}
+		<p style="font-size:0.9em;opacity:0.8;">
+			Counted from tracking links (<code>?utm_source=…&amp;utm_medium=…&amp;utm_campaign=…</code>). Visitors who
+			arrive without one show as "Direct / unknown". Orders from before tracking started have no source.
+		</p>
 	</div>
 
 	<div class="admin-card">
