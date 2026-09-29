@@ -4,6 +4,13 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import EmailOptin from "../components/EmailOptin.astro";
 import { BUZZYFLY_CONFIG, ALL_PRODUCTS } from "../data/monetization";
+
+// Lead with the core system and the bundle; single kits come after.
+const LEAD_IDS = ["buzzyfly-digital-system", "complete-business-bundle"];
+const products = [
+	...LEAD_IDS.map((id) => ALL_PRODUCTS.find((p) => p.id === id)!),
+	...ALL_PRODUCTS.filter((p) => !LEAD_IDS.includes(p.id)),
+];
 ---
 
 <!doctype html>
@@ -19,15 +26,15 @@ import { BUZZYFLY_CONFIG, ALL_PRODUCTS } from "../data/monetization";
 		<main>
 			<section class="page-hero">
 				<p class="eyebrow">Digital products for small businesses</p>
-				<h1>Pick the problem you want to solve first.</h1>
+				<h1>Start with the system. Add the rest if you want it.</h1>
 				<p class="lede">
-					Every product is a standalone template you can run immediately.
-					Buy one, buy all — no subscriptions, no fluff.
+					Most people get the Digital System: onboarding, weekly planning, and follow-ups in
+					one download. Only need one piece? The single kits are below. No subscriptions.
 				</p>
 			</section>
 
 			<section class="products-grid">
-				{ALL_PRODUCTS.map((product) => (
+				{products.map((product) => (
 					<div class={`product-card${product.badge === "Most popular" ? " product-card--featured" : ""}`}>
 						{product.badge && (
 							<div class={`product-badge${product.badge === "Best value" ? " product-badge--value" : ""}`}>

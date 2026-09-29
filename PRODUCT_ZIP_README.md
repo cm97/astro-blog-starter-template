@@ -57,4 +57,4 @@ Email coachmanager@gmail.com. This is a small operation and real questions get r
 
 ---
 
-You're holding the actual product. If this isn't what you expected, you have 7 days to email for a refund.
+You're holding the actual product. If it doesn't deliver, you have 30 days to email for a full refund.
