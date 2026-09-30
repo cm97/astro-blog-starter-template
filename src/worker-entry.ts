@@ -11,9 +11,9 @@ import type { SSRManifest } from "astro";
 import { App } from "astro/app";
 import { handle } from "@astrojs/cloudflare/handler";
 import { BUZZYFLY_CONFIG } from "./data/monetization";
-import { sendFollowUpEmail } from "./lib/email";
+import { escapeHtml, sendFollowUpEmail } from "./lib/email";
 import { sendDueSequenceEmails } from "./lib/emailSequence";
-import { ensureEmailSequenceSchema } from "./lib/schema";
+import { ensureDownloadSchema, ensureEmailSequenceSchema } from "./lib/schema";
 
 interface Env {
 	DB?: D1Database;
@@ -30,9 +30,7 @@ interface FulfillmentRow {
 	created_at: number;
 }
 
-async function sendOwnerAlert(orders: FulfillmentRow[], env: Env): Promise<void> {
-	if (!env.EMAIL_API_KEY || !env.EMAIL_FROM) return;
-
+async function sendOwnerAlert(orders: FulfillmentRow[], env: Env): Promise<boolean> {
 	const count = orders.length;
 	const lines = orders.map((o) => {
 		const date = new Date(o.created_at).toUTCString();
@@ -49,13 +47,29 @@ async function sendOwnerAlert(orders: FulfillmentRow[], env: Env): Promise<void>
 <ul style="padding-left:1.2em">${orders
 		.map(
 			(o) =>
-				`<li><strong>${o.order_id}</strong> (${o.provider})<br>${o.customer_email ?? "no email"}<br>${new Date(o.created_at).toUTCString()}</li>`,
+				`<li><strong>${escapeHtml(o.order_id)}</strong> (${o.provider})<br>${escapeHtml(o.customer_email ?? "no email")}<br>${new Date(o.created_at).toUTCString()}</li>`,
 		)
 		.join("")}</ul>
 <p style="color:#666;font-size:14px">— Buzzyfly cron alert</p>
 </body></html>`;
 
-	await fetch("https://api.resend.com/emails", {
+	// Same Cloudflare Email binding the customer emails use. Resend is only a
+	// fallback: it needs EMAIL_API_KEY, which production doesn't set, so relying
+	// on it alone meant no alert was ever sent.
+	if (env.EMAIL) {
+		await env.EMAIL.send({
+			from: env.EMAIL_FROM ?? `${BUZZYFLY_CONFIG.brandName} <orders@buzzyfly.com>`,
+			to: BUZZYFLY_CONFIG.orderEmail,
+			subject,
+			html,
+			text,
+		});
+		return true;
+	}
+
+	if (!env.EMAIL_API_KEY || !env.EMAIL_FROM) return false;
+
+	const response = await fetch("https://api.resend.com/emails", {
 		method: "POST",
 		headers: {
 			Authorization: `Bearer ${env.EMAIL_API_KEY}`,
@@ -69,6 +83,8 @@ async function sendOwnerAlert(orders: FulfillmentRow[], env: Env): Promise<void>
 			text,
 		}),
 	});
+	if (!response.ok) throw new Error(`Resend returned ${response.status}`);
+	return true;
 }
 
 async function runJob(name: string, job: () => Promise<void>): Promise<void> {
@@ -96,7 +112,9 @@ async function alertNewOrders(db: D1Database, env: Env): Promise<void> {
 	const newOrders = result.results ?? [];
 	if (newOrders.length === 0) return;
 
-	await sendOwnerAlert(newOrders, env);
+	// Only mark orders as alerted once the alert actually went out, so a missing
+	// email setup or a failed send is retried next hour instead of lost.
+	if (!(await sendOwnerAlert(newOrders, env))) return;
 	const now = Date.now();
 	await db.batch(
 		newOrders.map((o) =>
@@ -167,6 +185,7 @@ async function scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext
 				const added = await ensureEmailSequenceSchema(db);
 				if (added.length) console.log(`Buzzyfly schema: added ${added.join(", ")}`);
 			});
+			await runJob("download schema", () => ensureDownloadSchema(db));
 			await runJob("owner alert", () => alertNewOrders(db, env));
 			await runJob("buyer follow-up", () => followUpRecentBuyers(db, env));
 			// 3. Weekly email sequence for free-checklist subscribers.

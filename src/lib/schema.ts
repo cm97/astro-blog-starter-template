@@ -63,3 +63,30 @@ export async function ensureEmailSequenceSchema(db: D1Database): Promise<string[
 
 	return added;
 }
+
+/**
+ * Creates the tables /api/download uses (migration 0008). Keep in step with
+ * migrations/0008_download_tables.sql.
+ */
+export async function ensureDownloadSchema(db: D1Database): Promise<void> {
+	await db.batch([
+		db.prepare(
+			`CREATE TABLE IF NOT EXISTS download_events (
+			   id         INTEGER PRIMARY KEY AUTOINCREMENT,
+			   order_id   TEXT NOT NULL,
+			   item_id    TEXT NOT NULL,
+			   ip         TEXT,
+			   created_at INTEGER NOT NULL
+			 )`,
+		),
+		db.prepare(`CREATE INDEX IF NOT EXISTS idx_download_events_order ON download_events (order_id)`),
+		db.prepare(
+			`CREATE TABLE IF NOT EXISTS product_files (
+			   item_id      TEXT PRIMARY KEY,
+			   file_name    TEXT NOT NULL,
+			   content_type TEXT NOT NULL,
+			   content_b64  TEXT NOT NULL
+			 )`,
+		),
+	]);
+}

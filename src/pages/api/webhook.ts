@@ -7,7 +7,7 @@ import {
 	resolveProductFile,
 	type FulfillmentOrder,
 } from "../../lib/fulfillment";
-import { BUZZYFLY_CONFIG } from "../../data/monetization";
+import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../../data/monetization";
 import { sendDeliveryEmail } from "../../lib/email";
 
 // This endpoint must run on-demand (a Cloudflare Pages Function / Worker),
@@ -85,6 +85,38 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return new Response("Fulfillment not configured", { status: 500 });
 	}
 
+	// Record the order before emailing, and stop if it's already recorded:
+	// Stripe and Lemon Squeezy retry deliveries (timeouts, network blips), and
+	// without this check every retry emailed the customer another link.
+	// Best-effort: D1 is optional and a failed write must never block delivery.
+	if (env.DB) {
+		try {
+			const insert = await env.DB.prepare(
+				`INSERT INTO fulfillments (provider, order_id, item_id, customer_email, created_at)
+				 VALUES (?, ?, ?, ?, ?)
+				 ON CONFLICT (provider, order_id) DO NOTHING`,
+			)
+				.bind(order.provider, order.orderId, order.itemId, order.customerEmail, Date.now())
+				.run();
+			if (insert.meta.changes === 0) {
+				console.log(`Buzzyfly webhook: order ${order.orderId} already fulfilled; ignoring retry`);
+				return new Response(JSON.stringify({ received: true, fulfilled: true, duplicate: true }), {
+					status: 200,
+					headers: { "content-type": "application/json" },
+				});
+			}
+			// Separate, best-effort: a missing source column must never lose the order record.
+			if (order.source) {
+				await env.DB.prepare(`UPDATE fulfillments SET source = ? WHERE provider = ? AND order_id = ?`)
+					.bind(order.source, order.provider, order.orderId)
+					.run()
+					.catch((error) => console.error("Buzzyfly webhook: failed to record source", error));
+			}
+		} catch (error) {
+			console.error("Buzzyfly webhook: failed to record fulfillment in D1", error);
+		}
+	}
+
 	const downloadToken = await createDownloadToken(order, env.DOWNLOAD_TOKEN_SECRET);
 	const downloadUrl = `${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${downloadToken}`;
 
@@ -96,7 +128,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		{
 			to: order.customerEmail ?? "",
 			downloadUrl,
-			productName: productFile.fileName.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "),
+			productName:
+				ALL_PRODUCTS.find((p) => p.id === order.itemId)?.title ??
+				productFile.fileName.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "),
 			orderId: order.orderId,
 			itemId: order.itemId,
 		},
@@ -111,28 +145,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		console.error(
 			`Buzzyfly webhook: DELIVERY FAILED for order ${order.orderId} (${order.customerEmail ?? "no email"}): ${delivery.reason}. Download URL: ${downloadUrl}`,
 		);
-	}
-
-	// Best-effort fulfillment record. D1 is optional — the webhook still
-	// succeeds if the `DB` binding isn't configured for this environment.
-	if (env.DB) {
-		try {
-			await env.DB.prepare(
-				`INSERT INTO fulfillments (provider, order_id, item_id, customer_email, created_at)
-				 VALUES (?, ?, ?, ?, ?)`,
-			)
-				.bind(order.provider, order.orderId, order.itemId, order.customerEmail, Date.now())
-				.run();
-			// Separate, best-effort: a missing source column must never lose the order record.
-			if (order.source) {
-				await env.DB.prepare(`UPDATE fulfillments SET source = ? WHERE provider = ? AND order_id = ?`)
-					.bind(order.source, order.provider, order.orderId)
-					.run()
-					.catch((error) => console.error("Buzzyfly webhook: failed to record source", error));
-			}
-		} catch (error) {
-			console.error("Buzzyfly webhook: failed to record fulfillment in D1", error);
-		}
 	}
 
 	console.log(
