@@ -44,5 +44,5 @@ The system works because it's the same every time — not because it's perfect.
 
 ## License
 
-Personal use only. Do not resell, redistribute, or share these files.
+Personal and commercial use. Use and adapt these files in your own business, and share them with your team or contractors. Do not resell or redistribute them. Full terms in `LICENSE.md`.
 © Buzzyfly. All rights reserved.
