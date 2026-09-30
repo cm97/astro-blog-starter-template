@@ -22,7 +22,7 @@ const allPosts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-const categories = [...new Set(allPosts.map((p) => p.data.category).filter(Boolean))];
+const categories = [...new Set(allPosts.map((p) => p.data.category).filter((c): c is string => Boolean(c)))];
 const activeCategory = Astro.url.searchParams.get('category');
 
 const posts = activeCategory
