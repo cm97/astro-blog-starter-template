@@ -1,7 +1,7 @@
 ---
 title: "What's Actually Inside the Buzzyfly Digital System"
 description: "The literal file tree so you know exactly what you're buying."
-category: "Product"
+category: "product"
 pubDate: "Sep 01 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
