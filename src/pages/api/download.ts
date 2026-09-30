@@ -90,11 +90,16 @@ export const GET: APIRoute = async ({ request, locals }) => {
 	if (!object) {
 		// Fallback: serve from D1 product_files table (populated when R2 is unavailable).
 		if (env.DB) {
-			const row = await env.DB.prepare(
-				`SELECT content_b64, file_name, content_type FROM product_files WHERE item_id = ?`,
-			)
-				.bind(claims.itemId)
-				.first<{ content_b64: string; file_name: string; content_type: string }>();
+			let row: { content_b64: string; file_name: string; content_type: string } | null = null;
+			try {
+				row = await env.DB.prepare(
+					`SELECT content_b64, file_name, content_type FROM product_files WHERE item_id = ?`,
+				)
+					.bind(claims.itemId)
+					.first<{ content_b64: string; file_name: string; content_type: string }>();
+			} catch (error) {
+				console.error("Buzzyfly download: product_files fallback lookup failed", error);
+			}
 			if (row) {
 				const bytes = Uint8Array.from(atob(row.content_b64), (c) => c.charCodeAt(0));
 				await logDownloadEvent(env, claims.orderId, claims.itemId, ip);
