@@ -44,10 +44,10 @@ const CONTENTS = [
 			.store-hero h1 { font-size: 2.6em; margin-bottom: 0.3em; }
 			.store-lede { max-width: 32em; margin: 0 auto 1.4em; color: rgb(var(--gray-dark)); }
 			.store-buy { display: flex; align-items: center; justify-content: center; gap: 1em; flex-wrap: wrap; }
-			.store-price { font-size: 2em; font-weight: 700; color: rgb(var(--black)); }
-			.store-cta { display: inline-block; padding: 0.7em 1.8em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; transition: background-color 0.15s ease-in-out; }
+			.store-price { font-size: 2.4em; font-weight: 800; color: rgb(var(--black)); }
+			.store-cta { display: inline-block; padding: 1em 2.4em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.2em; text-decoration: none; transition: background-color 0.15s ease-in-out; }
 			.store-cta:hover { background: var(--accent-dark); color: #fff; }
-			.store-microcopy { margin: 0.9em 0 0; font-size: 0.8em; color: rgb(var(--gray)); }
+			.store-microcopy { margin: 0.9em 0 0; font-size: 0.85em; color: rgb(var(--gray-dark)); }
 			.store-section { margin-top: 2.5em; }
 			.store-section h2 { font-size: 1.6em; }
 			.store-list { padding-left: 1.2em; color: rgb(var(--gray-dark)); }
@@ -71,14 +71,14 @@ const CONTENTS = [
 					<span class="store-price">{price}</span>
 					{
 						order.external ? (
-							<a class="store-cta" href={order.href} target="_blank" rel="noopener noreferrer">{order.label}</a>
+							<a class="store-cta" href={order.href} target="_blank" rel="noopener noreferrer">{order.label} — Digital System</a>
 						) : (
-							<a class="store-cta" href={order.href}>{order.label}</a>
+							<a class="store-cta" href={order.href}>{order.label} — Digital System</a>
 						)
 					}
 				</div>
 				<p class="store-microcopy">
-					One-time payment. No subscription. Secure checkout by Stripe. {BUZZYFLY_CONFIG.guarantee}
+					One-time payment. Instant download. 30-day refund if files are not delivered or not as listed.
 				</p>
 			</section>
 
@@ -126,27 +126,22 @@ const CONTENTS = [
 					AUTOMATIC_DELIVERY_ENABLED ? (
 						<ol class="store-list">
 							<li>Pay securely through Stripe.</li>
-							<li>A private download link lands in the inbox you checked out with.</li>
-							<li>The link is good for 3 days; the files are yours to keep.</li>
+							<li>A private download link is sent to the inbox you checked out with.</li>
+							<li>The files are yours to keep. If they do not arrive or are not as listed, email us within 30 days for a refund.</li>
 						</ol>
 					) : (
 						<>
 							<ol class="store-list">
 								<li>Pay securely through Stripe.</li>
-								<li>
-									Your download is emailed to the address you checked out with — sent by
-									hand right now, not instantly, while automatic delivery is being
-									finished.
-								</li>
+								<li>Your download is emailed to the address you checked out with.</li>
 								<li>The files are yours to keep.</li>
 							</ol>
 							<p class="store-notice">
-								Being straight with you: delivery isn't automated yet, so there's a short
-								wait between paying and getting the file. If anything looks wrong, email
+								If the files are not delivered or not as listed, email
 								<a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>
 									{BUZZYFLY_CONFIG.orderEmail}
 								</a>{" "}
-								and you'll get a person, not a ticket queue. {BUZZYFLY_CONFIG.guarantee}
+								within 30 days for a refund.
 							</p>
 						</>
 					)
@@ -159,14 +154,14 @@ const CONTENTS = [
 					<span class="store-price">{price}</span>
 					{
 						order.external ? (
-							<a class="store-cta" href={order.href} target="_blank" rel="noopener noreferrer">{order.label}</a>
+							<a class="store-cta" href={order.href} target="_blank" rel="noopener noreferrer">{order.label} — Digital System</a>
 						) : (
-							<a class="store-cta" href={order.href}>{order.label}</a>
+							<a class="store-cta" href={order.href}>{order.label} — Digital System</a>
 						)
 					}
 				</div>
 				<p class="store-microcopy">
-					Want every Buzzyfly kit too? The <a href="/products">Complete Business Bundle</a> has it all.
+					Want every Buzzyfly kit too? The <a href="/products">Complete Business Bundle</a> is secondary — start with the $49 system.
 				</p>
 			</section>
 
