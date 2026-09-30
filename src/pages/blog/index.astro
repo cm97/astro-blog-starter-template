@@ -22,18 +22,20 @@ const allPosts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-const categories = [...new Set(allPosts.map((p) => p.data.category).filter(Boolean))];
-const activeCategory = Astro.url.searchParams.get('category');
+// Lowercased so "Product" and "product" are one category (and old ?category=Product links still work).
+const categoryOf = (p: (typeof allPosts)[number]) => p.data.category?.toLowerCase();
+const categories = [...new Set(allPosts.map(categoryOf).filter((c): c is string => Boolean(c)))];
+const activeCategory = Astro.url.searchParams.get('category')?.toLowerCase() ?? null;
 
 const posts = activeCategory
-	? allPosts.filter((p) => p.data.category === activeCategory)
+	? allPosts.filter((p) => categoryOf(p) === activeCategory)
 	: allPosts;
 
 const featured = posts[0];
 const rest = posts.slice(1);
 
 const categoryCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
-	const c = p.data.category;
+	const c = categoryOf(p);
 	if (c) acc[c] = (acc[c] ?? 0) + 1;
 	return acc;
 }, {});

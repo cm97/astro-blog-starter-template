@@ -195,9 +195,9 @@ const formatJobType = (type?: string) =>
     <Footer />
 
     <script>
-      const searchInput = document.getElementById('searchInput');
-      const locationInput = document.getElementById('locationInput');
-      const cards = document.querySelectorAll('.job-card');
+      const searchInput = document.getElementById('searchInput') as HTMLInputElement | null;
+      const locationInput = document.getElementById('locationInput') as HTMLInputElement | null;
+      const cards = document.querySelectorAll<HTMLElement>('.job-card');
 
       function filterJobs() {
         const query = searchInput ? searchInput.value.toLowerCase().trim() : '';

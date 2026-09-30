@@ -188,17 +188,37 @@ const {
 </style>
 
 <script>
-	function initSiteSearch(root) {
-		const form = root.querySelector("[data-search-form]");
-		const input = root.querySelector("[data-search-input]");
-		const clearBtn = root.querySelector("[data-search-clear]");
-		const results = root.querySelector("[data-search-results]");
-		if (!form || !input || !results) return;
+	/** One entry in /search.json. */
+	interface SearchDoc {
+		title?: string;
+		description?: string;
+		url: string;
+		type?: string;
+		text?: string;
+		snippet?: string;
+	}
 
-		let index = null;
-		let pending = null;
-		let matches = [];
-		let terms = [];
+	function initSiteSearch(root: Element) {
+		const form = root.querySelector<HTMLFormElement>("[data-search-form]");
+		const input = root.querySelector<HTMLInputElement>("[data-search-input]");
+		const clearBtn = root.querySelector<HTMLButtonElement>("[data-search-clear]");
+		const results = root.querySelector<HTMLElement>("[data-search-results]");
+		if (!form || !input || !clearBtn || !results) return;
+		setupSiteSearch(root, form, input, clearBtn, results);
+	}
+
+	function setupSiteSearch(
+		root: Element,
+		form: HTMLFormElement,
+		input: HTMLInputElement,
+		clearBtn: HTMLButtonElement,
+		results: HTMLElement,
+	) {
+
+		let index: SearchDoc[] | null = null;
+		let pending: Promise<void> | null = null;
+		let matches: SearchDoc[] = [];
+		let terms: string[] = [];
 		let active = -1;
 
 		function loadIndex() {
@@ -214,7 +234,7 @@ const {
 			return pending;
 		}
 
-		function escapeHtml(value) {
+		function escapeHtml(value: unknown): string {
 			return String(value).replace(
 				/[&<>"']/g,
 				(ch) =>
@@ -224,15 +244,15 @@ const {
 						">": "&gt;",
 						'"': "&quot;",
 						"'": "&#39;",
-					})[ch],
+					})[ch] ?? ch,
 			);
 		}
 
-		function escapeRegExp(value) {
+		function escapeRegExp(value: string) {
 			return value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 		}
 
-		function highlight(value) {
+		function highlight(value: string) {
 			let out = escapeHtml(value);
 			for (const term of terms) {
 				const pattern = new RegExp("(" + escapeRegExp(escapeHtml(term)) + ")", "gi");
@@ -242,7 +262,7 @@ const {
 		}
 
 		/** Every term must appear somewhere; titles outrank descriptions outrank body. */
-		function scoreDoc(doc) {
+		function scoreDoc(doc: SearchDoc) {
 			const title = (doc.title || "").toLowerCase();
 			const description = (doc.description || "").toLowerCase();
 			const text = (doc.text || "").toLowerCase();
@@ -259,7 +279,7 @@ const {
 			return total;
 		}
 
-		function buildSnippet(doc) {
+		function buildSnippet(doc: SearchDoc) {
 			const body = doc.text || doc.description || "";
 			const lower = body.toLowerCase();
 			let at = -1;
@@ -370,7 +390,7 @@ const {
 		});
 
 		document.addEventListener("click", (event) => {
-			if (!root.contains(event.target)) results.hidden = true;
+			if (!root.contains(event.target as Node)) results.hidden = true;
 		});
 	}
 

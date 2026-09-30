@@ -1,7 +1,7 @@
 ---
 title: "Templates vs. Systems: What Buzzyfly Actually Is"
 description: "Why 'just download a template' doesn't fix the actual problem."
-category: "Systems"
+category: "systems"
 pubDate: "Jul 28 2026"
 heroImage: "/blog-placeholder-4.jpg"
 featuredProductTitle: "Buzzyfly Digital System"

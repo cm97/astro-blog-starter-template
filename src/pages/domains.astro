@@ -345,11 +345,13 @@ const description = "Invent a domain name and see if the registry still has it."
 					const copy = document.createElement("div");
 					const title = document.createElement("h2");
 					title.textContent = row.domain;
-					copy.append(title);
+					// appendChild, not append(): Wrangler's generated Worker types
+					// redeclare Element.append for HTMLRewriter and hide the DOM one.
+					copy.appendChild(title);
 					if (row.line) {
 						const line = document.createElement("p");
 						line.textContent = row.line;
-						copy.append(line);
+						copy.appendChild(line);
 					}
 					const side = document.createElement("div");
 					side.className = "side";
@@ -357,7 +359,8 @@ const description = "Invent a domain name and see if the registry still has it."
 					meta.className = "meta" + (row.availability === "open" ? " open" : "");
 					const label = document.createElement("strong");
 					label.textContent = row.availability === "open" ? "Open" : row.availability === "taken" ? "Taken" : "Unconfirmed";
-					meta.append(label, document.createTextNode(`${money(row.price)} / yr`));
+					meta.appendChild(label);
+					meta.appendChild(document.createTextNode(`${money(row.price)} / yr`));
 					const button = document.createElement("button");
 					button.type = "button";
 					button.className = "hold";
@@ -381,9 +384,11 @@ const description = "Invent a domain name and see if the registry still has it."
 						openRequest();
 					});
 					if (row.availability !== "taken") wrap.style.cursor = "pointer";
-					side.append(meta, button);
-					wrap.append(copy, side);
-					rowsEl.append(wrap);
+					side.appendChild(meta);
+					side.appendChild(button);
+					wrap.appendChild(copy);
+					wrap.appendChild(side);
+					rowsEl.appendChild(wrap);
 				}
 			}
 
@@ -485,7 +490,7 @@ const description = "Invent a domain name and see if the registry still has it."
 						link.target = "_blank";
 						link.rel = "noopener";
 						link.textContent = data.checkoutLabel || "Pay on Stripe";
-						interestStatus.append(link);
+						interestStatus.appendChild(link);
 					}
 				} catch {
 					interestStatus.textContent = "Could not send that. Email coachmanager@gmail.com.";

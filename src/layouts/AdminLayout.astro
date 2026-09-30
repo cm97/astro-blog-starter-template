@@ -88,7 +88,11 @@ const adminUser = Astro.locals.adminUser;
 						mail.className = "admin-btn";
 						mail.href = `mailto:${button.dataset.email}?subject=${encodeURIComponent(data.subject)}&body=${encodeURIComponent(data.body)}`;
 						mail.textContent = "Open in email";
-						slot.append(subject, copy, mail);
+						// appendChild, not append(): Wrangler's generated Worker types
+						// redeclare Element.append for HTMLRewriter and hide the DOM one.
+						slot.appendChild(subject);
+						slot.appendChild(copy);
+						slot.appendChild(mail);
 					} catch {
 						slot.textContent = "Could not write that.";
 					} finally {
