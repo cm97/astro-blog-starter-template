@@ -1,14 +1,17 @@
 import type { APIRoute } from "astro";
-import { APPS_COOKIE, APPS_TOKEN_TTL_SECONDS, hasAppsAccess, lockedPage } from "../../lib/appsAccess";
+import { APPS_COOKIE, APPS_TOKEN_TTL_SECONDS, cookieValueFor, hasAppsAccess, lockedPage } from "../../lib/appsAccess";
 
 export const prerender = false;
 
-/** Redeems the unlock link from the purchase email: verifies the token, sets the access cookie. */
+/**
+ * Redeems an unlock link (?token=) from a purchase email or an access code (?code=):
+ * verifies it server-side, then sets the HttpOnly access cookie.
+ */
 export const GET: APIRoute = async ({ url, locals, cookies, redirect }) => {
-	const token = url.searchParams.get("token");
-	if (!(await hasAppsAccess(locals.runtime.env, token))) return lockedPage();
+	const raw = url.searchParams.get("token") ?? url.searchParams.get("code");
+	if (!raw || !(await hasAppsAccess(locals.runtime.env, raw))) return lockedPage();
 
-	cookies.set(APPS_COOKIE, token as string, {
+	cookies.set(APPS_COOKIE, cookieValueFor(raw), {
 		path: "/",
 		httpOnly: true,
 		secure: url.protocol === "https:",
