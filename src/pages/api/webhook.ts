@@ -1,3 +1,4 @@
+import { APPS_TOKEN_TTL_SECONDS, isAppsItem } from "../../lib/appsAccess";
 import type { APIRoute } from "astro";
 import { verifyLemonSqueezySignature, verifyStripeSignature } from "../../lib/webhookSecurity";
 import {
@@ -72,7 +73,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	}
 
 	const productFile = resolveProductFile(order.itemId);
-	if (!productFile) {
+	const isApps = isAppsItem(order.itemId);
+	if (!productFile && !isApps) {
 		console.error(`Buzzyfly webhook: no product file mapped for item ${order.itemId}`);
 		return new Response(JSON.stringify({ received: true, fulfilled: false }), {
 			status: 200,
@@ -117,8 +119,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		}
 	}
 
-	const downloadToken = await createDownloadToken(order, env.DOWNLOAD_TOKEN_SECRET);
-	const downloadUrl = `${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${downloadToken}`;
+	const downloadToken = await createDownloadToken(
+		order,
+		env.DOWNLOAD_TOKEN_SECRET,
+		isApps ? APPS_TOKEN_TTL_SECONDS : undefined,
+	);
+	const downloadUrl = isApps
+		? `${BUZZYFLY_CONFIG.siteUrl}/apps/unlock?token=${downloadToken}`
+		: `${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${downloadToken}`;
 
 	// Deliver the link to the customer. Until this existed, the URL was only
 	// written to the console and returned in the HTTP response body — and that
@@ -130,7 +138,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			downloadUrl,
 			productName:
 				ALL_PRODUCTS.find((p) => p.id === order.itemId)?.title ??
-				productFile.fileName.replace(/\.[^.]+$/, "").replace(/[-_]/g, " "),
+				(productFile?.fileName ?? "Buzzyfly Apps Pro").replace(/\.[^.]+$/, "").replace(/[-_]/g, " "),
 			orderId: order.orderId,
 			itemId: order.itemId,
 		},
