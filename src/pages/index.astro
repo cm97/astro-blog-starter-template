@@ -1,106 +1,424 @@
 ---
-import BaseHead from '../components/BaseHead.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import EmailOptin from '../components/EmailOptin.astro';
-import MoneyPrinterBanner from '../components/MoneyPrinterBanner.astro';
-import { SITE_TITLE, SITE_DESCRIPTION } from '../consts';
-import { BUZZYFLY_CONFIG, ALL_PRODUCTS } from '../data/monetization';
-import { getSettings } from '../lib/settings';
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import EmailOptin from "../components/EmailOptin.astro";
+import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
+import { BUZZYFLY_CONFIG, ALL_PRODUCTS } from "../data/monetization";
+import { getSettings } from "../lib/settings";
 
 const settings = await getSettings(Astro.locals.runtime?.env);
 
-const digitalSystem = ALL_PRODUCTS.find(p => p.id === 'buzzyfly-digital-system')!;
-const bundle = ALL_PRODUCTS.find(p => p.id === 'complete-business-bundle')!;
-const starters = ALL_PRODUCTS.filter(p => p.price === '$15' || p.price === '$19' || p.price === '$29');
+const digitalSystem = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
+const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={settings.brandName || SITE_TITLE} description={settings.defaultProductDescription || SITE_DESCRIPTION} />
+		<BaseHead
+			title={settings.brandName || SITE_TITLE}
+			description="Stop rebuilding your client process from scratch every week. Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes. $49 one-time."
+		/>
 		<style>
-			.hero { padding: 3.5em 0 3em; text-align: center; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.hero__eyebrow { display: inline-block; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1em; }
-			.hero h1 { font-size: clamp(1.8em, 5vw, 2.6em); line-height: 1.15; margin: 0 0 0.5em; color: rgb(var(--black)); }
-			.hero__sub { font-size: 1.1em; color: rgb(var(--gray-dark)); max-width: 36em; margin: 0 auto 2em; line-height: 1.6; }
-			.hero__cta-group { display: flex; align-items: center; justify-content: center; gap: 0.9em; flex-wrap: wrap; margin-bottom: 1em; }
-			.btn-primary { display: inline-block; padding: 0.75em 2em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 700; font-size: 1.05em; text-decoration: none; white-space: nowrap; }
-			.btn-primary:hover { background: var(--accent-dark); }
-			.btn-secondary { display: inline-block; padding: 0.75em 1.6em; border-radius: 999px; border: 2px solid rgb(var(--gray-light)); color: rgb(var(--gray-dark)) !important; font-weight: 600; font-size: 1em; text-decoration: none; }
-			.btn-secondary:hover { border-color: var(--accent); color: var(--accent) !important; }
-			.hero__price { font-size: 1.5em; font-weight: 700; color: rgb(var(--black)); }
-			.hero__trust { font-size: 0.82em; color: rgb(var(--gray)); margin: 0; }
-			.hero__trust strong { color: rgb(var(--gray-dark)); }
-			.pain { padding: 3em 0 2.5em; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.pain h2 { font-size: 1.35em; color: rgb(var(--gray)); font-weight: 400; margin: 0 0 1.5em; text-align: center; }
-			.pain__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75em; }
-			@media (max-width: 520px) { .pain__grid { grid-template-columns: 1fr; } }
-			.pain__item { display: flex; gap: 0.7em; align-items: flex-start; padding: 1em 1.1em; background: rgba(var(--gray-light), 30%); border-radius: 10px; }
-			.pain__icon { font-size: 1.1em; line-height: 1.6; flex-shrink: 0; }
-			.pain__text { font-size: 0.92em; color: rgb(var(--gray-dark)); line-height: 1.5; margin: 0; }
-			.inside { padding: 3em 0 2.5em; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.section-label { font-size: 0.75em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin: 0 0 0.5em; }
-			.section-title { font-size: 1.5em; color: rgb(var(--black)); margin: 0 0 0.4em; line-height: 1.25; }
-			.section-sub { color: rgb(var(--gray)); font-size: 0.95em; margin: 0 0 1.8em; }
-			.inside__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; }
-			@media (max-width: 520px) { .inside__grid { grid-template-columns: 1fr; } }
-			.inside__card { padding: 1.25em 1.3em; border: 1px solid rgb(var(--gray-light)); border-radius: 12px; background: #fff; }
-			.inside__card-icon { font-size: 1.4em; margin-bottom: 0.4em; display: block; }
-			.inside__card h3 { font-size: 0.95em; margin: 0 0 0.35em; color: rgb(var(--black)); }
-			.inside__card p { font-size: 0.85em; color: rgb(var(--gray)); margin: 0; line-height: 1.5; }
-			.products { padding: 3em 0 2.5em; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.products__featured { background: rgb(var(--black)); color: #fff; border-radius: 16px; padding: 2em 2.2em; margin-bottom: 1.25em; position: relative; overflow: hidden; }
-			.products__featured::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(35,55,255,0.35) 0%, transparent 60%); pointer-events: none; }
-			.products__featured-badge { display: inline-block; background: var(--accent); color: #fff; font-size: 0.72em; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.2em 0.7em; border-radius: 999px; margin-bottom: 0.8em; }
-			.products__featured h3 { color: #fff; font-size: 1.3em; margin: 0 0 0.4em; }
-			.products__featured p { color: rgba(255,255,255,0.75); font-size: 0.9em; margin: 0 0 1.2em; line-height: 1.5; }
-			.products__featured-features { list-style: none; padding: 0; margin: 0 0 1.5em; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em; }
-			@media (max-width: 480px) { .products__featured-features { grid-template-columns: 1fr; } }
-			.products__featured-features li { display: flex; align-items: flex-start; gap: 0.4em; font-size: 0.87em; color: rgba(255,255,255,0.85); line-height: 1.4; }
-			.products__featured-features li::before { content: "✓"; color: #4ade80; font-weight: 700; flex-shrink: 0; }
-			.products__featured-buy { display: flex; align-items: center; gap: 1em; flex-wrap: wrap; }
-			.products__featured-price { font-size: 2em; font-weight: 700; color: #fff; }
-			.btn-white { display: inline-block; padding: 0.65em 1.6em; border-radius: 999px; background: #fff; color: rgb(var(--black)) !important; font-weight: 700; font-size: 0.95em; text-decoration: none; }
-			.btn-white:hover { opacity: 0.9; }
-			.products__grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 195px), 1fr)); gap: 0.85em; }
-			.products__card { display: flex; flex-direction: column; padding: 1.2em 1.2em 1.1em; border: 1px solid rgb(var(--gray-light)); border-radius: 12px; background: #fff; text-decoration: none; color: inherit; }
-			.products__card:hover { border-color: var(--accent); box-shadow: 0 0 0 2px rgba(35,55,255,0.12); }
-			.products__card-price { font-size: 1.4em; font-weight: 700; color: var(--accent); margin-bottom: 0.3em; }
-			.products__card h3 { font-size: 0.9em; margin: 0 0 0.4em; color: rgb(var(--black)); }
-			.products__card p { font-size: 0.82em; color: rgb(var(--gray)); margin: 0; line-height: 1.45; flex: 1; }
-			.products__card-badge { display: inline-block; font-size: 0.7em; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent); padding: 0.15em 0.5em; border-radius: 999px; margin-bottom: 0.5em; }
-			.products__footer { margin-top: 0.9em; font-size: 0.82em; color: rgb(var(--gray)); }
-			.guarantee { padding: 2em 0 2.5em; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.guarantee__box { display: flex; gap: 1.2em; align-items: flex-start; padding: 1.5em 1.6em; background: rgba(35,55,255,0.04); border: 1px solid rgba(35,55,255,0.15); border-radius: 14px; }
-			.guarantee__icon { font-size: 2em; flex-shrink: 0; line-height: 1; }
-			.guarantee__copy h3 { font-size: 1em; margin: 0 0 0.3em; color: rgb(var(--black)); }
-			.guarantee__copy p { font-size: 0.88em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.55; }
-			.blog-section { padding: 3em 0 2.5em; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.blog__grid { display: grid; gap: 0.75em; margin-top: 1.2em; }
-			.blog__post { display: flex; gap: 1em; align-items: flex-start; padding: 1em 1.2em; border: 1px solid rgb(var(--gray-light)); border-radius: 12px; background: #fff; text-decoration: none; color: inherit; }
-			.blog__post:hover { border-color: var(--accent); }
-			.blog__arrow { color: var(--accent); font-size: 1.1em; flex-shrink: 0; margin-top: 0.15em; }
-			.blog__post h3 { font-size: 0.95em; margin: 0 0 0.25em; color: rgb(var(--black)); }
-			.blog__post p { font-size: 0.84em; color: rgb(var(--gray)); margin: 0; line-height: 1.45; }
-			.optin-wrap { padding: 1em 0; }
+			.hero {
+				padding: 4em 0 3.5em;
+				text-align: center;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.hero__eyebrow {
+				display: inline-block;
+				font-size: 0.78em;
+				font-weight: 700;
+				letter-spacing: 0.1em;
+				text-transform: uppercase;
+				color: var(--accent);
+				margin-bottom: 1em;
+			}
+			.hero h1 {
+				font-size: clamp(1.9em, 5.5vw, 2.8em);
+				line-height: 1.12;
+				margin: 0 0 0.6em;
+				color: rgb(var(--black));
+				max-width: 16em;
+				margin-left: auto;
+				margin-right: auto;
+			}
+			.hero__sub {
+				font-size: 1.15em;
+				color: rgb(var(--gray-dark));
+				max-width: 34em;
+				margin: 0 auto 2em;
+				line-height: 1.65;
+			}
+			.hero__cta-group {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				gap: 0.9em;
+				flex-wrap: wrap;
+				margin-bottom: 1em;
+			}
+			.btn-primary {
+				display: inline-block;
+				padding: 0.85em 2.2em;
+				border-radius: 999px;
+				background: var(--accent);
+				color: #fff !important;
+				font-weight: 700;
+				font-size: 1.1em;
+				text-decoration: none;
+				white-space: nowrap;
+			}
+			.btn-primary:hover {
+				background: var(--accent-dark);
+			}
+			.btn-secondary {
+				display: inline-block;
+				padding: 0.8em 1.6em;
+				border-radius: 999px;
+				border: 2px solid rgb(var(--gray-light));
+				color: rgb(var(--gray-dark)) !important;
+				font-weight: 600;
+				font-size: 1em;
+				text-decoration: none;
+			}
+			.btn-secondary:hover {
+				border-color: var(--accent);
+				color: var(--accent) !important;
+			}
+			.hero__price {
+				font-size: 1.6em;
+				font-weight: 700;
+				color: rgb(var(--black));
+			}
+			.hero__trust {
+				font-size: 0.85em;
+				color: rgb(var(--gray));
+				margin: 0;
+			}
+			.hero__trust strong {
+				color: rgb(var(--gray-dark));
+			}
+			.pain {
+				padding: 3.5em 0 3em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.pain h2 {
+				font-size: 1.4em;
+				color: rgb(var(--gray));
+				font-weight: 400;
+				margin: 0 0 1.5em;
+				text-align: center;
+			}
+			.pain__grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 0.75em;
+				max-width: 820px;
+				margin: 0 auto;
+			}
+			@media (max-width: 520px) {
+				.pain__grid {
+					grid-template-columns: 1fr;
+				}
+			}
+			.pain__item {
+				display: flex;
+				gap: 0.7em;
+				align-items: flex-start;
+				padding: 1em 1.1em;
+				background: rgba(var(--gray-light), 30%);
+				border-radius: 10px;
+			}
+			.pain__icon {
+				font-size: 1.1em;
+				line-height: 1.6;
+				flex-shrink: 0;
+			}
+			.pain__text {
+				font-size: 0.95em;
+				color: rgb(var(--gray-dark));
+				line-height: 1.5;
+				margin: 0;
+			}
+			.outcome {
+				padding: 3.5em 0 3em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+				background: rgba(35, 55, 255, 0.03);
+			}
+			.outcome h2 {
+				font-size: 1.5em;
+				color: rgb(var(--black));
+				margin: 0 0 0.4em;
+				text-align: center;
+			}
+			.outcome__sub {
+				color: rgb(var(--gray));
+				font-size: 0.95em;
+				margin: 0 0 1.8em;
+				text-align: center;
+			}
+			.outcome__grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1em;
+				max-width: 820px;
+				margin: 0 auto;
+			}
+			@media (max-width: 520px) {
+				.outcome__grid {
+					grid-template-columns: 1fr;
+				}
+			}
+			.outcome__card {
+				padding: 1.4em 1.4em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				background: #fff;
+			}
+			.outcome__card-icon {
+				font-size: 1.5em;
+				margin-bottom: 0.4em;
+				display: block;
+			}
+			.outcome__card h3 {
+				font-size: 1em;
+				margin: 0 0 0.35em;
+				color: rgb(var(--black));
+			}
+			.outcome__card p {
+				font-size: 0.88em;
+				color: rgb(var(--gray));
+				margin: 0;
+				line-height: 1.55;
+			}
+			.featured {
+				padding: 3.5em 0 3em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.featured__box {
+				background: rgb(var(--black));
+				color: #fff;
+				border-radius: 16px;
+				padding: 2.4em 2.4em;
+				position: relative;
+				overflow: hidden;
+				max-width: 820px;
+				margin: 0 auto;
+			}
+			.featured__box::before {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(135deg, rgba(35, 55, 255, 0.35) 0%, transparent 60%);
+				pointer-events: none;
+			}
+			.featured__badge {
+				display: inline-block;
+				background: var(--accent);
+				color: #fff;
+				font-size: 0.72em;
+				font-weight: 700;
+				letter-spacing: 0.07em;
+				text-transform: uppercase;
+				padding: 0.2em 0.7em;
+				border-radius: 999px;
+				margin-bottom: 0.8em;
+			}
+			.featured__box h2 {
+				color: #fff;
+				font-size: 1.45em;
+				margin: 0 0 0.4em;
+			}
+			.featured__box p {
+				color: rgba(255, 255, 255, 0.75);
+				font-size: 0.95em;
+				margin: 0 0 1.2em;
+				line-height: 1.55;
+			}
+			.featured__features {
+				list-style: none;
+				padding: 0;
+				margin: 0 0 1.6em;
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 0.5em;
+			}
+			@media (max-width: 480px) {
+				.featured__features {
+					grid-template-columns: 1fr;
+				}
+			}
+			.featured__features li {
+				display: flex;
+				align-items: flex-start;
+				gap: 0.4em;
+				font-size: 0.9em;
+				color: rgba(255, 255, 255, 0.85);
+				line-height: 1.4;
+			}
+			.featured__features li::before {
+				content: "✓";
+				color: #4ade80;
+				font-weight: 700;
+				flex-shrink: 0;
+			}
+			.featured__buy {
+				display: flex;
+				align-items: center;
+				gap: 1em;
+				flex-wrap: wrap;
+			}
+			.featured__price {
+				font-size: 2.1em;
+				font-weight: 700;
+				color: #fff;
+			}
+			.btn-white {
+				display: inline-block;
+				padding: 0.7em 1.7em;
+				border-radius: 999px;
+				background: #fff;
+				color: rgb(var(--black)) !important;
+				font-weight: 700;
+				font-size: 1em;
+				text-decoration: none;
+			}
+			.btn-white:hover {
+				opacity: 0.9;
+			}
+			.faq {
+				padding: 3.5em 0 3em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.faq h2 {
+				font-size: 1.4em;
+				color: rgb(var(--black));
+				margin: 0 0 1.5em;
+				text-align: center;
+			}
+			.faq__list {
+				max-width: 720px;
+				margin: 0 auto;
+			}
+			.faq__item {
+				border-bottom: 1px solid rgb(var(--gray-light));
+				padding: 1.1em 0;
+			}
+			.faq__item h3 {
+				font-size: 1em;
+				margin: 0 0 0.4em;
+				color: rgb(var(--black));
+			}
+			.faq__item p {
+				font-size: 0.9em;
+				color: rgb(var(--gray-dark));
+				margin: 0;
+				line-height: 1.6;
+			}
+			.pins {
+				padding: 3.5em 0 3em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.pins h2 {
+				font-size: 1.4em;
+				color: rgb(var(--black));
+				margin: 0 0 0.4em;
+				text-align: center;
+			}
+			.pins__sub {
+				color: rgb(var(--gray));
+				font-size: 0.9em;
+				margin: 0 0 1.5em;
+				text-align: center;
+			}
+			.pins__grid {
+				display: grid;
+				grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
+				gap: 0.85em;
+				max-width: 820px;
+				margin: 0 auto;
+			}
+			.pins__card {
+				padding: 1.2em 1.2em;
+				border: 1px solid rgb(var(--gray-light));
+				border-radius: 12px;
+				background: #fff;
+			}
+			.pins__card h3 {
+				font-size: 0.95em;
+				margin: 0 0 0.35em;
+				color: rgb(var(--black));
+			}
+			.pins__card p {
+				font-size: 0.82em;
+				color: rgb(var(--gray));
+				margin: 0 0 0.8em;
+				line-height: 1.45;
+			}
+			.pins__card code {
+				display: block;
+				font-size: 0.72em;
+				background: rgb(var(--gray-light));
+				padding: 0.35em 0.5em;
+				border-radius: 6px;
+				color: rgb(var(--gray-dark));
+				word-break: break-all;
+			}
+			.guarantee {
+				padding: 2.5em 0 3em;
+				border-bottom: 1px solid rgb(var(--gray-light));
+			}
+			.guarantee__box {
+				display: flex;
+				gap: 1.2em;
+				align-items: flex-start;
+				padding: 1.5em 1.6em;
+				background: rgba(35, 55, 255, 0.04);
+				border: 1px solid rgba(35, 55, 255, 0.15);
+				border-radius: 14px;
+				max-width: 820px;
+				margin: 0 auto;
+			}
+			.guarantee__icon {
+				font-size: 2em;
+				flex-shrink: 0;
+				line-height: 1;
+			}
+			.guarantee__copy h3 {
+				font-size: 1em;
+				margin: 0 0 0.3em;
+				color: rgb(var(--black));
+			}
+			.guarantee__copy p {
+				font-size: 0.88em;
+				color: rgb(var(--gray-dark));
+				margin: 0;
+				line-height: 1.55;
+			}
+			.optin-wrap {
+				padding: 1em 0;
+			}
 		</style>
 	</head>
 	<body>
 		<Header />
-		<MoneyPrinterBanner bundleUrl={bundle.stripeUrl} bundlePrice={bundle.price} />
 		<main>
 			<section class="hero">
-				<span class="hero__eyebrow">For solo operators</span>
-				<h1>Stop rebuilding your client process from scratch every single week.</h1>
-				<p class="hero__sub">{settings.defaultProductDescription || BUZZYFLY_CONFIG.defaultProductDescription}</p>
+				<span class="hero__eyebrow">For coaches and solo service providers</span>
+				<h1>Stop rebuilding your client process from scratch every week.</h1>
+				<p class="hero__sub">
+					Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you're slammed.
+				</p>
 				<div class="hero__cta-group">
 					<span class="hero__price">{digitalSystem.price}</span>
 					<a class="btn-primary" href={digitalSystem.stripeUrl} target="_blank" rel="noopener">Get the Digital System →</a>
-					<a class="btn-secondary" href={bundle.stripeUrl} target="_blank" rel="noopener">Get everything — {bundle.price}</a>
+					<a class="btn-secondary" href="#faq">See if it's for you</a>
 				</div>
 				<p class="hero__trust"><strong>One-time payment. Instant download.</strong> &nbsp;·&nbsp; {BUZZYFLY_CONFIG.guarantee}</p>
 			</section>
+
 			<section class="pain">
 				<h2>Sound familiar?</h2>
 				<div class="pain__grid">
@@ -110,63 +428,104 @@ const starters = ALL_PRODUCTS.filter(p => p.price === '$15' || p.price === '$19'
 					<div class="pain__item"><span class="pain__icon">💸</span><p class="pain__text">A client wrapped up three months ago. You've meant to check in — but you haven't, and now it's awkward.</p></div>
 				</div>
 			</section>
-			<section class="inside">
-				<p class="section-label">What you get</p>
-				<h2 class="section-title">Six systems. One download.</h2>
-				<p class="section-sub">Everything a solo operator needs to run client work without reinventing the wheel every week.</p>
-				<div class="inside__grid">
-					<div class="inside__card"><span class="inside__card-icon">📋</span><h3>Client Onboarding Checklist</h3><p>Four phases from signed contract to first delivery — with a red-flag detector built in.</p></div>
-					<div class="inside__card"><span class="inside__card-icon">🔄</span><h3>Weekly Reset Checklist</h3><p>A 20-minute Monday routine: clear inboxes, set three priorities, check in on every client.</p></div>
-					<div class="inside__card"><span class="inside__card-icon">📨</span><h3>Follow-Up Email System</h3><p>Five scenarios — leads, proposals, active projects, post-delivery, re-engagement — with word-for-word templates.</p></div>
-					<div class="inside__card"><span class="inside__card-icon">🛡️</span><h3>Scope Guard Scripts</h3><p>Six word-for-word scripts for scope creep — so you never "sure, no problem" your way into free work again.</p></div>
-					<div class="inside__card"><span class="inside__card-icon">🤝</span><h3>Client Retention Checklist</h3><p>The full client lifecycle — during the project, at delivery, post-delivery, and the quarterly re-engagement.</p></div>
-					<div class="inside__card"><span class="inside__card-icon">📝</span><h3>Templates for Everything</h3><p>Welcome emails, proposals, check-ins, close-outs, intake forms, and a pricing worksheet — all fill-in-ready.</p></div>
+
+			<section class="outcome">
+				<h2>What changes after you run it</h2>
+				<p class="outcome__sub">Not more templates. A process that survives a slammed week.</p>
+				<div class="outcome__grid">
+					<div class="outcome__card"><span class="outcome__card-icon">📋</span><h3>New client signs → you're ready in 20 minutes</h3><p>Welcome email, intake form, and kickoff agenda are already written. Fill in the name, hit send.</p></div>
+					<div class="outcome__card"><span class="outcome__card-icon">📨</span><h3>Quiet lead → a reply-generating follow-up</h3><p>Five word-for-word emails for every stage — proposal, mid-project, re-engagement. No staring at a blank screen.</p></div>
+					<div class="outcome__card"><span class="outcome__card-icon">🛡️</span><h3>Scope creep → a script that says no</h3><p>Six exact lines for when a client asks for "just one more thing" — without losing the client.</p></div>
+					<div class="outcome__card"><span class="outcome__card-icon">📅</span><h3>Monday → a 20-minute reset, not a scramble</h3><p>Clear inboxes, set one priority, check on every client. Same way every week.</p></div>
 				</div>
 			</section>
-			<section class="products">
-				<p class="section-label">All products</p>
-				<h2 class="section-title">Start anywhere. Own it forever.</h2>
-				<p class="section-sub">Every product is a one-time purchase with instant download. No subscriptions. No renewals.</p>
-				<div class="products__featured">
-					<span class="products__featured-badge">Most popular</span>
-					<h3>{digitalSystem.title}</h3>
+
+			<section class="featured">
+				<div class="featured__box">
+					<span class="featured__badge">Most popular</span>
+					<h2>{digitalSystem.title}</h2>
 					<p>{digitalSystem.description}</p>
-					<ul class="products__featured-features">{digitalSystem.features.map(f => <li>{f}</li>)}</ul>
-					<div class="products__featured-buy">
-						<span class="products__featured-price">{digitalSystem.price}</span>
+					<ul class="featured__features">{digitalSystem.features.map((f) => <li>{f}</li>)}</ul>
+					<div class="featured__buy">
+						<span class="featured__price">{digitalSystem.price}</span>
 						<a class="btn-white" href={digitalSystem.stripeUrl} target="_blank" rel="noopener">Buy now — instant download</a>
 					</div>
 				</div>
-				<div class="products__grid">
-					{ALL_PRODUCTS.filter(p => p.id !== 'buzzyfly-digital-system').map(p => (
-						<a class="products__card" href={p.stripeUrl} target="_blank" rel="noopener">
-							{p.badge && <span class="products__card-badge">{p.badge}</span>}
-							<div class="products__card-price">{p.price}</div>
-							<h3>{p.title}</h3>
-							<p>{p.description}</p>
-						</a>
-					))}
-				</div>
-				<p class="products__footer">All prices in USD. Instant download after payment. {BUZZYFLY_CONFIG.guarantee}</p>
 			</section>
+
+			<section class="faq" id="faq">
+				<h2>Questions before you buy</h2>
+				<div class="faq__list">
+					<div class="faq__item">
+						<h3>Is this for me?</h3>
+						<p>If you're a coach, consultant, freelancer, or solo service provider and your client process lives in your head — onboarding means rebuilding from memory, follow-ups only happen when you remember — yes. If you already run a documented system, you'd be buying something you've built.</p>
+					</div>
+					<div class="faq__item">
+						<h3>What's actually in the download?</h3>
+						<p>Six checklists, six templates, and one script — onboarding, weekly reset, follow-up emails, scope-creep scripts, retention, proposals, intake forms, and a pricing worksheet. Plain files. No course, no 200-tab spreadsheet.</p>
+					</div>
+					<div class="faq__item">
+						<h3>How do I get it?</h3>
+						<p>Pay once through Stripe. A private download link lands in your inbox, usually the same day. It's yours to keep, with lifetime access and future updates.</p>
+					</div>
+					<div class="faq__item">
+						<h3>What if it doesn't work for me?</h3>
+						<p>{BUZZYFLY_CONFIG.guarantee} Email us within 30 days and you get your money back. No forms, no questions.</p>
+					</div>
+					<div class="faq__item">
+						<h3>Do I need the whole thing at once?</h3>
+						<p>No. Pick the one checklist that fixes your biggest problem this week, run it, then add the next. The system works because it's the same every time — not because it's perfect.</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="pins">
+				<h2>Pinterest pins that sell this</h2>
+				<p class="pins__sub">Pinterest is a search engine for templates and planners — post these daily and they compound for months. Each pin should say what the buyer is already typing at midnight.</p>
+				<div class="pins__grid">
+					<div class="pins__card">
+						<h3>Pin 1 — the outcome</h3>
+						<p>Stop rebuilding your client process from scratch every week.</p>
+						<p>Onboarding, weekly planning, follow-ups — checklists you run in 20 minutes.</p>
+						<p>$49 one-time. Instant download.</p>
+						<p>Link: https://buzzyfly.com/store</p>
+						<p>Search terms: client onboarding checklist, freelancer follow up email, solo business systems</p>
+					</div>
+					<div class="pins__card">
+						<h3>Pin 2 — the free bait</h3>
+						<p>The 20-minute weekly reset checklist.</p>
+						<p>Free. Print it. Run it every Monday.</p>
+						<p>Link: https://buzzyfly.com (opt-in)</p>
+						<p>Search terms: weekly planner for freelancers, monday routine checklist, small business planning template</p>
+					</div>
+					<div class="pins__card">
+						<h3>Pin 3 — the objection</h3>
+						<p>Stop giving away free work.</p>
+						<p>Six word-for-word scripts for when a client asks for "just one more thing."</p>
+						<p>Part of the $49 Buzzyfly Digital System.</p>
+						<p>Link: https://buzzyfly.com/store</p>
+						<p>Search terms: scope creep script, how to say no to clients, freelancer pricing</p>
+					</div>
+					<div class="pins__card">
+						<h3>Pin 4 — the social proof angle</h3>
+						<p>If the free checklist is this good, the paid system must be insane.</p>
+						<p>Six checklists. Six templates. One script. $49, one-time.</p>
+						<p>Link: https://buzzyfly.com/store</p>
+						<p>Search terms: digital products for coaches, templates for service providers, business systems download</p>
+					</div>
+				</div>
+			</section>
+
 			<section class="guarantee">
 				<div class="guarantee__box">
-					<span class="guarantee__icon">🛡</span>
+					<span class="guarantee__icon">🛡️</span>
 					<div class="guarantee__copy">
 						<h3>30-Day Money-Back Guarantee</h3>
 						<p>If the system doesn't deliver — if the checklists don't work, the templates don't fit, or you just don't find it useful — email us within 30 days for a full refund. No questions, no forms, no hassle. The risk is ours.</p>
 					</div>
 				</div>
 			</section>
-			<section class="blog-section">
-				<p class="section-label">From the notebook</p>
-				<h2 class="section-title">How it works and why</h2>
-				<div class="blog__grid">
-					<a class="blog__post" href="/blog/client-onboarding-checklist-template/"><span class="blog__arrow">→</span><div><h3>The Client Onboarding Checklist Every Solo Operator Needs</h3><p>What to do in the first 48 hours after a client signs — and why most providers lose the relationship before the work even starts.</p></div></a>
-					<a class="blog__post" href="/blog/follow-up-email-after-no-response/"><span class="blog__arrow">→</span><div><h3>The Follow-Up Emails That Actually Get Replies</h3><p>Why most follow-up emails get ignored — and the three things a reply-generating email always does.</p></div></a>
-					<a class="blog__post" href="/blog/scope-creep-script"><span class="blog__arrow">→</span><div><h3>Scope Creep Script: Exact Words When a Client Asks for Just One More Thing</h3><p>The six scripts that stop free work before it starts.</p></div></a>
-				</div>
-			</section>
+
 			<div class="optin-wrap"><EmailOptin /></div>
 		</main>
 		<Footer />
