@@ -3,7 +3,7 @@ title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
 description: "A short weekly habit and the actual checklist behind it — so your priorities still exist when the week gets messy."
 category: "planning"
 pubDate: "Sep 01 2026"
-updatedDate: "Sep 29 2026"
+updatedDate: "Oct 01 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -28,7 +28,7 @@ The fix is not motivation. It is a fixed sequence you run the same way every wee
 
 ## The 20-minute weekly reset (run it the same window every week)
 
-Pick one slot and lock it: Monday morning before Slack, or Friday afternoon before you close the laptop. Same day, same time.
+Pick one slot and lock it: Monday morning before Slack, or Friday afternoon before you close the laptop. Same day, same time. If the slot moves, the reset dies.
 
 ### Block 1 — Clear the board (5 minutes)
 
@@ -56,6 +56,31 @@ Pick one slot and lock it: Monday morning before Slack, or Friday afternoon befo
 - Write tomorrow's first task in one line.
 - That is the only thing that has to be true when you open the laptop. Everything else is secondary.
 
+## Copy this Monday sheet (fill it in, do not redesign it)
+
+Week of: ________
+
+Shipped last week:
+1. ________
+2. ________
+
+Still open (promise + date):
+1. ________
+2. ________
+
+This week's three (if it is not on the calendar, it is not a priority):
+1. ________ — calendar block: ________
+2. ________ — calendar block: ________
+3. ________ — calendar block: ________
+
+Follow-ups that die if I don't send them today:
+- Name: ________ — one sentence: ________
+- Name: ________ — one sentence: ________
+
+Tomorrow's first move (one line): ________
+
+If you cannot fill the sheet in 20 minutes, you are planning, not resetting. Cut the list until it fits.
+
 ## The Wednesday 5-minute check (do not skip this)
 
 Look at the three priorities. Still the right three?
@@ -64,7 +89,13 @@ If a client request or a fire knocked one off, replace it. Do not add a fourth.
 
 Send any follow-up that is now overdue. One clear sentence each.
 
-A Wednesday check that is not on the calendar never happens. Put it on the calendar the same way you put the Monday reset.
+A Wednesday check that is not on the calendar never happens. Put it on the calendar the same way you put the Monday reset. Name the event "5-min reset check" so you do not talk yourself out of it.
+
+Wednesday lines, fill in and stop:
+
+- Priority still true? yes / replace with ________
+- Overdue follow-up: ________ — sent? yes / no
+- First move for tomorrow still the right one? ________
 
 ## The Friday close (10 minutes)
 
@@ -72,11 +103,23 @@ A Wednesday check that is not on the calendar never happens. Put it on the calen
 2. Capture open loops in one place (same note or checklist every week). Do not invent a new system.
 3. Update the checklist if a step failed twice. Then close the laptop.
 
+Friday close, same sheet every week:
+
+- Done: ________
+- Rolls to Monday: ________
+- Dies (and you will not feel guilty about it): ________
+- One process step that failed twice: ________ — fix next week, or delete the step.
+
 ## Exact phrases that keep it short
+
+Use these instead of writing a new email from scratch:
 
 - "Still the priority, or does this move?"
 - "One clear next step: [date] or off the list."
 - "This week's three: 1) 2) 3). Everything else waits."
+- "Checking in on the proposal from [date]. Still a fit this month, or should I close the loop?"
+- "Delivery landed [date]. One thing that would make the next round easier: ________. Reply with that and I'll lock it."
+- "We wrapped [date]. If you want the same setup next quarter, reply with a date and I'll hold it."
 
 ## What this does not do
 
@@ -86,8 +129,8 @@ It moves the process out of your head and into a short checklist that still exis
 
 ## Get the full printable version
 
-The full weekly reset checklist — Monday, Wednesday, and Friday templates with fill-in fields — ships inside the Buzzyfly Digital System along with the onboarding and follow-up workflows.
+The full weekly reset checklist — Monday, Wednesday, and Friday templates with fill-in fields — ships inside the Buzzyfly Digital System along with the onboarding and follow-up workflows. Same files, already written, so you are not rebuilding this sheet the next time Monday is ugly.
 
-One-time payment. Instant download. Lifetime access to updates.
+One-time payment. Instant download. Lifetime access to updates. 30-day refund if the files are not delivered or not as listed — email coachmanager@gmail.com.
 
-[Get the Digital System — $49](/store/)
+[Get the Digital System — $49](https://buzzyfly.com/store)
