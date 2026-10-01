@@ -18,7 +18,7 @@ export const APPS_BUY_URL = "/products";
  * Master switch. While false, the paid apps are open to everyone (no purchase check).
  * Set to true once Apps Pro can actually be bought (live Stripe + Payment Link for item_id apps-pro).
  */
-export const APPS_PAYWALL_ENABLED = false;
+export const APPS_PAYWALL_ENABLED = true;
 
 export function isAppsItem(itemId: string): boolean {
 	return APPS_ITEM_IDS.has(itemId);
