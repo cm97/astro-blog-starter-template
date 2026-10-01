@@ -14,12 +14,18 @@ export const APPS_COOKIE = "bf_apps";
 export const APPS_TOKEN_TTL_SECONDS = 60 * 60 * 24 * 365; // 1 year
 /** Where the locked page sends people to buy. Swap for the Stripe Payment Link once it exists. */
 export const APPS_BUY_URL = "/products";
+/**
+ * Master switch. While false, the paid apps are open to everyone (no purchase check).
+ * Set to true once Apps Pro can actually be bought (live Stripe + Payment Link for item_id apps-pro).
+ */
+export const APPS_PAYWALL_ENABLED = false;
 
 export function isAppsItem(itemId: string): boolean {
 	return APPS_ITEM_IDS.has(itemId);
 }
 
 export async function hasAppsAccess(env: Env, token: string | null | undefined): Promise<boolean> {
+	if (!APPS_PAYWALL_ENABLED) return true;
 	if (!token) return false;
 
 	// Revocable D1 token (delete the row and access ends).
