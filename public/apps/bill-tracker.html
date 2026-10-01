@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bill Tracker</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #f5f5f5; padding: 20px; max-width: 480px; margin: 0 auto; }
+  h1 { font-size: 1.5em; margin-bottom: 4px; }
+  .sub { color: #666; font-size: 0.9em; margin-bottom: 24px; }
+  .card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+  label { display: block; font-size: 0.85em; color: #555; margin-bottom: 6px; font-weight: 600; }
+  input, select { width: 100%; padding: 12px; border: 1px solid #ddd; border-radius: 8px; font-size: 1em; margin-bottom: 14px; }
+  button { width: 100%; padding: 14px; background: #2563eb; color: white; border: none; border-radius: 8px; font-size: 1em; font-weight: 600; cursor: pointer; }
+  button:hover { background: #1d4ed8; }
+  .bill { display: flex; justify-content: space-between; align-items: center; padding: 14px; border-bottom: 1px solid #eee; }
+  .bill:last-child { border-bottom: none; }
+  .bill-name { font-weight: 600; }
+  .bill-meta { font-size: 0.85em; color: #666; }
+  .due-soon { color: #dc2626; font-weight: 700; }
+  .due-ok { color: #059669; }
+  .paid { text-decoration: line-through; color: #999; }
+  .btn-small { width: auto; padding: 8px 14px; font-size: 0.85em; margin: 0; }
+  .btn-paid { background: #059669; }
+  .btn-paid:hover { background: #047857; }
+  .btn-del { background: #ef4444; }
+  .empty { color: #999; text-align: center; padding: 20px; }
+</style>
+</head>
+<body>
+<h1>Bill Tracker</h1>
+<p class="sub">Never miss a bill again. Simple as that.</p>
+
+<div class="card">
+  <label>Bill name</label>
+  <input type="text" id="billName" placeholder="e.g. Electric, Netflix, Car payment">
+  <label>Amount</label>
+  <input type="number" id="billAmount" placeholder="e.g. 85.00" step="0.01">
+  <label>Due date</label>
+  <input type="date" id="billDue">
+  <button onclick="addBill()">Add bill</button>
+</div>
+
+<div class="card" id="billList"></div>
+
+<script>
+let bills = JSON.parse(localStorage.getItem('bills') || '[]);
+function save() { localStorage.setItem('bills', JSON.stringify(bills)); }
+function addBill() {
+  const name = document.getElementById('billName').value.trim();
+  const amount = parseFloat(document.getElementById('billAmount').value);
+  const due = document.getElementById('billDue').value;
+  if (!name || !amount || !due) { alert('Fill in all fields'); return; }
+  bills.push({ id: Date.now(), name, amount, due, paid: false });
+  save();
+  document.getElementById('billName').value = '';
+  document.getElementById('billAmount').value = '';
+  document.getElementById('billDue').value = '';
+  render();
+}
+function togglePaid(id) {
+  const b = bills.find(x => x.id === id);
+  if (b) { b.paid = !b.paid; save(); render(); }
+}
+function deleteBill(id) {
+  bills = bills.filter(x => x.id !== id);
+  save(); render();
+}
+function render() {
+  const list = document.getElementById('billList);
+  if (bills.length === 0) { list.innerHTML = '<p class="empty">No bills yet. Add one above.</p>'; return; }
+  const today = new Date().toISOString().split('T')[0];
+  bills.sort((a, b) => a.due.localeCompare(b.due));
+  list.innerHTML = bills.map(b => {
+    const days = Math.ceil((new Date(b.due) - new Date(today)) / 86400000);
+    let dueClass = 'due-ok', dueText = 'Due ' + b.due;
+    if (!b.paid && days <= 3 && days >= 0) { dueClass = 'due-soon'; dueText = days === 0 ? 'DUE TODAY' : 'Due in ' + days + ' days'; }
+    if (b.paid) dueText = 'Paid';
+    return `<div class="bill ${b.paid ? 'paid' : ''}">
+      <div><div class="bill-name">${b.name}</div><div class="bill-meta">$` + b.amount.toFixed(2) + ` &middot; <span class="` + dueClass + `">` + dueText + `</span></div></div>
+      <div><button class="btn-small btn-paid" onclick="togglePaid(` + b.id + `)">` + (b.paid ? 'Undo' : 'Paid') + `</button> <button class="btn-small btn-del" onclick="deleteBill(` + b.id + `)">X</button></div>
+    </div>`;
+  }).join('');
+}
+render();
+</script>
+</body>
+</html>
