@@ -2,57 +2,47 @@
 import Layout from '../layouts/BlogPost.astro';
 import ProductCallout from '../components/ProductCallout.astro';
 import EmailOptin from '../components/EmailOptin.astro';
+import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from '../data/monetization';
+
+const system = ALL_PRODUCTS.find((p) => p.id === 'buzzyfly-digital-system')!;
+const bundle = ALL_PRODUCTS.find((p) => p.id === 'complete-business-bundle')!;
 ---
 
 <Layout
-	title="About Buzzyfly — Built by someone who actually runs it"
-	description="Why Buzzyfly exists, who built it, and why the Digital System is worth $49."
+	title="Client onboarding that still runs on a slammed week — Buzzyfly"
+	description="The 20-minute checklists for onboarding, follow-ups, and the Monday reset. $49 system or $97 bundle. No subscription."
 	pubDate={new Date('August 15 2026')}
 	heroImage="/buzzyfly-brand-about.svg"
 >
 	<p>
-		Buzzyfly started from a familiar problem: too many tools, and nothing holding them
-		together. I'd spend a slow morning setting up a clean process, feel good about it for
-		about a week, and then watch it quietly fall apart the moment things got busy — a new
-		client, a launch, a rough week. The tools were never really the problem. The lack of one
-		place tying them together was.
+		A new client signs. Thirty minutes later you are staring at a blank email. Follow-ups die in the inbox. The weekly plan collapses by Thursday. That is the problem this page is for.
 	</p>
 
-	<h2>Who's behind it</h2>
-	<p>
-		I'm the person who got tired of rebuilding onboarding from memory every time a client
-		showed up. Tired of follow-ups dying in the inbox. Tired of the weekly reset that
-		collapsed by Thursday. So I built the system I actually use to run my own shop — then
-		packaged it so you don't have to start from zero.
-	</p>
-	<p>
-		I run Buzzyfly the way I'd want a tool I paid for to be run: I use what I sell, I fix
-		what breaks, and if part of the system doesn't hold up under real use, it gets rebuilt
-		instead of just re-explained in nicer language.
-	</p>
-
-	<h2>What you actually get</h2>
-	<p>
-		The Buzzyfly Digital System is a small, opinionated set of workflows for the parts of
-		running a business that eat the most time and get the least credit — onboarding, weekly
-		planning, and following up — built so they still hold up on the days you don't feel like
-		running them. Checklists and templates you open, tick, and close. Not a 200-tab
-		spreadsheet you'll never touch again.
-	</p>
-
-	<h2>Why people buy it</h2>
+	<h2>What you run</h2>
 	<ul>
-		<li>Onboarding that doesn't live in your head anymore</li>
-		<li>Follow-ups that actually get sent instead of rotting</li>
-		<li>A weekly reset that survives a slammed Thursday</li>
-		<li>Scope-creep scripts so you stop giving work away for free</li>
+		<li>Welcome email, intake, and kickoff — filled in, not rewritten from memory</li>
+		<li>Five follow-ups for the proposal that got no reply</li>
+		<li>A 20-minute Monday reset: inbox, one priority, the late follow-ups</li>
+		<li>A line you can send when the extra request is out of scope</li>
 	</ul>
 
-	<h2>The guarantee</h2>
+	<h2>Who it is for</h2>
 	<p>
-		30-day money-back guarantee — if it doesn't deliver, email and you get a full refund. No hoops, no guilt trip.
-		If it doesn't fit how you work, you get your money back.
+		One-person and few-person operators who rebuild client onboarding from memory. Not a team with a project manager. Not a course. Files you open, fill, and send.
 	</p>
+
+	<h2>Pick one</h2>
+	<p>
+		Start with the {system.title} ({system.price}). Onboarding, the weekly reset, and the follow-up system in one download.
+		<a href={system.stripeUrl}>Get the {system.price} system</a>.
+	</p>
+	<p>
+		Want every file: the {bundle.title} is {bundle.price}. Same checklists, plus the onboarding kit, the follow-up templates, and the weekly checklist.
+		<a href={bundle.stripeUrl}>Get the {bundle.price} bundle</a>.
+	</p>
+
+	<h2>The guarantee</h2>
+	<p>{BUZZYFLY_CONFIG.guarantee}</p>
 
 	<ProductCallout />
 
@@ -61,9 +51,4 @@ import EmailOptin from '../components/EmailOptin.astro';
 		description="Send me the 20-minute version. No spam. Just the checklist, plus one email a week with the next piece of the system."
 		buttonLabel="Send me the checklist"
 	/>
-
-	<p>
-		Questions, feedback, or something broken? Reach out — this is a small operation and
-		real notes from real users are how it gets better.
-	</p>
 </Layout>
