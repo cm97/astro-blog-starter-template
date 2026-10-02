@@ -21,385 +21,65 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 			description="Stop rebuilding your client process from scratch every week. Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes. $49 one-time."
 		/>
 		<style>
-			.hero {
-				padding: 4em 0 3.5em;
-				text-align: center;
-				border-bottom: 1px solid rgb(var(--gray-light));
-			}
-			.hero__eyebrow {
-				display: inline-block;
-				font-size: 0.78em;
-				font-weight: 700;
-				letter-spacing: 0.1em;
-				text-transform: uppercase;
-				color: var(--accent);
-				margin-bottom: 1em;
-			}
-			.hero h1 {
-				font-size: clamp(1.9em, 5.5vw, 2.8em);
-				line-height: 1.12;
-				margin: 0 0 0.6em;
-				color: rgb(var(--black));
-				max-width: 16em;
-				margin-left: auto;
-				margin-right: auto;
-			}
-			.hero__sub {
-				font-size: 1.15em;
-				color: rgb(var(--gray-dark));
-				max-width: 34em;
-				margin: 0 auto 2em;
-				line-height: 1.65;
-			}
-			.hero__cta-group {
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				gap: 0.9em;
-				flex-wrap: wrap;
-				margin-bottom: 1em;
-			}
-			.btn-primary {
-				display: inline-block;
-				padding: 0.85em 2.2em;
-				border-radius: 999px;
-				background: var(--accent);
-				color: #fff !important;
-				font-weight: 700;
-				font-size: 1.1em;
-				text-decoration: none;
-				white-space: nowrap;
-			}
-			.btn-primary:hover {
-				background: var(--accent-dark);
-			}
-			.btn-secondary {
-				display: inline-block;
-				padding: 0.8em 1.6em;
-				border-radius: 999px;
-				border: 2px solid rgb(var(--gray-light));
-				color: rgb(var(--gray-dark)) !important;
-				font-weight: 600;
-				font-size: 1em;
-				text-decoration: none;
-			}
-			.btn-secondary:hover {
-				border-color: var(--accent);
-				color: var(--accent) !important;
-			}
-			.hero__price {
-				font-size: 1.6em;
-				font-weight: 700;
-				color: rgb(var(--black));
-			}
-			.hero__trust {
-				font-size: 0.85em;
-				color: rgb(var(--gray));
-				margin: 0;
-			}
-			.hero__trust strong {
-				color: rgb(var(--gray-dark));
-			}
-			.pain {
-				padding: 3.5em 0 3em;
-				border-bottom: 1px solid rgb(var(--gray-light));
-			}
-			.pain h2 {
-				font-size: 1.4em;
-				color: rgb(var(--gray));
-				font-weight: 400;
-				margin: 0 0 1.5em;
-				text-align: center;
-			}
-			.pain__grid {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 0.75em;
-				max-width: 820px;
-				margin: 0 auto;
-			}
-			@media (max-width: 520px) {
-				.pain__grid {
-					grid-template-columns: 1fr;
-				}
-			}
-			.pain__item {
-				display: flex;
-				gap: 0.7em;
-				align-items: flex-start;
-				padding: 1em 1.1em;
-				background: rgba(var(--gray-light), 30%);
-				border-radius: 10px;
-			}
-			.pain__icon {
-				font-size: 1.1em;
-				line-height: 1.6;
-				flex-shrink: 0;
-			}
-			.pain__text {
-				font-size: 0.95em;
-				color: rgb(var(--gray-dark));
-				line-height: 1.5;
-				margin: 0;
-			}
-			.outcome {
-				padding: 3.5em 0 3em;
-				border-bottom: 1px solid rgb(var(--gray-light));
-				background: rgba(35, 55, 255, 0.03);
-			}
-			.outcome h2 {
-				font-size: 1.5em;
-				color: rgb(var(--black));
-				margin: 0 0 0.4em;
-				text-align: center;
-			}
-			.outcome__sub {
-				color: rgb(var(--gray));
-				font-size: 0.95em;
-				margin: 0 0 1.8em;
-				text-align: center;
-			}
-			.outcome__grid {
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 1em;
-				max-width: 820px;
-				margin: 0 auto;
-			}
-			@media (max-width: 520px) {
-				.outcome__grid {
-					grid-template-columns: 1fr;
-				}
-			}
-			.outcome__card {
-				padding: 1.4em 1.4em;
-				border: 1px solid rgb(var(--gray-light));
-				border-radius: 12px;
-				background: #fff;
-			}
-			.outcome__card-icon {
-				font-size: 1.5em;
-				margin-bottom: 0.4em;
-				display: block;
-			}
-			.outcome__card h3 {
-				font-size: 1em;
-				margin: 0 0 0.35em;
-				color: rgb(var(--black));
-			}
-			.outcome__card p {
-				font-size: 0.88em;
-				color: rgb(var(--gray));
-				margin: 0;
-				line-height: 1.55;
-			}
-			.featured {
-				padding: 3.5em 0 3em;
-				border-bottom: 1px solid rgb(var(--gray-light));
-			}
-			.featured__box {
-				background: rgb(var(--black));
-				color: #fff;
-				border-radius: 16px;
-				padding: 2.4em 2.4em;
-				position: relative;
-				overflow: hidden;
-				max-width: 820px;
-				margin: 0 auto;
-			}
-			.featured__box::before {
-				content: "";
-				position: absolute;
-				inset: 0;
-				background: linear-gradient(135deg, rgba(35, 55, 255, 0.35) 0%, transparent 60%);
-				pointer-events: none;
-			}
-			.featured__badge {
-				display: inline-block;
-				background: var(--accent);
-				color: #fff;
-				font-size: 0.72em;
-				font-weight: 700;
-				letter-spacing: 0.07em;
-				text-transform: uppercase;
-				padding: 0.2em 0.7em;
-				border-radius: 999px;
-				margin-bottom: 0.8em;
-			}
-			.featured__box h2 {
-				color: #fff;
-				font-size: 1.45em;
-				margin: 0 0 0.4em;
-			}
-			.featured__box p {
-				color: rgba(255, 255, 255, 0.75);
-				font-size: 0.95em;
-				margin: 0 0 1.2em;
-				line-height: 1.55;
-			}
-			.featured__features {
-				list-style: none;
-				padding: 0;
-				margin: 0 0 1.6em;
-				display: grid;
-				grid-template-columns: 1fr 1fr;
-				gap: 0.5em;
-			}
-			@media (max-width: 480px) {
-				.featured__features {
-					grid-template-columns: 1fr;
-				}
-			}
-			.featured__features li {
-				display: flex;
-				align-items: flex-start;
-				gap: 0.4em;
-				font-size: 0.9em;
-				color: rgba(255, 255, 255, 0.85);
-				line-height: 1.4;
-			}
-			.featured__features li::before {
-				content: "✓";
-				color: #4ade80;
-				font-weight: 700;
-				flex-shrink: 0;
-			}
-			.featured__buy {
-				display: flex;
-				align-items: center;
-				gap: 1em;
-				flex-wrap: wrap;
-			}
-			.featured__price {
-				font-size: 2.1em;
-				font-weight: 700;
-				color: #fff;
-			}
-			.btn-white {
-				display: inline-block;
-				padding: 0.7em 1.7em;
-				border-radius: 999px;
-				background: #fff;
-				color: rgb(var(--black)) !important;
-				font-weight: 700;
-				font-size: 1em;
-				text-decoration: none;
-			}
-			.btn-white:hover {
-				opacity: 0.9;
-			}
-			.faq {
-				padding: 3.5em 0 3em;
-				border-bottom: 1px solid rgb(var(--gray-light));
-			}
-			.faq h2 {
-				font-size: 1.4em;
-				color: rgb(var(--black));
-				margin: 0 0 1.5em;
-				text-align: center;
-			}
-			.faq__list {
-				max-width: 720px;
-				margin: 0 auto;
-			}
-			.faq__item {
-				border-bottom: 1px solid rgb(var(--gray-light));
-				padding: 1.1em 0;
-			}
-			.faq__item h3 {
-				font-size: 1em;
-				margin: 0 0 0.4em;
-				color: rgb(var(--black));
-			}
-			.faq__item p {
-				font-size: 0.9em;
-				color: rgb(var(--gray-dark));
-				margin: 0;
-				line-height: 1.6;
-			}
-			.pins {
-				padding: 3.5em 0 3em;
-				border-bottom: 1px solid rgb(var(--gray-light));
-			}
-			.pins h2 {
-				font-size: 1.4em;
-				color: rgb(var(--black));
-				margin: 0 0 0.4em;
-				text-align: center;
-			}
-			.pins__sub {
-				color: rgb(var(--gray));
-				font-size: 0.9em;
-				margin: 0 0 1.5em;
-				text-align: center;
-			}
-			.pins__grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fill, minmax(min(100%, 240px), 1fr));
-				gap: 0.85em;
-				max-width: 820px;
-				margin: 0 auto;
-			}
-			.pins__card {
-				padding: 1.2em 1.2em;
-				border: 1px solid rgb(var(--gray-light));
-				border-radius: 12px;
-				background: #fff;
-			}
-			.pins__card h3 {
-				font-size: 0.95em;
-				margin: 0 0 0.35em;
-				color: rgb(var(--black));
-			}
-			.pins__card p {
-				font-size: 0.82em;
-				color: rgb(var(--gray));
-				margin: 0 0 0.8em;
-				line-height: 1.45;
-			}
-			.pins__card code {
-				display: block;
-				font-size: 0.72em;
-				background: rgb(var(--gray-light));
-				padding: 0.35em 0.5em;
-				border-radius: 6px;
-				color: rgb(var(--gray-dark));
-				word-break: break-all;
-			}
-			.guarantee {
-				padding: 2.5em 0 3em;
-				border-bottom: 1px solid rgb(var(--gray-light));
-			}
-			.guarantee__box {
-				display: flex;
-				gap: 1.2em;
-				align-items: flex-start;
-				padding: 1.5em 1.6em;
-				background: rgba(35, 55, 255, 0.04);
-				border: 1px solid rgba(35, 55, 255, 0.15);
-				border-radius: 14px;
-				max-width: 820px;
-				margin: 0 auto;
-			}
-			.guarantee__icon {
-				font-size: 2em;
-				flex-shrink: 0;
-				line-height: 1;
-			}
-			.guarantee__copy h3 {
-				font-size: 1em;
-				margin: 0 0 0.3em;
-				color: rgb(var(--black));
-			}
-			.guarantee__copy p {
-				font-size: 0.88em;
-				color: rgb(var(--gray-dark));
-				margin: 0;
-				line-height: 1.55;
-			}
-			.optin-wrap {
-				padding: 1em 0;
-			}
+			.hero { padding: 4em 0 3.5em; text-align: center; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.hero__eyebrow { display: inline-block; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1em; }
+			.hero h1 { font-size: clamp(1.9em, 5.5vw, 2.8em); line-height: 1.12; margin: 0 auto 0.6em; color: rgb(var(--black)); max-width: 16em; }
+			.hero__sub { font-size: 1.15em; color: rgb(var(--gray-dark)); max-width: 34em; margin: 0 auto 2em; line-height: 1.65; }
+			.hero__cta-group { display: flex; align-items: center; justify-content: center; gap: 0.9em; flex-wrap: wrap; margin-bottom: 1em; }
+			.btn-primary { display: inline-block; padding: 0.85em 2.2em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 700; font-size: 1.1em; text-decoration: none; white-space: nowrap; }
+			.btn-primary:hover { background: var(--accent-dark); }
+			.btn-secondary { display: inline-block; padding: 0.8em 1.6em; border-radius: 999px; border: 2px solid rgb(var(--gray-light)); color: rgb(var(--gray-dark)) !important; font-weight: 600; font-size: 1em; text-decoration: none; }
+			.btn-secondary:hover { border-color: var(--accent); color: var(--accent) !important; }
+			.hero__price { font-size: 1.6em; font-weight: 700; color: rgb(var(--black)); }
+			.hero__trust { font-size: 0.85em; color: rgb(var(--gray)); margin: 0; }
+			.hero__trust strong { color: rgb(var(--gray-dark)); }
+			.pain { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.pain h2 { font-size: 1.4em; color: rgb(var(--gray)); font-weight: 400; margin: 0 0 1.5em; text-align: center; }
+			.pain__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75em; max-width: 820px; margin: 0 auto; }
+			@media (max-width: 520px) { .pain__grid { grid-template-columns: 1fr; } }
+			.pain__item { display: flex; gap: 0.7em; align-items: flex-start; padding: 1em 1.1em; background: rgba(var(--gray-light), 30%); border-radius: 10px; }
+			.pain__icon { font-size: 1.1em; line-height: 1.6; flex-shrink: 0; }
+			.pain__text { font-size: 0.95em; color: rgb(var(--gray-dark)); line-height: 1.5; margin: 0; }
+			.outcome { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); background: rgba(35, 55, 255, 0.03); }
+			.outcome h2 { font-size: 1.5em; color: rgb(var(--black)); margin: 0 0 0.4em; text-align: center; }
+			.outcome__sub { color: rgb(var(--gray)); font-size: 0.95em; margin: 0 0 1.8em; text-align: center; }
+			.outcome__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; max-width: 820px; margin: 0 auto; }
+			@media (max-width: 520px) { .outcome__grid { grid-template-columns: 1fr; } }
+			.outcome__card { padding: 1.4em; border: 1px solid rgb(var(--gray-light)); border-radius: 12px; background: #fff; }
+			.outcome__card-icon { font-size: 1.5em; margin-bottom: 0.4em; display: block; }
+			.outcome__card h3 { font-size: 1em; margin: 0 0 0.35em; color: rgb(var(--black)); }
+			.outcome__card p { font-size: 0.88em; color: rgb(var(--gray)); margin: 0; line-height: 1.55; }
+			.featured { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.featured__box { background: rgb(var(--black)); color: #fff; border-radius: 16px; padding: 2.4em; position: relative; overflow: hidden; max-width: 820px; margin: 0 auto; }
+			.featured__box::before { content: ""; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(35, 55, 255, 0.35) 0%, transparent 60%); pointer-events: none; }
+			.featured__badge { display: inline-block; background: var(--accent); color: #fff; font-size: 0.72em; font-weight: 700; letter-spacing: 0.07em; text-transform: uppercase; padding: 0.2em 0.7em; border-radius: 999px; margin-bottom: 0.8em; }
+			.featured__box h2 { color: #fff; font-size: 1.45em; margin: 0 0 0.4em; }
+			.featured__box p { color: rgba(255, 255, 255, 0.75); font-size: 0.95em; margin: 0 0 1.2em; line-height: 1.55; }
+			.featured__features { list-style: none; padding: 0; margin: 0 0 1.6em; display: grid; grid-template-columns: 1fr 1fr; gap: 0.5em; }
+			@media (max-width: 480px) { .featured__features { grid-template-columns: 1fr; } }
+			.featured__features li { display: flex; align-items: flex-start; gap: 0.4em; font-size: 0.9em; color: rgba(255, 255, 255, 0.85); line-height: 1.4; }
+			.featured__features li::before { content: "\2713"; color: #4ade80; font-weight: 700; flex-shrink: 0; }
+			.featured__buy { display: flex; align-items: center; gap: 1em; flex-wrap: wrap; }
+			.featured__price { font-size: 2.1em; font-weight: 700; color: #fff; }
+			.btn-white { display: inline-block; padding: 0.7em 1.7em; border-radius: 999px; background: #fff; color: rgb(var(--black)) !important; font-weight: 700; font-size: 1em; text-decoration: none; }
+			.btn-white:hover { opacity: 0.9; }
+			.faq { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.faq h2 { font-size: 1.4em; color: rgb(var(--black)); margin: 0 0 1.5em; text-align: center; }
+			.faq__list { max-width: 720px; margin: 0 auto; }
+			.faq__item { border-bottom: 1px solid rgb(var(--gray-light)); padding: 1.1em 0; }
+			.faq__item h3 { font-size: 1em; margin: 0 0 0.4em; color: rgb(var(--black)); }
+			.faq__item p { font-size: 0.9em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.6; }
+			.bundle { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.bundle__box { max-width: 820px; margin: 0 auto; padding: 1.8em 1.6em; border: 2px solid var(--accent); border-radius: 16px; }
+			.bundle__box h2 { font-size: 1.35em; margin: 0 0 0.4em; }
+			.bundle__box p { color: rgb(var(--gray-dark)); margin: 0 0 1em; line-height: 1.55; }
+			.bundle__buy { display: flex; align-items: center; gap: 1em; flex-wrap: wrap; }
+			.guarantee { padding: 2.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.guarantee__box { display: flex; gap: 1.2em; align-items: flex-start; padding: 1.5em 1.6em; background: rgba(35, 55, 255, 0.04); border: 1px solid rgba(35, 55, 255, 0.15); border-radius: 14px; max-width: 820px; margin: 0 auto; }
+			.guarantee__icon { font-size: 2em; flex-shrink: 0; line-height: 1; }
+			.guarantee__copy h3 { font-size: 1em; margin: 0 0 0.3em; color: rgb(var(--black)); }
+			.guarantee__copy p { font-size: 0.88em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.55; }
+			.optin-wrap { padding: 1em 0; }
 		</style>
 	</head>
 	<body>
@@ -414,7 +94,7 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 				<div class="hero__cta-group">
 					<span class="hero__price">{digitalSystem.price}</span>
 					<a class="btn-primary" href={digitalSystem.stripeUrl} target="_blank" rel="noopener">Get the Digital System →</a>
-					<a class="btn-secondary" href="#faq">See if it's for you</a>
+					<a class="btn-secondary" href={bundle.stripeUrl} target="_blank" rel="noopener">Or the full bundle — {bundle.price}</a>
 				</div>
 				<p class="hero__trust"><strong>One-time payment. Instant download.</strong> &nbsp;·&nbsp; {BUZZYFLY_CONFIG.guarantee}</p>
 			</section>
@@ -479,39 +159,14 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 				</div>
 			</section>
 
-			<section class="pins">
-				<h2>Pinterest pins that sell this</h2>
-				<p class="pins__sub">Pinterest is a search engine for templates and planners — post these daily and they compound for months. Each pin should say what the buyer is already typing at midnight.</p>
-				<div class="pins__grid">
-					<div class="pins__card">
-						<h3>Pin 1 — the outcome</h3>
-						<p>Stop rebuilding your client process from scratch every week.</p>
-						<p>Onboarding, weekly planning, follow-ups — checklists you run in 20 minutes.</p>
-						<p>$49 one-time. Instant download.</p>
-						<p>Link: https://buzzyfly.com/store</p>
-						<p>Search terms: client onboarding checklist, freelancer follow up email, solo business systems</p>
-					</div>
-					<div class="pins__card">
-						<h3>Pin 2 — the free bait</h3>
-						<p>The 20-minute weekly reset checklist.</p>
-						<p>Free. Print it. Run it every Monday.</p>
-						<p>Link: https://buzzyfly.com (opt-in)</p>
-						<p>Search terms: weekly planner for freelancers, monday routine checklist, small business planning template</p>
-					</div>
-					<div class="pins__card">
-						<h3>Pin 3 — the objection</h3>
-						<p>Stop giving away free work.</p>
-						<p>Six word-for-word scripts for when a client asks for "just one more thing."</p>
-						<p>Part of the $49 Buzzyfly Digital System.</p>
-						<p>Link: https://buzzyfly.com/store</p>
-						<p>Search terms: scope creep script, how to say no to clients, freelancer pricing</p>
-					</div>
-					<div class="pins__card">
-						<h3>Pin 4 — the social proof angle</h3>
-						<p>If the free checklist is this good, the paid system must be insane.</p>
-						<p>Six checklists. Six templates. One script. $49, one-time.</p>
-						<p>Link: https://buzzyfly.com/store</p>
-						<p>Search terms: digital products for coaches, templates for service providers, business systems download</p>
+			<section class="bundle">
+				<div class="bundle__box">
+					<h2>{bundle.title} — {bundle.price}</h2>
+					<p>{bundle.description} One payment. Same 30-day guarantee. Stripe checkout opens now.</p>
+					<ul class="featured__features">{bundle.features.map((f) => <li>{f}</li>)}</ul>
+					<div class="bundle__buy">
+						<a class="btn-primary" href={bundle.stripeUrl} target="_blank" rel="noopener">Get the bundle — {bundle.price}</a>
+						<a class="btn-secondary" href="/store">See every product</a>
 					</div>
 				</div>
 			</section>
@@ -521,7 +176,7 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 					<span class="guarantee__icon">🛡️</span>
 					<div class="guarantee__copy">
 						<h3>30-Day Money-Back Guarantee</h3>
-						<p>If the system doesn't deliver — if the checklists don't work, the templates don't fit, or you just don't find it useful — email us within 30 days for a full refund. No questions, no forms, no hassle. The risk is ours.</p>
+						<p>{BUZZYFLY_CONFIG.guarantee} If the files are not delivered or are not as listed, email us within 30 days for a refund.</p>
 					</div>
 				</div>
 			</section>
