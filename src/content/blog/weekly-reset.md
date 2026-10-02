@@ -3,7 +3,7 @@ title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
 description: "A short weekly habit and the actual checklist behind it — so your priorities still exist when the week gets messy."
 category: "planning"
 pubDate: "Sep 01 2026"
-updatedDate: "Oct 01 2026"
+updatedDate: "Oct 02 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -97,6 +97,25 @@ Wednesday lines, fill in and stop:
 - Overdue follow-up: ________ — sent? yes / no
 - First move for tomorrow still the right one? ________
 
+## Thursday salvage — 12 minutes when the plan is already dead
+
+Use this only when Wednesday's three never moved. Do not rebuild the week. Rescue cash and the next client date.
+
+1. **Minute 0–2.** Open the Monday sheet. Cross out any priority that is no longer true. Do not replace it with a new project.
+2. **Minute 2–5.** Name the one delivery that is late or due tomorrow. Put a 45-minute block on the calendar today. If it will not fit, tell the client the new date in one line: "Moving [deliverable] to [date]. Still the right piece, or swap it?"
+3. **Minute 5–9.** Send the two follow-ups you skipped. Proposal ghost: "Still want me to hold the [date] start, or should I release it?" Finished work with no check-in: "Checking in after [deliverable]. Anything to tighten, or book the next piece?"
+4. **Minute 9–12.** Scope ask that landed mid-week: do not say yes in the thread. Reply "Got it. I'll check what we locked and come back with two options." Price it later. Park it if you cannot name a number in this window.
+
+Thursday sheet:
+
+- Still true from Monday: ________
+- Late delivery + new date sent: ________
+- Follow-up 1 sent: ________
+- Follow-up 2 sent: ________
+- Scope ask parked or priced: ________
+
+Stop at 12 minutes. A Thursday salvage that turns into a new planning system is how Friday disappears too.
+
 ## The Friday close (10 minutes)
 
 1. Close the week: what got done, what rolls to next Monday, what dies.
@@ -121,16 +140,16 @@ Use these instead of writing a new email from scratch:
 - "Delivery landed [date]. One thing that would make the next round easier: ________. Reply with that and I'll lock it."
 - "We wrapped [date]. If you want the same setup next quarter, reply with a date and I'll hold it."
 
-## What this does not do
+## What still breaks when this only lives in your head
 
-It does not turn you into a systems consultant. It does not require a new app. It does not need a 90-minute Sunday ritual that dies the first busy week.
-
-It moves the process out of your head and into a short checklist that still exists when the week gets slammed — which is the only time the process actually matters.
+The Monday sheet dies the first week three clients reply at once. Wednesday never gets a calendar hold. Thursday becomes inbox, and the proposal follow-up waits for a "good moment" that is not on the clock. The phrases above only work if they sit in the same folder as the onboarding checklist and the scope reply, so you are not rewriting them from memory.
 
 ## Get the full printable version
 
-The full weekly reset checklist — Monday, Wednesday, and Friday templates with fill-in fields — ships inside the Buzzyfly Digital System along with the onboarding and follow-up workflows. Same files, already written, so you are not rebuilding this sheet the next time Monday is ugly.
+The full weekly reset checklist — Monday, Wednesday, Thursday salvage, and Friday templates with fill-in fields — ships inside the Buzzyfly Digital System along with the onboarding and follow-up workflows. Same files, already written, so you are not rebuilding this sheet the next time Monday is ugly.
 
-One-time payment. Instant download. Lifetime access to updates. 30-day refund if the files are not delivered or not as listed — email coachmanager@gmail.com.
+One-time. $49. Instant download. 30-day money-back guarantee — email us if it doesn't deliver.
 
-[Get the Digital System — $49](https://buzzyfly.com/store)
+If you already know you want the weekly reset plus the onboarding kit and the follow-up templates in one zip, the Complete Business Bundle is $97. Start with the $49 system unless you want every file today.
+
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
