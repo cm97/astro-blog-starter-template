@@ -1,0 +1,54 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+const mailto =
+	"mailto:coachmanager@gmail.com?subject=Buzzyfly%20product%20request&body=What%20I%20need%20(one%20sentence)%3A%0A%0AWhen%20I%20would%20use%20it%3A%0A%0AWhich%20existing%20product%20I%20already%20bought%20(or%20none)%3A%0A";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Request a Buzzyfly template"
+			description="Ask for the checklist or email you cannot find. The same request from three buyers becomes the next file in the Digital System."
+		/>
+		<style>
+			.rq { max-width: 640px; margin: 0 auto; padding-bottom: 2em; }
+			.rq h1 { font-size: 2.1em; line-height: 1.15; }
+			.rq .btn {
+				display: inline-block;
+				background: var(--accent);
+				color: #fff;
+				padding: 0.8em 1.2em;
+				border-radius: 8px;
+				text-decoration: none;
+				font-weight: 700;
+			}
+			.rq ul { padding-left: 1.2em; }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="rq">
+			<h1>Ask for the file. If three people ask, it gets built.</h1>
+			<p>
+				Buzzyfly already sells the onboarding kit, follow-up emails, weekly reset, the $49 Digital System, and the $97 bundle.
+				If the template you need is not in those zips, send one sentence. Same ask from three buyers becomes the next file, added to the Digital System for everyone who already bought it.
+			</p>
+			<p><a class="btn" href={mailto}>Email the request</a></p>
+			<h2>Already covered — buy this instead of waiting</h2>
+			<ul>
+				<li>Ghosted after a proposal — <a href="https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06">Follow-Up Email Templates, $19</a></li>
+				<li>New client, blank inbox — <a href="https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07">Client Onboarding Kit, $29</a></li>
+				<li>Monday is already on fire — <a href="https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05">Weekly Reset Checklist, $15</a></li>
+				<li>All three workflows — <a href="https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00">Digital System, $49</a></li>
+				<li>Every file — <a href="https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08">Complete Business Bundle, $97</a></li>
+			</ul>
+			<p>30-day money-back guarantee — email us if it doesn't deliver.</p>
+			<p><a href="/store">Back to the store</a></p>
+		</main>
+		<Footer />
+	</body>
+</html>
