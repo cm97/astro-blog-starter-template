@@ -2,7 +2,7 @@
 title: "Follow-Up Email After No Response: 5 Templates That Actually Get Replies"
 description: "Five ready-to-send follow-up email templates for when a prospect or client goes quiet — for proposals, check-ins, re-engagement, referral requests, and project wrap-ups."
 pubDate: "Sep 13 2026"
-updatedDate: "Sep 29 2026"
+updatedDate: "Oct 06 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -42,6 +42,40 @@ Most people treat follow-up as a one-off email. That is why it fails. Run this i
 
 Run those seven steps the same way every time and the awkwardness disappears. The templates below are the words. The process above is the system.
 
+## Fill this in the minute you hit send
+
+Copy this block into the note you already use. Blank fields are the point. If a line is empty, the follow-up does not exist yet.
+
+```
+Name: ________
+What you sent: proposal / quote / recap / invoice
+Sent date and time: ________
+Channel: email / text
+Subject line used: ________
+One thing they said they wanted: ________
+Date you are holding (start or slot): ________
+Day 5–7 nudge due: ________
+Bump due (3 days after the nudge): ________
+Break-up due (~day 14 from the proposal): ________
+Status: waiting / replied / closed
+```
+
+Time box: 4 minutes after the proposal goes out. Do not wait for a calm afternoon. The calm afternoon is when delivery eats the follow-up.
+
+## Exact send windows
+
+Use the clock, not a mood.
+
+| Touch | When | Length | Job |
+|---|---|---|---|
+| Proposal or recap | Same day as the call | The proposal you already wrote | Put the date on the calendar before you close the tab |
+| Template 1 | Day 5, 6, or 7, Tuesday or Wednesday, before 11am | 4 sentences | Ask still-moving-forward or take-it-off-the-plate |
+| Bump | 3 days after Template 1 | 4 lines | Confirm it was not buried |
+| Break-up | About day 14 from the original send | 4 lines | Close the file or get a yes |
+| Quiet-lead poke | 21+ days, or a lead from last quarter | Template 3 | One problem, one question, an out |
+
+If the due date lands on a Friday or Monday, move it to Tuesday morning. Do not skip it.
+
 ## Template 1: Proposal follow-up (5–7 days after sending)
 
 Use when: You sent a proposal or quote and haven't heard back.
@@ -62,6 +96,8 @@ Why it works: It's four sentences. It restates what it's about. It asks one ques
 
 **Send on a Tuesday or Wednesday morning.** Response rates on follow-up emails drop significantly on Fridays and Mondays.
 
+Fill-in line before you send: "I am holding [start date] until [break-up date]." Add that only if you actually named a start date. A floating "let me know" gives them nothing to answer.
+
 ## Template 2: Mid-project check-in
 
 Use when: You're in the middle of an ongoing engagement and haven't heard from the client in a while.
@@ -79,6 +115,8 @@ Use when: You're in the middle of an ongoing engagement and haven't heard from t
 Why it works: It leads with reassurance (things are on track on my end), not a request. The two questions are answerable with a sentence each. This email takes 20 seconds to read and 30 seconds to reply to — and that's the goal.
 
 **Send before problems develop, not after.** A mid-project check-in sent at week 3 of a 6-week engagement is maintenance. The same email sent when something has gone wrong is damage control. The maintenance version is easier to write and easier to receive.
+
+Put this on the same weekday as your reset. If the last client email is older than 7 days and the next milestone is inside 10 days, this note goes out in that block. 20 minutes covers the reset and this send.
 
 ## Template 3: Re-engagement for a quiet lead
 
@@ -99,6 +137,8 @@ Use when: You had a good initial conversation months ago but nothing came of it,
 Why it works: It takes the blame for the silence (even if it wasn't your fault — it doesn't matter). It references what you actually talked about. It frames the question around their problem, not around your need for a sale. And "no pressure" at the end is real, not performative — you're genuinely giving them an easy exit.
 
 **Don't apologize if you did nothing wrong.** "I'm sorry to bother you" is unnecessary and makes you sound smaller. "I know timing wasn't right then" acknowledges reality without groveling.
+
+Cap this at one quiet lead per weekly reset. Five in one afternoon becomes a blast. One is a process.
 
 ## Template 4: Referral request
 
@@ -140,6 +180,8 @@ Use when: A project has ended and you want to close it properly, leave a good im
 
 Why it works: It confirms the work is done (which matters — some clients worry about invoices or lingering obligations). It restates the result in concrete terms. It opens the door to future work without being salesy. And it's short enough that they'll actually read it.
 
+Send this the day you finish, not "when I have a minute." Then set a reminder 14 days later for Template 4.
+
 ## When a proposal still gets no reply: the bump and the break-up
 
 Template 1 goes out at 5–7 days. If that gets silence too, two short emails finish the job.
@@ -176,12 +218,24 @@ Job: confirm they saw it. Not a novel. Not a second pitch.
 
 Job: create a deadline without a fake countdown. This is the email people actually answer.
 
+## What you do with the reply
+
+- **Yes:** send the invoice the same day. Welcome note with the start date, the one thing you need from them, and the day they will hear from you next.
+- **Not now:** write the month they named on the log. One note that month. Not a weekly drip.
+- **Price:** restate what is in and what is out. Do not cut the number to get a reply.
+- **Scope change:** new line, new price, new date. The original proposal stays the record.
+- **No:** mark closed. Do not argue.
+
+If you cannot name the next date after a yes, you do not have a running client yet. You have a payment waiting on a process that still lives in your head. That is the onboarding checklist, not another follow-up.
+
 ## What still breaks when the templates only live in your notes app
 
 You can copy the five emails above into a Google Doc right now and they will work. Until Thursday hits and you are slammed. Then the process collapses because there is no single place that also holds the onboarding checklist, the weekly reset, and the exact sequence for quiet leads.
 
-That is the gap the full system closes. The templates are the words. The Digital System is the 20-minute checklists that keep the words getting sent even when the week is on fire.
+That is the gap the full system closes. The templates are the words. The Digital System is the 20-minute checklists that keep the words getting sent even when the week is on fire: follow-up, onboarding, weekly reset, intake, scope, retention.
+
+The $19 follow-up pack is the emails alone. The $49 system is those emails plus the checklists you run when delivery eats the day. One primary move: the system.
 
 ---
 
-The Buzzyfly Digital System includes the follow-up templates plus the onboarding checklists and weekly reset so the whole client process still runs when you are slammed. One-time payment. Instant download. 30-day money-back guarantee. [Get the $49 system →](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+The Buzzyfly Digital System includes the follow-up templates plus the onboarding checklists and weekly reset so the whole client process still runs when you are slammed. One-time payment. Download after purchase. 30-day money-back guarantee — email us if it doesn't deliver. [Get the $49 system →](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
