@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Debt Payoff Planner | Buzzyfly</title>
+<meta name="description" content="See the fastest order to pay off your debts and how much interest you save. Runs in your browser.">
+<style>
+:root{--bg:#faf7ef;--card:#fff;--ink:#23201a;--muted:#6b6455;--line:#e2dccb;--accent:#e0a012;--accent-ink:#1d1606;--danger:#b3402f;--ok:#2f7d4f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.top{max-width:980px;margin:0 auto;padding:16px 16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.top a{color:var(--muted);text-decoration:none;font-size:.95rem}
+.sheet{max-width:980px;margin:14px auto 40px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:24px}
+h1{margin:0 0 4px;font-size:1.6rem}h2{font-size:1.1rem;margin:22px 0 8px}
+.sub{color:var(--muted);margin:0 0 14px}
+button,.btn{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 14px;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+label{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 3px}
+input,textarea,select{width:100%;font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:9px}
+.row{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th{text-align:left;font-size:.82rem;color:var(--muted);font-weight:600;border-bottom:2px solid var(--ink);padding:6px 4px}
+td{padding:7px 4px;border-bottom:1px solid var(--line);vertical-align:middle}
+.num{text-align:right}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0}
+.stat{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fffdf7}
+.stat b{display:block;font-size:1.35rem}.stat span{font-size:.8rem;color:var(--muted)}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.78rem;border:1px solid var(--line)}
+.bad{color:var(--danger);font-weight:600}.good{color:var(--ok);font-weight:600}
+.rm{border:none;background:none;color:var(--danger);font-size:1.2rem;padding:4px 8px}
+.scroll{overflow-x:auto}
+.note{color:var(--muted);font-size:.85rem}
+@media print{.top,.bar,.noprint{display:none}.sheet{border:none}}
+</style>
+</head>
+<body>
+<div class="top"><a href="/apps-pro">&larr; All Buzzyfly apps</a><span class="note">Your data stays in this browser.</span></div>
+<main class="sheet">
+
+<h1>Debt Payoff Planner</h1>
+<p class="sub">List your debts, add what you can pay each month, and see the fastest order to be debt-free and how much interest you save.</p>
+<div class="row">
+  <div><label for="extra">Extra per month ($)</label><input id="extra" type="number" min="0" step="1" value="0"></div>
+  <div><label for="strat">Order</label><select id="strat"><option value="avalanche">Avalanche (highest APR first, least interest)</option><option value="snowball">Snowball (smallest balance first)</option></select></div>
+</div>
+<h2>Debts</h2>
+<div class="scroll"><table id="tbl"><thead><tr><th>Name</th><th class="num">Balance ($)</th><th class="num">APR (%)</th><th class="num">Min payment ($)</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+<div class="bar"><button id="add">+ Add debt</button><button id="clear">Clear all</button></div>
+<div id="out" aria-live="polite"></div>
+
+</main>
+<script>
+
+const KEY='bf_debt_v1';
+let debts=[];
+try{debts=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){debts=[]}
+if(!debts.length)debts=[{n:'Credit card',b:4200,a:22.9,m:105},{n:'Car loan',b:9800,a:7.4,m:260}];
+const $=id=>document.getElementById(id);
+const money=n=>'$'+n.toLocaleString(undefined,{minimumFractionDigits:2,maximumFractionDigits:2});
+function sim(list,extra,strat){
+  let d=list.map((x,i)=>({i,n:x.n,b:x.b,a:x.a/100/12,m:x.m,done:null,int:0}));
+  d=d.filter(x=>x.b>0);
+  const budget=d.reduce((s,x)=>s+x.m,0)+extra;
+  let month=0,totalInt=0;
+  while(d.some(x=>x.b>0.005)&&month<1200){
+    month++;
+    for(const x of d){if(x.b>0){const i=x.b*x.a;x.b+=i;x.int+=i;totalInt+=i}}
+    let left=budget;
+    for(const x of d){if(x.b>0){const p=Math.min(x.m,x.b);x.b-=p;left-=p}}
+    const order=d.filter(x=>x.b>0.005).sort((p,q)=>strat==='snowball'?p.b-q.b:q.a-p.a);
+    for(const x of order){if(left<=0)break;const p=Math.min(left,x.b);x.b-=p;left-=p}
+    for(const x of d){if(x.b<=0.005&&x.done===null)x.done=month}
+  }
+  return {months:month,finished:!d.some(x=>x.b>0.005),totalInt,debts:d,budget};
+}
+function when(m){const t=new Date();t.setMonth(t.getMonth()+m);return t.toLocaleDateString(undefined,{month:'long',year:'numeric'})}
+function save(){localStorage.setItem(KEY,JSON.stringify(debts))}
+function esc(s){return String(s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
+function render(){
+  $('rows').innerHTML=debts.map((x,i)=>`<tr>
+   <td><input data-i="${i}" data-k="n" value="${esc(x.n)}" aria-label="Name"></td>
+   <td><input data-i="${i}" data-k="b" type="number" min="0" step="0.01" value="${x.b}" aria-label="Balance"></td>
+   <td><input data-i="${i}" data-k="a" type="number" min="0" step="0.01" value="${x.a}" aria-label="APR"></td>
+   <td><input data-i="${i}" data-k="m" type="number" min="0" step="0.01" value="${x.m}" aria-label="Minimum payment"></td>
+   <td><button class="rm" data-rm="${i}" aria-label="Remove debt">&times;</button></td></tr>`).join('');
+  calc();
+}
+function calc(){
+  const extra=Math.max(0,parseFloat($('extra').value)||0),strat=$('strat').value;
+  const valid=debts.filter(x=>x.b>0);
+  if(!valid.length){$('out').innerHTML='<p class="note">Add a debt with a balance to see your plan.</p>';return}
+  const base=sim(valid,0,strat),plan=sim(valid,extra,strat);
+  const bad=valid.filter(x=>x.m<=0);
+  let h='';
+  if(bad.length)h+='<p class="bad">Every debt needs a minimum payment above $0.</p>';
+  if(!plan.finished){h+='<p class="bad">At these payments the debts are not paid off within 100 years. Raise the extra amount or the minimums.</p>'}
+  else{
+    const saved=base.finished?base.totalInt-plan.totalInt:null,faster=base.finished?base.months-plan.months:null;
+    h+=`<div class="stats">
+      <div class="stat"><b>${when(plan.months)}</b><span>Debt-free (${plan.months} months)</span></div>
+      <div class="stat"><b>${money(plan.totalInt)}</b><span>Total interest</span></div>
+      <div class="stat"><b>${money(plan.budget)}</b><span>Paid per month in total</span></div>
+      ${saved!==null&&extra>0?`<div class="stat"><b class="good">${money(saved)}</b><span>Interest saved vs. minimums only</span></div><div class="stat"><b class="good">${faster} months</b><span>Sooner than minimums only</span></div>`:''}
+    </div>`;
+    h+='<h2>Payoff order</h2><table><thead><tr><th>Debt</th><th>Paid off</th><th class="num">Interest paid</th></tr></thead><tbody>'+
+      plan.debts.slice().sort((p,q)=>p.done-q.done).map(x=>`<tr><td>${esc(x.n||'Debt')}</td><td>${when(x.done)} (month ${x.done})</td><td class="num">${money(x.int)}</td></tr>`).join('')+'</tbody></table>';
+    if(!base.finished)h+='<p class="note">With minimums only, at least one debt never pays off because the payment is below the monthly interest.</p>';
+  }
+  $('out').innerHTML=h;
+}
+$('rows').addEventListener('input',e=>{const t=e.target,i=+t.dataset.i,k=t.dataset.k;if(k==null)return;debts[i][k]=k==='n'?t.value:(parseFloat(t.value)||0);save();calc()});
+$('rows').addEventListener('click',e=>{const i=e.target.dataset.rm;if(i==null)return;debts.splice(+i,1);save();render()});
+$('add').onclick=()=>{debts.push({n:'',b:0,a:0,m:0});save();render()};
+$('clear').onclick=()=>{if(confirm('Remove all debts?')){debts=[];save();render()}};
+$('extra').oninput=calc;$('strat').onchange=calc;
+render();
+
+</script>
+</body>
+</html>
