@@ -1,17 +1,19 @@
 ---
-const paste = "Onboarding still lives in your head. $49 Digital System, one-time, download after checkout: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00";
+import Layout from '../layouts/BlogPost.astro';
+import { ALL_PRODUCTS } from '../data/monetization';
+
+const system = ALL_PRODUCTS.find((p) => p.id === 'buzzyfly-digital-system')!;
+const paste = `Onboarding still lives in your head. ${system.price} ${system.title}, one-time, download after checkout: ${system.stripeUrl}`;
 ---
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Buzzyfly agent</title>
-</head>
-<body>
-<h1>Buzzyfly agent</h1>
-<p>Sells the live $49 Digital System. One job. No new product.</p>
-<p><a href="https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00">Open $49 checkout</a></p>
-<p><a href="/store">Open store</a></p>
-<textarea rows="4" cols="60">{paste}</textarea>
-</body>
-</html>
+
+<Layout
+	title="Buzzyfly agent — $49 Digital System"
+	description="Cash agent for the live Buzzyfly store. One paste. The $49 Digital System."
+	pubDate={new Date('October 7 2026')}
+>
+	<h1>Buzzyfly agent</h1>
+	<p>This page is the agent on the Cloudflare site. It sells the existing {system.title}. No new product.</p>
+	<p><a href={system.stripeUrl}>Open {system.price} checkout</a></p>
+	<p><a href="/store">Open store</a></p>
+	<pre>{paste}</pre>
+</Layout>
