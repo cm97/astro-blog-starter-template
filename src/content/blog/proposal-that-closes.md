@@ -96,4 +96,4 @@ The page above is the proposal. The follow-ups are the same set used for a quiet
 
 One-time. $49. Instant download. 30-day refund if the files do not arrive or are not as listed.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)

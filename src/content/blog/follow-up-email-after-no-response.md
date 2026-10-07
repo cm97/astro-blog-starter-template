@@ -238,4 +238,4 @@ The $19 follow-up pack is the emails alone. The $49 system is those emails plus 
 
 ---
 
-The Buzzyfly Digital System includes the follow-up templates plus the onboarding checklists and weekly reset so the whole client process still runs when you are slammed. One-time payment. Download after purchase. 30-day money-back guarantee — email us if it doesn't deliver. [Get the $49 system →](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+The Buzzyfly Digital System includes the follow-up templates plus the onboarding checklists and weekly reset so the whole client process still runs when you are slammed. One-time payment. Download after purchase. 30-day money-back guarantee — email us if it doesn't deliver. [Get the $49 system →](/buy/buzzyfly-digital-system)

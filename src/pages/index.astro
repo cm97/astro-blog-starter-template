@@ -93,10 +93,10 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 				</p>
 				<div class="hero__cta-group">
 					<span class="hero__price">{digitalSystem.price}</span>
-					<a class="btn-primary" href={digitalSystem.stripeUrl} target="_blank" rel="noopener">Buy the Digital System — {digitalSystem.price}</a>
+					<a class="btn-primary" href={digitalSystem.buyUrl} target="_blank" rel="noopener">Buy the Digital System — {digitalSystem.price}</a>
 				</div>
 				<p class="hero__trust">One-time payment. Download after purchase on the thank-you page. 30-day refund if the files are not delivered or not as listed.</p>
-				<p class="hero__trust"><a class="btn-secondary" href={bundle.stripeUrl} target="_blank" rel="noopener">Smaller option: full bundle — {bundle.price}</a></p>
+				<p class="hero__trust"><a class="btn-secondary" href={bundle.buyUrl} target="_blank" rel="noopener">Smaller option: full bundle — {bundle.price}</a></p>
 			</section>
 
 			<section class="pain">
@@ -128,7 +128,7 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 					<ul class="featured__features">{digitalSystem.features.map((f) => <li>{f}</li>)}</ul>
 					<div class="featured__buy">
 						<span class="featured__price">{digitalSystem.price}</span>
-						<a class="btn-white" href={digitalSystem.stripeUrl} target="_blank" rel="noopener">Buy the Digital System — {digitalSystem.price}</a>
+						<a class="btn-white" href={digitalSystem.buyUrl} target="_blank" rel="noopener">Buy the Digital System — {digitalSystem.price}</a>
 					</div>
 				</div>
 			</section>
@@ -146,7 +146,7 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 					</div>
 					<div class="faq__item">
 						<h3>How do I get it?</h3>
-						<p>Pay once through Stripe. Download after purchase on the thank-you page. The files are yours to keep, with lifetime updates.</p>
+						<p>Pay once through PayPal. Download right after purchase. The files are yours to keep, with lifetime updates.</p>
 					</div>
 					<div class="faq__item">
 						<h3>What if it doesn't work for me?</h3>
@@ -162,10 +162,10 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 			<section class="bundle">
 				<div class="bundle__box">
 					<h2>{bundle.title} — {bundle.price}</h2>
-					<p>{bundle.description} One payment. Same 30-day guarantee. Stripe checkout opens now.</p>
+					<p>{bundle.description} One payment. Same 30-day guarantee. PayPal checkout opens now.</p>
 					<ul class="featured__features">{bundle.features.map((f) => <li>{f}</li>)}</ul>
 					<div class="bundle__buy">
-						<a class="btn-secondary" href={bundle.stripeUrl} target="_blank" rel="noopener">Bundle — {bundle.price}</a>
+						<a class="btn-secondary" href={bundle.buyUrl} target="_blank" rel="noopener">Bundle — {bundle.price}</a>
 						<a class="btn-secondary" href="/store">See every product</a>
 					</div>
 				</div>

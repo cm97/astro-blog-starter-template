@@ -66,29 +66,15 @@ export const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa
 export const AUTOMATIC_DELIVERY_ENABLED = true;
 
 /**
- * Resolves the buy action for a product. Returns the live Stripe checkout when
- * one is configured, and a real, working email order path when it is not — so
- * the site never renders a dead checkout button.
+ * Resolves the buy action for the Digital System. Card payments go through the
+ * PayPal checkout at /buy/<product id>, which falls back to a real email order
+ * while PayPal is not configured, so the site never renders a dead button.
  */
-export function getOrderAction(productTitle: string = BUZZYFLY_CONFIG.defaultProductTitle) {
-	if (STRIPE_CHECKOUT_URL) {
-		return {
-			live: true,
-			href: STRIPE_CHECKOUT_URL,
-			label: "Buy now",
-			external: true,
-		};
-	}
-
-	const subject = encodeURIComponent(`Order: ${productTitle}`);
-	const body = encodeURIComponent(
-		`Hi,\n\nI'd like to order the ${productTitle}.\n\nPlease send payment details and the download.\n\nThanks,\n`,
-	);
-
+export function getOrderAction(_productTitle: string = BUZZYFLY_CONFIG.defaultProductTitle) {
 	return {
-		live: false,
-		href: `mailto:${BUZZYFLY_CONFIG.orderEmail}?subject=${subject}&body=${body}`,
-		label: "Email to order",
+		live: true,
+		href: "/buy/buzzyfly-digital-system",
+		label: "Buy now",
 		external: false,
 	};
 }
@@ -147,7 +133,7 @@ export const ALL_PRODUCTS = [
 		price: "$15",
 		description: "The 20-minute Monday routine that keeps your week on track. Clear inboxes, set one priority, plan your week — same way every time.",
 		features: ["20-minute weekly reset checklist", "Priority-setting template", "Thursday mid-week check-in", "Inbox-clearing routine"],
-		stripeUrl: "https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05",
+		buyUrl: "/buy/weekly-reset-checklist",
 		badge: null,
 	},
 	{
@@ -156,7 +142,7 @@ export const ALL_PRODUCTS = [
 		price: "$19",
 		description: "5 ready-to-send follow-up emails. Fill in a name, hit send — no staring at a blank screen.",
 		features: ["Proposal follow-up (5–7 days)", "Mid-project check-in", "Re-engagement for quiet leads", "Referral request", "End-of-project wrap-up"],
-		stripeUrl: "https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06",
+		buyUrl: "/buy/follow-up-email-templates",
 		badge: null,
 	},
 	{
@@ -165,7 +151,7 @@ export const ALL_PRODUCTS = [
 		price: "$29",
 		description: "Everything to onboard a new client in 20 minutes — welcome email, intake form, kickoff agenda, internal notes format.",
 		features: ["Welcome email template with fill-in variables", "Intake form questions", "Kickoff meeting agenda", "Internal client notes format", "48-hour follow-up reminder format"],
-		stripeUrl: "https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07",
+		buyUrl: "/buy/client-onboarding-kit",
 		badge: null,
 	},
 	{
@@ -174,7 +160,7 @@ export const ALL_PRODUCTS = [
 		price: "$49",
 		description: "The complete operating framework — onboarding, weekly planning, and follow-up workflows. The system that holds everything together.",
 		features: ["Complete onboarding workflow", "20-minute weekly reset", "Follow-up system with templates", "Lifetime access + future updates"],
-		stripeUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00",
+		buyUrl: "/buy/buzzyfly-digital-system",
 		badge: "Most popular",
 	},
 	{
@@ -183,7 +169,7 @@ export const ALL_PRODUCTS = [
 		price: "$97",
 		description: "Every Buzzyfly product in one download. The Digital System + Onboarding Kit + Follow-Up Templates + Weekly Checklist. Everything.",
 		features: ["Everything in the Digital System", "Client Onboarding Kit", "Follow-Up Email Templates", "Weekly Reset Checklist", "All future product updates"],
-		stripeUrl: "https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08",
+		buyUrl: "/buy/complete-business-bundle",
 		badge: "Best value",
 	},
 ];

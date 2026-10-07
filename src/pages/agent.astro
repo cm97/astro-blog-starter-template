@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
-import { ALL_PRODUCTS } from '../data/monetization';
+import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from '../data/monetization';
 
 const system = ALL_PRODUCTS.find((p) => p.id === 'buzzyfly-digital-system')!;
-const paste = `Onboarding still lives in your head. ${system.price} ${system.title}, one-time, download after checkout: ${system.stripeUrl}`;
+const paste = `Onboarding still lives in your head. ${system.price} ${system.title}, one-time, download after checkout: ${BUZZYFLY_CONFIG.siteUrl}${system.buyUrl}`;
 ---
 
 <Layout
@@ -13,7 +13,7 @@ const paste = `Onboarding still lives in your head. ${system.price} ${system.tit
 >
 	<h1>Buzzyfly agent</h1>
 	<p>This page is the agent on the Cloudflare site. It sells the existing {system.title}. No new product.</p>
-	<p><a href={system.stripeUrl}>Open {system.price} checkout</a></p>
+	<p><a href={system.buyUrl}>Open {system.price} checkout</a></p>
 	<p><a href="/store">Open store</a></p>
 	<pre>{paste}</pre>
 </Layout>
