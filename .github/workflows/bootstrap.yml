@@ -1,4 +1,4 @@
-name: Bootstrap — Upload products & set secrets
+name: Bootstrap — Set Worker secrets
 
 on:
   workflow_dispatch:
@@ -33,33 +33,8 @@ jobs:
           echo "::add-mask::${{ inputs.stripe_webhook_secret }}"
           echo "::add-mask::${{ inputs.download_token_secret }}"
 
-      # Build buzzyfly-digital-system.zip from component products
-      - name: Create buzzyfly-digital-system zip
-        run: |
-          cd product-files
-          zip buzzyfly-digital-system.zip \
-            weekly-reset-checklist.zip \
-            client-onboarding-kit.zip \
-            follow-up-email-templates.zip
-          cd ..
-
-      # Upload all product ZIPs to R2
-      - name: Upload product files to R2
-        run: |
-          for product in \
-            weekly-reset-checklist \
-            follow-up-email-templates \
-            client-onboarding-kit \
-            complete-business-bundle \
-            buzzyfly-digital-system; do
-            npx wrangler r2 object put \
-              "buzzyfly-products/products/${product}.zip" \
-              --file "product-files/${product}.zip" \
-              --content-type "application/zip"
-          done
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      # Product files are paid content and are not stored in this public repo.
+      # Upload them from your own computer with scripts/upload-products.sh.
 
       # Set Worker secrets (values masked above so they don't appear in logs)
       - name: Set STRIPE_WEBHOOK_SECRET
@@ -75,4 +50,4 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
 
       - name: Done
-        run: echo "Bootstrap complete — products uploaded, secrets set."
+        run: echo "Bootstrap complete — secrets set."
