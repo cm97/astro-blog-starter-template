@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Buzzyfly agent</title>
+<style>
+body{margin:0;font:16px/1.45 system-ui,sans-serif;background:#121410;color:#f4f1e6}
+main{max-width:720px;margin:0 auto;padding:24px 16px 48px}
+h1{font-size:22px;margin:0 0 8px}p{color:#b7b29f}a,button{background:#1f4d3a;color:#fff;border:0;border-radius:8px;padding:10px 12px;font-weight:700;text-decoration:none;display:inline-block}
+.card{background:#1c1f18;border:1px solid #34392c;border-radius:12px;padding:14px;margin:12px 0}
+textarea{width:100%;min-height:72px;background:#10130e;color:#f4f1e6;border:1px solid #34392c;border-radius:8px;padding:8px}
+</style>
+</head>
+<body>
+<main>
+<h1>Buzzyfly agent</h1>
+<p>Runs on this site after Cloudflare deploy. Sells the live $49 Digital System. Pattern from humanlayer/12-factor-agents: one small agent, one job, no new product.</p>
+<div class="card">
+<a href="https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00">Open $49 checkout</a>
+<a href="/store">Open store</a>
+</div>
+<div class="card">
+<strong>Paste</strong>
+<textarea id="p">Onboarding still lives in your head. $49 Digital System, one-time, download after checkout: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00</textarea>
+<p><button type="button" onclick="navigator.clipboard.writeText(document.getElementById('p').value)">Copy</button></p>
+</div>
+</main>
+</body>
+</html>
