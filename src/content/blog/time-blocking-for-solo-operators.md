@@ -98,6 +98,6 @@ The 3-block day is the weekly reset plus the follow-up lines, written down. The 
 
 If you want the reset, the follow-ups, and the onboarding kit in one zip, the Complete Business Bundle is $97. Same checkout. Same 30-day money-back guarantee — email us if it does not deliver.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)
 
-[Get the Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
+[Get the Complete Business Bundle — $97](/buy/complete-business-bundle)

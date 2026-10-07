@@ -100,8 +100,8 @@ You will remember it on a calm Tuesday. You will forget it on a slammed Thursday
 
 The words have to sit next to onboarding and the weekly reset. Same folder. Same 20-minute run. Not a speech you invent again.
 
-The follow-up if they ghost after the price is the same day-3 / day-6 pattern as a quiet proposal. The onboarding checklist is where the original scope line should have been written. Both are in the Digital System with the scope reply: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
+The follow-up if they ghost after the price is the same day-3 / day-6 pattern as a quiet proposal. The onboarding checklist is where the original scope line should have been written. Both are in the Digital System with the scope reply: /buy/buzzyfly-digital-system
 
 One-time payment. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)

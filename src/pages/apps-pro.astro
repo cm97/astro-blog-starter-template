@@ -1,0 +1,82 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { BUZZYFLY_CONFIG } from "../data/monetization";
+import { APPS_PRICE } from "../lib/appsAccess";
+import { paypalConfigured } from "../lib/paypal";
+
+export const prerender = false;
+
+const payEnabled = paypalConfigured(Astro.locals.runtime?.env);
+const mail = `mailto:${BUZZYFLY_CONFIG.orderEmail}?subject=${encodeURIComponent("Buzzyfly Apps Pro")}&body=${encodeURIComponent("Hi, I'd like Buzzyfly Apps Pro. Please send payment details and my access code.")}`;
+
+const APPS = [
+	{ slug: "invoice-maker", problem: "Getting paid", name: "Invoice Maker", does: "Build a clean invoice with line items, tax and discount, then print or save as PDF." },
+	{ slug: "lead-followup-tracker", problem: "Making money", name: "Lead Follow-Up Tracker", does: "Every lead gets a next follow-up date. Overdue leads rise to the top, with pipeline and won-value totals." },
+	{ slug: "content-calendar", problem: "Content volume", name: "Content Calendar", does: "Plan posts across channels on one calendar so publishing stops depending on your memory." },
+	{ slug: "csv-cleaner", problem: "Messy data", name: "CSV Cleaner", does: "Trim spaces, drop blank rows, remove duplicates and fix casing in a spreadsheet export, then download the clean file." },
+	{ slug: "compliance-deadline-tracker", problem: "Compliance fear", name: "Compliance Deadline Tracker", does: "Track tax, license, insurance and filing deadlines. Recurring ones roll forward, and you can export to your calendar." },
+	{ slug: "hiring-scorecard", problem: "Hiring", name: "Hiring Scorecard", does: "Score every candidate on the same weighted criteria and get a ranked list you can defend." },
+	{ slug: "debt-payoff-planner", problem: "Money stress", name: "Debt Payoff Planner", does: "See the fastest payoff order, your debt-free date and the interest saved from paying a little extra." },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Buzzyfly Apps Pro: 7 small-business apps, one payment"
+			description="Seven working web apps for the problems small businesses pay to solve: getting paid, follow-ups, hiring, compliance deadlines, messy data and debt. One payment, no subscription."
+		/>
+		<style>
+			.hero { text-align: center; padding: 2.4em 1em 1.2em; max-width: 680px; margin: 0 auto; }
+			.hero h1 { font-size: clamp(1.7em, 4vw, 2.5em); line-height: 1.2; margin: 0 0 0.4em; }
+			.hero p { color: rgb(var(--gray-dark)); line-height: 1.6; }
+			.buy { display: inline-block; padding: 0.9em 2em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.1em; text-decoration: none; }
+			.buy:hover { background: var(--accent-dark); color: #fff; }
+			.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 1.2em; max-width: 1050px; margin: 2em auto; padding: 0 1em; }
+			.card { border: 1px solid rgb(var(--gray-light)); border-radius: 14px; padding: 1.2em 1.3em; background: #fff; }
+			.card .tag { display: inline-block; font-size: 0.72em; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(var(--gray)); margin-bottom: 0.4em; }
+			.card h2 { font-size: 1.1em; margin: 0 0 0.4em; }
+			.card p { margin: 0; font-size: 0.92em; color: rgb(var(--gray-dark)); line-height: 1.55; }
+			.note { max-width: 620px; margin: 0 auto 2.5em; text-align: center; color: rgb(var(--gray-dark)); font-size: 0.9em; line-height: 1.6; }
+			.have { max-width: 420px; margin: 0 auto 3em; text-align: center; }
+			.have input { padding: 0.6em; border: 1px solid rgb(var(--gray-light)); border-radius: 6px; width: min(260px, 100%); }
+			.have button { padding: 0.6em 1.1em; border: 0; border-radius: 6px; background: rgb(var(--black)); color: #fff; cursor: pointer; }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="hero">
+				<p style="font-size:0.8em;letter-spacing:0.07em;text-transform:uppercase;color:rgb(var(--gray));margin:0 0 0.6em">Working tools, not templates</p>
+				<h1>Seven apps for the problems small businesses actually pay to fix</h1>
+				<p>Getting paid, chasing leads, hiring, deadlines, messy spreadsheets, debt. Open them in your browser, use them today. One payment of ${APPS_PRICE.replace(/\.00$/, "")}, no subscription. Your data stays in your own browser.</p>
+				{payEnabled
+					? <a class="buy" href="/apps/buy">Pay with PayPal: ${APPS_PRICE.replace(/\.00$/, "")}</a>
+					: <a class="buy" href={mail}>Email to buy: ${APPS_PRICE.replace(/\.00$/, "")}</a>}
+				<p class="note" style="margin-top:0.8em">{payEnabled ? "Secure PayPal checkout. You are unlocked the moment payment clears." : "You get an access code by email after payment."} {BUZZYFLY_CONFIG.guarantee}</p>
+			</section>
+
+			<section class="grid">
+				{APPS.map((a) => (
+					<div class="card">
+						<span class="tag">{a.problem}</span>
+						<h2>{a.name}</h2>
+						<p>{a.does}</p>
+					</div>
+				))}
+			</section>
+
+			<p class="note">Apps run in your browser and save to this device. Clearing your browser data removes what you entered, so use each app's export button for anything you want to keep.</p>
+
+			<form class="have" method="get" action="/apps/unlock">
+				<label for="code" style="display:block;margin-bottom:0.4em">Already bought? Enter your access code</label>
+				<input id="code" name="code" autocomplete="off" autocapitalize="characters" placeholder="BF-XXXX-XXXX-XXXX" />
+				<button type="submit">Unlock</button>
+			</form>
+		</main>
+		<Footer />
+	</body>
+</html>

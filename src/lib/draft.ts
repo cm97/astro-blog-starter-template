@@ -4,7 +4,7 @@ export async function draftReply(
 ): Promise<{ subject: string; body: string }> {
 	const facts =
 		input.kind === "domain"
-			? `They asked about the domain ${input.detail}. We have not registered it and this email must not say that we did. The only card payment available is the Buzzyfly Digital System for $49 at https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00 . Mention it as a separate product, not as the domain purchase.`
+			? `They asked about the domain ${input.detail}. We have not registered it and this email must not say that we did. The only card payment available is the Buzzyfly Digital System for $49 at https://buzzyfly.com/buy/buzzyfly-digital-system . Mention it as a separate product, not as the domain purchase.`
 			: `They asked to buy "${input.detail}" for ${input.price ?? "the listed price"}. Nothing has been charged. Ask them to reply so you can send payment details. Do not invent a card link.`;
 
 	const response = await fetch("https://api.x.ai/v1/chat/completions", {

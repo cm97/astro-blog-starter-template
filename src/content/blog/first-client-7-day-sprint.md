@@ -100,6 +100,6 @@ Landing the client is day 7. Keeping them is the next Monday. Without a reset an
 
 Get the Digital System — $49. One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day money-back guarantee — email us if it doesn't deliver.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)
 
-All five packs, one download: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
+All five packs, one download: [Complete Business Bundle — $97](/buy/complete-business-bundle)

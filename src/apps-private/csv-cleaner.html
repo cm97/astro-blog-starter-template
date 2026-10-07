@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CSV Cleaner | Buzzyfly</title>
+<meta name="description" content="Clean messy CSV files: trim, remove blanks and duplicates, fix casing. Runs in your browser.">
+<style>
+:root{--bg:#faf7ef;--card:#fff;--ink:#23201a;--muted:#6b6455;--line:#e2dccb;--accent:#e0a012;--accent-ink:#1d1606;--danger:#b3402f;--ok:#2f7d4f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.top{max-width:980px;margin:0 auto;padding:16px 16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.top a{color:var(--muted);text-decoration:none;font-size:.95rem}
+.sheet{max-width:980px;margin:14px auto 40px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:24px}
+h1{margin:0 0 4px;font-size:1.6rem}h2{font-size:1.1rem;margin:22px 0 8px}
+.sub{color:var(--muted);margin:0 0 14px}
+button,.btn{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 14px;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+label{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 3px}
+input,textarea,select{width:100%;font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:9px}
+.row{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th{text-align:left;font-size:.82rem;color:var(--muted);font-weight:600;border-bottom:2px solid var(--ink);padding:6px 4px}
+td{padding:7px 4px;border-bottom:1px solid var(--line);vertical-align:middle}
+.num{text-align:right}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0}
+.stat{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fffdf7}
+.stat b{display:block;font-size:1.35rem}.stat span{font-size:.8rem;color:var(--muted)}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.78rem;border:1px solid var(--line)}
+.bad{color:var(--danger);font-weight:600}.good{color:var(--ok);font-weight:600}
+.rm{border:none;background:none;color:var(--danger);font-size:1.2rem;padding:4px 8px}
+.scroll{overflow-x:auto}
+.note{color:var(--muted);font-size:.85rem}
+@media print{.top,.bar,.noprint{display:none}.sheet{border:none}}
+</style>
+</head>
+<body>
+<div class="top"><a href="/apps-pro">&larr; All Buzzyfly apps</a><span class="note">Your data stays in this browser.</span></div>
+<main class="sheet">
+
+<h1>CSV Cleaner</h1>
+<p class="sub">Paste or upload a messy CSV. Trim spaces, drop blank rows, remove duplicates, fix casing, then download the clean file.</p>
+<label for="file">Upload a .csv file</label><input id="file" type="file" accept=".csv,text/csv,text/plain">
+<label for="raw">Or paste CSV here</label><textarea id="raw" rows="7" placeholder="name,email&#10;Ann Lee , ANN@X.COM&#10;ann lee,ann@x.com"></textarea>
+<h2>Cleaning options</h2>
+<div class="row">
+  <div><label><input type="checkbox" id="trim" checked style="width:auto"> Trim and collapse spaces</label></div>
+  <div><label><input type="checkbox" id="blank" checked style="width:auto"> Remove blank rows</label></div>
+  <div><label><input type="checkbox" id="mail" checked style="width:auto"> Lowercase email columns</label></div>
+  <div><label for="case">Text case (all other columns)</label><select id="case"><option value="">Leave as is</option><option value="title">Title Case</option><option value="lower">lowercase</option><option value="upper">UPPERCASE</option></select></div>
+  <div><label for="dup">Remove duplicates by</label><select id="dup"><option value="">Do not remove</option><option value="*">Whole row</option></select></div>
+</div>
+<div class="bar"><button class="primary" id="go">Clean</button><button id="dl" disabled>Download cleaned CSV</button></div>
+<div id="stats" class="stats"></div>
+<div class="scroll" id="prev"></div>
+
+</main>
+<script>
+
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function parseCSV(t){
+  t=t.replace(/^\uFEFF/,'');
+  const out=[];let row=[],f='',q=false;
+  for(let i=0;i<t.length;i++){const c=t[i];
+    if(q){if(c==='"'){if(t[i+1]==='"'){f+='"';i++}else q=false}else f+=c}
+    else if(c==='"')q=true;
+    else if(c===','){row.push(f);f=''}
+    else if(c==='\n'||c==='\r'){if(c==='\r'&&t[i+1]==='\n')i++;row.push(f);out.push(row);row=[];f=''}
+    else f+=c}
+  if(f!==''||row.length){row.push(f);out.push(row)}
+  return out;
+}
+function toCSV(rows){const q=v=>/[",\n\r]/.test(v)?'"'+v.replace(/"/g,'""')+'"':v;return rows.map(r=>r.map(q).join(',')).join('\r\n')+'\r\n'}
+const title=s=>s.toLowerCase().replace(/(^|[\s\-'(])([a-z\u00c0-\u024f])/g,(m,a,b)=>a+b.toUpperCase());
+let cleaned=null,header=[];
+function headerOptions(){
+  const rows=parseCSV($('raw').value);header=rows[0]||[];
+  const sel=$('dup'),cur=sel.value;
+  sel.innerHTML='<option value="">Do not remove</option><option value="*">Whole row</option>'+header.map((h,i)=>`<option value="${i}">Column: ${esc(h||('#'+(i+1)))}</option>`).join('');
+  if([...sel.options].some(o=>o.value===cur))sel.value=cur;
+}
+$('raw').addEventListener('input',headerOptions);
+$('file').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{$('raw').value=r.result;headerOptions()};r.readAsText(f)});
+$('go').onclick=()=>{
+  let rows=parseCSV($('raw').value);if(!rows.length){$('stats').innerHTML='<p class="bad">Paste or upload a CSV first.</p>';return}
+  const head=rows[0],data=rows.slice(1),n0=data.length;
+  const mailCols=head.map((h,i)=>/e-?mail/i.test(h)?i:-1).filter(i=>i>=0);
+  let r=data.map(row=>row.map((v,i)=>{
+    if($('trim').checked)v=v.replace(/\s+/g,' ').trim();
+    if($('mail').checked&&mailCols.includes(i))v=v.toLowerCase();
+    else{const c=$('case').value;if(c==='title')v=title(v);else if(c==='lower')v=v.toLowerCase();else if(c==='upper')v=v.toUpperCase()}
+    return v}));
+  let blank=0,dupes=0;
+  if($('blank').checked){const b=r.length;r=r.filter(row=>row.some(v=>v.trim()!==''));blank=b-r.length}
+  const k=$('dup').value;
+  if(k!==''){const seen=new Set(),b=r.length;
+    r=r.filter(row=>{const key=(k==='*'?row.join('\u0001'):(row[+k]||'')).toLowerCase();if(k!=='*'&&key==='')return true;if(seen.has(key))return false;seen.add(key);return true});dupes=b-r.length}
+  cleaned=[head,...r];$('dl').disabled=false;
+  $('stats').innerHTML=`<div class="stat"><b>${n0}</b><span>Rows in</span></div><div class="stat"><b>${r.length}</b><span>Rows out</span></div><div class="stat"><b>${blank}</b><span>Blank rows removed</span></div><div class="stat"><b>${dupes}</b><span>Duplicates removed</span></div>`;
+  $('prev').innerHTML='<table><thead><tr>'+head.map(h=>`<th>${esc(h)}</th>`).join('')+'</tr></thead><tbody>'+r.slice(0,50).map(row=>'<tr>'+head.map((_,i)=>`<td>${esc(row[i])}</td>`).join('')+'</tr>').join('')+'</tbody></table>'+(r.length>50?`<p class="note">Showing the first 50 of ${r.length} rows. The download has all of them.</p>`:'');
+};
+$('dl').onclick=()=>{if(!cleaned)return;const b=new Blob([toCSV(cleaned)],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='cleaned.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+
+</script>
+</body>
+</html>

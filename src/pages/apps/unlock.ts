@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { paypalConfigured } from "../../lib/paypal";
 import { APPS_COOKIE, APPS_TOKEN_TTL_SECONDS, cookieValueFor, hasAppsAccess, lockedPage } from "../../lib/appsAccess";
 
 export const prerender = false;
@@ -9,7 +10,7 @@ export const prerender = false;
  */
 export const GET: APIRoute = async ({ url, locals, cookies, redirect }) => {
 	const raw = url.searchParams.get("token") ?? url.searchParams.get("code");
-	if (!raw || !(await hasAppsAccess(locals.runtime.env, raw))) return lockedPage();
+	if (!raw || !(await hasAppsAccess(locals.runtime.env, raw))) return lockedPage(undefined, { payEnabled: paypalConfigured(locals.runtime.env) });
 
 	cookies.set(APPS_COOKIE, cookieValueFor(raw), {
 		path: "/",
@@ -18,5 +19,5 @@ export const GET: APIRoute = async ({ url, locals, cookies, redirect }) => {
 		sameSite: "lax",
 		maxAge: APPS_TOKEN_TTL_SECONDS,
 	});
-	return redirect("/apps/open/invoice-maker", 302);
+	return redirect("/apps-pro", 302);
 };
