@@ -66,29 +66,15 @@ export const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa
 export const AUTOMATIC_DELIVERY_ENABLED = true;
 
 /**
- * Resolves the buy action for a product. Returns the live Stripe checkout when
- * one is configured, and a real, working email order path when it is not — so
- * the site never renders a dead checkout button.
+ * Resolves the buy action for a product. Stripe charges are disabled on the
+ * account, so every buy button goes to the PayPal checkout at /checkout/buy.
  */
 export function getOrderAction(productTitle: string = BUZZYFLY_CONFIG.defaultProductTitle) {
-	if (STRIPE_CHECKOUT_URL) {
-		return {
-			live: true,
-			href: STRIPE_CHECKOUT_URL,
-			label: "Buy now",
-			external: true,
-		};
-	}
-
-	const subject = encodeURIComponent(`Order: ${productTitle}`);
-	const body = encodeURIComponent(
-		`Hi,\n\nI'd like to order the ${productTitle}.\n\nPlease send payment details and the download.\n\nThanks,\n`,
-	);
-
+	const product = ALL_PRODUCTS.find((p) => p.title === productTitle);
 	return {
-		live: false,
-		href: `mailto:${BUZZYFLY_CONFIG.orderEmail}?subject=${subject}&body=${body}`,
-		label: "Email to order",
+		live: true,
+		href: checkoutUrl(product?.id ?? "buzzyfly-digital-system"),
+		label: "Buy now",
 		external: false,
 	};
 }
@@ -140,6 +126,11 @@ export const UPSELL_MAP: Record<string, string | null> = {
 	"complete-business-bundle": null,
 };
 
+/** Absolute PayPal checkout link for a product (works on the site and in emails). */
+export function checkoutUrl(itemId: string): string {
+	return `${BUZZYFLY_CONFIG.siteUrl}/checkout/buy?product=${encodeURIComponent(itemId)}`;
+}
+
 export const ALL_PRODUCTS = [
 	{
 		id: "weekly-reset-checklist",
@@ -147,7 +138,8 @@ export const ALL_PRODUCTS = [
 		price: "$15",
 		description: "The 20-minute Monday routine that keeps your week on track. Clear inboxes, set one priority, plan your week — same way every time.",
 		features: ["20-minute weekly reset checklist", "Priority-setting template", "Thursday mid-week check-in", "Inbox-clearing routine"],
-		stripeUrl: "https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05",
+		// Stripe link (charges disabled on the account): https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05
+		buyUrl: checkoutUrl("weekly-reset-checklist"),
 		badge: null,
 	},
 	{
@@ -156,7 +148,8 @@ export const ALL_PRODUCTS = [
 		price: "$19",
 		description: "5 ready-to-send follow-up emails. Fill in a name, hit send — no staring at a blank screen.",
 		features: ["Proposal follow-up (5–7 days)", "Mid-project check-in", "Re-engagement for quiet leads", "Referral request", "End-of-project wrap-up"],
-		stripeUrl: "https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06",
+		// Stripe link (charges disabled on the account): https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06
+		buyUrl: checkoutUrl("follow-up-email-templates"),
 		badge: null,
 	},
 	{
@@ -165,7 +158,8 @@ export const ALL_PRODUCTS = [
 		price: "$29",
 		description: "Everything to onboard a new client in 20 minutes — welcome email, intake form, kickoff agenda, internal notes format.",
 		features: ["Welcome email template with fill-in variables", "Intake form questions", "Kickoff meeting agenda", "Internal client notes format", "48-hour follow-up reminder format"],
-		stripeUrl: "https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07",
+		// Stripe link (charges disabled on the account): https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07
+		buyUrl: checkoutUrl("client-onboarding-kit"),
 		badge: null,
 	},
 	{
@@ -174,7 +168,8 @@ export const ALL_PRODUCTS = [
 		price: "$49",
 		description: "The complete operating framework — onboarding, weekly planning, and follow-up workflows. The system that holds everything together.",
 		features: ["Complete onboarding workflow", "20-minute weekly reset", "Follow-up system with templates", "Lifetime access + future updates"],
-		stripeUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00",
+		// Stripe link (charges disabled on the account): https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
+		buyUrl: checkoutUrl("buzzyfly-digital-system"),
 		badge: "Most popular",
 	},
 	{
@@ -183,7 +178,8 @@ export const ALL_PRODUCTS = [
 		price: "$97",
 		description: "Every Buzzyfly product in one download. The Digital System + Onboarding Kit + Follow-Up Templates + Weekly Checklist. Everything.",
 		features: ["Everything in the Digital System", "Client Onboarding Kit", "Follow-Up Email Templates", "Weekly Reset Checklist", "All future product updates"],
-		stripeUrl: "https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08",
+		// Stripe link (charges disabled on the account): https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
+		buyUrl: checkoutUrl("complete-business-bundle"),
 		badge: "Best value",
 	},
 ];

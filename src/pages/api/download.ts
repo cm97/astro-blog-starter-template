@@ -1,87 +1,75 @@
 import type { APIRoute } from "astro";
-import { resolveProductFile, verifyDownloadToken, checkDownloadRateLimit, logDownloadEvent } from "../../lib/fulfillment";
+import { resolveProductFile, checkDownloadRateLimit, logDownloadEvent } from "../../lib/fulfillment";
+import {
+	PRODUCT_TOKEN_TTL_SECONDS,
+	isProduct,
+	productCookieName,
+	productLockedPage,
+	verifyProductToken,
+} from "../../lib/productAccess";
+import { paypalConfigured } from "../../lib/paypal";
 
 export const prerender = false;
 
 /**
  * Secure Buzzyfly digital asset delivery. Streams a purchased file straight
- * out of the private `MY_PRODUCTS` R2 bucket. The bucket itself is never made
- * public — every download is authorized per request.
+ * out of the private `MY_PRODUCTS` R2 bucket (or the D1 `product_files`
+ * fallback). Nothing is ever sent without a valid purchase token.
  *
- * Two kinds of token are accepted:
+ *   /api/download?token=<t>     link from the order email or PayPal return.
+ *                               Verified, stored in an HttpOnly cookie for that
+ *                               product, then the file is served.
+ *   /api/download?product=<id>  re-download using that cookie, re-verified on
+ *                               every request.
  *
- *  1. A random token stored in the D1 `download_tokens` table. These are issued
- *     by the out-of-band fulfiller (the hourly "Buzzyfly order watch" task,
- *     which polls Stripe directly). This path needs NO shared secret, which is
- *     why it exists: it lets a paid order be delivered even when the Worker
- *     secrets have not been configured. It is also revocable — delete the row
- *     and the link dies immediately.
- *
- *  2. An HMAC-signed token minted by `/api/webhook` using
- *     `DOWNLOAD_TOKEN_SECRET`. This is the instant path and takes over
- *     automatically once that secret is set in production.
- *
- * Checked in that order. Both resolve to the same product lookup and stream.
+ * Tokens are accepted only when they come from a verified payment: a revocable
+ * D1 `download_tokens` row (order fulfiller / admin resend) or an HMAC token
+ * signed with `DOWNLOAD_TOKEN_SECRET` (Stripe webhook, PayPal capture). Each
+ * token is bound to one product. Without one the response is 402.
  *
  * Rate limited per IP to prevent abuse at scale.
  */
-export const GET: APIRoute = async ({ request, locals }) => {
+export const GET: APIRoute = async ({ request, locals, url, cookies }) => {
 	const env = locals.runtime.env;
-	const url = new URL(request.url);
-	const token = url.searchParams.get("token");
 	const ip = request.headers.get("cf-connecting-ip") ?? request.headers.get("x-forwarded-for") ?? "unknown";
+	const queryToken = url.searchParams.get("token");
+	const requested = url.searchParams.get("product");
+	const product = isProduct(requested) ? requested : null;
+	const payEnabled = paypalConfigured(env);
 
-	if (!token) return new Response("Missing download token", { status: 400 });
+	if (!queryToken && !product) return productLockedPage(null, { payEnabled });
 
 	// Rate limit to protect the bucket at scale.
 	if (!checkDownloadRateLimit(ip)) {
 		return new Response("Too many download attempts. Slow down.", { status: 429 });
 	}
 
-	let claims: { orderId: string; itemId: string } | null = null;
+	const token = queryToken ?? (product ? cookies.get(productCookieName(product))?.value : undefined);
+	const claims = await verifyProductToken(env, token);
+	if (!claims || (product && claims.itemId !== product)) {
+		return productLockedPage(product ?? claims?.itemId ?? null, { payEnabled });
+	}
 
-	// Path 1 — D1-backed token.
-	if (env.DB) {
+	if (queryToken) {
+		cookies.set(productCookieName(claims.itemId), queryToken, {
+			path: "/api/download",
+			httpOnly: true,
+			secure: url.protocol === "https:",
+			sameSite: "lax",
+			maxAge: PRODUCT_TOKEN_TTL_SECONDS,
+		});
+	}
+
+	if (claims.stored && env.DB) {
+		// Best-effort usage counter — useful for spotting a shared link.
 		try {
-			const row = await env.DB.prepare(
-				`SELECT order_id, item_id, expires_at FROM download_tokens WHERE token = ?`,
-			)
+			await env.DB.prepare(`UPDATE download_tokens SET used_count = used_count + 1 WHERE token = ?`)
 				.bind(token)
-				.first<{ order_id: string; item_id: string; expires_at: number }>();
-
-			if (row) {
-				if (Number(row.expires_at) < Date.now()) {
-					return new Response(
-						"This download link has expired. Reply to your order email and a fresh one will be sent.",
-						{ status: 401 },
-					);
-				}
-
-				claims = { orderId: String(row.order_id), itemId: String(row.item_id) };
-
-				// Best-effort usage counter — useful for spotting a shared link.
-				// Never fail the download over it.
-				try {
-					await env.DB.prepare(
-						`UPDATE download_tokens SET used_count = used_count + 1 WHERE token = ?`,
-					)
-						.bind(token)
-						.run();
-				} catch (error) {
-					console.error("Buzzyfly download: could not increment used_count", error);
-				}
-			}
+				.run();
 		} catch (error) {
-			console.error("Buzzyfly download: D1 token lookup failed", error);
+			console.error("Buzzyfly download: could not increment used_count", error);
 		}
 	}
-
-	// Path 2 — HMAC-signed token from /api/webhook.
-	if (!claims && env.DOWNLOAD_TOKEN_SECRET) {
-		claims = await verifyDownloadToken(token, env.DOWNLOAD_TOKEN_SECRET);
-	}
-
-	if (!claims) return new Response("Invalid or expired download link", { status: 401 });
 
 	const productFile = resolveProductFile(claims.itemId);
 	if (!productFile) return new Response("Product not found", { status: 404 });
