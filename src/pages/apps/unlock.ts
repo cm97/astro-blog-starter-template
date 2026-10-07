@@ -19,5 +19,5 @@ export const GET: APIRoute = async ({ url, locals, cookies, redirect }) => {
 		sameSite: "lax",
 		maxAge: APPS_TOKEN_TTL_SECONDS,
 	});
-	return redirect("/apps/open/invoice-maker", 302);
+	return redirect("/apps-pro", 302);
 };

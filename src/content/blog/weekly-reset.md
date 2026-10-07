@@ -152,4 +152,4 @@ One-time. $49. Instant download. 30-day money-back guarantee — email us if it 
 
 If you already know you want the weekly reset plus the onboarding kit and the follow-up templates in one zip, the Complete Business Bundle is $97. Start with the $49 system unless you want every file today.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)

@@ -50,7 +50,7 @@ function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string
       <strong>${escapeHtml(upsellProduct.title)}</strong> next — it's the logical next piece.
     </p>
     <p style="margin:0">
-      <a href="${upsellProduct.buyUrl}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
+      <a href="${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
         Get ${escapeHtml(upsellProduct.title)} — ${upsellProduct.price}
       </a>
     </p>`
@@ -93,7 +93,7 @@ function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string
 			"---",
 			"",
 			`Customers who bought ${productName} often grab the ${upsellProduct.title} next.`,
-			`Get it here (${upsellProduct.price}): ${upsellProduct.buyUrl}`,
+			`Get it here (${upsellProduct.price}): ${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}`,
 		);
 	}
 
@@ -143,7 +143,7 @@ export async function sendFollowUpEmail(
       It's what most people grab next.
     </p>
     <p style="margin:0">
-      <a href="${upsellProduct.buyUrl}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
+      <a href="${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
         Get ${escapeHtml(upsellProduct.title)} — ${upsellProduct.price}
       </a>
     </p>`
@@ -179,7 +179,7 @@ export async function sendFollowUpEmail(
 		lines.push(
 			"",
 			`If it's working, the next piece is the ${upsellProduct.title} (${upsellProduct.price}):`,
-			upsellProduct.buyUrl,
+			`${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}`,
 		);
 	}
 

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hiring Scorecard | Buzzyfly</title>
+<meta name="description" content="Score job candidates on weighted criteria and rank them fairly. Runs in your browser.">
+<style>
+:root{--bg:#faf7ef;--card:#fff;--ink:#23201a;--muted:#6b6455;--line:#e2dccb;--accent:#e0a012;--accent-ink:#1d1606;--danger:#b3402f;--ok:#2f7d4f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.top{max-width:980px;margin:0 auto;padding:16px 16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.top a{color:var(--muted);text-decoration:none;font-size:.95rem}
+.sheet{max-width:980px;margin:14px auto 40px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:24px}
+h1{margin:0 0 4px;font-size:1.6rem}h2{font-size:1.1rem;margin:22px 0 8px}
+.sub{color:var(--muted);margin:0 0 14px}
+button,.btn{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 14px;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+label{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 3px}
+input,textarea,select{width:100%;font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:9px}
+.row{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th{text-align:left;font-size:.82rem;color:var(--muted);font-weight:600;border-bottom:2px solid var(--ink);padding:6px 4px}
+td{padding:7px 4px;border-bottom:1px solid var(--line);vertical-align:middle}
+.num{text-align:right}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0}
+.stat{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fffdf7}
+.stat b{display:block;font-size:1.35rem}.stat span{font-size:.8rem;color:var(--muted)}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.78rem;border:1px solid var(--line)}
+.bad{color:var(--danger);font-weight:600}.good{color:var(--ok);font-weight:600}
+.rm{border:none;background:none;color:var(--danger);font-size:1.2rem;padding:4px 8px}
+.scroll{overflow-x:auto}
+.note{color:var(--muted);font-size:.85rem}
+@media print{.top,.bar,.noprint{display:none}.sheet{border:none}}
+</style>
+</head>
+<body>
+<div class="top"><a href="/apps-pro">&larr; All Buzzyfly apps</a><span class="note">Your data stays in this browser.</span></div>
+<main class="sheet">
+
+<h1>Hiring Scorecard</h1>
+<p class="sub">Score every candidate on the same weighted criteria so the decision is made on evidence, not on who interviewed last.</p>
+<h2>Criteria</h2>
+<div class="scroll"><table><thead><tr><th>Criterion</th><th class="num">Weight (1-5)</th><th></th></tr></thead><tbody id="crit"></tbody></table></div>
+<div class="bar"><button id="addc">+ Add criterion</button></div>
+<h2>Candidates</h2>
+<div class="row"><div><label for="cn">Candidate name</label><input id="cn"></div><div style="align-self:end"><button class="primary" id="addp">Add candidate</button></div></div>
+<div class="scroll"><table id="grid"></table></div>
+<h2>Ranking</h2>
+<div id="rank"></div>
+<div class="bar"><button id="csv">Export CSV</button><button id="reset">Reset all</button></div>
+
+</main>
+<script>
+
+const KEY='bf_hire_v1',$=id=>document.getElementById(id);
+let S={c:[{n:'Relevant experience',w:5},{n:'Communication',w:4},{n:'Reliability',w:5},{n:'Culture add',w:3}],p:[]};
+try{const x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&x.c&&x.p)S=x}catch(e){}
+const save=()=>localStorage.setItem(KEY,JSON.stringify(S));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+function total(p){let num=0,den=0;S.c.forEach((c,i)=>{const s=+p.s[i]||0;if(s>0){num+=s*c.w;den+=5*c.w}});const full=S.c.reduce((a,c)=>a+5*c.w,0);return {pct:full?Math.round(num/full*100):0,scored:den>0}}
+function render(){
+  $('crit').innerHTML=S.c.map((c,i)=>`<tr><td><input data-ci="${i}" data-k="n" value="${esc(c.n)}" aria-label="Criterion"></td><td><input data-ci="${i}" data-k="w" type="number" min="1" max="5" value="${c.w}" aria-label="Weight" style="width:80px"></td><td><button class="rm" data-rc="${i}" aria-label="Remove criterion">&times;</button></td></tr>`).join('');
+  $('grid').innerHTML=S.p.length?`<thead><tr><th>Candidate</th>${S.c.map(c=>`<th class="num">${esc(c.n)}</th>`).join('')}<th>Notes</th><th></th></tr></thead><tbody>`+S.p.map((p,j)=>`<tr><td><b>${esc(p.n)}</b></td>${S.c.map((c,i)=>`<td class="num"><select data-pj="${j}" data-pi="${i}" aria-label="${esc(p.n)} ${esc(c.n)}"><option value="">-</option>${[1,2,3,4,5].map(v=>`<option${+p.s[i]===v?' selected':''}>${v}</option>`).join('')}</select></td>`).join('')}<td><input data-pj="${j}" data-note="1" value="${esc(p.t||'')}" aria-label="Notes"></td><td><button class="rm" data-rp="${j}" aria-label="Remove candidate">&times;</button></td></tr>`).join('')+'</tbody>':'<tbody><tr><td class="note">Add your first candidate above.</td></tr></tbody>';
+  const r=S.p.map(p=>({p,t:total(p)})).sort((a,b)=>b.t.pct-a.t.pct);
+  $('rank').innerHTML=r.length?'<table><thead><tr><th>#</th><th>Candidate</th><th class="num">Weighted score</th></tr></thead><tbody>'+r.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.p.n)}</td><td class="num"><b>${x.t.scored?x.t.pct+'%':'not scored'}</b></td></tr>`).join('')+'</tbody></table><p class="note">Score is out of 100% across all criteria. A criterion left blank counts as zero, so score everyone on everything before comparing.</p>':'<p class="note">No candidates yet.</p>';
+}
+$('crit').addEventListener('input',e=>{const t=e.target,i=t.dataset.ci;if(i==null)return;if(t.dataset.k==='w'){S.c[+i].w=Math.min(5,Math.max(1,parseInt(t.value)||1))}else S.c[+i].n=t.value;save();const a=document.activeElement;renderRank()});
+function renderRank(){const r=S.p.map(p=>({p,t:total(p)})).sort((a,b)=>b.t.pct-a.t.pct);
+  $('rank').innerHTML=r.length?'<table><thead><tr><th>#</th><th>Candidate</th><th class="num">Weighted score</th></tr></thead><tbody>'+r.map((x,i)=>`<tr><td>${i+1}</td><td>${esc(x.p.n)}</td><td class="num"><b>${x.t.scored?x.t.pct+'%':'not scored'}</b></td></tr>`).join('')+'</tbody></table><p class="note">Score is out of 100% across all criteria. A criterion left blank counts as zero, so score everyone on everything before comparing.</p>':'<p class="note">No candidates yet.</p>'}
+$('crit').addEventListener('click',e=>{const i=e.target.dataset.rc;if(i==null)return;S.c.splice(+i,1);S.p.forEach(p=>p.s.splice(+i,1));save();render()});
+$('addc').onclick=()=>{S.c.push({n:'New criterion',w:3});S.p.forEach(p=>p.s.push(''));save();render()};
+$('addp').onclick=()=>{const n=$('cn').value.trim();if(!n){$('cn').focus();return}S.p.push({n,s:S.c.map(()=>''),t:''});$('cn').value='';save();render()};
+$('grid').addEventListener('change',e=>{const t=e.target;if(t.dataset.pi==null)return;S.p[+t.dataset.pj].s[+t.dataset.pi]=t.value;save();renderRank()});
+$('grid').addEventListener('input',e=>{const t=e.target;if(t.dataset.note){S.p[+t.dataset.pj].t=t.value;save()}});
+$('grid').addEventListener('click',e=>{const j=e.target.dataset.rp;if(j==null||!confirm('Remove this candidate?'))return;S.p.splice(+j,1);save();render()});
+$('reset').onclick=()=>{if(confirm('Clear all criteria and candidates?')){localStorage.removeItem(KEY);S={c:[{n:'Relevant experience',w:5},{n:'Communication',w:4},{n:'Reliability',w:5},{n:'Culture add',w:3}],p:[]};render()}};
+$('csv').onclick=()=>{const q=v=>'"'+String(v??'').replace(/"/g,'""')+'"';
+  const rows=[['Candidate',...S.c.map(c=>c.n+' (w'+c.w+')'),'Weighted %','Notes'],...S.p.map(p=>[p.n,...S.c.map((c,i)=>p.s[i]),total(p).pct,p.t])];
+  const b=new Blob([rows.map(r=>r.map(q).join(',')).join('\n')],{type:'text/csv'}),a=document.createElement('a');a.href=URL.createObjectURL(b);a.download='scorecard.csv';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+render();
+
+</script>
+</body>
+</html>

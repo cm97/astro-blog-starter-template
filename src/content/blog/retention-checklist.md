@@ -7,7 +7,7 @@ category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
+featuredProductUrl: "/buy/buzzyfly-digital-system"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
@@ -116,4 +116,4 @@ The sequence above is the retention checklist inside the Digital System, next to
 
 One-time. $49. Instant download. 30-day money-back guarantee — email us if it doesn't deliver.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)

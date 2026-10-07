@@ -13,7 +13,7 @@ export const APPS_ITEM_IDS = new Set<string>(["apps-pro"]);
 export const APPS_COOKIE = "bf_apps";
 export const APPS_TOKEN_TTL_SECONDS = 60 * 60 * 24 * 365; // 1 year
 /** Where the locked page sends people to buy. Swap for the Stripe Payment Link once it exists. */
-export const APPS_BUY_URL = "/products";
+export const APPS_BUY_URL = "/apps-pro";
 /** One-time price of Apps Pro (PayPal checkout at /apps/buy). Change here to reprice. */
 export const APPS_PRICE = "29.00";
 export const APPS_CURRENCY = "USD";
@@ -113,7 +113,7 @@ export function lockedPage(appName?: string, opts: { payEnabled?: boolean } = {}
 	const html = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Buzzyfly Apps Pro</title>
 <style>body{margin:0;background:#faf7ef;color:#23201a;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}main{max-width:560px;margin:0 auto;padding:48px 18px}h1{font-size:1.6rem;margin:0 0 8px}p{color:#6b6455}a.btn{display:inline-block;background:#e0a012;color:#1d1606;font-weight:600;padding:12px 18px;border-radius:6px;text-decoration:none;margin-top:12px}a.btn:focus-visible{outline:3px solid #23201a;outline-offset:2px}small{display:block;margin-top:18px}</style></head>
 <body><main><h1>${label.charAt(0).toUpperCase() + label.slice(1)} is part of Apps Pro</h1>
-<p>Buy Apps Pro to unlock the Invoice Maker and Content Calendar. Your purchase email contains a personal unlock link that works on any device you open it on.</p>
+<p>Buy Apps Pro once to unlock all seven Buzzyfly business apps. Your purchase email contains a personal unlock link that works on any device you open it on.</p>
 ${opts.payEnabled ? `<a class="btn" href="/apps/buy">Pay with PayPal \u2014 $${APPS_PRICE}</a>` : `<a class="btn" href="${APPS_BUY_URL}">See Apps Pro</a>`}
 <form method="get" action="/apps/unlock" style="margin-top:22px"><label for="code" style="display:block;font-size:.9rem;color:#6b6455;margin-bottom:6px">Have an access code?</label><input id="code" name="code" autocomplete="off" autocapitalize="characters" placeholder="BF-XXXX-XXXX-XXXX" style="font:inherit;padding:10px;border:1px solid #e2dccb;border-radius:6px;width:min(280px,100%)"> <button type="submit" style="font:inherit;padding:10px 16px;border:0;border-radius:6px;background:#23201a;color:#fff;cursor:pointer">Unlock</button></form><small>Already bought? Open the unlock link from your order email.</small></main></body></html>`;
 	return new Response(html, {

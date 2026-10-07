@@ -1,13 +1,12 @@
 import type { APIRoute } from "astro";
 import { resolveProductFile, checkDownloadRateLimit, logDownloadEvent } from "../../lib/fulfillment";
 import {
-	PRODUCT_TOKEN_TTL_SECONDS,
+	PRODUCT_COOKIE_MAX_AGE_SECONDS,
 	isProduct,
 	productCookieName,
 	productLockedPage,
 	verifyProductToken,
 } from "../../lib/productAccess";
-import { paypalConfigured } from "../../lib/paypal";
 
 export const prerender = false;
 
@@ -24,7 +23,7 @@ export const prerender = false;
  *
  * Tokens are accepted only when they come from a verified payment: a revocable
  * D1 `download_tokens` row (order fulfiller / admin resend) or an HMAC token
- * signed with `DOWNLOAD_TOKEN_SECRET` (Stripe webhook, PayPal capture). Each
+ * signed with `DOWNLOAD_TOKEN_SECRET` (Stripe webhook, /buy/paypal-return). Each
  * token is bound to one product. Without one the response is 402.
  *
  * Rate limited per IP to prevent abuse at scale.
@@ -35,9 +34,8 @@ export const GET: APIRoute = async ({ request, locals, url, cookies }) => {
 	const queryToken = url.searchParams.get("token");
 	const requested = url.searchParams.get("product");
 	const product = isProduct(requested) ? requested : null;
-	const payEnabled = paypalConfigured(env);
 
-	if (!queryToken && !product) return productLockedPage(null, { payEnabled });
+	if (!queryToken && !product) return productLockedPage(null);
 
 	// Rate limit to protect the bucket at scale.
 	if (!checkDownloadRateLimit(ip)) {
@@ -47,7 +45,7 @@ export const GET: APIRoute = async ({ request, locals, url, cookies }) => {
 	const token = queryToken ?? (product ? cookies.get(productCookieName(product))?.value : undefined);
 	const claims = await verifyProductToken(env, token);
 	if (!claims || (product && claims.itemId !== product)) {
-		return productLockedPage(product ?? claims?.itemId ?? null, { payEnabled });
+		return productLockedPage(product ?? claims?.itemId ?? null);
 	}
 
 	if (queryToken) {
@@ -56,7 +54,7 @@ export const GET: APIRoute = async ({ request, locals, url, cookies }) => {
 			httpOnly: true,
 			secure: url.protocol === "https:",
 			sameSite: "lax",
-			maxAge: PRODUCT_TOKEN_TTL_SECONDS,
+			maxAge: PRODUCT_COOKIE_MAX_AGE_SECONDS,
 		});
 	}
 

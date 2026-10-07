@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Compliance Deadline Tracker | Buzzyfly</title>
+<meta name="description" content="Track tax, license, insurance and filing deadlines with recurring dates and calendar export. Runs in your browser.">
+<style>
+:root{--bg:#faf7ef;--card:#fff;--ink:#23201a;--muted:#6b6455;--line:#e2dccb;--accent:#e0a012;--accent-ink:#1d1606;--danger:#b3402f;--ok:#2f7d4f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.top{max-width:980px;margin:0 auto;padding:16px 16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.top a{color:var(--muted);text-decoration:none;font-size:.95rem}
+.sheet{max-width:980px;margin:14px auto 40px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:24px}
+h1{margin:0 0 4px;font-size:1.6rem}h2{font-size:1.1rem;margin:22px 0 8px}
+.sub{color:var(--muted);margin:0 0 14px}
+button,.btn{font:inherit;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 14px;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-block}
+button.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+label{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 3px}
+input,textarea,select{width:100%;font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:9px}
+.row{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));align-items:end}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+table{width:100%;border-collapse:collapse;margin-top:10px}
+th{text-align:left;font-size:.82rem;color:var(--muted);font-weight:600;border-bottom:2px solid var(--ink);padding:6px 4px}
+td{padding:7px 4px;border-bottom:1px solid var(--line);vertical-align:middle}
+.num{text-align:right}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:10px;margin:14px 0}
+.stat{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#fffdf7}
+.stat b{display:block;font-size:1.35rem}.stat span{font-size:.8rem;color:var(--muted)}
+.tag{display:inline-block;padding:2px 8px;border-radius:99px;font-size:.78rem;border:1px solid var(--line)}
+.bad{color:var(--danger);font-weight:600}.good{color:var(--ok);font-weight:600}
+.rm{border:none;background:none;color:var(--danger);font-size:1.2rem;padding:4px 8px}
+.scroll{overflow-x:auto}
+.note{color:var(--muted);font-size:.85rem}
+@media print{.top,.bar,.noprint{display:none}.sheet{border:none}}
+</style>
+</head>
+<body>
+<div class="top"><a href="/apps-pro">&larr; All Buzzyfly apps</a><span class="note">Your data stays in this browser.</span></div>
+<main class="sheet">
+
+<h1>Compliance Deadline Tracker</h1>
+<p class="sub">Taxes, licenses, insurance, filings. Add each deadline once; recurring ones roll forward when you mark them done.</p>
+<div class="stats" id="stats"></div>
+<div class="row">
+  <div><label for="n">Deadline</label><input id="n" placeholder="Business license renewal"></div>
+  <div><label for="k">Category</label><select id="k"><option>Tax</option><option>License</option><option>Insurance</option><option>Filing</option><option>Contract</option><option>Other</option></select></div>
+  <div><label for="d">Due date</label><input id="d" type="date"></div>
+  <div><label for="r">Repeats</label><select id="r"><option value="0">No</option><option value="1">Monthly</option><option value="3">Quarterly</option><option value="12">Yearly</option></select></div>
+</div>
+<label for="t">Notes (where to file, account number, who handles it)</label><input id="t">
+<div class="bar"><button class="primary" id="add">Add deadline</button><button id="seed">Add common US examples</button><button id="ics">Export calendar (.ics)</button></div>
+<p class="note">The examples use typical federal dates for a calendar-year business. Dates, fees and rules vary by state and entity type, so confirm each one with your accountant or the agency before relying on it.</p>
+<div class="scroll"><table><thead><tr><th>Deadline</th><th>Category</th><th>Due</th><th>Status</th><th>Notes</th><th></th></tr></thead><tbody id="rows"></tbody></table></div>
+
+</main>
+<script>
+
+const KEY='bf_deadlines_v1',$=id=>document.getElementById(id);
+let L=[];try{L=JSON.parse(localStorage.getItem(KEY)||'[]')}catch(e){L=[]}
+const save=()=>localStorage.setItem(KEY,JSON.stringify(L));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const today=()=>{const t=new Date();return new Date(t.getFullYear(),t.getMonth(),t.getDate())};
+const parse=s=>{const [y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const iso=d=>d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+const left=l=>Math.round((parse(l.d)-today())/864e5);
+function addMonths(s,n){const d=parse(s),day=d.getDate();d.setDate(1);d.setMonth(d.getMonth()+n);const last=new Date(d.getFullYear(),d.getMonth()+1,0).getDate();d.setDate(Math.min(day,last));return iso(d)}
+function render(){
+  const over=L.filter(l=>left(l)<0).length,soon=L.filter(l=>left(l)>=0&&left(l)<=30).length;
+  $('stats').innerHTML=`<div class="stat"><b>${L.length}</b><span>Tracked</span></div><div class="stat"><b class="${over?'bad':''}">${over}</b><span>Overdue</span></div><div class="stat"><b>${soon}</b><span>Due in 30 days</span></div>`;
+  const list=L.map((l,i)=>({l,i})).sort((a,b)=>left(a.l)-left(b.l));
+  $('rows').innerHTML=list.map(({l,i})=>{const n=left(l);
+    const st=n<0?`<span class="bad">${-n}d overdue</span>`:n===0?'<span class="bad">Due today</span>':n<=14?`<span class="bad">${n}d left</span>`:n<=30?`${n}d left`:`<span class="good">${n}d left</span>`;
+    return `<tr><td><b>${esc(l.n)}</b>${+l.r?`<br><span class="note">Repeats every ${+l.r===1?'month':+l.r===3?'quarter':'year'}</span>`:''}</td><td><span class="tag">${esc(l.k)}</span></td><td>${esc(l.d)}</td><td>${st}</td><td>${esc(l.t)}</td>
+    <td style="white-space:nowrap"><button data-done="${i}">${+l.r?'Done, roll forward':'Done'}</button><button class="rm" data-rm="${i}" aria-label="Delete">&times;</button></td></tr>`}).join('')||'<tr><td colspan="6" class="note">No deadlines yet. Add one above or load the examples.</td></tr>';
+}
+$('add').onclick=()=>{const n=$('n').value.trim(),d=$('d').value;if(!n){$('n').focus();return}if(!d){$('d').focus();return}
+  L.push({n,k:$('k').value,d,r:$('r').value,t:$('t').value.trim()});$('n').value='';$('t').value='';save();render()};
+$('rows').addEventListener('click',e=>{const t=e.target;
+  if(t.dataset.rm!=null&&confirm('Delete this deadline?')){L.splice(+t.dataset.rm,1);save();render()}
+  if(t.dataset.done!=null){const l=L[+t.dataset.done];if(+l.r){l.d=addMonths(l.d,+l.r)}else{L.splice(+t.dataset.done,1)}save();render()}});
+$('seed').onclick=()=>{const y=today().getFullYear();
+  const s=[['Federal estimated tax, Q1','Tax',`${y}-04-15`,'3'],['Federal estimated tax, Q2','Tax',`${y}-06-15`,'12'],['Federal estimated tax, Q3','Tax',`${y}-09-15`,'12'],['Federal estimated tax, Q4','Tax',`${y+1}-01-15`,'12'],
+   ['Business license renewal (set your own date)','License',`${y+1}-01-01`,'12'],['Business insurance renewal (set your own date)','Insurance',`${y+1}-01-01`,'12'],['Annual report / state filing (set your own date)','Filing',`${y+1}-03-01`,'12']];
+  s.forEach(([n,k,d,r])=>{if(!L.some(l=>l.n===n))L.push({n,k,d,r:r==='3'?'12':r,t:''})});save();render()};
+$('ics').onclick=()=>{const stamp=new Date().toISOString().replace(/[-:]/g,'').replace(/\.\d+/,'');
+  const ev=L.map((l,i)=>{const d=l.d.replace(/-/g,'');const nx=iso(new Date(parse(l.d).getTime()+864e5)).replace(/-/g,'');
+   const rr=+l.r===1?'RRULE:FREQ=MONTHLY':+l.r===3?'RRULE:FREQ=MONTHLY;INTERVAL=3':+l.r===12?'RRULE:FREQ=YEARLY':'';
+   return ['BEGIN:VEVENT',`UID:bf-${i}-${d}@buzzyfly.com`,`DTSTAMP:${stamp}`,`DTSTART;VALUE=DATE:${d}`,`DTEND;VALUE=DATE:${nx}`,`SUMMARY:${l.n.replace(/[,;\\]/g,' ')}`,rr,'BEGIN:VALARM','TRIGGER:-P7D','ACTION:DISPLAY','DESCRIPTION:Due in 7 days','END:VALARM','END:VEVENT'].filter(Boolean).join('\r\n')}).join('\r\n');
+  const b=new Blob(['BEGIN:VCALENDAR\r\nVERSION:2.0\r\nPRODID:-//Buzzyfly//Deadlines//EN\r\n'+ev+'\r\nEND:VCALENDAR\r\n'],{type:'text/calendar'}),a=document.createElement('a');
+  a.href=URL.createObjectURL(b);a.download='deadlines.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000)};
+$('d').value=iso(new Date(today().getTime()+30*864e5));
+render();
+
+</script>
+</body>
+</html>

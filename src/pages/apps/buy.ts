@@ -15,9 +15,9 @@ export const GET: APIRoute = async ({ url, locals }) => {
 			itemId: "apps-pro",
 			amount: APPS_PRICE,
 			currency: APPS_CURRENCY,
-			description: "Buzzyfly Apps Pro: Invoice Maker + Content Calendar",
+			description: "Buzzyfly Apps Pro: 7 business apps",
 			returnUrl: `${url.origin}/apps/paypal-return`,
-			cancelUrl: `${url.origin}/apps/open/invoice-maker`,
+			cancelUrl: `${url.origin}/apps-pro`,
 		});
 		return new Response(null, { status: 302, headers: { location: order.approveUrl, "cache-control": "no-store" } });
 	} catch (error) {

@@ -6,7 +6,7 @@ updatedDate: 2026-10-07
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
+featuredProductUrl: "/buy/buzzyfly-digital-system"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
@@ -149,4 +149,4 @@ The words have to sit next to onboarding and the proposal follow-up, in the same
 
 One-time payment. $49. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)

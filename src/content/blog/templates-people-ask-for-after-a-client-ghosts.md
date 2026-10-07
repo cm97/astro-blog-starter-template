@@ -7,7 +7,7 @@ updatedDate: Oct 06 2026
 heroImage: '/blog-placeholder-1.jpg'
 featuredProductTitle: Buzzyfly Digital System
 featuredProductPrice: $49
-featuredProductUrl: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
+featuredProductUrl: /buy/buzzyfly-digital-system
 featuredProductDescription: Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.
 ---
 
@@ -131,10 +131,10 @@ The five emails alone are the Follow-Up Email Templates, $19.
 
 Intake plus kickoff is the Client Onboarding Kit, $29.
 
-All of it in one zip — onboarding, weekly reset, follow-ups — is the Digital System, $49: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
+All of it in one zip — onboarding, weekly reset, follow-ups — is the Digital System, $49: /buy/buzzyfly-digital-system
 
-Every file in one download is the Complete Business Bundle, $97: https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
+Every file in one download is the Complete Business Bundle, $97: /buy/complete-business-bundle
 
 One-time payment. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)
