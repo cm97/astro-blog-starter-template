@@ -26,9 +26,9 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 			.hero h1 { font-size: clamp(1.9em, 5.5vw, 2.8em); line-height: 1.12; margin: 0 auto 0.6em; color: rgb(var(--black)); max-width: 16em; }
 			.hero__sub { font-size: 1.15em; color: rgb(var(--gray-dark)); max-width: 34em; margin: 0 auto 2em; line-height: 1.65; }
 			.hero__cta-group { display: flex; align-items: center; justify-content: center; gap: 0.9em; flex-wrap: wrap; margin-bottom: 1em; }
-			.btn-primary { display: inline-block; padding: 0.85em 2.2em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 700; font-size: 1.1em; text-decoration: none; white-space: nowrap; }
+			.btn-primary { display: inline-block; padding: 1.05em 2.6em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 800; font-size: 1.28em; text-decoration: none; white-space: nowrap; }
 			.btn-primary:hover { background: var(--accent-dark); }
-			.btn-secondary { display: inline-block; padding: 0.8em 1.6em; border-radius: 999px; border: 2px solid rgb(var(--gray-light)); color: rgb(var(--gray-dark)) !important; font-weight: 600; font-size: 1em; text-decoration: none; }
+			.btn-secondary { display: inline-block; padding: 0.45em 0.9em; border-radius: 999px; border: 1px solid rgb(var(--gray-light)); color: rgb(var(--gray-dark)) !important; font-weight: 600; font-size: 0.82em; text-decoration: none; }
 			.btn-secondary:hover { border-color: var(--accent); color: var(--accent) !important; }
 			.hero__price { font-size: 1.6em; font-weight: 700; color: rgb(var(--black)); }
 			.hero__trust { font-size: 0.85em; color: rgb(var(--gray)); margin: 0; }
@@ -61,7 +61,7 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 			.featured__features li::before { content: "\2713"; color: #4ade80; font-weight: 700; flex-shrink: 0; }
 			.featured__buy { display: flex; align-items: center; gap: 1em; flex-wrap: wrap; }
 			.featured__price { font-size: 2.1em; font-weight: 700; color: #fff; }
-			.btn-white { display: inline-block; padding: 0.7em 1.7em; border-radius: 999px; background: #fff; color: rgb(var(--black)) !important; font-weight: 700; font-size: 1em; text-decoration: none; }
+			.btn-white { display: inline-block; padding: 0.95em 2.2em; border-radius: 999px; background: #fff; color: rgb(var(--black)) !important; font-weight: 800; font-size: 1.2em; text-decoration: none; }
 			.btn-white:hover { opacity: 0.9; }
 			.faq { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
 			.faq h2 { font-size: 1.4em; color: rgb(var(--black)); margin: 0 0 1.5em; text-align: center; }
@@ -93,10 +93,10 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 				</p>
 				<div class="hero__cta-group">
 					<span class="hero__price">{digitalSystem.price}</span>
-					<a class="btn-primary" href={digitalSystem.stripeUrl} target="_blank" rel="noopener">Get the Digital System →</a>
-					<a class="btn-secondary" href={bundle.stripeUrl} target="_blank" rel="noopener">Or the full bundle — {bundle.price}</a>
+					<a class="btn-primary" href={digitalSystem.stripeUrl} target="_blank" rel="noopener">Buy the Digital System — {digitalSystem.price}</a>
 				</div>
-				<p class="hero__trust"><strong>One-time payment. Instant download.</strong> &nbsp;·&nbsp; {BUZZYFLY_CONFIG.guarantee}</p>
+				<p class="hero__trust">One-time payment. Download after purchase on the thank-you page. 30-day refund if the files are not delivered or not as listed.</p>
+				<p class="hero__trust"><a class="btn-secondary" href={bundle.stripeUrl} target="_blank" rel="noopener">Smaller option: full bundle — {bundle.price}</a></p>
 			</section>
 
 			<section class="pain">
@@ -128,7 +128,7 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 					<ul class="featured__features">{digitalSystem.features.map((f) => <li>{f}</li>)}</ul>
 					<div class="featured__buy">
 						<span class="featured__price">{digitalSystem.price}</span>
-						<a class="btn-white" href={digitalSystem.stripeUrl} target="_blank" rel="noopener">Buy now — instant download</a>
+						<a class="btn-white" href={digitalSystem.stripeUrl} target="_blank" rel="noopener">Buy the Digital System — {digitalSystem.price}</a>
 					</div>
 				</div>
 			</section>
@@ -146,11 +146,11 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 					</div>
 					<div class="faq__item">
 						<h3>How do I get it?</h3>
-						<p>Pay once through Stripe. A private download link lands in your inbox, usually the same day. It's yours to keep, with lifetime access and future updates.</p>
+						<p>Pay once through Stripe. Download after purchase on the thank-you page. The files are yours to keep, with lifetime updates.</p>
 					</div>
 					<div class="faq__item">
 						<h3>What if it doesn't work for me?</h3>
-						<p>{BUZZYFLY_CONFIG.guarantee} Email us within 30 days and you get your money back. No forms, no questions.</p>
+						<p>30-day refund if the files are not delivered or not as listed.</p>
 					</div>
 					<div class="faq__item">
 						<h3>Do I need the whole thing at once?</h3>
@@ -165,7 +165,7 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 					<p>{bundle.description} One payment. Same 30-day guarantee. Stripe checkout opens now.</p>
 					<ul class="featured__features">{bundle.features.map((f) => <li>{f}</li>)}</ul>
 					<div class="bundle__buy">
-						<a class="btn-primary" href={bundle.stripeUrl} target="_blank" rel="noopener">Get the bundle — {bundle.price}</a>
+						<a class="btn-secondary" href={bundle.stripeUrl} target="_blank" rel="noopener">Bundle — {bundle.price}</a>
 						<a class="btn-secondary" href="/store">See every product</a>
 					</div>
 				</div>
@@ -176,7 +176,7 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 					<span class="guarantee__icon">🛡️</span>
 					<div class="guarantee__copy">
 						<h3>30-Day Money-Back Guarantee</h3>
-						<p>{BUZZYFLY_CONFIG.guarantee} If the files are not delivered or are not as listed, email us within 30 days for a refund.</p>
+						<p>30-day refund if the files are not delivered or not as listed.</p>
 					</div>
 				</div>
 			</section>
