@@ -141,6 +141,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 				(productFile?.fileName ?? "Buzzyfly Apps Pro").replace(/\.[^.]+$/, "").replace(/[-_]/g, " "),
 			orderId: order.orderId,
 			itemId: order.itemId,
+			upgradeUrl: isApps ? undefined : `${BUZZYFLY_CONFIG.siteUrl}/buy/upgrade?token=${downloadToken}`,
 		},
 		env,
 	);
