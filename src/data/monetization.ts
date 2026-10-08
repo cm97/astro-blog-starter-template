@@ -87,17 +87,6 @@ export function getProduct(idOrTitle: string) {
 	return ALL_PRODUCTS.find((p) => p.id === key || p.title.toLowerCase() === key) ?? null;
 }
 
-/**
- * Sum of the single products the bundle contains, shown crossed out next to the
- * bundle price. Computed from real prices so it can never drift into a made-up
- * "was" price.
- */
-export function bundleSeparatePrice(): string {
-	const parts = ["weekly-reset-checklist", "follow-up-email-templates", "client-onboarding-kit", "buzzyfly-digital-system"];
-	const total = parts.reduce((sum, id) => sum + Number(getProduct(id)!.price.replace(/[^0-9.]/g, "")), 0);
-	return `$${total}`;
-}
-
 // Maps a purchased item identifier (the Stripe Checkout Session's
 // `metadata.item_id`, or a Lemon Squeezy `variant_id`) to the private object
 // key inside the `MY_PRODUCTS` R2 bucket (`buzzyfly-products`) that should be

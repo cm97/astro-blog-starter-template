@@ -6,7 +6,6 @@ category: "free"
 heroImage: "/buzzyfly-brand-about.jpg"
 ---
 
-# Lead Magnet Ideas
 
 This is the actual list. Not theory. What works.
 

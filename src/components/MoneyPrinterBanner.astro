@@ -1,5 +1,5 @@
 ---
-import { BUZZYFLY_CONFIG, bundleSeparatePrice, getOrderAction, getProduct } from "../data/monetization";
+import { BUZZYFLY_CONFIG, getOrderAction, getProduct } from "../data/monetization";
 
 interface Props {
 	/** Defaults to the Complete Bundle's checkout route. */
@@ -15,7 +15,6 @@ const {
 	bundlePrice = bundle.price,
 	variant = "strip",
 } = Astro.props;
-const separate = bundleSeparatePrice();
 ---
 
 {
@@ -28,8 +27,6 @@ const separate = bundleSeparatePrice();
 				{bundle.features.map((f) => <li>{f}</li>)}
 			</ul>
 			<p class="printer-section__price">
-				<s><span class="sr-only">Bought separately: </span>{separate}</s>{" "}
-				<span class="sr-only">Bundle price: </span>
 				<strong>{bundlePrice}</strong>
 			</p>
 			<a class="printer-banner__cta printer-banner__cta--big" href={bundleUrl}>Buy the Complete Bundle — {bundlePrice}</a>
@@ -39,7 +36,7 @@ const separate = bundleSeparatePrice();
 		<div class="printer-banner">
 			<p class="printer-banner__kicker">One-time. Instant download. No subscription.</p>
 			<p class="printer-banner__line">
-				Every checklist, template and script in one zip. <s>{separate}</s> {bundlePrice} Complete Bundle.
+				Every checklist, template and script in one zip. {bundlePrice} Complete Bundle.
 			</p>
 			<a class="printer-banner__cta" href={bundleUrl}>Buy the bundle →</a>
 		</div>
@@ -70,10 +67,6 @@ const separate = bundleSeparatePrice();
 		margin: 0;
 		font-size: 0.95em;
 		font-weight: 600;
-	}
-	.printer-banner__line s {
-		color: rgba(255, 255, 255, 0.6);
-		font-weight: 400;
 	}
 	.printer-banner__cta {
 		display: inline-flex;
@@ -114,7 +107,6 @@ const separate = bundleSeparatePrice();
 	.printer-section__list li { padding: 0.25em 0 0.25em 1.5em; position: relative; color: rgba(255, 255, 255, 0.9); }
 	.printer-section__list li::before { content: "✓"; position: absolute; left: 0; color: #4ade80; font-weight: 700; }
 	.printer-section__price { margin: 0 0 1em; font-size: 1.5em; }
-	.printer-section__price s { color: rgba(255, 255, 255, 0.55); font-size: 0.7em; margin-right: 0.3em; }
 	.printer-banner__cta--big { font-size: 1em; padding: 0.8em 1.8em; }
 	.printer-section__fine { margin: 1em 0 0; font-size: 0.8em; color: rgba(255, 255, 255, 0.7); }
 </style>

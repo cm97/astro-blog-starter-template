@@ -5,7 +5,15 @@ import { getSettings } from "./settings";
 
 const CHECKLIST_URL = `${BUZZYFLY_CONFIG.siteUrl}/blog/weekly-reset/`;
 const STORE_URL = `${BUZZYFLY_CONFIG.siteUrl}/store`;
+const WEEKLY_RESET_BUY_URL = `${BUZZYFLY_CONFIG.siteUrl}/buy/weekly-reset-checklist`;
 const BATCH_SIZE = 50;
+// The sequence sells the Digital System. Someone who already bought it (or the
+// bundle that contains it) gets the post-purchase emails instead, not this pitch.
+const SKIP_SYSTEM_BUYERS = `AND NOT EXISTS (
+		SELECT 1 FROM fulfillments f
+		WHERE lower(f.customer_email) = lower(subscribers.email)
+		  AND f.item_id IN ('buzzyfly-digital-system', 'complete-business-bundle')
+	)`;
 
 export function unsubscribeUrl(token: string): string {
 	return `${BUZZYFLY_CONFIG.siteUrl}/unsubscribe?token=${encodeURIComponent(token)}`;
@@ -15,6 +23,7 @@ function fillVars(value: string): string {
 	return value
 		.replace(/\{checklist\}/g, CHECKLIST_URL)
 		.replace(/\{store\}/g, STORE_URL)
+		.replace(/\{weeklyResetBuy\}/g, WEEKLY_RESET_BUY_URL)
 		.replace(/\{orderEmail\}/g, BUZZYFLY_CONFIG.orderEmail);
 }
 
@@ -147,17 +156,27 @@ export async function sendDueSequenceEmails(env: {
 
 	const now = Date.now();
 	const lastStep = EMAIL_SEQUENCE.length - 1;
-	const due = await env.DB.prepare(
+	const dueSql = (skipBuyers: boolean) =>
 		`SELECT email, unsubscribe_token, sequence_step, sequence_sent_at
 		 FROM subscribers
 		 WHERE unsubscribed_at IS NULL
 		   AND sequence_step < ?
 		   AND COALESCE(sequence_sent_at, created_at, 0) <= ?
+		   ${skipBuyers ? SKIP_SYSTEM_BUYERS : ""}
 		 ORDER BY COALESCE(sequence_sent_at, created_at, 0) ASC
-		 LIMIT ?`,
-	)
-		.bind(lastStep, now - SEQUENCE_INTERVAL_MS, BATCH_SIZE)
-		.all<DueSubscriber>();
+		 LIMIT ?`;
+	let due;
+	try {
+		due = await env.DB.prepare(dueSql(true))
+			.bind(lastStep, now - SEQUENCE_INTERVAL_MS, BATCH_SIZE)
+			.all<DueSubscriber>();
+	} catch (error) {
+		// No fulfillments table yet: send to everyone rather than stop the sequence.
+		console.error("Buzzyfly sequence: buyer check failed, sending without it", error);
+		due = await env.DB.prepare(dueSql(false))
+			.bind(lastStep, now - SEQUENCE_INTERVAL_MS, BATCH_SIZE)
+			.all<DueSubscriber>();
+	}
 
 	let sent = 0;
 	let failed = 0;

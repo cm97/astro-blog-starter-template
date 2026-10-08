@@ -71,7 +71,8 @@ footer {
 	z-index: 2;
 }
 main {
-	width: 720px;
+	/* min() keeps pages that only override max-width from overflowing a phone. */
+	width: min(720px, calc(100% - 2em));
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;

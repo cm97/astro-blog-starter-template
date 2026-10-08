@@ -1,13 +1,13 @@
 ---
-title: "Follow-Up Email After No Response: 5 Templates That Actually Get Replies"
-description: "Five ready-to-send follow-up email templates for when a prospect or client goes quiet — for proposals, check-ins, re-engagement, referral requests, and project wrap-ups."
+title: "Follow-Up Email Templates for Coaches and Freelancers: 5 That Get Replies"
+description: "Five follow-up email templates for coaches and freelancers when a prospect or client goes quiet after no response. Proposals, check-ins, re-engagement, referrals and wrap-ups."
 pubDate: "Sep 13 2026"
 updatedDate: "Oct 06 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
-featuredProductTitle: "Buzzyfly Digital System"
-featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductTitle: "Follow-Up Email Templates"
+featuredProductPrice: "$19"
+featuredProductDescription: "All five follow-ups written out with variants, plus the timing guide: when to send, how long to wait and when to stop."
 ---
 
 You sent the proposal. Or you finished the project. Or you had a great call and said you'd follow up. And then: nothing.

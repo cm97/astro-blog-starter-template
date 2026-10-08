@@ -5,8 +5,22 @@ import AdminLayout from "../../layouts/AdminLayout.astro";
 import AdminHelp from "../../components/AdminHelp.astro";
 import { auditTableExists, listAuditLog } from "../../lib/audit";
 import { describeSource } from "../../lib/trafficSource";
+import { getSettings } from "../../lib/settings";
+import { paypalConfigured } from "../../lib/paypal";
 
 const env = Astro.locals.runtime.env;
+
+// Setup gaps that silently cost sales. Each one is otherwise only a console log.
+const setupWarnings: { text: string; href?: string }[] = [];
+if (!(await getSettings(env)).mailingAddress.trim()) {
+	setupWarnings.push({ text: "The weekly email sequence is paused. US anti-spam law needs a postal address in the footer. Add one in Settings.", href: "/admin/settings" });
+}
+if (!paypalConfigured(env)) {
+	setupWarnings.push({ text: "PayPal is not configured (PAYPAL_CLIENT_ID / PAYPAL_SECRET). Buy buttons fall back to Stripe for the Digital System and to email orders for every other product." });
+}
+if (!env.DOWNLOAD_TOKEN_SECRET) {
+	setupWarnings.push({ text: "DOWNLOAD_TOKEN_SECRET is missing. Paid orders cannot be fulfilled automatically." });
+}
 
 let subscriberCount = 0;
 let orderCount = 0;
@@ -60,6 +74,32 @@ if (env.DB) {
 		sourceRows = [...bySource.values()].sort((a, b) => b.orders - a.orders || b.signups - a.signups);
 	} catch {
 		// source columns not added yet (the hourly cron adds them): show nothing
+	}
+}
+
+// Buy clicks (/buy/<id>, src/lib/checkoutStarts.ts) against paid orders, per product.
+type FunnelRow = { itemId: string; clicks: number; orders: number };
+let funnelRows: FunnelRow[] = [];
+const thirtyDaysAgo = Date.now() - 30 * 24 * 60 * 60 * 1000;
+if (env.DB) {
+	try {
+		const [clicks, paid] = await Promise.all([
+			env.DB.prepare(
+				`SELECT item_id, COUNT(*) AS n FROM checkout_starts WHERE created_at >= ? AND is_bot = 0 GROUP BY item_id`,
+			)
+				.bind(thirtyDaysAgo)
+				.all<{ item_id: string; n: number }>(),
+			env.DB.prepare(`SELECT item_id, COUNT(*) AS n FROM fulfillments WHERE created_at >= ? GROUP BY item_id`)
+				.bind(thirtyDaysAgo)
+				.all<{ item_id: string; n: number }>(),
+		]);
+		const byItem = new Map<string, FunnelRow>();
+		const row = (id: string) => byItem.get(id) ?? byItem.set(id, { itemId: id, clicks: 0, orders: 0 }).get(id)!;
+		for (const r of clicks.results ?? []) row(r.item_id).clicks = r.n;
+		for (const r of paid.results ?? []) row(r.item_id).orders = r.n;
+		funnelRows = [...byItem.values()].sort((a, b) => b.clicks - a.clicks);
+	} catch {
+		// checkout_starts is created on the first buy click: nothing to show before that
 	}
 }
 
@@ -139,6 +179,14 @@ queue.sort((a, b) => b.when - a.when);
 
 <AdminLayout title="Dashboard" active="dashboard">
 	<h1>Dashboard</h1>
+	{setupWarnings.length > 0 && (
+		<div role="alert" style="margin:0 0 1.5em;padding:1em 1.2em;border:2px solid #b3261e;border-radius:10px;background:#fdecea">
+			<strong>Fix these to stop losing sales:</strong>
+			<ul style="margin:0.5em 0 0;padding-left:1.2em">
+				{setupWarnings.map((w) => <li>{w.text} {w.href && <a href={w.href}>Fix it</a>}</li>)}
+			</ul>
+		</div>
+	)}
 	<p class="admin-subtitle">Buzzyfly, at a glance.</p>
 
 	<AdminHelp title="What this console can do" open={missing.length > 0}>
@@ -260,6 +308,37 @@ queue.sort((a, b) => b.when - a.when);
 		<p style="font-size:0.9em;opacity:0.8;">
 			Counted from tracking links (<code>?utm_source=…&amp;utm_medium=…&amp;utm_campaign=…</code>). Visitors who
 			arrive without one show as "Direct / unknown". Orders from before tracking started have no source.
+		</p>
+	</div>
+
+	<div class="admin-card">
+		<h2>Buy clicks vs orders (last 30 days)</h2>
+		{funnelRows.length === 0 && <p>No buy clicks recorded yet.</p>}
+		{
+			funnelRows.length > 0 && (
+				<table>
+					<thead>
+						<tr>
+							<th>Product</th>
+							<th>Buy clicks</th>
+							<th>Orders</th>
+						</tr>
+					</thead>
+					<tbody>
+						{funnelRows.map((r) => (
+							<tr>
+								<td>{r.itemId}</td>
+								<td>{r.clicks}</td>
+								<td>{r.orders}</td>
+							</tr>
+						))}
+					</tbody>
+				</table>
+			)
+		}
+		<p style="font-size:0.9em;opacity:0.8;">
+			A buy click is a visit to a buy button's checkout route (known bots excluded). Many clicks and few orders
+			means people drop off at checkout. Few clicks means the page is not convincing them.
 		</p>
 	</div>
 

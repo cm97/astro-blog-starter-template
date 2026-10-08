@@ -6,6 +6,8 @@ interface Props {
 	title?: string;
 	description?: string;
 	buttonLabel?: string;
+	/** Single line: one field and one button, for the homepage hero. */
+	compact?: boolean;
 }
 
 const settings = await getSettings(Astro.locals.runtime?.env);
@@ -13,17 +15,20 @@ const {
 	title = settings.newsletterTitle || BUZZYFLY_CONFIG.newsletterTitle,
 	description = settings.newsletterDescription || BUZZYFLY_CONFIG.newsletterDescription,
 	buttonLabel = "Send me the checklist",
+	compact = false,
 } = Astro.props;
+// Unique per instance: a page can show more than one form.
+const inputId = `email-optin-${Math.random().toString(36).slice(2, 8)}`;
 const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 ---
 
-<section class="email-optin" aria-label={`${brand} newsletter signup`}>
-	<h3 class="email-optin__title">{title}</h3>
-	<p class="email-optin__description">{description}</p>
+<section class:list={["email-optin", { "email-optin--compact": compact }]} aria-label={`${brand} free checklist signup`}>
+	{!compact && <h3 class="email-optin__title">{title}</h3>}
+	{!compact && <p class="email-optin__description">{description}</p>}
 	<form class="email-optin__form" data-email-optin-form method="POST" action="/api/subscribe">
-		<label class="sr-only" for="email-optin-input">Email address</label>
+		<label class="sr-only" for={inputId}>Email address</label>
 		<input
-			id="email-optin-input"
+			id={inputId}
 			class="email-optin__input"
 			type="email"
 			name="email"
@@ -33,6 +38,7 @@ const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 		/>
 		<button class="email-optin__submit" type="submit">{buttonLabel}</button>
 	</form>
+	{compact && <p class="email-optin__fine">{description}</p>}
 	<p class="email-optin__status" data-email-optin-status role="status" aria-live="polite"></p>
 </section>
 
@@ -103,6 +109,27 @@ const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 		background: linear-gradient(var(--gray-gradient)) no-repeat;
 		border: 1px solid rgb(var(--gray-light));
 		text-align: center;
+	}
+	.email-optin--compact {
+		margin: 0;
+		padding: 0;
+		border: none;
+		background: none;
+	}
+	.email-optin--compact .email-optin__status {
+		margin-top: 0.2em;
+		min-height: 0;
+	}
+	.email-optin--compact .email-optin__status:empty {
+		display: none;
+	}
+	.email-optin--compact .email-optin__submit {
+		font-size: 1.05em;
+	}
+	.email-optin__fine {
+		margin: 0.6em 0 0;
+		font-size: 0.82em;
+		color: rgb(var(--gray));
 	}
 	.email-optin__title {
 		margin: 0 0 0.4em 0;

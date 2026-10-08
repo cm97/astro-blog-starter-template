@@ -6,7 +6,6 @@ category: "product"
 heroImage: "/buzzyfly-brand-about.jpg"
 ---
 
-# The Buzzyfly Digital System
 
 This is the product. Not a description of the product. The product.
 

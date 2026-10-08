@@ -1,5 +1,5 @@
 ---
-// Remembers which tracking link brought a visitor and tags Stripe buy links
+// Remembers which tracking link brought a visitor and tags buy links
 // with it. See src/lib/trafficSource.ts.
 ---
 
@@ -20,6 +20,13 @@
 			| null;
 		if (saved && Date.now() - saved.ts < SOURCE_TTL_MS) {
 			const [source, medium, campaign] = saved.source.split("__");
+			// Buy buttons go through /buy/<id>, which passes the source on to Stripe or
+			// PayPal and records it with the order.
+			document.querySelectorAll<HTMLAnchorElement>('a[href^="/buy/"]').forEach((link) => {
+				const url = new URL(link.href, location.origin);
+				url.searchParams.set("src", saved.source);
+				link.href = url.pathname + url.search + url.hash;
+			});
 			document.querySelectorAll<HTMLAnchorElement>('a[href^="https://buy.stripe.com/"]').forEach((link) => {
 				const url = new URL(link.href);
 				url.searchParams.set("client_reference_id", saved.source);

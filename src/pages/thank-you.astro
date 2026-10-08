@@ -180,7 +180,9 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 		text-decoration: none;
 		font-size: 0.95em;
 		transition: background-color 0.15s;
-		white-space: nowrap;
+		max-width: 100%;
+		box-sizing: border-box;
+		text-align: center;
 	}
 	.ty-upsell__cta:hover { background: var(--accent-dark); color: #fff; }
 	.ty-upsell__guarantee {

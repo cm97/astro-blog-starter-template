@@ -4,6 +4,7 @@ import { sendDeliveryEmail } from "../../lib/email";
 import { createDownloadToken } from "../../lib/fulfillment";
 import { captureOrder, paypalConfigured } from "../../lib/paypal";
 import { PRODUCT_CURRENCY, findSellableProduct } from "../../lib/productCheckout";
+import { cleanSourceParam } from "../../lib/checkoutStarts";
 
 export const prerender = false;
 
@@ -69,6 +70,13 @@ export const GET: APIRoute = async ({ url, locals }) => {
 				.bind("paypal", captured.orderId, product.id, captured.payerEmail, Date.now())
 				.run();
 			firstVisit = (result.meta?.changes ?? 1) > 0;
+			const source = cleanSourceParam(url.searchParams.get("src"));
+			if (firstVisit && source) {
+				await env.DB.prepare(`UPDATE fulfillments SET source = ? WHERE provider = ? AND order_id = ?`)
+					.bind(source, "paypal", captured.orderId)
+					.run()
+					.catch((error) => console.error("Buzzyfly buy: could not record source", error));
+			}
 		} catch (error) {
 			console.error("Buzzyfly buy: could not record PayPal order", error);
 		}

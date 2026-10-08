@@ -66,6 +66,36 @@ const FAQ = [
 		a: "If you already run a documented system that works, skip it. You would be buying what you already have.",
 	},
 ];
+
+// Structured data for search results: the FAQ above and each product's offer.
+const jsonLd = JSON.stringify([
+	{
+		"@context": "https://schema.org",
+		"@type": "FAQPage",
+		mainEntity: FAQ.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+	},
+	...ALL_PRODUCTS.map((p) => ({
+		"@context": "https://schema.org",
+		"@type": "Product",
+		name: p.title,
+		description: p.description,
+		brand: { "@type": "Brand", name: BUZZYFLY_CONFIG.brandName },
+		image: `${BUZZYFLY_CONFIG.siteUrl}/buzzyfly-brand-about.jpg`,
+		offers: {
+			"@type": "Offer",
+			price: p.price.replace(/[^0-9.]/g, ""),
+			priceCurrency: "USD",
+			availability: "https://schema.org/InStock",
+			url: `${BUZZYFLY_CONFIG.siteUrl}/store`,
+		},
+	})),
+]);
+
+const FREE_TOOLS = [
+	{ href: "/tools/weekly-reset.html", label: "Weekly reset", text: "Run the 20-minute Monday reset in your browser." },
+	{ href: "/tools/follow-up-writer.html", label: "Follow-up writer", text: "Pick the situation and get an email you can send." },
+	{ href: "/tools/client-onboarding.html", label: "Onboarding pack", text: "Type a client name and get the welcome email and kickoff agenda." },
+];
 ---
 
 <!doctype html>
@@ -106,7 +136,14 @@ const FAQ = [
 			.final-cta { text-align: center; margin: 3em auto 0; max-width: 720px; padding: 2em 1em; border-radius: 16px; background: rgba(35, 55, 255, 0.05); border: 1px solid rgba(35, 55, 255, 0.15); }
 			.final-cta h2 { font-size: clamp(1.3em, 4.5vw, 1.7em); }
 			.final-cta p { margin: 0.8em 0 0; font-size: 0.85em; color: rgb(var(--gray-dark)); }
+			.try-free { max-width: 720px; margin: 3em auto 0; }
+			.try-free h2 { font-size: 1.6em; }
+			.try-free ul { list-style: none; padding: 0; margin: 1em 0 0; display: grid; gap: 0.6em; }
+			.try-free a { display: block; min-height: 44px; padding: 0.8em 1em; border: 1px solid rgb(var(--gray-light)); border-radius: 12px; text-decoration: none; color: rgb(var(--gray-dark)); background: #fff; }
+			.try-free a:hover { border-color: var(--accent); }
+			.try-free strong { color: var(--accent); }
 		</style>
+		<script type="application/ld+json" set:html={jsonLd} />
 	</head>
 	<body>
 		<Header />
@@ -141,6 +178,16 @@ const FAQ = [
 			</section>
 
 			<MoneyPrinterBanner variant="section" />
+
+			<section class="try-free" aria-labelledby="try-free-heading">
+				<h2 id="try-free-heading">Try it free first</h2>
+				<p>See the quality before you pay. Each free tool is a working sample of a paid product. No sign-up.</p>
+				<ul>
+					{FREE_TOOLS.map((t) => (
+						<li><a href={t.href}><strong>{t.label}</strong> · {t.text}</a></li>
+					))}
+				</ul>
+			</section>
 
 			<section class="store-section">
 				<h2>What's actually in the Digital System zip</h2>

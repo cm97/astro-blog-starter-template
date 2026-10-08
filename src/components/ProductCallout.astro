@@ -1,5 +1,5 @@
 ---
-import { BUZZYFLY_CONFIG, bundleSeparatePrice, getOrderAction, getProduct } from "../data/monetization";
+import { BUZZYFLY_CONFIG, getOrderAction, getProduct } from "../data/monetization";
 
 interface Props {
 	/** Product id from ALL_PRODUCTS. Fills in any field not passed explicitly. */
@@ -26,8 +26,6 @@ const features = props.features ?? product?.features ?? [];
 const badge = props.badge !== undefined ? props.badge : product?.badge ?? null;
 const featured = props.featured ?? badge === "Most popular";
 const Heading = props.headingLevel ?? "h3";
-// Crossed-out price only where it is true: the bundle vs buying each piece.
-const compareAt = product?.id === "complete-business-bundle" ? bundleSeparatePrice() : null;
 
 // Buy buttons always go to a real checkout route for a known product.
 const order = product
@@ -55,12 +53,6 @@ const order = product
 	}
 	<div class="product-callout__footer">
 		<span class="product-callout__price">
-			{compareAt && (
-				<s class="product-callout__compare">
-					<span class="sr-only">Bought separately: </span>{compareAt}
-				</s>
-			)}
-			{compareAt && <span class="sr-only">Bundle price: </span>}
 			{price}
 		</span>
 		<a
@@ -72,7 +64,6 @@ const order = product
 			<span class="sr-only"> {title}</span>
 		</a>
 	</div>
-	{compareAt && <p class="product-callout__note">{compareAt} if you buy each piece separately.</p>}
 	<p class="product-callout__guarantee">One-time payment. Instant download. {BUZZYFLY_CONFIG.guarantee}</p>
 </aside>
 
@@ -144,12 +135,6 @@ const order = product
 		font-weight: 700;
 		color: rgb(var(--black));
 	}
-	.product-callout__compare {
-		margin-right: 0.35em;
-		font-size: 0.65em;
-		font-weight: 400;
-		color: rgb(var(--gray));
-	}
 	.product-callout__cta {
 		display: inline-flex;
 		align-items: center;
@@ -171,7 +156,6 @@ const order = product
 		outline: 3px solid rgb(var(--black));
 		outline-offset: 3px;
 	}
-	.product-callout__note,
 	.product-callout__guarantee {
 		margin: 0.75em 0 0;
 		font-size: 0.8em;

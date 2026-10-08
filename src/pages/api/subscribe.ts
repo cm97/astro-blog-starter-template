@@ -101,6 +101,14 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		if (!result.sent) console.error(`Buzzyfly subscribe: welcome email (step 0) to ${email} failed: ${result.reason}`);
 	}
 
+	// A plain form POST (no JavaScript) gets a page, not raw JSON.
+	if (!(request.headers.get("content-type") ?? "").includes("application/json")) {
+		return new Response(
+			`<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>You're in — Buzzyfly</title><style>body{margin:0;font:18px/1.6 system-ui,sans-serif;color:#222939;background:#fff}main{max-width:560px;margin:0 auto;padding:48px 18px}a.btn{display:inline-block;margin-top:8px;padding:12px 20px;border-radius:999px;background:#2337ff;color:#fff;font-weight:700;text-decoration:none}</style></head><body><main><h1>You're in.</h1><p>Your free 20-minute weekly reset checklist is on its way. Check your inbox in a minute or two.</p><p>Want to start right now? The checklist is also here:</p><a class="btn" href="/blog/weekly-reset/">Open the weekly reset</a></main></body></html>`,
+			{ status: 200, headers: { "content-type": "text/html; charset=utf-8" } },
+		);
+	}
+
 	return new Response(JSON.stringify({ received: true }), {
 		status: 200,
 		headers: { "content-type": "application/json" },
