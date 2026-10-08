@@ -5,8 +5,22 @@ import AdminLayout from "../../layouts/AdminLayout.astro";
 import AdminHelp from "../../components/AdminHelp.astro";
 import { auditTableExists, listAuditLog } from "../../lib/audit";
 import { describeSource } from "../../lib/trafficSource";
+import { getSettings } from "../../lib/settings";
+import { paypalConfigured } from "../../lib/paypal";
 
 const env = Astro.locals.runtime.env;
+
+// Setup gaps that silently cost sales. Each one is otherwise only a console log.
+const setupWarnings: { text: string; href?: string }[] = [];
+if (!(await getSettings(env)).mailingAddress.trim()) {
+	setupWarnings.push({ text: "The weekly email sequence is paused. US anti-spam law needs a postal address in the footer. Add one in Settings.", href: "/admin/settings" });
+}
+if (!paypalConfigured(env)) {
+	setupWarnings.push({ text: "PayPal is not configured (PAYPAL_CLIENT_ID / PAYPAL_SECRET). Buy buttons fall back to Stripe for the Digital System and to email orders for every other product." });
+}
+if (!env.DOWNLOAD_TOKEN_SECRET) {
+	setupWarnings.push({ text: "DOWNLOAD_TOKEN_SECRET is missing. Paid orders cannot be fulfilled automatically." });
+}
 
 let subscriberCount = 0;
 let orderCount = 0;
@@ -139,6 +153,14 @@ queue.sort((a, b) => b.when - a.when);
 
 <AdminLayout title="Dashboard" active="dashboard">
 	<h1>Dashboard</h1>
+	{setupWarnings.length > 0 && (
+		<div role="alert" style="margin:0 0 1.5em;padding:1em 1.2em;border:2px solid #b3261e;border-radius:10px;background:#fdecea">
+			<strong>Fix these to stop losing sales:</strong>
+			<ul style="margin:0.5em 0 0;padding-left:1.2em">
+				{setupWarnings.map((w) => <li>{w.text} {w.href && <a href={w.href}>Fix it</a>}</li>)}
+			</ul>
+		</div>
+	)}
 	<p class="admin-subtitle">Buzzyfly, at a glance.</p>
 
 	<AdminHelp title="What this console can do" open={missing.length > 0}>

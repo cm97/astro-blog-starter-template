@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /admin
+Disallow: /api/
+Disallow: /buy/
+Disallow: /apps/open/
+
+Sitemap: https://buzzyfly.com/sitemap-index.xml

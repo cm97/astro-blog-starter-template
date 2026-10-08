@@ -44,6 +44,23 @@ export default defineConfig({
 		"/blog/first-client-sprint": { status: 301, destination: "/blog/first-client-7-day-sprint/" },
 		"/blog/time-blocking": { status: 301, destination: "/blog/time-blocking-for-solo-operators/" },
 	},
-	integrations: [mdx(), sitemap()],
+	integrations: [
+		mdx(),
+		sitemap({
+			// Static tools in public/ are not Astro routes, so list them by hand.
+			customPages: [
+				"https://buzzyfly.com/tools/",
+				"https://buzzyfly.com/tools/weekly-reset.html",
+				"https://buzzyfly.com/tools/follow-up-writer.html",
+				"https://buzzyfly.com/tools/client-onboarding.html",
+				"https://buzzyfly.com/apps/",
+			],
+			// Admin, redirects, and post-purchase or one-off pages are not for search.
+			filter: (page) =>
+				!/\/(admin|api|agent|app|products|success|thank-you|tools|unsubscribe)(\/|$)/.test(new URL(page).pathname) ||
+				/\/tools\/.+/.test(new URL(page).pathname) ||
+				new URL(page).pathname === "/tools/",
+		}),
+	],
 	devToolbar: { enabled: false },
 });

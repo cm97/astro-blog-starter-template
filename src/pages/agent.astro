@@ -10,10 +10,10 @@ const paste = `Onboarding still lives in your head. ${system.price} ${system.tit
 	title="Buzzyfly agent — $49 Digital System"
 	description="Cash agent for the live Buzzyfly store. One paste. The $49 Digital System."
 	pubDate={new Date('October 7 2026')}
+	noindex
 >
-	<h1>Buzzyfly agent</h1>
 	<p>This page is the agent on the Cloudflare site. It sells the existing {system.title}. No new product.</p>
 	<p><a href={system.buyUrl}>Open {system.price} checkout</a></p>
 	<p><a href="/store">Open store</a></p>
-	<pre>{paste}</pre>
+	<pre style="white-space: pre-wrap; word-break: break-word;">{paste}</pre>
 </Layout>

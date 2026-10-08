@@ -64,6 +64,11 @@ footer a{color:inherit}
 [hidden]{display:none!important}
 @media(max-width:540px){.clock{grid-template-columns:1fr;gap:14px}.clock>button{justify-self:start}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* 44px minimum tap targets on phones. */
+button,select,.brand,input:not([type=radio]):not([type=checkbox]){min-height:44px;box-sizing:border-box}
+.brand{display:inline-flex;align-items:center}
+:focus-visible{outline:3px solid currentColor;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>

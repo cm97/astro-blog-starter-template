@@ -13,6 +13,7 @@ type Props = CollectionEntry<'blog'>['data'] & {
 	next?: CollectionEntry<'blog'> | null;
 	related?: CollectionEntry<'blog'>[];
 	currentId?: string;
+	noindex?: boolean;
 };
 
 const {
@@ -28,6 +29,7 @@ const {
 	prev,
 	next,
 	related = [],
+	noindex = false,
 } = Astro.props;
 
 // Every post ends with a product callout: the post's own product when it names
@@ -44,7 +46,7 @@ const displayHero =
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} image={displayHero} />
+		<BaseHead title={title} description={description} image={displayHero === brandHero ? '/buzzyfly-brand-about.jpg' : displayHero} noindex={noindex} />
 		<style>
 			main { width: calc(100% - 2em); max-width: 100%; margin: 0; }
 			.hero-image { width: 100%; }

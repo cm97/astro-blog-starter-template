@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { BUZZYFLY_CONFIG } from "../../data/monetization";
+import { BUZZYFLY_CONFIG, STRIPE_CHECKOUT_URL } from "../../data/monetization";
 import { PRODUCT_CURRENCY, findSellableProduct } from "../../lib/productCheckout";
 import { createOrder, paypalConfigured } from "../../lib/paypal";
 
@@ -12,6 +12,11 @@ export const GET: APIRoute = async ({ params, url, locals }) => {
 
 	const env = locals.runtime.env;
 	if (!paypalConfigured(env)) {
+		// The Digital System also has a live Stripe Payment Link (its metadata.item_id
+		// drives /api/webhook fulfillment). Use it rather than an email order.
+		if (product.id === "buzzyfly-digital-system" && STRIPE_CHECKOUT_URL) {
+			return new Response(null, { status: 302, headers: { location: STRIPE_CHECKOUT_URL, "cache-control": "no-store" } });
+		}
 		// No working card checkout yet: send the buyer to a real email order instead of a dead button.
 		const subject = encodeURIComponent(`Order: ${product.title}`);
 		const body = encodeURIComponent(`Hi,\n\nI'd like to order the ${product.title} ($${product.amount}).\n\nPlease send payment details.\n\nThanks,\n`);

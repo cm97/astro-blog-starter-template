@@ -49,6 +49,11 @@ pre.email{font-family:var(--mono);font-size:14px;line-height:1.65;white-space:pr
 a.cta{font-family:var(--display);font-weight:700;font-size:15px;color:var(--paper);background:var(--accent);border-radius:3px;padding:12px 20px;text-decoration:none;align-self:flex-start;margin-top:6px}
 footer{color:var(--muted);font-size:14px}
 footer a{color:inherit}
+/* 44px minimum tap targets on phones. */
+button,select,.brand,input:not([type=radio]):not([type=checkbox]){min-height:44px;box-sizing:border-box}
+.brand{display:inline-flex;align-items:center}
+:focus-visible{outline:3px solid currentColor;outline-offset:2px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 </head>
 <body>
