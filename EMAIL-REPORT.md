@@ -26,7 +26,7 @@ Config:
 - `AUTOMATIC_DELIVERY_ENABLED = true` in `src/data/monetization.ts`.
 - `UPSELL_MAP` in `src/data/monetization.ts` matches the ladder in CLAUDE.md. The delivery and follow-up emails both use it.
 
-Not part of the live system: `workers/buzzyfly-email/` is a standalone scaffold. It still has `database_id = "REPLACE_WITH_D1_ID"` and calls Resend. Nothing deploys it and the site does not use it. I left it alone. Consider deleting it so nobody mistakes it for the email system.
+Not part of the live system: `workers/buzzyfly-email/` was a standalone Resend scaffold with a placeholder D1 id. Nothing deployed it. It has since been deleted.
 
 ## 2. Pause diagnosis
 
@@ -96,7 +96,7 @@ Watch logs throughout with `npx wrangler tail buzzyfly`.
 4. **Set the mailing address (step 1).** This unpauses the 7-email sequence that moves free subscribers toward the $49 Digital System.
 5. **Recover past buyers if onboarding was broken.** Search `wrangler tail` or Workers Logs for `DELIVERY FAILED`, then use Admin > Orders → Resend link, which now emails the buyer directly. Follow-ups already marked failed before this fix can be released for retry with `DELETE FROM followup_emails WHERE success = 0`. This only works for orders under 7 days old, because of the follow-up window.
 6. **Done (follow-up PR):** the Admin > Orders "Resend link" button now emails the fresh link to the buyer through `sendDeliveryEmail`. It still shows the link on the page, and if the order has no email or the send fails it says so, so you can paste the link into your reply.
-7. **Clean-up:** delete the unused `workers/buzzyfly-email/` Resend scaffold.
+7. **Done:** the unused `workers/buzzyfly-email/` Resend scaffold has been deleted.
 
 ## 7. Verification (second pass, local only)
 
@@ -114,7 +114,7 @@ No connectors, paid APIs or owner credentials were used. Nothing in this pass se
 | Cron → sequence | `scheduled` → `sendDueSequenceEmails` → `sendSequenceEmail(step)` | orders@ | `sequence: step <n> to <email> failed: <reason>`, plus the rollback line when every send fails |
 | Admin outbox | `POST /api/admin/send-email` (admin session) → `sendBrandEmail` | `BUZZYFLY_CONFIG.brandEmail` → hello@ | `outbox: send to <email> ("<subject>") failed` plus a D1 `outbox_emails` row with `error` |
 
-- **Senders.** No code builds a From address outside `orders@` and `hello@`. A grep for `from:` across `src/` finds only these call sites. The standalone `workers/buzzyfly-email/` is not deployed.
+- **Senders.** No code builds a From address outside `orders@` and `hello@`. A grep for `from:` across `src/` finds only these call sites. The standalone `workers/buzzyfly-email/` scaffold was never deployed and has since been deleted.
 - **Cron.** `wrangler.json` sets `"crons": ["0 * * * *"]`. `astro.config.mjs` registers `src/worker-entry.ts`, which exports `scheduled`. That handler doesn't filter on `event.cron`, so this one trigger runs all five jobs, including `sendDueSequenceEmails`.
 
 ### 7.2 Unit tests (`npm run test:email`, 15/15 pass)
