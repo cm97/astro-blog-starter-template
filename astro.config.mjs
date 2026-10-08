@@ -4,6 +4,13 @@ import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
 
 import cloudflare from "@astrojs/cloudflare";
+import { readdirSync, readFileSync } from "node:fs";
+
+// Blog posts marked `draft: true` render but stay out of the sitemap (see
+// the `draft` field in src/content.config.ts).
+const draftPostUrls = readdirSync("./src/content/blog")
+	.filter((file) => /^draft:\s*true\s*$/m.test(readFileSync(`./src/content/blog/${file}`, "utf8").split(/^---$/m)[1] ?? ""))
+	.map((file) => `https://buzzyfly.com/blog/${file.replace(/\.mdx?$/, "")}/`);
 
 // https://astro.build/config
 export default defineConfig({
@@ -43,7 +50,31 @@ export default defineConfig({
 		"/blog/discovery-questions": { status: 301, destination: "/blog/client-discovery-questions/" },
 		"/blog/first-client-sprint": { status: 301, destination: "/blog/first-client-7-day-sprint/" },
 		"/blog/time-blocking": { status: 301, destination: "/blog/time-blocking-for-solo-operators/" },
+		// Starter-template slugs renamed to the words people search for.
+		"/blog/first-post": { status: 301, destination: "/blog/why-i-built-the-buzzyfly-digital-system/" },
+		"/blog/second-post": { status: 301, destination: "/blog/signs-your-business-is-running-you/" },
+		"/blog/markdown-style-guide": { status: 301, destination: "/blog/templates-vs-systems/" },
+		"/blog/using-mdx": { status: 301, destination: "/blog/how-to-use-the-buzzyfly-digital-system/" },
+		// Thin duplicates merged into the fuller post on the same topic.
+		"/blog/the-product": { status: 301, destination: "/blog/product-contents/" },
+		"/blog/lead-magnet-ideas": { status: 301, destination: "/blog/free-checklist-lead-magnet/" },
 	},
-	integrations: [mdx(), sitemap()],
+	integrations: [
+		mdx(),
+		sitemap({
+			// The free tools are static files in public/, which the sitemap
+			// integration does not see on its own.
+			customPages: [
+				"https://buzzyfly.com/tools/weekly-reset",
+				"https://buzzyfly.com/tools/follow-up-writer",
+				"https://buzzyfly.com/tools/client-onboarding",
+			],
+			// Only pages a searcher should land on: no admin console, order
+			// confirmations, unsubscribe page, or routes that only redirect.
+			filter: (page) =>
+				!/^https:\/\/buzzyfly\.com\/(admin|success|thank-you|unsubscribe|products|app)(\/|$)/.test(page) &&
+				!draftPostUrls.includes(page),
+		}),
+	],
 	devToolbar: { enabled: false },
 });

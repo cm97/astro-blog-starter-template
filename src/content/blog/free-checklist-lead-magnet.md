@@ -1,6 +1,6 @@
 ---
 title: 'The Free Checklist That Turns Strangers Into Buyers'
-description: 'Stop collecting emails with no bait. Give them the 20-minute weekly reset for free, then sell the full system.'
+description: "Why a one-page checklist beats an ebook or webinar as a free offer, what makes a good one, and the short email sequence that follows the download."
 pubDate: '2026-09-01'
 category: 'marketing'
 heroImage: '/blog-placeholder-3.jpg'
@@ -26,8 +26,15 @@ The 20-minute weekly reset checklist. Five steps. One page. They print it, stick
 
 ## Why this converts
 
-You are not selling a product. You are selling relief from a specific Tuesday that went to shit. The free checklist proves you understand the pain. The paid system proves you have the fix.
+You are not selling a product. You are selling relief from a specific Tuesday that fell apart. The free checklist proves you understand the pain. The paid system proves you have the fix.
 
-The full sequence — all four emails, the checklist, and the store link — is in the Buzzyfly Digital System. Stop collecting emails like a creep with no plan.
+## What makes a good free checklist
 
-[Get the Digital System — $49 →](/store/)
+- Something they can print and use today.
+- A template they can copy and send.
+- One page that solves one problem.
+- Nothing that takes longer than five minutes to start.
+
+A 50-page ebook, a webinar nobody attends, or a "free consultation" that is really a sales pitch all fail that test.
+
+You can start with the same free checklist this post describes: the [20-minute weekly reset](/checklist/).

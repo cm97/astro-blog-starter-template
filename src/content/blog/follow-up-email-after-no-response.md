@@ -1,11 +1,11 @@
 ---
-title: "Follow-Up Email After No Response: 5 Templates That Actually Get Replies"
-description: "Five ready-to-send follow-up email templates for when a prospect or client goes quiet — for proposals, check-ins, re-engagement, referral requests, and project wrap-ups."
+title: "Follow-Up Email After No Response: 5 Templates That Get Replies"
+description: "Five ready-to-send follow-up emails for when a prospect or client goes quiet: proposal, check-in, re-engagement, referral request and project wrap-up."
 pubDate: "Sep 13 2026"
 updatedDate: "Oct 06 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
-featuredProductTitle: "Buzzyfly Digital System"
+featuredProductTitle: "Follow-Up Email Templates"
 featuredProductPrice: "$49"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
@@ -159,6 +159,8 @@ Use when: A project went well and you want to ask if they know anyone who might 
 Why it works: It leads with a specific reference to a result, which reminds them why they're happy with you. The ask is framed as minimal effort ("even a name"). And it closes with a genuine out: "No worries if no one comes to mind."
 
 **Ask for referrals at the right moment.** The window is roughly two to four weeks after a project ends — after you've delivered results but before the engagement has faded from memory. Earlier feels like you're asking for a favor before you've fully delivered. Later and they've moved on.
+
+More versions, the one follow-up to send and how to thank a referrer are in [how to ask clients for referrals](/blog/referral-request-email-template/).
 
 ## Template 5: End-of-project wrap-up
 

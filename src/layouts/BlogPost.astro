@@ -28,6 +28,8 @@ const {
 	prev,
 	next,
 	related = [],
+	currentId,
+	draft = false,
 } = Astro.props;
 
 // Every post ends with a product callout: the post's own product when it names
@@ -40,11 +42,48 @@ const displayHero =
 	heroImage.includes('buzzyfly-brand-about.jpg')
 		? brandHero
 		: heroImage;
+// Social sites ignore SVG, so share a raster image: the post's own hero when it
+// is a real photo, otherwise the brand card.
+const shareImage = /\.(jpe?g|png|webp)$/i.test(displayHero) ? displayHero : '/og-default.jpg';
+
+// Only real blog posts (not About/Privacy/Terms, which reuse this layout) are articles.
+const isPost = Boolean(currentId);
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+const jsonLd = isPost
+	? [
+			{
+				'@context': 'https://schema.org',
+				'@type': 'BlogPosting',
+				headline: title,
+				description,
+				datePublished: pubDate.toISOString(),
+				...(updatedDate && { dateModified: updatedDate.toISOString() }),
+				image: new URL(shareImage, Astro.site).href,
+				mainEntityOfPage: canonicalURL,
+				...(category && { articleSection: category }),
+				author: { '@type': 'Organization', name: BUZZYFLY_CONFIG.brandName, url: BUZZYFLY_CONFIG.siteUrl },
+				publisher: {
+					'@type': 'Organization',
+					name: BUZZYFLY_CONFIG.brandName,
+					logo: { '@type': 'ImageObject', url: `${BUZZYFLY_CONFIG.siteUrl}/og-default.jpg` },
+				},
+			},
+		]
+	: [];
 ---
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} image={displayHero} />
+		<BaseHead
+			title={title}
+			description={description}
+			image={shareImage}
+			type={isPost ? 'article' : 'website'}
+			noindex={draft}
+			jsonLd={jsonLd}
+			publishedTime={isPost ? pubDate : undefined}
+			modifiedTime={isPost ? updatedDate : undefined}
+		/>
 		<style>
 			main { width: calc(100% - 2em); max-width: 100%; margin: 0; }
 			.hero-image { width: 100%; }

@@ -12,22 +12,24 @@ export async function getStaticPaths() {
 		(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 	);
 
-	return all.map((post, idx) => ({
-		params: { slug: post.id },
-		props: {
-			post,
-			prev: idx > 0 ? all[idx - 1] : null,
-			next: idx < all.length - 1 ? all[idx + 1] : null,
-			related: all
-				.filter(
-					(p) =>
-						p.id !== post.id &&
-						p.data.category &&
-						p.data.category === post.data.category,
-				)
-				.slice(0, 3),
-		},
-	}));
+	// Drafts get a page (see `draft` in content.config.ts) but never appear in
+	// another post's prev/next or related links.
+	const published = all.filter((p) => !p.data.draft);
+
+	return all.map((post) => {
+		const idx = published.indexOf(post);
+		return {
+			params: { slug: post.id },
+			props: {
+				post,
+				prev: idx > 0 ? published[idx - 1] : null,
+				next: idx >= 0 && idx < published.length - 1 ? published[idx + 1] : null,
+				related: published
+					.filter((p) => p.id !== post.id && p.data.category && p.data.category === post.data.category)
+					.slice(0, 3),
+			},
+		};
+	});
 }
 
 interface Props {

@@ -58,7 +58,7 @@ function toPlainText(source) {
 }
 
 export async function GET() {
-	const posts = await getCollection("blog");
+	const posts = await getCollection("blog", ({ data }) => !data.draft);
 
 	const postDocs = posts
 		.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())

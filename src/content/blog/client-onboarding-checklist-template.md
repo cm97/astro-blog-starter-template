@@ -1,6 +1,6 @@
 ---
 title: "Client Onboarding Checklist Template (Copy and Use Today)"
-description: "A complete client onboarding checklist template for coaches and consultants — every step from signed contract to kickoff call, ready to run without rebuilding from memory."
+description: "A client onboarding checklist for coaches, consultants and freelancers. Every step from signed contract to kickoff call, ready to run without rebuilding it from memory."
 pubDate: "Sep 13 2026"
 updatedDate: "Sep 29 2026"
 heroImage: "/blog-placeholder-2.jpg"
@@ -92,6 +92,8 @@ The welcome email does four things: confirms the relationship, sets tone, tells 
 
 That's it. No long preamble, no list of everything you're excited about. Just what they need to know right now.
 
+For project, retainer and "kickoff not booked yet" versions, see the [client welcome email template](/blog/client-welcome-email-template/).
+
 ## The intake form template
 
 Five questions. No more. The intake form is not a discovery call — it's pre-work so the discovery call isn't wasted on basics.
@@ -117,6 +119,8 @@ A kickoff call without an agenda turns into a 45-minute conversation where nothi
 5. **Questions** (5 min) — What do they need from you right now?
 
 Send a one-paragraph summary within an hour of the call: what you agreed on, who owns what, and what the next check-in looks like.
+
+The [client kickoff call agenda](/blog/client-kickoff-call-agenda/) has a 60-minute version, a prep list and a summary email you can copy.
 
 ## Why most onboarding breaks down
 

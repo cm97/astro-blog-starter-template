@@ -1,6 +1,6 @@
 ---
 title: "Client Intake Form Template: The 5 Questions That Actually Matter"
-description: "A client intake form template for coaches and consultants — five questions that prepare you for a better first call without overwhelming the client before they've started."
+description: "A client intake form template for coaches, consultants and freelancers. Five questions that prepare you for the first call without burying a new client in paperwork."
 pubDate: "Sep 13 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "onboarding"
@@ -37,7 +37,7 @@ These questions work for coaching, consulting, and most service-based engagement
 
 Why it's there: Most clients have a list of things they want to improve. The intake form isn't the place to collect the whole list — that comes out over time. This question identifies the thing that, if it doesn't happen, they'll feel like the engagement didn't deliver. That's what you're anchoring the work to.
 
-The answer to this question should show up explicitly in the kickoff call agenda. You're not starting the call by asking what they want — you're confirming what they told you.
+The answer to this question should show up explicitly in the [kickoff call agenda](/blog/client-kickoff-call-agenda/). You're not starting the call by asking what they want — you're confirming what they told you.
 
 ---
 

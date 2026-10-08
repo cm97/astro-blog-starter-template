@@ -98,7 +98,7 @@ const posts = (await getCollection("blog")).sort(
 				{
 					posts.map((post) => (
 						<tr>
-							<td>{post.data.title}</td>
+							<td>{post.data.title}{post.data.draft && <strong> (draft: unlisted, not indexed)</strong>}</td>
 							<td>{post.data.pubDate.toLocaleDateString()}</td>
 							<td><code>{post.id}</code></td>
 							<td style="display:flex; gap:0.5em;">
