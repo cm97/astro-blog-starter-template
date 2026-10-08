@@ -1,4 +1,5 @@
 import { BUZZYFLY_CONFIG, ALL_PRODUCTS, UPSELL_MAP } from "../data/monetization";
+import { findUpgrade } from "./productCheckout";
 
 /**
  * Transactional email for order fulfillment via the Cloudflare Email Service
@@ -17,6 +18,8 @@ export interface DeliveryEmail {
 	productName: string;
 	orderId: string;
 	itemId?: string;
+	/** Pay-the-difference upgrade link; replaces the full-price upsell when present. */
+	upgradeUrl?: string;
 }
 
 export interface EmailResult {
@@ -38,11 +41,24 @@ export function escapeHtml(value: string): string {
 		.replace(/"/g, "&quot;");
 }
 
-function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string {
+function renderHtml({ downloadUrl, productName, itemId, upgradeUrl }: DeliveryEmail): string {
 	const upsellId = itemId ? UPSELL_MAP[itemId] : null;
 	const upsellProduct = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) : null;
+	const upgrade = upgradeUrl && itemId ? findUpgrade(itemId) : null;
 
-	const upsellBlock = upsellProduct
+	const upsellBlock = upgrade && upgradeUrl
+		? `<hr style="border:none;border-top:1px solid #e5e5e5;margin:24px 0">
+    <p style="margin:0 0 8px;font-size:15px;font-weight:600;color:#16191c">Upgrade for the difference</p>
+    <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
+      The <strong>${escapeHtml(upgrade.to.title)}</strong> is normally $${upgrade.to.amount}. What you paid for
+      ${escapeHtml(productName)} comes off, so it's <strong>$${upgrade.amount}</strong> for the next 3 days.
+    </p>
+    <p style="margin:0">
+      <a href="${upgradeUrl}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
+        Upgrade for $${upgrade.amount}
+      </a>
+    </p>`
+		: upsellProduct
 		? `<hr style="border:none;border-top:1px solid #e5e5e5;margin:24px 0">
     <p style="margin:0 0 8px;font-size:15px;font-weight:600;color:#16191c">One more thing</p>
     <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
@@ -74,9 +90,10 @@ function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string
 </html>`;
 }
 
-function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string {
+function renderText({ downloadUrl, productName, itemId, upgradeUrl }: DeliveryEmail): string {
 	const upsellId = itemId ? UPSELL_MAP[itemId] : null;
 	const upsellProduct = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) : null;
+	const upgrade = upgradeUrl && itemId ? findUpgrade(itemId) : null;
 
 	const lines = [
 		`Thanks for buying ${productName}.`,
@@ -87,7 +104,15 @@ function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string
 		"This link expires in 3 days. If it lapses before you grab the file, reply to this email and you'll get a fresh one.",
 	];
 
-	if (upsellProduct) {
+	if (upgrade && upgradeUrl) {
+		lines.push(
+			"",
+			"---",
+			"",
+			`Upgrade to the ${upgrade.to.title} for the difference: $${upgrade.amount} instead of $${upgrade.to.amount}, for the next 3 days.`,
+			upgradeUrl,
+		);
+	} else if (upsellProduct) {
 		lines.push(
 			"",
 			"---",

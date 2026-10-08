@@ -3,7 +3,7 @@ import { BUZZYFLY_CONFIG } from "../../data/monetization";
 import { sendDeliveryEmail } from "../../lib/email";
 import { createDownloadToken } from "../../lib/fulfillment";
 import { captureOrder, paypalConfigured } from "../../lib/paypal";
-import { PRODUCT_CURRENCY, findSellableProduct } from "../../lib/productCheckout";
+import { PRODUCT_CURRENCY, findUpgrade, resolveCheckoutItem } from "../../lib/productCheckout";
 
 export const prerender = false;
 
@@ -18,6 +18,14 @@ function page(status: number, title: string, body: string): Response {
 
 const message = (status: number, text: string) =>
 	page(status, "Your order", `<p>${escape(text)}</p><p><a href="/products">Back to the products</a></p>`);
+
+function upgradeOffer(upgrade: NonNullable<ReturnType<typeof findUpgrade>>, path: string): string {
+	return `<hr style="border:none;border-top:1px solid #e3dccb;margin:32px 0">
+<p style="font-size:13px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;margin:0">Upgrade offer &middot; next 3 days</p>
+<h2 style="margin:6px 0 8px">Get the ${escape(upgrade.to.title)} for $${escape(upgrade.amount)}</h2>
+<p>It's normally $${escape(upgrade.to.amount)}. You already paid $${escape(upgrade.from.amount)} for the ${escape(upgrade.from.title)}, so that comes off the price. You only pay the difference.</p>
+<p><a class="btn" href="${escape(path)}">Upgrade for $${escape(upgrade.amount)}</a></p>`;
+}
 
 /**
  * PayPal sends the buyer back here (?token=<order id>). We capture the order server-side,
@@ -43,12 +51,13 @@ export const GET: APIRoute = async ({ url, locals }) => {
 		return message(402, `We could not confirm your PayPal payment. If you were charged, email ${BUZZYFLY_CONFIG.orderEmail} with order ${orderId}.`);
 	}
 
-	const product = captured.customId ? findSellableProduct(captured.customId) : null;
+	const item = captured.customId ? resolveCheckoutItem(captured.customId) : null;
+	const product = item?.product ?? null;
 	const valid =
-		product !== null &&
+		item !== null &&
 		captured.completed &&
 		captured.currency === PRODUCT_CURRENCY &&
-		Number(captured.amount) >= Number(product.amount);
+		Number(captured.amount) >= Number(item.requiredAmount);
 	if (!valid || !product) {
 		console.error("Buzzyfly buy: PayPal order failed verification", JSON.stringify(captured));
 		return message(402, "Your payment was not completed, so no download was issued.");
@@ -56,6 +65,9 @@ export const GET: APIRoute = async ({ url, locals }) => {
 
 	const token = await createDownloadToken({ orderId: captured.orderId, itemId: product.id }, env.DOWNLOAD_TOKEN_SECRET);
 	const downloadPath = `/api/download?token=${token}`;
+	// The download token doubles as proof of purchase for the pay-the-difference upgrade.
+	const upgrade = findUpgrade(product.id);
+	const upgradePath = upgrade ? `/buy/upgrade?token=${token}` : null;
 
 	// Best effort: a failed record or email must never block a paid buyer from their file.
 	// Only the visit that first records the order sends the email, so reloading this page does not resend it.
@@ -82,6 +94,7 @@ export const GET: APIRoute = async ({ url, locals }) => {
 					productName: product.title,
 					orderId: captured.orderId,
 					itemId: product.id,
+					upgradeUrl: upgradePath ? `${BUZZYFLY_CONFIG.siteUrl}${upgradePath}` : undefined,
 				},
 				env,
 			);
@@ -96,6 +109,6 @@ export const GET: APIRoute = async ({ url, locals }) => {
 		"Thanks, your order is complete",
 		`<p>Your ${escape(product.title)} is ready.</p>
 <p><a class="btn" href="${escape(downloadPath)}">Download now</a></p>
-<p>We've also emailed this link${captured.payerEmail ? ` to ${escape(captured.payerEmail)}` : ""}. It works for 3 days. ${escape(BUZZYFLY_CONFIG.guarantee)}</p>`,
+<p>We've also emailed this link${captured.payerEmail ? ` to ${escape(captured.payerEmail)}` : ""}. It works for 3 days. ${escape(BUZZYFLY_CONFIG.guarantee)}</p>${upgrade && upgradePath ? upgradeOffer(upgrade, upgradePath) : ""}`,
 	);
 };
