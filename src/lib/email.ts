@@ -114,8 +114,22 @@ export interface EmailBinding {
 	}): Promise<{ messageId: string }>;
 }
 
+// Must match `send_email[0].allowed_sender_addresses` in wrangler.json. The
+// binding rejects any other From address at runtime, so a typo in EMAIL_FROM
+// would otherwise fail every send.
+export const ALLOWED_SENDERS = ["orders@buzzyfly.com", "hello@buzzyfly.com"];
+const DEFAULT_FROM = `${BUZZYFLY_CONFIG.brandName} <orders@buzzyfly.com>`;
+
 export function resolveFrom(env: { EMAIL_FROM?: string }): string {
-	return env.EMAIL_FROM ?? `${BUZZYFLY_CONFIG.brandName} <orders@buzzyfly.com>`;
+	if (!env.EMAIL_FROM) return DEFAULT_FROM;
+	const { email, name } = parseFrom(env.EMAIL_FROM);
+	if (!ALLOWED_SENDERS.includes(email.toLowerCase())) {
+		console.error(
+			`Buzzyfly email: EMAIL_FROM "${email}" is not an allowed sender (${ALLOWED_SENDERS.join(", ")}); using ${DEFAULT_FROM}`,
+		);
+		return DEFAULT_FROM;
+	}
+	return name ? `${name} <${email}>` : email;
 }
 
 export interface FollowUpEmail {
@@ -193,13 +207,14 @@ export async function sendFollowUpEmail(
 		await env.EMAIL.send({ from, to: message.to, subject, html, text });
 		return { sent: true };
 	} catch (error) {
+		console.error(`Buzzyfly email: follow-up send failed for order ${message.orderId} to ${message.to}`, error);
 		return { sent: false, reason: `send failed: ${String(error)}` };
 	}
 }
 
 export async function sendDeliveryEmail(
 	message: DeliveryEmail,
-	env: { EMAIL?: EmailBinding; EMAIL_FROM?: string; EMAIL_API_KEY?: string },
+	env: { EMAIL?: EmailBinding; EMAIL_FROM?: string },
 ): Promise<EmailResult> {
 	if (!env.EMAIL) {
 		return { sent: false, reason: "EMAIL binding is not configured in wrangler.json" };
@@ -208,13 +223,9 @@ export async function sendDeliveryEmail(
 		return { sent: false, reason: "no customer email on the order" };
 	}
 
-	const fromStr = env.EMAIL_FROM ?? `${BUZZYFLY_CONFIG.brandName} <orders@buzzyfly.com>`;
-	const { email: fromEmail, name: fromName } = parseFrom(fromStr);
-	const from = fromName ? `${fromName} <${fromEmail}>` : fromEmail;
-
 	try {
 		await env.EMAIL.send({
-			from,
+			from: resolveFrom(env),
 			to: message.to,
 			subject: `Your ${message.productName} download`,
 			html: renderHtml(message),
@@ -222,6 +233,7 @@ export async function sendDeliveryEmail(
 		});
 		return { sent: true };
 	} catch (error) {
+		console.error(`Buzzyfly email: delivery send failed for order ${message.orderId} to ${message.to}`, error);
 		return { sent: false, reason: `send failed: ${String(error)}` };
 	}
 }

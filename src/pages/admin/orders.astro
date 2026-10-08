@@ -8,6 +8,8 @@ const env = Astro.locals.runtime.env;
 const q = Astro.url.searchParams.get("q")?.trim() ?? "";
 const resent = Astro.url.searchParams.get("resent");
 const resendError = Astro.url.searchParams.get("error");
+const emailed = Astro.url.searchParams.get("emailed");
+const emailError = Astro.url.searchParams.get("email_error");
 
 // `fulfillments` has no surrogate id column; (provider, order_id) is unique
 // (see the index in migrations/0001_init.sql) and identifies a row.
@@ -90,11 +92,12 @@ if (env.DB) {
 		<ol>
 			<li>Search their email address or order number.</li>
 			<li>Press <strong>Resend link</strong> on their order.</li>
-			<li>A fresh link appears at the top of this page. Copy it and email it to them.</li>
+			<li>A fresh link is emailed to the address on the order, from orders@buzzyfly.com.</li>
 		</ol>
 		<p>
-			The new link works for 3 days. The console does not email it for you — you paste it into your
-			own reply. Old links keep working until they expire on their own.
+			The new link works for 3 days and also appears at the top of this page. If the email can't be
+			sent, or the order has no email, the page says so — copy the link into your own reply instead.
+			Old links keep working until they expire on their own.
 		</p>
 	</AdminHelp>
 
@@ -134,9 +137,13 @@ if (env.DB) {
 	</div>
 	{
 		resent && (
-			<p class="admin-notice admin-notice--success">
-				New download link (valid 3 days): <a href={resent}>{resent}</a>
-			</p>
+			<>
+				{emailed && <p class="admin-notice admin-notice--success">Fresh download link emailed to {emailed}.</p>}
+				{emailError && <p class="admin-notice admin-notice--error">{emailError} Copy the link below into your reply.</p>}
+				<p class={`admin-notice ${emailed ? "admin-notice--info" : "admin-notice--warn"}`}>
+					New download link (valid 3 days): <a href={resent}>{resent}</a>
+				</p>
+			</>
 		)
 	}
 

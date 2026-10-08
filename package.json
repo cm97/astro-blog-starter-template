@@ -34,7 +34,8 @@
 		"check": "astro build && tsc && wrangler deploy --dry-run",
 		"deploy": "wrangler deploy",
 		"dev": "astro dev",
-		"preview": "astro build && wrangler dev"
+		"preview": "astro build && wrangler dev",
+		"test:email": "esbuild tests/email.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/email.test.mjs && node --test .test-build/email.test.mjs"
 	},
 	"type": "module"
 }

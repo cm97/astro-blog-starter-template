@@ -93,7 +93,8 @@ export const GET: APIRoute = async ({ url, locals }) => {
 				},
 				env,
 			);
-			if (!sent.sent) console.error("Buzzyfly buy: download email not sent", captured.orderId, sent.reason);
+			if (!sent.sent)
+				console.error(`Buzzyfly buy: download email not sent for order ${captured.orderId} to ${captured.payerEmail}: ${sent.reason}`);
 		} catch (error) {
 			console.error("Buzzyfly buy: download email failed", error);
 		}
