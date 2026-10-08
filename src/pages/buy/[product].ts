@@ -28,7 +28,7 @@ export const GET: APIRoute = async ({ params, url, locals }) => {
 			currency: PRODUCT_CURRENCY,
 			description: `Buzzyfly ${product.title}`,
 			returnUrl: `${url.origin}/buy/paypal-return`,
-			cancelUrl: `${url.origin}/products`,
+			cancelUrl: `${url.origin}/store`,
 		});
 		return new Response(null, { status: 302, headers: { location: order.approveUrl, "cache-control": "no-store" } });
 	} catch (error) {

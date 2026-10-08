@@ -66,17 +66,36 @@ export const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa
 export const AUTOMATIC_DELIVERY_ENABLED = true;
 
 /**
- * Resolves the buy action for the Digital System. Card payments go through the
- * PayPal checkout at /buy/<product id>, which falls back to a real email order
- * while PayPal is not configured, so the site never renders a dead button.
+ * Resolves the buy action for a product, by id or title (defaults to the
+ * Digital System). Card payments go through the PayPal checkout at
+ * /buy/<product id>, which falls back to a real email order while PayPal is not
+ * configured, so the site never renders a dead button.
  */
-export function getOrderAction(_productTitle: string = BUZZYFLY_CONFIG.defaultProductTitle) {
+export function getOrderAction(productIdOrTitle: string = BUZZYFLY_CONFIG.defaultProductTitle) {
+	const product = getProduct(productIdOrTitle) ?? getProduct("buzzyfly-digital-system")!;
 	return {
 		live: true,
-		href: "/buy/buzzyfly-digital-system",
+		href: product.buyUrl,
 		label: "Buy now",
 		external: false,
 	};
+}
+
+/** Finds a product by id or (case-insensitive) title. */
+export function getProduct(idOrTitle: string) {
+	const key = idOrTitle.trim().toLowerCase();
+	return ALL_PRODUCTS.find((p) => p.id === key || p.title.toLowerCase() === key) ?? null;
+}
+
+/**
+ * Sum of the single products the bundle contains, shown crossed out next to the
+ * bundle price. Computed from real prices so it can never drift into a made-up
+ * "was" price.
+ */
+export function bundleSeparatePrice(): string {
+	const parts = ["weekly-reset-checklist", "follow-up-email-templates", "client-onboarding-kit", "buzzyfly-digital-system"];
+	const total = parts.reduce((sum, id) => sum + Number(getProduct(id)!.price.replace(/[^0-9.]/g, "")), 0);
+	return `$${total}`;
 }
 
 // Maps a purchased item identifier (the Stripe Checkout Session's
@@ -131,7 +150,7 @@ export const ALL_PRODUCTS = [
 		id: "weekly-reset-checklist",
 		title: "Weekly Reset Checklist",
 		price: "$15",
-		description: "The 20-minute Monday routine that keeps your week on track. Clear inboxes, set one priority, plan your week — same way every time.",
+		description: "Stop losing Monday to figuring out what to work on. Run one 20-minute routine and the week has a plan by 9:30.",
 		features: ["20-minute weekly reset checklist", "Priority-setting template", "Thursday mid-week check-in", "Inbox-clearing routine"],
 		buyUrl: "/buy/weekly-reset-checklist",
 		badge: null,
@@ -140,7 +159,7 @@ export const ALL_PRODUCTS = [
 		id: "follow-up-email-templates",
 		title: "Follow-Up Email Templates",
 		price: "$19",
-		description: "5 ready-to-send follow-up emails. Fill in a name, hit send — no staring at a blank screen.",
+		description: "Stop letting quiet leads go cold. Five ready-to-send emails for every stage. Fill in a name and hit send.",
 		features: ["Proposal follow-up (5–7 days)", "Mid-project check-in", "Re-engagement for quiet leads", "Referral request", "End-of-project wrap-up"],
 		buyUrl: "/buy/follow-up-email-templates",
 		badge: null,
@@ -149,7 +168,7 @@ export const ALL_PRODUCTS = [
 		id: "client-onboarding-kit",
 		title: "Client Onboarding Kit",
 		price: "$29",
-		description: "Everything to onboard a new client in 20 minutes — welcome email, intake form, kickoff agenda, internal notes format.",
+		description: "A new client signs and you are ready in 20 minutes, not two hours. Welcome email, intake form and kickoff agenda already written.",
 		features: ["Welcome email template with fill-in variables", "Intake form questions", "Kickoff meeting agenda", "Internal client notes format", "48-hour follow-up reminder format"],
 		buyUrl: "/buy/client-onboarding-kit",
 		badge: null,
@@ -158,7 +177,7 @@ export const ALL_PRODUCTS = [
 		id: "buzzyfly-digital-system",
 		title: "Buzzyfly Digital System",
 		price: "$49",
-		description: "The complete operating framework — onboarding, weekly planning, and follow-up workflows. The system that holds everything together.",
+		description: "Onboarding, weekly planning and follow-ups as checklists you run in 20 minutes. The process still works on the weeks you are slammed.",
 		features: ["Complete onboarding workflow", "20-minute weekly reset", "Follow-up system with templates", "Lifetime access + future updates"],
 		buyUrl: "/buy/buzzyfly-digital-system",
 		badge: "Most popular",
@@ -167,7 +186,7 @@ export const ALL_PRODUCTS = [
 		id: "complete-business-bundle",
 		title: "Complete Business Bundle",
 		price: "$97",
-		description: "Every Buzzyfly product in one download. The Digital System + Onboarding Kit + Follow-Up Templates + Weekly Checklist. Everything.",
+		description: "Every Buzzyfly checklist, template and script in one download. Never wonder which piece you are missing.",
 		features: ["Everything in the Digital System", "Client Onboarding Kit", "Follow-Up Email Templates", "Weekly Reset Checklist", "All future product updates"],
 		buyUrl: "/buy/complete-business-bundle",
 		badge: "Best value",

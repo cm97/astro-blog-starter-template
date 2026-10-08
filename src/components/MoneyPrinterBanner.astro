@@ -1,18 +1,50 @@
 ---
+import { BUZZYFLY_CONFIG, bundleSeparatePrice, getOrderAction, getProduct } from "../data/monetization";
+
 interface Props {
-	bundleUrl: string;
-	bundlePrice: string;
+	/** Defaults to the Complete Bundle's checkout route. */
+	bundleUrl?: string;
+	bundlePrice?: string;
+	/** "strip" is the slim top banner. "section" is the full store banner. */
+	variant?: "strip" | "section";
 }
-const { bundleUrl, bundlePrice } = Astro.props;
+
+const bundle = getProduct("complete-business-bundle")!;
+const {
+	bundleUrl = getOrderAction(bundle.id).href,
+	bundlePrice = bundle.price,
+	variant = "strip",
+} = Astro.props;
+const separate = bundleSeparatePrice();
 ---
 
-<div class="printer-banner">
-	<p class="printer-banner__kicker">One-time. Instant download. No subscription.</p>
-	<p class="printer-banner__line">
-		Get every checklist, template, and script in one zip — {bundlePrice} Complete Bundle.
-	</p>
-	<a class="printer-banner__cta" href={bundleUrl} target="_blank" rel="noopener">Buy the bundle →</a>
-</div>
+{
+	variant === "section" ? (
+		<section class="printer-section" aria-labelledby="bundle-heading">
+			<p class="printer-banner__kicker">Best value · One-time · Instant download</p>
+			<h2 id="bundle-heading">Want every file? Get the Complete Bundle.</h2>
+			<p class="printer-section__lede">{bundle.description}</p>
+			<ul class="printer-section__list">
+				{bundle.features.map((f) => <li>{f}</li>)}
+			</ul>
+			<p class="printer-section__price">
+				<s><span class="sr-only">Bought separately: </span>{separate}</s>{" "}
+				<span class="sr-only">Bundle price: </span>
+				<strong>{bundlePrice}</strong>
+			</p>
+			<a class="printer-banner__cta printer-banner__cta--big" href={bundleUrl}>Buy the Complete Bundle — {bundlePrice}</a>
+			<p class="printer-section__fine">{BUZZYFLY_CONFIG.guarantee}</p>
+		</section>
+	) : (
+		<div class="printer-banner">
+			<p class="printer-banner__kicker">One-time. Instant download. No subscription.</p>
+			<p class="printer-banner__line">
+				Every checklist, template and script in one zip. <s>{separate}</s> {bundlePrice} Complete Bundle.
+			</p>
+			<a class="printer-banner__cta" href={bundleUrl}>Buy the bundle →</a>
+		</div>
+	)
+}
 
 <style>
 	.printer-banner {
@@ -39,15 +71,50 @@ const { bundleUrl, bundlePrice } = Astro.props;
 		font-size: 0.95em;
 		font-weight: 600;
 	}
+	.printer-banner__line s {
+		color: rgba(255, 255, 255, 0.6);
+		font-weight: 400;
+	}
 	.printer-banner__cta {
-		display: inline-block;
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
 		background: #facc15;
 		color: #111 !important;
 		font-weight: 800;
 		font-size: 0.85em;
-		padding: 0.4em 0.95em;
+		padding: 0.4em 1.1em;
 		border-radius: 999px;
 		text-decoration: none;
 	}
 	.printer-banner__cta:hover { opacity: 0.9; }
+	.printer-banner__cta:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+	.printer-section {
+		margin: 3em 0;
+		padding: 2.2em 1.6em;
+		border-radius: 18px;
+		background: #111;
+		color: #fff;
+		text-align: center;
+	}
+	.printer-section h2 {
+		color: #fff;
+		font-size: clamp(1.4em, 5vw, 1.9em);
+		margin: 0.5em 0;
+	}
+	.printer-section__lede { color: rgba(255, 255, 255, 0.8); margin: 0 auto 1.2em; max-width: 30em; }
+	.printer-section__list {
+		list-style: none;
+		padding: 0;
+		margin: 0 auto 1.4em;
+		max-width: 22em;
+		text-align: left;
+		font-size: 0.92em;
+	}
+	.printer-section__list li { padding: 0.25em 0 0.25em 1.5em; position: relative; color: rgba(255, 255, 255, 0.9); }
+	.printer-section__list li::before { content: "✓"; position: absolute; left: 0; color: #4ade80; font-weight: 700; }
+	.printer-section__price { margin: 0 0 1em; font-size: 1.5em; }
+	.printer-section__price s { color: rgba(255, 255, 255, 0.55); font-size: 0.7em; margin-right: 0.3em; }
+	.printer-banner__cta--big { font-size: 1em; padding: 0.8em 1.8em; }
+	.printer-section__fine { margin: 1em 0 0; font-size: 0.8em; color: rgba(255, 255, 255, 0.7); }
 </style>

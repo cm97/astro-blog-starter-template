@@ -1,30 +1,48 @@
 ---
-import { BUZZYFLY_CONFIG, getOrderAction } from "../data/monetization";
+import { BUZZYFLY_CONFIG, bundleSeparatePrice, getOrderAction, getProduct } from "../data/monetization";
 
 interface Props {
+	/** Product id from ALL_PRODUCTS. Fills in any field not passed explicitly. */
+	productId?: string;
 	title?: string;
 	price?: string;
+	/** Only used when no product in ALL_PRODUCTS matches. */
 	url?: string;
 	description?: string;
 	features?: string[];
+	badge?: string | null;
+	/** Larger card with a glow, for the recommended product. */
+	featured?: boolean;
+	headingLevel?: "h2" | "h3";
 }
 
-const {
-	title = BUZZYFLY_CONFIG.defaultProductTitle,
-	price = BUZZYFLY_CONFIG.defaultProductPrice,
-	url,
-	description = BUZZYFLY_CONFIG.defaultProductDescription,
-	features = ["Lifetime access", "Instant download after payment, plus an emailed link", "Free updates"],
-} = Astro.props;
+const props = Astro.props;
+const product = getProduct(props.productId ?? props.title ?? BUZZYFLY_CONFIG.defaultProductTitle);
 
-const order = url
-	? { live: true, href: url, label: "Get it now", external: true }
-	: getOrderAction(title);
+const title = props.title ?? product?.title ?? BUZZYFLY_CONFIG.defaultProductTitle;
+const price = props.price ?? product?.price ?? BUZZYFLY_CONFIG.defaultProductPrice;
+const description = props.description ?? product?.description ?? BUZZYFLY_CONFIG.defaultProductDescription;
+const features = props.features ?? product?.features ?? [];
+const badge = props.badge !== undefined ? props.badge : product?.badge ?? null;
+const featured = props.featured ?? badge === "Most popular";
+const Heading = props.headingLevel ?? "h3";
+// Crossed-out price only where it is true: the bundle vs buying each piece.
+const compareAt = product?.id === "complete-business-bundle" ? bundleSeparatePrice() : null;
+
+// Buy buttons always go to a real checkout route for a known product.
+const order = product
+	? getOrderAction(product.id)
+	: props.url
+		? { live: true, href: props.url, label: "Buy now", external: /^https?:/.test(props.url) }
+		: getOrderAction();
 ---
 
-<aside class="product-callout" aria-label={`${BUZZYFLY_CONFIG.brandName} product`}>
-	<div class="product-callout__badge">{BUZZYFLY_CONFIG.brandName}</div>
-	<h3 class="product-callout__title">{title}</h3>
+<aside
+	class:list={["product-callout", { "product-callout--featured": featured }]}
+	aria-label={`${title}, ${price}`}
+>
+	{badge && <div class="product-callout__badge">{badge}</div>}
+	<Heading class="product-callout__title">{title}</Heading>
 	<p class="product-callout__description">{description}</p>
 	{
 		features.length > 0 && (
@@ -36,32 +54,26 @@ const order = url
 		)
 	}
 	<div class="product-callout__footer">
-		<span class="product-callout__price">{price}</span>
-		{
-			order.external ? (
-				<a
-					class="product-callout__cta"
-					href={order.href}
-					target="_blank"
-					rel="noopener noreferrer"
-				>
-					{order.label}
-				</a>
-			) : (
-				<a class="product-callout__cta" href={order.href}>
-					{order.label}
-				</a>
-			)
-		}
+		<span class="product-callout__price">
+			{compareAt && (
+				<s class="product-callout__compare">
+					<span class="sr-only">Bought separately: </span>{compareAt}
+				</s>
+			)}
+			{compareAt && <span class="sr-only">Bundle price: </span>}
+			{price}
+		</span>
+		<a
+			class="product-callout__cta"
+			href={order.href}
+			{...(order.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+		>
+			{order.label}
+			<span class="sr-only"> {title}</span>
+		</a>
 	</div>
-	{
-		!order.live && (
-			<p class="product-callout__note">
-				Card checkout isn't switched on yet — email orders are handled by hand.
-			</p>
-		)
-	}
-	<p class="product-callout__guarantee">30-day money-back guarantee — email us if it doesn't deliver.</p>
+	{compareAt && <p class="product-callout__note">{compareAt} if you buy each piece separately.</p>}
+	<p class="product-callout__guarantee">One-time payment. Instant download. {BUZZYFLY_CONFIG.guarantee}</p>
 </aside>
 
 <style>
@@ -72,9 +84,15 @@ const order = url
 		border: 1px solid rgb(var(--gray-light));
 		background: #fff;
 		box-shadow: var(--box-shadow);
+		display: flex;
+		flex-direction: column;
+	}
+	.product-callout--featured {
+		border: 2px solid var(--accent);
+		box-shadow: 0 0 0 4px rgba(35, 55, 255, 0.12), 0 12px 40px rgba(35, 55, 255, 0.22);
 	}
 	.product-callout__badge {
-		display: inline-block;
+		align-self: flex-start;
 		padding: 0.25em 0.75em;
 		margin-bottom: 0.75em;
 		border-radius: 999px;
@@ -87,6 +105,7 @@ const order = url
 	}
 	.product-callout__title {
 		margin: 0 0 0.4em 0;
+		font-size: 1.5em;
 		color: rgb(var(--black));
 	}
 	.product-callout__description {
@@ -94,12 +113,24 @@ const order = url
 		color: rgb(var(--gray-dark));
 	}
 	.product-callout__features {
+		list-style: none;
 		margin: 0 0 1.25em 0;
-		padding-left: 1.25em;
+		padding: 0;
 		color: rgb(var(--gray-dark));
+		flex: 1;
 	}
 	.product-callout__features li {
+		position: relative;
 		margin-bottom: 0.35em;
+		padding-left: 1.4em;
+		font-size: 0.92em;
+	}
+	.product-callout__features li::before {
+		content: "✓";
+		position: absolute;
+		left: 0;
+		color: #1a7a3c;
+		font-weight: 700;
 	}
 	.product-callout__footer {
 		display: flex;
@@ -109,14 +140,23 @@ const order = url
 		flex-wrap: wrap;
 	}
 	.product-callout__price {
-		font-size: 1.5em;
+		font-size: 1.6em;
 		font-weight: 700;
 		color: rgb(var(--black));
 	}
+	.product-callout__compare {
+		margin-right: 0.35em;
+		font-size: 0.65em;
+		font-weight: 400;
+		color: rgb(var(--gray));
+	}
 	.product-callout__cta {
-		display: inline-block;
-		padding: 0.65em 1.5em;
-		border-radius: 8px;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		padding: 0.6em 1.6em;
+		border-radius: 999px;
 		background: var(--accent);
 		color: #fff;
 		font-weight: 700;
@@ -127,14 +167,19 @@ const order = url
 		background: var(--accent-dark);
 		color: #fff;
 	}
-	.product-callout__note {
-		margin: 1em 0 0;
-		font-size: 0.8em;
-		color: rgb(var(--gray));
+	.product-callout__cta:focus-visible {
+		outline: 3px solid rgb(var(--black));
+		outline-offset: 3px;
 	}
+	.product-callout__note,
 	.product-callout__guarantee {
 		margin: 0.75em 0 0;
 		font-size: 0.8em;
 		color: rgb(var(--gray));
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.product-callout__cta {
+			transition: none;
+		}
 	}
 </style>

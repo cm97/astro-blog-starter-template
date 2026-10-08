@@ -6,7 +6,7 @@ import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import ProductCallout from '../components/ProductCallout.astro';
 import EmailOptin from '../components/EmailOptin.astro';
-import { BUZZYFLY_CONFIG } from '../data/monetization';
+import { BUZZYFLY_CONFIG, getProduct } from '../data/monetization';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	prev?: CollectionEntry<'blog'> | null;
@@ -23,7 +23,6 @@ const {
 	heroImage,
 	category,
 	featuredProductTitle,
-	featuredProductPrice,
 	featuredProductUrl,
 	featuredProductDescription,
 	prev,
@@ -31,7 +30,9 @@ const {
 	related = [],
 } = Astro.props;
 
-const hasFeaturedProduct = Boolean(featuredProductTitle || featuredProductUrl);
+// Every post ends with a product callout: the post's own product when it names
+// one in frontmatter, otherwise the flagship Digital System.
+const calloutProduct = getProduct(featuredProductTitle ?? '') ?? getProduct('buzzyfly-digital-system')!;
 const brandHero = '/buzzyfly-brand-about.svg';
 const displayHero =
 	!heroImage ||
@@ -66,9 +67,11 @@ const displayHero =
 			.related a:hover { color: var(--accent); }
 			.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid rgb(var(--gray-light)); box-shadow: 0 -4px 16px rgba(0,0,0,0.08); padding: 0.7em 1em; display: flex; align-items: center; justify-content: space-between; gap: 1em; z-index: 50; }
 			.sticky-cta .price { font-weight: 700; }
-			.sticky-cta a { padding: 0.6em 1.4em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; }
+			.sticky-cta a { display: inline-flex; align-items: center; min-height: 44px; padding: 0.4em 1.4em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; }
 			.sticky-cta a:hover { background: var(--accent-dark); }
 			@media (max-width: 720px) { .sticky-cta span:first-child { display: none; } }
+			body { padding-bottom: 72px; }
+			.store-link { text-align: center; font-size: 0.9em; color: rgb(var(--gray)); margin: -1.5em 0 2em; }
 		</style>
 	</head>
 
@@ -96,16 +99,12 @@ const displayHero =
 						<hr />
 					</div>
 					<slot />
-					{
-						hasFeaturedProduct && (
-							<ProductCallout
-								title={featuredProductTitle}
-								price={featuredProductPrice}
-								url={featuredProductUrl}
-								description={featuredProductDescription}
-							/>
-						)
-					}
+					<ProductCallout
+						productId={calloutProduct.id}
+						description={calloutProduct.title === featuredProductTitle ? featuredProductDescription : undefined}
+						url={featuredProductUrl}
+					/>
+					<p class="store-link">Not sure which one fits? <a href="/store">See every product in the store</a>.</p>
 					{
 						(prev || next) && (
 							<nav class="nav-posts" aria-label="Post navigation">
@@ -138,7 +137,7 @@ const displayHero =
 		<div class="sticky-cta">
 			<span>The checklists for this are in the Digital System.</span>
 			<span class="price">{BUZZYFLY_CONFIG.defaultProductPrice}</span>
-			<a href="/store">Get it</a>
+			<a href="/store#digital-system">See the system</a>
 		</div>
 	</body>
 </html>

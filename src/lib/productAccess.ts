@@ -73,7 +73,7 @@ export function productLockedPage(itemId: string | null): Response {
 	const title = product ? `${product.title} is a paid download` : "This download needs a purchase";
 	const action = product
 		? `<a class="btn" href="${productBuyUrl(product.id)}">Buy ${escapeHtml(product.title)} \u2014 ${escapeHtml(product.price)}</a>`
-		: `<a class="btn" href="/products">See the products</a>`;
+		: `<a class="btn" href="/store">See the products</a>`;
 	const html = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Buzzyfly download</title>
 <style>body{margin:0;background:#faf7ef;color:#23201a;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}main{max-width:560px;margin:0 auto;padding:48px 18px}h1{font-size:1.6rem;margin:0 0 8px}p{color:#6b6455}a.btn{display:inline-block;background:#e0a012;color:#1d1606;font-weight:600;padding:12px 18px;border-radius:6px;text-decoration:none;margin-top:12px}a.btn:focus-visible{outline:3px solid #23201a;outline-offset:2px}small{display:block;margin-top:18px}</style></head>
 <body><main><h1>${escapeHtml(title)}</h1>
