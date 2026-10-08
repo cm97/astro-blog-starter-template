@@ -52,8 +52,8 @@ let tipPct = 18;
 function setTip(pct, btn) {
   tipPct = pct;
   document.querySelectorAll('.tip-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active);
-  document.getElementById('customTipBox').classList.remove('show);
+  btn.classList.add('active');
+  document.getElementById('customTipBox').classList.remove('show');
   calc();
 }
 function calc() {

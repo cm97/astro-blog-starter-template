@@ -45,7 +45,7 @@
 <div class="card" id="billList"></div>
 
 <script>
-let bills = JSON.parse(localStorage.getItem('bills') || '[]);
+let bills = JSON.parse(localStorage.getItem('bills') || '[]');
 function save() { localStorage.setItem('bills', JSON.stringify(bills)); }
 function addBill() {
   const name = document.getElementById('billName').value.trim();
@@ -68,7 +68,7 @@ function deleteBill(id) {
   save(); render();
 }
 function render() {
-  const list = document.getElementById('billList);
+  const list = document.getElementById('billList');
   if (bills.length === 0) { list.innerHTML = '<p class="empty">No bills yet. Add one above.</p>'; return; }
   const today = new Date().toISOString().split('T')[0];
   bills.sort((a, b) => a.due.localeCompare(b.due));
