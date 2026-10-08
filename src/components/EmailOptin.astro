@@ -106,6 +106,7 @@ const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 	}
 	.email-optin__title {
 		margin: 0 0 0.4em 0;
+		font-size: clamp(1.35em, 5vw, 1.75em);
 		color: rgb(var(--black));
 	}
 	.email-optin__description {
@@ -121,12 +122,15 @@ const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 	.email-optin__input {
 		flex: 1 1 260px;
 		max-width: 320px;
+		min-height: 44px;
+		box-sizing: border-box;
 		padding: 0.65em 0.9em;
 		border: 1px solid rgb(var(--gray-light));
 		border-radius: 8px;
 		font-family: inherit;
 	}
 	.email-optin__submit {
+		min-height: 44px;
 		padding: 0.65em 1.5em;
 		border: none;
 		border-radius: 8px;

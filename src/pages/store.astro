@@ -3,8 +3,11 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import EmailOptin from "../components/EmailOptin.astro";
+import ProductCallout from "../components/ProductCallout.astro";
+import MoneyPrinterBanner from "../components/MoneyPrinterBanner.astro";
 import {
 	AUTOMATIC_DELIVERY_ENABLED,
+	ALL_PRODUCTS,
 	BUZZYFLY_CONFIG,
 	getOrderAction,
 } from "../data/monetization";
@@ -13,21 +16,55 @@ import { getSettings } from "../lib/settings";
 export const prerender = false;
 
 const settings = await getSettings(Astro.locals.runtime?.env);
-const title = settings.defaultProductTitle || BUZZYFLY_CONFIG.defaultProductTitle;
-const price = BUZZYFLY_CONFIG.defaultProductPrice;
-const description = settings.defaultProductDescription || BUZZYFLY_CONFIG.defaultProductDescription;
-const order = getOrderAction(title);
+const system = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
+// An admin-edited description (Admin > Settings) wins over the shipped copy.
+const systemDescription =
+	settings.defaultProductDescription && settings.defaultProductDescription !== BUZZYFLY_CONFIG.defaultProductDescription
+		? settings.defaultProductDescription
+		: system.description;
+const systemOrder = getOrderAction(system.id);
+const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id && p.id !== "complete-business-bundle");
 
-const INCLUDED = [
-	"The core operating framework — the onboarding, weekly planning, and follow-up workflows",
-	"The 20-minute weekly reset checklist, ready to run instead of rebuilt from scratch",
-	"Lifetime access, including future updates to the system",
+const TRUST = [
+	{ icon: "⚡", label: AUTOMATIC_DELIVERY_ENABLED ? "Instant download" : "Emailed after payment" },
+	{ icon: "🔁", label: "No subscription" },
+	{ icon: "🛡️", label: "30-day money-back guarantee" },
+	{ icon: "🐝", label: "Built by a solo creator" },
 ];
 
 const CONTENTS = [
-	{ folder: "checklists/", items: "onboarding, weekly reset, follow-up, intake, scope-creep, retention" },
+	{ folder: "checklists/", items: "onboarding, weekly reset, follow-up, intake, scope creep, retention" },
 	{ folder: "templates/", items: "proposal, discovery questions, follow-up emails, one-page plan" },
-	{ folder: "scripts/", items: "the 'how to say no' lines that don't lose the client" },
+	{ folder: "scripts/", items: "the 'how to say no' lines that keep the client" },
+];
+
+const FAQ = [
+	{
+		q: "Which one should I buy?",
+		a: "Start with the $49 Digital System. It covers onboarding, weekly planning and follow-ups. Only need one piece? Grab that single kit. Want every file? Take the bundle.",
+	},
+	{
+		q: "Is this a course?",
+		a: "No. There are no videos to watch. You get plain checklists, templates and scripts. Open one and run it today.",
+	},
+	{
+		q: "How do I get the files?",
+		a: AUTOMATIC_DELIVERY_ENABLED
+			? "Pay once through PayPal. You download on the thank-you page right away. A copy of the link is emailed to you too."
+			: "Pay once through PayPal. Your download is emailed to the address you checked out with.",
+	},
+	{
+		q: "Do I need an account?",
+		a: "No. There is no login and no subscription. Pay once and the files are yours to keep.",
+	},
+	{
+		q: "What if it doesn't help?",
+		a: `Email ${BUZZYFLY_CONFIG.orderEmail} within 30 days and you get your money back. No form. No hoops.`,
+	},
+	{
+		q: "Who is it not for?",
+		a: "If you already run a documented system that works, skip it. You would be buying what you already have.",
+	},
 ];
 ---
 
@@ -35,68 +72,78 @@ const CONTENTS = [
 <html lang="en">
 	<head>
 		<BaseHead
-			title={`${title} — ${BUZZYFLY_CONFIG.brandName}`}
-			description={description}
+			title={`Store — ${BUZZYFLY_CONFIG.brandName}`}
+			description="Run your client business from checklists, not memory. Onboarding, weekly planning and follow-up systems for coaches and solo service providers. One-time payment. 30-day money-back guarantee."
 		/>
 		<style>
-			.store-hero { text-align: center; padding-bottom: 1em; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.store-eyebrow { margin: 0 0 0.4em 0; font-size: 0.8em; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(var(--gray)); }
-			.store-hero h1 { font-size: 2.6em; margin-bottom: 0.3em; }
-			.store-lede { max-width: 32em; margin: 0 auto 1.4em; color: rgb(var(--gray-dark)); }
-			.store-buy { display: flex; align-items: center; justify-content: center; gap: 1em; flex-wrap: wrap; }
-			.store-price { font-size: 2.4em; font-weight: 800; color: rgb(var(--black)); }
-			.store-cta { display: inline-block; padding: 1.15em 2.8em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.4em; text-decoration: none; transition: background-color 0.15s ease-in-out; }
+			main { width: 1000px; }
+			.store-hero { text-align: center; padding: 1em 0 1.5em; }
+			.store-eyebrow { margin: 0 0 0.8em; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+			.store-hero h1 { font-size: clamp(1.8em, 6vw, 2.8em); line-height: 1.12; max-width: 15em; margin: 0 auto 0.5em; }
+			.store-lede { max-width: 32em; margin: 0 auto 1.6em; color: rgb(var(--gray-dark)); font-size: 1.05em; }
+			.store-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0.8em 2.4em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.2em; text-decoration: none; transition: background-color 0.15s ease-in-out; }
 			.store-cta:hover { background: var(--accent-dark); color: #fff; }
-			.store-microcopy { margin: 0.9em 0 0; font-size: 0.85em; color: rgb(var(--gray-dark)); }
-			.store-section { margin-top: 2.5em; }
+			.store-secondary { display: inline-block; margin-top: 0.9em; font-size: 0.9em; padding: 0.6em 0.4em; }
+			.trust-row { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6em; padding: 0; margin: 1.5em 0 0; }
+			@media (max-width: 720px) { .trust-row { grid-template-columns: 1fr 1fr; } }
+			.trust-row li { display: flex; align-items: center; justify-content: center; gap: 0.45em; padding: 0.7em 0.5em; border-radius: 10px; background: rgba(var(--gray-light), 55%); font-size: 0.82em; font-weight: 700; color: rgb(var(--gray-dark)); text-align: center; line-height: 1.3; }
+			.section-head { text-align: center; margin: 2.5em 0 0; }
+			.section-head h2 { font-size: clamp(1.4em, 4.5vw, 1.9em); }
+			.section-head p { color: rgb(var(--gray)); margin: 0; }
+			.featured-wrap { max-width: 640px; margin: 0 auto; scroll-margin-top: 1em; }
+			.featured-wrap :global(.product-callout) { margin-top: 1.5em; }
+			.singles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 0 1.5em; }
+			.singles :global(.product-callout) { margin: 1.5em 0 0; font-size: 0.92em; }
+			.store-section { max-width: 720px; margin: 3em auto 0; }
 			.store-section h2 { font-size: 1.6em; }
-			.store-list { padding-left: 1.2em; color: rgb(var(--gray-dark)); }
-			.store-list li { margin-bottom: 0.5em; }
-			.store-notice { padding: 1em 1.2em; border-radius: 12px; border: 1px solid rgb(var(--gray-light)); background: rgba(var(--gray-light), 40%); font-size: 0.95em; }
 			.contents-table { width: 100%; border-collapse: collapse; margin-top: 1em; }
-			.contents-table th, .contents-table td { text-align: left; padding: 0.6em 0.8em; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.95em; }
-			.contents-table th { color: rgb(var(--gray)); font-size: 0.8em; text-transform: uppercase; letter-spacing: 0.05em; }
-			.contents-table code { background: rgb(var(--gray-light)); padding: 0.1em 0.4em; border-radius: 4px; }
+			.contents-table th, .contents-table td { text-align: left; padding: 0.6em 0.8em; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.92em; vertical-align: top; }
+			.contents-table th { color: rgb(var(--gray)); font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.05em; }
+			.contents-table code { background: rgb(var(--gray-light)); padding: 0.1em 0.4em; border-radius: 4px; white-space: nowrap; }
+			.faq details { border-bottom: 1px solid rgb(var(--gray-light)); }
+			.faq summary { cursor: pointer; padding: 0.7em 0; min-height: 44px; box-sizing: border-box; font-weight: 700; color: rgb(var(--black)); list-style-position: inside; }
+			.faq details p { margin: 0 0 1em; color: rgb(var(--gray-dark)); font-size: 0.95em; }
+			.final-cta { text-align: center; margin: 3em auto 0; max-width: 720px; padding: 2em 1em; border-radius: 16px; background: rgba(35, 55, 255, 0.05); border: 1px solid rgba(35, 55, 255, 0.15); }
+			.final-cta h2 { font-size: clamp(1.3em, 4.5vw, 1.7em); }
+			.final-cta p { margin: 0.8em 0 0; font-size: 0.85em; color: rgb(var(--gray-dark)); }
 		</style>
 	</head>
 	<body>
 		<Header />
 		<main>
 			<section class="store-hero">
-				<p class="store-eyebrow">The core system. Everything most people need, in one download.</p>
-				<h1>{title}</h1>
-				<p class="store-lede">{description}</p>
-
-				<div class="store-buy">
-					<span class="store-price">{price}</span>
-					{
-						order.external ? (
-							<a class="store-cta" href={order.href} target="_blank" rel="noopener noreferrer">{order.label} — Digital System</a>
-						) : (
-							<a class="store-cta" href={order.href}>{order.label} — Digital System</a>
-						)
-					}
-				</div>
-				<p class="store-microcopy">
-					One-time payment. Download after purchase on the thank-you page. 30-day refund if the files are not delivered or not as listed.
+				<p class="store-eyebrow">For coaches, consultants and solo service providers</p>
+				<h1>Run your client business from checklists, not memory.</h1>
+				<p class="store-lede">
+					You lose hours rebuilding onboarding emails. Proposals go quiet and you never follow up.
+					Monday starts with a scramble. Pick the system that ends it.
 				</p>
-			</section>
-
-			<section class="store-section">
-				<h2>What you get</h2>
-				<ul class="store-list">
-					{INCLUDED.map((item) => <li>{item}</li>)}
+				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
+				<br />
+				<a class="store-secondary" href="#all-products">Or compare every product ↓</a>
+				<ul class="trust-row" aria-label="Why buying here is low risk">
+					{TRUST.map((t) => <li><span aria-hidden="true">{t.icon}</span>{t.label}</li>)}
 				</ul>
-				<p>
-					The long version of why this exists is in
-					<a href="/blog/first-post/">Why I Built the Buzzyfly Digital System</a>, and a
-					plain contents list is in
-					<a href="/blog/product-contents/">What's Actually Inside</a>.
-				</p>
 			</section>
 
+			<div class="featured-wrap" id="digital-system">
+				<ProductCallout productId={system.id} description={systemDescription} featured headingLevel="h2" />
+			</div>
+
+			<section id="all-products" aria-labelledby="singles-heading">
+				<div class="section-head">
+					<h2 id="singles-heading">Only need one piece?</h2>
+					<p>Fix the problem that hurts most this week.</p>
+				</div>
+				<div class="singles">
+					{singles.map((p) => <ProductCallout productId={p.id} />)}
+				</div>
+			</section>
+
+			<MoneyPrinterBanner variant="section" />
+
 			<section class="store-section">
-				<h2>What's actually in the zip</h2>
+				<h2>What's actually in the Digital System zip</h2>
 				<table class="contents-table">
 					<thead><tr><th>Folder</th><th>Contains</th></tr></thead>
 					<tbody>
@@ -105,76 +152,28 @@ const CONTENTS = [
 						))}
 					</tbody>
 				</table>
-			</section>
-
-			<section class="store-section">
-				<h2>Who it's for</h2>
 				<p>
-					One- or few-person businesses where the process lives in someone's head. If
-					onboarding a new client means rebuilding the same steps from memory, or
-					follow-ups only happen when you remember them, this is aimed squarely at you.
-				</p>
-				<p>
-					It is <strong>not</strong> for you if you already run a documented, working
-					system — you'd be buying something you've already built.
+					The full file list is in <a href="/blog/product-contents/">What's Actually Inside</a>.
 				</p>
 			</section>
 
-			<section class="store-section">
-				<h2>How it arrives</h2>
-				{
-					AUTOMATIC_DELIVERY_ENABLED ? (
-						<ol class="store-list">
-							<li>Pay securely through PayPal.</li>
-							<li>Download after purchase on the thank-you page.</li>
-							<li>The files are yours to keep. 30-day refund if the files are not delivered or not as listed.</li>
-						</ol>
-					) : (
-						<>
-							<ol class="store-list">
-								<li>Pay securely through PayPal.</li>
-								<li>Your download is emailed to the address you checked out with.</li>
-								<li>The files are yours to keep.</li>
-							</ol>
-							<p class="store-notice">
-								If the files are not delivered or not as listed, email
-								<a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>
-									{BUZZYFLY_CONFIG.orderEmail}
-								</a>{" "}
-								within 30 days for a refund.
-							</p>
-						</>
-					)
-				}
+			<section class="store-section faq" aria-labelledby="faq-heading">
+				<h2 id="faq-heading">Questions before you buy</h2>
+				{FAQ.map((item) => (
+					<details>
+						<summary>{item.q}</summary>
+						<p>{item.a}</p>
+					</details>
+				))}
 			</section>
 
-			<section class="store-section">
-				<h2>Ready to stop rebuilding it from memory?</h2>
-				<div class="store-buy">
-					<span class="store-price">{price}</span>
-					{
-						order.external ? (
-							<a class="store-cta" href={order.href} target="_blank" rel="noopener noreferrer">{order.label} — Digital System</a>
-						) : (
-							<a class="store-cta" href={order.href}>{order.label} — Digital System</a>
-						)
-					}
-				</div>
-				<p class="store-microcopy">
-					Other packs stay secondary. Start with the $49 Digital System. The <a href="/products">Complete Business Bundle</a> is the smaller add-on, not the main button.
-				</p>
+			<section class="final-cta">
+				<h2>Stop rebuilding your process from memory.</h2>
+				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
+				<p>One-time payment. No subscription. {BUZZYFLY_CONFIG.guarantee}</p>
 			</section>
 
-			<section class="store-section">
-				<h2>Questions</h2>
-				<p>
-					Anything at all —
-					<a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a>.
-					It's a small operation, so you're emailing the person who built it.
-				</p>
-			</section>
-
-			<EmailOptin />
+			<EmailOptin title="Not ready to buy? Start with the free checklist." />
 		</main>
 		<Footer />
 	</body>

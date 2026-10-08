@@ -17,7 +17,7 @@ function page(status: number, title: string, body: string): Response {
 }
 
 const message = (status: number, text: string) =>
-	page(status, "Your order", `<p>${escape(text)}</p><p><a href="/products">Back to the products</a></p>`);
+	page(status, "Your order", `<p>${escape(text)}</p><p><a href="/store">Back to the store</a></p>`);
 
 /**
  * PayPal sends the buyer back here (?token=<order id>). We capture the order server-side,

@@ -64,8 +64,8 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 						{upsell.features.map((f) => <li>{f}</li>)}
 					</ul>
 					<div class="ty-upsell__cta-row">
-						<a class="ty-upsell__cta" href={upsell.buyUrl} target="_blank" rel="noopener noreferrer">
-							Add {upsell.title} — {upsell.price}
+						<a class="ty-upsell__cta" href={upsell.buyUrl}>
+							Get {upsell.title} — {upsell.price}
 						</a>
 						<span class="ty-upsell__guarantee">One-time payment. 30-day money-back guarantee.</span>
 					</div>
@@ -73,7 +73,7 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 			)}
 
 			<div class="ty-actions">
-				<a class="btn btn--primary" href="/products">See all products</a>
+				<a class="btn btn--primary" href="/store">See all products</a>
 				<a class="btn btn--secondary" href="/blog">Read the blog</a>
 			</div>
 		</main>

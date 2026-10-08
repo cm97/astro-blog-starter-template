@@ -46,8 +46,9 @@ function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string
 		? `<hr style="border:none;border-top:1px solid #e5e5e5;margin:24px 0">
     <p style="margin:0 0 8px;font-size:15px;font-weight:600;color:#16191c">One more thing</p>
     <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
-      Customers who bought <strong>${escapeHtml(productName)}</strong> often grab the
-      <strong>${escapeHtml(upsellProduct.title)}</strong> next — it's the logical next piece.
+      You have <strong>${escapeHtml(productName)}</strong>. The logical next piece is the
+      <strong>${escapeHtml(upsellProduct.title)}</strong>. ${escapeHtml(upsellProduct.description)}
+      Same 30-day money-back guarantee.
     </p>
     <p style="margin:0">
       <a href="${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
@@ -92,7 +93,9 @@ function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string
 			"",
 			"---",
 			"",
-			`Customers who bought ${productName} often grab the ${upsellProduct.title} next.`,
+			`You have ${productName}. The logical next piece is the ${upsellProduct.title}.`,
+			upsellProduct.description,
+			"Same 30-day money-back guarantee.",
 			`Get it here (${upsellProduct.price}): ${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}`,
 		);
 	}
@@ -140,7 +143,7 @@ export async function sendFollowUpEmail(
 		? `<p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
       If you've run it once or twice and it's working, the next piece is the
       <strong>${escapeHtml(upsellProduct.title)}</strong> (${upsellProduct.price}).
-      It's what most people grab next.
+      ${escapeHtml(upsellProduct.description)}
     </p>
     <p style="margin:0">
       <a href="${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
