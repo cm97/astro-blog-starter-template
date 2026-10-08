@@ -1,7 +1,8 @@
 import type { APIRoute } from "astro";
 import { issueStoredDownloadToken, resolveProductFile } from "../../../../lib/fulfillment";
-import { BUZZYFLY_CONFIG } from "../../../../data/monetization";
+import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../../../../data/monetization";
 import { logAdminAction } from "../../../../lib/audit";
+import { sendDeliveryEmail } from "../../../../lib/email";
 
 export const prerender = false;
 
@@ -13,6 +14,10 @@ export const prerender = false;
  * has no `DOWNLOAD_TOKEN_SECRET` set, so minting an HMAC token instead would
  * produce a link that never resolves. A stored token also lets the link be
  * revoked later by deleting the row.
+ *
+ * The fresh link is emailed to the buyer with the same delivery email the
+ * webhook sends, and also shown in the console so it can be pasted into a
+ * reply if the email fails or the order has no address on file.
  */
 export const POST: APIRoute = async ({ request, locals }) => {
 	const env = locals.runtime.env;
@@ -64,9 +69,37 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return redirect(backParams);
 	}
 
-	await logAdminAction(env, locals.adminUser ?? "unknown", "order_resend", order.order_id);
+	const downloadUrl = `${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${token}`;
+	backParams.set("resent", downloadUrl);
 
-	backParams.set("resent", `${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${token}`);
+	let outcome: string;
+	if (!order.customer_email) {
+		outcome = "no email on file";
+		backParams.set("email_error", "This order has no customer email on file, so nothing was sent.");
+	} else {
+		const delivery = await sendDeliveryEmail(
+			{
+				to: order.customer_email,
+				downloadUrl,
+				productName: ALL_PRODUCTS.find((p) => p.id === order.item_id)?.title ?? order.item_id,
+				orderId: order.order_id,
+				itemId: order.item_id,
+			},
+			env,
+		);
+		if (delivery.sent) {
+			outcome = `emailed to ${order.customer_email}`;
+			backParams.set("emailed", order.customer_email);
+		} else {
+			outcome = `email failed: ${delivery.reason}`;
+			console.error(
+				`Buzzyfly admin: resend email for order ${order.order_id} to ${order.customer_email} failed: ${delivery.reason}`,
+			);
+			backParams.set("email_error", `Email to ${order.customer_email} failed: ${delivery.reason}`);
+		}
+	}
+
+	await logAdminAction(env, locals.adminUser ?? "unknown", "order_resend", `${order.order_id} — ${outcome}`);
 	return redirect(backParams);
 };
 

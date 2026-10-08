@@ -94,8 +94,8 @@ Watch logs throughout with `npx wrangler tail buzzyfly`.
 2. **Verify all five R2 zips exist (step 4).** A missing file means a paid order with a dead link and a likely refund.
 3. **Run one real end-to-end test purchase (test plan step 2)** and click the link.
 4. **Set the mailing address (step 1).** This unpauses the 7-email sequence that moves free subscribers toward the $49 Digital System.
-5. **Recover past buyers if onboarding was broken.** Search `wrangler tail` or Workers Logs for `DELIVERY FAILED`, then use Admin > Orders → Resend link. Follow-ups already marked failed before this fix can be released for retry with `DELETE FROM followup_emails WHERE success = 0`. This only works for orders under 7 days old, because of the follow-up window.
-6. **Small follow-up:** the Admin > Orders "Resend link" button only shows a fresh link and doesn't email it. Wiring it to `sendDeliveryEmail` would save a manual copy-paste per support request.
+5. **Recover past buyers if onboarding was broken.** Search `wrangler tail` or Workers Logs for `DELIVERY FAILED`, then use Admin > Orders → Resend link, which now emails the buyer directly. Follow-ups already marked failed before this fix can be released for retry with `DELETE FROM followup_emails WHERE success = 0`. This only works for orders under 7 days old, because of the follow-up window.
+6. **Done (follow-up PR):** the Admin > Orders "Resend link" button now emails the fresh link to the buyer through `sendDeliveryEmail`. It still shows the link on the page, and if the order has no email or the send fails it says so, so you can paste the link into your reply.
 7. **Clean-up:** delete the unused `workers/buzzyfly-email/` Resend scaffold.
 
 ## 7. Verification (second pass, local only)
