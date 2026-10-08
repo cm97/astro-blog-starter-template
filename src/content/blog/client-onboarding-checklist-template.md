@@ -1,6 +1,6 @@
 ---
-title: "Client Onboarding Checklist Template (Copy and Use Today)"
-description: "A complete client onboarding checklist template for coaches and consultants — every step from signed contract to kickoff call, ready to run without rebuilding from memory."
+title: "Client Onboarding Checklist for Freelancers: Free Template (Copy and Use Today)"
+description: "A client onboarding checklist for freelancers, coaches and consultants. Every step from signed contract to kickoff call, ready to copy so you stop rebuilding it from memory."
 pubDate: "Sep 13 2026"
 updatedDate: "Sep 29 2026"
 heroImage: "/blog-placeholder-2.jpg"

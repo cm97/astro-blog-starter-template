@@ -1,6 +1,6 @@
 ---
-title: "Weekly Planning Template for Small Business Owners (20-Minute Version)"
-description: "A simple weekly planning template that takes 20 minutes, runs the same way every week, and keeps priorities from falling through during busy stretches."
+title: "Weekly Planning Template for Solo Business Owners (20-Minute Version)"
+description: "A weekly planning template for solo business owners and freelancers. Twenty minutes, the same way every week, so priorities and follow-ups survive a busy week."
 pubDate: "Sep 13 2026"
 heroImage: "/blog-placeholder-4.jpg"
 category: "planning"

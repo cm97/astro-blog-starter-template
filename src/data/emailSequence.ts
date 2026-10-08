@@ -1,7 +1,8 @@
 // Weekly email sequence for free-checklist subscribers. It moves a subscriber
 // toward the $49 Digital System:
-//   1    deliver the free checklist, set expectations
-//   2-3  teach one piece of the system, tease the full version
+//   1    deliver the free checklist (inline and linked), set expectations
+//   2    teach the mid-week check, offer the $15 Weekly Reset Checklist
+//   3    teach one piece of the system, tease the full version
 //   4-5  objection handling ("I'll build my own", "what if it doesn't work")
 //   6-7  direct pitch, no deadline ("when you're ready")
 // No invented testimonials, no fake scarcity, no income promises. When real
@@ -16,7 +17,7 @@
 //   - "- item"            -> bullet list
 //   - "1. item"           -> numbered list
 //   - "> text"            -> quoted text (for copy-paste templates)
-//   - {checklist} {store} {orderEmail} -> replaced with real values
+//   - {checklist} {store} {weeklyResetBuy} {orderEmail} -> replaced with real values
 //   - bare https:// URLs  -> links
 // The signature and unsubscribe footer are added automatically.
 
@@ -34,9 +35,16 @@ export const EMAIL_SEQUENCE: SequenceEmail[] = [
 		preview: "One thing to do before you open it.",
 		body: `Hi,
 
-Here's your checklist: {checklist}
+Here's your free 20-minute weekly reset. It's four 5-minute blocks:
 
-Before you read it, do one thing. Put 20 minutes in your calendar for next Monday morning. Call it "Weekly reset." Same time every week.
+1. Clear the board. Write what shipped, what slipped and what you still owe. Empty the inbox of open decisions.
+2. Pick three priorities. Not five. Put each one on the calendar.
+3. Send the follow-ups. Who is waiting on you? Who went quiet? One sentence each.
+4. Write tomorrow's first move. One line.
+
+The fill-in Monday sheet and the full walkthrough are here: {checklist}
+
+Before you run it, do one thing. Put 20 minutes in your calendar for next Monday morning. Call it "Weekly reset." Same time every week.
 
 That calendar block matters more than the checklist. Most planning systems fail because they never get a fixed slot. The system is rarely the problem.
 
@@ -67,7 +75,11 @@ Friday, take 10 minutes. What got done? What rolls to Monday? What dies?
 
 That's the whole weekly rhythm. Monday 20 minutes, Wednesday 5, Friday 10.
 
-The full version, with the Monday, Wednesday and Friday sheets ready to print, is part of the Buzzyfly Digital System. More on that later. Next week: the follow-up email people actually answer.`,
+Want it ready to print instead of rebuilt from this email each week? The Weekly Reset Checklist is the kit: the 20-minute reset, the priority-setting template, the Thursday mid-week check-in and the inbox-clearing routine. $15 once. 30-day money-back guarantee.
+
+Get it here: {weeklyResetBuy}
+
+No pressure either way. Next week: the follow-up email people actually answer.`,
 	},
 	{
 		subject: "The follow-up email people actually answer",

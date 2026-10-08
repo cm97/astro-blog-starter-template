@@ -35,6 +35,22 @@ const {
 // Every post ends with a product callout: the post's own product when it names
 // one in frontmatter, otherwise the flagship Digital System.
 const calloutProduct = getProduct(featuredProductTitle ?? '') ?? getProduct('buzzyfly-digital-system')!;
+
+// The free tool that matches this post, so readers can try it before buying.
+const TOOLS = {
+	reset: { href: '/tools/weekly-reset.html', label: 'Run the 20-minute weekly reset in your browser' },
+	followUp: { href: '/tools/follow-up-writer.html', label: 'Write your follow-up email in 30 seconds' },
+	onboarding: { href: '/tools/client-onboarding.html', label: 'Generate your client onboarding pack' },
+};
+const topic = (category ?? '').toLowerCase();
+const freeTool =
+	calloutProduct.id === 'weekly-reset-checklist' ? TOOLS.reset
+	: calloutProduct.id === 'follow-up-email-templates' ? TOOLS.followUp
+	: calloutProduct.id === 'client-onboarding-kit' ? TOOLS.onboarding
+	: topic === 'follow-up' || topic === 'sales' ? TOOLS.followUp
+	: topic === 'onboarding' ? TOOLS.onboarding
+	: TOOLS.reset;
+
 const brandHero = '/buzzyfly-brand-about.svg';
 const displayHero =
 	!heroImage ||
@@ -42,6 +58,19 @@ const displayHero =
 	heroImage.includes('buzzyfly-brand-about.jpg')
 		? brandHero
 		: heroImage;
+
+const articleJsonLd = JSON.stringify({
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: title,
+	description,
+	datePublished: pubDate.toISOString(),
+	dateModified: (updatedDate ?? pubDate).toISOString(),
+	image: new URL(displayHero === '/buzzyfly-brand-about.svg' ? '/buzzyfly-brand-about.jpg' : displayHero, Astro.site).toString(),
+	author: { '@type': 'Organization', name: BUZZYFLY_CONFIG.brandName },
+	publisher: { '@type': 'Organization', name: BUZZYFLY_CONFIG.brandName },
+	mainEntityOfPage: new URL(Astro.url.pathname, Astro.site).toString(),
+});
 ---
 
 <html lang="en">
@@ -73,8 +102,10 @@ const displayHero =
 			.sticky-cta a:hover { background: var(--accent-dark); }
 			@media (max-width: 720px) { .sticky-cta span:first-child { display: none; } }
 			body { padding-bottom: 72px; }
+			.free-tool { margin: 2em 0 0; padding: 0.9em 1.1em; border-left: 4px solid var(--accent); background: rgba(35, 55, 255, 0.05); border-radius: 0 10px 10px 0; font-size: 0.95em; }
 			.store-link { text-align: center; font-size: 0.9em; color: rgb(var(--gray)); margin: -1.5em 0 2em; }
 		</style>
+		<script type="application/ld+json" set:html={articleJsonLd} />
 	</head>
 
 	<body>
@@ -101,6 +132,9 @@ const displayHero =
 						<hr />
 					</div>
 					<slot />
+					<p class="free-tool">
+						<strong>Free tool:</strong> <a href={freeTool.href}>{freeTool.label}</a>. No sign-up.
+					</p>
 					<ProductCallout
 						productId={calloutProduct.id}
 						description={calloutProduct.title === featuredProductTitle ? featuredProductDescription : undefined}

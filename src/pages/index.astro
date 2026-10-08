@@ -22,12 +22,16 @@ const order = getOrderAction(digitalSystem.id);
 			description="Stop rebuilding your client process from scratch every week. Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes. $49 one-time."
 		/>
 		<style>
-			.hero { padding: 4em 0 3.5em; text-align: center; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.hero__eyebrow { display: inline-block; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1em; }
-			.hero h1 { font-size: clamp(1.9em, 5.5vw, 2.8em); line-height: 1.12; margin: 0 auto 0.6em; color: rgb(var(--black)); max-width: 16em; }
-			.hero__sub { font-size: 1.15em; color: rgb(var(--gray-dark)); max-width: 34em; margin: 0 auto 2em; line-height: 1.65; }
+			.hero { padding: 1.5em 0 2.5em; text-align: center; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.hero__eyebrow { display: inline-block; font-size: 0.7em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1em; }
+			.hero h1 { font-size: clamp(1.7em, 5.5vw, 2.8em); line-height: 1.12; margin: 0 auto 0.6em; color: rgb(var(--black)); max-width: 16em; }
+			.hero__sub { font-size: 1.1em; color: rgb(var(--gray-dark)); max-width: 34em; margin: 0 auto 1.2em; line-height: 1.55; }
+			.hero__optin { max-width: 560px; margin: 0 auto; padding: 1.1em 1em 0.9em; border: 2px solid var(--accent); border-radius: 16px; background: #fff; box-shadow: 0 8px 28px rgba(35, 55, 255, 0.14); }
+			.hero__optin-label { margin: 0 0 0.7em; font-weight: 700; color: rgb(var(--black)); line-height: 1.35; }
+			@media (max-width: 480px) { .hero h1 { font-size: 1.6em; } .hero__eyebrow { margin-bottom: 0.6em; } .hero__sub { font-size: 1em; } }
+			.hero__or { margin: 1.4em 0 0.6em; font-size: 0.9em; color: rgb(var(--gray)); }
 			.hero__cta-group { display: flex; align-items: center; justify-content: center; gap: 0.9em; flex-wrap: wrap; margin-bottom: 1em; }
-			.btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; max-width: 100%; white-space: normal; text-align: center; padding: 1.05em 2.6em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 800; font-size: 1.28em; text-decoration: none; }
+			.btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; max-width: 100%; white-space: normal; text-align: center; padding: 0.8em 2.2em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 800; font-size: 1.15em; text-decoration: none; }
 			.btn-primary:hover { background: var(--accent-dark); }
 			.hero__trust { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3em 1.1em; font-size: 0.85em; color: rgb(var(--gray-dark)); font-weight: 700; }
 			.pain { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
@@ -58,7 +62,6 @@ const order = getOrderAction(digitalSystem.id);
 			.guarantee__icon { font-size: 2em; flex-shrink: 0; line-height: 1; }
 			.guarantee__copy h2 { font-size: 1.05em; margin: 0 0 0.3em; color: rgb(var(--black)); }
 			.guarantee__copy p { font-size: 0.88em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.55; }
-			.optin-wrap { padding: 0; }
 			.featured__wrap { max-width: 640px; margin: 0 auto; }
 			.final-cta { text-align: center; margin-top: 2em; }
 			.final-cta__alt { font-size: 0.88em; color: rgb(var(--gray)); margin: 0.9em 0 0; }
@@ -68,28 +71,29 @@ const order = getOrderAction(digitalSystem.id);
 		<Header />
 		<main>
 			<section class="hero">
-				<span class="hero__eyebrow">For coaches and solo service providers</span>
+				<span class="hero__eyebrow">For freelancers, coaches and solo service providers</span>
 				<h1>Stop rebuilding your client process from scratch every week.</h1>
 				<p class="hero__sub">
-					Onboarding, weekly planning and follow-ups become checklists you run in 20 minutes. The process still works on the weeks you're slammed.
+					Onboarding, weekly planning and follow-ups as checklists you run in 20 minutes.
 				</p>
+				<div class="hero__optin">
+					<p class="hero__optin-label">Start free: get the 20-minute weekly reset checklist</p>
+					<EmailOptin
+						compact
+						buttonLabel="Send me the free checklist"
+						description="Free. One short email a week. Unsubscribe anytime."
+					/>
+				</div>
+				<p class="hero__or">Or skip ahead to the full system:</p>
 				<div class="hero__cta-group">
 					<a class="btn-primary" href={order.href}>Get the Digital System — {digitalSystem.price}</a>
 				</div>
 				<ul class="hero__trust" aria-label="Purchase details">
 					<li>✓ One-time payment</li>
 					<li>✓ Instant download</li>
-					<li>✓ No subscription</li>
 					<li>✓ 30-day money-back guarantee</li>
 				</ul>
 			</section>
-
-			<div class="optin-wrap">
-				<EmailOptin
-					title="Not ready to buy? Get the free 20-minute weekly reset."
-					description="The checklist that turns Monday from a scramble into a plan. Free. One email a week. Unsubscribe anytime."
-				/>
-			</div>
 
 			<section class="pain">
 				<h2>Sound familiar?</h2>
@@ -157,6 +161,8 @@ const order = getOrderAction(digitalSystem.id);
 					<p class="final-cta__alt">Only need one piece, or want everything? <a href="/store#all-products">See every product</a>.</p>
 				</div>
 			</section>
+
+			<EmailOptin title="Not ready to buy? Start with the free weekly reset." />
 		</main>
 		<Footer />
 	</body>

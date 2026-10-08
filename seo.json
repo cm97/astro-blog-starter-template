@@ -8,7 +8,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 57,
+  "kb": 58,
   "small": 0,
   "overflow": 0
  },
@@ -21,7 +21,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 10,
+  "kb": 11,
   "small": 0,
   "overflow": 0
  },
@@ -99,7 +99,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 6,
+  "kb": 7,
   "small": 0,
   "overflow": 0
  },
@@ -112,7 +112,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 13,
+  "kb": 7,
   "small": 0,
   "overflow": 0
  },
@@ -125,7 +125,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 9,
+  "kb": 10,
   "small": 0,
   "overflow": 0
  },
@@ -151,7 +151,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 6,
+  "kb": 7,
   "small": 0,
   "overflow": 0
  },
@@ -179,7 +179,7 @@
   "noalt": 0,
   "kb": 8,
   "small": 0,
-  "overflow": 1303
+  "overflow": 0
  },
  {
   "path": "/request",
@@ -216,7 +216,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 8,
+  "kb": 9,
   "small": 0,
   "overflow": 0
  },
@@ -260,6 +260,58 @@
   "overflow": 0
  },
  {
+  "path": "/tools/",
+  "title": "Free Tools | Buzzyfly",
+  "desc": "Three free working tools for running a small business without improvising: the 20-minute weekly reset, a follow-up email writer, and a client onboarding pack.",
+  "canon": "https://buzzyfly.com/tools/",
+  "og": true,
+  "robots": "",
+  "h1": 1,
+  "noalt": 0,
+  "kb": 0,
+  "small": 0,
+  "overflow": 0
+ },
+ {
+  "path": "/tools/weekly-reset.html",
+  "title": "The 20-Minute Weekly Reset — Free Tool | Buzzyfly",
+  "desc": "A free, working version of the 20-minute Monday reset: four timed passes that clear the decks, close last week, set one priority, and block the week.",
+  "canon": "https://buzzyfly.com/tools/weekly-reset.html",
+  "og": true,
+  "robots": "",
+  "h1": 1,
+  "noalt": 0,
+  "kb": 6,
+  "small": 0,
+  "overflow": 0
+ },
+ {
+  "path": "/tools/follow-up-writer.html",
+  "title": "Follow-Up Email Writer — Free Tool | Buzzyfly",
+  "desc": "Free follow-up email writer. Pick the situation, fill in two fields, get an email you can send — proposal chasers, check-ins, re-engagement, referral asks and project wrap-ups.",
+  "canon": "https://buzzyfly.com/tools/follow-up-writer.html",
+  "og": true,
+  "robots": "",
+  "h1": 1,
+  "noalt": 0,
+  "kb": 6,
+  "small": 5,
+  "overflow": 0
+ },
+ {
+  "path": "/tools/client-onboarding.html",
+  "title": "Client Onboarding Pack — Free Tool | Buzzyfly",
+  "desc": "Free client onboarding pack. Type a name and project, get a welcome email, intake questions, kickoff agenda and notes format — ready to copy and send.",
+  "canon": "https://buzzyfly.com/tools/client-onboarding.html",
+  "og": true,
+  "robots": "",
+  "h1": 1,
+  "noalt": 0,
+  "kb": 5,
+  "small": 0,
+  "overflow": 0
+ },
+ {
   "path": "/blog/product-contents/",
   "title": "What's Actually Inside the Buzzyfly Digital System",
   "desc": "The literal file tree so you know exactly what you're buying.",
@@ -268,7 +320,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 8,
+  "kb": 9,
   "small": 0,
   "overflow": 0
  },
@@ -294,7 +346,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 10,
+  "kb": 11,
   "small": 0,
   "overflow": 0
  },
@@ -320,20 +372,20 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 11,
+  "kb": 12,
   "small": 0,
   "overflow": 0
  },
  {
   "path": "/blog/client-onboarding-checklist-template/",
-  "title": "Client Onboarding Checklist Template (Copy and Use Today)",
-  "desc": "A complete client onboarding checklist template for coaches and consultants — every step from signed contract to kickoff call, ready to run without rebuilding from memory.",
+  "title": "Client Onboarding Checklist for Freelancers: Free Template (Copy and Use Today)",
+  "desc": "A client onboarding checklist for freelancers, coaches and consultants. Every step from signed contract to kickoff call, ready to copy so you stop rebuilding it from memory.",
   "canon": "https://buzzyfly.com/blog/client-onboarding-checklist-template/",
   "og": true,
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 11,
+  "kb": 12,
   "small": 0,
   "overflow": 0
  },
@@ -359,27 +411,27 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 11,
+  "kb": 12,
   "small": 0,
   "overflow": 0
  },
  {
   "path": "/blog/follow-up-email-after-no-response/",
-  "title": "Follow-Up Email After No Response: 5 Templates That Actually Get Replies",
-  "desc": "Five ready-to-send follow-up email templates for when a prospect or client goes quiet — for proposals, check-ins, re-engagement, referral requests, and project wrap-ups.",
+  "title": "Follow-Up Email Templates for Coaches and Freelancers: 5 That Get Replies",
+  "desc": "Five follow-up email templates for coaches and freelancers when a prospect or client goes quiet after no response. Proposals, check-ins, re-engagement, referrals and wrap-ups.",
   "canon": "https://buzzyfly.com/blog/follow-up-email-after-no-response/",
   "og": true,
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 13,
+  "kb": 14,
   "small": 0,
   "overflow": 0
  },
  {
   "path": "/blog/weekly-planning-template-small-business/",
-  "title": "Weekly Planning Template for Small Business Owners (20-Minute Version)",
-  "desc": "A simple weekly planning template that takes 20 minutes, runs the same way every week, and keeps priorities from falling through during busy stretches.",
+  "title": "Weekly Planning Template for Solo Business Owners (20-Minute Version)",
+  "desc": "A weekly planning template for solo business owners and freelancers. Twenty minutes, the same way every week, so priorities and follow-ups survive a busy week.",
   "canon": "https://buzzyfly.com/blog/weekly-planning-template-small-business/",
   "og": true,
   "robots": "",
@@ -424,7 +476,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 10,
+  "kb": 11,
   "small": 0,
   "overflow": 0
  },
@@ -437,7 +489,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 8,
+  "kb": 9,
   "small": 0,
   "overflow": 0
  },
@@ -502,7 +554,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 10,
+  "kb": 11,
   "small": 0,
   "overflow": 0
  },
@@ -535,7 +587,7 @@
  {
   "path": "/blog/weekly-reset/",
   "title": "The 20-Minute Weekly Reset That Doesn't Die by Thursday",
-  "desc": "A short weekly habit and the actual checklist behind it — so your priorities still exist when the week gets messy.",
+  "desc": "A 20-minute weekly reset for solo operators — Monday sheet, Wednesday check, and a 12-minute Thursday cash salvage so priorities and follow-ups still exist when the week breaks.",
   "canon": "https://buzzyfly.com/blog/weekly-reset/",
   "og": true,
   "robots": "",
@@ -567,7 +619,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 9,
+  "kb": 10,
   "small": 0,
   "overflow": 0
  },
@@ -580,7 +632,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 10,
+  "kb": 11,
   "small": 0,
   "overflow": 0
  },
@@ -593,20 +645,20 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 8,
+  "kb": 9,
   "small": 0,
   "overflow": 0
  },
  {
   "path": "/blog/second-post/",
   "title": "3 Signs Your Business Is Running You",
-  "desc": "The quiet tells that your workflow has become the thing in charge, not you.",
+  "desc": "Three tells that onboarding, follow-up, and the weekly reset still live in your head — plus the 20-minute lists that stop each one.",
   "canon": "https://buzzyfly.com/blog/second-post/",
   "og": true,
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 9,
+  "kb": 11,
   "small": 0,
   "overflow": 0
  },
@@ -619,7 +671,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 8,
+  "kb": 9,
   "small": 0,
   "overflow": 0
  },
@@ -632,46 +684,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 8,
-  "small": 0,
-  "overflow": 0
- },
- {
-  "path": "/tools/weekly-reset.html",
-  "title": "The 20-Minute Weekly Reset — Free Tool | Buzzyfly",
-  "desc": "A free, working version of the 20-minute Monday reset: four timed passes that clear the decks, close last week, set one priority, and block the week.",
-  "canon": "https://buzzyfly.com/tools/weekly-reset.html",
-  "og": true,
-  "robots": "",
-  "h1": 1,
-  "noalt": 0,
-  "kb": 6,
-  "small": 0,
-  "overflow": 0
- },
- {
-  "path": "/tools/follow-up-writer.html",
-  "title": "Follow-Up Email Writer — Free Tool | Buzzyfly",
-  "desc": "Free follow-up email writer. Pick the situation, fill in two fields, get an email you can send — proposal chasers, check-ins, re-engagement, referral asks and project wrap-ups.",
-  "canon": "https://buzzyfly.com/tools/follow-up-writer.html",
-  "og": true,
-  "robots": "",
-  "h1": 1,
-  "noalt": 0,
-  "kb": 6,
-  "small": 5,
-  "overflow": 0
- },
- {
-  "path": "/tools/client-onboarding.html",
-  "title": "Client Onboarding Pack — Free Tool | Buzzyfly",
-  "desc": "Free client onboarding pack. Type a name and project, get a welcome email, intake questions, kickoff agenda and notes format — ready to copy and send.",
-  "canon": "https://buzzyfly.com/tools/client-onboarding.html",
-  "og": true,
-  "robots": "",
-  "h1": 1,
-  "noalt": 0,
-  "kb": 4,
+  "kb": 9,
   "small": 0,
   "overflow": 0
  },
@@ -684,7 +697,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 15,
+  "kb": 14,
   "small": 0,
   "overflow": 0
  },
@@ -697,7 +710,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 12,
+  "kb": 13,
   "small": 0,
   "overflow": 0
  },
@@ -710,7 +723,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 12,
+  "kb": 13,
   "small": 0,
   "overflow": 0
  },
@@ -736,7 +749,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 13,
+  "kb": 12,
   "small": 0,
   "overflow": 0
  },
@@ -775,7 +788,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 12,
+  "kb": 13,
   "small": 0,
   "overflow": 0
  },
@@ -788,7 +801,7 @@
   "robots": "",
   "h1": 1,
   "noalt": 0,
-  "kb": 9,
+  "kb": 10,
   "small": 0,
   "overflow": 0
  },
@@ -802,19 +815,6 @@
   "h1": 1,
   "noalt": 0,
   "kb": 8,
-  "small": 0,
-  "overflow": 0
- },
- {
-  "path": "/products",
-  "title": "Store — Buzzyfly",
-  "desc": "Run your client business from checklists, not memory. Onboarding, weekly planning and follow-up systems for coaches and solo service providers. One-time payment. 30-day money-back guarantee.",
-  "canon": "https://buzzyfly.com/store",
-  "og": true,
-  "robots": "",
-  "h1": 1,
-  "noalt": 0,
-  "kb": 9,
   "small": 0,
   "overflow": 0
  }
