@@ -58,19 +58,22 @@ export const GET: APIRoute = async ({ url, locals }) => {
 	const downloadPath = `/api/download?token=${token}`;
 
 	// Best effort: a failed record or email must never block a paid buyer from their file.
+	// Only the visit that first records the order sends the email, so reloading this page does not resend it.
+	let firstVisit = true;
 	if (env.DB) {
 		try {
-			await env.DB.prepare(
+			const result = await env.DB.prepare(
 				`INSERT INTO fulfillments (provider, order_id, item_id, customer_email, created_at)
 				 VALUES (?, ?, ?, ?, ?) ON CONFLICT (provider, order_id) DO NOTHING`,
 			)
 				.bind("paypal", captured.orderId, product.id, captured.payerEmail, Date.now())
 				.run();
+			firstVisit = (result.meta?.changes ?? 1) > 0;
 		} catch (error) {
 			console.error("Buzzyfly buy: could not record PayPal order", error);
 		}
 	}
-	if (captured.payerEmail) {
+	if (firstVisit && captured.payerEmail) {
 		try {
 			const sent = await sendDeliveryEmail(
 				{
