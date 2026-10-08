@@ -73,10 +73,12 @@ export const GET: APIRoute = async ({ url, locals }) => {
 	}
 	if (firstVisit && captured.payerEmail) {
 		try {
-			await sendDeliveryEmail(
+			const sent = await sendDeliveryEmail(
 				{ to: captured.payerEmail, downloadUrl: unlockUrl, productName: "Buzzyfly Apps Pro", orderId: captured.orderId, itemId: "apps-pro" },
 				env,
 			);
+			if (!sent.sent)
+				console.error(`Buzzyfly apps: unlock email not sent for order ${captured.orderId} to ${captured.payerEmail}: ${sent.reason}`);
 		} catch (error) {
 			console.error("Buzzyfly apps: unlock email failed", error);
 		}

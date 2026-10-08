@@ -77,6 +77,7 @@ export async function sendBrandEmail(
 			});
 			result = { sent: true };
 		} catch (error) {
+			console.error(`Buzzyfly outbox: send to ${to} ("${subject}") failed`, error);
 			result = { sent: false, reason: `Send failed: ${String(error)}` };
 		}
 	}

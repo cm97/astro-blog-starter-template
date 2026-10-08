@@ -3,15 +3,12 @@
 // regenerated wholesale by Wrangler, so anything added directly to it is lost
 // on the next `npm run cf-typegen`.
 //
-// These two are set as Worker secrets, never committed:
-//   npx wrangler secret put EMAIL_API_KEY
-//   npx wrangler secret put EMAIL_FROM
+// Email goes out through the Cloudflare Email Service `EMAIL` binding in
+// wrangler.json. EMAIL_FROM is a plain var there; it must use one of the
+// binding's allowed sender addresses (see ALLOWED_SENDERS in src/lib/email.ts).
 
 declare namespace Cloudflare {
 	interface Env {
-		// Transactional email for order delivery. Without these the webhook can
-		// mint a download link but has no way to send it to the customer.
-		EMAIL_API_KEY?: string;
 		EMAIL_FROM?: string;
 	}
 }

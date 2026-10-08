@@ -54,8 +54,8 @@ export const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa
  * FALSE until all of these Worker secrets exist in production:
  *   STRIPE_WEBHOOK_SECRET   (from the Stripe webhook endpoint we_1U4ZrrRxSLoSSvA0hj8EoGmv)
  *   DOWNLOAD_TOKEN_SECRET   (any long random string)
- *   EMAIL_API_KEY           (e.g. a Resend API key)
- *   EMAIL_FROM              (e.g. Buzzyfly <orders@buzzyfly.com>)
+ * plus the `EMAIL` send_email binding in wrangler.json (Cloudflare Email
+ * Service, no API key) with buzzyfly.com onboarded in the dashboard.
  *
  * While this is false, payment still works and every order is caught by the
  * hourly "Buzzyfly order watch" task, but the file is sent by hand. The store
