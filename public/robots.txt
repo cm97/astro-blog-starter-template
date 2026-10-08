@@ -1,0 +1,10 @@
+# https://buzzyfly.com/robots.txt
+User-agent: *
+Allow: /
+# Admin console, API endpoints and checkout redirects are not content.
+Disallow: /admin
+Disallow: /api/
+Disallow: /buy/
+Disallow: /apps/open/
+
+Sitemap: https://buzzyfly.com/sitemap-index.xml

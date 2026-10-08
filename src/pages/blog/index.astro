@@ -18,7 +18,7 @@ function cardImage(src?: string) {
 	return src;
 }
 
-const allPosts = (await getCollection('blog')).sort(
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
@@ -42,7 +42,10 @@ const categoryCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
 <!doctype html>
 <html lang="en">
 	<head>
-		<BaseHead title={`Blog | ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
+		<BaseHead
+			title={`Onboarding, Follow-Up & Weekly Planning Guides | ${SITE_TITLE} Blog`}
+			description="Practical guides and copy-paste templates for coaches, consultants and freelancers: client onboarding, follow-up emails, proposals and the weekly reset."
+		/>
 		<style>
 			.blog-page { width: auto; max-width: 1100px; margin: 0 auto; padding: 2em 1em 5em; }
 			.blog-hero { text-align: center; margin-bottom: 2.5em; }

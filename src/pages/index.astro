@@ -18,8 +18,23 @@ const order = getOrderAction(digitalSystem.id);
 <html lang="en">
 	<head>
 		<BaseHead
-			title={settings.brandName || SITE_TITLE}
+			title={`Client Onboarding, Follow-Up & Weekly Planning Templates | ${settings.brandName || SITE_TITLE}`}
 			description="Stop rebuilding your client process from scratch every week. Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes. $49 one-time."
+			jsonLd={[
+				{
+					'@context': 'https://schema.org',
+					'@type': 'Organization',
+					name: settings.brandName || SITE_TITLE,
+					url: 'https://buzzyfly.com/',
+					logo: 'https://buzzyfly.com/og-default.jpg',
+				},
+				{
+					'@context': 'https://schema.org',
+					'@type': 'WebSite',
+					name: settings.brandName || SITE_TITLE,
+					url: 'https://buzzyfly.com/',
+				},
+			]}
 		/>
 		<style>
 			.hero { padding: 4em 0 3.5em; text-align: center; border-bottom: 1px solid rgb(var(--gray-light)); }

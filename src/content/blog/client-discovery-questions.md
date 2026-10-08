@@ -1,6 +1,6 @@
 ---
-title: 'Client Discovery Questions That Stop You From Guessing What They Need'
-description: 'Stop pitching blind. Ask these questions before you quote a price.'
+title: "Client Discovery Questions to Ask Before You Quote a Price"
+description: "The discovery call questions that tell you what a client actually needs, what it is worth to them, and whether to quote at all. Copy the list and use it on your next call."
 pubDate: '2026-09-01'
 updatedDate: "Sep 29 2026"
 category: 'sales'
