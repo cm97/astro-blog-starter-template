@@ -11,14 +11,13 @@ import type { SSRManifest } from "astro";
 import { App } from "astro/app";
 import { handle } from "@astrojs/cloudflare/handler";
 import { BUZZYFLY_CONFIG } from "./data/monetization";
-import { escapeHtml, sendFollowUpEmail } from "./lib/email";
+import { escapeHtml, resolveFrom, sendFollowUpEmail } from "./lib/email";
 import { sendDueSequenceEmails } from "./lib/emailSequence";
 import { ensureDownloadSchema, ensureEmailSequenceSchema } from "./lib/schema";
 
 interface Env {
 	DB?: D1Database;
 	EMAIL?: { send(msg: { from: string; to: string; subject: string; html?: string; text?: string }): Promise<{ messageId: string }> };
-	EMAIL_API_KEY?: string;
 	EMAIL_FROM?: string;
 }
 
@@ -53,37 +52,21 @@ async function sendOwnerAlert(orders: FulfillmentRow[], env: Env): Promise<boole
 <p style="color:#666;font-size:14px">— Buzzyfly cron alert</p>
 </body></html>`;
 
-	// Same Cloudflare Email binding the customer emails use. Resend is only a
-	// fallback: it needs EMAIL_API_KEY, which production doesn't set, so relying
-	// on it alone meant no alert was ever sent.
-	if (env.EMAIL) {
-		await env.EMAIL.send({
-			from: env.EMAIL_FROM ?? `${BUZZYFLY_CONFIG.brandName} <orders@buzzyfly.com>`,
-			to: BUZZYFLY_CONFIG.orderEmail,
-			subject,
-			html,
-			text,
-		});
-		return true;
+	// Same Cloudflare Email binding the customer emails use. On failure the
+	// orders stay un-alerted, so they retry next hour.
+	if (!env.EMAIL) {
+		console.error(`Buzzyfly cron: owner alert skipped for ${count} order(s) — EMAIL binding not configured`);
+		return false;
 	}
-
-	if (!env.EMAIL_API_KEY || !env.EMAIL_FROM) return false;
-
-	const response = await fetch("https://api.resend.com/emails", {
-		method: "POST",
-		headers: {
-			Authorization: `Bearer ${env.EMAIL_API_KEY}`,
-			"Content-Type": "application/json",
-		},
-		body: JSON.stringify({
-			from: env.EMAIL_FROM,
-			to: [BUZZYFLY_CONFIG.orderEmail],
-			subject,
-			html,
-			text,
-		}),
-	});
-	if (!response.ok) throw new Error(`Resend returned ${response.status}`);
+	try {
+		await env.EMAIL.send({ from: resolveFrom(env), to: BUZZYFLY_CONFIG.orderEmail, subject, html, text });
+	} catch (error) {
+		console.error(
+			`Buzzyfly cron: owner alert to ${BUZZYFLY_CONFIG.orderEmail} failed for orders ${orders.map((o) => o.order_id).join(", ")}; retrying next hour`,
+			error,
+		);
+		return false;
+	}
 	return true;
 }
 
@@ -153,22 +136,34 @@ async function followUpRecentBuyers(db: D1Database, env: Env): Promise<void> {
 		.all<FulfillmentRow>();
 
 	const now = Date.now();
+	const results: { order: FulfillmentRow; sent: boolean }[] = [];
 	for (const order of pending.results ?? []) {
 		if (!order.customer_email) continue;
 		const result = await sendFollowUpEmail(
 			{ to: order.customer_email, itemId: order.item_id, orderId: order.order_id },
 			env,
 		);
-		console.log(
-			`Buzzyfly follow-up: order ${order.order_id} -> sent=${result.sent}${result.reason ? ` (${result.reason})` : ""}`,
-		);
-		// Record attempt regardless of send result so we don't retry forever
+		if (result.sent) console.log(`Buzzyfly follow-up: order ${order.order_id} -> sent to ${order.customer_email}`);
+		else console.error(`Buzzyfly follow-up: order ${order.order_id} to ${order.customer_email} failed: ${result.reason}`);
+		results.push({ order, sent: result.sent });
+	}
+
+	// If nothing sent at all, the binding itself is broken (e.g. the domain
+	// isn't onboarded to Cloudflare Email Service). Don't record those attempts,
+	// so the buyers get their follow-up once it's fixed, inside the 7-day window.
+	if (results.length && !results.some((r) => r.sent)) {
+		console.error(`Buzzyfly follow-up: all ${results.length} sends failed — will retry next hour`);
+		return;
+	}
+
+	// Otherwise record every attempt, so a single bad address isn't retried forever.
+	for (const { order, sent } of results) {
 		await db
 			.prepare(
 				`INSERT OR IGNORE INTO followup_emails (provider, order_id, sent_at, success)
 				 VALUES (?, ?, ?, ?)`,
 			)
-			.bind(order.provider, order.order_id, now, result.sent ? 1 : 0)
+			.bind(order.provider, order.order_id, now, sent ? 1 : 0)
 			.run();
 	}
 }

@@ -106,6 +106,7 @@ export async function sendSequenceEmail(
 		await env.EMAIL.send({ from: resolveFrom(env), to, subject, html, text });
 		return { sent: true };
 	} catch (error) {
+		console.error(`Buzzyfly sequence: step ${step} send to ${to} threw`, error);
 		return { sent: false, reason: `send failed: ${String(error)}` };
 	}
 }
@@ -114,6 +115,7 @@ interface DueSubscriber {
 	email: string;
 	unsubscribe_token: string | null;
 	sequence_step: number;
+	sequence_sent_at: number | null;
 }
 
 /**
@@ -122,7 +124,11 @@ interface DueSubscriber {
  *
  * Each subscriber's step is claimed (advanced) before sending, so an
  * overlapping run can never send the same email twice. A failed send is
- * logged and skipped rather than retried, matching the buyer follow-up job.
+ * logged and skipped rather than retried, matching the buyer follow-up job —
+ * unless nothing in the run sent at all. That pattern means the EMAIL binding
+ * itself is broken (e.g. the domain isn't onboarded to Cloudflare Email
+ * Service), so the claims are rolled back and everyone retries next hour
+ * instead of silently skipping a week's email.
  */
 export async function sendDueSequenceEmails(env: {
 	DB?: D1Database;
@@ -142,7 +148,7 @@ export async function sendDueSequenceEmails(env: {
 	const now = Date.now();
 	const lastStep = EMAIL_SEQUENCE.length - 1;
 	const due = await env.DB.prepare(
-		`SELECT email, unsubscribe_token, sequence_step
+		`SELECT email, unsubscribe_token, sequence_step, sequence_sent_at
 		 FROM subscribers
 		 WHERE unsubscribed_at IS NULL
 		   AND sequence_step < ?
@@ -155,6 +161,7 @@ export async function sendDueSequenceEmails(env: {
 
 	let sent = 0;
 	let failed = 0;
+	const failedClaims: { sub: DueSubscriber; step: number }[] = [];
 	for (const sub of due.results ?? []) {
 		const step = sub.sequence_step + 1;
 
@@ -180,7 +187,23 @@ export async function sendDueSequenceEmails(env: {
 		if (result.sent) sent++;
 		else {
 			failed++;
+			failedClaims.push({ sub, step });
 			console.error(`Buzzyfly sequence: step ${step} to ${sub.email} failed: ${result.reason}`);
+		}
+	}
+
+	if (sent === 0 && failedClaims.length) {
+		console.error(
+			`Buzzyfly sequence: all ${failedClaims.length} sends failed — EMAIL binding looks broken (check Cloudflare Email Service onboarding for buzzyfly.com). Rolling back so they retry next hour.`,
+		);
+		for (const { sub, step } of failedClaims) {
+			await env.DB.prepare(
+				`UPDATE subscribers SET sequence_step = ?, sequence_sent_at = ?
+				 WHERE email = ? AND sequence_step = ?`,
+			)
+				.bind(sub.sequence_step, sub.sequence_sent_at, sub.email, step)
+				.run()
+				.catch((error) => console.error(`Buzzyfly sequence: rollback for ${sub.email} failed`, error));
 		}
 	}
 	return { sent, failed };

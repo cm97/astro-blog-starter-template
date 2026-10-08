@@ -95,9 +95,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	}
 
 	// Welcome email (sequence email 0) — best-effort, never fail the signup over it.
-	if (env.EMAIL) {
+	if (!env.EMAIL) console.error(`Buzzyfly subscribe: welcome email to ${email} skipped — EMAIL binding not configured`);
+	else {
 		const result = await sendSequenceEmail(0, email, unsubscribeToken, env);
-		if (!result.sent) console.error("Buzzyfly subscribe: welcome email failed", result.reason);
+		if (!result.sent) console.error(`Buzzyfly subscribe: welcome email (step 0) to ${email} failed: ${result.reason}`);
 	}
 
 	return new Response(JSON.stringify({ received: true }), {
