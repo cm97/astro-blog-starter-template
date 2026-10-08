@@ -51,7 +51,7 @@
 let payerCount = 0;
 function addPayer() {
   payerCount++;
-  const div = document.createElement('div);
+  const div = document.createElement('div');
   div.className = 'person-row';
   div.innerHTML = `<input type="text" placeholder="Name" id="name${payerCount}"><input type="number" placeholder="Amount paid" id="paid${payerCount}" step="0.01"><button class="remove" onclick="this.parentElement.remove()">X</button>`;
   document.getElementById('payer-list').appendChild(div);
@@ -61,7 +61,7 @@ function split() {
   const people = parseInt(document.getElementById('people').value);
   if (!total || !people) { alert('Enter the total and number of people'); return; }
   const each = (total / people).toFixed(2);
-  let html = `<div class="result"><h3>Each person owes</h3><p>$$${each}</p></div>`;
+  let html = `<div class="result"><h3>Each person owes</h3><p>$${each}</p></div>`;
   const payers = [];
   for (let i = 1; i <= payerCount; i++) {
     const nameEl = document.getElementById('name' + i);
@@ -74,8 +74,8 @@ function split() {
     html += '<div class="result owed"><h3>Who owes whom</h3>';
     payers.forEach(p => {
       const diff = p.paid - each;
-      if (diff > 0) html += `<p>${p.name} is owed <strong>$$${diff.toFixed(2)}</strong></p>`;
-      else if (diff < 0) html += `<p>${p.name} owes <strong>$$${Math.abs(diff).toFixed(2)}</strong></p>`;
+      if (diff > 0) html += `<p>${p.name} is owed <strong>$${diff.toFixed(2)}</strong></p>`;
+      else if (diff < 0) html += `<p>${p.name} owes <strong>$${Math.abs(diff).toFixed(2)}</strong></p>`;
       else html += `<p>${p.name} is even</p>`;
     });
     html += '</div>';
