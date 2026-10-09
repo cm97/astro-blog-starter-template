@@ -1,6 +1,6 @@
 ---
 // Remembers which tracking link brought a visitor and tags Stripe buy links
-// with it. See src/lib/trafficSource.ts.
+// and /buy/ links with it. See src/lib/trafficSource.ts.
 ---
 
 <script>
@@ -28,6 +28,12 @@
 				if (medium) url.searchParams.set("utm_medium", medium);
 				if (campaign) url.searchParams.set("utm_campaign", campaign);
 				link.href = url.toString();
+			});
+			// Our own checkout: /buy/<id> passes it through PayPal onto the order.
+			document.querySelectorAll<HTMLAnchorElement>('a[href^="/buy/"]').forEach((link) => {
+				const url = new URL(link.href);
+				url.searchParams.set("src", saved.source);
+				link.href = url.pathname + url.search + url.hash;
 			});
 		}
 	} catch {

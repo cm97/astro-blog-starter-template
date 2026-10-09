@@ -1,7 +1,7 @@
 import type { APIRoute } from "astro";
 import { sendSequenceEmail } from "../../lib/emailSequence";
 import { ensureEmailSequenceSchema } from "../../lib/schema";
-import { cleanSource } from "../../lib/trafficSource";
+import { cleanSourceTriple } from "../../lib/trafficSource";
 
 export const prerender = false;
 
@@ -12,11 +12,7 @@ async function readSignup(request: Request): Promise<{ email: string | null; sou
 
 	if (contentType.includes("application/json")) {
 		const body = (await request.json().catch(() => null)) as { email?: string; source?: string } | null;
-		// Source is "source__medium__campaign"; clean each part so the separator survives.
-		const source = typeof body?.source === "string"
-			? body.source.split("__").map((p) => cleanSource(p) ?? "").join("__").replace(/(__)+$/, "") || null
-			: null;
-		return { email: body?.email ?? null, source };
+		return { email: body?.email ?? null, source: cleanSourceTriple(body?.source) };
 	}
 
 	// Native <form> fallback when JavaScript is unavailable.
