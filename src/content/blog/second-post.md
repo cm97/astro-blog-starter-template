@@ -92,7 +92,7 @@ If you skip it, signs 1–3 come back by Thursday. The Weekly Reset Checklist ($
 - Day 3 and day 6 are not written, so the quiet lead never gets the same five lines.
 - The reset is a mood, not a clock, so the week dies on Thursday.
 
-Get the Digital System — $49. One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. Download from the thank-you page after purchase. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+Get the Digital System — $49. One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. Download from the thank-you page after purchase. 30-day money-back guarantee — email us if it doesn't deliver.
 
 [Get the Digital System — $49](/buy/buzzyfly-digital-system)
 

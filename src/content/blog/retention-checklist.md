@@ -126,8 +126,8 @@ You will remember the day-14 note on a calm Tuesday. You will skip it on the Thu
 
 The words have to sit next to onboarding and the weekly reset. Same folder. Same 20-minute run. Not a speech you invent again after they pay.
 
-The follow-up if a proposal goes quiet before they pay is a different list (day 3, day 7, day 12). This list starts the day money lands. Both are in the Digital System with the onboarding checklist: https://buzzyfly.com/blog/retention-checklist/
+The follow-up if a proposal goes quiet before they pay is a different list (day 3, day 7, day 12). This list starts the day money lands. Both are in the Digital System with the onboarding checklist.
 
 One-time payment. Download after purchase from the thank-you page. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day money-back guarantee — email us if it doesn't deliver.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)

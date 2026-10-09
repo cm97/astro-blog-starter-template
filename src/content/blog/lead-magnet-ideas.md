@@ -30,4 +30,4 @@ Give them something they can use in 5 minutes. If it takes longer, it's not a le
 
 ---
 
-These ideas plus the full system is the [Buzzyfly Digital System](/store) — $49.
+A lead magnet gets them in the door. What happens after they pay is the [Buzzyfly Digital System](/buy/buzzyfly-digital-system): onboarding, the weekly reset and follow-ups as checklists. $49 once. 30-day money-back guarantee.

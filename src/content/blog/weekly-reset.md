@@ -129,8 +129,8 @@ The Monday sheet dies the first week three clients reply at once. Wednesday neve
 
 The Weekly Reset Checklist ($15) is this sheet alone. The Digital System ($49) is the reset plus onboarding and follow-ups, so a slammed Thursday still has a list to open. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
 
-One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day money-back guarantee — email us if it doesn't deliver.
 
 [Get the Digital System — $49](/buy/buzzyfly-digital-system)
 
-All five packs, one download: [Complete Business Bundle — $97](/buy/complete-business-bundle)
+Every pack in one download: [Complete Business Bundle — $97](/buy/complete-business-bundle)

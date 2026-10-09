@@ -94,6 +94,6 @@ Put that date on the same row. That is the whole quiet-lead path.
 
 The page above is the proposal. The follow-ups are the same set used for a quiet lead after a quote. The Digital System keeps that set next to the onboarding checklist and the weekly reset, so a yes on Friday still has a welcome email on Monday.
 
-One-time. $49. Instant download. 30-day refund if the files do not arrive or are not as listed.
+One-time. $49. Instant download. 30-day money-back guarantee — email us if it doesn't deliver.
 
 [Get the Digital System — $49](/buy/buzzyfly-digital-system)

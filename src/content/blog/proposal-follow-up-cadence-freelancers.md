@@ -78,10 +78,10 @@ Run the cadence like a checklist, not a mood:
 - One note per open proposal. Never two in the same day.
 - No new proposal goes out until the tracker row exists.
 
-If you want the five ready-to-send notes only — proposal follow-up, mid-project check-in, quiet-lead poke, referral ask, wrap-up — that pack is $19: /buy/follow-up-email-templates
+If you want the five ready-to-send notes only — proposal follow-up, mid-project check-in, quiet-lead poke, referral ask, wrap-up — that pack is [$19](/buy/follow-up-email-templates).
 
 The full set is the $49 Digital System: the follow-up checklist, the onboarding checklist, and the 20-minute weekly reset in one download. One-time. Files plus lifetime updates. Not a subscription and not a coaching call. 30-day money-back guarantee — email us if it doesn't deliver.
 
-Get the Digital System — $49: /buy/buzzyfly-digital-system
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)
 
-If you want every pack in one checkout, the Complete Business Bundle is $97: /buy/complete-business-bundle
+If you want every pack in one checkout, the [Complete Business Bundle is $97](/buy/complete-business-bundle).
