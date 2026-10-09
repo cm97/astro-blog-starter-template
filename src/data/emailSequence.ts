@@ -67,7 +67,7 @@ Friday, take 10 minutes. What got done? What rolls to Monday? What dies?
 
 That's the whole weekly rhythm. Monday 20 minutes, Wednesday 5, Friday 10.
 
-The full version, with the Monday, Wednesday and Friday sheets ready to print, is part of the Buzzyfly Digital System. More on that later. Next week: the follow-up email people actually answer.`,
+The full weekly reset checklist is part of the Buzzyfly Digital System. More on that later. Next week: the follow-up email people actually answer.`,
 	},
 	{
 		subject: "The follow-up email people actually answer",
@@ -88,7 +88,7 @@ The break-up email is the one people reply to. It gives them a real deadline. It
 
 This week's homework: find one proposal that's gone quiet. Send the right email for where it's at.
 
-These two are from a set of five in the Digital System. The other three cover mid-project check-ins, referrals and project wrap-ups.`,
+The Digital System has the follow-up checklist these come from, plus a ready-to-send check-in email and a close-out email for when a project wraps.`,
 	},
 	{
 		subject: "“I'll just build my own”",
@@ -137,7 +137,7 @@ Three rules:
 2. Always name a price, even $25.
 3. Always give them the out: "No worries, we stick to the original scope."
 
-The system has five more scripts for the harder moments. Pushback. Endless revisions. "I thought that was included."
+The system has the full scope guard script and a scope creep checklist for the harder moments. Pushback. Endless revisions. "I thought that was included."
 
 If this one is useful, the rest will be too. If it isn't, the system probably isn't for you. Either way you've lost nothing.`,
 	},
@@ -164,15 +164,15 @@ The fill-in-the-blanks version of this worksheet is in the Digital System, next 
 		preview: "Everything from the last six weeks, in one place.",
 		body: `Hi,
 
-Over the last six weeks I've sent you pieces of the system. The weekly reset. The Thursday check. Follow-ups. Onboarding. Scope creep. Pricing.
+Over the last six weeks I've sent you pieces of the system. The weekly reset. The Wednesday check. Follow-ups. Onboarding. Scope creep. Pricing.
 
 The Buzzyfly Digital System is all of it in one download, ready to use:
 
-- Client onboarding: checklist, intake form, kickoff agenda
-- Weekly planning: the Monday, Wednesday and Friday reset
-- Follow-ups: templates, timing, and the break-up email
-- Scope and proposals: six scope scripts, a one-page proposal, a pricing worksheet
-- Retention: checklist and re-engagement email
+- Onboarding: checklist, intake checklist, intake form, welcome email
+- Weekly planning: the weekly reset checklist
+- Follow-ups: follow-up checklist, check-in email, close-out email
+- Scope and proposals: scope creep checklist, scope guard script, proposal template, pricing worksheet
+- Retention: retention checklist
 
 Who it's for: one- or few-person businesses where the process lives in your head.
 
