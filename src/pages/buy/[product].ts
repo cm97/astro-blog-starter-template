@@ -1,14 +1,19 @@
 import type { APIRoute } from "astro";
-import { BUZZYFLY_CONFIG } from "../../data/monetization";
+import { BUZZYFLY_CONFIG, DONE_FOR_YOU } from "../../data/monetization";
+import { codeFromCookieHeader, rememberOrderRef } from "../../lib/affiliates";
 import { PRODUCT_CURRENCY, findSellableProduct } from "../../lib/productCheckout";
 import { createOrder, paypalConfigured } from "../../lib/paypal";
 
 export const prerender = false;
 
 /** Starts a PayPal checkout for one digital product and sends the buyer to PayPal to approve it. */
-export const GET: APIRoute = async ({ params, url, locals }) => {
+export const GET: APIRoute = async ({ params, url, locals, request }) => {
 	const product = findSellableProduct(params.product ?? "");
 	if (!product) return new Response("Not found", { status: 404 });
+	if (product.id === DONE_FOR_YOU.productId && !DONE_FOR_YOU.acceptingOrders) {
+		// Calendar is full: never take money for a setup that can't be scheduled.
+		return new Response(null, { status: 302, headers: { location: "/setup", "cache-control": "no-store" } });
+	}
 
 	const env = locals.runtime.env;
 	if (!paypalConfigured(env)) {
@@ -30,6 +35,13 @@ export const GET: APIRoute = async ({ params, url, locals }) => {
 			returnUrl: `${url.origin}/buy/paypal-return`,
 			cancelUrl: `${url.origin}/store`,
 		});
+		// Credit the partner who sent this buyer, if any. Best effort: never block checkout on it.
+		const partner = codeFromCookieHeader(request.headers.get("cookie"));
+		if (partner && env.DB) {
+			await rememberOrderRef(env.DB, "paypal", order.id, partner).catch((error) =>
+				console.error("Buzzyfly partners: could not remember order ref", order.id, error),
+			);
+		}
 		return new Response(null, { status: 302, headers: { location: order.approveUrl, "cache-control": "no-store" } });
 	} catch (error) {
 		console.error("Buzzyfly buy: PayPal create order failed", product.id, error);

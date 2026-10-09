@@ -1,4 +1,5 @@
-import { BUZZYFLY_CONFIG, ALL_PRODUCTS, UPSELL_MAP } from "../data/monetization";
+import { BUZZYFLY_CONFIG, ALL_PRODUCTS, DONE_FOR_YOU, UPSELL_MAP } from "../data/monetization";
+import { INTAKE_QUESTIONS, intakeMailto } from "./doneForYou";
 
 /**
  * Transactional email for order fulfillment via the Cloudflare Email Service
@@ -38,7 +39,24 @@ export function escapeHtml(value: string): string {
 		.replace(/"/g, "&quot;");
 }
 
-function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string {
+function setupIntakeHtml(orderId: string): string {
+	return `<hr style="border:none;border-top:1px solid #e5e5e5;margin:24px 0">
+    <p style="margin:0 0 8px;font-size:15px;font-weight:600;color:#16191c">Next: your setup</p>
+    <p style="margin:0 0 12px">Answer these and the setup starts. Short answers are fine.</p>
+    <ol style="margin:0 0 16px;padding-left:20px">
+      ${INTAKE_QUESTIONS.map((q) => `<li style="margin:0 0 6px">${escapeHtml(q)}</li>`).join("\n      ")}
+    </ol>
+    <p style="margin:0 0 16px">
+      <a href="${escapeHtml(intakeMailto(orderId))}" style="display:inline-block;background:#1f4d3a;color:#fff;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:600">Send my answers</a>
+    </p>
+    <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
+      Or email them to ${escapeHtml(BUZZYFLY_CONFIG.orderEmail)}. Your finished setup arrives within
+      ${DONE_FOR_YOU.turnaroundDays} working days of your answers, followed by a ${DONE_FOR_YOU.callMinutes}-minute handover call.
+    </p>`;
+}
+
+function renderHtml({ downloadUrl, productName, itemId, orderId }: DeliveryEmail): string {
+	const isSetup = itemId === DONE_FOR_YOU.productId;
 	const upsellId = itemId ? UPSELL_MAP[itemId] : null;
 	const upsellProduct = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) : null;
 
@@ -60,15 +78,16 @@ function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string
 	return `<!doctype html>
 <html>
   <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#16191c;max-width:520px;margin:0 auto;padding:24px">
-    <h1 style="font-size:20px;margin:0 0 16px">Your download is ready</h1>
-    <p style="margin:0 0 16px">Thanks for buying <strong>${escapeHtml(productName)}</strong>.</p>
+    <h1 style="font-size:20px;margin:0 0 16px">${isSetup ? "Your setup is booked" : "Your download is ready"}</h1>
+    <p style="margin:0 0 16px">Thanks for buying <strong>${escapeHtml(productName)}</strong>.${isSetup ? " Every Buzzyfly file is below, so you can start using them today." : ""}</p>
     <p style="margin:0 0 24px">
-      <a href="${downloadUrl}" style="display:inline-block;background:#1f4d3a;color:#fff;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:600">Download ${escapeHtml(productName)}</a>
+      <a href="${downloadUrl}" style="display:inline-block;background:#1f4d3a;color:#fff;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:600">Download ${isSetup ? "every file" : escapeHtml(productName)}</a>
     </p>
     <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
       This link expires in 3 days. If it lapses before you grab the file, reply to this
       email and you'll get a fresh one.
     </p>
+    ${isSetup ? setupIntakeHtml(orderId) : ""}
     ${upsellBlock}
     <p style="margin:24px 0 0;color:#6b6a64;font-size:14px">— ${escapeHtml(BUZZYFLY_CONFIG.brandName)}</p>
   </body>
@@ -87,6 +106,19 @@ function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string
 		"",
 		"This link expires in 3 days. If it lapses before you grab the file, reply to this email and you'll get a fresh one.",
 	];
+
+	if (itemId === DONE_FOR_YOU.productId) {
+		lines.push(
+			"",
+			"---",
+			"",
+			"Next: your setup. Answer these and the setup starts. Short answers are fine.",
+			"",
+			...INTAKE_QUESTIONS.map((q, i) => `${i + 1}. ${q}`),
+			"",
+			`Email your answers to ${BUZZYFLY_CONFIG.orderEmail}. Your finished setup arrives within ${DONE_FOR_YOU.turnaroundDays} working days of your answers, followed by a ${DONE_FOR_YOU.callMinutes}-minute handover call.`,
+		);
+	}
 
 	if (upsellProduct) {
 		lines.push(
@@ -227,7 +259,10 @@ export async function sendDeliveryEmail(
 		await env.EMAIL.send({
 			from: resolveFrom(env),
 			to: message.to,
-			subject: `Your ${message.productName} download`,
+			subject:
+				message.itemId === DONE_FOR_YOU.productId
+					? `Your ${message.productName}: files + next step`
+					: `Your ${message.productName} download`,
 			html: renderHtml(message),
 			text: renderText(message),
 		});
@@ -235,5 +270,42 @@ export async function sendDeliveryEmail(
 	} catch (error) {
 		console.error(`Buzzyfly email: delivery send failed for order ${message.orderId} to ${message.to}`, error);
 		return { sent: false, reason: `send failed: ${String(error)}` };
+	}
+}
+
+/**
+ * Tells the owner a done-for-you setup was bought, so the buyer isn't left
+ * waiting on an inbox nobody is watching. No-op for every other product.
+ * Never throws: the buyer's own delivery must not depend on it.
+ */
+export async function sendDoneForYouAlert(
+	env: { EMAIL?: EmailBinding; EMAIL_FROM?: string },
+	order: { provider: string; orderId: string; itemId: string; buyerEmail: string | null },
+): Promise<void> {
+	if (order.itemId !== DONE_FOR_YOU.productId) return;
+	if (!env.EMAIL) {
+		console.error(`Buzzyfly setup: NEW DONE-FOR-YOU ORDER ${order.orderId} (${order.buyerEmail ?? "no email"}) — EMAIL binding missing, no alert sent`);
+		return;
+	}
+	const text = [
+		"New done-for-you setup order.",
+		"",
+		`Buyer: ${order.buyerEmail ?? "no email on the order — check the payment provider"}`,
+		`Order: ${order.provider} ${order.orderId}`,
+		"",
+		"They've been sent every file and the intake questions. Their answers will arrive at this address.",
+		`Promised turnaround: ${DONE_FOR_YOU.turnaroundDays} working days from their answers, then a ${DONE_FOR_YOU.callMinutes}-minute handover call.`,
+		"",
+		"If they haven't sent answers in 2 days, nudge them by replying to their order email.",
+	].join("\n");
+	try {
+		await env.EMAIL.send({
+			from: resolveFrom(env),
+			to: BUZZYFLY_CONFIG.orderEmail,
+			subject: `New done-for-you setup order — ${order.buyerEmail ?? order.orderId}`,
+			text,
+		});
+	} catch (error) {
+		console.error(`Buzzyfly setup: owner alert failed for order ${order.orderId}`, error);
 	}
 }

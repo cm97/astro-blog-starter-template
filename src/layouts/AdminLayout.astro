@@ -3,7 +3,7 @@ import "../styles/global.css";
 
 interface Props {
 	title: string;
-	active?: "dashboard" | "posts" | "media" | "subscribers" | "orders" | "domains" | "compose" | "settings" | "log";
+	active?: "dashboard" | "posts" | "media" | "subscribers" | "orders" | "affiliates" | "domains" | "compose" | "settings" | "log";
 }
 
 const { title, active } = Astro.props;
@@ -14,6 +14,7 @@ const navItems = [
 	{ id: "media", href: "/admin/media", label: "Media" },
 	{ id: "subscribers", href: "/admin/subscribers", label: "Subscribers" },
 	{ id: "orders", href: "/admin/orders", label: "Orders" },
+	{ id: "affiliates", href: "/admin/affiliates", label: "Partners" },
 	{ id: "domains", href: "/admin/domains", label: "Domain requests" },
 	{ id: "compose", href: "/admin/compose", label: "Send email" },
 	{ id: "settings", href: "/admin/settings", label: "Settings" },

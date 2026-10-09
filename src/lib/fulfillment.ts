@@ -7,6 +7,8 @@ export interface FulfillmentOrder {
 	customerEmail: string | null;
 	/** Traffic source from the buy link's client_reference_id (see src/lib/trafficSource.ts). */
 	source?: string | null;
+	/** What the buyer actually paid, in cents, when the provider reports it. */
+	amountCents?: number | null;
 }
 
 /** Extracts the fields fulfillment needs from a verified Lemon Squeezy webhook payload. */
@@ -62,6 +64,7 @@ export function parseStripeOrder(payload: any): FulfillmentOrder | null {
 		itemId: String(itemId),
 		customerEmail: session?.customer_details?.email ?? session?.customer_email ?? null,
 		source: typeof session?.client_reference_id === "string" ? session.client_reference_id : null,
+		amountCents: typeof session?.amount_total === "number" ? session.amount_total : null,
 	};
 }
 

@@ -1,8 +1,9 @@
 import type { APIRoute } from "astro";
 import { BUZZYFLY_CONFIG } from "../../data/monetization";
-import { sendDeliveryEmail } from "../../lib/email";
+import { sendDeliveryEmail, sendDoneForYouAlert } from "../../lib/email";
 import { createDownloadToken } from "../../lib/fulfillment";
 import { captureOrder, paypalConfigured } from "../../lib/paypal";
+import { lookupOrderRef, recordCommission } from "../../lib/affiliates";
 import { PRODUCT_CURRENCY, findSellableProduct } from "../../lib/productCheckout";
 
 export const prerender = false;
@@ -72,6 +73,23 @@ export const GET: APIRoute = async ({ url, locals }) => {
 		} catch (error) {
 			console.error("Buzzyfly buy: could not record PayPal order", error);
 		}
+	}
+	if (firstVisit && env.DB) {
+		const partner = await lookupOrderRef(env.DB, "paypal", captured.orderId).catch(() => null);
+		if (partner) {
+			const credit = await recordCommission(env.DB, {
+				provider: "paypal",
+				orderId: captured.orderId,
+				itemId: product.id,
+				code: partner,
+				buyerEmail: captured.payerEmail,
+				saleCents: Math.round(Number(captured.amount) * 100),
+			});
+			if (!credit.recorded) console.log(`Buzzyfly partners: no commission for ${captured.orderId}: ${credit.reason}`);
+		}
+	}
+	if (firstVisit) {
+		await sendDoneForYouAlert(env, { provider: "paypal", orderId: captured.orderId, itemId: product.id, buyerEmail: captured.payerEmail });
 	}
 	if (firstVisit && captured.payerEmail) {
 		try {

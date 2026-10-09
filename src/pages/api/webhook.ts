@@ -9,7 +9,8 @@ import {
 	type FulfillmentOrder,
 } from "../../lib/fulfillment";
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../../data/monetization";
-import { sendDeliveryEmail } from "../../lib/email";
+import { sendDeliveryEmail, sendDoneForYouAlert } from "../../lib/email";
+import { codeFromStripeReference, recordCommission } from "../../lib/affiliates";
 
 // This endpoint must run on-demand (a Cloudflare Pages Function / Worker),
 // never be statically prerendered, since it verifies a live request signature.
@@ -118,6 +119,26 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			console.error("Buzzyfly webhook: failed to record fulfillment in D1", error);
 		}
 	}
+
+	// Credit the partner who referred this sale (client_reference_id "aff-<code>").
+	const partner = codeFromStripeReference(order.source);
+	if (partner) {
+		const credit = await recordCommission(env.DB, {
+			provider: order.provider,
+			orderId: order.orderId,
+			itemId: order.itemId,
+			code: partner,
+			buyerEmail: order.customerEmail,
+			saleCents: order.amountCents ?? null,
+		});
+		if (!credit.recorded) console.log(`Buzzyfly partners: no commission for ${order.orderId}: ${credit.reason}`);
+	}
+	await sendDoneForYouAlert(env, {
+		provider: order.provider,
+		orderId: order.orderId,
+		itemId: order.itemId,
+		buyerEmail: order.customerEmail,
+	});
 
 	const downloadToken = await createDownloadToken(
 		order,

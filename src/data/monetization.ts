@@ -134,6 +134,13 @@ export const PRODUCT_FILE_MAP: Record<
 		fileName: "complete-business-bundle.zip",
 		contentType: "application/zip",
 	},
+	// The done-for-you buyer gets every file straight away, so they can start
+	// before the setup is finished. Same zip as the bundle.
+	"done-for-you-setup": {
+		r2Key: "products/complete-business-bundle.zip",
+		fileName: "complete-business-bundle.zip",
+		contentType: "application/zip",
+	},
 };
 
 // Maps each product to the next logical upsell product id (null = top of funnel, they own everything).
@@ -142,7 +149,25 @@ export const UPSELL_MAP: Record<string, string | null> = {
 	"follow-up-email-templates": "buzzyfly-digital-system",
 	"client-onboarding-kit": "buzzyfly-digital-system",
 	"buzzyfly-digital-system": "complete-business-bundle",
-	"complete-business-bundle": null,
+	"complete-business-bundle": "done-for-you-setup",
+	"done-for-you-setup": null,
+};
+
+/**
+ * The done-for-you setup: the owner sets the buyer's onboarding, weekly reset
+ * and follow-up system up for them. Sold through the same /buy/<id> checkout as
+ * the files; it is the `done-for-you-setup` entry in ALL_PRODUCTS.
+ *
+ * Set acceptingOrders to false when the calendar is full. /setup then swaps the
+ * buy button for a waitlist email instead of taking money you can't deliver on.
+ */
+export const DONE_FOR_YOU = {
+	productId: "done-for-you-setup",
+	acceptingOrders: true,
+	// Working days from receiving the buyer's intake answers to handing over the finished setup.
+	turnaroundDays: 5,
+	// The live call where the setup is handed over and walked through.
+	callMinutes: 30,
 };
 
 export const ALL_PRODUCTS = [
@@ -190,6 +215,21 @@ export const ALL_PRODUCTS = [
 		features: ["Everything in the Digital System", "Client Onboarding Kit", "Follow-Up Email Templates", "Weekly Reset Checklist", "All future product updates"],
 		buyUrl: "/buy/complete-business-bundle",
 		badge: "Best value",
+	},
+	{
+		id: "done-for-you-setup",
+		title: "Done-For-You Setup",
+		price: "$297",
+		description: "Skip the setup work. Answer one short intake email and get your onboarding, weekly reset and follow-ups written in your words, ready to run.",
+		features: [
+			"Every Buzzyfly file, delivered right away",
+			"Welcome email and intake form rewritten for your business",
+			"Follow-up emails filled in with your offer and prices",
+			"Weekly reset built around your real week",
+			"30-minute handover call",
+		],
+		buyUrl: "/buy/done-for-you-setup",
+		badge: null,
 	},
 ];
 

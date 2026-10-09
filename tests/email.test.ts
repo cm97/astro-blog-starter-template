@@ -9,6 +9,7 @@ import {
 	ALLOWED_SENDERS,
 	resolveFrom,
 	sendDeliveryEmail,
+	sendDoneForYouAlert,
 	sendFollowUpEmail,
 	type EmailBinding,
 } from "../src/lib/email";
@@ -88,7 +89,8 @@ test("every product's delivery email carries the upsell from UPSELL_MAP", async 
 		"follow-up-email-templates": "Buzzyfly Digital System",
 		"client-onboarding-kit": "Buzzyfly Digital System",
 		"buzzyfly-digital-system": "Complete Business Bundle",
-		"complete-business-bundle": null,
+		"complete-business-bundle": "Done-For-You Setup",
+		"done-for-you-setup": null,
 	};
 	for (const [itemId, upsell] of Object.entries(ladder)) {
 		const EMAIL = mockEmail();
@@ -97,6 +99,31 @@ test("every product's delivery email carries the upsell from UPSELL_MAP", async 
 		if (upsell) assert.ok(html.includes(`Get ${upsell}`), `${itemId} -> ${upsell}`);
 		else assert.doesNotMatch(html, /One more thing/, `${itemId} has no upsell`);
 	}
+});
+
+test("done-for-you delivery email carries the intake questions and a working mailto", async () => {
+	const EMAIL = mockEmail();
+	await sendDeliveryEmail(
+		{ to: "b@example.com", downloadUrl: "https://x/y", productName: "Done-For-You Setup", orderId: "ORD-1", itemId: "done-for-you-setup" },
+		{ EMAIL },
+	);
+	const msg = EMAIL.sent[0];
+	assertValidHtml(msg.html!);
+	assert.match(msg.subject, /next step/);
+	assert.match(msg.html!, /Next: your setup/);
+	assert.match(msg.html!, /href="mailto:coachmanager@gmail\.com\?subject=Setup%20intake/);
+	assert.match(msg.text!, /1\. What do you sell/);
+	assert.doesNotMatch(msg.html!, /One more thing/);
+});
+
+test("done-for-you owner alert fires only for the setup", async () => {
+	const EMAIL = mockEmail();
+	await sendDoneForYouAlert({ EMAIL }, { provider: "paypal", orderId: "A", itemId: "buzzyfly-digital-system", buyerEmail: "b@example.com" });
+	assert.equal(EMAIL.sent.length, 0);
+	await sendDoneForYouAlert({ EMAIL }, { provider: "paypal", orderId: "B", itemId: "done-for-you-setup", buyerEmail: "b@example.com" });
+	assert.equal(EMAIL.sent.length, 1);
+	assert.equal(EMAIL.sent[0].to, "coachmanager@gmail.com");
+	assert.match(EMAIL.sent[0].text!, /b@example\.com/);
 });
 
 test("delivery email escapes product names", async () => {
