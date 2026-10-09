@@ -1,4 +1,4 @@
-import { BUZZYFLY_CONFIG, ALL_PRODUCTS, UPSELL_MAP } from "../data/monetization";
+import { BUZZYFLY_CONFIG, ALL_PRODUCTS, UPSELL_MAP, UPSELL_REASON } from "../data/monetization";
 
 /**
  * Transactional email for order fulfillment via the Cloudflare Email Service
@@ -38,17 +38,27 @@ export function escapeHtml(value: string): string {
 		.replace(/"/g, "&quot;");
 }
 
-function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string {
+/** The next product for a buyer of `itemId`, and why, or null at the top of the ladder. */
+function upsellFor(itemId: string | undefined) {
 	const upsellId = itemId ? UPSELL_MAP[itemId] : null;
-	const upsellProduct = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) : null;
+	const product = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) : null;
+	if (!product || !itemId) return null;
+	return { product, reason: UPSELL_REASON[itemId] ?? product.description };
+}
+
+function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string {
+	const upsell = upsellFor(itemId);
+	const upsellProduct = upsell?.product;
 
 	const upsellBlock = upsellProduct
 		? `<hr style="border:none;border-top:1px solid #e5e5e5;margin:24px 0">
     <p style="margin:0 0 8px;font-size:15px;font-weight:600;color:#16191c">One more thing</p>
     <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
-      You have <strong>${escapeHtml(productName)}</strong>. The logical next piece is the
-      <strong>${escapeHtml(upsellProduct.title)}</strong>. ${escapeHtml(upsellProduct.description)}
-      Same 30-day money-back guarantee.
+      ${escapeHtml(upsell!.reason)}
+    </p>
+    <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
+      One-time payment. Same 30-day money-back guarantee.
+      No rush. Run what you just bought first.
     </p>
     <p style="margin:0">
       <a href="${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
@@ -76,8 +86,8 @@ function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string
 }
 
 function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string {
-	const upsellId = itemId ? UPSELL_MAP[itemId] : null;
-	const upsellProduct = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) : null;
+	const upsell = upsellFor(itemId);
+	const upsellProduct = upsell?.product;
 
 	const lines = [
 		`Thanks for buying ${productName}.`,
@@ -93,9 +103,8 @@ function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string
 			"",
 			"---",
 			"",
-			`You have ${productName}. The logical next piece is the ${upsellProduct.title}.`,
-			upsellProduct.description,
-			"Same 30-day money-back guarantee.",
+			upsell!.reason,
+			"One-time payment. Same 30-day money-back guarantee. No rush. Run what you just bought first.",
 			`Get it here (${upsellProduct.price}): ${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}`,
 		);
 	}
@@ -145,19 +154,17 @@ export async function sendFollowUpEmail(
 	if (!env.EMAIL) return { sent: false, reason: "EMAIL binding not configured" };
 	if (!message.to) return { sent: false, reason: "no email address" };
 
-	const upsellId = UPSELL_MAP[message.itemId];
-	const upsellProduct = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) : null;
+	const upsell = upsellFor(message.itemId);
+	const upsellProduct = upsell?.product;
 	const purchasedProduct = ALL_PRODUCTS.find((p) => p.id === message.itemId);
 	const productName = purchasedProduct?.title ?? message.itemId;
 
 	const from = resolveFrom(env);
-	const subject = `Quick check-in on your ${productName}`;
+	const subject = `Has ${productName} helped yet?`;
 
 	const upsellSection = upsellProduct
 		? `<p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
-      If you've run it once or twice and it's working, the next piece is the
-      <strong>${escapeHtml(upsellProduct.title)}</strong> (${upsellProduct.price}).
-      ${escapeHtml(upsellProduct.description)}
+      If it's working, here's the next piece. ${escapeHtml(upsell!.reason)}
     </p>
     <p style="margin:0">
       <a href="${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
@@ -165,16 +172,16 @@ export async function sendFollowUpEmail(
       </a>
     </p>`
 		: `<p style="margin:0;color:#6b6a64;font-size:14px">
-      You've got the complete system. If you have any questions about using it, just reply to this email.
+      You have every Buzzyfly file. Nothing else to buy. If a piece isn't clear, reply and ask.
     </p>`;
 
 	const html = `<!doctype html>
 <html>
   <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#16191c;max-width:520px;margin:0 auto;padding:24px">
-    <p style="margin:0 0 16px">Hey — just checking in.</p>
+    <p style="margin:0 0 16px">Hi,</p>
     <p style="margin:0 0 16px">
-      You downloaded <strong>${escapeHtml(productName)}</strong> a couple of days ago.
-      Did it do what you needed it to?
+      You got <strong>${escapeHtml(productName)}</strong> a few days ago.
+      Have you used it yet? If not, open one file and use it on a real client today.
     </p>
     <p style="margin:0 0 24px;color:#6b6a64;font-size:14px">
       If anything's not working or unclear, reply here and you'll get a person, not a ticket.
@@ -185,9 +192,9 @@ export async function sendFollowUpEmail(
 </html>`;
 
 	const lines = [
-		"Hey — just checking in.",
+		"Hi,",
 		"",
-		`You downloaded ${productName} a couple of days ago. Did it do what you needed it to?`,
+		`You got ${productName} a few days ago. Have you used it yet? If not, open one file and use it on a real client today.`,
 		"",
 		"If anything's not working or unclear, reply here and you'll get a person, not a ticket.",
 	];
@@ -195,8 +202,8 @@ export async function sendFollowUpEmail(
 	if (upsellProduct) {
 		lines.push(
 			"",
-			`If it's working, the next piece is the ${upsellProduct.title} (${upsellProduct.price}):`,
-			`${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}`,
+			`If it's working, here's the next piece. ${upsell!.reason}`,
+			`Get ${upsellProduct.title} (${upsellProduct.price}): ${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}`,
 		);
 	}
 
