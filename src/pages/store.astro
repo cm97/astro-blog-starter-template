@@ -17,7 +17,6 @@ export const prerender = false;
 
 const settings = await getSettings(Astro.locals.runtime?.env);
 const system = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
-// An admin-edited description (Admin > Settings) wins over the shipped copy.
 const systemDescription =
 	settings.defaultProductDescription && settings.defaultProductDescription !== BUZZYFLY_CONFIG.defaultProductDescription
 		? settings.defaultProductDescription
@@ -50,8 +49,8 @@ const FAQ = [
 	{
 		q: "How do I get the files?",
 		a: AUTOMATIC_DELIVERY_ENABLED
-			? "Pay once through PayPal. You download on the thank-you page right away. A copy of the link is emailed to you too."
-			: "Pay once through PayPal. Your download is emailed to the address you checked out with.",
+			? "Pay once through Stripe. You download on the thank-you page right away. A copy of the link is emailed to you too."
+			: "Pay once through Stripe. Your download is emailed to the address you checked out with.",
 	},
 	{
 		q: "Do I need an account?",
