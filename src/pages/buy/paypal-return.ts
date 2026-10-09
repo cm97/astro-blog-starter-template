@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { BUZZYFLY_CONFIG } from "../../data/monetization";
 import { sendDeliveryEmail } from "../../lib/email";
 import { createDownloadToken } from "../../lib/fulfillment";
+import { usableSecret } from "../../lib/secrets";
 import { captureOrder, paypalConfigured } from "../../lib/paypal";
 import { PRODUCT_CURRENCY, findSellableProduct } from "../../lib/productCheckout";
 
@@ -29,7 +30,8 @@ export const GET: APIRoute = async ({ url, locals }) => {
 	const orderId = url.searchParams.get("token") ?? "";
 	if (!ORDER_ID.test(orderId)) return message(400, "That payment link is not valid.");
 	if (!paypalConfigured(env)) return message(503, "PayPal checkout is not set up yet.");
-	if (!env.DOWNLOAD_TOKEN_SECRET) {
+	const secret = await usableSecret(env.DOWNLOAD_TOKEN_SECRET);
+	if (!secret) {
 		// Checked BEFORE capturing so we never take money we cannot fulfil.
 		console.error("Buzzyfly buy: DOWNLOAD_TOKEN_SECRET missing; refusing to capture PayPal order", orderId);
 		return message(500, "Checkout is temporarily unavailable. You have not been charged.");
@@ -54,7 +56,7 @@ export const GET: APIRoute = async ({ url, locals }) => {
 		return message(402, "Your payment was not completed, so no download was issued.");
 	}
 
-	const token = await createDownloadToken({ orderId: captured.orderId, itemId: product.id }, env.DOWNLOAD_TOKEN_SECRET);
+	const token = await createDownloadToken({ orderId: captured.orderId, itemId: product.id }, secret);
 	const downloadPath = `/api/download?token=${token}`;
 
 	// Best effort: a failed record or email must never block a paid buyer from their file.

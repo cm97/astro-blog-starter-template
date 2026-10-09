@@ -1,6 +1,7 @@
 import { APPS_TOKEN_TTL_SECONDS, isAppsItem } from "../../lib/appsAccess";
 import type { APIRoute } from "astro";
 import { verifyLemonSqueezySignature, verifyStripeSignature } from "../../lib/webhookSecurity";
+import { usableSecret } from "../../lib/secrets";
 import {
 	createDownloadToken,
 	parseLemonSqueezyOrder,
@@ -33,14 +34,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	let order: FulfillmentOrder | null = null;
 
 	if (stripeSignature) {
-		if (!env.STRIPE_WEBHOOK_SECRET) {
+		const stripeSecret = await usableSecret(env.STRIPE_WEBHOOK_SECRET);
+		if (!stripeSecret) {
 			console.error("Buzzyfly webhook: STRIPE_WEBHOOK_SECRET is not configured");
 			return new Response("Webhook not configured", { status: 500 });
 		}
 		const valid = await verifyStripeSignature(
 			rawBody,
 			stripeSignature,
-			env.STRIPE_WEBHOOK_SECRET,
+			stripeSecret,
 		);
 		if (!valid) return new Response("Invalid signature", { status: 401 });
 
@@ -82,7 +84,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		});
 	}
 
-	if (!env.DOWNLOAD_TOKEN_SECRET) {
+	const downloadSecret = await usableSecret(env.DOWNLOAD_TOKEN_SECRET);
+	if (!downloadSecret) {
 		console.error("Buzzyfly webhook: DOWNLOAD_TOKEN_SECRET is not configured");
 		return new Response("Fulfillment not configured", { status: 500 });
 	}
@@ -121,7 +124,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
 	const downloadToken = await createDownloadToken(
 		order,
-		env.DOWNLOAD_TOKEN_SECRET,
+		downloadSecret,
 		isApps ? APPS_TOKEN_TTL_SECONDS : undefined,
 	);
 	const downloadUrl = isApps

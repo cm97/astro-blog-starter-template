@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { APPS_CURRENCY, APPS_PRICE, APPS_TOKEN_TTL_SECONDS } from "../../lib/appsAccess";
 import { captureOrder, paypalConfigured } from "../../lib/paypal";
 import { createDownloadToken } from "../../lib/fulfillment";
+import { usableSecret } from "../../lib/secrets";
 import { sendDeliveryEmail } from "../../lib/email";
 import { BUZZYFLY_CONFIG } from "../../data/monetization";
 
@@ -24,7 +25,8 @@ export const GET: APIRoute = async ({ url, locals }) => {
 	const orderId = url.searchParams.get("token") ?? "";
 	if (!ORDER_ID.test(orderId)) return page(400, "That payment link is not valid.");
 	if (!paypalConfigured(env)) return page(503, "PayPal checkout is not set up yet.");
-	if (!env.DOWNLOAD_TOKEN_SECRET) {
+	const secret = await usableSecret(env.DOWNLOAD_TOKEN_SECRET);
+	if (!secret) {
 		// Checked BEFORE capturing so we never take money we cannot fulfil.
 		console.error("Buzzyfly apps: DOWNLOAD_TOKEN_SECRET missing; refusing to capture PayPal order", orderId);
 		return page(500, "Checkout is temporarily unavailable. You have not been charged.");
@@ -50,7 +52,7 @@ export const GET: APIRoute = async ({ url, locals }) => {
 
 	const token = await createDownloadToken(
 		{ orderId: captured.orderId, itemId: "apps-pro" },
-		env.DOWNLOAD_TOKEN_SECRET,
+		secret,
 		APPS_TOKEN_TTL_SECONDS,
 	);
 	const unlockUrl = `${BUZZYFLY_CONFIG.siteUrl}/apps/unlock?token=${token}`;
