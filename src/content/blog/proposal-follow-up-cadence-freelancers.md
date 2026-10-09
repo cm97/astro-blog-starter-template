@@ -2,12 +2,11 @@
 title: "Proposal Follow-Up Cadence for Freelancers (Day 3, 7, 12)"
 description: "The exact Day 3, Day 7, and Day 12 follow-up freelancers send after a proposal gets no reply — close the deal or clear the pipeline."
 pubDate: "Oct 7 2026"
-updatedDate: "Oct 7 2026"
+updatedDate: "Oct 9 2026"
 heroImage: "/blog-placeholder-2.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductUrl: "/buy/buzzyfly-digital-system"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
@@ -19,31 +18,68 @@ Use three dated notes. Same shape every time. Then stop. If they want the work, 
 
 Before the first follow-up, write five fields. If these are not written down, the cadence dies on the first busy Tuesday.
 
-- Client name and the email you actually sent the proposal to
-- Proposal sent date (not the day you drafted it)
-- One-line scope: what you will do, and what is out
-- Price and the start date you offered
-- Decision date: sent date plus 12 days
+```
+Client name: ________
+Email the proposal went to: ________
+Proposal sent date (actual): ________
+One-line scope (in + out): ________
+Price: ________
+Start date you offered: ________
+Decision date (sent + 12 days): ________
+Day 3 due: ________
+Day 7 due: ________
+Day 12 due: ________
+Status: waiting / replied / closed
+```
 
-That is the whole tracker. A notes app is enough. The failure mode is keeping it in your head and then guessing who you already nudged.
+Time box: 3 minutes right after you hit send. Do not wait for a calm afternoon. The calm afternoon is when delivery eats the follow-up.
+
+## Exact send windows
+
+| Touch | When | Length | Job |
+|---|---|---|---|
+| Proposal | Same day as the call | The proposal you already wrote | Put the decision date on the calendar before you close the tab |
+| Day 3 | Calendar day 3, before 11am | 4 lines | One binary question |
+| Day 7 | Calendar day 7, before 11am | 5 lines | Name the close date |
+| Day 12 | Calendar day 12 | 3 lines | Close the file |
+
+If the due date lands on a Friday or Monday, move it to Tuesday morning. Do not skip it.
 
 ## Day 3 — one ask
 
 Send this on the third calendar day after the proposal, not the third business day you felt like it. Subject stays boring so it does not look like a newsletter.
 
-Subject: Proposal — still the right fit?
+**Subject:** Proposal — still the right fit?
 
-Hi [Name], checking the proposal I sent on [date] for [one-line scope] at [price]. One question: do you want to start, or should I close the file? Reply with start or close.
+> Hi [Name],
+>
+> Checking the proposal I sent on [date] for [one-line scope] at [price].
+>
+> One question: do you want to start, or should I close the file?
+>
+> Reply with start or close.
+>
+> [Your name]
 
 Do not attach a new PDF. Do not add a discount. Do not ask how they are. One question. Time box: four minutes, including finding the thread.
+
+Fill-in line before you send: "I am holding [start date] until [Day 12]." Add that only if you actually named a start date.
 
 ## Day 7 — date and next step
 
 If Day 3 got nothing, send this. The point is a close date, not a second pitch.
 
-Subject: Closing this on [date] unless I hear back
+**Subject:** Closing this on [date] unless I hear back
 
-Hi [Name], I have not heard back on the [project] proposal from [sent date]. I will close it on [date, 5 days out] so the slot does not sit open. If you want to start, reply with the start date and I will send the welcome note the same day.
+> Hi [Name],
+>
+> I have not heard back on the [project] proposal from [sent date].
+>
+> I will close it on [date, 5 days out] so the slot does not sit open.
+>
+> If you want to start, reply with the start date and I will send the welcome note the same day.
+>
+> [Your name]
 
 If they reply with a question, answer that question in one paragraph and restate the close date. Do not open a new scope conversation inside the follow-up.
 
@@ -51,22 +87,43 @@ If they reply with a question, answer that question in one paragraph and restate
 
 No reply by the decision date means the file closes. Send the note anyway so you are not the person who vanished.
 
-Subject: Closed the proposal
+**Subject:** Closed the proposal
 
-Hi [Name], I closed the proposal today. If the timing changes, reply to this email and I will reopen it. No chase after this.
+> Hi [Name],
+>
+> I closed the proposal today.
+>
+> If the timing changes, reply to this email and I will reopen it. No chase after this.
+>
+> [Your name]
 
 Then mark the row closed. Remove it from this week's priorities. A closed no is usable. An open silence is not.
 
-## What you do if they answer late
+## What you do if they answer
 
-A reply after Day 12 is a new job, not a continuation of the old chase.
+- **Start / yes:** send the invoice or deposit request the same day. Welcome note with the start date, the one thing you need from them, and the day they will hear from you next.
+- **Not now:** write the month they named on the log. One note that month. Not a weekly drip.
+- **Price question:** restate what is in and what is out. Do not cut the number to get a reply.
+- **Scope change:** new line, new price, new date. The original proposal stays the record.
+- **No / close:** mark closed. Do not argue.
 
-1. Restate the price and the one-line scope in the reply.
-2. Offer one start date in the next 10 days.
-3. If they say yes, send the welcome note the same day: what happens in the first 48 hours, what you need from them, and when kickoff is.
-4. If they want a change in scope, write the change and the new price before you agree. Do not start work on a maybe.
+If you cannot name the next date after a yes, you do not have a running client yet. You have a payment waiting on a process that still lives in your head. That is the onboarding checklist, not another follow-up.
 
-That same-day welcome is where most solo operators drop the paid client. The proposal closed. Week one was still invented from memory. Keep the welcome to six lines so you can send it between other jobs.
+## Same-day welcome when they say yes
+
+Keep it to six lines so you can send it between other jobs.
+
+> Hi [Name],
+>
+> Glad we are moving forward on [one-line scope].
+>
+> Start date: [date]. First thing I need from you by [date]: [one concrete asset or access].
+>
+> Kickoff: [date/time] or async if that is better. I will send the agenda the day before.
+>
+> Invoice / deposit is attached. Once that clears, we are locked.
+>
+> [Your name]
 
 ## What still breaks if this only lives in your head
 
@@ -74,14 +131,12 @@ The three emails are short. The leak is the calendar. You forget Day 7 because a
 
 Run the cadence like a checklist, not a mood:
 
-- Monday and Thursday, 15 minutes: open the tracker, send whatever note is due, close anything past Day 12.
-- One note per open proposal. Never two in the same day.
-- No new proposal goes out until the tracker row exists.
+1. Monday and Thursday, 15 minutes: open the tracker, send whatever note is due, close anything past Day 12.
+2. One note per open proposal. Never two in the same day.
+3. No new proposal goes out until the tracker row exists.
 
-If you want the five ready-to-send notes only — proposal follow-up, mid-project check-in, quiet-lead poke, referral ask, wrap-up — that pack is $19: /buy/follow-up-email-templates
+If you want the five ready-to-send notes only — proposal follow-up, mid-project check-in, quiet-lead poke, referral ask, wrap-up — that pack is $19.
 
-The full set is the $49 Digital System: the follow-up checklist, the onboarding checklist, and the 20-minute weekly reset in one download. One-time. Files plus lifetime updates. Not a subscription and not a coaching call. 30-day money-back guarantee — email us if it doesn't deliver.
+The full set is the $49 Digital System: the follow-up checklist, the onboarding checklist, and the 20-minute weekly reset in one download. One-time. Files plus lifetime updates. Not a subscription and not a coaching call. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
 
-Get the Digital System — $49: /buy/buzzyfly-digital-system
-
-If you want every pack in one checkout, the Complete Business Bundle is $97: /buy/complete-business-bundle
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
