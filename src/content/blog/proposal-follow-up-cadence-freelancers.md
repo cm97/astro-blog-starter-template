@@ -139,4 +139,4 @@ If you want the five ready-to-send notes only — proposal follow-up, mid-projec
 
 The full set is the $49 Digital System: the follow-up checklist, the onboarding checklist, and the 20-minute weekly reset in one download. One-time. Files plus lifetime updates. Not a subscription and not a coaching call. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)

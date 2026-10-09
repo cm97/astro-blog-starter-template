@@ -130,4 +130,4 @@ The follow-up if a proposal goes quiet before they pay is a different list (day 
 
 One-time payment. Download after purchase from the thank-you page. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day money-back guarantee — email us if it doesn't deliver.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+[Get the Digital System — $49](/buy/buzzyfly-digital-system)
