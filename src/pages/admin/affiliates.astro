@@ -1,0 +1,189 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import AdminHelp from "../../components/AdminHelp.astro";
+import { BUZZYFLY_CONFIG, getProduct } from "../../data/monetization";
+import {
+	HOLD_DAYS,
+	ensureAffiliateSchema,
+	formatCents,
+	isPayable,
+	partnerSummary,
+	type Affiliate,
+	type PartnerSummary,
+} from "../../lib/affiliates";
+
+const env = Astro.locals.runtime.env;
+const ok = Astro.url.searchParams.get("ok");
+const error = Astro.url.searchParams.get("error");
+
+interface Commission {
+	provider: string;
+	order_id: string;
+	code: string;
+	item_id: string;
+	sale_cents: number;
+	commission_cents: number;
+	status: string;
+	created_at: number;
+	paid_at: number | null;
+}
+
+let pending: Affiliate[] = [];
+let partners: (Affiliate & { summary: PartnerSummary })[] = [];
+let commissions: Commission[] = [];
+
+if (env.DB) {
+	try {
+		await ensureAffiliateSchema(env.DB);
+		const all = (await env.DB.prepare(`SELECT * FROM affiliates ORDER BY created_at DESC`).all<Affiliate>()).results ?? [];
+		pending = all.filter((a) => a.status === "pending");
+		partners = await Promise.all(
+			all.filter((a) => a.status !== "pending").map(async (a) => ({ ...a, summary: await partnerSummary(env.DB!, a.code) })),
+		);
+		commissions =
+			(await env.DB.prepare(`SELECT * FROM affiliate_commissions ORDER BY created_at DESC LIMIT 200`).all<Commission>()).results ?? [];
+	} catch (err) {
+		console.error("Buzzyfly admin partners: failed to read D1", err);
+	}
+}
+
+const owed = partners.reduce((sum, p) => sum + p.summary.payableCents, 0);
+const when = (ms: number) => new Date(ms).toLocaleDateString("en-US", { dateStyle: "medium" });
+const commissionStatus = (c: Commission) =>
+	c.status === "pending" ? (isPayable(c.created_at) ? "Payable" : "Pending") : c.status === "paid" ? "Paid" : "Void";
+---
+
+<AdminLayout title="Partners" active="affiliates">
+	<h1>Partners</h1>
+	<p class="admin-subtitle">
+		{partners.filter((p) => p.status === "active").length} active · {pending.length} waiting for review · {formatCents(owed)} ready to pay
+	</p>
+
+	{!env.DB && <p class="admin-notice admin-notice--warn">No D1 database bound — partners can't be listed.</p>}
+	{ok && <p class="admin-notice admin-notice--success">{ok}</p>}
+	{error && <p class="admin-notice admin-notice--error">{error}</p>}
+
+	<AdminHelp title="How the partner program works">
+		<p>
+			People apply at <a href="/partners">/partners</a>. Approving one emails them their link
+			(<code>{BUZZYFLY_CONFIG.siteUrl}/r/their-name</code>) and a private stats page.
+		</p>
+		<p>
+			A sale within 30 days of their click earns them their rate (40% by default, capped at 20% on the done-for-you setup).
+			Their own purchases are never credited.
+		</p>
+		<ol>
+			<li>A commission stays <strong>Pending</strong> for {HOLD_DAYS} days, the money-back window.</li>
+			<li>If you refund that order, press <strong>Void</strong> on its commission.</li>
+			<li>Once a month, send each partner their <strong>Ready to pay</strong> total by PayPal, then press <strong>Mark payable as paid</strong>.</li>
+		</ol>
+	</AdminHelp>
+
+	<div class="admin-card">
+		<h2>Applications</h2>
+		{pending.length === 0 && <p>No applications waiting.</p>}
+		{pending.length > 0 && (
+			<table>
+				<thead><tr><th>Applied</th><th>Who</th><th>Where / audience</th><th>Link</th><th /></tr></thead>
+				<tbody>
+					{pending.map((a) => (
+						<tr>
+							<td>{when(a.created_at)}</td>
+							<td>{a.name}<br /><a href={`mailto:${a.email}`}>{a.email}</a></td>
+							<td>{a.website}<br /><small>{a.audience}</small></td>
+							<td>/r/{a.code}</td>
+							<td>
+								<form method="POST" action="/api/admin/affiliates" style="display:inline">
+									<input type="hidden" name="code" value={a.code} />
+									<button class="admin-btn admin-btn--primary" name="action" value="approve" type="submit">Approve</button>
+									<button class="admin-btn" name="action" value="decline" type="submit">Decline</button>
+								</form>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		)}
+	</div>
+
+	<div class="admin-card">
+		<h2>Partners</h2>
+		{partners.length === 0 && <p>No approved partners yet.</p>}
+		{partners.length > 0 && (
+			<table>
+				<thead><tr><th>Partner</th><th>Clicks (30d)</th><th>Sales</th><th>Pending</th><th>Ready to pay</th><th>Paid</th><th>Rate</th><th /></tr></thead>
+				<tbody>
+					{partners.map((p) => (
+						<tr>
+							<td>
+								<strong>{p.name}</strong> {p.status === "paused" && <em>(paused)</em>}<br />
+								/r/{p.code}<br />
+								<small>Pay to: {p.payout_email ?? p.email}</small><br />
+								<small><a href={`/partners/stats?t=${p.stats_token}`} rel="noreferrer">Their stats page</a></small>
+							</td>
+							<td>{p.summary.clicks30d}</td>
+							<td>{p.summary.sales}</td>
+							<td>{formatCents(p.summary.pendingCents)}</td>
+							<td><strong>{formatCents(p.summary.payableCents)}</strong></td>
+							<td>{formatCents(p.summary.paidCents)}</td>
+							<td>
+								<form method="POST" action="/api/admin/affiliates" style="display:flex;gap:0.3em;align-items:center">
+									<input type="hidden" name="code" value={p.code} />
+									<input type="hidden" name="action" value="rate" />
+									<input name="rate_pct" type="number" min="0" max="90" step="1" value={p.rate_pct} aria-label={`Commission rate for ${p.name}`} style="width:4.5em" />%
+									<button class="admin-btn" type="submit">Save</button>
+								</form>
+							</td>
+							<td>
+								<form method="POST" action="/api/admin/affiliates">
+									<input type="hidden" name="code" value={p.code} />
+									{p.summary.payableCents > 0 && (
+										<button class="admin-btn admin-btn--primary" name="action" value="pay_all" type="submit">Mark payable as paid</button>
+									)}
+									{p.status === "active"
+										? <button class="admin-btn" name="action" value="pause" type="submit">Pause</button>
+										: <button class="admin-btn" name="action" value="activate" type="submit">Reactivate</button>}
+								</form>
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		)}
+	</div>
+
+	<div class="admin-card">
+		<h2>Commissions</h2>
+		{commissions.length === 0 && <p>No partner sales yet.</p>}
+		{commissions.length > 0 && (
+			<table>
+				<thead><tr><th>Date</th><th>Partner</th><th>Product</th><th>Sale</th><th>Commission</th><th>Status</th><th>Order</th><th /></tr></thead>
+				<tbody>
+					{commissions.map((c) => (
+						<tr>
+							<td>{when(c.created_at)}</td>
+							<td>{c.code}</td>
+							<td>{getProduct(c.item_id)?.title ?? c.item_id}</td>
+							<td>{formatCents(c.sale_cents)}</td>
+							<td>{formatCents(c.commission_cents)}</td>
+							<td>{commissionStatus(c)}{c.paid_at ? ` ${when(c.paid_at)}` : ""}</td>
+							<td><small>{c.provider} {c.order_id}</small></td>
+							<td>
+								{c.status === "pending" && (
+									<form method="POST" action="/api/admin/affiliates">
+										<input type="hidden" name="provider" value={c.provider} />
+										<input type="hidden" name="order_id" value={c.order_id} />
+										{isPayable(c.created_at) && <button class="admin-btn" name="action" value="paid" type="submit">Mark paid</button>}
+										<button class="admin-btn" name="action" value="void" type="submit">Void</button>
+									</form>
+								)}
+							</td>
+						</tr>
+					))}
+				</tbody>
+			</table>
+		)}
+	</div>
+</AdminLayout>

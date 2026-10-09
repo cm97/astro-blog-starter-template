@@ -9,7 +9,9 @@ import {
 	AUTOMATIC_DELIVERY_ENABLED,
 	ALL_PRODUCTS,
 	BUZZYFLY_CONFIG,
+	DONE_FOR_YOU,
 	getOrderAction,
+	getProduct,
 } from "../data/monetization";
 import { getSettings } from "../lib/settings";
 
@@ -23,7 +25,10 @@ const systemDescription =
 		? settings.defaultProductDescription
 		: system.description;
 const systemOrder = getOrderAction(system.id);
-const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id && p.id !== "complete-business-bundle");
+const singles = ALL_PRODUCTS.filter(
+	(p) => p.id !== system.id && p.id !== "complete-business-bundle" && p.id !== DONE_FOR_YOU.productId,
+);
+const setup = getProduct(DONE_FOR_YOU.productId)!;
 
 const TRUST = [
 	{ icon: "⚡", label: AUTOMATIC_DELIVERY_ENABLED ? "Instant download" : "Emailed after payment" },
@@ -103,6 +108,11 @@ const FAQ = [
 			.faq details { border-bottom: 1px solid rgb(var(--gray-light)); }
 			.faq summary { cursor: pointer; padding: 0.7em 0; min-height: 44px; box-sizing: border-box; font-weight: 700; color: rgb(var(--black)); list-style-position: inside; }
 			.faq details p { margin: 0 0 1em; color: rgb(var(--gray-dark)); font-size: 0.95em; }
+			.setup-teaser { max-width: 720px; margin: 3em auto 0; padding: 1.5em; border-radius: 16px; border: 1px solid rgb(var(--gray-light)); display: flex; flex-wrap: wrap; gap: 1em; align-items: center; justify-content: space-between; }
+			.setup-teaser h2 { font-size: 1.3em; margin: 0 0 0.3em; }
+			.setup-teaser p { margin: 0; color: rgb(var(--gray-dark)); font-size: 0.95em; }
+			.setup-teaser a { display: inline-flex; align-items: center; min-height: 44px; padding: 0.5em 1.2em; border-radius: 999px; border: 2px solid var(--accent); font-weight: 700; text-decoration: none; white-space: nowrap; }
+			.setup-teaser a:hover, .setup-teaser a:focus-visible { background: var(--accent); color: #fff; }
 			.final-cta { text-align: center; margin: 3em auto 0; max-width: 720px; padding: 2em 1em; border-radius: 16px; background: rgba(35, 55, 255, 0.05); border: 1px solid rgba(35, 55, 255, 0.15); }
 			.final-cta h2 { font-size: clamp(1.3em, 4.5vw, 1.7em); }
 			.final-cta p { margin: 0.8em 0 0; font-size: 0.85em; color: rgb(var(--gray-dark)); }
@@ -141,6 +151,14 @@ const FAQ = [
 			</section>
 
 			<MoneyPrinterBanner variant="section" />
+
+			<section class="setup-teaser" aria-labelledby="setup-heading">
+				<div>
+					<h2 id="setup-heading">No time to set it up yourself?</h2>
+					<p>Answer one intake email. Get the whole system written in your words, plus every file. {setup.price}, one time.</p>
+				</div>
+				<a href="/setup">See the done-for-you setup</a>
+			</section>
 
 			<section class="store-section">
 				<h2>What's actually in the Digital System zip</h2>

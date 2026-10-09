@@ -5,6 +5,7 @@
 
 <script>
 	import { SOURCE_STORAGE_KEY, SOURCE_TTL_MS, cleanSource } from "../lib/trafficSource";
+	import { STRIPE_REF_PREFIX, codeFromCookieHeader } from "../lib/affiliateRef";
 
 	try {
 		const params = new URLSearchParams(location.search);
@@ -27,6 +28,17 @@
 				url.searchParams.set("utm_source", source);
 				if (medium) url.searchParams.set("utm_medium", medium);
 				if (campaign) url.searchParams.set("utm_campaign", campaign);
+				link.href = url.toString();
+			});
+		}
+
+		// A partner link (/r/<code>) set this cookie. Their credit wins the
+		// client_reference_id; the utm_* parameters above still record the channel.
+		const partner = codeFromCookieHeader(document.cookie);
+		if (partner) {
+			document.querySelectorAll<HTMLAnchorElement>('a[href^="https://buy.stripe.com/"]').forEach((link) => {
+				const url = new URL(link.href);
+				url.searchParams.set("client_reference_id", STRIPE_REF_PREFIX + partner);
 				link.href = url.toString();
 			});
 		}

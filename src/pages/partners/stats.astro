@@ -1,0 +1,166 @@
+---
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import { BUZZYFLY_CONFIG, getProduct } from "../../data/monetization";
+import {
+	HOLD_DAYS,
+	ensureAffiliateSchema,
+	formatCents,
+	isPayable,
+	partnerSummary,
+	type Affiliate,
+	type PartnerSummary,
+} from "../../lib/affiliates";
+
+export const prerender = false;
+
+// The private link emailed to a partner on approval. The token is the only key,
+// so the page never shows buyer details: just dates, products and amounts.
+const token = Astro.url.searchParams.get("t") ?? "";
+const db = Astro.locals.runtime?.env?.DB;
+
+let partner: Affiliate | null = null;
+let summary: PartnerSummary | null = null;
+let recent: { item_id: string; commission_cents: number; status: string; created_at: number }[] = [];
+
+if (db && /^[a-f0-9]{48}$/.test(token)) {
+	try {
+		await ensureAffiliateSchema(db);
+		partner = await db.prepare(`SELECT * FROM affiliates WHERE stats_token = ?`).bind(token).first<Affiliate>();
+		if (partner) {
+			summary = await partnerSummary(db, partner.code);
+			const rows = await db
+				.prepare(
+					`SELECT item_id, commission_cents, status, created_at FROM affiliate_commissions
+					 WHERE code = ? ORDER BY created_at DESC LIMIT 50`,
+				)
+				.bind(partner.code)
+				.all<{ item_id: string; commission_cents: number; status: string; created_at: number }>();
+			recent = rows.results ?? [];
+		}
+	} catch (error) {
+		console.error("Buzzyfly partners: stats page failed", error);
+	}
+}
+if (!partner) Astro.response.status = 404;
+
+const link = partner ? `${BUZZYFLY_CONFIG.siteUrl}/r/${partner.code}` : "";
+const LINKS = partner
+	? [
+			{ label: "Homepage", url: link },
+			{ label: "Store", url: `${link}?to=/store` },
+			{ label: "$49 Digital System", url: `${link}?to=/store%23digital-system` },
+			{ label: "Done-for-you setup", url: `${link}?to=/setup` },
+		]
+	: [];
+const statusLabel = (row: { status: string; created_at: number }) =>
+	row.status === "pending" ? (isPayable(row.created_at) ? "Payable" : "Pending") : row.status === "paid" ? "Paid" : "Refunded";
+const date = (ms: number) => new Date(ms).toISOString().slice(0, 10);
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead title="Your partner stats — Buzzyfly" description="Clicks, sales and earnings for your Buzzyfly partner link." />
+		<meta name="robots" content="noindex, nofollow" />
+		<meta name="referrer" content="no-referrer" />
+		<style>
+			main { width: 760px; }
+			.tiles { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr)); gap: 0.8em; }
+			.tiles li { padding: 1em; border-radius: 12px; background: rgba(var(--gray-light), 55%); }
+			.tiles strong { display: block; font-size: 1.5em; color: rgb(var(--black)); }
+			.tiles span { font-size: 0.85em; color: rgb(var(--gray-dark)); }
+			table { width: 100%; border-collapse: collapse; }
+			th, td { text-align: left; padding: 0.55em 0.6em; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.92em; }
+			th { font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.05em; color: rgb(var(--gray)); }
+			.links code { word-break: break-all; }
+			.links button { min-height: 44px; padding: 0 1em; border-radius: 8px; border: 1px solid var(--accent); background: #fff; color: var(--accent); font: inherit; font-weight: 700; cursor: pointer; }
+			.links button:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+			.scroll { overflow-x: auto; }
+			@media (max-width: 560px) {
+				.links tr { display: grid; grid-template-columns: 1fr auto; gap: 0.3em 0.6em; padding: 0.6em 0; border-bottom: 1px solid rgb(var(--gray-light)); }
+				.links td { border: 0; padding: 0; }
+				.links td:nth-child(2) { grid-column: 1 / -1; grid-row: 2; }
+				.recent th, .recent td { padding: 0.5em 0.35em; font-size: 0.85em; }
+			}
+			.note { color: rgb(var(--gray-dark)); font-size: 0.92em; }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			{!partner && (
+				<>
+					<h1>That stats link doesn't work</h1>
+					<p>Check you copied the whole link from your approval email. Lost it? Email <a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a>.</p>
+				</>
+			)}
+			{partner && partner.status === "pending" && (
+				<>
+					<h1>Your application is under review</h1>
+					<p>You'll get an email with your link once it's approved.</p>
+				</>
+			)}
+			{partner && partner.status !== "pending" && summary && (
+				<>
+					<h1>Hi {partner.name}</h1>
+					{partner.status === "paused" && <p class="note"><strong>Your link is paused.</strong> New clicks and sales aren't being credited. Email {BUZZYFLY_CONFIG.orderEmail} with questions.</p>}
+					<ul class="tiles">
+						<li><strong>{summary.clicks30d}</strong><span>Clicks, last 30 days</span></li>
+						<li><strong>{summary.sales}</strong><span>Sales, all time</span></li>
+						<li><strong>{formatCents(summary.pendingCents)}</strong><span>Pending ({HOLD_DAYS}-day refund window)</span></li>
+						<li><strong>{formatCents(summary.payableCents)}</strong><span>Ready to pay</span></li>
+						<li><strong>{formatCents(summary.paidCents)}</strong><span>Paid to you</span></li>
+					</ul>
+					<p class="note">Payouts go to {partner.payout_email ?? partner.email} by PayPal at the start of each month.</p>
+
+					<h2>Your links</h2>
+					<table class="links">
+						<tbody>
+							{LINKS.map((l) => (
+								<tr>
+									<td>{l.label}</td>
+									<td><code>{l.url}</code></td>
+									<td><button type="button" data-copy={l.url}>Copy</button></td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+					<p class="note">Remember to say you earn a commission when you share these.</p>
+
+					<h2>Recent sales</h2>
+					{recent.length === 0 && <p>No sales yet. Links in a newsletter or a pinned community post usually work best.</p>}
+					{recent.length > 0 && (
+						<div class="scroll"><table class="recent">
+							<thead><tr><th>Date</th><th>Product</th><th>Commission</th><th>Status</th></tr></thead>
+							<tbody>
+								{recent.map((r) => (
+									<tr>
+										<td>{date(r.created_at)}</td>
+										<td>{getProduct(r.item_id)?.title ?? r.item_id}</td>
+										<td>{formatCents(r.commission_cents)}</td>
+										<td>{statusLabel(r)}</td>
+									</tr>
+								))}
+							</tbody>
+						</table></div>
+					)}
+				</>
+			)}
+		</main>
+		<Footer />
+		<script>
+			document.querySelectorAll<HTMLButtonElement>("[data-copy]").forEach((button) => {
+				button.addEventListener("click", async () => {
+					try {
+						await navigator.clipboard.writeText(button.dataset.copy ?? "");
+						button.textContent = "Copied";
+					} catch {
+						button.textContent = "Select and copy";
+					}
+				});
+			});
+		</script>
+	</body>
+</html>

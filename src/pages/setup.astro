@@ -1,0 +1,164 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { BUZZYFLY_CONFIG, DONE_FOR_YOU, getProduct } from "../data/monetization";
+import { INTAKE_QUESTIONS } from "../lib/doneForYou";
+
+const setup = getProduct(DONE_FOR_YOU.productId)!;
+const bundle = getProduct("complete-business-bundle")!;
+const open = DONE_FOR_YOU.acceptingOrders;
+const waitlist = `mailto:${BUZZYFLY_CONFIG.orderEmail}?subject=${encodeURIComponent("Done-for-you setup waitlist")}&body=${encodeURIComponent("Please tell me when a setup slot opens.\n\nWhat I do (one sentence):\n")}`;
+const cta = open
+	? { href: setup.buyUrl, label: `Book my setup — ${setup.price}` }
+	: { href: waitlist, label: "Join the waitlist" };
+
+const BEFORE_AFTER = [
+	["A new client signs and you write the welcome email from scratch.", "The welcome email is already written in your voice. You change the name and send."],
+	["Proposals go quiet and you forget to chase them.", "Follow-ups are written for your offer and prices, with the day to send each one."],
+	["Monday starts with an inbox and no plan.", "A 20-minute reset built around your real week."],
+	["You bought templates and never filled them in.", "They're filled in for you. You just run them."],
+];
+
+const STEPS = [
+	{ title: "Pay once", body: "You get every Buzzyfly file straight away, plus seven short intake questions." },
+	{ title: "Answer the questions", body: "Reply to one email. Short answers are fine. Most people take 15 minutes." },
+	{
+		title: "Get your setup",
+		body: `Within ${DONE_FOR_YOU.turnaroundDays} working days you get your finished files and a ${DONE_FOR_YOU.callMinutes}-minute call to walk through them.`,
+	},
+];
+
+const FAQ = [
+	{
+		q: "What exactly do I get back?",
+		a: "Your welcome email, intake form and kickoff agenda rewritten for your business. Your follow-up emails filled in with your offer and prices. A weekly reset checklist built around the days you actually work. All as plain docs you can paste into Gmail, Notion or Google Docs.",
+	},
+	{
+		q: "Do I need to use any new software?",
+		a: "No. Everything works in the email and docs you already use. Nothing to log into and no subscription.",
+	},
+	{
+		q: "How is this different from the $97 bundle?",
+		a: `The bundle gives you the templates and you fill them in. The setup fills them in for you. You still get every bundle file on day one, so you're never waiting to start.`,
+	},
+	{
+		q: "What if it doesn't fit how I work?",
+		a: `Tell us within 30 days and you get your money back. ${BUZZYFLY_CONFIG.guarantee}`,
+	},
+	{
+		q: "Who is it not for?",
+		a: "Teams with an operations person, or anyone who already has documented onboarding and follow-ups that work. You'd be paying for what you have.",
+	},
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title={`Done-for-you client system setup — ${BUZZYFLY_CONFIG.brandName}`}
+			description={`Your onboarding, follow-ups and weekly reset written in your words and ready to run. Answer one intake email. ${setup.price} one-time. 30-day money-back guarantee.`}
+		/>
+		<style>
+			main { width: 860px; }
+			.dfy-hero { text-align: center; padding: 1em 0 1.5em; }
+			.eyebrow { margin: 0 0 0.8em; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+			.dfy-hero h1 { font-size: clamp(1.8em, 6vw, 2.7em); line-height: 1.12; max-width: 15em; margin: 0 auto 0.5em; }
+			.lede { max-width: 32em; margin: 0 auto 1.5em; color: rgb(var(--gray-dark)); font-size: 1.05em; }
+			.cta { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0.8em 2.2em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.15em; text-decoration: none; transition: background-color 0.15s ease-in-out; }
+			.cta:hover, .cta:focus-visible { background: var(--accent-dark); color: #fff; }
+			.cta:focus-visible, .faq summary:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 3px; }
+			.fine { margin: 0.9em 0 0; font-size: 0.85em; color: rgb(var(--gray-dark)); }
+			.closed { display: inline-block; margin: 0 0 1em; padding: 0.4em 0.9em; border-radius: 999px; background: rgb(var(--gray-light)); font-size: 0.85em; font-weight: 700; }
+			section { margin-top: 3em; }
+			h2 { font-size: clamp(1.35em, 4.5vw, 1.7em); }
+			.ba { width: 100%; border-collapse: collapse; }
+			.ba th, .ba td { text-align: left; vertical-align: top; padding: 0.7em 0.8em; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.95em; }
+			.ba th { font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.05em; color: rgb(var(--gray)); }
+			.ba td:last-child { font-weight: 600; color: rgb(var(--black)); }
+			@media (max-width: 560px) {
+				.ba thead { display: none; }
+				.ba tr { display: block; padding: 0.6em 0; border-bottom: 1px solid rgb(var(--gray-light)); }
+				.ba td { display: block; border: 0; padding: 0.2em 0; }
+				.ba td:first-child { color: rgb(var(--gray)); text-decoration: line-through; }
+			}
+			.included { padding-left: 1.2em; }
+			.included li { margin-bottom: 0.4em; }
+			.steps { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 1em; counter-reset: step; }
+			.steps li { counter-increment: step; padding: 1.1em; border-radius: 12px; background: rgba(var(--gray-light), 55%); }
+			.steps li::before { content: counter(step); display: inline-grid; place-items: center; width: 2em; height: 2em; border-radius: 50%; background: var(--accent); color: #fff; font-weight: 800; margin-bottom: 0.5em; }
+			.steps h3 { margin: 0 0 0.3em; font-size: 1.1em; }
+			.steps p { margin: 0; font-size: 0.93em; color: rgb(var(--gray-dark)); }
+			.questions { font-size: 0.93em; color: rgb(var(--gray-dark)); }
+			.faq details { border-bottom: 1px solid rgb(var(--gray-light)); }
+			.faq summary { cursor: pointer; padding: 0.7em 0; min-height: 44px; box-sizing: border-box; font-weight: 700; color: rgb(var(--black)); list-style-position: inside; }
+			.faq details p { margin: 0 0 1em; color: rgb(var(--gray-dark)); font-size: 0.95em; }
+			.final { text-align: center; padding: 2em 1em; border-radius: 16px; background: rgba(35, 55, 255, 0.05); border: 1px solid rgba(35, 55, 255, 0.15); }
+			@media (prefers-reduced-motion: reduce) { .cta { transition: none; } }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="dfy-hero" style="margin-top:0">
+				<p class="eyebrow">Done-for-you setup</p>
+				<h1>Your client system, written for you and ready to run.</h1>
+				<p class="lede">
+					You know you need onboarding emails, follow-ups and a weekly plan. You don't have a free weekend to write them.
+					Answer one intake email. Get them back in your words.
+				</p>
+				{!open && <p class="closed">The calendar is full right now. Join the waitlist and you'll hear first when a slot opens.</p>}
+				<a class="cta" href={cta.href}>{cta.label}</a>
+				<p class="fine">One-time payment. Every Buzzyfly file included on day one. {BUZZYFLY_CONFIG.guarantee}</p>
+			</section>
+
+			<section aria-labelledby="ba-heading">
+				<h2 id="ba-heading">What changes</h2>
+				<table class="ba">
+					<thead><tr><th>Now</th><th>After the setup</th></tr></thead>
+					<tbody>
+						{BEFORE_AFTER.map(([before, after]) => <tr><td>{before}</td><td>{after}</td></tr>)}
+					</tbody>
+				</table>
+			</section>
+
+			<section aria-labelledby="inc-heading">
+				<h2 id="inc-heading">What you get</h2>
+				<ul class="included">
+					{setup.features.map((f) => <li>{f}</li>)}
+				</ul>
+			</section>
+
+			<section aria-labelledby="how-heading">
+				<h2 id="how-heading">How it works</h2>
+				<ol class="steps">
+					{STEPS.map((s) => <li><h3>{s.title}</h3><p>{s.body}</p></li>)}
+				</ol>
+				<details class="questions">
+					<summary>See the intake questions</summary>
+					<ol>{INTAKE_QUESTIONS.map((q) => <li>{q}</li>)}</ol>
+				</details>
+			</section>
+
+			<section class="faq" aria-labelledby="faq-heading">
+				<h2 id="faq-heading">Questions before you book</h2>
+				{FAQ.map((item) => (
+					<details>
+						<summary>{item.q}</summary>
+						<p>{item.a}</p>
+					</details>
+				))}
+			</section>
+
+			<section class="final">
+				<h2>Stop meaning to write it. Have it written.</h2>
+				<a class="cta" href={cta.href}>{cta.label}</a>
+				<p class="fine">
+					Rather do it yourself? The <a href={bundle.buyUrl}>{bundle.title} is {bundle.price}</a>.
+				</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
