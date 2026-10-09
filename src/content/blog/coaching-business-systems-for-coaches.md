@@ -111,4 +111,4 @@ The third thing that changes, more slowly, is how the business feels during busy
 
 ---
 
-The Buzzyfly Digital System includes all three of these systems built out as checklists and templates — the complete client onboarding workflow, the weekly planning routine, and the follow-up email templates. One download, ready to run. [Get the Digital System →](/store)
+The Buzzyfly Digital System includes all three of these systems built out as checklists and templates — the complete client onboarding workflow, the weekly planning routine, and the follow-up checklist with its check-in and close-out emails. One download, ready to run. [Get the Digital System →](/store)

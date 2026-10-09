@@ -234,8 +234,8 @@ You can copy the five emails above into a Google Doc right now and they will wor
 
 That is the gap the full system closes. The templates are the words. The Digital System is the 20-minute checklists that keep the words getting sent even when the week is on fire: follow-up, onboarding, weekly reset, intake, scope, retention.
 
-The $19 follow-up pack is the emails alone. The $49 system is those emails plus the checklists you run when delivery eats the day. One primary move: the system.
+The $19 follow-up pack is the five emails alone. The $49 system is the follow-up checklist that tells you when to send, plus the onboarding checklist and the weekly reset. If you only need the words, take the pack. If you need them to actually get sent, take the system.
 
 ---
 
-The Buzzyfly Digital System includes the follow-up templates plus the onboarding checklists and weekly reset so the whole client process still runs when you are slammed. One-time payment. Download after purchase. 30-day money-back guarantee — email us if it doesn't deliver. [Get the $49 system →](/buy/buzzyfly-digital-system)
+The Buzzyfly Digital System includes the follow-up checklist, check-in and close-out emails, plus the onboarding checklists and weekly reset so the whole client process still runs when you are slammed. One-time payment. Download after purchase. 30-day money-back guarantee — email us if it doesn't deliver. [Get the $49 system →](/buy/buzzyfly-digital-system)

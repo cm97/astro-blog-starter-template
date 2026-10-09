@@ -141,8 +141,23 @@ export const UPSELL_MAP: Record<string, string | null> = {
 	"weekly-reset-checklist": "client-onboarding-kit",
 	"follow-up-email-templates": "buzzyfly-digital-system",
 	"client-onboarding-kit": "buzzyfly-digital-system",
-	"buzzyfly-digital-system": "complete-business-bundle",
+	// Not the bundle: a system buyer would pay again for the system inside it.
+	"buzzyfly-digital-system": "follow-up-email-templates",
 	"complete-business-bundle": null,
+};
+
+// Why the UPSELL_MAP product is the right next buy, written to someone who
+// already owns the key product. Used in the delivery and follow-up emails.
+// Only claim what the product actually contains.
+export const UPSELL_REASON: Record<string, string> = {
+	"weekly-reset-checklist":
+		"Your week has a plan now. The next place time leaks is new clients. The Client Onboarding Kit has the welcome email, intake form and kickoff agenda already written. A new client takes 20 minutes, not two hours.",
+	"follow-up-email-templates":
+		"You have the words. The Digital System adds the follow-up checklist that tells you when to send them, plus the onboarding checklist and the 20-minute weekly reset. That's what keeps the emails going out on a slammed week.",
+	"client-onboarding-kit":
+		"New clients are covered. The Digital System adds the weekly reset and the follow-up checklist. The client you just onboarded doesn't go quiet in week three, and neither does your pipeline.",
+	"buzzyfly-digital-system":
+		"The system tells you when to follow up. The Follow-Up Email Templates give you the words for five more moments, including re-engaging a quiet lead and asking for a referral. Fill in a name and hit send.",
 };
 
 export const ALL_PRODUCTS = [

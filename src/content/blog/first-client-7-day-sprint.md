@@ -102,4 +102,4 @@ Get the Digital System — $49. One-time. Files plus lifetime updates. Not a sub
 
 [Get the Digital System — $49](/buy/buzzyfly-digital-system)
 
-All five packs, one download: [Complete Business Bundle — $97](/buy/complete-business-bundle)
+Every pack in one download: [Complete Business Bundle — $97](/buy/complete-business-bundle)

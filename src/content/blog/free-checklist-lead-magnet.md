@@ -28,6 +28,6 @@ The 20-minute weekly reset checklist. Five steps. One page. They print it, stick
 
 You are not selling a product. You are selling relief from a specific Tuesday that went to shit. The free checklist proves you understand the pain. The paid system proves you have the fix.
 
-The full sequence — all four emails, the checklist, and the store link — is in the Buzzyfly Digital System. Stop collecting emails like a creep with no plan.
+The free checklist is the first step. The Buzzyfly Digital System is the rest of the process it points to: onboarding, the weekly reset and follow-ups, as checklists you run in 20 minutes.
 
 [Get the Digital System — $49 →](/store/)

@@ -60,7 +60,7 @@ This site must outperform the revenue-generating pages of Google, GoDaddy, and a
 - `weekly-reset-checklist` → `client-onboarding-kit`
 - `follow-up-email-templates` → `buzzyfly-digital-system`
 - `client-onboarding-kit` → `buzzyfly-digital-system`
-- `buzzyfly-digital-system` → `complete-business-bundle`
+- `buzzyfly-digital-system` → `follow-up-email-templates` (not the bundle: a system buyer would pay again for the system inside it)
 - This is where the real money is: one buyer becoming a five-product buyer.
 
 ## Copy rules (non-negotiable)
