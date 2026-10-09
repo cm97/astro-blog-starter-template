@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { sendSequenceEmail } from "../../lib/emailSequence";
 import { ensureEmailSequenceSchema } from "../../lib/schema";
 import { cleanSourceTriple } from "../../lib/trafficSource";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -28,7 +29,6 @@ async function readSignup(request: Request): Promise<{ email: string | null; sou
  * environment variables.
  */
 export const POST: APIRoute = async ({ request, locals }) => {
-	const env = locals.runtime.env;
 	const { email, source } = await readSignup(request);
 
 	if (!email || !EMAIL_RE.test(email)) {

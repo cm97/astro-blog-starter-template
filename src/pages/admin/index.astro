@@ -5,8 +5,8 @@ import AdminLayout from "../../layouts/AdminLayout.astro";
 import AdminHelp from "../../components/AdminHelp.astro";
 import { auditTableExists, listAuditLog } from "../../lib/audit";
 import { describeSource } from "../../lib/trafficSource";
+import { env } from "cloudflare:workers";
 
-const env = Astro.locals.runtime.env;
 
 let subscriberCount = 0;
 let orderCount = 0;

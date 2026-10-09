@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { draftReply } from "../../../lib/draft";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -17,8 +18,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	if (!kind || !email.includes("@") || detail.length < 2) {
 		return Response.json({ ok: false, error: "Say who the reply is for." }, { status: 400 });
 	}
-	const env = locals.runtime?.env as { XAI_API_KEY?: string } | undefined;
-	const apiKey = env?.XAI_API_KEY || process.env.XAI_API_KEY;
+	const apiKey = env.XAI_API_KEY || process.env.XAI_API_KEY;
 	if (!apiKey) {
 		return Response.json({ ok: false, error: "Grok is not connected on this server." }, { status: 503 });
 	}

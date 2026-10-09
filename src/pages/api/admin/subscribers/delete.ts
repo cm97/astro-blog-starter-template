@@ -1,10 +1,10 @@
 import type { APIRoute } from "astro";
 import { logAdminAction } from "../../../../lib/audit";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
 export const POST: APIRoute = async ({ request, locals }) => {
-	const env = locals.runtime.env;
 	const form = await request.formData().catch(() => null);
 	// `subscribers` has no surrogate id — email is the primary key.
 	const email = String(form?.get("email") ?? "");

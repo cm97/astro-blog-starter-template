@@ -1,6 +1,7 @@
 ---
 import { BUZZYFLY_CONFIG } from "../data/monetization";
 import { getSettings } from "../lib/settings";
+import { env } from "cloudflare:workers";
 
 interface Props {
 	title?: string;
@@ -8,7 +9,7 @@ interface Props {
 	buttonLabel?: string;
 }
 
-const settings = await getSettings(Astro.locals.runtime?.env);
+const settings = await getSettings(Astro.isPrerendered ? undefined : env);
 const {
 	title = settings.newsletterTitle || BUZZYFLY_CONFIG.newsletterTitle,
 	description = settings.newsletterDescription || BUZZYFLY_CONFIG.newsletterDescription,

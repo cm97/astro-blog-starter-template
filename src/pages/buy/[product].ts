@@ -3,6 +3,7 @@ import { BUZZYFLY_CONFIG } from "../../data/monetization";
 import { PRODUCT_CURRENCY, findSellableProduct } from "../../lib/productCheckout";
 import { createOrder, paypalConfigured } from "../../lib/paypal";
 import { cleanSourceTriple } from "../../lib/trafficSource";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -11,7 +12,6 @@ export const GET: APIRoute = async ({ params, url, locals }) => {
 	const product = findSellableProduct(params.product ?? "");
 	if (!product) return new Response("Not found", { status: 404 });
 
-	const env = locals.runtime.env;
 	if (!paypalConfigured(env)) {
 		// No working card checkout yet: send the buyer to a real email order instead of a dead button.
 		const subject = encodeURIComponent(`Order: ${product.title}`);

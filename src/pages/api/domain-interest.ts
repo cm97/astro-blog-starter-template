@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { STRIPE_CHECKOUT_URL } from "../../data/monetization";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -23,7 +24,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return Response.json({ ok: false, error: "Enter a real domain and email." }, { status: 400 });
 	}
 
-	const env = locals.runtime?.env;
 	if (!env?.DB) {
 		return Response.json(
 			{

@@ -12,16 +12,16 @@
 		"publish": true
 	},
 	"dependencies": {
-		"@astrojs/cloudflare": "12.6.12",
-		"@astrojs/mdx": "4.3.13",
+		"@astrojs/cloudflare": "14.3.4",
+		"@astrojs/mdx": "8.0.3",
 		"@astrojs/rss": "4.0.19",
-		"@astrojs/sitemap": "3.6.1",
-		"astro": "5.16.9",
+		"@astrojs/sitemap": "3.7.4",
+		"astro": "7.3.8",
 		"typescript": "5.9.3"
 	},
 	"devDependencies": {
 		"@astrojs/check": "^0.9.10",
-		"wrangler": "4.136.3"
+		"wrangler": "4.149.0"
 	},
 	"engines": {
 		"node": ">=22"

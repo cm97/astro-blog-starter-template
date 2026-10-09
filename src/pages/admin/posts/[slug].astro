@@ -3,8 +3,8 @@ export const prerender = false;
 
 import AdminLayout from "../../../layouts/AdminLayout.astro";
 import { getGitHubConfig, getFile, parsePostMarkdown } from "../../../lib/github";
+import { env } from "cloudflare:workers";
 
-const env = Astro.locals.runtime.env;
 const githubConfig = getGitHubConfig(env);
 const { slug } = Astro.params;
 const error = Astro.url.searchParams.get("error");

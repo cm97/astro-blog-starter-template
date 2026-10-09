@@ -4,6 +4,7 @@ import { sendDeliveryEmail } from "../../lib/email";
 import { createDownloadToken } from "../../lib/fulfillment";
 import { captureOrder, paypalConfigured } from "../../lib/paypal";
 import { PRODUCT_CURRENCY, findSellableProduct } from "../../lib/productCheckout";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -25,7 +26,6 @@ const message = (status: number, text: string) =>
  * download link on the page and by email. Nothing is downloadable without that token.
  */
 export const GET: APIRoute = async ({ url, locals }) => {
-	const env = locals.runtime.env;
 	const orderId = url.searchParams.get("token") ?? "";
 	if (!ORDER_ID.test(orderId)) return message(400, "That payment link is not valid.");
 	if (!paypalConfigured(env)) return message(503, "PayPal checkout is not set up yet.");

@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
 import { checkNames, inventNames } from "../../lib/domains";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -22,8 +23,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	if (query.length < 1) {
 		return Response.json({ ok: false, error: "Type something to search." }, { status: 400 });
 	}
-	const runtimeEnv = (locals as { runtime?: { env?: { XAI_API_KEY?: string } } }).runtime?.env;
-	const apiKey = runtimeEnv?.XAI_API_KEY || process.env.XAI_API_KEY;
+	const apiKey = env.XAI_API_KEY || process.env.XAI_API_KEY;
 	if (body?.mode === "invent") {
 		if (query.length < 3) {
 			return Response.json({ ok: false, error: "Say a little more about what the name is for." }, { status: 400 });

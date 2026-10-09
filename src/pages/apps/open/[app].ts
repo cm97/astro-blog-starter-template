@@ -8,6 +8,7 @@ import leadFollowupTracker from "../../../apps-private/lead-followup-tracker.htm
 import csvCleaner from "../../../apps-private/csv-cleaner.html?raw";
 import complianceDeadlineTracker from "../../../apps-private/compliance-deadline-tracker.html?raw";
 import hiringScorecard from "../../../apps-private/hiring-scorecard.html?raw";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -28,8 +29,8 @@ export const GET: APIRoute = async ({ params, locals, cookies }) => {
 	if (!html) return new Response("Not found", { status: 404 });
 
 	const token = cookies.get(APPS_COOKIE)?.value;
-	if (!(await hasAppsAccess(locals.runtime.env, token))) {
-		return lockedPage(name, { payEnabled: paypalConfigured(locals.runtime.env) });
+	if (!(await hasAppsAccess(env, token))) {
+		return lockedPage(name, { payEnabled: paypalConfigured(env) });
 	}
 
 	return new Response(html, {

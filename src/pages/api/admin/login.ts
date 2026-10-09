@@ -6,6 +6,7 @@ import {
 	verifyAdminCredentials,
 } from "../../../lib/adminAuth";
 import { logAdminAction } from "../../../lib/audit";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -16,7 +17,6 @@ function loginRedirect(next: string, error?: string): Response {
 }
 
 export const POST: APIRoute = async ({ request, cookies, locals }) => {
-	const env = locals.runtime.env;
 	const form = await request.formData().catch(() => null);
 	const username = String(form?.get("username") ?? "");
 	const password = String(form?.get("password") ?? "");

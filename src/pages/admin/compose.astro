@@ -5,8 +5,8 @@ import AdminLayout from "../../layouts/AdminLayout.astro";
 import AdminHelp from "../../components/AdminHelp.astro";
 import { BUZZYFLY_CONFIG } from "../../data/monetization";
 import { listOutbox } from "../../lib/outbox";
+import { env } from "cloudflare:workers";
 
-const env = Astro.locals.runtime.env;
 const status = Astro.url.searchParams.get("status");
 const sentTo = Astro.url.searchParams.get("to");
 const error = Astro.url.searchParams.get("error");

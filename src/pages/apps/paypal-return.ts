@@ -4,6 +4,7 @@ import { captureOrder, paypalConfigured } from "../../lib/paypal";
 import { createDownloadToken } from "../../lib/fulfillment";
 import { sendDeliveryEmail } from "../../lib/email";
 import { BUZZYFLY_CONFIG } from "../../data/monetization";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -20,7 +21,6 @@ function page(status: number, message: string): Response {
  * access token via the existing /apps/unlock flow (and email them the same link).
  */
 export const GET: APIRoute = async ({ url, locals }) => {
-	const env = locals.runtime.env;
 	const orderId = url.searchParams.get("token") ?? "";
 	if (!ORDER_ID.test(orderId)) return page(400, "That payment link is not valid.");
 	if (!paypalConfigured(env)) return page(503, "PayPal checkout is not set up yet.");
