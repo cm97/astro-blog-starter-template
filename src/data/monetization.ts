@@ -33,6 +33,11 @@ export function getOrderAction(productIdOrTitle: string = BUZZYFLY_CONFIG.defaul
 	};
 }
 
+/** A product's buy link as a full URL, for emails and copy-paste text. buyUrl may already be a Stripe URL. */
+export function absoluteBuyUrl(product: { buyUrl: string }): string {
+	return product.buyUrl.startsWith("http") ? product.buyUrl : `${BUZZYFLY_CONFIG.siteUrl}${product.buyUrl}`;
+}
+
 export function getProduct(idOrTitle: string) {
 	const key = idOrTitle.trim().toLowerCase();
 	return ALL_PRODUCTS.find((p) => p.id === key || p.title.toLowerCase() === key) ?? null;

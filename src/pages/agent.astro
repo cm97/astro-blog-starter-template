@@ -1,9 +1,9 @@
 ---
 import Layout from '../layouts/BlogPost.astro';
-import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from '../data/monetization';
+import { ALL_PRODUCTS, absoluteBuyUrl } from '../data/monetization';
 
 const system = ALL_PRODUCTS.find((p) => p.id === 'buzzyfly-digital-system')!;
-const paste = `Onboarding still lives in your head. ${system.price} ${system.title}, one-time, download after checkout: ${BUZZYFLY_CONFIG.siteUrl}${system.buyUrl}`;
+const paste = `Onboarding still lives in your head. ${system.price} ${system.title}, one-time, download after checkout: ${absoluteBuyUrl(system)}`;
 ---
 
 <Layout

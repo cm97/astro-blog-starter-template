@@ -15,6 +15,7 @@ import {
 import { renderSequenceEmail, sendDueSequenceEmails, sendSequenceEmail } from "../src/lib/emailSequence";
 import { sendBrandEmail } from "../src/lib/outbox";
 import { EMAIL_SEQUENCE } from "../src/data/emailSequence";
+import { absoluteBuyUrl, getProduct } from "../src/data/monetization";
 
 type Sent = Parameters<EmailBinding["send"]>[0];
 
@@ -76,8 +77,11 @@ test("delivery email sends from an allowed address with link, expiry and upsell"
 	assert.ok(msg.html!.includes(`href="${url}"`));
 	assert.match(msg.html!, /expires in 3 days/);
 	assert.match(msg.html!, /Complete Business Bundle/); // UPSELL_MAP: digital-system -> bundle
-	assert.match(msg.html!, /buzzyfly\.com\/buy\/complete-business-bundle/);
+	const bundleUrl = absoluteBuyUrl(getProduct("complete-business-bundle")!);
+	assert.ok(msg.html!.includes(`href="${bundleUrl}"`), "upsell links to the bundle checkout");
+	assert.doesNotMatch(msg.html!, /buzzyfly\.comhttps?:/); // site URL glued onto a full Stripe URL
 	assert.ok(msg.text!.includes(url));
+	assert.ok(msg.text!.includes(bundleUrl));
 	assert.match(msg.text!, /Complete Business Bundle/);
 	assert.doesNotMatch(msg.text!, /</);
 });
