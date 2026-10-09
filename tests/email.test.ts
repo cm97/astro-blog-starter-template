@@ -75,10 +75,10 @@ test("delivery email sends from an allowed address with link, expiry and upsell"
 	assertValidHtml(msg.html!);
 	assert.ok(msg.html!.includes(`href="${url}"`));
 	assert.match(msg.html!, /expires in 3 days/);
-	assert.match(msg.html!, /Complete Business Bundle/); // UPSELL_MAP: digital-system -> bundle
-	assert.match(msg.html!, /buzzyfly\.com\/buy\/complete-business-bundle/);
+	assert.match(msg.html!, /Follow-Up Email Templates/); // UPSELL_MAP: digital-system -> follow-up templates
+	assert.match(msg.html!, /buzzyfly\.com\/buy\/follow-up-email-templates/);
 	assert.ok(msg.text!.includes(url));
-	assert.match(msg.text!, /Complete Business Bundle/);
+	assert.match(msg.text!, /Follow-Up Email Templates/);
 	assert.doesNotMatch(msg.text!, /</);
 });
 
@@ -87,7 +87,7 @@ test("every product's delivery email carries the upsell from UPSELL_MAP", async 
 		"weekly-reset-checklist": "Client Onboarding Kit",
 		"follow-up-email-templates": "Buzzyfly Digital System",
 		"client-onboarding-kit": "Buzzyfly Digital System",
-		"buzzyfly-digital-system": "Complete Business Bundle",
+		"buzzyfly-digital-system": "Follow-Up Email Templates",
 		"complete-business-bundle": null,
 	};
 	for (const [itemId, upsell] of Object.entries(ladder)) {
