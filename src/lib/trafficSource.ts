@@ -2,8 +2,10 @@
 // brought them (e.g. ?utm_source=reddit&utm_medium=social&utm_campaign=scope-creep).
 //
 // The browser remembers it for 30 days (localStorage), sends it with email
-// signups, and adds it to Stripe buy links as `client_reference_id`, which the
-// webhook stores on the order. Stored as "source__medium__campaign".
+// signups, adds it to Stripe buy links as `client_reference_id` (the webhook
+// stores it on the order), and adds it to /buy/ links as `?src=` (carried
+// through PayPal as the order's reference_id and stored on the order by
+// /buy/paypal-return). Stored as "source__medium__campaign".
 
 export const SOURCE_STORAGE_KEY = "bf_src";
 export const SOURCE_TTL_MS = 30 * 24 * 60 * 60 * 1000;
@@ -20,6 +22,17 @@ export function cleanSource(value: unknown): string | null {
 		.replace(/^-+|-+$/g, "")
 		.slice(0, 120);
 	return cleaned || null;
+}
+
+/**
+ * Cleans each part of a "source__medium__campaign" value so the separator
+ * survives, capped at 200 chars (Stripe's client_reference_id limit, and under
+ * PayPal's 256 for reference_id).
+ */
+export function cleanSourceTriple(value: unknown): string | null {
+	if (typeof value !== "string") return null;
+	const parts = value.split("__").slice(0, 3).map((p) => cleanSource(p) ?? "");
+	return parts.join("__").slice(0, 200).replace(/_+$/, "") || null;
 }
 
 /** "reddit__social__scope-creep" -> "reddit / social / scope-creep" for display. */

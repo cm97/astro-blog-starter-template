@@ -43,7 +43,16 @@ export interface CreatedOrder {
 
 export async function createOrder(
 	env: unknown,
-	opts: { itemId: string; amount: string; currency: string; description: string; returnUrl: string; cancelUrl: string },
+	opts: {
+		itemId: string;
+		amount: string;
+		currency: string;
+		description: string;
+		returnUrl: string;
+		cancelUrl: string;
+		/** Traffic source ("source__medium__campaign"), carried as reference_id and read back on capture. */
+		source?: string | null;
+	},
 ): Promise<CreatedOrder> {
 	const e = env as PaypalEnv;
 	const token = await accessToken(e);
@@ -54,6 +63,7 @@ export async function createOrder(
 			intent: "CAPTURE",
 			purchase_units: [
 				{
+					...(opts.source ? { reference_id: `${SOURCE_REF_PREFIX}${opts.source}` } : {}),
 					custom_id: opts.itemId,
 					description: opts.description,
 					amount: { currency_code: opts.currency, value: opts.amount },
@@ -85,6 +95,16 @@ export interface CapturedOrder {
 	currency: string | null;
 	customId: string | null;
 	payerEmail: string | null;
+	source: string | null;
+}
+
+// PayPal sets reference_id to "default" when none is given, so ours is prefixed.
+const SOURCE_REF_PREFIX = "src:";
+
+function sourceFromReference(referenceId: unknown): string | null {
+	return typeof referenceId === "string" && referenceId.startsWith(SOURCE_REF_PREFIX)
+		? referenceId.slice(SOURCE_REF_PREFIX.length) || null
+		: null;
 }
 
 function summarize(orderId: string, json: any): CapturedOrder {
@@ -97,6 +117,7 @@ function summarize(orderId: string, json: any): CapturedOrder {
 		currency: capture?.amount?.currency_code ?? null,
 		customId: capture?.custom_id ?? unit?.custom_id ?? null,
 		payerEmail: json?.payer?.email_address ?? null,
+		source: sourceFromReference(unit?.reference_id),
 	};
 }
 

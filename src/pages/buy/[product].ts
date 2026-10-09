@@ -2,6 +2,7 @@ import type { APIRoute } from "astro";
 import { BUZZYFLY_CONFIG } from "../../data/monetization";
 import { PRODUCT_CURRENCY, findSellableProduct } from "../../lib/productCheckout";
 import { createOrder, paypalConfigured } from "../../lib/paypal";
+import { cleanSourceTriple } from "../../lib/trafficSource";
 
 export const prerender = false;
 
@@ -29,6 +30,8 @@ export const GET: APIRoute = async ({ params, url, locals }) => {
 			description: `Buzzyfly ${product.title}`,
 			returnUrl: `${url.origin}/buy/paypal-return`,
 			cancelUrl: `${url.origin}/store`,
+			// Set by TrafficSource.astro from the visitor's utm_* params.
+			source: cleanSourceTriple(url.searchParams.get("src")),
 		});
 		return new Response(null, { status: 302, headers: { location: order.approveUrl, "cache-control": "no-store" } });
 	} catch (error) {

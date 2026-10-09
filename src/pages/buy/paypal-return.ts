@@ -69,6 +69,13 @@ export const GET: APIRoute = async ({ url, locals }) => {
 				.bind("paypal", captured.orderId, product.id, captured.payerEmail, Date.now())
 				.run();
 			firstVisit = (result.meta?.changes ?? 1) > 0;
+			// Separate, best-effort: a missing source column must never lose the order record.
+			if (firstVisit && captured.source) {
+				await env.DB.prepare(`UPDATE fulfillments SET source = ? WHERE provider = ? AND order_id = ?`)
+					.bind(captured.source, "paypal", captured.orderId)
+					.run()
+					.catch((error) => console.error("Buzzyfly buy: failed to record source", error));
+			}
 		} catch (error) {
 			console.error("Buzzyfly buy: could not record PayPal order", error);
 		}
