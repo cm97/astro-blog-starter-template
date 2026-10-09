@@ -6,6 +6,8 @@ const OFFERS = [
   { id: "complete-business-bundle", name: "Complete Business Bundle", price: "$97", url: "https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08" },
 ];
 
+const ALLOWED = ["https://buzzyfly.com/", "https://buy.stripe.com/", "https://github.com/cm97/"];
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -14,23 +16,39 @@ export default {
     if (path === "/" || path === "/health") {
       return json({
         worker: "buzzyfly-agent",
-        site: "https://buzzyfly.com",
-        store: "https://buzzyfly.com/store",
-        offers: OFFERS,
-        routes: ["/health", "/store-check", "/offers", "/draft", "/follow-up", "/logs"],
+        fetch: true,
+        allowed: ALLOWED,
+        routes: ["/health", "/fetch", "/store-check", "/offers", "/draft", "/follow-up", "/logs"],
       });
     }
 
-    if (path === "/offers" || path === "/store-check") {
-      const store = await fetch("https://buzzyfly.com/store");
-      const html = await store.text();
-      const offers = OFFERS.map((offer) => ({
-        ...offer,
-        onStore: html.includes(offer.url),
-      }));
+    if (path === "/fetch") {
+      const target = url.searchParams.get("url") || "https://buzzyfly.com/store";
+      if (!ALLOWED.some((prefix) => target.startsWith(prefix))) {
+        return json({ ok: false, error: "Fetch is open for buzzyfly.com, Stripe buy links, and the cm97 GitHub repo." }, 400);
+      }
+      const response = await fetch(target, { redirect: "follow" });
+      const text = await response.text();
       const body = {
-        ok: store.ok && offers.every((offer) => offer.onStore),
-        status: store.status,
+        ok: response.ok,
+        url: target,
+        status: response.status,
+        bytes: text.length,
+        stripe: text.includes("buy.stripe.com"),
+        title: (text.match(/<title>([^<]+)<\/title>/i) || [])[1] || null,
+        checkedAt: new Date().toISOString(),
+      };
+      await save(env, "fetch", body);
+      return json(body, response.ok ? 200 : 502);
+    }
+
+    if (path === "/offers" || path === "/store-check") {
+      const fetched = await fetch("https://buzzyfly.com/store");
+      const html = await fetched.text();
+      const offers = OFFERS.map((offer) => ({ ...offer, onStore: html.includes(offer.url) }));
+      const body = {
+        ok: fetched.ok && offers.every((offer) => offer.onStore),
+        status: fetched.status,
         offers,
         checkedAt: new Date().toISOString(),
       };
@@ -75,7 +93,7 @@ export default {
       });
     }
 
-    return json({ error: "Use /health, /store-check, /offers, POST /draft, POST /follow-up, or /logs" }, 404);
+    return json({ error: "Use /health, /fetch?url=, /store-check, POST /draft, POST /follow-up, or /logs" }, 404);
   },
 };
 
