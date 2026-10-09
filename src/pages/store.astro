@@ -9,6 +9,7 @@ import {
 	AUTOMATIC_DELIVERY_ENABLED,
 	ALL_PRODUCTS,
 	BUZZYFLY_CONFIG,
+	bundleSeparatePrice,
 	getOrderAction,
 } from "../data/monetization";
 import { getSettings } from "../lib/settings";
@@ -23,6 +24,7 @@ const systemDescription =
 		? settings.defaultProductDescription
 		: system.description;
 const systemOrder = getOrderAction(system.id);
+const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
 const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id && p.id !== "complete-business-bundle");
 
 const TRUST = [
@@ -30,6 +32,26 @@ const TRUST = [
 	{ icon: "🔁", label: "No subscription" },
 	{ icon: "🛡️", label: "30-day money-back guarantee" },
 	{ icon: "🐝", label: "Built by a solo creator" },
+];
+
+// Every "after" line restates a claim already made in the product copy. No new numbers.
+const BEFORE_AFTER = [
+	{
+		before: "A new client signs. You spend two hours rewriting the welcome email from scratch.",
+		after: "The welcome email, intake form and kickoff agenda are already written. You're ready in 20 minutes.",
+	},
+	{
+		before: "A proposal goes quiet. You remember it three weeks later, when the lead has moved on.",
+		after: "The follow-up schedule tells you when to send. The email is already written. Fill in a name and hit send.",
+	},
+	{
+		before: "Monday starts with a full inbox and no plan. You work on whatever is loudest.",
+		after: "One 20-minute reset. The week has a plan by 9:30.",
+	},
+	{
+		before: "You build a clean process on a slow week. It's gone by the first busy Thursday.",
+		after: "The checklists don't need you to remember anything. They still work on the weeks you're slammed.",
+	},
 ];
 
 const CONTENTS = [
@@ -42,6 +64,18 @@ const FAQ = [
 	{
 		q: "Which one should I buy?",
 		a: "Start with the $49 Digital System. It covers onboarding, weekly planning and follow-ups. Only need one piece? Grab that single kit. Want every file? Take the bundle.",
+	},
+	{
+		q: "What's the difference between the Digital System and the bundle?",
+		a: `The Digital System covers onboarding, weekly planning and follow-ups. The bundle is the Digital System plus all three single kits in one download. Bought separately, those four cost ${bundleSeparatePrice()}. The bundle is ${bundle.price}.`,
+	},
+	{
+		q: "I've tried systems before and dropped them. Why is this different?",
+		a: "Most systems ask you to set up an app and keep it fed. This one is a short list you run on Monday. If you skip a week, you open the list and start again. Nothing to rebuild.",
+	},
+	{
+		q: "How long until I'm using it?",
+		a: "Open the weekly reset and run it. It takes 20 minutes. You don't have to set anything up first.",
 	},
 	{
 		q: "Is this a course?",
@@ -73,7 +107,7 @@ const FAQ = [
 	<head>
 		<BaseHead
 			title={`Store — ${BUZZYFLY_CONFIG.brandName}`}
-			description="Run your client business from checklists, not memory. Onboarding, weekly planning and follow-up systems for coaches and solo service providers. One-time payment. 30-day money-back guarantee."
+			description="Every client onboarded. Every follow-up sent. Onboarding, weekly planning and follow-up checklists for coaches and solo service providers. One-time payment. 30-day money-back guarantee."
 		/>
 		<style>
 			main { width: 1000px; }
@@ -100,6 +134,15 @@ const FAQ = [
 			.contents-table th, .contents-table td { text-align: left; padding: 0.6em 0.8em; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.92em; vertical-align: top; }
 			.contents-table th { color: rgb(var(--gray)); font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.05em; }
 			.contents-table code { background: rgb(var(--gray-light)); padding: 0.1em 0.4em; border-radius: 4px; white-space: nowrap; }
+			.ba-list { list-style: none; padding: 0; margin: 1em 0 0; display: grid; gap: 0.8em; }
+			.ba-list li { display: grid; grid-template-columns: 1fr 1fr; border: 1px solid rgb(var(--gray-light)); border-radius: 12px; overflow: hidden; }
+			@media (max-width: 600px) { .ba-list li { grid-template-columns: 1fr; } }
+			.ba-list p { margin: 0; padding: 0.9em 1em; font-size: 0.95em; line-height: 1.45; }
+			.ba-before { color: rgb(var(--gray-dark)); background: rgba(var(--gray-light), 40%); }
+			.ba-after { color: rgb(var(--black)); background: rgba(35, 55, 255, 0.05); }
+			.ba-tag { display: block; margin-bottom: 0.3em; font-size: 0.72em; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: rgb(var(--gray)); }
+			.ba-after .ba-tag { color: var(--accent); }
+			.ba-cta { text-align: center; margin: 1.5em 0 0; }
 			.faq details { border-bottom: 1px solid rgb(var(--gray-light)); }
 			.faq summary { cursor: pointer; padding: 0.7em 0; min-height: 44px; box-sizing: border-box; font-weight: 700; color: rgb(var(--black)); list-style-position: inside; }
 			.faq details p { margin: 0 0 1em; color: rgb(var(--gray-dark)); font-size: 0.95em; }
@@ -113,10 +156,11 @@ const FAQ = [
 		<main>
 			<section class="store-hero">
 				<p class="store-eyebrow">For coaches, consultants and solo service providers</p>
-				<h1>Run your client business from checklists, not memory.</h1>
+				<h1>Every client onboarded. Every follow-up sent. Nothing kept in your head.</h1>
 				<p class="store-lede">
-					You lose hours rebuilding onboarding emails. Proposals go quiet and you never follow up.
-					Monday starts with a scramble. Pick the system that ends it.
+					Right now your process lives in your memory. So a new client costs you two hours.
+					Quiet proposals die because nobody reminded you. Monday starts with a scramble.
+					The Digital System turns all three into checklists you run in 20 minutes.
 				</p>
 				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
 				<br />
@@ -129,6 +173,19 @@ const FAQ = [
 			<div class="featured-wrap" id="digital-system">
 				<ProductCallout productId={system.id} description={systemDescription} featured headingLevel="h2" />
 			</div>
+
+			<section class="store-section" aria-labelledby="ba-heading">
+				<h2 id="ba-heading">What changes when it's on a checklist</h2>
+				<ul class="ba-list">
+					{BEFORE_AFTER.map((row) => (
+						<li>
+							<p class="ba-before"><span class="ba-tag">Before</span>{row.before}</p>
+							<p class="ba-after"><span class="ba-tag">After</span>{row.after}</p>
+						</li>
+					))}
+				</ul>
+				<p class="ba-cta"><a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a></p>
+			</section>
 
 			<section id="all-products" aria-labelledby="singles-heading">
 				<div class="section-head">
