@@ -1,4 +1,5 @@
 import { verifyDownloadToken } from "./fulfillment";
+import { usableSecret } from "./secrets";
 
 /**
  * Access control for the paid Buzzyfly web apps (/apps/open/*).
@@ -100,8 +101,9 @@ export async function hasAppsAccess(env: Env, token: string | null | undefined):
 	}
 
 	// Signed token minted by /api/webhook.
-	if (env.DOWNLOAD_TOKEN_SECRET) {
-		const claims = await verifyDownloadToken(token, env.DOWNLOAD_TOKEN_SECRET);
+	const secret = await usableSecret(env.DOWNLOAD_TOKEN_SECRET);
+	if (secret) {
+		const claims = await verifyDownloadToken(token, secret);
 		if (claims && isAppsItem(claims.itemId)) return true;
 	}
 
