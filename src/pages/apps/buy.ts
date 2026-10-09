@@ -1,12 +1,12 @@
 import type { APIRoute } from "astro";
 import { APPS_CURRENCY, APPS_PRICE } from "../../lib/appsAccess";
 import { createOrder, paypalConfigured } from "../../lib/paypal";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
 /** Starts a PayPal checkout for Apps Pro and sends the buyer to PayPal to approve it. */
 export const GET: APIRoute = async ({ url, locals }) => {
-	const env = locals.runtime.env;
 	if (!paypalConfigured(env)) {
 		return new Response("PayPal checkout is not set up yet. Please try again soon.", { status: 503 });
 	}

@@ -7,8 +7,9 @@ import ProductCallout from "../components/ProductCallout.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { BUZZYFLY_CONFIG, ALL_PRODUCTS, getOrderAction } from "../data/monetization";
 import { getSettings } from "../lib/settings";
+import { env } from "cloudflare:workers";
 
-const settings = await getSettings(Astro.locals.runtime?.env);
+const settings = await getSettings(env);
 
 const digitalSystem = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
 const order = getOrderAction(digitalSystem.id);

@@ -12,10 +12,11 @@ import {
 	getOrderAction,
 } from "../data/monetization";
 import { getSettings } from "../lib/settings";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
-const settings = await getSettings(Astro.locals.runtime?.env);
+const settings = await getSettings(env);
 const system = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
 // An admin-edited description (Admin > Settings) wins over the shipped copy.
 const systemDescription =

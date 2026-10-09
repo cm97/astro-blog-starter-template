@@ -1,4 +1,5 @@
 import type { APIRoute } from "astro";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -19,7 +20,6 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	if (!EMAIL_RE.test(email) || title.length < 2 || !price.startsWith("$")) {
 		return Response.json({ ok: false, error: "Enter your email and pick a product." }, { status: 400 });
 	}
-	const env = locals.runtime?.env;
 	if (!env?.DB) {
 		return Response.json(
 			{ ok: false, error: "Could not save that. Email coachmanager@gmail.com instead." },

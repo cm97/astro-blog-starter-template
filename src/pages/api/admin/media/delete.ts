@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { resolvePublicKey } from "../../../../lib/media";
 import { logAdminAction } from "../../../../lib/audit";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -12,7 +13,6 @@ export const prerender = false;
  * paid product file out of `products/`.
  */
 export const POST: APIRoute = async ({ request, locals }) => {
-	const env = locals.runtime.env;
 	const form = await request.formData().catch(() => null);
 	const name = String(form?.get("name") ?? "");
 

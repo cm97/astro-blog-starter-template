@@ -3,8 +3,8 @@ export const prerender = false;
 
 import AdminLayout from "../../layouts/AdminLayout.astro";
 import AdminHelp from "../../components/AdminHelp.astro";
+import { env } from "cloudflare:workers";
 
-const env = Astro.locals.runtime.env;
 const q = Astro.url.searchParams.get("q")?.trim() ?? "";
 const deleted = Astro.url.searchParams.get("deleted");
 

@@ -30,5 +30,7 @@ jobs:
         run: npm run test:email
       # Validates wrangler.json and bindings against the built worker.
       # Needs no Cloudflare credentials, so it runs on fork PRs too.
+      # No --config: the build writes .wrangler/deploy/config.json, which
+      # redirects wrangler to the generated dist/server/wrangler.json.
       - name: Wrangler dry run
-        run: npx wrangler deploy --config wrangler.json --dry-run
+        run: npx wrangler deploy --dry-run

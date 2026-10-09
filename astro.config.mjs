@@ -9,12 +9,16 @@ import cloudflare from "@astrojs/cloudflare";
 export default defineConfig({
 	site: "https://buzzyfly.com",
 	output: "server",
+	// The Worker entry (fetch + the hourly cron's `scheduled`) is wrangler.json
+	// `main`: ./src/worker-entry.ts.
 	adapter: cloudflare({
-		platformProxy: {
-			enabled: true,
-		},
-		workerEntryPoint: { path: "./src/worker-entry.ts" },
+		// No astro:assets usage, so skip the Cloudflare Images binding (a paid
+		// product) the adapter would otherwise add.
+		imageService: "passthrough",
 	}),
+	// Admin auth is a signed cookie, not Astro sessions. Left on, the adapter
+	// would add a SESSION KV binding and provision a namespace on deploy.
+	session: false,
 	// Duplicate posts merged into one post per topic. Keep these so old links
 	// and search results still land on the merged post.
 	redirects: {

@@ -3,6 +3,7 @@ import { issueStoredDownloadToken, resolveProductFile } from "../../../../lib/fu
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../../../../data/monetization";
 import { logAdminAction } from "../../../../lib/audit";
 import { sendDeliveryEmail } from "../../../../lib/email";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -20,7 +21,6 @@ export const prerender = false;
  * reply if the email fails or the order has no address on file.
  */
 export const POST: APIRoute = async ({ request, locals }) => {
-	const env = locals.runtime.env;
 	const form = await request.formData().catch(() => null);
 
 	// `fulfillments` has no surrogate id — (provider, order_id) identifies a row.

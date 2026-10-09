@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { paypalConfigured } from "../../lib/paypal";
 import { APPS_COOKIE, APPS_TOKEN_TTL_SECONDS, cookieValueFor, hasAppsAccess, lockedPage } from "../../lib/appsAccess";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -10,7 +11,7 @@ export const prerender = false;
  */
 export const GET: APIRoute = async ({ url, locals, cookies, redirect }) => {
 	const raw = url.searchParams.get("token") ?? url.searchParams.get("code");
-	if (!raw || !(await hasAppsAccess(locals.runtime.env, raw))) return lockedPage(undefined, { payEnabled: paypalConfigured(locals.runtime.env) });
+	if (!raw || !(await hasAppsAccess(env, raw))) return lockedPage(undefined, { payEnabled: paypalConfigured(env) });
 
 	cookies.set(APPS_COOKIE, cookieValueFor(raw), {
 		path: "/",

@@ -9,6 +9,10 @@
 
 declare namespace Cloudflare {
 	interface Env {
+		// send_email binding from wrangler.json.
+		EMAIL?: SendEmail;
 		EMAIL_FROM?: string;
+		// Grok key for the admin reply drafter and the domain name inventor.
+		XAI_API_KEY?: string;
 	}
 }

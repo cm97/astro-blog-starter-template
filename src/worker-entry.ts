@@ -1,21 +1,18 @@
 /**
  * Custom Cloudflare Worker entry point.
  *
- * Registered in astro.config.mjs as `workerEntryPoint`. Astro calls
- * `createExports` with the build manifest; we return the usual `fetch`
- * handler plus a `scheduled` handler for the hourly cron trigger in
- * wrangler.json.
+ * wrangler.json `main` points here. Astro's handler serves every HTTP request
+ * through `fetch`; the hourly cron trigger in wrangler.json lands in
+ * `scheduled` below.
  */
 
-import type { SSRManifest } from "astro";
-import { App } from "astro/app";
-import { handle } from "@astrojs/cloudflare/handler";
+import astroHandler from "@astrojs/cloudflare/entrypoints/server";
 import { BUZZYFLY_CONFIG } from "./data/monetization";
 import { escapeHtml, resolveFrom, sendFollowUpEmail } from "./lib/email";
 import { sendDueSequenceEmails } from "./lib/emailSequence";
 import { ensureDownloadSchema, ensureEmailSequenceSchema } from "./lib/schema";
 
-interface Env {
+interface CronEnv {
 	DB?: D1Database;
 	EMAIL?: { send(msg: { from: string; to: string; subject: string; html?: string; text?: string }): Promise<{ messageId: string }> };
 	EMAIL_FROM?: string;
@@ -29,7 +26,7 @@ interface FulfillmentRow {
 	created_at: number;
 }
 
-async function sendOwnerAlert(orders: FulfillmentRow[], env: Env): Promise<boolean> {
+async function sendOwnerAlert(orders: FulfillmentRow[], env: CronEnv): Promise<boolean> {
 	const count = orders.length;
 	const lines = orders.map((o) => {
 		const date = new Date(o.created_at).toUTCString();
@@ -79,7 +76,7 @@ async function runJob(name: string, job: () => Promise<void>): Promise<void> {
 }
 
 // 1. Owner alert for any new fulfilled orders.
-async function alertNewOrders(db: D1Database, env: Env): Promise<void> {
+async function alertNewOrders(db: D1Database, env: CronEnv): Promise<void> {
 	const result = await db
 		.prepare(
 			`SELECT f.provider, f.order_id, f.item_id, f.customer_email, f.created_at
@@ -112,7 +109,7 @@ async function alertNewOrders(db: D1Database, env: Env): Promise<void> {
 }
 
 // 2. Two-day follow-up email for recent buyers who haven't had one yet.
-async function followUpRecentBuyers(db: D1Database, env: Env): Promise<void> {
+async function followUpRecentBuyers(db: D1Database, env: CronEnv): Promise<void> {
 	if (!env.EMAIL) return;
 
 	const DAY_MS = 24 * 60 * 60 * 1000;
@@ -168,7 +165,7 @@ async function followUpRecentBuyers(db: D1Database, env: Env): Promise<void> {
 	}
 }
 
-async function scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
+async function scheduled(_event: ScheduledEvent, env: CronEnv, ctx: ExecutionContext): Promise<void> {
 	const db = env.DB;
 	if (!db) return;
 
@@ -192,14 +189,7 @@ async function scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext
 	);
 }
 
-export function createExports(manifest: SSRManifest) {
-	const app = new App(manifest);
-	return {
-		default: {
-			async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
-				return handle(manifest, app, request as never, env as never, ctx as never);
-			},
-			scheduled,
-		},
-	};
-}
+export default {
+	fetch: astroHandler.fetch,
+	scheduled,
+};

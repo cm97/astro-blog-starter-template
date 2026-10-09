@@ -5,10 +5,11 @@ import Footer from "../components/Footer.astro";
 import { BUZZYFLY_CONFIG } from "../data/monetization";
 import { APPS_PRICE } from "../lib/appsAccess";
 import { paypalConfigured } from "../lib/paypal";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
-const payEnabled = paypalConfigured(Astro.locals.runtime?.env);
+const payEnabled = paypalConfigured(env);
 const mail = `mailto:${BUZZYFLY_CONFIG.orderEmail}?subject=${encodeURIComponent("Buzzyfly Apps Pro")}&body=${encodeURIComponent("Hi, I'd like Buzzyfly Apps Pro. Please send payment details and my access code.")}`;
 
 const APPS = [

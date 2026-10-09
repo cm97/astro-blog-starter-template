@@ -1,10 +1,11 @@
 ---
 import HeaderLink from './HeaderLink.astro';
 import { getSettings } from '../lib/settings';
+import { env } from "cloudflare:workers";
 
 let brand = 'Buzzyfly';
 try {
-	const settings = await getSettings(Astro.locals.runtime?.env);
+	const settings = await getSettings(Astro.isPrerendered ? undefined : env);
 	if (settings.brandName) brand = settings.brandName;
 } catch {
 	brand = 'Buzzyfly';

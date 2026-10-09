@@ -7,6 +7,7 @@ import {
 	productLockedPage,
 	verifyProductToken,
 } from "../../lib/productAccess";
+import { env } from "cloudflare:workers";
 
 export const prerender = false;
 
@@ -29,7 +30,6 @@ export const prerender = false;
  * Rate limited per IP to prevent abuse at scale.
  */
 export const GET: APIRoute = async ({ request, locals, url, cookies }) => {
-	const env = locals.runtime.env;
 	const ip = request.headers.get("cf-connecting-ip") ?? request.headers.get("x-forwarded-for") ?? "unknown";
 	const queryToken = url.searchParams.get("token");
 	const requested = url.searchParams.get("product");

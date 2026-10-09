@@ -5,8 +5,8 @@ import AdminLayout from "../../layouts/AdminLayout.astro";
 import AdminHelp from "../../components/AdminHelp.astro";
 import { getSettings } from "../../lib/settings";
 import { getGitHubConfig } from "../../lib/github";
+import { env } from "cloudflare:workers";
 
-const env = Astro.locals.runtime.env;
 const settings = await getSettings(env);
 const githubConfig = getGitHubConfig(env);
 const status = Astro.url.searchParams.get("status");
