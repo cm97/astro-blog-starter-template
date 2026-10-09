@@ -2,7 +2,7 @@
 title: "How to Stop Scope Creep Without Losing the Client"
 description: "The exact reply when a client asks for one more thing — pause, price, two options, written yes — so the extra work is a line item, not a free favor."
 pubDate: "2026-09-01"
-updatedDate: "Oct 06 2026"
+updatedDate: "Oct 09 2026"
 category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -46,6 +46,17 @@ Park-until date: ________
 Waiting on: written YES / parked / declined
 ```
 
+Price line, so you do not round it down in the reply:
+
+```
+Quoted fee: ________
+Quoted hours: ________
+Hourly used for add-ons: fee ÷ hours = ________
+This ask, minutes: ________
+Line item: (minutes ÷ 60) × hourly = ________
+Round up to the nearest $25. Do not round down.
+```
+
 ## The script
 
 When they ask for something outside scope:
@@ -70,6 +81,18 @@ If you do not want the extra work at all:
 
 > I am not taking that on this round. We finish [original deliverable] on [date]. If you still want [ask] after that, I can quote it as its own job.
 
+## If the ask arrives as a text
+
+Do not price it in the text thread. Texts get a yes by accident.
+
+1. Reply in under two minutes: "Got it. I will check the locked list and send two options by [time today]."
+2. Move the decision to email or the same project thread. Subject: "Add-on for [ask] — two options."
+3. Paste the two-option script. Do not add a third option in the text because they used a smiley.
+
+Text you can send as-is:
+
+> Got the note on [ask]. Checking it against what we locked. Two options by [time] — add it as a line item, or park it. Not starting it in this thread.
+
 ## What to do after they pick
 
 **They reply YES.** Send one confirmation the same day:
@@ -77,6 +100,10 @@ If you do not want the extra work at all:
 > Added. [Ask] is a line item at [price], due [date]. Original delivery stays [date]. I will not start the extra until this note is in the thread.
 
 Then invoice the line or add it to the next invoice before you open the file. Work that is not on an invoice is still a favor.
+
+Change-order line, one sentence, paste under the yes:
+
+> Change: add [ask]. Price: [price]. Due: [date]. Original [deliverable] still due [date]. This note is the yes.
 
 **They say park it.** Write the date on the same card:
 
@@ -87,6 +114,10 @@ Then invoice the line or add it to the next invoice before you open the file. Wo
 > Still need a yes or a park on [ask] at [price]. Original job stays on [date] either way.
 
 If they do not answer by day 6, mark the ask declined and keep the original date. Silence is not a yes.
+
+Day-6 close, one sentence:
+
+> No reply on [ask] at [price], so I am marking it declined. Original delivery stays [date]. Reply if you want a fresh quote after that date.
 
 ## Three rules that keep it from collapsing
 
@@ -100,8 +131,8 @@ You will remember it on a calm Tuesday. You will forget it on a slammed Thursday
 
 The words have to sit next to onboarding and the weekly reset. Same folder. Same 20-minute run. Not a speech you invent again.
 
-The follow-up if they ghost after the price is the same day-3 / day-6 pattern as a quiet proposal. The onboarding checklist is where the original scope line should have been written. Both are in the Digital System with the scope reply: /buy/buzzyfly-digital-system
+The follow-up if they ghost after the price is the same day-3 / day-6 pattern as a quiet proposal. The onboarding checklist is where the original scope line should have been written. Both are in the Digital System with the scope reply.
 
-One-time payment. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+One-time payment. Files plus lifetime updates. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
 
-[Get the Digital System — $49](/buy/buzzyfly-digital-system)
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
