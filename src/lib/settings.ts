@@ -24,12 +24,25 @@ function isSettingsKey(key: string): key is PatchableSettingsKey {
 	return (SETTINGS_KEYS as string[]).includes(key);
 }
 
+// Header, EmailOptin and the page itself each ask for settings, and they
+// barely ever change. Keep one copy per Worker isolate for a minute instead
+// of reading D1 up to three times, one after another, on every page view.
+const CACHE_TTL_MS = 60_000;
+let cached: { db: unknown; at: number; value: Promise<SiteSettings> } | null = null;
+
 /** Site settings as currently recorded in the admin console (D1), falling back to the shipped defaults. */
 export async function getSettings(env?: { DB?: Env["DB"] } | null): Promise<SiteSettings> {
 	if (!env?.DB) return { ...DEFAULTS };
 
+	if (!cached || cached.db !== env.DB || Date.now() - cached.at > CACHE_TTL_MS) {
+		cached = { db: env.DB, at: Date.now(), value: readSettings(env.DB) };
+	}
+	return { ...(await cached.value) };
+}
+
+async function readSettings(db: NonNullable<Env["DB"]>): Promise<SiteSettings> {
 	try {
-		const rows = await env.DB.prepare(`SELECT key, value FROM site_content`).all<{
+		const rows = await db.prepare(`SELECT key, value FROM site_content`).all<{
 			key: string;
 			value: string;
 		}>();
@@ -39,6 +52,7 @@ export async function getSettings(env?: { DB?: Env["DB"] } | null): Promise<Site
 		return { ...DEFAULTS, ...overrides };
 	} catch (error) {
 		console.error("Buzzyfly admin: failed to read settings from D1", error);
+		cached = null; // don't hold on to the fallback; try D1 again next request
 		return { ...DEFAULTS };
 	}
 }
@@ -46,6 +60,7 @@ export async function getSettings(env?: { DB?: Env["DB"] } | null): Promise<Site
 /** Persists settings to D1 so the admin console has a record independent of whether GitHub is configured. */
 export async function saveSettings(env: Env, updates: Partial<SiteSettings>): Promise<void> {
 	if (!env.DB) return;
+	cached = null; // the admin sees their change on the next page load
 	const now = Date.now();
 	for (const [key, value] of Object.entries(updates)) {
 		if (value === undefined || !isSettingsKey(key)) continue;
