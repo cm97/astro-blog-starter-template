@@ -137,6 +137,6 @@ Run the cadence like a checklist, not a mood:
 
 If you want the five ready-to-send notes only — proposal follow-up, mid-project check-in, quiet-lead poke, referral ask, wrap-up — that pack is $19.
 
-The full set is the $49 Digital System: the follow-up checklist, the onboarding checklist, and the 20-minute weekly reset in one download. One-time. Files plus lifetime updates. Not a subscription and not a coaching call. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+The full set is the $49 Digital System: the follow-up checklist, the onboarding checklist, and the 20-minute weekly reset in one download. One-time. Files plus lifetime updates. Not a subscription and not a coaching call. Download after purchase from the thank-you page. 30-day money-back guarantee. If it doesn't help, email us within 30 days for a full refund.
 
 [Get the Digital System — $49](/buy/buzzyfly-digital-system)
