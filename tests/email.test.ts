@@ -15,6 +15,16 @@ import {
 import { renderSequenceEmail, sendDueSequenceEmails, sendSequenceEmail } from "../src/lib/emailSequence";
 import { sendBrandEmail } from "../src/lib/outbox";
 import { EMAIL_SEQUENCE } from "../src/data/emailSequence";
+import { ALL_PRODUCTS, UPSELL_MAP } from "../src/data/monetization";
+
+/** Every href and bare URL in an email must be one well-formed http(s) URL. */
+function assertLinksWellFormed(body: string, label: string) {
+	const urls = [...body.matchAll(/https?:\/\/[^\s"<>]+/g)].map((m) => m[0]);
+	for (const u of urls) {
+		assert.doesNotMatch(u.slice(8), /https?:/, `${label}: two URLs glued together: ${u}`);
+		assert.doesNotThrow(() => new URL(u), `${label}: bad URL ${u}`);
+	}
+}
 
 type Sent = Parameters<EmailBinding["send"]>[0];
 
@@ -76,7 +86,9 @@ test("delivery email sends from an allowed address with link, expiry and upsell"
 	assert.ok(msg.html!.includes(`href="${url}"`));
 	assert.match(msg.html!, /expires in 3 days/);
 	assert.match(msg.html!, /Complete Business Bundle/); // UPSELL_MAP: digital-system -> bundle
-	assert.match(msg.html!, /buzzyfly\.com\/buy\/complete-business-bundle/);
+	const bundle = ALL_PRODUCTS.find((p) => p.id === "complete-business-bundle")!;
+	assert.ok(msg.html!.includes(`href="${bundle.buyUrl}"`), "upsell button points at the bundle checkout");
+	assert.ok(msg.text!.includes(bundle.buyUrl), "plain-text upsell has the bundle checkout");
 	assert.ok(msg.text!.includes(url));
 	assert.match(msg.text!, /Complete Business Bundle/);
 	assert.doesNotMatch(msg.text!, /</);
@@ -94,8 +106,13 @@ test("every product's delivery email carries the upsell from UPSELL_MAP", async 
 		const EMAIL = mockEmail();
 		await sendDeliveryEmail({ to: "b@example.com", downloadUrl: "https://x/y", productName: itemId, orderId: "o", itemId }, { EMAIL });
 		const html = EMAIL.sent[0].html!;
-		if (upsell) assert.ok(html.includes(`Get ${upsell}`), `${itemId} -> ${upsell}`);
-		else assert.doesNotMatch(html, /One more thing/, `${itemId} has no upsell`);
+		if (upsell) {
+			assert.ok(html.includes(`Get ${upsell}`), `${itemId} -> ${upsell}`);
+			const next = ALL_PRODUCTS.find((p) => p.id === UPSELL_MAP[itemId])!;
+			assert.ok(html.includes(`href="${next.buyUrl}"`), `${itemId} upsell links to ${next.buyUrl}`);
+		} else assert.doesNotMatch(html, /One more thing/, `${itemId} has no upsell`);
+		assertLinksWellFormed(html, `${itemId} html`);
+		assertLinksWellFormed(EMAIL.sent[0].text!, `${itemId} text`);
 	}
 });
 
@@ -151,6 +168,11 @@ test("follow-up email sends with the next upsell", async () => {
 	assertValidHtml(msg.html!);
 	assert.match(msg.html!, /Client Onboarding Kit/);
 	assert.match(msg.text!, /Client Onboarding Kit/);
+	const kit = ALL_PRODUCTS.find((p) => p.id === "client-onboarding-kit")!;
+	assert.ok(msg.html!.includes(`href="${kit.buyUrl}"`));
+	assert.ok(msg.text!.includes(kit.buyUrl));
+	assertLinksWellFormed(msg.html!, "follow-up html");
+	assertLinksWellFormed(msg.text!, "follow-up text");
 });
 
 // --- Sequence ---------------------------------------------------------------
