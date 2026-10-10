@@ -1,4 +1,4 @@
-import { BUZZYFLY_CONFIG, ALL_PRODUCTS, UPSELL_MAP } from "../data/monetization";
+import { BUZZYFLY_CONFIG, ALL_PRODUCTS, UPSELL_MAP, absoluteBuyUrl } from "../data/monetization";
 
 /**
  * Transactional email for order fulfillment via the Cloudflare Email Service
@@ -51,7 +51,7 @@ function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string
       Same 30-day money-back guarantee.
     </p>
     <p style="margin:0">
-      <a href="${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
+      <a href="${absoluteBuyUrl(upsellProduct.buyUrl)}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
         Get ${escapeHtml(upsellProduct.title)} — ${upsellProduct.price}
       </a>
     </p>`
@@ -96,7 +96,7 @@ function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string
 			`You have ${productName}. The logical next piece is the ${upsellProduct.title}.`,
 			upsellProduct.description,
 			"Same 30-day money-back guarantee.",
-			`Get it here (${upsellProduct.price}): ${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}`,
+			`Get it here (${upsellProduct.price}): ${absoluteBuyUrl(upsellProduct.buyUrl)}`,
 		);
 	}
 
@@ -160,7 +160,7 @@ export async function sendFollowUpEmail(
       ${escapeHtml(upsellProduct.description)}
     </p>
     <p style="margin:0">
-      <a href="${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
+      <a href="${absoluteBuyUrl(upsellProduct.buyUrl)}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
         Get ${escapeHtml(upsellProduct.title)} — ${upsellProduct.price}
       </a>
     </p>`
@@ -196,7 +196,7 @@ export async function sendFollowUpEmail(
 		lines.push(
 			"",
 			`If it's working, the next piece is the ${upsellProduct.title} (${upsellProduct.price}):`,
-			`${BUZZYFLY_CONFIG.siteUrl}${upsellProduct.buyUrl}`,
+			`${absoluteBuyUrl(upsellProduct.buyUrl)}`,
 		);
 	}
 

@@ -33,6 +33,11 @@ export function getOrderAction(productIdOrTitle: string = BUZZYFLY_CONFIG.defaul
 	};
 }
 
+/** A buy link as a full URL, for emails and anything pasted off-site. Stripe links are already absolute. */
+export function absoluteBuyUrl(href: string): string {
+	return /^https?:\/\//.test(href) ? href : `${BUZZYFLY_CONFIG.siteUrl}${href}`;
+}
+
 export function getProduct(idOrTitle: string) {
 	const key = idOrTitle.trim().toLowerCase();
 	return ALL_PRODUCTS.find((p) => p.id === key || p.title.toLowerCase() === key) ?? null;

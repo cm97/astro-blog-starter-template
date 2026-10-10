@@ -135,6 +135,6 @@ All of it in one zip — onboarding, weekly reset, follow-ups — is the Digital
 
 Every file in one download is the Complete Business Bundle, $97: /buy/complete-business-bundle
 
-One-time payment. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+One-time payment. Download after purchase from the thank-you page. 30-day money-back guarantee. If it doesn't help, email us within 30 days for a full refund.
 
 [Get the Digital System — $49](/buy/buzzyfly-digital-system)

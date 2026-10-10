@@ -147,6 +147,6 @@ The three priorities change every time you remember a new fire. Client dates liv
 
 The words have to sit next to onboarding and the proposal follow-up, in the same folder, so a slammed Monday still has a list to open. That is the weekly reset inside the Digital System, with the onboarding checklist and the follow-up lines in the same zip.
 
-One-time payment. $49. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+One-time payment. $49. Download after purchase from the thank-you page. 30-day money-back guarantee. If it doesn't help, email us within 30 days for a full refund.
 
 [Get the Digital System — $49](/buy/buzzyfly-digital-system)
