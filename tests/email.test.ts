@@ -76,7 +76,8 @@ test("delivery email sends from an allowed address with link, expiry and upsell"
 	assert.ok(msg.html!.includes(`href="${url}"`));
 	assert.match(msg.html!, /expires in 3 days/);
 	assert.match(msg.html!, /Complete Business Bundle/); // UPSELL_MAP: digital-system -> bundle
-	assert.match(msg.html!, /buzzyfly\.com\/buy\/complete-business-bundle/);
+	assert.ok(msg.html!.includes('href="https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08"')); // bundle checkout, not prefixed with the site URL
+	assert.doesNotMatch(msg.html!, /buzzyfly\.comhttps?:/);
 	assert.ok(msg.text!.includes(url));
 	assert.match(msg.text!, /Complete Business Bundle/);
 	assert.doesNotMatch(msg.text!, /</);
