@@ -2,12 +2,12 @@
 title: "Client Onboarding Checklist Template (Copy and Use Today)"
 description: "A complete client onboarding checklist template for coaches and consultants — every step from signed contract to kickoff call, ready to run without rebuilding from memory."
 pubDate: "Sep 13 2026"
-updatedDate: "Sep 29 2026"
+updatedDate: "Oct 12 2026"
 heroImage: "/blog-placeholder-2.jpg"
 category: "onboarding"
-featuredProductTitle: "Client Onboarding Kit"
-featuredProductPrice: "$29"
-featuredProductDescription: "Welcome email, intake form, kickoff agenda, and internal notes format — ready to run in 20 minutes."
+featuredProductTitle: "Buzzyfly Digital System"
+featuredProductPrice: "$49"
+featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
 A new client signs. You feel good. Then thirty minutes later you're staring at a blank email wondering exactly what you're supposed to send first.
@@ -38,6 +38,10 @@ A checklist that works has three layers:
 - [ ] Set internal reminder: intake form follow-up in 48 hours if not returned
 - [ ] Create internal client note (fields: name, email, phone, service, start date, billing)
 
+Fill-in welcome line you can paste the hour payment clears:
+
+> Hi [Name] — payment received. We start [date]. I need [access or file] by [date]. I reply [window, e.g. weekdays before 4pm]. First thing you get is [deliverable] on [date]. Kickoff is [time]. Out of scope for this start: [one line].
+
 ### Before the kickoff call
 
 - [ ] Review completed intake form — note two or three things to confirm on the call
@@ -51,6 +55,10 @@ A checklist that works has three layers:
 - [ ] Add client to any recurring communication (weekly update, report, etc.)
 - [ ] Set internal milestone reminders for the first 30 days
 
+Paste-ready kickoff summary:
+
+> Recap from today: goal is [one outcome]. You own [item]. I own [item]. Next check-in is [date/time]. Anything not listed is out of scope for this start.
+
 ### Week one: four touches
 
 - [ ] Day 2: confirm you have everything from intake. One paragraph.
@@ -59,6 +67,14 @@ A checklist that works has three layers:
 - [ ] Day 7: add them to your retention list so week two is not silence.
 
 If a touch is late, send the late version. Do not skip it because you are embarrassed.
+
+Day 2 line:
+
+> Confirming I have everything from the intake. Missing [item] if it is still outstanding. Kickoff stays [time].
+
+Day 6 line:
+
+> Mid-point check: on track for [deliverable]? Anything blocked on your side? Any priority that shifted?
 
 ### Two weeks in
 
@@ -142,6 +158,14 @@ Not a CRM profile. Just a note with five fields:
 
 That's it. When you need to reference something about this client in six months, that note is the place you look. If you have fifteen clients, you have fifteen notes. They live in the same folder. You can find any client in 10 seconds.
 
----
+## What still breaks when this only lives in your head
 
-The Client Onboarding Kit includes the welcome email template, intake form questions, kickoff agenda, and internal client notes format — pre-written and ready to run in one download. [Get the Client Onboarding Kit →](/store)
+The welcome email gets rewritten every time. The 48-hour intake nudge never gets scheduled. The kickoff summary sits unsent because you are already in the next call. Week two goes quiet and the client wonders if you forgot them. Without a weekly reset and a follow-up set in the same folder, you are still hunting the next client while this one drifts.
+
+The Client Onboarding Kit ($29) is those files alone. The Digital System ($49) is that kit plus the weekly reset and the follow-up emails so week two does not go quiet. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
+
+One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day money-back guarantee — email us if it doesn't deliver.
+
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+
+All packs in one download: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
