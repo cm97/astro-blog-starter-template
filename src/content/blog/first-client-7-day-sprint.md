@@ -2,12 +2,12 @@
 title: 'The 7-Day Sprint to Land Your First Paying Client'
 description: 'No audience required. A day-by-day sprint to get one paying client, then run the same-day start line so week one does not die in your head.'
 pubDate: '2026-09-01'
-updatedDate: 'Oct 7 2026'
+updatedDate: 'Oct 12 2026'
 category: 'sales'
 heroImage: '/blog-placeholder-2.jpg'
-featuredProductTitle: Buzzyfly Digital System
-featuredProductPrice: $49
-featuredProductDescription: Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.
+featuredProductTitle: 'Buzzyfly Digital System'
+featuredProductPrice: '$49'
+featuredProductDescription: 'Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.'
 ---
 
 You do not need a brand, a following, or a funnel to get paid. You need one person with the problem, one short message, and a same-day start line the hour they say yes. If the first week after they pay is rebuilt from memory, they go quiet and you are back at zero.
@@ -78,19 +78,23 @@ Yes means invoice the same day. No means thank them and go to the next name. Do 
 
 If nobody said yes, the sprint is not failed. You have 20 notes and a message you can send again next Monday. Do not rebuild the offer.
 
-## The same-day start line
+## The same-day start line (the part that keeps the money)
 
 This is where most first clients die. Do these five things before you celebrate. Time box: 20 minutes after payment clears.
 
-1. Welcome email. Subject: You are in — start date [date]. Body: what you need from them (access, files, decision-maker), when you reply (one window, e.g. weekdays before 4pm), and the first deliverable date.
-2. Intake, five fields only: goal, deadline, access, who decides, what is out of scope. If out of scope is blank, you will eat the extra work.
-3. Kickoff on the calendar. Agenda is already written: outcome, constraints, first deliverable, next check-in. 25 minutes. Not a discovery safari.
-4. 48-hour follow-up on the calendar: "Confirm I have everything from intake." One paragraph. Do not skip it because you are embarrassed it is late.
-5. One-page client note: name, amount paid, next step, date. If it is not written, Thursday wipes it.
+1. **Welcome email.** Subject: You are in — start date [date]. Body: what you need from them (access, files, decision-maker), when you reply (one window, e.g. weekdays before 4pm), and the first deliverable date.
+2. **Intake, five fields only:** goal, deadline, access, who decides, what is out of scope. If out of scope is blank, you will eat the extra work.
+3. **Kickoff on the calendar.** Agenda is already written: outcome, constraints, first deliverable, next check-in. 25 minutes. Not a discovery safari.
+4. **48-hour follow-up on the calendar:** "Confirm I have everything from intake." One paragraph. Do not skip it because you are embarrassed it is late.
+5. **One-page client note:** name, amount paid, next step, date. If it is not written, Thursday wipes it.
 
 Fill-in welcome line you can paste today:
 
 > Hi [Name] — payment received. We start [date]. I need [access or file] by [date]. I reply [window]. First thing you get is [deliverable] on [date]. Kickoff is [time]. Out of scope for this start: [one line].
+
+Fill-in 48-hour check you can paste:
+
+> Hi [Name] — confirming I have everything from intake: [list what arrived]. Still missing: [item or "nothing"]. Kickoff stays [time]. Reply only if something changed.
 
 If those five live in your head, the first client is a one-off. The Client Onboarding Kit ($29) is those files alone. The Digital System ($49) is that kit plus the weekly reset and the follow-up emails so week two does not go quiet. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
 
@@ -98,8 +102,8 @@ If those five live in your head, the first client is a one-off. The Client Onboa
 
 Landing the client is day 7. Keeping them is the next Monday. Without a reset and a follow-up you already wrote, you hunt a new client every time the last one goes silent.
 
-Get the Digital System — $49. One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day money-back guarantee — email us if it doesn't deliver.
+Get the Digital System — $49. One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day refund if files were not delivered or are materially not what the listing described.
 
-[Get the Digital System — $49](/buy/buzzyfly-digital-system)
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-All five packs, one download: [Complete Business Bundle — $97](/buy/complete-business-bundle)
+All five packs, one download: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
