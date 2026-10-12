@@ -38,6 +38,11 @@ export function getProduct(idOrTitle: string) {
 	return ALL_PRODUCTS.find((p) => p.id === key || p.title.toLowerCase() === key) ?? null;
 }
 
+/** A product's buy link as a full URL, for emails and copy-paste text where a site-relative path will not work. */
+export function absoluteBuyUrl(product: { buyUrl: string }) {
+	return product.buyUrl.startsWith("http") ? product.buyUrl : `${BUZZYFLY_CONFIG.siteUrl}${product.buyUrl}`;
+}
+
 export function bundleSeparatePrice(): string {
 	const parts = ["weekly-reset-checklist", "follow-up-email-templates", "client-onboarding-kit", "buzzyfly-digital-system"];
 	const total = parts.reduce((sum, id) => sum + Number(getProduct(id)!.price.replace(/[^0-9.]/g, "")), 0);
