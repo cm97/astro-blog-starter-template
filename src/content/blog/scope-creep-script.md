@@ -2,12 +2,12 @@
 title: "How to Stop Scope Creep Without Losing the Client"
 description: "The exact reply when a client asks for one more thing — pause, price, two options, written yes — so the extra work is a line item, not a free favor."
 pubDate: "2026-09-01"
-updatedDate: "Oct 09 2026"
+updatedDate: "Oct 13 2026"
 category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. Includes the scope-creep script."
 ---
 
 A client asks for one small thing that was not in the agreement. You say sure. Six weeks later you have done four extra hours and they have no idea you are angry. That is not a personality problem. It is a missing reply.
@@ -56,6 +56,14 @@ This ask, minutes: ________
 Line item: (minutes ÷ 60) × hourly = ________
 Round up to the nearest $25. Do not round down.
 ```
+
+## Extra concrete steps that stop the leak
+
+- Paste the original scope line into the reply thread before you price. Clients forget what they signed.
+- If the ask is under 30 minutes, still price it. Free under-30s become the new baseline.
+- Book the pause reply as a calendar hold if you cannot do it in the next hour. Unscheduled pauses get forgotten.
+- After they say yes, add the line item to the invoice before you open the file. Work that is not invoiced is still free.
+- At the next weekly reset, add a row: "Open scope asks waiting on yes." If none, write none.
 
 ## The script
 
@@ -135,4 +143,4 @@ The follow-up if they ghost after the price is the same day-3 / day-6 pattern as
 
 One-time payment. Files plus lifetime updates. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
 
-[Get the Digital System — $49](/buy/buzzyfly-digital-system)
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
