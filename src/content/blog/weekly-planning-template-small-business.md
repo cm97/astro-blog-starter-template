@@ -1,117 +1,190 @@
 ---
 title: "Weekly Planning Template for Small Business Owners (20-Minute Version)"
-description: "A simple weekly planning template that takes 20 minutes, runs the same way every week, and keeps priorities from falling through during busy stretches."
+description: "A 20-minute weekly planning template for solo operators — clear the board, three priorities, follow-ups that die, and a Thursday salvage so the plan still exists when the week breaks."
 pubDate: "Sep 13 2026"
+updatedDate: "Oct 13 2026"
 heroImage: "/blog-placeholder-4.jpg"
 category: "planning"
-featuredProductTitle: "Weekly Reset Checklist"
-featuredProductPrice: "$15"
-featuredProductDescription: "The 20-minute Monday routine — run it instead of rebuilding it. Clear inboxes, set one priority, plan your week."
+featuredProductTitle: "Buzzyfly Digital System"
+featuredProductPrice: "$49"
+featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
 The problem with most weekly planning systems is that they're designed for a version of you that has 90 minutes on Sunday evening and a cup of tea.
 
-Most small business owners don't have that. They have a Monday morning where three things are already on fire, a call at 10, and a vague intention to "get organized this week" that never quite happens.
+Most solo operators don't have that. They have a Monday morning where three things are already on fire, a call at 10, and a vague intention to "get organized this week" that never quite happens.
 
 So the week runs on urgency instead of priorities. You finish Friday having done a lot of things but not sure you did the right things. And the weekend planning session that was supposed to fix this gets pushed to "next week when things slow down."
 
-Here's a weekly planning template that takes 20 minutes, runs the same every week, and works even on the weeks when you're slammed.
+Here is a weekly planning template that takes 20 minutes, runs the same every week, and still works on the weeks when you are slammed.
+
+## Why the plan dies by Thursday
+
+1. Too many priorities. Five must-dos means none of them are. By Wednesday the list is guilt, not a plan.
+2. No mid-week check. Monday energy fades. Without a Wednesday or Thursday look, the plan is fiction.
+3. Follow-ups live in your head. The paid client, the quiet proposal, the lead who said circle back — none get a touch unless you remember.
+
+The fix is a fixed sequence. Not motivation.
 
 ## Why 20 minutes is the right target
 
 A good weekly planning routine is one you actually do. A great one that takes 90 minutes and gets skipped four weeks out of five is worse than a decent one that takes 20 minutes and runs every single Monday.
 
-Twenty minutes is short enough to feel non-negotiable. It fits in the gap before your first meeting, or while your coffee is brewing, or as the first thing after you sit down. You can build a habit around it because it's small enough to not feel like work.
+Twenty minutes is short enough to feel non-negotiable. It fits in the gap before your first meeting, or while your coffee is brewing, or as the first thing after you sit down. You can build a habit around it because it is small enough to not feel like work.
 
-The catch: 20 minutes is only possible if the template already exists and you already know what you're doing. You're not deciding each week how to plan your week. You're running a checklist.
+The catch: 20 minutes is only possible if the template already exists and you already know what you are doing. You are not deciding each week how to plan your week. You are running a checklist.
 
-## The weekly planning template
+## The 20-minute weekly planning template
 
-Run this every Monday morning. Block 20 minutes. Do it before you open email.
+Lock one slot: Monday before Slack, or Friday before you close the laptop. If the slot moves, the reset dies.
 
-### Step 1: Clear the inbox (5 minutes)
+### Block 1 — Clear the board (5 minutes)
 
-This is not "zero inbox." This is a triage pass.
+- Open last week's note or calendar.
+- Write three lines only: what shipped, what got pushed and why, what you promised that is still open.
+- Clear every open decision in the inbox. Reply, schedule, or delete. No later pile. Cap at five minutes. If still in the inbox, stop.
 
-Go through your email and respond to anything that takes under two minutes. Flag anything that needs a longer response. Archive or delete everything else. Don't respond to anything that takes more than two minutes right now — that's a task, not an inbox pass.
+Fill this before you leave the inbox:
 
-Do the same for any other inboxes you check regularly: Slack, text, voicemail. The goal is to see what came in over the weekend so it's not sitting in the back of your mind during the rest of the planning session.
+```
+Shipped last week:
+1. ________
+2. ________
 
-Time limit: five minutes. If you're still in your inbox at five minutes, stop and move on.
+Still open (promise + date):
+1. ________
+2. ________
 
-### Step 2: Review last week (3 minutes)
+Today threads (max 5):
+1) ________
+Wait until Wednesday: ________
+Deleted: ________
+```
 
-Three questions, write the answers in a running document:
+### Block 2 — Three priorities (5 minutes)
 
-1. What got done last week that actually mattered?
-2. What got pushed that needs to happen this week?
-3. What slowed me down that I can fix this week?
+- Write three priorities. Not five. If a fourth appears, one of the three leaves.
+- Put each on the calendar with a real block. Unscheduled is not a priority.
+- One client delivery that is due or late. One follow-up that is aging. One admin item that unblocks money.
 
-These don't need long answers. One sentence each is enough. The point is to close last week explicitly before opening this week — otherwise unfinished business from last week bleeds into Monday's attention without you realizing it.
+Fill-in:
 
-### Step 3: Set one priority (2 minutes)
+```
+This week's three:
+1) ________ — block: ________
+2) ________ — block: ________
+3) ________ — block: ________
+Killed so these three can live: ________
+```
 
-Not a to-do list. One thing.
+### Block 3 — Follow-ups that die (5 minutes)
 
-The question is: if this week ends and I only accomplished one thing, what do I most need it to be?
+- Who is waiting on you?
+- Who went quiet after a proposal or a deliverable?
+- Send one sentence each. One next step or a soft close. No novel.
 
-Write it down. Put it somewhere you'll see it this week — top of your task list, a sticky note on your monitor, whatever you actually look at.
+Exact lines:
 
-The reason this matters: most weekly planning produces a list of seven priorities, which is functionally zero priorities. When everything is urgent, you default to whatever's in front of you rather than what matters. One named priority at the start of the week gives you a tiebreaker for every decision about where to put your attention.
+- Proposal, no reply: "Still want me to hold the [date] start, or should I release it?"
+- Finished work, no check-in: "Checking in after [deliverable]. Anything to tighten, or book the next piece?"
+- Invoice that never left: "Invoice for [deliverable] is attached. Due [date]. Reply if the address is wrong."
 
-### Step 4: Map the week (7 minutes)
+Send two. Do not perfect them.
 
-Look at your calendar for the week. Then build a rough daily plan:
+### Block 4 — Tomorrow's first move (5 minutes)
 
-- **Monday:** [Priority task] + [meetings]
-- **Tuesday:** [Secondary work] + [standing admin]
-- **Wednesday:** [Deep work or client work]
-- **Thursday:** Mid-week check-in — are you on track for the week's priority?
-- **Friday:** [Wrap-up tasks] + [next week prep]
+One line. That is the only thing that has to be true when you open the laptop.
 
-This is not a minute-by-minute schedule. It's a rough allocation of where major work will happen. If something unexpected comes up — and it will — you have a plan to return to rather than starting from scratch.
+```
+Tomorrow first move: ________
+Time box: ________
+Done when: ________
+```
 
-Time block the most important work first, before the day fills with reactive tasks. If your priority task isn't on the calendar, it probably won't get done.
+If the sheet takes more than 20 minutes, you are planning. Cut the list until it fits.
 
-### Step 5: Flag two or three at-risk items (3 minutes)
+## Monday sheet — fill it, do not redesign it
 
-Look at the week and ask: what's most likely to fall through?
+Week of: ________
 
-These are usually things like:
-- A follow-up you need to send but keeps getting delayed
-- A task you've been avoiding because it's uncomfortable
-- A commitment that's due Friday that requires work you haven't started
+Shipped last week:
+1. ________
+2. ________
 
-Write them down and schedule them. Put them in a specific slot, not "sometime this week." Things that go on the calendar happen. Things that go on a to-do list wait for a slow day that never comes.
+Still open (promise + date):
+1. ________
+2. ________
 
-## The Thursday check-in
+This week's three (if it is not on the calendar, it is not a priority):
+1. ________ — block: ________
+2. ________ — block: ________
+3. ________ — block: ________
 
-Add a five-minute Thursday check-in to your weekly routine. Same structure every week:
+Follow-ups that die if you do not send them today:
+- Name: ________ — one sentence: ________
+- Name: ________ — one sentence: ________
 
-1. Am I on track for the week's one priority?
-2. What didn't happen that needs to happen by Friday?
-3. Is there anything I need to communicate to a client or colleague before end of week?
+Tomorrow's first move: ________
 
-The Thursday check-in catches problems when there's still time to fix them. By Friday afternoon it's usually too late to course-correct. By Thursday morning you have 36 hours.
+## Wednesday or Thursday, 5 minutes
 
-## What to do when the week goes sideways
+Look at the three. Still the right three? If a fire knocked one off, replace it. Do not add a fourth.
 
-Every week planner fails when the week gets chaotic. A client emergency. A project that blows up. A day where everything ran long and the planned work didn't happen.
+Send any follow-up that is now overdue. One sentence.
 
-The response that works: on Thursday or Friday, do a five-minute reset. Not a full planning session — just: what was this week's one priority, and did it happen? If it didn't, it moves to the top of next week's list.
+Put the check on the calendar as "5-min reset check." A check that is not on the calendar never happens.
 
-Don't try to recover the whole week. Don't add more to the list. Just name what happened, identify one thing that must happen next week, and close the week deliberately rather than letting it just run out.
+- Priority still true? yes / replace with ________
+- Overdue follow-up: ________ — sent? yes / no
+- Tomorrow's first move still right? ________
 
-## The habit that makes this work
+## Thursday cash salvage (12 minutes) when the three never moved
 
-The weekly planning session only becomes a real system when it happens at the same time every week, run the same way.
+Use this only when the plan is already a corpse. Do not rebuild the week. Rescue cash and the next client date.
 
-Pick a time. Block it as a recurring meeting on your calendar. Treat it as non-negotiable as a client call. The first few weeks it'll feel like overhead. By week six it'll feel like the thing that keeps everything else from coming apart.
+1. Minute 0–2. Open the Monday sheet. Cross out any priority that is no longer true. Do not replace it with a new project.
+2. Minute 2–5. Name the one delivery that is late or due tomorrow. Put a 45-minute block on today. If it will not fit, send: "Moving [deliverable] to [date]. Still the right piece, or swap it?"
+3. Minute 5–9. Send the two follow-ups you skipped.
+4. Minute 9–12. A scope ask that landed mid-week does not get a yes in the thread. Reply: "Got it. I'll check what we locked and come back with two options." Price it later.
 
-Most small business owners I know have tried and abandoned some version of a weekly planning system. Usually not because the system was bad, but because the routine was inconsistent — they did it when they had time, which meant they didn't do it the weeks they most needed it.
+Thursday cash salvage sheet:
 
-The 20-minute ceiling exists for exactly this reason. Short enough that there's no week where you don't have time for it. Structured enough that it runs the same way whether you're slammed or slow.
+- Still true from Monday: ________
+- Late delivery + new date sent: ________
+- Follow-up 1 sent: ________
+- Follow-up 2 sent: ________
+- Scope ask parked or priced: ________
 
----
+Stop at 12 minutes.
 
-The Weekly Reset Checklist is a done version of this template — the exact Monday routine, with the Thursday mid-week check-in and the inbox-clearing steps built in. Download it, run it, don't rebuild it each week. [Get the checklist →](/store)
+## Friday close (10 minutes)
+
+1. What got done, what rolls to Monday, what dies.
+2. Capture open loops in the same note. Do not invent a new system.
+3. If a step failed twice, fix it next week or delete the step. Then close the laptop.
+
+- Done: ________
+- Rolls to Monday: ________
+- Dies (no guilt): ________
+- Step that failed twice: ________
+
+## Phrases so you do not draft from a blank screen
+
+- "Still the priority, or does this move?"
+- "One clear next step: [date] or off the list."
+- "This week's three: 1) 2) 3). Everything else waits."
+- "Checking in on the proposal from [date]. Still a fit this month, or should I close the loop?"
+- "Delivery landed [date]. One thing that would make the next round easier: ________."
+- "We wrapped [date]. If you want the same setup next quarter, reply with a date and I'll hold it."
+
+## What still breaks when this only lives in your head
+
+The Monday sheet dies the first week three clients reply at once. Wednesday never gets a calendar hold. Thursday becomes inbox, and the proposal follow-up waits for a good moment that is not on the clock. The phrases only work if they sit in the same folder as the onboarding checklist and the scope reply.
+
+The Weekly Reset Checklist ($15) is this sheet alone. The Digital System ($49) is the reset plus onboarding and follow-ups, so a slammed Thursday still has a list to open. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
+
+One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+
+All five packs, one download: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
