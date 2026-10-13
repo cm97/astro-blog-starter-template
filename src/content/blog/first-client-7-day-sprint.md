@@ -2,7 +2,7 @@
 title: 'The 7-Day Sprint to Land Your First Paying Client'
 description: 'No audience required. A day-by-day sprint to get one paying client, then run the same-day start line so week one does not die in your head.'
 pubDate: '2026-09-01'
-updatedDate: 'Oct 12 2026'
+updatedDate: 'Oct 13 2026'
 category: 'sales'
 heroImage: '/blog-placeholder-2.jpg'
 featuredProductTitle: 'Buzzyfly Digital System'
@@ -28,6 +28,12 @@ Write one sentence: who you help, the broken thing, the result, the price. Stop 
 
 Say the price out loud once. If you will not say it, you will not invoice it.
 
+Fill-in you can paste into notes right now:
+
+```
+Offer sentence: I help [who] who are stuck on [problem] so they can [outcome] by [date]. Price: $[number]. Start: [date].
+```
+
 ## Day 2 — 20 names, not 200 (30 minutes)
 
 Open the app you already use. Write 20 names of people who already show the problem. LinkedIn, Instagram, a local directory, old texts. No cold list you bought.
@@ -35,6 +41,15 @@ Open the app you already use. Write 20 names of people who already show the prob
 For each name, one line: what is visibly broken. A dead link, a vague bio, a proposal they posted and never followed up, a "DM me for prices" with no prices.
 
 If you cannot name the broken thing, skip the name. A vague list produces vague messages.
+
+Name card (copy this 20 times):
+
+```
+Name: ________
+Where: LinkedIn / IG / text / directory
+Broken thing: ________
+Sent day 3?: yes / no
+```
 
 ## Day 3 — 20 messages, one question (40 minutes)
 
@@ -44,6 +59,12 @@ Not a pitch deck. Copy this and swap the brackets:
 
 No attachment. No "just circling back" on day one. Send all 20 in one sitting. Log the send time next to the name so day 4 is a list, not a feeling.
 
+Exact log line after each send:
+
+```
+Sent [time] to [name] re: [broken thing]. Day-4 bump date: ________
+```
+
 ## Day 4 — one follow-up, then stop (15 minutes)
 
 Half will not reply. That is the job, not a rejection. One bump, only to people who have not replied:
@@ -52,6 +73,14 @@ Half will not reply. That is the job, not a rejection. One bump, only to people 
 
 Then move. Do not write a new novel. Two bumps is a chase. One bump is a close-or-clear.
 
+After the bump, mark the card:
+
+```
+Bumped: ________
+Reply?: yes / no
+If no: close / next Monday list
+```
+
 ## Day 5 — the 15-minute audit, not free work (15 minutes per reply)
 
 To anyone who replied:
@@ -59,6 +88,12 @@ To anyone who replied:
 > I will look at [the broken thing] for 15 minutes and send three fixes. You keep the notes. If you want me to do the fixes, I will quote the number from day 1.
 
 Cap it at three audits. A free afternoon is not a sales call. If a fourth person replies, book them for next week or decline.
+
+Audit fill-in (three bullets only):
+
+1. What is broken: ________
+2. What changes this week: ________
+3. Price and start: $[number] starting [date]
 
 ## Day 6 — deliver the audit, name the price (20 minutes)
 
@@ -78,6 +113,10 @@ Yes means invoice the same day. No means thank them and go to the next name. Do 
 
 If nobody said yes, the sprint is not failed. You have 20 notes and a message you can send again next Monday. Do not rebuild the offer.
 
+Invoice note you can paste the moment they say yes:
+
+> Invoice for [offer] is attached. $[number] due [date]. Reply once paid and I send the welcome note today.
+
 ## The same-day start line (the part that keeps the money)
 
 This is where most first clients die. Do these five things before you celebrate. Time box: 20 minutes after payment clears.
@@ -95,6 +134,16 @@ Fill-in welcome line you can paste today:
 Fill-in 48-hour check you can paste:
 
 > Hi [Name] — confirming I have everything from intake: [list what arrived]. Still missing: [item or "nothing"]. Kickoff stays [time]. Reply only if something changed.
+
+Client note card (write it before you close the laptop):
+
+```
+Client: ________
+Paid: $[amount] on ________
+Next step: ________ by ________
+Kickoff: ________
+Out of scope: ________
+```
 
 If those five live in your head, the first client is a one-off. The Client Onboarding Kit ($29) is those files alone. The Digital System ($49) is that kit plus the weekly reset and the follow-up emails so week two does not go quiet. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
 
