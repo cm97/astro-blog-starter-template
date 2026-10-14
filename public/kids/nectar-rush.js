@@ -138,8 +138,8 @@
 			gfx.save(); gfx.beginPath(); gfx.arc(70, H - 70, 44, 0, Math.PI * 2); gfx.clip();
 			gfx.drawImage(faceImg, 26, H - 114, 88, 88); gfx.restore();
 		}
-		gfx.fillStyle = '#1a1612'; gfx.font = '800 28px Atkinson, sans-serif'; gfx.fillText(String(score), 16, 40);
-		gfx.fillStyle = '#c45c00'; gfx.font = '700 16px Atkinson, sans-serif';
+		gfx.fillStyle = '#1a1612'; gfx.font = '800 28px "Bricolage Grotesque", sans-serif'; gfx.fillText(String(score), 16, 40);
+		gfx.fillStyle = '#c45c00'; gfx.font = '700 16px "Bricolage Grotesque", sans-serif';
 		gfx.fillText(combo > 1 ? ('COMBO x' + combo) : ('Best ' + best), 16, 64);
 		for (let i = 0; i < 3; i++) {
 			gfx.fillStyle = i < lives ? '#ff4d6d' : '#d7cbb6';

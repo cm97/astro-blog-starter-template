@@ -26,10 +26,10 @@ const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id && p.id !== "compl
 const guarantee = "30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.";
 
 const TRUST = [
-	{ icon: "⚡", label: AUTOMATIC_DELIVERY_ENABLED ? "Download after purchase" : "Emailed after payment" },
-	{ icon: "🔁", label: "No subscription" },
-	{ icon: "🛡️", label: "30-day delivery guarantee" },
-	{ icon: "🐝", label: "Built by a solo creator" },
+	{ label: AUTOMATIC_DELIVERY_ENABLED ? "Download after purchase" : "Emailed after payment" },
+	{ label: "No subscription" },
+	{ label: "30-day delivery guarantee" },
+	{ label: "Built by a solo creator" },
 ];
 
 const CONTENTS = [
@@ -76,36 +76,41 @@ const FAQ = [
 			description="Run your client business from checklists, not memory. Onboarding, weekly planning and follow-up systems for coaches and solo service providers. One-time payment. 30-day delivery guarantee."
 		/>
 		<style>
-			main { width: 1000px; }
-			.store-hero { text-align: center; padding: 1em 0 1.5em; }
-			.store-eyebrow { margin: 0 0 0.8em; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
-			.store-hero h1 { font-size: clamp(1.8em, 6vw, 2.8em); line-height: 1.12; max-width: 15em; margin: 0 auto 0.5em; }
-			.store-lede { max-width: 32em; margin: 0 auto 1.6em; color: rgb(var(--gray-dark)); font-size: 1.05em; }
-			.store-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 60px; padding: 1em 2.8em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.45em; text-decoration: none; transition: background-color 0.15s ease-in-out; }
-			.store-cta:hover { background: var(--accent-dark); color: #fff; }
-			.store-secondary { display: inline-block; margin-top: 0.9em; font-size: 0.9em; padding: 0.6em 0.4em; }
-			.trust-row { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6em; padding: 0; margin: 1.5em 0 0; }
-			@media (max-width: 720px) { .trust-row { grid-template-columns: 1fr 1fr; } }
-			.trust-row li { display: flex; align-items: center; justify-content: center; gap: 0.45em; padding: 0.7em 0.5em; border-radius: 10px; background: rgba(var(--gray-light), 55%); font-size: 0.82em; font-weight: 700; color: rgb(var(--gray-dark)); text-align: center; line-height: 1.3; }
-			.section-head { text-align: center; margin: 2.5em 0 0; }
-			.section-head h2 { font-size: clamp(1.4em, 4.5vw, 1.9em); }
-			.section-head p { color: rgb(var(--gray)); margin: 0; }
-			.featured-wrap { max-width: 640px; margin: 0 auto; scroll-margin-top: 1em; }
-			.featured-wrap :global(.product-callout) { margin-top: 1.5em; }
-			.singles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 0 1.5em; }
-			.singles :global(.product-callout) { margin: 1.5em 0 0; font-size: 0.92em; }
-			.store-section { max-width: 720px; margin: 3em auto 0; }
+			main { width: var(--max-width); }
+			.store-hero { padding: var(--space-6) 0 var(--space-4); }
+			.store-eyebrow { margin: 0 0 var(--space-2); font-size: 0.8em; font-weight: 600; color: var(--muted); }
+			.store-hero h1 { font-size: clamp(2.1em, 7vw, 3.6em); line-height: 1.04; max-width: 13em; margin: 0 0 var(--space-3); }
+			.store-lede { max-width: 32em; margin: 0 0 var(--space-4); color: rgb(var(--gray-dark)); font-size: 1.05em; }
+			.store-actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-1) var(--space-3); }
+			.store-cta { min-height: 56px; padding: 0 var(--space-4); font-size: 1.05em; }
+			.store-secondary { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.88em; color: var(--muted); }
+			.trust-row { list-style: none; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); padding: var(--space-3) 0 0; margin: var(--space-4) 0 0; border-top: 1px solid var(--line); }
+			.trust-row li { font-size: 0.8em; font-weight: 600; color: var(--muted); }
+			.section-head { margin: var(--space-8) 0 0; }
+			.section-head h2 { font-size: clamp(1.5em, 4.5vw, 2.1em); }
+			.section-head p { color: var(--muted); margin: 0; }
+			.featured-wrap { max-width: 760px; scroll-margin-top: var(--space-2); }
+			.featured-wrap :global(.product-callout) { margin: var(--space-2) 0 0; }
+			/* Two columns at most. No three-up feature grids. */
+			.singles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: var(--space-2); max-width: 1000px; }
+			@media (min-width: 1100px) { .singles { grid-template-columns: 1fr 1fr; } }
+			.singles :global(.product-callout) { margin: var(--space-3) 0 0; font-size: 0.92em; }
+			.store-section { max-width: 720px; margin: var(--space-8) 0 0; }
 			.store-section h2 { font-size: 1.6em; }
-			.contents-table { width: 100%; border-collapse: collapse; margin-top: 1em; }
-			.contents-table th, .contents-table td { text-align: left; padding: 0.6em 0.8em; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.92em; vertical-align: top; }
-			.contents-table th { color: rgb(var(--gray)); font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.05em; }
-			.contents-table code { background: rgb(var(--gray-light)); padding: 0.1em 0.4em; border-radius: 4px; white-space: nowrap; }
-			.faq details { border-bottom: 1px solid rgb(var(--gray-light)); }
-			.faq summary { cursor: pointer; padding: 0.7em 0; min-height: 44px; box-sizing: border-box; font-weight: 700; color: rgb(var(--black)); list-style-position: inside; }
-			.faq details p { margin: 0 0 1em; color: rgb(var(--gray-dark)); font-size: 0.95em; }
-			.final-cta { text-align: center; margin: 3em auto 0; max-width: 720px; padding: 2em 1em; border-radius: 16px; background: rgba(35, 55, 255, 0.05); border: 1px solid rgba(35, 55, 255, 0.15); }
-			.final-cta h2 { font-size: clamp(1.3em, 4.5vw, 1.7em); }
-			.final-cta p { margin: 0.8em 0 0; font-size: 0.85em; color: rgb(var(--gray-dark)); }
+			.contents-table { width: 100%; border-collapse: collapse; margin-top: var(--space-2); }
+			.contents-table th, .contents-table td { text-align: left; padding: 12px var(--space-2) 12px 0; border-bottom: 1px solid var(--line); font-size: 0.9em; vertical-align: top; }
+			.contents-table th { color: var(--muted); font-size: 0.78em; font-weight: 600; }
+			.contents-table code { white-space: nowrap; }
+			.faq details { border-bottom: 1px solid var(--line); }
+			.faq summary { cursor: pointer; display: flex; align-items: center; min-height: 56px; box-sizing: border-box; font-weight: 600; color: var(--ink); }
+			.faq summary::-webkit-details-marker { display: none; }
+			.faq summary::after { content: "+"; margin-left: auto; padding-left: var(--space-2); color: var(--muted); }
+			.faq details[open] summary::after { content: "–"; }
+			.faq details p { margin: 0 0 var(--space-3); color: rgb(var(--gray-dark)); font-size: 0.95em; }
+			.final-cta { margin: var(--space-8) 0 0; max-width: 760px; padding: var(--space-6) var(--space-3); border-radius: var(--radius-card); background: var(--surface); border: 1px solid var(--line); }
+			.final-cta h2 { font-size: clamp(1.4em, 4.5vw, 1.9em); font-weight: 800; }
+			.final-cta p { margin: var(--space-2) 0 0; font-size: 0.82em; color: var(--muted); }
+			.final-cta + :global(.email-optin) { max-width: 760px; box-sizing: border-box; }
 		</style>
 	</head>
 	<body>
@@ -118,11 +123,12 @@ const FAQ = [
 					You lose hours rebuilding onboarding emails. Proposals go quiet and you never follow up.
 					Monday starts with a scramble. Pick the system that ends it.
 				</p>
-				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
-				<br />
-				<a class="store-secondary" href="#all-products">Or compare every product ↓</a>
+				<div class="store-actions">
+					<a class="btn-primary store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
+					<a class="store-secondary" href="#all-products">Or compare every product ↓</a>
+				</div>
 				<ul class="trust-row" aria-label="Why buying here is low risk">
-					{TRUST.map((t) => <li><span aria-hidden="true">{t.icon}</span>{t.label}</li>)}
+					{TRUST.map((t) => <li>{t.label}</li>)}
 				</ul>
 			</section>
 
@@ -169,7 +175,7 @@ const FAQ = [
 
 			<section class="final-cta">
 				<h2>Stop rebuilding your process from memory.</h2>
-				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
+				<a class="btn-primary store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
 				<p>One-time payment. No subscription. {guarantee}</p>
 			</section>
 

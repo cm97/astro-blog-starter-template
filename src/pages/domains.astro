@@ -21,7 +21,7 @@ const description = "Invent a domain name and see if the registry still has it."
 				font-weight: 700;
 				letter-spacing: 0.1em;
 				text-transform: uppercase;
-				color: var(--accent);
+				color: var(--muted);
 				margin: 0 0 0.4em;
 			}
 			.desk h1 {
@@ -34,8 +34,8 @@ const description = "Invent a domain name and see if the registry still has it."
 				margin-top: 0;
 			}
 			.panel {
-				background: #fff;
-				border: 1px solid rgb(var(--gray-light));
+				background: var(--surface);
+				border: 1px solid var(--line-strong);
 				border-radius: 16px;
 				padding: 1em;
 				margin: 1.2em 0;
@@ -52,8 +52,8 @@ const description = "Invent a domain name and see if the registry still has it."
 				font: inherit;
 				cursor: pointer;
 				border-radius: 999px;
-				border: 1px solid rgb(var(--gray-light));
-				background: #fff;
+				border: 1px solid var(--line-strong);
+				background: var(--surface);
 				color: rgb(var(--gray-dark));
 			}
 			.modes button,
@@ -64,15 +64,15 @@ const description = "Invent a domain name and see if the registry still has it."
 			}
 			.modes button[aria-selected="true"],
 			.filters button[aria-pressed="true"] {
-				background: rgb(var(--black));
-				color: #fff;
-				border-color: rgb(var(--black));
+				background: var(--ink);
+				color: var(--bg);
+				border-color: var(--ink);
 			}
 			.panel input {
 				width: 100%;
 				border: 0;
-				border-top: 1px solid rgb(var(--gray-light));
-				border-bottom: 1px solid rgb(var(--gray-light));
+				border-top: 1px solid var(--line-strong);
+				border-bottom: 1px solid var(--line-strong);
 				padding: 0.8em 0.2em;
 				font: inherit;
 				background: transparent;
@@ -100,7 +100,7 @@ const description = "Invent a domain name and see if the registry still has it."
 				border: 0;
 				border-radius: 999px;
 				background: var(--accent);
-				color: #fff;
+				color: var(--on-accent);
 				font: inherit;
 				font-weight: 700;
 				cursor: pointer;
@@ -138,7 +138,7 @@ const description = "Invent a domain name and see if the registry still has it."
 				font-size: 0.9em;
 			}
 			.error {
-				color: #9f1239;
+				color: var(--danger);
 			}
 			.row {
 				display: flex;
@@ -146,7 +146,7 @@ const description = "Invent a domain name and see if the registry still has it."
 				gap: 1em;
 				align-items: center;
 				padding: 0.9em 0;
-				border-top: 1px solid rgb(var(--gray-light));
+				border-top: 1px solid var(--line-strong);
 			}
 			.row h2 {
 				font-size: 1.25em;
@@ -167,7 +167,7 @@ const description = "Invent a domain name and see if the registry still has it."
 				font-size: 1.05em;
 			}
 			.open {
-				color: #166534;
+				color: var(--success);
 			}
 			.side {
 				display: flex;
@@ -184,14 +184,13 @@ const description = "Invent a domain name and see if the registry still has it."
 				font: inherit;
 				text-align: left;
 				cursor: pointer;
-				background: #fff;
-				border: 1px solid rgb(var(--gray-light));
+				background: var(--surface);
+				border: 1px solid var(--line-strong);
 				border-radius: 12px;
 				padding: 0.8em;
 			}
 			.rate[aria-pressed="true"] {
-				border-color: var(--accent);
-				box-shadow: 0 0 0 2px rgba(35, 55, 255, 0.15);
+				border-color: var(--ink);
 			}
 			.rate strong {
 				display: block;

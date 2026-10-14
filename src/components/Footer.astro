@@ -27,22 +27,23 @@ const today = new Date();
 			<span class="sep">·</span>
 			<a href="mailto:coachmanager@gmail.com">Support</a>
 		</div>
-		<p class="footer-guarantee">30-day money-back guarantee — email us if it doesn't deliver.</p>
+		<p class="footer-guarantee">30-day money-back guarantee. Email me if it doesn't deliver.</p>
 		<p class="footer-copy">&copy; {today.getFullYear()} Buzzyfly. All rights reserved.</p>
 	</div>
 </footer>
 <style>
 	footer {
-		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		color: rgb(var(--gray));
+		padding: var(--space-6) var(--gutter) var(--space-8);
+		background: var(--bg);
+		border-top: 1px solid var(--line);
+		color: var(--muted);
 		text-align: center;
 	}
 	.footer-inner { max-width: 760px; margin: 0 auto; }
-	.footer-links { margin-bottom: 0.6em; }
-	.footer-links a { color: rgb(var(--gray-dark)); text-decoration: none; font-weight: 600; }
-	.footer-links a:hover { color: var(--accent); }
+	.footer-links { margin-bottom: var(--space-2); font-size: 0.85em; }
+	.footer-links a { display: inline-block; padding: 10px 2px; color: var(--muted); text-decoration: none; font-weight: 600; }
+	.footer-links a:hover { color: var(--ink); }
 	.sep { margin: 0 0.4em; opacity: 0.5; }
-	.footer-guarantee { margin: 0 0 0.4em; font-size: 0.85em; }
-	.footer-copy { margin: 0; font-size: 0.8em; opacity: 0.7; }
+	.footer-guarantee { margin: 0 0 var(--space-1); font-size: 0.8em; }
+	.footer-copy { margin: 0; font-size: 0.75em; opacity: 0.7; }
 </style>

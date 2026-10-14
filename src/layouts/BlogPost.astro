@@ -46,32 +46,32 @@ const displayHero =
 	<head>
 		<BaseHead title={title} description={description} image={displayHero} />
 		<style>
-			main { width: calc(100% - 2em); max-width: 100%; margin: 0; }
+			main { width: var(--max-width); }
 			.hero-image { width: 100%; }
-			.hero-image img { display: block; margin: 0 auto; border-radius: 12px; box-shadow: var(--box-shadow); }
-			.prose { width: 720px; max-width: calc(100% - 2em); margin: auto; padding: 1em; color: rgb(var(--gray-dark)); }
-			.title { margin-bottom: 1em; padding: 1em 0; text-align: center; line-height: 1; }
-			.title h1 { margin: 0 0 0.5em 0; }
-			.date { margin-bottom: 0.5em; color: rgb(var(--gray)); }
+			.hero-image img { display: block; margin: 0 auto; border-radius: var(--radius-card); border: 1px solid var(--line); }
+			.prose { width: 720px; max-width: 100%; margin: auto; padding: var(--space-3) 0; color: rgb(var(--gray-dark)); }
+			.title { margin-bottom: var(--space-3); padding: var(--space-3) 0; }
+			.title h1 { margin: 0 0 var(--space-3) 0; font-size: clamp(1.9em, 6vw, 2.8em); line-height: 1.08; }
+			.date { margin-bottom: var(--space-1); color: var(--muted); font-size: 0.85em; }
 			.last-updated-on { font-style: italic; }
-			.tag-line { text-align: center; margin-bottom: 0.5em; }
-			.tag-line span { display: inline-block; padding: 0.2em 0.7em; border-radius: 999px; background: rgb(var(--gray-light)); color: rgb(var(--gray-dark)); font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; }
-			.nav-posts { display: flex; justify-content: space-between; gap: 1em; margin: 2.5em 0 1em; padding-top: 1.5em; border-top: 1px solid rgb(var(--gray-light)); }
-			.nav-posts a { color: var(--accent); text-decoration: none; font-weight: 600; font-size: 0.95em; }
+			.tag-line { margin-bottom: var(--space-1); }
+			.tag-line span { display: inline-block; padding: 2px var(--space-2); border-radius: 999px; border: 1px solid var(--line-strong); color: var(--ink); font-size: 0.72em; font-weight: 600; }
+			.nav-posts { display: flex; justify-content: space-between; gap: 1em; margin: 2.5em 0 1em; padding-top: 1.5em; border-top: 1px solid var(--line); }
+			.nav-posts a { color: var(--ink); text-decoration: none; font-weight: 600; font-size: 0.95em; }
 			.nav-posts a:hover { text-decoration: underline; }
-			.nav-posts .dir { display: block; font-size: 0.75em; color: rgb(var(--gray)); font-weight: 400; margin-bottom: 0.2em; }
+			.nav-posts .dir { display: block; font-size: 0.75em; color: var(--muted); font-weight: 400; margin-bottom: 4px; }
 			.related { margin: 2em 0; }
 			.related h3 { font-size: 1.2em; margin-bottom: 0.8em; }
 			.related ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6em; }
-			.related a { color: rgb(var(--black)); text-decoration: none; font-weight: 600; }
-			.related a:hover { color: var(--accent); }
-			.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid rgb(var(--gray-light)); box-shadow: 0 -4px 16px rgba(0,0,0,0.08); padding: 0.7em 1em; display: flex; align-items: center; justify-content: space-between; gap: 1em; z-index: 50; }
-			.sticky-cta .price { font-weight: 700; }
-			.sticky-cta a { display: inline-flex; align-items: center; min-height: 44px; padding: 0.4em 1.4em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; }
-			.sticky-cta a:hover { background: var(--accent-dark); }
+			.related a { color: var(--ink); font-weight: 600; }
+			
+			.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1px solid var(--line); padding: var(--space-1) var(--gutter); font-size: 0.85em; color: rgb(var(--gray-dark)); display: flex; align-items: center; justify-content: space-between; gap: 1em; z-index: 50; }
+			.sticky-cta .price { font-family: var(--font-display); font-weight: 800; color: var(--ink); margin-left: auto; }
+			
+			
 			@media (max-width: 720px) { .sticky-cta span:first-child { display: none; } }
 			body { padding-bottom: 72px; }
-			.store-link { text-align: center; font-size: 0.9em; color: rgb(var(--gray)); margin: -1.5em 0 2em; }
+			.store-link { font-size: 0.85em; color: var(--muted); margin: calc(-1 * var(--space-4)) 0 var(--space-6); }
 		</style>
 	</head>
 
@@ -137,7 +137,7 @@ const displayHero =
 		<div class="sticky-cta">
 			<span>The checklists for this are in the Digital System.</span>
 			<span class="price">{BUZZYFLY_CONFIG.defaultProductPrice}</span>
-			<a href="/store#digital-system">See the system</a>
+			<a class="btn-primary" href="/store#digital-system">See the system</a>
 		</div>
 	</body>
 </html>

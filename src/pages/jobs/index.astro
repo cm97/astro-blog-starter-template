@@ -31,8 +31,8 @@ const formatJobType = (type?: string) =>
         display: inline-flex;
         align-items: center;
         gap: 0.4rem;
-        background: #e6f4ea;
-        color: #137333;
+        border: 1px solid var(--line-strong);
+        color: var(--muted);
         font-size: 0.8rem;
         font-weight: 600;
         padding: 0.25rem 0.65rem;
@@ -42,8 +42,7 @@ const formatJobType = (type?: string) =>
       .pulse-dot {
         width: 8px;
         height: 8px;
-        background: #137333;
-        border-radius: 50%;
+        display: none;
       }
       .search-container {
         display: flex;
@@ -55,13 +54,16 @@ const formatJobType = (type?: string) =>
         flex: 1;
         min-width: 240px;
         padding: 0.8rem 1rem;
-        border: 1px solid #cbd5e1;
+        border: 1px solid var(--line-strong);
+        border-radius: 999px;
+        background: var(--surface);
+        color: var(--ink);
         border-radius: 6px;
         font-size: 1rem;
         outline: none;
       }
       .search-field:focus {
-        border-color: #0066cc;
+        border-color: var(--ink);
       }
       .layout-grid {
         display: grid;
@@ -74,16 +76,15 @@ const formatJobType = (type?: string) =>
         }
       }
       .job-card {
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 1.25rem;
-        margin-bottom: 1rem;
-        background: #fff;
-        transition: transform 0.15s ease, box-shadow 0.15s ease;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-card);
+        padding: var(--space-3);
+        margin-bottom: var(--space-2);
+        background: var(--surface);
+        transition: border-color 0.15s ease;
       }
       .job-card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+        border-color: var(--line-strong);
       }
       .company-row {
         display: flex;
@@ -93,13 +94,13 @@ const formatJobType = (type?: string) =>
       }
       .company-name {
         font-weight: 600;
-        color: #1e293b;
+        color: var(--ink);
       }
       .job-title {
         font-size: 1.25rem;
         font-weight: 700;
         margin: 0 0 0.5rem 0;
-        color: #0f172a;
+        color: var(--ink);
       }
       .job-tags {
         display: flex;
@@ -107,31 +108,34 @@ const formatJobType = (type?: string) =>
         gap: 0.5rem;
         margin-bottom: 0.75rem;
         font-size: 0.85rem;
-        color: #475569;
+        color: var(--muted);
       }
       .tag-item {
-        background: #f1f5f9;
+        background: var(--surface-raised);
         padding: 0.2rem 0.6rem;
         border-radius: 4px;
       }
       .apply-btn {
-        display: inline-block;
-        background: #0066cc;
-        color: #fff;
-        padding: 0.55rem 1.1rem;
-        border-radius: 6px;
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        box-sizing: border-box;
+        border: 1px solid var(--line-strong);
+        color: var(--ink);
+        padding: 0 var(--space-2);
+        border-radius: 999px;
         font-weight: 600;
         text-decoration: none;
         font-size: 0.9rem;
       }
       .apply-btn:hover {
-        background: #0052a3;
+        border-color: var(--ink);
       }
       .sidebar-panel {
-        border: 1px solid #e2e8f0;
-        border-radius: 8px;
-        padding: 1.25rem;
-        background: #f8fafc;
+        border: 1px solid var(--line);
+        border-radius: var(--radius-card);
+        padding: var(--space-3);
+        background: var(--surface);
         position: sticky;
         top: 2rem;
         height: fit-content;
@@ -144,12 +148,11 @@ const formatJobType = (type?: string) =>
       <div>
         {updatedLabel && (
           <div class="live-indicator">
-            <span class="pulse-dot"></span>
             Updated {updatedLabel}
           </div>
         )}
         <h1 style="font-size: 2rem; margin: 0 0 0.5rem 0;">Remote Jobs</h1>
-        <p style="color: #64748b; margin: 0 0 1.5rem 0;">
+        <p style="color: var(--muted); margin: 0 0 1.5rem 0;">
           Recent remote job openings, sourced from <a href="https://remotive.com" target="_blank" rel="noopener">Remotive</a>. The list refreshes a few times a day.
         </p>
       </div>
@@ -162,7 +165,7 @@ const formatJobType = (type?: string) =>
       <div class="layout-grid">
         <div class="job-list" id="jobList">
           {jobs.length === 0 ? (
-            <p style="color: #64748b;">No active listings found right now. Check back shortly.</p>
+            <p style="color: var(--muted);">No active listings found right now. Check back shortly.</p>
           ) : (
             jobs.map((job) => (
               <article class="job-card" data-title={job.title.toLowerCase()} data-location={(job.candidate_required_location || 'remote').toLowerCase()} data-company={job.company_name.toLowerCase()}>
@@ -185,7 +188,7 @@ const formatJobType = (type?: string) =>
 
         <aside class="sidebar-panel">
           <h3 style="margin-top: 0; font-size: 1.1rem;">About these listings</h3>
-          <ul style="padding-left: 1.2rem; color: #475569; font-size: 0.9rem; line-height: 1.6;">
+          <ul style="padding-left: 1.2rem; color: var(--muted); font-size: 0.9rem; line-height: 1.6;">
             <li><strong>Source:</strong> Jobs come from <a href="https://remotive.com" target="_blank" rel="noopener">Remotive</a>'s public job board. Buzzyfly doesn't screen or verify employers.</li>
             <li><strong>Applying:</strong> Each link opens the listing on Remotive, where you'll find how to apply.</li>
             <li><strong>Stay safe:</strong> Never pay a fee to apply or share bank details before a real offer. If a listing looks off, skip it.</li>
