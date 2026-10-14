@@ -1,5 +1,6 @@
 import type { APIRoute } from "astro";
-import { resolveProductFile, checkDownloadRateLimit, logDownloadEvent } from "../../lib/fulfillment";
+import { resolveProductFile, logDownloadEvent } from "../../lib/fulfillment";
+import { hitRateLimit } from "../../lib/rateLimit";
 import {
 	PRODUCT_COOKIE_MAX_AGE_SECONDS,
 	isProduct,
@@ -38,7 +39,7 @@ export const GET: APIRoute = async ({ request, locals, url, cookies }) => {
 	if (!queryToken && !product) return productLockedPage(null);
 
 	// Rate limit to protect the bucket at scale.
-	if (!checkDownloadRateLimit(ip)) {
+	if (!(await hitRateLimit(env, `download:${ip}`, 10, 60_000))) {
 		return new Response("Too many download attempts. Slow down.", { status: 429 });
 	}
 

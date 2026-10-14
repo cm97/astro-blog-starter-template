@@ -6,6 +6,10 @@ import {
 	verifyAdminCredentials,
 } from "../../../lib/adminAuth";
 import { logAdminAction } from "../../../lib/audit";
+import { hitRateLimit, isRateLimited } from "../../../lib/rateLimit";
+
+const LOGIN_MAX_FAILURES = 5;
+const LOGIN_WINDOW_MS = 15 * 60_000;
 
 export const prerender = false;
 
@@ -30,7 +34,18 @@ export const POST: APIRoute = async ({ request, cookies, locals }) => {
 		);
 	}
 
+	// Lock an IP out after repeated failures. Only failures count, so the owner
+	// logging in normally is never throttled; correct credentials are not even
+	// checked while locked, which stops a bot from guessing during the lockout.
+	const ip = request.headers.get("cf-connecting-ip") ?? "unknown";
+	const lockKey = `admin-login:${ip}`;
+	if (await isRateLimited(env, lockKey, LOGIN_MAX_FAILURES, LOGIN_WINDOW_MS)) {
+		await logAdminAction(env, username || "unknown", "login_locked_out");
+		return loginRedirect(safeNext, "Too many failed attempts. Try again in 15 minutes.");
+	}
+
 	if (!username || !password || !verifyAdminCredentials(env, username, password)) {
+		await hitRateLimit(env, lockKey, LOGIN_MAX_FAILURES, LOGIN_WINDOW_MS);
 		await logAdminAction(env, username || "unknown", "login_failed");
 		return loginRedirect(safeNext, "Incorrect username or password.");
 	}
