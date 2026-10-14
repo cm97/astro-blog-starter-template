@@ -2,11 +2,10 @@
 title: "The Monday Reset When You Are Already Behind"
 description: "A 20-minute Monday plan for the week that is already late — three priorities, client dates, and the two follow-ups that protect cash."
 pubDate: 2026-09-29
-updatedDate: 2026-10-07
+updatedDate: 2026-10-14
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductUrl: "/buy/buzzyfly-digital-system"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
@@ -67,6 +66,12 @@ This week's three (behind-Monday version):
 Killed so these three can live: ________
 ```
 
+Cash-protect check before you leave this block:
+
+- Is one of the three an invoice or a paid next date? If not, swap one in.
+- Is the follow-up older than 7 days? If yes, it stays.
+- Can you name the dollar amount or the next date on paper? If not, it is not a priority yet.
+
 ## Minute 8–14 — Touch every open client once
 
 One line each: next deliverable and next date. If you cannot name the next date, that client is drifting.
@@ -87,6 +92,7 @@ Next deliverable: ________
 Next date: ________
 Who owes a reply: me / them
 If no date: follow up today / mark paused
+Paid amount still open: ________
 ```
 
 Cap this at the clients who paid or who have a proposal out. Old leads with no date and no reply in 21 days are not an open client. They are a follow-up or a closed row.
@@ -111,6 +117,13 @@ Send two. Do not perfect them. Two sent beats one rewritten.
 
 If you only have one overdue thread, send that one and write the second as tomorrow's first line. Do not invent a third.
 
+Log the sends so Thursday cannot invent a different version:
+
+```
+Follow-up 1: ________ sent [time] — next touch if no reply: ________
+Follow-up 2: ________ sent [time] — next touch if no reply: ________
+```
+
 ## Minute 19–20 — Stop
 
 Write tomorrow's first move in one line. Close the list.
@@ -131,6 +144,12 @@ Send any follow-up that is now overdue. One sentence each.
 
 A Wednesday check that is not on the calendar never happens. Put a 5-minute block next to Monday the same week you write the list.
 
+```
+Priority still true? yes / replace with ________
+Overdue follow-up sent? yes / no — which: ________
+Tomorrow first move still right? ________
+```
+
 ## Friday, 5 minutes if Monday was ugly
 
 Do not rebuild the week. Close it.
@@ -141,12 +160,22 @@ Do not rebuild the week. Close it.
 
 That is the whole Friday. Same place, same card. If Friday gets skipped, Monday starts from the last written three, not from memory.
 
+```
+Moved: ________
+Slid (next Monday line 1 unless killed): ________
+Invoice or close-out sent: ________
+```
+
 ## What still breaks if this only lives in your head
 
 The three priorities change every time you remember a new fire. Client dates live in threads you will not reopen until they complain. Follow-ups wait for a good moment, and the moment is never Monday at 9:12. The invoice stays a feeling instead of a sent file.
 
 The words have to sit next to onboarding and the proposal follow-up, in the same folder, so a slammed Monday still has a list to open. That is the weekly reset inside the Digital System, with the onboarding checklist and the follow-up lines in the same zip.
 
-One-time payment. $49. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+The Weekly Reset Checklist ($15) is this sheet alone. The Digital System ($49) is the reset plus onboarding and follow-ups so a slammed Monday still has the list. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
 
-[Get the Digital System — $49](/buy/buzzyfly-digital-system)
+One-time payment. Files plus lifetime updates. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+
+All packs: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
