@@ -23,11 +23,12 @@ const systemDescription =
 		: system.description;
 const systemOrder = getOrderAction(system.id);
 const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id && p.id !== "complete-business-bundle");
+const guarantee = "30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.";
 
 const TRUST = [
-	{ icon: "⚡", label: AUTOMATIC_DELIVERY_ENABLED ? "Instant download" : "Emailed after payment" },
+	{ icon: "⚡", label: AUTOMATIC_DELIVERY_ENABLED ? "Download after purchase" : "Emailed after payment" },
 	{ icon: "🔁", label: "No subscription" },
-	{ icon: "🛡️", label: "30-day money-back guarantee" },
+	{ icon: "🛡️", label: "30-day delivery guarantee" },
 	{ icon: "🐝", label: "Built by a solo creator" },
 ];
 
@@ -49,7 +50,7 @@ const FAQ = [
 	{
 		q: "How do I get the files?",
 		a: AUTOMATIC_DELIVERY_ENABLED
-			? "Pay once through Stripe. You download on the thank-you page right away. A copy of the link is emailed to you too."
+			? "Pay once through Stripe. Download from the thank-you page right after purchase."
 			: "Pay once through Stripe. Your download is emailed to the address you checked out with.",
 	},
 	{
@@ -58,7 +59,7 @@ const FAQ = [
 	},
 	{
 		q: "What if it doesn't help?",
-		a: `Email ${BUZZYFLY_CONFIG.orderEmail} within 30 days and you get your money back. No form. No hoops.`,
+		a: guarantee,
 	},
 	{
 		q: "Who is it not for?",
@@ -72,7 +73,7 @@ const FAQ = [
 	<head>
 		<BaseHead
 			title={`Store — ${BUZZYFLY_CONFIG.brandName}`}
-			description="Run your client business from checklists, not memory. Onboarding, weekly planning and follow-up systems for coaches and solo service providers. One-time payment. 30-day money-back guarantee."
+			description="Run your client business from checklists, not memory. Onboarding, weekly planning and follow-up systems for coaches and solo service providers. One-time payment. 30-day delivery guarantee."
 		/>
 		<style>
 			main { width: 1000px; }
@@ -80,7 +81,7 @@ const FAQ = [
 			.store-eyebrow { margin: 0 0 0.8em; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 			.store-hero h1 { font-size: clamp(1.8em, 6vw, 2.8em); line-height: 1.12; max-width: 15em; margin: 0 auto 0.5em; }
 			.store-lede { max-width: 32em; margin: 0 auto 1.6em; color: rgb(var(--gray-dark)); font-size: 1.05em; }
-			.store-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0.8em 2.4em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.2em; text-decoration: none; transition: background-color 0.15s ease-in-out; }
+			.store-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 60px; padding: 1em 2.8em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.45em; text-decoration: none; transition: background-color 0.15s ease-in-out; }
 			.store-cta:hover { background: var(--accent-dark); color: #fff; }
 			.store-secondary { display: inline-block; margin-top: 0.9em; font-size: 0.9em; padding: 0.6em 0.4em; }
 			.trust-row { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6em; padding: 0; margin: 1.5em 0 0; }
@@ -169,7 +170,7 @@ const FAQ = [
 			<section class="final-cta">
 				<h2>Stop rebuilding your process from memory.</h2>
 				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
-				<p>One-time payment. No subscription. {BUZZYFLY_CONFIG.guarantee}</p>
+				<p>One-time payment. No subscription. {guarantee}</p>
 			</section>
 
 			<EmailOptin title="Not ready to buy? Start with the free checklist." />
