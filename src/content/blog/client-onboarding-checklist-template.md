@@ -2,7 +2,7 @@
 title: "Client Onboarding Checklist Template (Copy and Use Today)"
 description: "A complete client onboarding checklist template for coaches and consultants — every step from signed contract to kickoff call, ready to run without rebuilding from memory."
 pubDate: "Sep 13 2026"
-updatedDate: "Oct 12 2026"
+updatedDate: "Oct 14 2026"
 heroImage: "/blog-placeholder-2.jpg"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -59,7 +59,51 @@ Paste-ready kickoff summary:
 
 > Recap from today: goal is [one outcome]. You own [item]. I own [item]. Next check-in is [date/time]. Anything not listed is out of scope for this start.
 
-### Week one: four touches
+### First 7 days — exact sequence (run the list, do not improvise)
+
+Copy this block into the client note the day payment clears. Tick every line. If a day is late, send the late version the same day — never skip because you are behind.
+
+**Day 0 (payment day)**  
+- [ ] Welcome email sent  
+- [ ] Folder created  
+- [ ] Intake link sent with deadline [date]  
+- [ ] 48-hour intake reminder set  
+- [ ] Internal note filled  
+
+**Day 1**  
+- [ ] Calendar invite for kickoff with agenda in description  
+- [ ] Tools / access list ready (login links, folders, channels)  
+
+**Day 2**  
+- [ ] Confirm intake received or send the 48-hour nudge  
+- Fill-in nudge:  
+> Still need the intake before kickoff so we use the time well. Link again: [link]. Deadline stays [date].  
+
+**Day 3**  
+- [ ] Review intake answers — write 2–3 clarifying questions for the call  
+- [ ] Confirm any missing access or files  
+
+**Day 4**  
+- [ ] Kickoff call held (or rescheduled with new date written)  
+- [ ] Kickoff summary sent within 60 minutes  
+
+**Day 5**  
+- [ ] First status line or deliverable milestone note  
+- Fill-in:  
+> Quick status: [what moved]. Next piece due [date]. Anything blocked on your side?  
+
+**Day 6**  
+- [ ] Mid-point check: on track / blocked / priority shift  
+- Fill-in:  
+> Mid-point check: on track for [deliverable]? Anything blocked on your side? Any priority that shifted?  
+
+**Day 7**  
+- [ ] Add client to retention / weekly check list so week two is not silence  
+- [ ] Note any open scope questions and send one clarifying line if needed  
+
+If any day is missed, do not restart the whole list. Send the missed touch the same day you notice it, mark the date, and continue.
+
+### Week one: four touches (summary)
 
 - [ ] Day 2: confirm you have everything from intake. One paragraph.
 - [ ] Day 4: first milestone, or a status line if the milestone is later.
