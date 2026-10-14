@@ -4,42 +4,44 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
-/* Design tokens. See DESIGN.md. Dark ground, one accent, type-led. */
+/* Design tokens. See DESIGN.md. Light ground, one yellow action, calm type. */
 :root {
-	color-scheme: dark;
+	color-scheme: light;
 	/* Palette roles */
-	--bg: #0b0b0d;
-	--surface: #141418;
-	--surface-raised: #1c1c22;
-	--ink-rgb: 243, 243, 245;
-	--ink: rgb(var(--ink-rgb));
-	--muted: #a8a8b2;
-	--line: rgba(var(--ink-rgb), 8%);
-	--line-strong: rgba(var(--ink-rgb), 20%);
-	/* The accent marks the one action on a screen. Text on it is --on-accent. */
+	--bg: #ffffff;
+	--surface: #f7f7f5;
+	--surface-raised: #ffffff;
+	--ink-rgb: 26, 26, 26;
+	--ink: #1a1a1a;
+	--muted: #5f5f66;
+	--line: #e5e5e2;
+	--line-strong: rgba(26, 26, 26, 20%);
+	/* The accent marks the one action on a screen. Never yellow text on white. */
 	--accent: #f5be14;
-	--accent-dark: #d9a50a;
-	--on-accent: #0b0b0d;
-	--success: #7ad69a;
-	--danger: #ff8a80;
+	--accent-dark: #e0a800;
+	--on-accent: #1a1a1a;
+	--accent-edge: rgba(26, 26, 26, 35%);
+	--success: #1e7b45;
+	--danger: #b3261e;
 	/* Legacy names kept so existing components keep working. RGB triplets. */
 	--black: var(--ink-rgb);
-	--gray: 168, 168, 178;
-	--gray-light: 42, 42, 50;
-	--gray-dark: 214, 214, 222;
+	--gray: 95, 95, 102;
+	--gray-light: 229, 229, 226;
+	--gray-dark: 42, 42, 46;
 	--gray-gradient: var(--bg), var(--bg);
 	--box-shadow: none;
 	/* Type */
 	--font-display: "Bricolage Grotesque", "Instrument Sans", sans-serif;
 	--font-body: "Instrument Sans", sans-serif;
-	/* Layout: 8px scale, 1180px max, 24px gutters */
+	/* Layout: 8px scale, 1120px max, 24px gutters */
 	--space-1: 8px;
 	--space-2: 16px;
 	--space-3: 24px;
 	--space-4: 32px;
 	--space-6: 48px;
 	--space-8: 64px;
-	--max-width: 1180px;
+	--space-12: 96px;
+	--max-width: 1120px;
 	--gutter: 24px;
 	--radius-card: 16px;
 }
@@ -80,10 +82,10 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+	font-size: 18px;
+	line-height: 1.6;
 }
-/* One Buzzyfly watermark on every page. Faint on the dark ground. */
+/* One Buzzyfly watermark on every page. Faint, so it never competes with text. */
 body::after {
 	content: "";
 	position: fixed;
@@ -91,7 +93,7 @@ body::after {
 	pointer-events: none;
 	z-index: 0;
 	background: url("/buzzyfly-watermark.svg") center 42% / min(420px, 62vw) no-repeat;
-	opacity: 0.05;
+	opacity: 0.06;
 }
 body.yt-page::after {
 	opacity: 0.3;
@@ -223,9 +225,6 @@ select {
 	opacity: 1;
 }
 @media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
 	main {
 		padding: var(--space-3) 0;
 	}
@@ -289,14 +288,15 @@ summary:focus-visible {
 	cursor: pointer;
 	transition: background-color 0.15s ease, border-color 0.15s ease;
 }
+/* Yellow on white is light-on-light, so the primary gets a thin dark edge to hold its shape. */
 .btn-primary {
 	background: var(--accent);
 	color: var(--on-accent) !important;
-	border: 1px solid var(--accent);
+	border: 1px solid var(--accent-edge);
+	font-weight: 700;
 }
 .btn-primary:hover {
 	background: var(--accent-dark);
-	border-color: var(--accent-dark);
 }
 .btn-secondary {
 	background: transparent;
