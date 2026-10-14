@@ -15,14 +15,16 @@ const mailto =
 			description="Ask for the checklist or email you cannot find. The same request from three buyers becomes the next file in the Digital System."
 		/>
 		<style>
-			.rq { max-width: 640px; margin: 0 auto; padding-bottom: 2em; }
+			.rq { max-width: min(640px, calc(100% - 2 * var(--gutter))); margin: 0 auto; padding-bottom: 2em; }
 			.rq h1 { font-size: 2.1em; line-height: 1.15; }
 			.rq .btn {
-				display: inline-block;
+				display: inline-flex;
+				align-items: center;
+				min-height: 44px;
 				background: var(--accent);
-				color: #fff;
-				padding: 0.8em 1.2em;
-				border-radius: 8px;
+				color: var(--on-accent);
+				padding: 0 var(--space-3);
+				border-radius: 999px;
 				text-decoration: none;
 				font-weight: 700;
 			}

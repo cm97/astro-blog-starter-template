@@ -4,46 +4,88 @@
   License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
  */
 
+/* Design tokens. See DESIGN.md. Light ground, one yellow action, calm type. */
 :root {
-	--accent: #2337ff;
-	--accent-dark: #000d8a;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+	color-scheme: light;
+	/* Palette roles */
+	--bg: #ffffff;
+	--surface: #f7f7f5;
+	--surface-raised: #ffffff;
+	--ink-rgb: 26, 26, 26;
+	--ink: #1a1a1a;
+	--muted: #5f5f66;
+	--line: #e5e5e2;
+	--line-strong: rgba(26, 26, 26, 20%);
+	/* The accent marks the one action on a screen. Never yellow text on white. */
+	--accent: #f5be14;
+	--accent-dark: #e0a800;
+	--on-accent: #1a1a1a;
+	--accent-edge: rgba(26, 26, 26, 35%);
+	--success: #1e7b45;
+	--danger: #b3261e;
+	/* Legacy names kept so existing components keep working. RGB triplets. */
+	--black: var(--ink-rgb);
+	--gray: 95, 95, 102;
+	--gray-light: 229, 229, 226;
+	--gray-dark: 42, 42, 46;
+	--gray-gradient: var(--bg), var(--bg);
+	--box-shadow: none;
+	/* Type */
+	--font-display: "Bricolage Grotesque", "Instrument Sans", sans-serif;
+	--font-body: "Instrument Sans", sans-serif;
+	/* Layout: 8px scale, 1120px max, 24px gutters */
+	--space-1: 8px;
+	--space-2: 16px;
+	--space-3: 24px;
+	--space-4: 32px;
+	--space-6: 48px;
+	--space-8: 64px;
+	--space-12: 96px;
+	--max-width: 1120px;
+	--gutter: 24px;
+	--radius-card: 16px;
 }
 @font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-regular.woff") format("woff");
+	font-family: "Instrument Sans";
+	src: url("/fonts/instrument-sans-latin-400-normal.woff2") format("woff2");
 	font-weight: 400;
 	font-style: normal;
 	font-display: swap;
 }
 @font-face {
-	font-family: "Atkinson";
-	src: url("/fonts/atkinson-bold.woff") format("woff");
+	font-family: "Instrument Sans";
+	src: url("/fonts/instrument-sans-latin-600-normal.woff2") format("woff2");
+	font-weight: 600 700;
+	font-style: normal;
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bricolage Grotesque";
+	src: url("/fonts/bricolage-grotesque-latin-700-normal.woff2") format("woff2");
 	font-weight: 700;
 	font-style: normal;
 	font-display: swap;
 }
+@font-face {
+	font-family: "Bricolage Grotesque";
+	src: url("/fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2");
+	font-weight: 800 900;
+	font-style: normal;
+	font-display: swap;
+}
 body {
-	font-family: "Atkinson", sans-serif;
+	font-family: var(--font-body);
 	margin: 0;
 	padding: 0;
 	text-align: left;
-	background: linear-gradient(var(--gray-gradient)) no-repeat;
-	background-size: 100% 600px;
+	background: var(--bg);
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: rgb(var(--gray-dark));
-	font-size: 20px;
-	line-height: 1.7;
+	font-size: 18px;
+	line-height: 1.6;
 }
-/* One Buzzyfly watermark on every page — big enough to mark it as yours, not tiled. */
+/* One Buzzyfly watermark on every page. Faint, so it never competes with text. */
 body::after {
 	content: "";
 	position: fixed;
@@ -51,15 +93,14 @@ body::after {
 	pointer-events: none;
 	z-index: 0;
 	background: url("/buzzyfly-watermark.svg") center 42% / min(420px, 62vw) no-repeat;
-	opacity: 0.22;
-	mix-blend-mode: multiply;
+	opacity: 0.06;
 }
 body.yt-page::after {
 	opacity: 0.3;
 	mix-blend-mode: screen;
 }
 body.kids-page::after {
-	opacity: 0.08;
+	opacity: 0.04;
 }
 header {
 	position: relative;
@@ -72,9 +113,9 @@ footer {
 }
 main {
 	width: 720px;
-	max-width: calc(100% - 2em);
+	max-width: calc(100% - 2 * var(--gutter));
 	margin: auto;
-	padding: 3em 1em;
+	padding: var(--space-6) 0;
 }
 h1,
 h2,
@@ -83,8 +124,14 @@ h4,
 h5,
 h6 {
 	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
+	color: var(--ink);
+	font-family: var(--font-display);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+	line-height: 1.15;
+}
+h1 {
+	font-weight: 800;
 }
 h1 {
 	font-size: 3.052em;
@@ -105,11 +152,19 @@ strong,
 b {
 	font-weight: 700;
 }
+/* Links are ink, underlined. The accent is saved for the primary action. */
 a {
-	color: var(--accent);
+	color: var(--ink);
+	text-decoration-color: var(--line-strong);
+	text-underline-offset: 0.18em;
 }
 a:hover {
-	color: var(--accent);
+	color: var(--ink);
+	text-decoration-color: var(--ink);
+}
+::selection {
+	background: var(--accent);
+	color: var(--on-accent);
 }
 p {
 	margin-bottom: 1em;
@@ -134,36 +189,47 @@ img {
 }
 code {
 	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+	background-color: var(--surface-raised);
+	border-radius: 4px;
 }
 pre {
 	padding: 1.5em;
 	border-radius: 8px;
+	background: var(--surface);
+	border: 1px solid var(--line);
 }
 pre > code {
 	all: unset;
 }
 blockquote {
-	border-left: 4px solid var(--accent);
+	border-left: 2px solid var(--line-strong);
+	color: var(--ink);
 	padding: 0 0 0 20px;
 	margin: 0px;
 	font-size: 1.333em;
 }
 hr {
 	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
+	border-top: 1px solid var(--line);
+}
+input,
+textarea,
+select {
+	color: var(--ink);
+	background: var(--surface);
+	border: 1px solid var(--line-strong);
+	font-family: inherit;
+}
+::placeholder {
+	color: var(--muted);
+	opacity: 1;
 }
 @media (max-width: 720px) {
-	body {
-		font-size: 18px;
-	}
 	main {
-		padding: 1em;
+		padding: var(--space-3) 0;
 	}
 	body::after {
 		background-size: min(300px, 78vw);
-		opacity: 0.2;
 	}
 }
 
@@ -191,8 +257,8 @@ input:focus-visible,
 select:focus-visible,
 textarea:focus-visible,
 summary:focus-visible {
-	outline: 3px solid var(--accent);
-	outline-offset: 2px;
+	outline: 2px solid var(--ink);
+	outline-offset: 3px;
 }
 @media (prefers-reduced-motion: reduce) {
 	*,
@@ -203,4 +269,59 @@ summary:focus-visible {
 		animation-iteration-count: 1 !important;
 		scroll-behavior: auto !important;
 	}
+}
+
+/* Shared buttons. Pill, 44px tall. One .btn-primary per screen. */
+.btn,
+.btn-primary,
+.btn-secondary {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-height: 44px;
+	padding: 0 var(--space-3);
+	border-radius: 999px;
+	font-family: var(--font-body);
+	font-weight: 600;
+	text-decoration: none;
+	text-align: center;
+	cursor: pointer;
+	transition: background-color 0.15s ease, border-color 0.15s ease;
+}
+/* Yellow on white is light-on-light, so the primary gets a thin dark edge to hold its shape. */
+.btn-primary {
+	background: var(--accent);
+	color: var(--on-accent) !important;
+	border: 1px solid var(--accent-edge);
+	font-weight: 700;
+}
+.btn-primary:hover {
+	background: var(--accent-dark);
+}
+.btn-secondary {
+	background: transparent;
+	color: var(--ink) !important;
+	border: 1px solid var(--line-strong);
+}
+.btn-secondary:hover {
+	border-color: var(--ink);
+}
+
+/* Light sub-theme for the kids pages, which keep their own warm palette. */
+.theme-light {
+	color-scheme: light;
+	--bg: #f6efe3;
+	--surface: #fffaf0;
+	--surface-raised: #fff;
+	--ink-rgb: 26, 22, 18;
+	--ink: rgb(26, 22, 18);
+	--muted: #5c5348;
+	--line: rgba(26, 22, 18, 8%);
+	--line-strong: rgba(26, 22, 18, 20%);
+	--black: 26, 22, 18;
+	--gray: 92, 83, 72;
+	--gray-light: 230, 222, 208;
+	--gray-dark: 61, 55, 47;
+	background: var(--bg);
+	color: rgb(var(--gray-dark));
 }

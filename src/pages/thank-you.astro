@@ -91,8 +91,8 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 	.ty-check {
 		width: 64px;
 		height: 64px;
-		background: #1a7a3c;
-		color: #fff;
+		border: 1px solid var(--line-strong);
+		color: var(--success);
 		font-size: 2em;
 		font-weight: 700;
 		border-radius: 50%;
@@ -122,16 +122,14 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 		max-width: 560px;
 		margin: 0 auto 2.5em;
 		padding: 1.75em;
-		border: 2px solid var(--accent);
-		border-radius: 14px;
-		background: rgba(var(--accent-rgb, 31 77 58), 0.03);
+		border: 1px solid var(--line-strong);
+		border-radius: var(--radius-card);
+		background: var(--surface);
 	}
 	.ty-upsell__eyebrow {
 		font-size: 0.75em;
-		letter-spacing: 0.07em;
-		text-transform: uppercase;
-		color: var(--accent);
-		font-weight: 700;
+		color: var(--muted);
+		font-weight: 600;
 		margin: 0 0 0.5em;
 	}
 	.ty-upsell__title {
@@ -154,15 +152,15 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 		color: rgb(var(--gray-dark));
 		padding: 0.3em 0 0.3em 1.4em;
 		position: relative;
-		border-bottom: 1px solid rgb(var(--gray-light));
+		border-bottom: 1px solid var(--line);
 	}
 	.ty-upsell__features li:last-child { border-bottom: none; }
 	.ty-upsell__features li::before {
 		content: "✓";
 		position: absolute;
 		left: 0;
-		color: #1a7a3c;
-		font-weight: 700;
+		color: var(--muted);
+		font-weight: 600;
 	}
 	.ty-upsell__cta-row {
 		display: flex;
@@ -171,18 +169,22 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 		flex-wrap: wrap;
 	}
 	.ty-upsell__cta {
-		display: inline-block;
-		padding: 0.75em 1.5em;
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		box-sizing: border-box;
+		padding: 0 var(--space-3);
 		border-radius: 999px;
 		background: var(--accent);
-		color: #fff;
+		color: var(--on-accent);
 		font-weight: 700;
 		text-decoration: none;
 		font-size: 0.95em;
 		transition: background-color 0.15s;
-		white-space: nowrap;
+		max-width: 100%;
+		text-align: center;
 	}
-	.ty-upsell__cta:hover { background: var(--accent-dark); color: #fff; }
+	.ty-upsell__cta:hover { background: var(--accent-dark); color: var(--on-accent); }
 	.ty-upsell__guarantee {
 		font-size: 0.75em;
 		color: rgb(var(--gray));
@@ -196,18 +198,21 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 		margin-bottom: 3em;
 	}
 	.btn {
-		display: inline-block;
-		padding: 0.75em 1.75em;
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		box-sizing: border-box;
+		padding: 0 var(--space-3);
 		border-radius: 999px;
 		font-weight: 700;
 		text-decoration: none;
 		transition: background-color 0.15s;
 	}
-	.btn--primary { background: var(--accent); color: #fff; }
-	.btn--primary:hover { background: var(--accent-dark); color: #fff; }
+	.btn--primary { border: 1px solid var(--line-strong); color: var(--ink); }
+	.btn--primary:hover { border-color: var(--ink); color: var(--ink); }
 	.btn--secondary {
-		border: 2px solid rgb(var(--gray-light));
+		border: 1px solid var(--line-strong);
 		color: rgb(var(--gray-dark));
 	}
-	.btn--secondary:hover { border-color: var(--accent); color: var(--accent); }
+	.btn--secondary:hover { border-color: var(--ink); color: var(--ink); }
 </style>

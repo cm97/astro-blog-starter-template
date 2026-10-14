@@ -23,46 +23,43 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 			description="Stop rebuilding your client process from scratch every week. Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes. $49 one-time."
 		/>
 		<style>
-			.hero { padding: 4em 0 3.5em; text-align: center; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.hero__eyebrow { display: inline-block; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1em; }
-			.hero h1 { font-size: clamp(1.9em, 5.5vw, 2.8em); line-height: 1.12; margin: 0 auto 0.6em; color: rgb(var(--black)); max-width: 16em; }
-			.hero__sub { font-size: 1.15em; color: rgb(var(--gray-dark)); max-width: 34em; margin: 0 auto 2em; line-height: 1.65; }
-			.hero__cta-group { display: flex; align-items: center; justify-content: center; gap: 0.9em; flex-wrap: wrap; margin-bottom: 1em; }
-			.btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 60px; max-width: 100%; white-space: normal; text-align: center; padding: 1.2em 3em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 800; font-size: 1.45em; text-decoration: none; }
-			.btn-primary:hover { background: var(--accent-dark); }
-			.hero__trust { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3em 1.1em; font-size: 0.85em; color: rgb(var(--gray-dark)); font-weight: 700; }
-			.pain { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.pain h2 { font-size: 1.4em; color: rgb(var(--gray)); font-weight: 400; margin: 0 0 1.5em; text-align: center; }
-			.pain__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75em; max-width: 820px; margin: 0 auto; }
-			@media (max-width: 520px) { .pain__grid { grid-template-columns: 1fr; } }
-			.pain__item { display: flex; gap: 0.7em; align-items: flex-start; padding: 1em 1.1em; background: rgba(var(--gray-light), 30%); border-radius: 10px; }
-			.pain__icon { font-size: 1.1em; line-height: 1.6; flex-shrink: 0; }
-			.pain__text { font-size: 0.95em; color: rgb(var(--gray-dark)); line-height: 1.5; margin: 0; }
-			.outcome { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); background: rgba(35, 55, 255, 0.03); }
-			.outcome h2 { font-size: 1.5em; color: rgb(var(--black)); margin: 0 0 0.4em; text-align: center; }
-			.outcome__sub { color: rgb(var(--gray)); font-size: 0.95em; margin: 0 0 1.8em; text-align: center; }
-			.outcome__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; max-width: 820px; margin: 0 auto; }
-			@media (max-width: 520px) { .outcome__grid { grid-template-columns: 1fr; } }
-			.outcome__card { padding: 1.4em; border: 1px solid rgb(var(--gray-light)); border-radius: 12px; background: #fff; }
-			.outcome__card-icon { font-size: 1.5em; margin-bottom: 0.4em; display: block; }
-			.outcome__card h3 { font-size: 1em; margin: 0 0 0.35em; color: rgb(var(--black)); }
-			.outcome__card p { font-size: 0.88em; color: rgb(var(--gray)); margin: 0; line-height: 1.55; }
-			.featured { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.faq { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.faq h2 { font-size: 1.4em; color: rgb(var(--black)); margin: 0 0 1.5em; text-align: center; }
-			.faq__list { max-width: 720px; margin: 0 auto; }
-			.faq__item { border-bottom: 1px solid rgb(var(--gray-light)); padding: 1.1em 0; }
-			.faq__item h3 { font-size: 1em; margin: 0 0 0.4em; color: rgb(var(--black)); }
+			main { width: var(--max-width); }
+			section { padding: var(--space-12) 0; border-bottom: 1px solid var(--line); }
+			@media (max-width: 720px) { section { padding: var(--space-8) 0; } }
+			.hero { padding: var(--space-12) 0 var(--space-8); }
+			@media (max-width: 720px) { .hero { padding: var(--space-8) 0 var(--space-6); } }
+			.hero__eyebrow { display: block; font-size: 0.8em; font-weight: 600; color: var(--muted); margin-bottom: var(--space-2); }
+			.hero h1 { font-size: clamp(2.1em, 7vw, 3.6em); line-height: 1.04; margin: 0 0 var(--space-3); max-width: 13em; }
+			.hero__sub { font-size: 1.1em; color: rgb(var(--gray-dark)); max-width: 32em; margin: 0 0 var(--space-4); line-height: 1.6; }
+			.hero__cta-group { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; margin-bottom: var(--space-3); }
+			.hero .btn-primary { min-height: 56px; padding: 0 var(--space-4); font-size: 1.05em; }
+			.hero__trust { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: var(--space-1) var(--space-3); font-size: 0.8em; color: var(--muted); font-weight: 600; }
+			.optin-wrap { max-width: 720px; }
+			h2.section-title { font-size: clamp(1.5em, 4.5vw, 2.1em); margin: 0 0 var(--space-4); max-width: 18em; }
+			.pain__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+			@media (max-width: 640px) { .pain__grid { grid-template-columns: 1fr; } }
+			.pain__item { padding: var(--space-3); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); }
+			.pain__text { font-size: 0.95em; color: rgb(var(--gray-dark)); line-height: 1.55; margin: 0; }
+			.outcome__sub { color: var(--muted); font-size: 0.95em; margin: calc(-1 * var(--space-3)) 0 var(--space-4); }
+			.outcome__grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-2); }
+			@media (max-width: 640px) { .outcome__grid { grid-template-columns: 1fr; } }
+			.outcome__card { padding: var(--space-3); border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); }
+			.outcome__card h3 { font-size: 1.05em; margin: 0 0 var(--space-1); }
+			.outcome__card p { font-size: 0.88em; color: var(--muted); margin: 0; line-height: 1.55; }
+			.featured__wrap { max-width: 720px; }
+			.featured__wrap :global(.product-callout) { margin: 0; }
+			.faq__list { max-width: 720px; }
+			.faq__item { border-bottom: 1px solid var(--line); padding: var(--space-3) 0; }
+			.faq__item:first-child { padding-top: 0; }
+			.faq__item h3 { font-size: 1.05em; margin: 0 0 var(--space-1); }
 			.faq__item p { font-size: 0.9em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.6; }
-			.guarantee { padding: 2.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
-			.guarantee__box { display: flex; gap: 1.2em; align-items: flex-start; padding: 1.5em 1.6em; background: rgba(35, 55, 255, 0.04); border: 1px solid rgba(35, 55, 255, 0.15); border-radius: 14px; max-width: 820px; margin: 0 auto; }
-			.guarantee__icon { font-size: 2em; flex-shrink: 0; line-height: 1; }
-			.guarantee__copy h2 { font-size: 1.05em; margin: 0 0 0.3em; color: rgb(var(--black)); }
+			.guarantee { border-bottom: none; }
+			.guarantee__box { padding: var(--space-4) var(--space-3); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-card); max-width: 720px; }
+			.guarantee__copy h2 { font-size: 1.2em; margin: 0 0 var(--space-1); }
 			.guarantee__copy p { font-size: 0.88em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.55; }
-			.optin-wrap { padding: 0; }
-			.featured__wrap { max-width: 640px; margin: 0 auto; }
-			.final-cta { text-align: center; margin-top: 2em; }
-			.final-cta__alt { font-size: 0.88em; color: rgb(var(--gray)); margin: 0.9em 0 0; }
+			.final-cta { margin-top: var(--space-6); }
+			.final-cta .btn-primary { min-height: 56px; padding: 0 var(--space-4); font-size: 1.05em; }
+			.final-cta__alt { font-size: 0.85em; color: var(--muted); margin: var(--space-2) 0 0; }
 		</style>
 	</head>
 	<body>
@@ -78,10 +75,10 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 					<a class="btn-primary" href={order.href}>Get the Digital System — {digitalSystem.price}</a>
 				</div>
 				<ul class="hero__trust" aria-label="Purchase details">
-					<li>✓ One-time payment</li>
-					<li>✓ Download after purchase</li>
-					<li>✓ No subscription</li>
-					<li>✓ 30-day delivery guarantee</li>
+					<li>One-time payment</li>
+					<li>Download after purchase</li>
+					<li>No subscription</li>
+					<li>30-day delivery guarantee</li>
 				</ul>
 			</section>
 
@@ -93,23 +90,23 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 			</div>
 
 			<section class="pain">
-				<h2>Sound familiar?</h2>
+				<h2 class="section-title">Sound familiar?</h2>
 				<div class="pain__grid">
-					<div class="pain__item"><span class="pain__icon">😰</span><p class="pain__text">A new client signs and you spend two hours piecing together an onboarding email from old messages.</p></div>
-					<div class="pain__item"><span class="pain__icon">📭</span><p class="pain__text">You sent a proposal 12 days ago. You haven't followed up because you don't know what to say.</p></div>
-					<div class="pain__item"><span class="pain__icon">🌀</span><p class="pain__text">Monday arrives and you spend the first hour figuring out what you're supposed to be working on.</p></div>
-					<div class="pain__item"><span class="pain__icon">💸</span><p class="pain__text">A client wrapped up three months ago. You've meant to check in — but you haven't, and now it's awkward.</p></div>
+					<div class="pain__item"><p class="pain__text">A new client signs and you spend two hours piecing together an onboarding email from old messages.</p></div>
+					<div class="pain__item"><p class="pain__text">You sent a proposal 12 days ago. You haven't followed up because you don't know what to say.</p></div>
+					<div class="pain__item"><p class="pain__text">Monday arrives and you spend the first hour figuring out what you're supposed to be working on.</p></div>
+					<div class="pain__item"><p class="pain__text">A client wrapped up three months ago. You've meant to check in — but you haven't, and now it's awkward.</p></div>
 				</div>
 			</section>
 
 			<section class="outcome">
-				<h2>What changes after you run it</h2>
+				<h2 class="section-title">What changes after you run it</h2>
 				<p class="outcome__sub">Not more templates. A process that survives a slammed week.</p>
 				<div class="outcome__grid">
-					<div class="outcome__card"><span class="outcome__card-icon">📋</span><h3>New client signs → you're ready in 20 minutes</h3><p>Welcome email, intake form, and kickoff agenda are already written. Fill in the name, hit send.</p></div>
-					<div class="outcome__card"><span class="outcome__card-icon">📨</span><h3>Quiet lead → a reply-generating follow-up</h3><p>Five word-for-word emails for every stage — proposal, mid-project, re-engagement. No staring at a blank screen.</p></div>
-					<div class="outcome__card"><span class="outcome__card-icon">🛡️</span><h3>Scope creep → a script that says no</h3><p>Six exact lines for when a client asks for "just one more thing" — without losing the client.</p></div>
-					<div class="outcome__card"><span class="outcome__card-icon">📅</span><h3>Monday → a 20-minute reset, not a scramble</h3><p>Clear inboxes, set one priority, check on every client. Same way every week.</p></div>
+					<div class="outcome__card"><h3>New client signs → you're ready in 20 minutes</h3><p>Welcome email, intake form, and kickoff agenda are already written. Fill in the name, hit send.</p></div>
+					<div class="outcome__card"><h3>Quiet lead → a reply-generating follow-up</h3><p>Five word-for-word emails for every stage — proposal, mid-project, re-engagement. No staring at a blank screen.</p></div>
+					<div class="outcome__card"><h3>Scope creep → a script that says no</h3><p>Six exact lines for when a client asks for "just one more thing" — without losing the client.</p></div>
+					<div class="outcome__card"><h3>Monday → a 20-minute reset, not a scramble</h3><p>Clear inboxes, set one priority, check on every client. Same way every week.</p></div>
 				</div>
 			</section>
 
@@ -120,7 +117,7 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 			</section>
 
 			<section class="faq" id="faq">
-				<h2>Questions before you buy</h2>
+				<h2 class="section-title">Questions before you buy</h2>
 				<div class="faq__list">
 					<div class="faq__item">
 						<h3>Is this for me?</h3>
@@ -147,7 +144,6 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 
 			<section class="guarantee">
 				<div class="guarantee__box">
-					<span class="guarantee__icon" aria-hidden="true">🛡️</span>
 					<div class="guarantee__copy">
 						<h2>30-day delivery guarantee</h2>
 						<p>{guarantee} Support: {BUZZYFLY_CONFIG.orderEmail}</p>

@@ -31,7 +31,7 @@ const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 			autocomplete="email"
 			required
 		/>
-		<button class="email-optin__submit" type="submit">{buttonLabel}</button>
+		<button class="email-optin__submit btn-secondary" type="submit">{buttonLabel}</button>
 	</form>
 	<p class="email-optin__status" data-email-optin-status role="status" aria-live="polite"></p>
 </section>
@@ -97,25 +97,24 @@ const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 
 <style>
 	.email-optin {
-		margin: 2.5em 0;
-		padding: 1.75em;
-		border-radius: 16px;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
-		border: 1px solid rgb(var(--gray-light));
+		margin: var(--space-6) 0;
+		padding: var(--space-4) var(--space-3);
+		border-radius: var(--radius-card);
+		background: var(--surface);
+		border: 1px solid var(--line);
 		text-align: center;
 	}
 	.email-optin__title {
-		margin: 0 0 0.4em 0;
-		font-size: clamp(1.35em, 5vw, 1.75em);
-		color: rgb(var(--black));
+		margin: 0 0 var(--space-1) 0;
+		font-size: clamp(1.3em, 5vw, 1.6em);
 	}
 	.email-optin__description {
-		margin: 0 0 1.25em 0;
+		margin: 0 0 var(--space-3) 0;
 		color: rgb(var(--gray-dark));
 	}
 	.email-optin__form {
 		display: flex;
-		gap: 0.75em;
+		gap: var(--space-1);
 		justify-content: center;
 		flex-wrap: wrap;
 	}
@@ -124,41 +123,32 @@ const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 		max-width: 320px;
 		min-height: 44px;
 		box-sizing: border-box;
-		padding: 0.65em 0.9em;
-		border: 1px solid rgb(var(--gray-light));
-		border-radius: 8px;
+		padding: 0 var(--space-2);
+		border: 1px solid var(--line-strong);
+		border-radius: 999px;
+		background: var(--bg);
+		color: var(--ink);
 		font-family: inherit;
+		font-size: 16px;
 	}
+	/* Secondary on purpose: the buy button is the primary action on every page. */
 	.email-optin__submit {
-		min-height: 44px;
-		padding: 0.65em 1.5em;
-		border: none;
-		border-radius: 8px;
-		background: var(--accent);
-		color: #fff;
-		font-weight: 700;
-		font-size: 1em;
-		font-family: inherit;
-		cursor: pointer;
-		transition: background-color 0.15s ease-in-out;
-	}
-	.email-optin__submit:hover {
-		background: var(--accent-dark);
+		font-size: 0.9em;
 	}
 	.email-optin__submit:disabled {
 		opacity: 0.6;
 		cursor: not-allowed;
 	}
 	.email-optin__status {
-		margin: 0.75em 0 0 0;
+		margin: var(--space-1) 0 0 0;
 		min-height: 1.2em;
-		font-size: 0.9em;
-		color: rgb(var(--gray));
+		font-size: 0.85em;
+		color: var(--muted);
 	}
 	.email-optin__status[data-state="success"] {
-		color: #1a7a3c;
+		color: var(--success);
 	}
 	.email-optin__status[data-state="error"] {
-		color: #b3261e;
+		color: var(--danger);
 	}
 </style>
