@@ -12,6 +12,7 @@ const settings = await getSettings(Astro.locals.runtime?.env);
 
 const digitalSystem = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
 const order = getOrderAction(digitalSystem.id);
+const guarantee = "30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.";
 ---
 
 <!doctype html>
@@ -27,7 +28,7 @@ const order = getOrderAction(digitalSystem.id);
 			.hero h1 { font-size: clamp(1.9em, 5.5vw, 2.8em); line-height: 1.12; margin: 0 auto 0.6em; color: rgb(var(--black)); max-width: 16em; }
 			.hero__sub { font-size: 1.15em; color: rgb(var(--gray-dark)); max-width: 34em; margin: 0 auto 2em; line-height: 1.65; }
 			.hero__cta-group { display: flex; align-items: center; justify-content: center; gap: 0.9em; flex-wrap: wrap; margin-bottom: 1em; }
-			.btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; max-width: 100%; white-space: normal; text-align: center; padding: 1.05em 2.6em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 800; font-size: 1.28em; text-decoration: none; }
+			.btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 60px; max-width: 100%; white-space: normal; text-align: center; padding: 1.2em 3em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 800; font-size: 1.45em; text-decoration: none; }
 			.btn-primary:hover { background: var(--accent-dark); }
 			.hero__trust { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3em 1.1em; font-size: 0.85em; color: rgb(var(--gray-dark)); font-weight: 700; }
 			.pain { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
@@ -78,9 +79,9 @@ const order = getOrderAction(digitalSystem.id);
 				</div>
 				<ul class="hero__trust" aria-label="Purchase details">
 					<li>✓ One-time payment</li>
-					<li>✓ Instant download</li>
+					<li>✓ Download after purchase</li>
 					<li>✓ No subscription</li>
-					<li>✓ 30-day money-back guarantee</li>
+					<li>✓ 30-day delivery guarantee</li>
 				</ul>
 			</section>
 
@@ -131,11 +132,11 @@ const order = getOrderAction(digitalSystem.id);
 					</div>
 					<div class="faq__item">
 						<h3>How do I get it?</h3>
-						<p>Pay once through PayPal. No account to create. Download right after purchase. The files are yours to keep, with lifetime updates.</p>
+						<p>Pay once through Stripe. Download from the thank-you page right after purchase. The files are yours to keep, with lifetime updates.</p>
 					</div>
 					<div class="faq__item">
 						<h3>What if it doesn't work for me?</h3>
-						<p>Email us within 30 days for a full refund. No form. No hoops.</p>
+						<p>{guarantee}</p>
 					</div>
 					<div class="faq__item">
 						<h3>Do I need the whole thing at once?</h3>
@@ -148,8 +149,8 @@ const order = getOrderAction(digitalSystem.id);
 				<div class="guarantee__box">
 					<span class="guarantee__icon" aria-hidden="true">🛡️</span>
 					<div class="guarantee__copy">
-						<h2>Try it for 30 days. If it doesn't help, get your money back.</h2>
-						<p>Email {BUZZYFLY_CONFIG.orderEmail} within 30 days. No form. No hoops.</p>
+						<h2>30-day delivery guarantee</h2>
+						<p>{guarantee} Support: {BUZZYFLY_CONFIG.orderEmail}</p>
 					</div>
 				</div>
 				<div class="final-cta">
