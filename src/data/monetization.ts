@@ -86,6 +86,7 @@ export const UPSELL_MAP: Record<string, string | null> = {
 	"client-onboarding-kit": "buzzyfly-digital-system",
 	"buzzyfly-digital-system": "complete-business-bundle",
 	"complete-business-bundle": null,
+	"buzzyfly-monthly-drop": null,
 };
 
 export const ALL_PRODUCTS = [
@@ -133,5 +134,14 @@ export const ALL_PRODUCTS = [
 		features: ["Everything in the Digital System", "Client Onboarding Kit", "Follow-Up Email Templates", "Weekly Reset Checklist", "All future product updates"],
 		buyUrl: "https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08",
 		badge: "Best value",
+	},
+	{
+		id: "buzzyfly-monthly-drop",
+		title: "Buzzyfly Monthly Drop",
+		price: "$19/month",
+		description: "New real content every month: fresh email template pack, updated weekly reset checklist, new client onboarding asset, and one digital system update. Delivered to your inbox. Cancel anytime.",
+		features: ["New email templates every month", "Updated weekly reset checklist", "New client onboarding asset", "Digital system update", "Cancel anytime"],
+		buyUrl: "https://buy.stripe.com/eVq4gB7963AWfned3UaVa09",
+		badge: "Monthly",
 	},
 ];
