@@ -27,6 +27,12 @@
 			"database_id": "c4ff4255-c51b-45a7-85a5-4583328b26c4"
 		}
 	],
+	"services": [
+		{
+			"binding": "KIDS",
+			"service": "react-router-starter-template"
+		}
+	],
 	"triggers": {
 		"crons": ["0 * * * *"]
 	},

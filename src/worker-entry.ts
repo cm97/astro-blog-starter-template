@@ -19,6 +19,23 @@ interface Env {
 	DB?: D1Database;
 	EMAIL?: { send(msg: { from: string; to: string; subject: string; html?: string; text?: string }): Promise<{ messageId: string }> };
 	EMAIL_FROM?: string;
+	KIDS?: Fetcher;
+}
+
+// The Buzzyfly Kids app (cm97/react-router-starter-template) is its own
+// Worker, served at buzzyfly.com/kids through this service binding.
+function isKidsPath(pathname: string): boolean {
+	return pathname === "/kids" || pathname.startsWith("/kids/");
+}
+
+async function kidsApp(request: Request, env: Env): Promise<Response> {
+	if (!env.KIDS) {
+		return new Response("Buzzyfly Kids is taking a nap. Please try again soon.", {
+			status: 503,
+			headers: { "Content-Type": "text/plain; charset=utf-8", "Retry-After": "300" },
+		});
+	}
+	return env.KIDS.fetch(request);
 }
 
 interface FulfillmentRow {
@@ -197,6 +214,7 @@ export function createExports(manifest: SSRManifest) {
 	return {
 		default: {
 			async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+				if (isKidsPath(new URL(request.url).pathname)) return kidsApp(request, env);
 				return handle(manifest, app, request as never, env as never, ctx as never);
 			},
 			scheduled,

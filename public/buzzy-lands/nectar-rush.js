@@ -8,8 +8,8 @@
 	const W = 960, H = 540;
 	let playing = false, score = 0, combo = 0, lives = 3, best = 0, t = 0, spawnAcc = 0;
 	try { best = Number(localStorage.getItem('buzzy-pop-best') || 0) || 0; } catch {}
-	const gardenImg = new Image(); gardenImg.src = '/kids/garden.jpg';
-	const faceImg = new Image(); faceImg.src = '/kids/buzzy-face.jpg';
+	const gardenImg = new Image(); gardenImg.src = '/buzzy-lands/garden.jpg';
+	const faceImg = new Image(); faceImg.src = '/buzzy-lands/buzzy-face.jpg';
 	const items = [];
 	const bits = [];
 	let audioCtx = null;
