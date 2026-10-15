@@ -70,8 +70,8 @@ function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string
       email and you'll get a fresh one.
     </p>
     <p style="margin:0 0 16px;font-size:14px">
-      <strong>To open your app:</strong> unzip the download, then double-click the app file.
-      It opens in your web browser. No install and no account needed.
+      <strong>To get started:</strong> unzip the download and double-click the workbook.
+      It opens in Excel, or upload it to Google Sheets. Start on the Start Here tab.
     </p>
     ${upsellBlock}
     <p style="margin:24px 0 0;color:#6b6a64;font-size:14px">— ${escapeHtml(BUZZYFLY_CONFIG.brandName)}</p>
@@ -91,7 +91,7 @@ function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string
 		"",
 		"This link expires in 3 days. If it lapses before you grab the file, reply to this email and you'll get a fresh one.",
 		"",
-		"To open your app: unzip the download, then double-click the app file. It opens in your web browser. No install and no account needed.",
+		"To get started: unzip the download and double-click the workbook. It opens in Excel, or upload it to Google Sheets. Start on the Start Here tab.",
 	];
 
 	if (upsellProduct) {
