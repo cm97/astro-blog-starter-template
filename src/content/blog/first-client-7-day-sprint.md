@@ -2,12 +2,12 @@
 title: 'The 7-Day Sprint to Land Your First Paying Client'
 description: 'No audience required. A day-by-day sprint to get one paying client, then run the same-day start line so week one does not die in your head.'
 pubDate: '2026-09-01'
-updatedDate: 'Oct 13 2026'
+updatedDate: 'Oct 15 2026'
 category: 'sales'
 heroImage: '/blog-placeholder-2.jpg'
 featuredProductTitle: 'Buzzyfly Digital System'
 featuredProductPrice: '$49'
-featuredProductDescription: 'Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.'
+featuredProductDescription: 'Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. Includes the same-day start line after the first yes.'
 ---
 
 You do not need a brand, a following, or a funnel to get paid. You need one person with the problem, one short message, and a same-day start line the hour they say yes. If the first week after they pay is rebuilt from memory, they go quiet and you are back at zero.
@@ -144,6 +144,37 @@ Next step: ________ by ________
 Kickoff: ________
 Out of scope: ________
 ```
+
+## Exact first-week checklist after they pay (copy this)
+
+Run these lines the hour the invoice clears. Do not invent a new sequence.
+
+**Hour 0 (payment clears)**
+- [ ] Welcome email sent (use the fill-in above)
+- [ ] Intake form link sent with 3-day deadline
+- [ ] Kickoff calendar invite with agenda
+- [ ] Client note created
+
+**Day 1**
+- [ ] Confirm they opened the welcome (or send one short nudge)
+- [ ] Tools/access list ready
+
+**Day 2**
+- [ ] 48-hour intake nudge if not returned
+- Fill-in: > Still need the intake before kickoff so we use the time well. Link: [link]. Deadline stays [date].
+
+**Day 3–4**
+- [ ] Kickoff held or rescheduled with new date written
+- [ ] Kickoff summary sent within 60 minutes
+
+**Day 5**
+- [ ] First status line: > Quick status: [what moved]. Next piece due [date]. Anything blocked?
+
+**Day 7**
+- [ ] Week-1 wrap sent: what is done, what is next, what is blocked
+- [ ] Added to your weekly reset list so week two is not silence
+
+If a line is late, send the late version the same day. Never skip because you are behind.
 
 If those five live in your head, the first client is a one-off. The Client Onboarding Kit ($29) is those files alone. The Digital System ($49) is that kit plus the weekly reset and the follow-up emails so week two does not go quiet. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
 
