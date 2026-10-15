@@ -2,12 +2,12 @@
 title: "Proposal Follow-Up Cadence for Freelancers (Day 3, 7, 12)"
 description: "The exact Day 3, Day 7, and Day 12 follow-up freelancers send after a proposal gets no reply — close the deal or clear the pipeline."
 pubDate: "Oct 7 2026"
-updatedDate: "Oct 9 2026"
+updatedDate: "Oct 15 2026"
 heroImage: "/blog-placeholder-2.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. Includes the full follow-up cadence."
 ---
 
 A proposal with no reply is not a maybe. It is a job you have not closed and have not cleared. The money leaks in the gap between send and silence. You rewrite a new note every time, or you do nothing and keep the slot imaginary. Both kill the week.
@@ -44,6 +44,16 @@ Time box: 3 minutes right after you hit send. Do not wait for a calm afternoon. 
 | Day 12 | Calendar day 12 | 3 lines | Close the file |
 
 If the due date lands on a Friday or Monday, move it to Tuesday morning. Do not skip it.
+
+## Concrete steps the day you send the proposal
+
+1. Hit send on the proposal. Note the exact time in the log above.
+2. Open your calendar. Block 10 minutes on Day 3 morning, Day 7 morning, and Day 12 for the follow-ups. Label them "Proposal cadence: [client]".
+3. Copy the log block into your weekly reset note or a single tracker file. Blank fields mean the follow-up does not exist.
+4. Set a phone reminder for Day 3 at 9:30am: "Send Day 3 note."
+5. Do not open a new draft. The templates below are the words. Paste and fill.
+
+These five steps take under 8 minutes. Skip any one and the cadence becomes a feeling.
 
 ## Day 3 — one ask
 
@@ -139,4 +149,4 @@ If you want the five ready-to-send notes only — proposal follow-up, mid-projec
 
 The full set is the $49 Digital System: the follow-up checklist, the onboarding checklist, and the 20-minute weekly reset in one download. One-time. Files plus lifetime updates. Not a subscription and not a coaching call. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
 
-[Get the Digital System — $49](/buy/buzzyfly-digital-system)
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
