@@ -19,6 +19,7 @@ products=(
 	follow-up-email-templates
 	client-onboarding-kit
 	complete-business-bundle
+	buzzyfly-monthly-drop
 )
 
 uploaded=0

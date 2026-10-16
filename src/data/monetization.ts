@@ -78,6 +78,12 @@ export const PRODUCT_FILE_MAP: Record<
 		fileName: "complete-business-bundle.zip",
 		contentType: "application/zip",
 	},
+	// Subscription: replace this ZIP in R2 each month with the new drop.
+	"buzzyfly-monthly-drop": {
+		r2Key: "products/buzzyfly-monthly-drop.zip",
+		fileName: "buzzyfly-monthly-drop.zip",
+		contentType: "application/zip",
+	},
 };
 
 export const UPSELL_MAP: Record<string, string | null> = {
