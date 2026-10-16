@@ -1,0 +1,271 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+
+// Free tool: writes an overdue-invoice reminder email in the browser.
+// Nothing typed here is sent anywhere. The only network call is the optional
+// early-access signup, tagged so the admin can count demand for the paid app.
+const WAITLIST_SOURCE = "invoice-tool__waitlist__free-generator";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Overdue Invoice Email Generator (Free) — Buzzyfly"
+			description="Write a polite, firm reminder for a late invoice in 30 seconds. Pick how late it is and copy the email. Free, no sign-up, nothing leaves your browser."
+		/>
+		<style>
+			main { width: 960px; }
+			.hero { text-align: center; padding: 1.5em 0 1em; }
+			.hero h1 { font-size: clamp(1.7em, 5vw, 2.5em); line-height: 1.15; margin: 0 0 0.35em; }
+			.hero p { color: rgb(var(--gray-dark)); max-width: 620px; margin: 0 auto; line-height: 1.6; }
+			.privacy { font-size: 0.85em; color: rgb(var(--gray)); margin-top: 0.6em; }
+			.tool { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 1.5em; margin: 1.5em 0 2.5em; }
+			@media (max-width: 760px) { .tool { grid-template-columns: 1fr; } }
+			.panel { border: 1px solid rgb(var(--gray-light)); border-radius: 14px; padding: 1.25em; background: #fff; }
+			.panel h2 { font-size: 1.1em; margin: 0 0 0.8em; }
+			.field { margin-bottom: 0.9em; }
+			.field label { display: block; font-weight: 700; font-size: 0.9em; margin-bottom: 0.3em; }
+			.field .hint { font-weight: 400; color: rgb(var(--gray)); }
+			.field input, .field select, .field textarea {
+				width: 100%; box-sizing: border-box; min-height: 44px; padding: 0.55em 0.7em;
+				border: 1px solid rgb(var(--gray-light)); border-radius: 8px; font: inherit; background: #fff;
+			}
+			.row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8em; }
+			@media (max-width: 420px) { .row { grid-template-columns: 1fr; } }
+			.check { display: flex; gap: 0.6em; align-items: flex-start; font-size: 0.9em; margin: 0.4em 0 0.8em; }
+			.check input { width: 20px; height: 20px; min-height: 0; margin-top: 2px; }
+			.stage { display: inline-block; padding: 0.2em 0.7em; border-radius: 99px; font-size: 0.8em; font-weight: 700; background: rgb(var(--gray-light)); }
+			.stage[data-level="soon"] { background: #e6f0ff; color: #234; }
+			.stage[data-level="friendly"] { background: #e3f5ea; color: #1d6b3d; }
+			.stage[data-level="firm"] { background: #fff1d6; color: #8a5a00; }
+			.stage[data-level="final"] { background: #fde4e4; color: #a12b2b; }
+			#out-body { min-height: 300px; line-height: 1.55; white-space: pre-wrap; }
+			.actions { display: flex; flex-wrap: wrap; gap: 0.6em; margin-top: 0.8em; }
+			.btn {
+				min-height: 44px; padding: 0.6em 1.1em; border-radius: 10px; font: inherit; font-weight: 700; cursor: pointer;
+				border: 1px solid rgb(var(--black)); background: rgb(var(--black)); color: #fff; text-decoration: none; display: inline-flex; align-items: center;
+			}
+			.btn.secondary { background: #fff; color: rgb(var(--black)); }
+			.btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+			.status { min-height: 1.4em; font-size: 0.9em; color: rgb(var(--gray-dark)); }
+			.tips { font-size: 0.9em; color: rgb(var(--gray-dark)); line-height: 1.6; }
+			.tips li { margin-bottom: 0.3em; }
+			.waitlist { border: 2px solid var(--accent); border-radius: 16px; padding: 1.5em; margin: 0 0 3em; text-align: center; }
+			.waitlist h2 { margin: 0 0 0.4em; font-size: clamp(1.25em, 4vw, 1.6em); }
+			.waitlist p { max-width: 600px; margin: 0 auto 1em; color: rgb(var(--gray-dark)); line-height: 1.6; }
+			.waitlist form { display: flex; gap: 0.6em; justify-content: center; flex-wrap: wrap; }
+			.waitlist input { min-height: 44px; padding: 0.55em 0.8em; border: 1px solid rgb(var(--gray-light)); border-radius: 8px; font: inherit; width: min(320px, 100%); box-sizing: border-box; }
+			.fine { font-size: 0.8em; color: rgb(var(--gray)); margin-top: 0.8em; }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="hero">
+				<h1>Get paid without the awkward email.</h1>
+				<p>Tell it how late the invoice is. Get a polite, firm reminder you can send in 30 seconds. Free. No sign-up.</p>
+				<p class="privacy">Nothing you type here leaves your browser.</p>
+			</section>
+
+			<section class="tool" aria-label="Overdue invoice email generator">
+				<form class="panel" id="inv-form" autocomplete="off" onsubmit="return false">
+					<h2>1. The invoice</h2>
+					<div class="row">
+						<div class="field">
+							<label for="client">Client's first name</label>
+							<input id="client" placeholder="Sam" />
+						</div>
+						<div class="field">
+							<label for="me">Your name</label>
+							<input id="me" placeholder="Jordan" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="field">
+							<label for="number">Invoice number</label>
+							<input id="number" placeholder="1042" />
+						</div>
+						<div class="field">
+							<label for="amount">Amount</label>
+							<input id="amount" inputmode="decimal" placeholder="$1,200" />
+						</div>
+					</div>
+					<div class="field">
+						<label for="due">Due date</label>
+						<input id="due" type="date" />
+					</div>
+					<div class="field">
+						<label for="what">What it was for <span class="hint">(optional)</span></label>
+						<input id="what" placeholder="the website redesign" />
+					</div>
+					<div class="field">
+						<label for="link">Payment link <span class="hint">(optional)</span></label>
+						<input id="link" type="url" placeholder="https://…" />
+					</div>
+					<div class="field">
+						<label for="tone">Tone</label>
+						<select id="tone">
+							<option value="auto">Pick for me, based on how late it is</option>
+							<option value="soon">Due soon (heads-up before the due date)</option>
+							<option value="friendly">Friendly nudge</option>
+							<option value="firm">Firm reminder</option>
+							<option value="final">Final notice</option>
+						</select>
+					</div>
+					<label class="check"><input type="checkbox" id="latefee" /> <span>My contract includes a late fee or a right to pause work</span></label>
+				</form>
+
+				<div class="panel" aria-live="polite">
+					<h2>2. Your email <span class="stage" id="stage" data-level="friendly">Friendly nudge</span></h2>
+					<div class="field">
+						<label for="out-subject">Subject</label>
+						<input id="out-subject" />
+					</div>
+					<div class="field">
+						<label for="out-body">Email <span class="hint">(edit anything before you send)</span></label>
+						<textarea id="out-body"></textarea>
+					</div>
+					<div class="actions">
+						<button class="btn" type="button" id="copy">Copy email</button>
+						<a class="btn secondary" id="mailto" href="mailto:">Open in my email app</a>
+					</div>
+					<p class="status" id="status" role="status"></p>
+					<ul class="tips">
+						<li>Send it in the morning, Tuesday to Thursday, when people clear their inbox.</li>
+						<li>Always include the invoice number, the amount, and one easy way to pay.</li>
+						<li>No reply in a week? Come back and send the next tone up.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="waitlist" aria-labelledby="wl-title">
+				<h2 id="wl-title">Chasing more than one invoice?</h2>
+				<p>We're building a simple app that keeps every unpaid invoice in one place, tells you who to chase today, and writes each reminder for you. Want early access when it opens?</p>
+				<form id="wl-form">
+					<label class="sr-only" for="wl-email">Email address</label>
+					<input id="wl-email" type="email" placeholder="you@example.com" autocomplete="email" required />
+					<button class="btn" type="submit">Get early access</button>
+				</form>
+				<p class="status" id="wl-status" role="status"></p>
+				<p class="fine">You'll also get Buzzyfly's weekly email for freelancers. Unsubscribe anytime.</p>
+			</section>
+		</main>
+		<Footer />
+
+		<script define:vars={{ WAITLIST_SOURCE }}>
+			const $ = (id) => document.getElementById(id);
+			const fields = ["client", "me", "number", "amount", "due", "what", "link", "tone", "latefee"];
+			const LABELS = { soon: "Due soon", friendly: "Friendly nudge", firm: "Firm reminder", final: "Final notice" };
+
+			function daysLate(dueStr) {
+				if (!dueStr) return null;
+				const [y, m, d] = dueStr.split("-").map(Number);
+				const due = new Date(y, m - 1, d);
+				const today = new Date();
+				today.setHours(0, 0, 0, 0);
+				return Math.round((today - due) / 86400000);
+			}
+			function pickLevel(late, tone) {
+				if (tone !== "auto") return tone;
+				if (late === null) return "friendly";
+				if (late <= 0) return "soon";
+				if (late <= 7) return "friendly";
+				if (late <= 30) return "firm";
+				return "final";
+			}
+			function niceDate(dueStr) {
+				if (!dueStr) return "[due date]";
+				const [y, m, d] = dueStr.split("-").map(Number);
+				return new Date(y, m - 1, d).toLocaleDateString(undefined, { month: "long", day: "numeric" });
+			}
+
+			function build() {
+				const v = Object.fromEntries(fields.map((f) => [f, f === "latefee" ? $(f).checked : $(f).value.trim()]));
+				const late = daysLate(v.due);
+				const level = pickLevel(late, v.tone);
+				const name = v.client || "[Name]";
+				const me = v.me || "[Your name]";
+				const inv = v.number ? `invoice #${v.number}` : "my invoice";
+				const amt = v.amount ? ` for ${v.amount}` : "";
+				const forWhat = v.what ? ` for ${v.what}` : "";
+				const due = niceDate(v.due);
+				const pay = v.link ? `You can pay here: ${v.link}` : "Let me know if you need the payment details again.";
+				const lateDays = late && late > 0 ? `${late} day${late === 1 ? "" : "s"} overdue` : "overdue";
+				const ref = v.number ? `Invoice #${v.number}` : "Invoice";
+				let subject, body;
+
+				if (level === "soon") {
+					subject = `${ref} due ${due}`;
+					body = `Hi ${name},\n\nA quick heads-up that ${inv}${amt}${forWhat} is due on ${due}.\n\n${pay}\n\nThanks so much — it's been great working with you.\n\n${me}`;
+				} else if (level === "friendly") {
+					subject = `Friendly reminder: ${ref}${amt ? " —" + amt.replace(" for", "") : ""}`;
+					body = `Hi ${name},\n\nJust a friendly reminder that ${inv}${amt}${forWhat} was due on ${due}. I know things get busy, so I wanted to make sure it didn't slip through.\n\n${pay}\n\nIf it's already on its way, please ignore this — and thank you.\n\n${me}`;
+				} else if (level === "firm") {
+					subject = `${ref} is now ${lateDays}`;
+					body = `Hi ${name},\n\nI'm following up on ${inv}${amt}${forWhat}, which was due on ${due} and is now ${lateDays}.\n\nCould you let me know when I can expect payment? If anything is holding it up — a question about the invoice, or it needs to go to someone else — just tell me and I'll sort it out.\n\n${pay}\n\nThanks,\n${me}`;
+				} else {
+					subject = `Final notice: ${ref} — ${lateDays}`;
+					const fee = v.latefee
+						? `\n\nAs set out in our agreement, a late fee may now apply, and I may need to pause any further work until the account is settled. I'd much rather avoid that.`
+						: "";
+					body = `Hi ${name},\n\nThis is my final reminder about ${inv}${amt}${forWhat}. It was due on ${due} and is now ${lateDays}, and I haven't been able to get a reply.\n\nPlease arrange payment by ${niceDate(addDays(7))}, or reply to let me know what's going on so we can agree a plan.${fee}\n\n${pay}\n\n${me}`;
+				}
+
+				$("stage").textContent = LABELS[level] + (late && late > 0 ? ` · ${late} day${late === 1 ? "" : "s"} late` : "");
+				$("stage").dataset.level = level;
+				$("out-subject").value = subject;
+				$("out-body").value = body;
+				updateMailto();
+			}
+			function addDays(n) {
+				const d = new Date();
+				d.setDate(d.getDate() + n);
+				return d.toISOString().slice(0, 10);
+			}
+			function updateMailto() {
+				$("mailto").href = "mailto:?subject=" + encodeURIComponent($("out-subject").value) + "&body=" + encodeURIComponent($("out-body").value);
+			}
+
+			fields.forEach((f) => $(f).addEventListener(f === "latefee" || f === "tone" || f === "due" ? "change" : "input", build));
+			["out-subject", "out-body"].forEach((f) => $(f).addEventListener("input", updateMailto));
+
+			$("copy").addEventListener("click", async () => {
+				const text = "Subject: " + $("out-subject").value + "\n\n" + $("out-body").value;
+				try {
+					await navigator.clipboard.writeText(text);
+				} catch {
+					$("out-body").select();
+					document.execCommand("copy");
+				}
+				$("status").textContent = "Copied. Paste it into your email and hit send.";
+			});
+
+			$("wl-form").addEventListener("submit", async (e) => {
+				e.preventDefault();
+				const status = $("wl-status");
+				status.textContent = "Sending…";
+				try {
+					const res = await fetch("/api/subscribe", {
+						method: "POST",
+						headers: { "Content-Type": "application/json" },
+						body: JSON.stringify({ email: $("wl-email").value, source: WAITLIST_SOURCE }),
+					});
+					if (!res.ok) throw new Error();
+					status.textContent = "You're on the list. We'll email you when it opens.";
+					$("wl-form").reset();
+				} catch {
+					status.textContent = "Something went wrong. Please try again.";
+				}
+			});
+
+			// Default the due date to two weeks ago so the first email shown is a realistic one.
+			const d = new Date();
+			d.setDate(d.getDate() - 14);
+			$("due").value = d.toISOString().slice(0, 10);
+			build();
+		</script>
+	</body>
+</html>
