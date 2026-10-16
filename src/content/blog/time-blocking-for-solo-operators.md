@@ -96,7 +96,7 @@ Wednesday, five minutes, on the calendar: still the right three? If a fire ate o
 
 The 3-block day is the weekly reset plus the follow-up lines, written down. The Buzzyfly Digital System ships that sequence with the onboarding checklists so a new client does not restart the same scramble. One-time. $49. Instant download.
 
-If you want the reset, the follow-ups, and the onboarding kit in one zip, the Complete Business Bundle is $97. Same checkout. Same 30-day money-back guarantee — email us if it does not deliver.
+If you want every Buzzyfly workbook, the Complete Business Bundle is $97. Same checkout. Same 30-day money-back guarantee — email us if it does not deliver.
 
 [Get the Digital System — $49](/buy/buzzyfly-digital-system)
 

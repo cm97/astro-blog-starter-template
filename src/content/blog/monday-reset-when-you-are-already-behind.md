@@ -170,7 +170,7 @@ Invoice or close-out sent: ________
 
 The three priorities change every time you remember a new fire. Client dates live in threads you will not reopen until they complain. Follow-ups wait for a good moment, and the moment is never Monday at 9:12. The invoice stays a feeling instead of a sent file.
 
-The words have to sit next to onboarding and the proposal follow-up, in the same folder, so a slammed Monday still has a list to open. That is the weekly reset inside the Digital System, with the onboarding checklist and the follow-up lines in the same zip.
+The words have to sit next to onboarding and the proposal follow-up, in the same place, so a slammed Monday still has a list to open. That is the Weekly Reset tab inside the Digital System workbook, next to onboarding and follow-ups.
 
 The Weekly Reset Checklist ($15) is this sheet alone. The Digital System ($49) is the reset plus onboarding and follow-ups so a slammed Monday still has the list. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
 

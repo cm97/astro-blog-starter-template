@@ -70,7 +70,7 @@ function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string
       email and you'll get a fresh one.
     </p>
     <p style="margin:0 0 16px;font-size:14px">
-      <strong>To get started:</strong> unzip the download and double-click the workbook.
+      <strong>To get started:</strong> double-click the downloaded workbook.
       It opens in Excel, or upload it to Google Sheets. Start on the Start Here tab.
     </p>
     ${upsellBlock}
@@ -91,7 +91,7 @@ function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string
 		"",
 		"This link expires in 3 days. If it lapses before you grab the file, reply to this email and you'll get a fresh one.",
 		"",
-		"To get started: unzip the download and double-click the workbook. It opens in Excel, or upload it to Google Sheets. Start on the Start Here tab.",
+		"To get started: double-click the downloaded workbook. It opens in Excel, or upload it to Google Sheets. Start on the Start Here tab.",
 	];
 
 	if (upsellProduct) {

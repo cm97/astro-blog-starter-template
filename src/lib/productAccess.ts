@@ -1,4 +1,4 @@
-import { ALL_PRODUCTS, PRODUCT_FILE_MAP } from "../data/monetization";
+import { ALL_PRODUCTS, PRODUCT_FILE_MAP, type ProductFile } from "../data/monetization";
 import { verifyDownloadToken } from "./fulfillment";
 import { productBuyUrl } from "./productCheckout";
 
@@ -82,6 +82,28 @@ ${action}
 <small>Already bought? Open the download link from your order email, or reply to it and we will send a fresh one.</small></main></body></html>`;
 	return new Response(html, {
 		status: 402,
+		headers: { "content-type": "text/html; charset=utf-8", "cache-control": "private, no-store" },
+	});
+}
+
+/** Download page for a product that delivers several workbooks (the bundle). */
+export function productFileListPage(itemId: string, files: ProductFile[]): Response {
+	const product = productInfo(itemId);
+	const title = product ? `Your ${product.title}` : "Your download";
+	const links = files
+		.map(
+			(file, i) =>
+				`<li><a class="btn" href="/api/download?product=${encodeURIComponent(itemId)}&amp;file=${i}">Download ${escapeHtml(file.fileName)}</a></li>`,
+		)
+		.join("");
+	const html = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Buzzyfly download</title>
+<style>body{margin:0;background:#faf7ef;color:#23201a;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}main{max-width:560px;margin:0 auto;padding:48px 18px}h1{font-size:1.6rem;margin:0 0 8px}p{color:#6b6455}ul{list-style:none;padding:0;margin:16px 0}li{margin:0 0 12px}a.btn{display:block;background:#e0a012;color:#1d1606;font-weight:600;padding:12px 18px;min-height:44px;box-sizing:border-box;border-radius:6px;text-decoration:none;overflow-wrap:anywhere}a.btn:focus-visible{outline:3px solid #23201a;outline-offset:2px}small{display:block;margin-top:18px}</style></head>
+<body><main><h1>${escapeHtml(title)}</h1>
+<p>Download each workbook below. Each one opens in Excel, or upload it to Google Sheets. Start on the Start Here tab.</p>
+<ul>${links}</ul>
+<small>Bookmark this page. It keeps working on this device for 30 days.</small></main></body></html>`;
+	return new Response(html, {
+		status: 200,
 		headers: { "content-type": "text/html; charset=utf-8", "cache-control": "private, no-store" },
 	});
 }

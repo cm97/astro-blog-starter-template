@@ -2,7 +2,8 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { BUZZYFLY_CONFIG, ALL_PRODUCTS, UPSELL_MAP } from "../data/monetization";
+import { BUZZYFLY_CONFIG, ALL_PRODUCTS, UPSELL_MAP, PRODUCT_FILE_MAP } from "../data/monetization";
+import { issueStoredDownloadToken } from "../lib/fulfillment";
 
 export const prerender = false;
 
@@ -26,6 +27,35 @@ if (sessionId && env?.DB) {
 	}
 }
 
+// Hand the buyer their download right here, not only by email. The Stripe
+// session ID in ?s= is long and random and only reaches the buyer's browser,
+// so holding it is proof of this purchase. Reuse a live token for the order
+// rather than minting a new one on every refresh.
+let downloadHref: string | null = null;
+if (sessionId && purchasedItemId && PRODUCT_FILE_MAP[purchasedItemId] && env?.DB) {
+	try {
+		const existing = await env.DB.prepare(
+			`SELECT token FROM download_tokens WHERE order_id = ? AND item_id = ? AND expires_at > ? LIMIT 1`,
+		)
+			.bind(sessionId, purchasedItemId, Date.now())
+			.first<{ token: string }>();
+		const token =
+			existing?.token ?? (await issueStoredDownloadToken(env, { orderId: sessionId, itemId: purchasedItemId }));
+		if (token) downloadHref = `/api/download?token=${token}`;
+	} catch (error) {
+		console.error("Buzzyfly thank-you: could not issue download token", error);
+	}
+}
+
+// Stripe redirects here as soon as payment succeeds, which can be a few
+// seconds before the webhook records the order. Re-check a few times.
+const attempt = Number(Astro.url.searchParams.get("r") ?? "0") || 0;
+const waitingForOrder = !!sessionId && !purchasedItemId && attempt < 8;
+const retryUrl = waitingForOrder
+	? `/thank-you?s=${encodeURIComponent(sessionId)}&r=${attempt + 1}`
+	: null;
+const downloadCount = purchasedItemId ? PRODUCT_FILE_MAP[purchasedItemId]?.length ?? 0 : 0;
+
 const upsellId = purchasedItemId ? UPSELL_MAP[purchasedItemId] : "complete-business-bundle";
 const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : null;
 ---
@@ -35,8 +65,10 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 	<head>
 		<BaseHead
 			title={`Order confirmed — ${BUZZYFLY_CONFIG.brandName}`}
-			description="Your order is confirmed. Check your email for your download link."
+			description="Your order is confirmed. Download your workbook."
 		/>
+		<meta name="robots" content="noindex" />
+		{retryUrl && <meta http-equiv="refresh" content={`4;url=${retryUrl}`} />}
 	</head>
 	<body>
 		<Header />
@@ -44,10 +76,26 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 			<section class="ty-hero">
 				<div class="ty-check">✓</div>
 				<h1>You're all set.</h1>
-				<p class="ty-lede">
-					Your download link is on its way to the email address you checked out with.
-					It should arrive within a few minutes.
-				</p>
+				{downloadHref ? (
+					<>
+						<a class="ty-download" href={downloadHref}>
+							{downloadCount > 1 ? "Download your workbooks" : "Download your workbook"}
+						</a>
+						<p class="ty-lede">
+							It opens in Excel, or upload it to Google Sheets. Start on the Start Here tab.
+							A copy of this link is also in your email.
+						</p>
+					</>
+				) : waitingForOrder ? (
+					<p class="ty-lede" role="status">
+						Getting your download ready. This page updates in a few seconds.
+					</p>
+				) : (
+					<p class="ty-lede">
+						Your download link is on its way to the email address you checked out with.
+						It should arrive within a few minutes.
+					</p>
+				)}
 				<p class="ty-note">
 					If you don't see it, check your spam folder. Still nothing after 10 minutes?
 					Email <a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a>
@@ -105,6 +153,21 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 		font-size: 2.2em;
 		margin: 0 0 0.4em;
 	}
+	.ty-download {
+		display: inline-block;
+		margin: 0 0 1em;
+		padding: 0.85em 1.75em;
+		min-height: 44px;
+		box-sizing: border-box;
+		border-radius: 999px;
+		background: var(--accent);
+		color: #fff;
+		font-weight: 700;
+		font-size: 1.1em;
+		text-decoration: none;
+	}
+	.ty-download:hover { background: var(--accent-dark); color: #fff; }
+	.ty-download:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 3px; }
 	.ty-lede {
 		font-size: 1.1em;
 		color: rgb(var(--gray-dark));
