@@ -2,7 +2,8 @@ import type { APIRoute } from "astro";
 import { issueStoredDownloadToken, resolveProductFile } from "../../../../lib/fulfillment";
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../../../../data/monetization";
 import { logAdminAction } from "../../../../lib/audit";
-import { sendDeliveryEmail } from "../../../../lib/email";
+import { sendDeliveryEmail, sendDropWelcomeEmail } from "../../../../lib/email";
+import { isDropItem, issueDropToken } from "../../../../lib/dropAccess";
 
 export const prerender = false;
 
@@ -47,6 +48,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		backParams.set("error", "Order not found.");
 		return redirect(backParams);
 	}
+
+	if (isDropItem(order.item_id)) return resendDropLink(order, env, locals.adminUser ?? "unknown", backParams);
 
 	if (!resolveProductFile(order.item_id)) {
 		backParams.set("error", `No product file is mapped for item "${order.item_id}".`);
@@ -105,4 +108,44 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
 function redirect(params: URLSearchParams): Response {
 	return new Response(null, { status: 303, headers: { Location: `/admin/orders?${params}` } });
+}
+
+/** Monthly Drop orders get a fresh /drop unlock link instead of a file download. */
+async function resendDropLink(
+	order: { order_id: string; item_id: string; customer_email: string | null },
+	env: Env,
+	adminUser: string,
+	backParams: URLSearchParams,
+): Promise<Response> {
+	const token = await issueDropToken(env, { orderId: order.order_id, customerEmail: order.customer_email }).catch(
+		(error) => {
+			console.error("Buzzyfly admin: failed to issue drop token", error);
+			return null;
+		},
+	);
+	if (!token) {
+		backParams.set("error", "Could not issue an unlock link.");
+		return redirect(backParams);
+	}
+
+	const unlockUrl = `${BUZZYFLY_CONFIG.siteUrl}/drop/unlock?token=${token}`;
+	backParams.set("resent", unlockUrl);
+
+	let outcome: string;
+	if (!order.customer_email) {
+		outcome = "no email on file";
+		backParams.set("email_error", "This order has no customer email on file, so nothing was sent.");
+	} else {
+		const delivery = await sendDropWelcomeEmail({ to: order.customer_email, unlockUrl, orderId: order.order_id }, env);
+		if (delivery.sent) {
+			outcome = `emailed to ${order.customer_email}`;
+			backParams.set("emailed", order.customer_email);
+		} else {
+			outcome = `email failed: ${delivery.reason}`;
+			backParams.set("email_error", `Email to ${order.customer_email} failed: ${delivery.reason}`);
+		}
+	}
+
+	await logAdminAction(env, adminUser, "order_resend", `${order.order_id} — drop unlock link ${outcome}`);
+	return redirect(backParams);
 }

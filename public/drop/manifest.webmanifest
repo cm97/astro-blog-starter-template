@@ -1,0 +1,16 @@
+{
+  "id": "/drop/",
+  "name": "Buzzyfly Monthly Drop",
+  "short_name": "Buzzyfly Drop",
+  "description": "New client tools every month: emails that write themselves, checklists and planning tools.",
+  "start_url": "/drop/",
+  "scope": "/drop/",
+  "display": "standalone",
+  "background_color": "#faf7ef",
+  "theme_color": "#23201a",
+  "icons": [
+    { "src": "/drop/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/drop/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/drop/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

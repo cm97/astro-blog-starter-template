@@ -243,3 +243,76 @@ export async function sendDeliveryEmail(
 		return { sent: false, reason: `send failed: ${String(error)}` };
 	}
 }
+
+export interface DropWelcomeEmail {
+	to: string;
+	unlockUrl: string;
+	orderId: string;
+}
+
+/**
+ * Welcome email for a new Monthly Drop subscriber. Unlike the download email,
+ * the link opens the web app at /drop and keeps working while the
+ * subscription is active, so there is no expiry warning and nothing to unzip.
+ */
+export async function sendDropWelcomeEmail(
+	message: DropWelcomeEmail,
+	env: { EMAIL?: EmailBinding; EMAIL_FROM?: string },
+): Promise<EmailResult> {
+	if (!env.EMAIL) return { sent: false, reason: "EMAIL binding is not configured in wrangler.json" };
+	if (!message.to) return { sent: false, reason: "no customer email on the order" };
+
+	const brand = escapeHtml(BUZZYFLY_CONFIG.brandName);
+	const html = `<!doctype html>
+<html>
+  <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#16191c;max-width:520px;margin:0 auto;padding:24px">
+    <h1 style="font-size:20px;margin:0 0 16px">Your Monthly Drop is ready</h1>
+    <p style="margin:0 0 16px">Thanks for subscribing to the <strong>Buzzyfly Monthly Drop</strong>.</p>
+    <p style="margin:0 0 24px">
+      <a href="${message.unlockUrl}" style="display:inline-block;background:#1f4d3a;color:#fff;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:600">Open the Monthly Drop app</a>
+    </p>
+    <p style="margin:0 0 16px;font-size:14px">
+      It works on any phone, tablet or computer. When it opens, tap <strong>Install app</strong> to put the
+      Buzzyfly icon on your home screen. After that, tap the icon to open it like any other app.
+      Your work saves automatically and follows you to any device you open this link on.
+    </p>
+    <p style="margin:0 0 16px;font-size:14px">
+      This month: five year-end client emails that write themselves, the Q4 weekly reset,
+      a client working agreement, and the year-end client review.
+    </p>
+    <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
+      Keep this email. The link is your key. A new drop is added to the app each month.
+      To cancel, reply to this email.
+    </p>
+    <p style="margin:24px 0 0;color:#6b6a64;font-size:14px">— ${brand}</p>
+  </body>
+</html>`;
+	const text = [
+		"Thanks for subscribing to the Buzzyfly Monthly Drop.",
+		"",
+		"Open the Monthly Drop app:",
+		message.unlockUrl,
+		"",
+		"It works on any phone, tablet or computer. When it opens, tap Install app to put the Buzzyfly icon on your home screen. After that, tap the icon to open it like any other app. Your work saves automatically and follows you to any device you open this link on.",
+		"",
+		"This month: five year-end client emails that write themselves, the Q4 weekly reset, a client working agreement, and the year-end client review.",
+		"",
+		"Keep this email. The link is your key. A new drop is added to the app each month. To cancel, reply to this email.",
+		"",
+		`— ${BUZZYFLY_CONFIG.brandName}`,
+	].join("\n");
+
+	try {
+		await env.EMAIL.send({
+			from: resolveFrom(env),
+			to: message.to,
+			subject: "Your Buzzyfly Monthly Drop is ready",
+			html,
+			text,
+		});
+		return { sent: true };
+	} catch (error) {
+		console.error(`Buzzyfly email: drop welcome send failed for order ${message.orderId} to ${message.to}`, error);
+		return { sent: false, reason: `send failed: ${String(error)}` };
+	}
+}

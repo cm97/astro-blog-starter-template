@@ -7,6 +7,9 @@ export interface FulfillmentOrder {
 	customerEmail: string | null;
 	/** Traffic source from the buy link's client_reference_id (see src/lib/trafficSource.ts). */
 	source?: string | null;
+	/** Stripe subscription and customer ids, set when the checkout started a subscription. */
+	subscriptionId?: string | null;
+	customerId?: string | null;
 }
 
 /** Extracts the fields fulfillment needs from a verified Lemon Squeezy webhook payload. */
@@ -62,6 +65,28 @@ export function parseStripeOrder(payload: any): FulfillmentOrder | null {
 		itemId: String(itemId),
 		customerEmail: session?.customer_details?.email ?? session?.customer_email ?? null,
 		source: typeof session?.client_reference_id === "string" ? session.client_reference_id : null,
+		subscriptionId: typeof session?.subscription === "string" ? session.subscription : null,
+		customerId: typeof session?.customer === "string" ? session.customer : null,
+	};
+}
+
+/**
+ * Extracts a subscription status change from a verified Stripe
+ * customer.subscription.* event, or null for any other event.
+ */
+export function parseStripeSubscriptionEvent(
+	payload: any,
+): { subscriptionId: string; customerId: string | null; status: string; itemId: string | null } | null {
+	const type = String(payload?.type ?? "");
+	if (!type.startsWith("customer.subscription.")) return null;
+	const sub = payload?.data?.object;
+	if (typeof sub?.id !== "string" || typeof sub?.status !== "string") return null;
+	return {
+		subscriptionId: sub.id,
+		customerId: typeof sub.customer === "string" ? sub.customer : null,
+		// A deleted subscription is canceled even if an older payload says otherwise.
+		status: type === "customer.subscription.deleted" ? "canceled" : sub.status,
+		itemId: typeof sub.metadata?.item_id === "string" ? sub.metadata.item_id : null,
 	};
 }
 

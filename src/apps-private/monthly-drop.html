@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Monthly Drop | Buzzyfly</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/drop/manifest.webmanifest">
+<meta name="theme-color" content="#23201a">
+<link rel="apple-touch-icon" href="/drop/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Buzzyfly Drop">
+<style>
+:root{--bg:#faf7ef;--card:#fff;--ink:#23201a;--muted:#6b6455;--line:#e2dccb;--accent:#e0a012;--accent-ink:#1d1606;--ok:#2f7d4f;--ok-bg:#e4f3ea;--warn:#b3402f;--soft:#fffdf7}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+.top{max-width:980px;margin:0 auto;padding:16px 16px 0;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+.top a{color:var(--muted);text-decoration:none}
+.save{font-size:.85rem;color:var(--muted)}.save.err{color:var(--warn)}
+header.hero{max-width:980px;margin:10px auto 0;padding:0 16px}
+h1{margin:0 0 4px;font-size:1.6rem}h2{font-size:1.15rem;margin:22px 0 8px}h3{font-size:1rem;margin:0 0 6px}
+.sub{color:var(--muted);margin:0 0 6px}
+nav.tabs{max-width:980px;margin:14px auto 0;padding:0 16px;display:flex;gap:6px;overflow-x:auto}
+nav.tabs button{white-space:nowrap}
+nav.tabs button[aria-selected="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+.sheet{max-width:980px;margin:10px auto 40px;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:20px}
+section[hidden]{display:none}
+button,.btn{font:inherit;min-height:44px;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:9px 14px;border-radius:6px;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+button.primary,.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);font-weight:600}
+button.small{min-height:36px;padding:6px 10px;font-size:.9rem}
+button:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible,a:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+label{display:block;font-size:.85rem;color:var(--muted);margin:10px 0 3px}
+input,textarea,select{width:100%;font:inherit;color:var(--ink);background:#fff;border:1px solid var(--line);border-radius:6px;padding:9px;min-height:44px}
+textarea{min-height:120px;resize:vertical}
+.grid{display:grid;gap:0 12px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}
+.bar{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
+.card{border:1px solid var(--line);border-radius:8px;padding:14px;margin:12px 0;background:var(--soft)}
+.when{font-size:.85rem;color:var(--muted);margin:0 0 8px}
+.mail{white-space:pre-wrap;background:#fff;border:1px solid var(--line);border-radius:6px;padding:12px;margin:8px 0;font-size:.95rem}
+.subject{font-weight:600}
+.check{display:flex;gap:12px;align-items:flex-start;padding:10px 4px;border-bottom:1px solid var(--line)}
+.check input{width:24px;height:24px;min-height:24px;margin-top:2px;flex:none}
+.check label{margin:0;color:var(--ink);font-size:1rem}
+.check.done label{color:var(--muted);text-decoration:line-through}
+.new{display:inline-block;background:var(--accent);color:var(--accent-ink);font-size:.72rem;font-weight:700;border-radius:99px;padding:1px 8px;margin-right:6px;vertical-align:1px}
+.sec{font-size:.8rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:16px 0 0}
+.progress{height:10px;background:var(--line);border-radius:99px;overflow:hidden;margin:8px 0}
+.progress>div{height:100%;background:var(--ok);width:0;transition:width .3s}
+.banner{background:var(--ok-bg);color:var(--ok);border-radius:6px;padding:10px 12px;font-weight:600;margin:10px 0}
+.table-wrap{overflow-x:auto;position:relative}
+table{width:100%;border-collapse:collapse;margin-top:10px;min-width:720px}
+th{text-align:left;font-size:.8rem;color:var(--muted);font-weight:600;border-bottom:2px solid var(--ink);padding:6px 4px}
+td{padding:6px 4px;border-bottom:1px solid var(--line);vertical-align:top}
+td input,td select{min-height:40px;padding:7px}
+.num{text-align:right;white-space:nowrap}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:14px 0}
+.stat{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:var(--soft)}
+.stat b{display:block;font-size:1.3rem}.stat span{font-size:.8rem;color:var(--muted)}
+.steps li{margin:6px 0}
+.muted{color:var(--muted)}
+.install{max-width:980px;margin:12px auto 0;padding:0 16px}
+.install>div{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:8px;padding:12px 14px}
+.install img{width:44px;height:44px;border-radius:10px;flex:none}
+.install p{margin:0;flex:1;min-width:180px}
+.install .muted{color:#d6d0c2}
+.install button.primary{min-width:120px}
+.install button.link{background:none;border:0;color:#d6d0c2;text-decoration:underline}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+@media (prefers-reduced-motion:reduce){.progress>div{transition:none}}
+@media print{.top,nav.tabs,.bar,button{display:none!important}.sheet{border:0}}
+</style>
+</head>
+<body>
+<div class="top"><a href="/">&larr; buzzyfly.com</a><span class="save" id="saveState" role="status" aria-live="polite">Loading…</span></div>
+<header class="hero">
+  <h1>Buzzyfly Monthly Drop</h1>
+  <p class="sub"><strong>October 2026: Finish the year clean.</strong> Close out invoices, quiet clients and loose ends before January.</p>
+</header>
+<aside class="install" id="install" hidden aria-label="Install the app">
+  <div>
+    <img src="/drop/icon-192.png" alt="">
+    <p><strong>Install the Monthly Drop app</strong><br><span class="muted" id="installHow">Get the Buzzyfly icon on your home screen. It opens like any app, even offline.</span></p>
+    <button class="primary" id="installBtn">Install app</button>
+    <button class="link" id="installLater">Not now</button>
+  </div>
+</aside>
+<nav class="tabs" role="tablist" aria-label="Monthly Drop tools">
+  <button role="tab" id="t-start" aria-controls="p-start" aria-selected="true">Start here</button>
+  <button role="tab" id="t-emails" aria-controls="p-emails" aria-selected="false">Year-end emails</button>
+  <button role="tab" id="t-reset" aria-controls="p-reset" aria-selected="false">Weekly reset</button>
+  <button role="tab" id="t-agree" aria-controls="p-agree" aria-selected="false">Working agreement</button>
+  <button role="tab" id="t-review" aria-controls="p-review" aria-selected="false">Year-end review</button>
+</nav>
+<main class="sheet">
+
+<section id="p-start" role="tabpanel" aria-labelledby="t-start">
+  <h2>Your details</h2>
+  <p class="sub">Fill these in once. Every tool in this drop uses them. Your work saves automatically to your account.</p>
+  <div class="grid">
+    <div><label for="me">Your name</label><input id="me" data-bind="me" autocomplete="name"></div>
+    <div><label for="biz">Your business</label><input id="biz" data-bind="biz" autocomplete="organization"></div>
+    <div><label for="pay">Payment link</label><input id="pay" data-bind="pay" type="url" placeholder="https://"></div>
+    <div><label for="off">Holiday: first day off</label><input id="off" data-bind="off" placeholder="December 22"></div>
+    <div><label for="back">Holiday: back on</label><input id="back" data-bind="back" placeholder="January 5"></div>
+    <div><label for="lastreq">Last day to send requests</label><input id="lastreq" data-bind="lastreq" placeholder="December 15"></div>
+  </div>
+  <h2>Do this month</h2>
+  <ol class="steps">
+    <li>Run the <strong>Weekly reset</strong> this Monday. It takes 20 minutes.</li>
+    <li>Add your active clients under <strong>Year-end emails</strong>. Send each one the check-in this week.</li>
+    <li>Fill in the <strong>Working agreement</strong> once. Send it to your next new client.</li>
+    <li>Block 90 minutes in early December for the <strong>Year-end review</strong>.</li>
+  </ol>
+  <p class="muted">One thing at a time. A new drop is added here each month.</p>
+</section>
+
+<section id="p-emails" role="tabpanel" aria-labelledby="t-emails" hidden>
+  <h2>Year-end client emails</h2>
+  <p class="sub">Add a client. Five emails write themselves. Copy one or open it in your email app, then tick it off.</p>
+  <div class="bar">
+    <label for="clientPick" class="sr">Client</label>
+    <select id="clientPick" style="max-width:320px"></select>
+    <button id="addClient" class="primary">+ Add client</button>
+    <button id="delClient">Remove client</button>
+  </div>
+  <div id="clientForm">
+    <div class="grid">
+      <div><label for="c-name">Client first name</label><input id="c-name" data-client="name"></div>
+      <div><label for="c-email">Client email</label><input id="c-email" data-client="email" type="email"></div>
+      <div><label for="c-project">Project</label><input id="c-project" data-client="project" placeholder="the website refresh"></div>
+      <div><label for="c-replyby">Reply-by day</label><input id="c-replyby" data-client="replyBy" placeholder="Friday"></div>
+      <div><label for="c-week">Kickoff week of</label><input id="c-week" data-client="kickWeek" placeholder="January 12"></div>
+      <div><label for="c-inv">Open invoice #</label><input id="c-inv" data-client="inv"></div>
+      <div><label for="c-amt">Invoice amount</label><input id="c-amt" data-client="amt" placeholder="$1,200"></div>
+      <div><label for="c-sent">Invoice sent on</label><input id="c-sent" data-client="sent" placeholder="November 3"></div>
+      <div><label for="c-o1">Kickoff time 1</label><input id="c-o1" data-client="o1"></div>
+      <div><label for="c-o2">Kickoff time 2</label><input id="c-o2" data-client="o2"></div>
+      <div><label for="c-o3">Kickoff time 3</label><input id="c-o3" data-client="o3"></div>
+    </div>
+  </div>
+  <div id="emailCards"></div>
+</section>
+
+<section id="p-reset" role="tabpanel" aria-labelledby="t-reset" hidden>
+  <h2>The 20-minute weekly reset: Q4 edition</h2>
+  <p class="sub">Every Monday. Set a timer. Tick each step. Start a new week when you're done.</p>
+  <div class="progress" aria-hidden="true"><div id="resetBar"></div></div>
+  <p id="resetCount" class="muted"></p>
+  <div id="resetDone" class="banner" hidden>Reset complete. Start the week.</div>
+  <div id="resetList"></div>
+  <label for="oneThing">This week's ONE thing</label><input id="oneThing" data-bind="oneThing">
+  <div class="bar">
+    <button id="newWeek" class="primary">Start a new week</button>
+    <span id="weeksDone" class="muted"></span>
+  </div>
+</section>
+
+<section id="p-agree" role="tabpanel" aria-labelledby="t-agree" hidden>
+  <h2>Client working agreement</h2>
+  <p class="sub">Fill this in once. Send it with your welcome email so expectations are set on day one. It is not a legal contract. Match it to your real contract.</p>
+  <div class="grid">
+    <div><label for="a-client">Client first name</label><input id="a-client" data-bind="aClient"></div>
+    <div><label for="a-reach">Best way to reach you</label><input id="a-reach" data-bind="aReach" placeholder="email"></div>
+    <div><label for="a-reply">You reply within</label><input id="a-reply" data-bind="aReply" placeholder="1 business day"></div>
+    <div><label for="a-hours">Working hours</label><input id="a-hours" data-bind="aHours" placeholder="Mon–Fri, 9am–5pm Eastern"></div>
+    <div><label for="a-urgent">Urgent contact</label><input id="a-urgent" data-bind="aUrgent" placeholder="text me at 555-0100"></div>
+    <div><label for="a-urgmeans">Urgent means</label><input id="a-urgmeans" data-bind="aUrgMeans" placeholder="something is broken or a deadline is at risk"></div>
+    <div><label for="a-update">Weekly update day</label><input id="a-update" data-bind="aUpdate" placeholder="Friday"></div>
+    <div><label for="a-rev">Revision rounds included</label><input id="a-rev" data-bind="aRev" placeholder="2"></div>
+    <div><label for="a-invwhen">Invoices are sent</label><input id="a-invwhen" data-bind="aInvWhen" placeholder="at each milestone"></div>
+    <div><label for="a-due">Invoices due within (days)</label><input id="a-due" data-bind="aDue" placeholder="14"></div>
+    <div><label for="a-need">What you need from them</label><input id="a-need" data-bind="aNeed" placeholder="logins and brand files"></div>
+    <div><label for="a-needby">Needed by</label><input id="a-needby" data-bind="aNeedBy" placeholder="the end of week one"></div>
+    <div><label for="a-dm">Their decision-maker</label><input id="a-dm" data-bind="aDm"></div>
+  </div>
+  <h3 style="margin-top:18px">Your agreement</h3>
+  <div id="agreement" class="mail"></div>
+  <div class="bar"><button class="primary" data-copy="agreement">Copy agreement</button><button onclick="window.print()">Print</button></div>
+</section>
+
+<section id="p-review" role="tabpanel" aria-labelledby="t-review" hidden>
+  <h2>Year-end client review</h2>
+  <p class="sub">Once a year, early December, 90 minutes. List every client from this year. Pick how it felt and a group. Do the next step it gives you.</p>
+  <div class="stats" id="reviewStats"></div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Client</th><th>What you did</th><th class="num">Billed ($)</th><th class="num">Hours</th><th>Felt</th><th>Group</th><th class="num">$/hour</th><th>Next step</th><th><span class="sr">Remove</span></th></tr></thead>
+      <tbody id="reviewRows"></tbody>
+    </table>
+  </div>
+  <div class="bar"><button id="addRow" class="primary">+ Add client</button></div>
+  <h2>Your 3 rules for next year</h2>
+  <p class="sub">Look at your "Keep and grow" clients. What do they have in common? Examples: "Projects start at $___." "No work starts before the deposit is paid."</p>
+  <label for="rule1">Rule 1</label><input id="rule1" data-bind="rule1">
+  <label for="rule2">Rule 2</label><input id="rule2" data-bind="rule2">
+  <label for="rule3">Rule 3</label><input id="rule3" data-bind="rule3">
+</section>
+
+</main>
+<script>
+(function () {
+  "use strict";
+  var ISSUE = "2026-10";
+  var LOCAL_KEY = "bf-drop-" + ISSUE;
+  var state = { clients: [], current: 0, sentLog: {}, reset: {}, weeks: 0, review: [] };
+
+  function $(id) { return document.getElementById(id); }
+  function el(tag, attrs, text) {
+    var n = document.createElement(tag);
+    if (attrs) Object.keys(attrs).forEach(function (k) { n.setAttribute(k, attrs[k]); });
+    if (text != null) n.textContent = text;
+    return n;
+  }
+  function v(key, fallback) { var x = state[key]; return x && String(x).trim() ? String(x).trim() : fallback; }
+  function cv(c, key, fallback) { var x = c && c[key]; return x && String(x).trim() ? String(x).trim() : fallback; }
+
+  // ---------- saving ----------
+  var saveTimer = null, online = true;
+  function setSave(text, err) { var s = $("saveState"); s.textContent = text; s.className = "save" + (err ? " err" : ""); }
+  function save() {
+    try { localStorage.setItem(LOCAL_KEY, JSON.stringify(state)); } catch (e) {}
+    setSave("Saving…");
+    clearTimeout(saveTimer);
+    saveTimer = setTimeout(function () {
+      fetch("/api/drop/data?issue=" + ISSUE, { method: "PUT", headers: { "content-type": "application/json" }, body: JSON.stringify(state), credentials: "same-origin" })
+        .then(function (r) {
+          if (r.status === 401) { setSave("Session ended. Reload to sign in again.", true); return; }
+          if (!r.ok) throw new Error(r.status);
+          setSave("Saved");
+        })
+        .catch(function () { setSave("Saved on this device. Will sync when you're back online.", true); });
+    }, 700);
+  }
+  function load() {
+    return fetch("/api/drop/data?issue=" + ISSUE, { credentials: "same-origin" })
+      .then(function (r) { if (!r.ok) throw new Error(r.status); return r.json(); })
+      .then(function (j) {
+        if (j && j.data) { state = Object.assign(state, j.data); }
+        else { try { var l = localStorage.getItem(LOCAL_KEY); if (l) state = Object.assign(state, JSON.parse(l)); } catch (e) {} }
+        setSave("Saved");
+      })
+      .catch(function () {
+        try { var l = localStorage.getItem(LOCAL_KEY); if (l) state = Object.assign(state, JSON.parse(l)); } catch (e) {}
+        setSave("Offline. Changes save on this device.", true);
+      });
+  }
+
+  // ---------- tabs ----------
+  var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
+  function show(tab) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      $(t.getAttribute("aria-controls")).hidden = !on;
+    });
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { show(t); });
+    t.addEventListener("keydown", function (e) {
+      var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (d) { var n = tabs[(i + d + tabs.length) % tabs.length]; show(n); n.focus(); }
+    });
+  });
+
+  // ---------- simple bound fields ----------
+  function bindFields() {
+    Array.prototype.forEach.call(document.querySelectorAll("[data-bind]"), function (input) {
+      var key = input.getAttribute("data-bind");
+      input.value = state[key] || "";
+      input.addEventListener("input", function () { state[key] = input.value; renderAll(); save(); });
+    });
+  }
+
+  // ---------- emails ----------
+  function client() { return state.clients[state.current] || null; }
+  function emailsFor(c) {
+    var me = v("me", "[Your name]"), n = cv(c, "name", "[Client name]");
+    var lastreq = v("lastreq", "[last day for requests]");
+    return [
+      { key: "checkin", title: "1. Year-end check-in", when: "First week of November. Every active client.",
+        subject: "Quick check before the year wraps up",
+        body: "Hi " + n + ",\n\nThe year is almost done. I want to make sure we finish strong.\n\nIs there anything on your list you still want done before " + lastreq + "?\n\nIf so, reply with it. I'll tell you by " + cv(c, "replyBy", "[day]") + " whether it fits.\n\nThanks,\n" + me },
+      { key: "holiday", title: "2. Holiday schedule notice", when: "Two weeks before your first day off.",
+        subject: "My holiday schedule",
+        body: "Hi " + n + ",\n\nHeads up on my schedule for the holidays.\n\nI'm out from " + v("off", "[first day off]") + ". I'll be back on " + v("back", "[return date]") + ".\n\nAnything you need before then, please send by " + lastreq + ". That gives me time to get it done right.\n\nHappy holidays,\n" + me },
+      { key: "nextyear", title: "3. “Next year” nudge", when: "Mid-November. Clients whose project ends this year.",
+        subject: "What's next for you in 2027?",
+        body: "Hi " + n + ",\n\nWe're wrapping up " + cv(c, "project", "[project]") + " soon. It's been good work.\n\nBefore the year closes, I'd like to hear what's coming for you in 2027. If there's a way I can help, I'd rather plan it now than scramble in January.\n\nDo you have 20 minutes the week of " + cv(c, "kickWeek", "[date]") + "?\n\n" + me },
+      { key: "invoice", title: "4. Pay-before-year-end reminder", when: "Early December. Any open invoice.",
+        subject: "Invoice " + cv(c, "inv", "[#]") + " before the books close",
+        body: "Hi " + n + ",\n\nA quick note on invoice " + cv(c, "inv", "[#]") + " for " + cv(c, "amt", "[amount]") + ", sent on " + cv(c, "sent", "[date]") + ".\n\nMany businesses like to settle open invoices before year-end. If that's useful for you, here's the payment link: " + v("pay", "[payment link]") + "\n\nIf something's holding it up, just tell me. Happy to sort it out.\n\nThanks,\n" + me },
+      { key: "kickoff", title: "5. January kickoff booking", when: "Mid-December. Clients continuing next year.",
+        subject: "Let's lock in our January kickoff",
+        body: "Hi " + n + ",\n\nJanuary fills up fast. I'd like to save you a spot now.\n\nHere are three times for a 30-minute kickoff:\n- " + cv(c, "o1", "[option 1]") + "\n- " + cv(c, "o2", "[option 2]") + "\n- " + cv(c, "o3", "[option 3]") + "\n\nReply with the one that works. I'll send the invite.\n\n" + me }
+    ];
+  }
+  function renderClientPicker() {
+    var pick = $("clientPick"); pick.textContent = "";
+    if (!state.clients.length) { pick.appendChild(el("option", { value: "" }, "No clients yet")); }
+    state.clients.forEach(function (c, i) {
+      var sent = Object.keys(state.sentLog[c.id] || {}).length;
+      pick.appendChild(el("option", { value: String(i) }, (c.name || "Unnamed client") + " (" + sent + "/5 sent)"));
+    });
+    pick.value = String(state.current);
+    pick.disabled = !state.clients.length;
+    $("delClient").disabled = !state.clients.length;
+    $("clientForm").hidden = !state.clients.length;
+    var c = client();
+    Array.prototype.forEach.call(document.querySelectorAll("[data-client]"), function (input) {
+      if (document.activeElement !== input) input.value = c ? (c[input.getAttribute("data-client")] || "") : "";
+    });
+  }
+  function renderEmails() {
+    var box = $("emailCards"); box.textContent = "";
+    var c = client();
+    if (!c) { box.appendChild(el("p", { class: "muted" }, "Add your first client to see their emails.")); return; }
+    emailsFor(c).forEach(function (m) {
+      var card = el("div", { class: "card" });
+      card.appendChild(el("h3", null, m.title));
+      card.appendChild(el("p", { class: "when" }, "When: " + m.when));
+      var mail = el("div", { class: "mail" });
+      mail.appendChild(el("div", { class: "subject" }, "Subject: " + m.subject));
+      mail.appendChild(el("div", null, "\n" + m.body));
+      card.appendChild(mail);
+      var bar = el("div", { class: "bar" });
+      var copy = el("button", { class: "primary" }, "Copy email");
+      copy.addEventListener("click", function () { copyText("Subject: " + m.subject + "\n\n" + m.body, copy); });
+      bar.appendChild(copy);
+      var href = "mailto:" + encodeURIComponent(c.email || "") + "?subject=" + encodeURIComponent(m.subject) + "&body=" + encodeURIComponent(m.body);
+      bar.appendChild(el("a", { class: "btn", href: href }, "Open in email app"));
+      var log = state.sentLog[c.id] || {};
+      var sentBtn = el("button", null, log[m.key] ? "✓ Sent " + log[m.key] : "Mark as sent");
+      sentBtn.addEventListener("click", function () {
+        state.sentLog[c.id] = state.sentLog[c.id] || {};
+        if (state.sentLog[c.id][m.key]) delete state.sentLog[c.id][m.key];
+        else state.sentLog[c.id][m.key] = new Date().toLocaleDateString();
+        renderAll(); save();
+      });
+      bar.appendChild(sentBtn);
+      card.appendChild(bar);
+      box.appendChild(card);
+    });
+  }
+  $("clientPick").addEventListener("change", function () { state.current = Number(this.value) || 0; renderAll(); save(); });
+  $("addClient").addEventListener("click", function () {
+    state.clients.push({ id: "c" + Date.now().toString(36) });
+    state.current = state.clients.length - 1;
+    renderAll(); save(); $("c-name").focus();
+  });
+  $("delClient").addEventListener("click", function () {
+    var c = client(); if (!c) return;
+    if (!confirm("Remove " + (c.name || "this client") + "?")) return;
+    delete state.sentLog[c.id];
+    state.clients.splice(state.current, 1);
+    state.current = Math.max(0, state.current - 1);
+    renderAll(); save();
+  });
+  Array.prototype.forEach.call(document.querySelectorAll("[data-client]"), function (input) {
+    input.addEventListener("input", function () {
+      var c = client(); if (!c) return;
+      c[input.getAttribute("data-client")] = input.value;
+      renderAll(); save();
+    });
+  });
+
+  // ---------- weekly reset ----------
+  var RESET = [
+    ["Clear", "Inbox: archive, answer, or turn every email into a task."],
+    ["Clear", "Messages and DMs: same rule."],
+    ["Clear", "Downloads and desktop: delete or file."],
+    ["Money", "List every unpaid invoice. Note how many days late each one is."],
+    ["Money", "Send one reminder for anything over 14 days late."],
+    ["Money", "Note which invoices must be paid before December 31. Send them email 4.", true],
+    ["Clients", "For each active client, write the next step and its due date."],
+    ["Clients", "Anyone you haven't heard from in 10 days gets a check-in today."],
+    ["Clients", "Mark clients whose work ends this year. Send them email 3.", true],
+    ["Clients", "Confirm every client knows your holiday schedule (email 2).", true],
+    ["Plan", "Pick the ONE thing that matters most this week. Write it below."],
+    ["Plan", "Block time on your calendar to do it."],
+    ["Plan", "Count the working days left this year. Is your list realistic? Cut what isn't.", true]
+  ];
+  function renderReset() {
+    var list = $("resetList"); list.textContent = "";
+    var lastSec = "", done = 0;
+    RESET.forEach(function (item, i) {
+      if (item[0] !== lastSec) { list.appendChild(el("p", { class: "sec" }, item[0])); lastSec = item[0]; }
+      var on = !!state.reset[i]; if (on) done++;
+      var row = el("div", { class: "check" + (on ? " done" : "") });
+      var box = el("input", { type: "checkbox", id: "r" + i });
+      box.checked = on;
+      box.addEventListener("change", function () { if (box.checked) state.reset[i] = 1; else delete state.reset[i]; renderReset(); save(); });
+      var lab = el("label", { for: "r" + i });
+      if (item[2]) lab.appendChild(el("span", { class: "new" }, "NEW FOR Q4"));
+      lab.appendChild(document.createTextNode(item[1]));
+      row.appendChild(box); row.appendChild(lab); list.appendChild(row);
+    });
+    $("resetBar").style.width = Math.round(done / RESET.length * 100) + "%";
+    $("resetCount").textContent = done + " of " + RESET.length + " done";
+    $("resetDone").hidden = done !== RESET.length;
+    $("weeksDone").textContent = state.weeks ? state.weeks + (state.weeks === 1 ? " week" : " weeks") + " completed" : "";
+  }
+  $("newWeek").addEventListener("click", function () {
+    var done = Object.keys(state.reset).length;
+    if (done === RESET.length) state.weeks = (state.weeks || 0) + 1;
+    else if (done && !confirm("Not every step is ticked. Clear them and start a new week anyway?")) return;
+    state.reset = {}; state.oneThing = ""; $("oneThing").value = "";
+    renderReset(); save();
+  });
+
+  // ---------- working agreement ----------
+  function agreementText() {
+    return "Hi " + v("aClient", "[Client name]") + ",\n\nWelcome aboard. Here's how I work, so there are no surprises.\n\n" +
+      "HOW TO REACH ME\n- Best way: " + v("aReach", "email") + ".\n- I reply within " + v("aReply", "1 business day") + ".\n- My working hours are " + v("aHours", "[your hours]") + ".\n- For urgent issues, " + v("aUrgent", "[how to reach you]") + ". Urgent means " + v("aUrgMeans", "something is broken or a deadline is at risk") + ".\n\n" +
+      "HOW WE'LL STAY ON TRACK\n- Every " + v("aUpdate", "Friday") + ", I'll send a short update: what's done, what's next, anything I need from you.\n- If I'm waiting on you, I'll say so clearly, with a date.\n\n" +
+      "FEEDBACK AND CHANGES\n- Each deliverable includes " + v("aRev", "2") + " rounds of revisions.\n- Send feedback in one message per round. It's faster for both of us.\n- New requests outside our agreed scope are welcome. I'll quote them separately before starting.\n\n" +
+      "PAYMENTS\n- Invoices are sent " + v("aInvWhen", "at each milestone") + " and due within " + v("aDue", "14") + " days.\n- Payment link: " + v("pay", "[payment link]") + "\n\n" +
+      "WHAT I NEED FROM YOU\n- " + v("aNeed", "[what you need]") + " by " + v("aNeedBy", "[date]") + ".\n- One main contact for decisions: " + v("aDm", "[name]") + ".\n\n" +
+      "Questions about any of this? Just reply. Looking forward to it.\n\n" + v("me", "[Your name]") + (v("biz", "") ? "\n" + v("biz", "") : "");
+  }
+
+  // ---------- year-end review ----------
+  var GROUPS = ["Keep and grow", "Keep as is", "Change something", "Let go"];
+  var NEXT = {
+    "Keep and grow": "Send the January kickoff email. Ask what else they need.",
+    "Keep as is": "Nothing. Carry on.",
+    "Change something": "Write the one change. Raise it at your next check-in.",
+    "Let go": "Finish current work well. Do not renew. Refer them elsewhere if you can."
+  };
+  function money(n) { return "$" + Math.round(n).toLocaleString(); }
+  function num(x) { var n = parseFloat(String(x || "").replace(/[^0-9.]/g, "")); return isFinite(n) ? n : 0; }
+  function renderReview() {
+    var body = $("reviewRows");
+    var focusId = document.activeElement && document.activeElement.id;
+    body.textContent = "";
+    var billed = 0, hours = 0, counts = {};
+    GROUPS.forEach(function (g) { counts[g] = 0; });
+    state.review.forEach(function (r, i) {
+      var tr = el("tr");
+      function cell(field, type, label) {
+        var td = el("td", type === "number" ? { class: "num" } : null);
+        var inp = el("input", { type: type || "text", id: "rv-" + i + "-" + field, "aria-label": label + " (row " + (i + 1) + ")" });
+        if (type === "number") { inp.setAttribute("min", "0"); inp.setAttribute("inputmode", "decimal"); inp.style.width = "100px"; }
+        inp.value = r[field] || "";
+        inp.addEventListener("input", function () { r[field] = inp.value; renderReview(); save(); });
+        td.appendChild(inp); return td;
+      }
+      function choice(field, options, label) {
+        var td = el("td"); var s = el("select", { id: "rv-" + i + "-" + field, "aria-label": label + " (row " + (i + 1) + ")" });
+        s.appendChild(el("option", { value: "" }, "—"));
+        options.forEach(function (o) { s.appendChild(el("option", { value: o }, o)); });
+        s.value = r[field] || "";
+        s.addEventListener("change", function () { r[field] = s.value; renderReview(); save(); });
+        td.appendChild(s); return td;
+      }
+      tr.appendChild(cell("client", "text", "Client"));
+      tr.appendChild(cell("what", "text", "What you did"));
+      tr.appendChild(cell("billed", "number", "Billed"));
+      tr.appendChild(cell("hours", "number", "Hours"));
+      tr.appendChild(choice("felt", ["Easy", "Fine", "Draining"], "Felt"));
+      tr.appendChild(choice("group", GROUPS, "Group"));
+      var b = num(r.billed), h = num(r.hours);
+      billed += b; hours += h; if (counts[r.group] != null) counts[r.group]++;
+      tr.appendChild(el("td", { class: "num" }, h > 0 && b > 0 ? money(b / h) : ""));
+      tr.appendChild(el("td", null, NEXT[r.group] || ""));
+      var del = el("button", { class: "small", "aria-label": "Remove row " + (i + 1) }, "×");
+      del.addEventListener("click", function () { state.review.splice(i, 1); renderReview(); save(); });
+      var tdDel = el("td"); tdDel.appendChild(del); tr.appendChild(tdDel);
+      body.appendChild(tr);
+    });
+    if (!state.review.length) {
+      var tr0 = el("tr"); var td0 = el("td", { colspan: "9", class: "muted" }, "No clients yet. Add every client you worked with this year.");
+      tr0.appendChild(td0); body.appendChild(tr0);
+    }
+    var stats = $("reviewStats"); stats.textContent = "";
+    function stat(value, label) { var d = el("div", { class: "stat" }); d.appendChild(el("b", null, value)); d.appendChild(el("span", null, label)); stats.appendChild(d); }
+    stat(money(billed), "Billed this year");
+    stat(String(Math.round(hours)), "Hours");
+    stat(hours > 0 ? money(billed / hours) : "—", "Average $ per hour");
+    GROUPS.forEach(function (g) { stat(String(counts[g]), g); });
+    if (focusId) { var f = $(focusId); if (f) { f.focus(); if (f.setSelectionRange && f.type === "text") { var l = f.value.length; f.setSelectionRange(l, l); } } }
+  }
+  $("addRow").addEventListener("click", function () {
+    state.review.push({}); renderReview(); save();
+    var f = $("rv-" + (state.review.length - 1) + "-client"); if (f) f.focus();
+  });
+
+  // ---------- copy ----------
+  function copyText(text, btn) {
+    var done = function () { var t = btn.textContent; btn.textContent = "✓ Copied"; setTimeout(function () { btn.textContent = t; }, 1500); };
+    if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(text).then(done, function () { fallback(text); done(); });
+    else { fallback(text); done(); }
+  }
+  function fallback(text) { var t = el("textarea"); t.value = text; document.body.appendChild(t); t.select(); try { document.execCommand("copy"); } catch (e) {} t.remove(); }
+  Array.prototype.forEach.call(document.querySelectorAll("[data-copy]"), function (b) {
+    b.addEventListener("click", function () { copyText($(b.getAttribute("data-copy")).textContent, b); });
+  });
+
+  function renderAll() {
+    renderClientPicker(); renderEmails(); renderReset();
+    $("agreement").textContent = agreementText();
+  }
+
+  // ---------- install as an app ----------
+  (function () {
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("/drop/sw.js", { scope: "/drop/" }).catch(function () {});
+    var standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone === true;
+    var dismissed = false;
+    try { dismissed = localStorage.getItem("bf-drop-install-dismissed") === "1"; } catch (e) {}
+    if (standalone || dismissed) return;
+    var box = $("install"), btn = $("installBtn"), how = $("installHow"), deferred = null;
+    var ua = navigator.userAgent || "";
+    var isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferred = e; box.hidden = false; });
+    window.addEventListener("appinstalled", function () { box.hidden = true; });
+    if (isIOS) {
+      box.hidden = false;
+      btn.textContent = "How to install";
+      btn.addEventListener("click", function () {
+        how.textContent = "In Safari, tap the Share button, then “Add to Home Screen”. The Buzzyfly icon appears on your home screen.";
+        btn.hidden = true;
+      });
+    } else {
+      btn.addEventListener("click", function () {
+        if (!deferred) {
+          how.textContent = "Open your browser menu and choose “Install app” or “Add to Home screen”.";
+          return;
+        }
+        deferred.prompt();
+        deferred.userChoice.then(function (choice) { if (choice.outcome === "accepted") box.hidden = true; deferred = null; });
+      });
+    }
+    $("installLater").addEventListener("click", function () {
+      box.hidden = true;
+      try { localStorage.setItem("bf-drop-install-dismissed", "1"); } catch (e) {}
+    });
+  })();
+
+  load().then(function () {
+    if (!Array.isArray(state.clients)) state.clients = [];
+    if (!Array.isArray(state.review)) state.review = [];
+    if (!state.sentLog || typeof state.sentLog !== "object") state.sentLog = {};
+    if (!state.reset || typeof state.reset !== "object") state.reset = {};
+    if (state.current >= state.clients.length) state.current = 0;
+    bindFields(); renderAll(); renderReview();
+  });
+})();
+</script>
+</body>
+</html>
