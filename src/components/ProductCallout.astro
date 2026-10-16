@@ -28,6 +28,8 @@ const featured = props.featured ?? badge === "Most popular";
 const Heading = props.headingLevel ?? "h3";
 // Crossed-out price only where it is true: the bundle vs buying each piece.
 const compareAt = product?.id === "complete-business-bundle" ? bundleSeparatePrice() : null;
+// Subscriptions bill monthly and open as a web app, so the one-time download line would be false.
+const isSubscription = price.includes("/month");
 
 // Buy buttons always go to a real checkout route for a known product.
 const order = product
@@ -73,7 +75,11 @@ const order = product
 		</a>
 	</div>
 	{compareAt && <p class="product-callout__note">{compareAt} if you buy each piece separately.</p>}
-	<p class="product-callout__guarantee">One-time payment. Instant download. {BUZZYFLY_CONFIG.guarantee}</p>
+	<p class="product-callout__guarantee">
+		{isSubscription
+			? "Billed monthly. Cancel anytime. Opens in your browser on any device."
+			: `One-time payment. Instant download. ${BUZZYFLY_CONFIG.guarantee}`}
+	</p>
 </aside>
 
 <style>

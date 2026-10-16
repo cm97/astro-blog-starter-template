@@ -5,11 +5,19 @@ import {
 	createDownloadToken,
 	parseLemonSqueezyOrder,
 	parseStripeOrder,
+	parseStripeSubscriptionEvent,
 	resolveProductFile,
 	type FulfillmentOrder,
 } from "../../lib/fulfillment";
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../../data/monetization";
-import { sendDeliveryEmail } from "../../lib/email";
+import { sendDeliveryEmail, sendDropWelcomeEmail } from "../../lib/email";
+import {
+	ensureDropSchema,
+	isDropItem,
+	issueDropToken,
+	recordDropCheckout,
+	recordDropStatus,
+} from "../../lib/dropAccess";
 
 // This endpoint must run on-demand (a Cloudflare Pages Function / Worker),
 // never be statically prerendered, since it verifies a live request signature.
@@ -44,7 +52,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		);
 		if (!valid) return new Response("Invalid signature", { status: 401 });
 
-		order = parseStripeOrder(JSON.parse(rawBody));
+		const payload = JSON.parse(rawBody);
+		const subscriptionEvent = parseStripeSubscriptionEvent(payload);
+		if (subscriptionEvent) return handleSubscriptionEvent(subscriptionEvent, env);
+		order = parseStripeOrder(payload);
 	} else if (lemonSqueezySignature) {
 		if (!env.LEMONSQUEEZY_WEBHOOK_SECRET) {
 			console.error("Buzzyfly webhook: LEMONSQUEEZY_WEBHOOK_SECRET is not configured");
@@ -71,6 +82,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			headers: { "content-type": "application/json" },
 		});
 	}
+
+	// The Monthly Drop is a subscription to a web app, not a file download.
+	if (isDropItem(order.itemId)) return fulfillDropOrder(order, env);
 
 	const productFile = resolveProductFile(order.itemId);
 	const isApps = isAppsItem(order.itemId);
@@ -164,3 +178,108 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		{ status: 200, headers: { "content-type": "application/json" } },
 	);
 };
+
+function json(body: unknown): Response {
+	return new Response(JSON.stringify(body), { status: 200, headers: { "content-type": "application/json" } });
+}
+
+/**
+ * Keeps drop_subscriptions in step with Stripe so /drop closes when a
+ * subscription is canceled or goes unpaid. Subscriptions that aren't the
+ * Monthly Drop are ignored unless they're already on record.
+ */
+async function handleSubscriptionEvent(
+	event: NonNullable<ReturnType<typeof parseStripeSubscriptionEvent>>,
+	env: Env,
+): Promise<Response> {
+	if (!env.DB) {
+		console.error(`Buzzyfly webhook: no D1 binding; cannot record subscription ${event.subscriptionId} -> ${event.status}`);
+		return json({ received: true, recorded: false });
+	}
+	try {
+		await ensureDropSchema(env.DB);
+		if (event.itemId && isDropItem(event.itemId)) {
+			await recordDropStatus(env.DB, event);
+		} else {
+			await env.DB.prepare(`UPDATE drop_subscriptions SET status = ?, updated_at = ? WHERE subscription_id = ?`)
+				.bind(event.status, Date.now(), event.subscriptionId)
+				.run();
+		}
+	} catch (error) {
+		// 500 so Stripe retries: a lost cancellation would leave access open.
+		console.error(`Buzzyfly webhook: failed to record subscription ${event.subscriptionId}`, error);
+		return new Response("Could not record subscription", { status: 500 });
+	}
+	console.log(`Buzzyfly webhook: subscription ${event.subscriptionId} -> ${event.status}`);
+	return json({ received: true, recorded: true });
+}
+
+/**
+ * New Monthly Drop subscriber: record the order and subscription, mint a
+ * stored unlock token (works without DOWNLOAD_TOKEN_SECRET) and email the
+ * link to the /drop web app.
+ */
+async function fulfillDropOrder(order: FulfillmentOrder, env: Env): Promise<Response> {
+	if (!env.DB) {
+		console.error(`Buzzyfly webhook: no D1 binding; cannot fulfill Monthly Drop order ${order.orderId}`);
+		return new Response("Fulfillment not configured", { status: 500 });
+	}
+
+	const insert = await env.DB.prepare(
+		`INSERT INTO fulfillments (provider, order_id, item_id, customer_email, created_at)
+		 VALUES (?, ?, ?, ?, ?)
+		 ON CONFLICT (provider, order_id) DO NOTHING`,
+	)
+		.bind(order.provider, order.orderId, order.itemId, order.customerEmail, Date.now())
+		.run();
+	if (insert.meta.changes === 0) {
+		console.log(`Buzzyfly webhook: drop order ${order.orderId} already fulfilled; ignoring retry`);
+		return json({ received: true, fulfilled: true, duplicate: true });
+	}
+	if (order.source) {
+		await env.DB.prepare(`UPDATE fulfillments SET source = ? WHERE provider = ? AND order_id = ?`)
+			.bind(order.source, order.provider, order.orderId)
+			.run()
+			.catch((error) => console.error("Buzzyfly webhook: failed to record source", error));
+	}
+
+	if (order.subscriptionId) {
+		try {
+			await ensureDropSchema(env.DB);
+			await recordDropCheckout(env.DB, {
+				subscriptionId: order.subscriptionId,
+				checkoutSessionId: order.orderId,
+				customerId: order.customerId ?? null,
+				customerEmail: order.customerEmail,
+			});
+		} catch (error) {
+			console.error(`Buzzyfly webhook: failed to record drop subscription for ${order.orderId}`, error);
+		}
+	} else {
+		console.error(`Buzzyfly webhook: drop order ${order.orderId} has no subscription id`);
+	}
+
+	const token = await issueDropToken(env, { orderId: order.orderId, customerEmail: order.customerEmail }).catch(
+		(error) => {
+			console.error(`Buzzyfly webhook: failed to issue drop token for ${order.orderId}`, error);
+			return null;
+		},
+	);
+	if (!token) {
+		console.error(`Buzzyfly webhook: DELIVERY FAILED for drop order ${order.orderId}: no unlock token`);
+		return json({ received: true, fulfilled: false });
+	}
+
+	const unlockUrl = `${BUZZYFLY_CONFIG.siteUrl}/drop/unlock?token=${token}`;
+	const delivery = await sendDropWelcomeEmail(
+		{ to: order.customerEmail ?? "", unlockUrl, orderId: order.orderId },
+		env,
+	);
+	if (!delivery.sent) {
+		console.error(
+			`Buzzyfly webhook: DELIVERY FAILED for drop order ${order.orderId} (${order.customerEmail ?? "no email"}): ${delivery.reason}. Unlock URL: ${unlockUrl}`,
+		);
+	}
+	console.log(`Buzzyfly webhook: fulfilled drop order ${order.orderId} -> delivered=${delivery.sent}`);
+	return json({ received: true, fulfilled: true, delivered: delivery.sent });
+}

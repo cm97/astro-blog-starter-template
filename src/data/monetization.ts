@@ -78,12 +78,6 @@ export const PRODUCT_FILE_MAP: Record<
 		fileName: "complete-business-bundle.zip",
 		contentType: "application/zip",
 	},
-	// Subscription: replace this ZIP in R2 each month with the new drop.
-	"buzzyfly-monthly-drop": {
-		r2Key: "products/buzzyfly-monthly-drop.zip",
-		fileName: "buzzyfly-monthly-drop.zip",
-		contentType: "application/zip",
-	},
 };
 
 export const UPSELL_MAP: Record<string, string | null> = {
@@ -145,8 +139,8 @@ export const ALL_PRODUCTS = [
 		id: "buzzyfly-monthly-drop",
 		title: "Buzzyfly Monthly Drop",
 		price: "$19/month",
-		description: "New real content every month: fresh email template pack, updated weekly reset checklist, new client onboarding asset, and one digital system update. Delivered to your inbox. Cancel anytime.",
-		features: ["New email templates every month", "Updated weekly reset checklist", "New client onboarding asset", "Digital system update", "Cancel anytime"],
+		description: "A web app that gets new client tools every month. Emails that write themselves, an updated weekly reset, a new onboarding piece and a planning tool. Opens in your browser. Your work saves to your account.",
+		features: ["New email templates every month that fill in each client's details", "Updated weekly reset checklist that tracks your progress", "New client onboarding asset", "New planning tool for your business", "Works on phone, tablet or computer. Nothing to install"],
 		buyUrl: "https://buy.stripe.com/eVq4gB7963AWfned3UaVa09",
 		badge: "Monthly",
 	},
