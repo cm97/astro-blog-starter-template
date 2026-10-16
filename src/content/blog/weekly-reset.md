@@ -3,7 +3,7 @@ title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
 description: "A 20-minute weekly reset for solo operators — Monday sheet, Wednesday check, and a 12-minute Thursday cash salvage so priorities and follow-ups still exist when the week breaks."
 category: "planning"
 pubDate: "Sep 01 2026"
-updatedDate: "Oct 08 2026"
+updatedDate: "Oct 16 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -30,12 +30,40 @@ Lock one slot: Monday before Slack, or Friday before you close the laptop. If th
 
 - Open last week's note or calendar.
 - Write three lines only: what shipped, what got pushed and why, what you promised that is still open.
-- Clear every open decision in the inbox. Reply, schedule, or delete. No later pile.
+- Clear every open decision in the inbox. Reply, schedule, or delete. No later pile. Cap at five minutes. If still in the inbox, stop.
+
+Fill this before you leave the inbox:
+
+```
+Shipped last week:
+1. ________
+2. ________
+
+Still open (promise + date):
+1. ________
+2. ________
+
+Today threads (max 5):
+1) ________
+Wait until Wednesday: ________
+Deleted: ________
+```
 
 ### Block 2 — Three priorities (5 minutes)
 
 - Write three priorities. Not five. If a fourth appears, one of the three leaves.
 - Put each on the calendar with a real block. Unscheduled is not a priority.
+- One client delivery that is due or late. One follow-up that is aging. One admin item that unblocks money.
+
+Fill-in:
+
+```
+This week's three:
+1) ________ — block: ________
+2) ________ — block: ________
+3) ________ — block: ________
+Killed so these three can live: ________
+```
 
 ### Block 3 — Follow-ups that die (5 minutes)
 
@@ -43,9 +71,25 @@ Lock one slot: Monday before Slack, or Friday before you close the laptop. If th
 - Who went quiet after a proposal or a deliverable?
 - Send one sentence each. One next step or a soft close. No novel.
 
+Exact lines:
+
+- Proposal, no reply: "Still want me to hold the [date] start, or should I release it?"
+- Finished work, no check-in: "Checking in after [deliverable]. Anything to tighten, or book the next piece?"
+- Invoice that never left: "Invoice for [deliverable] is attached. Due [date]. Reply if the address is wrong."
+
+Send two. Do not perfect them.
+
 ### Block 4 — Tomorrow's first move (5 minutes)
 
 One line. That is the only thing that has to be true when you open the laptop.
+
+```
+Tomorrow first move: ________
+Time box: ________
+Done when: ________
+```
+
+If the sheet takes more than 20 minutes, you are planning. Cut the list until it fits.
 
 ## Monday sheet — fill it, do not redesign it
 
@@ -69,8 +113,6 @@ Follow-ups that die if you do not send them today:
 - Name: ________ — one sentence: ________
 
 Tomorrow's first move: ________
-
-If the sheet takes more than 20 minutes, you are planning. Cut the list until it fits.
 
 ## Wednesday, 5 minutes
 
@@ -114,6 +156,14 @@ Stop at 12 minutes. A salvage that becomes a new planning system is how Friday d
 - Dies (no guilt): ________
 - Step that failed twice: ________
 
+## Extra concrete steps that keep the reset alive
+
+- Put the Monday slot on the calendar as a recurring 20-minute block titled "Reset — do not move." If it is not protected, delivery eats it.
+- Keep the filled Monday sheet in the same folder as the onboarding checklist and the scope reply. One open, all three available.
+- When a fourth priority appears mid-week, write it on a parking line. It does not enter the three until Monday.
+- After any client payment clears, add one line to next Monday's "Still open": the day-2 or day-7 onboarding touch. The reset is how week two stays quiet-free.
+- Cap follow-ups at two per reset. Five becomes a blast and the habit dies.
+
 ## Phrases so you do not draft from a blank screen
 
 - "Still the priority, or does this move?"
@@ -131,6 +181,6 @@ The Weekly Reset Checklist ($15) is this sheet alone. The Digital System ($49) i
 
 One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
 
-[Get the Digital System — $49](/buy/buzzyfly-digital-system)
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-All five packs, one download: [Complete Business Bundle — $97](/buy/complete-business-bundle)
+All five packs, one download: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
