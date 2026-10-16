@@ -50,9 +50,10 @@ jobs:
           NODE_ENV: production
       - name: Deploy to Cloudflare Workers
         run: npx wrangler deploy --config wrangler.json
-      # Runs even when the deploy fails: a challenge page blocks Stripe either way.
+      # Runs even when the deploy fails (a challenge page blocks Stripe either way),
+      # but only when there is a key to run it with.
       - name: Keep Cloudflare from challenging visitors and Stripe
-        if: ${{ !cancelled() }}
+        if: ${{ !cancelled() && env.CLOUDFLARE_API_TOKEN != '' }}
         run: scripts/cloudflare-guard.sh
       - name: Check the live site the way Stripe sees it
         run: scripts/verify-live.sh
