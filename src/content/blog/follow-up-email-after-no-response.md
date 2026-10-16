@@ -2,11 +2,12 @@
 title: "Follow-Up Email After No Response: 5 Templates That Actually Get Replies"
 description: "Five ready-to-send follow-up email templates for when a prospect or client goes quiet — for proposals, check-ins, re-engagement, referral requests, and project wrap-ups."
 pubDate: "Sep 13 2026"
-updatedDate: "Oct 06 2026"
+updatedDate: "Oct 16 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
@@ -236,6 +237,10 @@ That is the gap the full system closes. The templates are the words. The Digital
 
 The $19 follow-up pack is the emails alone. The $49 system is those emails plus the checklists you run when delivery eats the day. One primary move: the system.
 
----
+The Follow-Up Email Templates ($19) is the five emails alone. The Digital System ($49) is those emails plus the onboarding checklist and the weekly reset so the sends still happen on a slammed Thursday. The Complete Business Bundle ($97) is every pack in one download.
 
-The Buzzyfly Digital System includes the follow-up templates plus the onboarding checklists and weekly reset so the whole client process still runs when you are slammed. One-time payment. Download after purchase. 30-day money-back guarantee — email us if it doesn't deliver. [Get the $49 system →](/buy/buzzyfly-digital-system)
+One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+
+All packs in one download: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
