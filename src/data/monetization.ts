@@ -49,35 +49,26 @@ export function bundleSeparatePrice(): string {
 	return `$${total}`;
 }
 
-export const PRODUCT_FILE_MAP: Record<
-	string,
-	{ r2Key: string; fileName: string; contentType: string }
-> = {
-	"buzzyfly-digital-system": {
-		r2Key: "products/buzzyfly-digital-system.zip",
-		fileName: "buzzyfly-digital-system.zip",
-		contentType: "application/zip",
-	},
-	"weekly-reset-checklist": {
-		r2Key: "products/weekly-reset-checklist.zip",
-		fileName: "weekly-reset-checklist.zip",
-		contentType: "application/zip",
-	},
-	"follow-up-email-templates": {
-		r2Key: "products/follow-up-email-templates.zip",
-		fileName: "follow-up-email-templates.zip",
-		contentType: "application/zip",
-	},
-	"client-onboarding-kit": {
-		r2Key: "products/client-onboarding-kit.zip",
-		fileName: "client-onboarding-kit.zip",
-		contentType: "application/zip",
-	},
-	"complete-business-bundle": {
-		r2Key: "products/complete-business-bundle.zip",
-		fileName: "complete-business-bundle.zip",
-		contentType: "application/zip",
-	},
+const XLSX_TYPE = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+
+export type ProductFile = { r2Key: string; fileName: string; contentType: string };
+
+function workbook(slug: string, fileName: string): ProductFile {
+	return { r2Key: `products/${slug}.xlsx`, fileName: `${fileName}.xlsx`, contentType: XLSX_TYPE };
+}
+
+const CLIENT_OS = workbook("buzzyfly-client-os", "Buzzyfly Client OS");
+const CLIENT_ONBOARDING = workbook("buzzyfly-client-onboarding", "Buzzyfly Client Onboarding");
+const FOLLOW_UP_TRACKER = workbook("buzzyfly-follow-up-tracker", "Buzzyfly Follow-Up Tracker");
+const WEEKLY_RESET_PLANNER = workbook("buzzyfly-weekly-reset-planner", "Buzzyfly Weekly Reset Planner");
+
+/** The Excel workbook(s) each paid product delivers. The bundle delivers four. */
+export const PRODUCT_FILE_MAP: Record<string, ProductFile[]> = {
+	"buzzyfly-digital-system": [CLIENT_OS],
+	"weekly-reset-checklist": [WEEKLY_RESET_PLANNER],
+	"follow-up-email-templates": [FOLLOW_UP_TRACKER],
+	"client-onboarding-kit": [CLIENT_ONBOARDING],
+	"complete-business-bundle": [CLIENT_OS, CLIENT_ONBOARDING, FOLLOW_UP_TRACKER, WEEKLY_RESET_PLANNER],
 };
 
 export const UPSELL_MAP: Record<string, string | null> = {

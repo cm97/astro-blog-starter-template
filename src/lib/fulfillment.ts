@@ -65,8 +65,8 @@ export function parseStripeOrder(payload: any): FulfillmentOrder | null {
 	};
 }
 
-/** Looks up the private R2 object for a purchased item, if it exists. */
-export function resolveProductFile(itemId: string) {
+/** Looks up the workbook file(s) a purchased item delivers, if it is a paid product. */
+export function resolveProductFiles(itemId: string) {
 	return PRODUCT_FILE_MAP[itemId] ?? null;
 }
 

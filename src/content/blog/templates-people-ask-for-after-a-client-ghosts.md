@@ -131,7 +131,7 @@ The five emails alone are the Follow-Up Email Templates, $19.
 
 Intake plus kickoff is the Client Onboarding Kit, $29.
 
-All of it in one zip — onboarding, weekly reset, follow-ups — is the Digital System, $49: /buy/buzzyfly-digital-system
+All of it in one Excel workbook — onboarding, weekly reset, follow-ups — is the Digital System, $49: /buy/buzzyfly-digital-system
 
 Every file in one download is the Complete Business Bundle, $97: /buy/complete-business-bundle
 

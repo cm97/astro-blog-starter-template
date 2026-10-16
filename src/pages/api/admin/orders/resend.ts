@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { issueStoredDownloadToken, resolveProductFile } from "../../../../lib/fulfillment";
+import { issueStoredDownloadToken, resolveProductFiles } from "../../../../lib/fulfillment";
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../../../../data/monetization";
 import { logAdminAction } from "../../../../lib/audit";
 import { sendDeliveryEmail } from "../../../../lib/email";
@@ -48,7 +48,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return redirect(backParams);
 	}
 
-	if (!resolveProductFile(order.item_id)) {
+	if (!resolveProductFiles(order.item_id)) {
 		backParams.set("error", `No product file is mapped for item "${order.item_id}".`);
 		return redirect(backParams);
 	}

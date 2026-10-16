@@ -5,7 +5,7 @@ import {
 	createDownloadToken,
 	parseLemonSqueezyOrder,
 	parseStripeOrder,
-	resolveProductFile,
+	resolveProductFiles,
 	type FulfillmentOrder,
 } from "../../lib/fulfillment";
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../../data/monetization";
@@ -72,9 +72,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		});
 	}
 
-	const productFile = resolveProductFile(order.itemId);
+	const productFiles = resolveProductFiles(order.itemId);
 	const isApps = isAppsItem(order.itemId);
-	if (!productFile && !isApps) {
+	if (!productFiles && !isApps) {
 		console.error(`Buzzyfly webhook: no product file mapped for item ${order.itemId}`);
 		return new Response(JSON.stringify({ received: true, fulfilled: false }), {
 			status: 200,
@@ -138,7 +138,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			downloadUrl,
 			productName:
 				ALL_PRODUCTS.find((p) => p.id === order.itemId)?.title ??
-				(productFile?.fileName ?? "Buzzyfly Apps Pro").replace(/\.[^.]+$/, "").replace(/[-_]/g, " "),
+				(productFiles?.[0]?.fileName ?? "Buzzyfly Apps Pro").replace(/\.[^.]+$/, "").replace(/[-_]/g, " "),
 			orderId: order.orderId,
 			itemId: order.itemId,
 		},
