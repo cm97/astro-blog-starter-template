@@ -6,6 +6,11 @@
 <meta name="robots" content="noindex">
 <title>Monthly Drop | Buzzyfly</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="manifest" href="/drop/manifest.webmanifest">
+<meta name="theme-color" content="#23201a">
+<link rel="apple-touch-icon" href="/drop/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Buzzyfly Drop">
 <style>
 :root{--bg:#faf7ef;--card:#fff;--ink:#23201a;--muted:#6b6455;--line:#e2dccb;--accent:#e0a012;--accent-ink:#1d1606;--ok:#2f7d4f;--ok-bg:#e4f3ea;--warn:#b3402f;--soft:#fffdf7}
 *{box-sizing:border-box}
@@ -54,6 +59,13 @@ td input,td select{min-height:40px;padding:7px}
 .stat b{display:block;font-size:1.3rem}.stat span{font-size:.8rem;color:var(--muted)}
 .steps li{margin:6px 0}
 .muted{color:var(--muted)}
+.install{max-width:980px;margin:12px auto 0;padding:0 16px}
+.install>div{display:flex;gap:12px;align-items:center;flex-wrap:wrap;background:var(--ink);color:#fff;border-radius:8px;padding:12px 14px}
+.install img{width:44px;height:44px;border-radius:10px;flex:none}
+.install p{margin:0;flex:1;min-width:180px}
+.install .muted{color:#d6d0c2}
+.install button.primary{min-width:120px}
+.install button.link{background:none;border:0;color:#d6d0c2;text-decoration:underline}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
 @media (prefers-reduced-motion:reduce){.progress>div{transition:none}}
 @media print{.top,nav.tabs,.bar,button{display:none!important}.sheet{border:0}}
@@ -65,6 +77,14 @@ td input,td select{min-height:40px;padding:7px}
   <h1>Buzzyfly Monthly Drop</h1>
   <p class="sub"><strong>October 2026: Finish the year clean.</strong> Close out invoices, quiet clients and loose ends before January.</p>
 </header>
+<aside class="install" id="install" hidden aria-label="Install the app">
+  <div>
+    <img src="/drop/icon-192.png" alt="">
+    <p><strong>Install the Monthly Drop app</strong><br><span class="muted" id="installHow">Get the Buzzyfly icon on your home screen. It opens like any app, even offline.</span></p>
+    <button class="primary" id="installBtn">Install app</button>
+    <button class="link" id="installLater">Not now</button>
+  </div>
+</aside>
 <nav class="tabs" role="tablist" aria-label="Monthly Drop tools">
   <button role="tab" id="t-start" aria-controls="p-start" aria-selected="true">Start here</button>
   <button role="tab" id="t-emails" aria-controls="p-emails" aria-selected="false">Year-end emails</button>
@@ -481,6 +501,41 @@ td input,td select{min-height:40px;padding:7px}
     renderClientPicker(); renderEmails(); renderReset();
     $("agreement").textContent = agreementText();
   }
+
+  // ---------- install as an app ----------
+  (function () {
+    if ("serviceWorker" in navigator) navigator.serviceWorker.register("/drop/sw.js", { scope: "/drop/" }).catch(function () {});
+    var standalone = (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches) || window.navigator.standalone === true;
+    var dismissed = false;
+    try { dismissed = localStorage.getItem("bf-drop-install-dismissed") === "1"; } catch (e) {}
+    if (standalone || dismissed) return;
+    var box = $("install"), btn = $("installBtn"), how = $("installHow"), deferred = null;
+    var ua = navigator.userAgent || "";
+    var isIOS = /iPhone|iPad|iPod/.test(ua) || (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+    window.addEventListener("beforeinstallprompt", function (e) { e.preventDefault(); deferred = e; box.hidden = false; });
+    window.addEventListener("appinstalled", function () { box.hidden = true; });
+    if (isIOS) {
+      box.hidden = false;
+      btn.textContent = "How to install";
+      btn.addEventListener("click", function () {
+        how.textContent = "In Safari, tap the Share button, then “Add to Home Screen”. The Buzzyfly icon appears on your home screen.";
+        btn.hidden = true;
+      });
+    } else {
+      btn.addEventListener("click", function () {
+        if (!deferred) {
+          how.textContent = "Open your browser menu and choose “Install app” or “Add to Home screen”.";
+          return;
+        }
+        deferred.prompt();
+        deferred.userChoice.then(function (choice) { if (choice.outcome === "accepted") box.hidden = true; deferred = null; });
+      });
+    }
+    $("installLater").addEventListener("click", function () {
+      box.hidden = true;
+      try { localStorage.setItem("bf-drop-install-dismissed", "1"); } catch (e) {}
+    });
+  })();
 
   load().then(function () {
     if (!Array.isArray(state.clients)) state.clients = [];

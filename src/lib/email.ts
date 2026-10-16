@@ -272,7 +272,8 @@ export async function sendDropWelcomeEmail(
       <a href="${message.unlockUrl}" style="display:inline-block;background:#1f4d3a;color:#fff;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:600">Open the Monthly Drop app</a>
     </p>
     <p style="margin:0 0 16px;font-size:14px">
-      It opens in your browser on any phone, tablet or computer. Nothing to download or install.
+      It works on any phone, tablet or computer. When it opens, tap <strong>Install app</strong> to put the
+      Buzzyfly icon on your home screen. After that, tap the icon to open it like any other app.
       Your work saves automatically and follows you to any device you open this link on.
     </p>
     <p style="margin:0 0 16px;font-size:14px">
@@ -292,7 +293,7 @@ export async function sendDropWelcomeEmail(
 		"Open the Monthly Drop app:",
 		message.unlockUrl,
 		"",
-		"It opens in your browser on any phone, tablet or computer. Nothing to download or install. Your work saves automatically and follows you to any device you open this link on.",
+		"It works on any phone, tablet or computer. When it opens, tap Install app to put the Buzzyfly icon on your home screen. After that, tap the icon to open it like any other app. Your work saves automatically and follows you to any device you open this link on.",
 		"",
 		"This month: five year-end client emails that write themselves, the Q4 weekly reset, a client working agreement, and the year-end client review.",
 		"",

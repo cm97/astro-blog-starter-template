@@ -17,5 +17,5 @@ export const GET: APIRoute = async ({ url, locals, cookies, redirect }) => {
 		sameSite: "lax",
 		maxAge: DROP_TOKEN_TTL_SECONDS,
 	});
-	return redirect("/drop", 302);
+	return redirect("/drop/", 302);
 };
