@@ -1,5 +1,6 @@
 import { ALL_PRODUCTS, PRODUCT_FILE_MAP } from "../data/monetization";
 import { verifyDownloadToken } from "./fulfillment";
+import { usableSecret } from "./secrets";
 import { productBuyUrl } from "./productCheckout";
 
 /**
@@ -55,8 +56,9 @@ export async function verifyProductToken(
 	}
 
 	// Signed token minted after a verified payment (Stripe webhook or PayPal capture).
-	if (env.DOWNLOAD_TOKEN_SECRET) {
-		const claims = await verifyDownloadToken(token, env.DOWNLOAD_TOKEN_SECRET);
+	const secret = await usableSecret(env.DOWNLOAD_TOKEN_SECRET);
+	if (secret) {
+		const claims = await verifyDownloadToken(token, secret);
 		if (claims && isProduct(claims.itemId)) return { ...claims, stored: false };
 	}
 
