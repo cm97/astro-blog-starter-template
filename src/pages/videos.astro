@@ -5,13 +5,17 @@ import Footer from '../components/Footer.astro';
 import { EXPLAINER_VIDEOS, fmtTime } from '../data/videos';
 
 export const prerender = false;
+
+const featured = EXPLAINER_VIDEOS[0];
+const queue = EXPLAINER_VIDEOS.slice(1);
+const perSlide = Math.round((featured.seconds / featured.slides.length) * 1000);
 ---
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead title="Buzzyfly Videos" description="Short explainer videos for every part of the Buzzyfly system." />
 		<style>
-			body.yt-page { background:#0f0f0f; color:#f1f1f1; margin:0; }
+			body.yt-page { background:#0f0f0f; color:#f1f1f1; margin:0; font-family:system-ui,-apple-system,sans-serif; }
 			body.yt-page header { background:#0f0f0f !important; box-shadow:none !important; border-bottom:1px solid #272727; }
 			body.yt-page footer { background:#0f0f0f !important; border-top:1px solid #272727; }
 			body.yt-page header nav a,
@@ -21,7 +25,6 @@ export const prerender = false;
 
 			.yt { max-width:1280px; margin:0 auto; padding:0 16px 48px; }
 
-			/* ── Channel banner ── */
 			.ch-banner {
 				display:flex;
 				align-items:center;
@@ -46,7 +49,6 @@ export const prerender = false;
 			.ch-meta { font-size:.82rem; color:#aaa; margin:0 0 8px; }
 			.ch-desc { font-size:.85rem; color:#ccc; margin:0; max-width:500px; line-height:1.4; }
 
-			/* ── Filter pills ── */
 			.filters {
 				display:flex;
 				gap:8px;
@@ -66,14 +68,178 @@ export const prerender = false;
 			}
 			.pill.active, .pill:hover { background:#f1f1f1; color:#0f0f0f; }
 
-			/* ── Video grid ── */
+			.yt-layout { display:grid; grid-template-columns:minmax(0,1fr) 402px; gap:24px; align-items:start; margin-bottom:40px; }
+
+			.player-wrap { min-width:0; }
+			.player {
+				position:relative;
+				aspect-ratio:16/9;
+				background:#000;
+				border-radius:12px;
+				overflow:hidden;
+				cursor:pointer;
+				user-select:none;
+			}
+			.player-poster {
+				position:absolute;
+				inset:0;
+				z-index:10;
+				transition:opacity .35s;
+			}
+			.player-poster img {
+				width:100%; height:100%;
+				object-fit:cover;
+				display:block;
+			}
+			.poster-play {
+				position:absolute;
+				inset:0;
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				background:rgba(0,0,0,.35);
+				transition:background .2s;
+			}
+			.player:hover .poster-play { background:rgba(0,0,0,.5); }
+			.poster-play-btn {
+				width:72px; height:72px;
+				border-radius:50%;
+				background:rgba(255,255,255,.92);
+				display:flex;
+				align-items:center;
+				justify-content:center;
+				box-shadow:0 4px 24px rgba(0,0,0,.5);
+				transition:transform .2s, background .2s;
+			}
+			.player:hover .poster-play-btn { transform:scale(1.08); background:#fff; }
+			.poster-play-btn svg { width:28px; height:28px; margin-left:4px; }
+			.player.playing .player-poster { opacity:0; pointer-events:none; }
+
+			.explainer {
+				position:absolute;
+				inset:0;
+				overflow:hidden;
+				opacity:0;
+				transition:opacity .4s;
+			}
+			.player.playing .explainer { opacity:1; }
+			.exp-bg {
+				position:absolute;
+				inset:-20%;
+				animation:bgshift 8s ease-in-out infinite alternate;
+			}
+			@keyframes bgshift {
+				0%   { transform:translate(0,0) scale(1); }
+				50%  { transform:translate(3%,2%) scale(1.04); }
+				100% { transform:translate(-2%,3%) scale(1.02); }
+			}
+			.exp-grid {
+				position:absolute;
+				inset:0;
+				background-image:
+					linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+					linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+				background-size:48px 48px;
+				pointer-events:none;
+			}
+			.exp-content {
+				position:absolute;
+				inset:0;
+				display:flex;
+				flex-direction:column;
+				justify-content:center;
+				padding:7% 8%;
+			}
+			.slide-kicker {
+				font-size:clamp(.65rem,.9vw,.85rem);
+				font-weight:700;
+				letter-spacing:.14em;
+				text-transform:uppercase;
+				color:#f4c27a;
+				margin:0 0 .55rem;
+			}
+			.slide-headline {
+				font-size:clamp(1.2rem,3.5vw,2.6rem);
+				font-weight:800;
+				color:#fff;
+				line-height:1.15;
+				margin:0 0 .6rem;
+			}
+			.slide-sub {
+				font-size:clamp(.82rem,1.5vw,1.05rem);
+				color:rgba(255,255,255,.72);
+				line-height:1.55;
+				margin:0;
+				max-width:36rem;
+			}
+			.exp-brand {
+				position:absolute;
+				top:14px; left:16px;
+				font-size:.72rem;
+				font-weight:800;
+				letter-spacing:.1em;
+				color:rgba(244,194,122,.6);
+				text-transform:uppercase;
+				z-index:2;
+			}
+
+			.video-title {
+				font-size:1.15rem;
+				font-weight:600;
+				color:#fff;
+				margin:14px 0 8px;
+				line-height:1.35;
+			}
+			.video-stats { font-size:.85rem; color:#aaa; margin:0 0 16px; }
+
+			.sidebar { min-width:0; }
+			.sidebar-label {
+				font-size:.8rem;
+				font-weight:700;
+				letter-spacing:.06em;
+				text-transform:uppercase;
+				color:#aaa;
+				margin:0 0 10px;
+			}
+			.queue { display:flex; flex-direction:column; gap:6px; }
+			.qcard {
+				display:grid;
+				grid-template-columns:168px 1fr;
+				gap:8px;
+				text-decoration:none;
+				color:inherit;
+				padding:5px;
+				border-radius:8px;
+				transition:background .15s;
+			}
+			.qcard:hover { background:#1f1f1f; }
+			.qthumb {
+				position:relative;
+				aspect-ratio:16/9;
+				border-radius:6px;
+				overflow:hidden;
+				background:#1a1a1a;
+				flex-shrink:0;
+			}
+			.qthumb img { width:100%; height:100%; object-fit:cover; display:block; }
+			.qdur {
+				position:absolute;
+				right:4px; bottom:4px;
+				background:rgba(0,0,0,.85);
+				color:#fff;
+				font-size:10px;
+				font-weight:600;
+				padding:1px 4px;
+				border-radius:3px;
+			}
+			.qtitle { font-size:.84rem; font-weight:500; color:#f1f1f1; margin:0 0 4px; line-height:1.35; }
+			.qmeta  { font-size:.74rem; color:#aaa; margin:0; }
+
 			.grid {
 				display:grid;
 				grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
 				gap:20px;
 			}
-
-			/* ── Video card ── */
 			.vcard { text-decoration:none; color:inherit; display:block; }
 			.vcard:hover .vthumb img { transform:scale(1.04); }
 			.vthumb {
@@ -113,7 +279,6 @@ export const prerender = false;
 			}
 			.vcard:hover .vplay-overlay { opacity:1; }
 			.vplay-overlay svg { width:48px; height:48px; }
-
 			.vtitle {
 				font-size:.92rem;
 				font-weight:500;
@@ -127,6 +292,12 @@ export const prerender = false;
 			}
 			.vmeta { font-size:.78rem; color:#aaa; margin:0; }
 
+			@media (max-width:960px) {
+				.yt-layout { grid-template-columns:1fr; }
+				.sidebar { order:3; }
+				.queue { display:grid; grid-template-columns:repeat(auto-fill,minmax(260px,1fr)); gap:12px; }
+				.qcard { grid-template-columns:140px 1fr; }
+			}
 			@media (max-width:640px) {
 				.grid { grid-template-columns:repeat(auto-fill,minmax(220px,1fr)); gap:14px; }
 				.ch-banner { flex-wrap:wrap; }
@@ -137,7 +308,6 @@ export const prerender = false;
 		<Header />
 		<main class="yt">
 
-			<!-- Channel header -->
 			<div class="ch-banner">
 				<div class="ch-logo">
 					<img src="/buzzyfly-logo.svg" alt="Buzzyfly" />
@@ -149,7 +319,6 @@ export const prerender = false;
 				</div>
 			</div>
 
-			<!-- Filter pills -->
 			<div class="filters">
 				<button class="pill active">All</button>
 				<button class="pill">Systems</button>
@@ -157,7 +326,53 @@ export const prerender = false;
 				<button class="pill">Quick tips</button>
 			</div>
 
-			<!-- Video grid -->
+			<div class="yt-layout">
+				<div class="player-wrap">
+					<div class="player" id="player">
+						<div class="player-poster" id="playerPoster">
+							<img src={featured.poster} alt={featured.title} />
+							<div class="poster-play" id="posterPlay">
+								<div class="poster-play-btn">
+									<svg viewBox="0 0 28 28" fill="none">
+										<polygon points="6,2 26,14 6,26" fill="#0f0f0f"/>
+									</svg>
+								</div>
+							</div>
+						</div>
+						<div class="explainer" id="explainer">
+							<div class="exp-bg" id="expBg"></div>
+							<div class="exp-grid"></div>
+							<span class="exp-brand">Buzzyfly</span>
+							<div class="exp-content" id="slideContent">
+								<p class="slide-kicker" id="slideKicker">{featured.slides[0][0]}</p>
+								<h2 class="slide-headline" id="slideHeadline">{featured.slides[0][1]}</h2>
+								<p class="slide-sub" id="slideSub">{featured.slides[0][2]}</p>
+							</div>
+						</div>
+					</div>
+					<h2 class="video-title">{featured.title}</h2>
+					<p class="video-stats">Buzzyfly · {featured.views} views · {featured.date}</p>
+				</div>
+
+				<aside class="sidebar">
+					<p class="sidebar-label">Up next</p>
+					<div class="queue">
+						{queue.map((v) => (
+							<a class="qcard" href={`/videos/${v.slug}`}>
+								<div class="qthumb">
+									<img src={v.poster} alt={v.title} loading="lazy" />
+									<span class="qdur">{fmtTime(v.seconds)}</span>
+								</div>
+								<div>
+									<p class="qtitle">{v.title}</p>
+									<p class="qmeta">Buzzyfly · {v.views} views · {v.date}</p>
+								</div>
+							</a>
+						))}
+					</div>
+				</aside>
+			</div>
+
 			<div class="grid">
 				{EXPLAINER_VIDEOS.map((v) => (
 					<a class="vcard" href={`/videos/${v.slug}`}>
@@ -179,5 +394,55 @@ export const prerender = false;
 
 		</main>
 		<Footer />
+
+		<script is:inline define:vars={{ slides: featured.slides, perSlide }}>
+			const player = document.getElementById('player');
+			const posterPlay = document.getElementById('posterPlay');
+			const slideKicker = document.getElementById('slideKicker');
+			const slideHeadline = document.getElementById('slideHeadline');
+			const slideSub = document.getElementById('slideSub');
+			const expBg = document.getElementById('expBg');
+
+			const BG_SETS = [
+				'radial-gradient(ellipse 60% 50% at 20% 30%, rgba(201,120,32,0.4) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 80% 70%, rgba(35,55,255,0.28) 0%, transparent 65%), #0f0f0f',
+				'radial-gradient(ellipse 55% 55% at 75% 25%, rgba(35,200,120,0.3) 0%, transparent 70%), radial-gradient(ellipse 60% 50% at 20% 75%, rgba(120,35,255,0.25) 0%, transparent 65%), #0a0a0a',
+				'radial-gradient(ellipse 70% 50% at 50% 20%, rgba(255,60,80,0.28) 0%, transparent 70%), radial-gradient(ellipse 50% 60% at 80% 80%, rgba(201,120,32,0.3) 0%, transparent 65%), #0f0f0f',
+			];
+			let bgIdx = 0;
+			let slideIdx = 0;
+			let playing = false;
+			let timer = null;
+
+			function showSlide(i) {
+				const s = slides[i % slides.length];
+				slideKicker.textContent = s[0];
+				slideHeadline.textContent = s[1];
+				slideSub.textContent = s[2];
+				expBg.style.background = BG_SETS[bgIdx % BG_SETS.length];
+				bgIdx++;
+			}
+
+			function startPlay() {
+				if (playing) return;
+				playing = true;
+				player.classList.add('playing');
+				showSlide(0);
+				timer = setInterval(() => {
+					slideIdx++;
+					if (slideIdx >= slides.length) {
+						clearInterval(timer);
+						playing = false;
+						player.classList.remove('playing');
+						return;
+					}
+					showSlide(slideIdx);
+				}, perSlide);
+			}
+
+			posterPlay.addEventListener('click', startPlay);
+			player.addEventListener('click', () => {
+				if (!playing) startPlay();
+			});
+		</script>
 	</body>
 </html>
