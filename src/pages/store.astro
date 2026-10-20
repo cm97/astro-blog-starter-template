@@ -23,12 +23,12 @@ const systemDescription =
 		: system.description;
 const systemOrder = getOrderAction(system.id);
 const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id && p.id !== "complete-business-bundle");
-const guarantee = "30-day refund if the workbook was not delivered or does not work as this page describes. No change-of-mind refunds after a valid download.";
+const guarantee = BUZZYFLY_CONFIG.guarantee;
 
 const TRUST = [
 	{ icon: "⚡", label: AUTOMATIC_DELIVERY_ENABLED ? "Download after purchase" : "Emailed after payment" },
 	{ icon: "🔁", label: "No subscription" },
-	{ icon: "🛡️", label: "30-day delivery guarantee" },
+	{ icon: "🛡️", label: "30-day money-back guarantee" },
 	{ icon: "🐝", label: "Built by a solo creator" },
 ];
 
