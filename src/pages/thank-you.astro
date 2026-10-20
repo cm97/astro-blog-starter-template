@@ -22,12 +22,13 @@ if (sessionId && env?.DB) {
 			.first<{ item_id: string }>();
 		if (row) purchasedItemId = row.item_id;
 	} catch {
-		// non-critical — upsell degrades gracefully to the bundle
+		// non-critical — no upsell shown
 	}
 }
 
-const upsellId = purchasedItemId ? UPSELL_MAP[purchasedItemId] : "complete-business-bundle";
-const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : null;
+// Only products that are for sale (have a buyUrl) are offered.
+const upsellId = purchasedItemId ? UPSELL_MAP[purchasedItemId] : null;
+const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId && p.buyUrl) ?? null : null;
 ---
 
 <!doctype html>
@@ -35,7 +36,7 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 	<head>
 		<BaseHead
 			title={`Order confirmed — ${BUZZYFLY_CONFIG.brandName}`}
-			description="Your order is confirmed. Check your email for your download link."
+			description="Your order is confirmed. Download your files from the checkout confirmation page."
 		/>
 	</head>
 	<body>
@@ -45,13 +46,13 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 				<div class="ty-check">✓</div>
 				<h1>You're all set.</h1>
 				<p class="ty-lede">
-					Your download link is on its way to the email address you checked out with.
-					It should arrive within a few minutes.
+					Thanks for your order. Download your files from the link on the
+					checkout confirmation page you saw right after paying.
 				</p>
 				<p class="ty-note">
-					If you don't see it, check your spam folder. Still nothing after 10 minutes?
-					Email <a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a>
-					and you'll get a person, not a ticket queue.
+					Can't find the link? Email
+					<a href={`mailto:${BUZZYFLY_CONFIG.supportEmail}`}>{BUZZYFLY_CONFIG.supportEmail}</a>
+					from the address you checked out with. You'll get a person, not a ticket queue.
 				</p>
 			</section>
 
@@ -64,10 +65,10 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) ?? null : 
 						{upsell.features.map((f) => <li>{f}</li>)}
 					</ul>
 					<div class="ty-upsell__cta-row">
-						<a class="ty-upsell__cta" href={upsell.buyUrl}>
+						<a class="ty-upsell__cta" href={upsell.buyUrl!}>
 							Get {upsell.title} — {upsell.price}
 						</a>
-						<span class="ty-upsell__guarantee">One-time payment. 30-day money-back guarantee.</span>
+						<span class="ty-upsell__guarantee">One-time payment. {BUZZYFLY_CONFIG.guaranteeShort}</span>
 					</div>
 				</section>
 			)}

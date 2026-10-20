@@ -22,7 +22,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	const env = locals.runtime?.env;
 	if (!env?.DB) {
 		return Response.json(
-			{ ok: false, error: "Could not save that. Email coachmanager@gmail.com instead." },
+			{ ok: false, error: "Could not save that. Email support@buzzyfly.com instead." },
 			{ status: 503 },
 		);
 	}
@@ -35,7 +35,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			.run();
 	} catch (error) {
 		console.error("purchase request", error);
-		return Response.json({ ok: false, error: "Could not save that. Email coachmanager@gmail.com." }, { status: 500 });
+		return Response.json({ ok: false, error: "Could not save that. Email support@buzzyfly.com." }, { status: 500 });
 	}
 	return Response.json({ ok: true });
 };

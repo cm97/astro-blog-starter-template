@@ -77,7 +77,7 @@ if (Astro.request.method === "POST") {
 				<>
 					<h1>That link didn't work.</h1>
 					<p>
-						Email <a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a> and
+						Email <a href={`mailto:${BUZZYFLY_CONFIG.supportEmail}`}>{BUZZYFLY_CONFIG.supportEmail}</a> and
 						we'll take you off the list by hand.
 					</p>
 				</>
@@ -86,7 +86,7 @@ if (Astro.request.method === "POST") {
 				<>
 					<h1>Something went wrong.</h1>
 					<p>
-						Please try again, or email <a href={`mailto:${BUZZYFLY_CONFIG.orderEmail}`}>{BUZZYFLY_CONFIG.orderEmail}</a>
+						Please try again, or email <a href={`mailto:${BUZZYFLY_CONFIG.supportEmail}`}>{BUZZYFLY_CONFIG.supportEmail}</a>
 						and we'll take you off the list by hand.
 					</p>
 				</>

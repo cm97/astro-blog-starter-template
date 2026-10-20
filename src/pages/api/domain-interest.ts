@@ -28,7 +28,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return Response.json(
 			{
 				ok: false,
-				error: "The desk cannot store that right now. Email coachmanager@gmail.com with the name you want.",
+				error: "The desk cannot store that right now. Email support@buzzyfly.com with the name you want.",
 			},
 			{ status: 503 },
 		);
@@ -44,7 +44,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	} catch (error) {
 		console.error("domain lead insert failed", error);
 		return Response.json(
-			{ ok: false, error: "Could not save the request. Email coachmanager@gmail.com instead." },
+			{ ok: false, error: "Could not save the request. Email support@buzzyfly.com instead." },
 			{ status: 500 },
 		);
 	}

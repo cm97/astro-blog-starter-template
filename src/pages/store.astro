@@ -6,7 +6,6 @@ import EmailOptin from "../components/EmailOptin.astro";
 import ProductCallout from "../components/ProductCallout.astro";
 import MoneyPrinterBanner from "../components/MoneyPrinterBanner.astro";
 import {
-	AUTOMATIC_DELIVERY_ENABLED,
 	ALL_PRODUCTS,
 	BUZZYFLY_CONFIG,
 	getOrderAction,
@@ -26,9 +25,9 @@ const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id && p.id !== "compl
 const guarantee = BUZZYFLY_CONFIG.guarantee;
 
 const TRUST = [
-	{ icon: "⚡", label: AUTOMATIC_DELIVERY_ENABLED ? "Download after purchase" : "Emailed after payment" },
+	{ icon: "⚡", label: "Download after purchase" },
 	{ icon: "🔁", label: "No subscription" },
-	{ icon: "🛡️", label: "30-day money-back guarantee" },
+	{ icon: "🛡️", label: "30-day refund for non-delivery or files not as described" },
 	{ icon: "🐝", label: "Built by a solo creator" },
 ];
 
@@ -45,7 +44,7 @@ const CONTENTS = [
 const FAQ = [
 	{
 		q: "Which one should I buy?",
-		a: "Start with the $49 Digital System. It is the full Client OS workbook: follow-ups, onboarding, weekly planning, proposals and pricing. Only need one piece? Grab that single workbook. Want every workbook? Take the bundle.",
+		a: "The $49 Digital System. It is the only product for sale right now, and it is the full Client OS workbook: follow-ups, onboarding, weekly planning, proposals and pricing. The single workbooks below are coming soon. Everything in them is already inside the Digital System.",
 	},
 	{
 		q: "Is this a course?",
@@ -53,16 +52,14 @@ const FAQ = [
 	},
 	{
 		q: "How do I get it?",
-		a: AUTOMATIC_DELIVERY_ENABLED
-			? "Pay once through Stripe. Download from the thank-you page right after purchase."
-			: "Pay once through Stripe. Your download is emailed to the address you checked out with.",
+		a: "Pay once through Stripe. Download from the thank-you page right after purchase.",
 	},
 	{
 		q: "Do I need an account?",
 		a: "No. There is no login and no subscription. Pay once and the workbook is yours to keep. Your data stays in your own file."
 	},
 	{
-		q: "What if it doesn't help?",
+		q: "What is the refund policy?",
 		a: guarantee,
 	},
 	{
@@ -77,7 +74,7 @@ const FAQ = [
 	<head>
 		<BaseHead
 			title={`Store — ${BUZZYFLY_CONFIG.brandName}`}
-			description="Run your client business from one workbook, not memory. Follow-up, onboarding and weekly planning Excel workbooks for coaches and solo service providers. One-time payment. 30-day guarantee."
+			description="Run your client business from one workbook, not memory. Follow-up, onboarding and weekly planning in one Excel workbook for coaches and solo service providers. $49 one-time payment."
 		/>
 		<style>
 			main { width: 1000px; }
@@ -126,7 +123,7 @@ const FAQ = [
 				</p>
 				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
 				<br />
-				<a class="store-secondary" href="#all-products">Or compare every product ↓</a>
+				<a class="store-secondary" href="#digital-system">See what's inside ↓</a>
 				<ul class="trust-row" aria-label="Why buying here is low risk">
 					{TRUST.map((t) => <li><span aria-hidden="true">{t.icon}</span>{t.label}</li>)}
 				</ul>
@@ -138,8 +135,8 @@ const FAQ = [
 
 			<section id="all-products" aria-labelledby="singles-heading">
 				<div class="section-head">
-					<h2 id="singles-heading">Only need one piece?</h2>
-					<p>Fix the problem that hurts most this week.</p>
+					<h2 id="singles-heading">Coming soon</h2>
+					<p>Single workbooks, not for sale yet. Each one is already inside the Digital System.</p>
 				</div>
 				<div class="singles">
 					{singles.map((p) => <ProductCallout productId={p.id} />)}

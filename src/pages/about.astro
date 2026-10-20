@@ -5,12 +5,11 @@ import EmailOptin from '../components/EmailOptin.astro';
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from '../data/monetization';
 
 const system = ALL_PRODUCTS.find((p) => p.id === 'buzzyfly-digital-system')!;
-const bundle = ALL_PRODUCTS.find((p) => p.id === 'complete-business-bundle')!;
 ---
 
 <Layout
 	title="Client onboarding that still runs on a slammed week — Buzzyfly"
-	description="The 20-minute checklists for onboarding, follow-ups, and the Monday reset. $49 system or $97 bundle. No subscription."
+	description="The 20-minute checklists for onboarding, follow-ups, and the Monday reset. $49 one-time. No subscription."
 	pubDate={new Date('August 15 2026')}
 	heroImage="/buzzyfly-brand-about.svg"
 >
@@ -34,14 +33,10 @@ const bundle = ALL_PRODUCTS.find((p) => p.id === 'complete-business-bundle')!;
 	<h2>Pick one</h2>
 	<p>
 		Start with the {system.title} ({system.price}). Onboarding, the weekly reset, and the follow-up system in one download.
-		<a href={system.buyUrl}>Get the {system.price} system</a>.
-	</p>
-	<p>
-		Want every file: the {bundle.title} is {bundle.price}. Same checklists, plus the onboarding kit, the follow-up templates, and the weekly checklist.
-		<a href={bundle.buyUrl}>Get the {bundle.price} bundle</a>.
+		<a href={system.buyUrl ?? '/store'}>Get the {system.price} system</a>.
 	</p>
 
-	<h2>The guarantee</h2>
+	<h2>Refunds</h2>
 	<p>{BUZZYFLY_CONFIG.guarantee}</p>
 
 	<ProductCallout />

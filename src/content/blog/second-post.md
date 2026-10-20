@@ -45,7 +45,7 @@ Paste this welcome line. Swap the brackets. Do not rewrite it.
 
 > Hi [Name] — payment received. We start [date]. I need [access or file] by [date]. I reply [window]. First thing you get is [deliverable] on [date]. Kickoff is [time]. Out of scope for this start: [one line].
 
-The Client Onboarding Kit ($29) is those files alone. If the next client is this week, that is the pack. The Digital System ($49) is that sequence plus the reset and the follow-ups, so week two is not a blank page.
+The Digital System ($49) is that sequence plus the reset and the follow-ups, so week two is not a blank page.
 
 ## 3. Follow-up lives in your head, not on a date
 
@@ -72,7 +72,7 @@ Day-6 date:
 Status: waiting / yes / no / parked
 ```
 
-Two bumps is a chase. One bump plus a close-the-file note is a system. The Follow-Up Email Templates ($19) are the five ready-to-send versions of this. The Digital System keeps those next to onboarding so a yes on Friday still has a welcome note on Monday.
+Two bumps is a chase. One bump plus a close-the-file note is a system. The Digital System keeps those next to onboarding so a yes on Friday still has a welcome note on Monday.
 
 ## The Thursday test
 
@@ -83,7 +83,7 @@ Friday or Monday, 20 minutes, same chair.
 3. Open the follow-up log. Send the one note that is due today.
 4. Write tomorrow's first task. One line.
 
-If you skip it, signs 1–3 come back by Thursday. The Weekly Reset Checklist ($15) is that list alone. Most people who already need onboarding and follow-ups should skip the single pack and take the system.
+If you skip it, signs 1–3 come back by Thursday. If you also need onboarding and follow-ups, the Digital System has all three.
 
 ## What still breaks if it only lives in your head
 
@@ -92,8 +92,7 @@ If you skip it, signs 1–3 come back by Thursday. The Weekly Reset Checklist ($
 - Day 3 and day 6 are not written, so the quiet lead never gets the same five lines.
 - The reset is a mood, not a clock, so the week dies on Thursday.
 
-Get the Digital System — $49. One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. Download from the thank-you page after purchase. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+Get the Digital System — $49. One-time. Yours to keep. Not a subscription. Not a coaching call. Download from the thank-you page after purchase. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
 
 [Get the Digital System — $49](/buy/buzzyfly-digital-system)
 
-Every pack in one download — Digital System, Onboarding Kit, Follow-Up Templates, Weekly Reset: [Complete Business Bundle — $97](/buy/complete-business-bundle)

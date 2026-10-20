@@ -177,10 +177,9 @@ Stop at 12 minutes. A salvage that becomes a new planning system is how Friday d
 
 The Monday sheet dies the first week three clients reply at once. Wednesday never gets a calendar hold. Thursday becomes inbox, and the proposal follow-up waits for a good moment that is not on the clock. The phrases only work if they sit in the same folder as the onboarding checklist and the scope reply.
 
-The Weekly Reset Checklist ($15) is this sheet alone. The Digital System ($49) is the reset plus onboarding and follow-ups, so a slammed Thursday still has a list to open. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
+The Digital System ($49) is the reset plus onboarding and follow-ups, so a slammed Thursday still has a list to open.
 
-One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-All five packs, one download: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)

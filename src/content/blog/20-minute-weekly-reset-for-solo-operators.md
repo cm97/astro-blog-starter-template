@@ -85,6 +85,4 @@ The Digital System is the same sequence written down so it still runs when you a
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
-
-All packs: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
+30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.

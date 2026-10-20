@@ -20,7 +20,7 @@ const guarantee = BUZZYFLY_CONFIG.guarantee;
 	<head>
 		<BaseHead
 			title={settings.brandName || SITE_TITLE}
-			description="Stop rebuilding your client process from scratch every week. One Excel workbook shows who to follow up with today, writes the email and onboards new clients. $49 one-time. 30-day money-back guarantee."
+			description="Stop rebuilding your client process from scratch every week. One Excel workbook shows who to follow up with today, writes the email and onboards new clients. $49 one-time."
 		/>
 		<style>
 			.hero { padding: 4em 0 3.5em; text-align: center; border-bottom: 1px solid rgb(var(--gray-light)); }
@@ -81,7 +81,7 @@ const guarantee = BUZZYFLY_CONFIG.guarantee;
 					<li>✓ One-time payment</li>
 					<li>✓ Download after purchase</li>
 					<li>✓ No subscription</li>
-					<li>✓ 30-day money-back guarantee</li>
+					<li>✓ 30-day refund for non-delivery or files not as described</li>
 				</ul>
 			</section>
 
@@ -107,8 +107,8 @@ const guarantee = BUZZYFLY_CONFIG.guarantee;
 				<p class="outcome__sub">Not more templates. A process that survives a slammed week.</p>
 				<div class="outcome__grid">
 					<div class="outcome__card"><span class="outcome__card-icon">📋</span><h3>New client signs → you're ready in 20 minutes</h3><p>Welcome email, intake form, and kickoff agenda are already written. Fill in the name, hit send.</p></div>
-					<div class="outcome__card"><span class="outcome__card-icon">📨</span><h3>Quiet lead → the right follow-up, already written</h3><p>The Today tab shows who is due. The email writer fills in their name and project. No staring at a blank screen.</p></div>
-					<div class="outcome__card"><span class="outcome__card-icon">🛡️</span><h3>Scope creep → the exact words to say</h3><p>Ready replies for when a client asks for "just one more thing." You get paid for it and keep the client.</p></div>
+					<div class="outcome__card"><span class="outcome__card-icon">📨</span><h3>Quiet lead → a follow-up draft, ready to send</h3><p>The Today tab shows who is due. The email writer fills in their name and project. You copy it and send it.</p></div>
+					<div class="outcome__card"><span class="outcome__card-icon">🛡️</span><h3>Scope creep → the exact words to say</h3><p>Ready replies for when a client asks for "just one more thing." Copy one, add your price, send it.</p></div>
 					<div class="outcome__card"><span class="outcome__card-icon">📅</span><h3>Monday → a 20-minute reset, not a scramble</h3><p>Clear inboxes, set one priority, check on every client. Same way every week.</p></div>
 				</div>
 			</section>
@@ -149,13 +149,13 @@ const guarantee = BUZZYFLY_CONFIG.guarantee;
 				<div class="guarantee__box">
 					<span class="guarantee__icon" aria-hidden="true">🛡️</span>
 					<div class="guarantee__copy">
-						<h2>30-day money-back guarantee</h2>
-						<p>{guarantee} Support: {BUZZYFLY_CONFIG.orderEmail}</p>
+						<h2>30-day refund policy</h2>
+						<p>{guarantee} Support: {BUZZYFLY_CONFIG.supportEmail}</p>
 					</div>
 				</div>
 				<div class="final-cta">
 					<a class="btn-primary" href={order.href}>Get the Digital System — {digitalSystem.price}</a>
-					<p class="final-cta__alt">Only need one piece, or want everything? <a href="/store#all-products">See every product</a>.</p>
+					<p class="final-cta__alt">Want the details first? <a href="/store">See what's inside</a>.</p>
 				</div>
 			</section>
 		</main>

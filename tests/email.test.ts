@@ -63,7 +63,7 @@ test("delivery email sends from an allowed address with link, expiry and upsell"
 	const EMAIL = mockEmail();
 	const url = "https://buzzyfly.com/api/download?token=abc.def";
 	const result = await sendDeliveryEmail(
-		{ to: "buyer@example.com", downloadUrl: url, productName: "Buzzyfly Digital System", orderId: "cs_test_1", itemId: "buzzyfly-digital-system" },
+		{ to: "buyer@example.com", downloadUrl: url, productName: "Follow-Up Email Templates", orderId: "cs_test_1", itemId: "follow-up-email-templates" },
 		{ EMAIL, EMAIL_FROM: ENV_FROM },
 	);
 	assert.deepEqual(result, { sent: true });
@@ -71,24 +71,24 @@ test("delivery email sends from an allowed address with link, expiry and upsell"
 	const msg = EMAIL.sent[0];
 	assert.ok(ALLOWED_SENDERS.includes(addressOf(msg.from)), msg.from);
 	assert.equal(msg.to, "buyer@example.com");
-	assert.equal(msg.subject, "Your Buzzyfly Digital System download");
+	assert.equal(msg.subject, "Your Follow-Up Email Templates download");
 	assertValidHtml(msg.html!);
 	assert.ok(msg.html!.includes(`href="${url}"`));
 	assert.match(msg.html!, /expires in 3 days/);
-	assert.match(msg.html!, /Complete Business Bundle/); // UPSELL_MAP: digital-system -> bundle
-	assert.ok(msg.html!.includes('href="https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08"')); // bundle checkout, not prefixed with the site URL
+	assert.match(msg.html!, /Buzzyfly Digital System/); // UPSELL_MAP: follow-ups -> digital system
+	assert.ok(msg.html!.includes('href="https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"')); // system checkout, not prefixed with the site URL
 	assert.doesNotMatch(msg.html!, /buzzyfly\.comhttps?:/);
 	assert.ok(msg.text!.includes(url));
-	assert.match(msg.text!, /Complete Business Bundle/);
+	assert.match(msg.text!, /Buzzyfly Digital System/);
 	assert.doesNotMatch(msg.text!, /</);
 });
 
 test("every product's delivery email carries the upsell from UPSELL_MAP", async () => {
 	const ladder: Record<string, string | null> = {
-		"weekly-reset-checklist": "Client Onboarding Kit",
+		"weekly-reset-checklist": "Buzzyfly Digital System",
 		"follow-up-email-templates": "Buzzyfly Digital System",
 		"client-onboarding-kit": "Buzzyfly Digital System",
-		"buzzyfly-digital-system": "Complete Business Bundle",
+		"buzzyfly-digital-system": null, // only the system is for sale, so nothing to upsell
 		"complete-business-bundle": null,
 	};
 	for (const [itemId, upsell] of Object.entries(ladder)) {
@@ -150,8 +150,8 @@ test("follow-up email sends with the next upsell", async () => {
 	const msg = EMAIL.sent[0];
 	assert.ok(ALLOWED_SENDERS.includes(addressOf(msg.from)));
 	assertValidHtml(msg.html!);
-	assert.match(msg.html!, /Client Onboarding Kit/);
-	assert.match(msg.text!, /Client Onboarding Kit/);
+	assert.match(msg.html!, /Buzzyfly Digital System/);
+	assert.match(msg.text!, /Buzzyfly Digital System/);
 });
 
 // --- Sequence ---------------------------------------------------------------

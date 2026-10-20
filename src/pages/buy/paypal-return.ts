@@ -40,7 +40,7 @@ export const GET: APIRoute = async ({ url, locals }) => {
 		captured = await captureOrder(env, orderId);
 	} catch (error) {
 		console.error("Buzzyfly buy: PayPal capture failed", orderId, error);
-		return message(402, `We could not confirm your PayPal payment. If you were charged, email ${BUZZYFLY_CONFIG.orderEmail} with order ${orderId}.`);
+		return message(402, `We could not confirm your PayPal payment. If you were charged, email ${BUZZYFLY_CONFIG.supportEmail} with order ${orderId}.`);
 	}
 
 	const product = captured.customId ? findSellableProduct(captured.customId) : null;

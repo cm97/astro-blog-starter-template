@@ -9,7 +9,7 @@ import { paypalConfigured } from "../lib/paypal";
 export const prerender = false;
 
 const payEnabled = paypalConfigured(Astro.locals.runtime?.env);
-const mail = `mailto:${BUZZYFLY_CONFIG.orderEmail}?subject=${encodeURIComponent("Buzzyfly Apps Pro")}&body=${encodeURIComponent("Hi, I'd like Buzzyfly Apps Pro. Please send payment details and my access code.")}`;
+const mail = `mailto:${BUZZYFLY_CONFIG.supportEmail}?subject=${encodeURIComponent("Buzzyfly Apps Pro")}&body=${encodeURIComponent("Hi, I'd like Buzzyfly Apps Pro. Please send payment details and my access code.")}`;
 
 const APPS = [
 	{ slug: "invoice-maker", problem: "Getting paid", name: "Invoice Maker", does: "Build a clean invoice with line items, tax and discount, then print or save as PDF." },

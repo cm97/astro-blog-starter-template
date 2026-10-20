@@ -39,7 +39,7 @@ If they cannot use it in the same sitting they download it, it is not a lead mag
 1. Free 20-minute weekly reset checklist (opt-in on the homepage and every post).
 2. They run it once. Monday stops being a scramble.
 3. They want the same thing for onboarding and follow-ups so the rest of the week survives too.
-4. $49 Digital System — one Excel workbook, one-time, download after Stripe. Lifetime updates. 30-day refund if the files are not what the listing described.
+4. $49 Digital System — one Excel workbook, one-time, download after Stripe. Yours to keep. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
 
 No new product. No subscription. The free checklist is the top of the ladder. The $49 system is the full set of checklists that already exist in the store.
 
@@ -47,4 +47,3 @@ No new product. No subscription. The free checklist is the top of the ladder. Th
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-All packs: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)

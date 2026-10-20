@@ -206,10 +206,9 @@ That's it. When you need to reference something about this client in six months,
 
 The welcome email gets rewritten every time. The 48-hour intake nudge never gets scheduled. The kickoff summary sits unsent because you are already in the next call. Week two goes quiet and the client wonders if you forgot them. Without a weekly reset and a follow-up set in the same folder, you are still hunting the next client while this one drifts.
 
-The Client Onboarding Kit ($29) is those files alone. The Digital System ($49) is that kit plus the weekly reset and the follow-up emails so week two does not go quiet. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
+The Digital System ($49) is that kit plus the weekly reset and the follow-up emails so week two does not go quiet.
 
-One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day money-back guarantee — email us if it doesn't deliver.
+One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-All packs in one download: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)

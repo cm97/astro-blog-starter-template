@@ -63,6 +63,6 @@ Personal and commercial use. You can use these in your business. You cannot rese
 
 ## 30-day guarantee
 
-If it doesn't deliver, email within 30 days for a full refund. No questions.
+30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download. Email support@buzzyfly.com.
 
 [Get it now — $49](/store)
