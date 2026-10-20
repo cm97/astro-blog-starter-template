@@ -13,7 +13,7 @@ import { handle } from "@astrojs/cloudflare/handler";
 import { BUZZYFLY_CONFIG } from "./data/monetization";
 import { escapeHtml, resolveFrom, sendFollowUpEmail } from "./lib/email";
 import { sendDueSequenceEmails } from "./lib/emailSequence";
-import { ensureDownloadSchema, ensureEmailSequenceSchema } from "./lib/schema";
+import { ensureDownloadSchema, ensureEmailSequenceSchema, ensureFunnelSchema } from "./lib/schema";
 
 interface Env {
 	DB?: D1Database;
@@ -198,6 +198,7 @@ async function scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext
 				if (added.length) console.log(`Buzzyfly schema: added ${added.join(", ")}`);
 			});
 			await runJob("download schema", () => ensureDownloadSchema(db));
+			await runJob("funnel schema", () => ensureFunnelSchema(db));
 			await runJob("owner alert", () => alertNewOrders(db, env));
 			await runJob("buyer follow-up", () => followUpRecentBuyers(db, env));
 			// 3. Weekly email sequence for free-checklist subscribers.

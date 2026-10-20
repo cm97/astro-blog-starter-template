@@ -65,6 +65,25 @@ export async function ensureEmailSequenceSchema(db: D1Database): Promise<string[
 }
 
 /**
+ * Creates the funnel_daily table /api/track and /admin/funnel use (migration
+ * 0010). Keep in step with migrations/0010_funnel_events.sql.
+ */
+export async function ensureFunnelSchema(db: D1Database): Promise<void> {
+	await db
+		.prepare(
+			`CREATE TABLE IF NOT EXISTS funnel_daily (
+			   day    TEXT    NOT NULL,
+			   event  TEXT    NOT NULL,
+			   path   TEXT    NOT NULL,
+			   source TEXT    NOT NULL,
+			   count  INTEGER NOT NULL DEFAULT 0,
+			   PRIMARY KEY (day, event, path, source)
+			 )`,
+		)
+		.run();
+}
+
+/**
  * Creates the tables /api/download uses (migration 0008). Keep in step with
  * migrations/0008_download_tables.sql.
  */

@@ -39,4 +39,30 @@
 	} catch {
 		// Storage blocked (private mode etc.): tracking is best-effort only.
 	}
+
+	// Funnel counts for /admin/funnel: one beacon per page view and per buy
+	// click (see src/pages/api/track.ts). Counts only, no cookies or ids.
+	try {
+		const send = (event: "view" | "buy_click") => {
+			if (navigator.webdriver) return;
+			let source = "";
+			try {
+				const saved = JSON.parse(localStorage.getItem(SOURCE_STORAGE_KEY) ?? "null") as { source: string; ts: number } | null;
+				if (saved && Date.now() - saved.ts < SOURCE_TTL_MS) source = saved.source;
+			} catch {
+				// no saved source: counted as direct
+			}
+			const body = new Blob([JSON.stringify({ event, path: location.pathname, source })], { type: "application/json" });
+			navigator.sendBeacon("/api/track", body);
+		};
+		send("view");
+		document.addEventListener("click", (e) => {
+			const link = (e.target as Element | null)?.closest?.("a");
+			if (!link) return;
+			const href = link.getAttribute("href") ?? "";
+			if (href.startsWith("https://buy.stripe.com/") || href.startsWith("/buy/")) send("buy_click");
+		});
+	} catch {
+		// Tracking must never break the page.
+	}
 </script>

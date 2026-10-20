@@ -1,0 +1,165 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../layouts/AdminLayout.astro";
+import { ensureFunnelSchema } from "../../lib/schema";
+import { describeSource } from "../../lib/trafficSource";
+
+// Visits -> buy clicks -> paid orders. Views and clicks come from
+// funnel_daily (src/pages/api/track.ts). Paid orders come from fulfillments,
+// which the Stripe webhook and PayPal return write.
+const env = Astro.locals.runtime.env;
+const days = Astro.url.searchParams.get("days") === "7" ? 7 : 30;
+const since = new Date(Date.now() - (days - 1) * 86_400_000).toISOString().slice(0, 10);
+const sinceMs = Date.parse(`${since}T00:00:00Z`);
+
+type Row = { views: number; clicks: number };
+let totals: Row = { views: 0, clicks: 0 };
+let orders = 0;
+let byDay: { day: string; views: number; clicks: number; orders: number }[] = [];
+let byPage: { path: string; views: number; clicks: number }[] = [];
+let bySource: { source: string; views: number; clicks: number; orders: number }[] = [];
+let error: string | null = null;
+
+const sumCols = `SUM(CASE WHEN event = 'view' THEN count ELSE 0 END) AS views,
+                 SUM(CASE WHEN event = 'buy_click' THEN count ELSE 0 END) AS clicks`;
+
+if (env.DB) {
+	try {
+		await ensureFunnelSchema(env.DB);
+		const [t, o, d, od, p, s, os] = await Promise.all([
+			env.DB.prepare(`SELECT ${sumCols} FROM funnel_daily WHERE day >= ?`).bind(since).first<Row>(),
+			env.DB.prepare(`SELECT COUNT(*) AS n FROM fulfillments WHERE created_at >= ?`).bind(sinceMs).first<{ n: number }>(),
+			env.DB.prepare(`SELECT day, ${sumCols} FROM funnel_daily WHERE day >= ? GROUP BY day`).bind(since).all<{ day: string } & Row>(),
+			env.DB.prepare(
+				`SELECT strftime('%Y-%m-%d', created_at / 1000, 'unixepoch') AS day, COUNT(*) AS n
+				 FROM fulfillments WHERE created_at >= ? GROUP BY day`,
+			)
+				.bind(sinceMs)
+				.all<{ day: string; n: number }>(),
+			env.DB.prepare(
+				`SELECT path, ${sumCols} FROM funnel_daily WHERE day >= ?
+				 GROUP BY path ORDER BY clicks DESC, views DESC LIMIT 25`,
+			)
+				.bind(since)
+				.all<{ path: string } & Row>(),
+			env.DB.prepare(
+				`SELECT source, ${sumCols} FROM funnel_daily WHERE day >= ?
+				 GROUP BY source ORDER BY views DESC LIMIT 25`,
+			)
+				.bind(since)
+				.all<{ source: string } & Row>(),
+			env.DB.prepare(
+				`SELECT COALESCE(source, 'direct') AS source, COUNT(*) AS n FROM fulfillments
+				 WHERE created_at >= ? GROUP BY COALESCE(source, 'direct')`,
+			)
+				.bind(sinceMs)
+				.all<{ source: string; n: number }>(),
+		]);
+		totals = { views: Number(t?.views ?? 0), clicks: Number(t?.clicks ?? 0) };
+		orders = Number(o?.n ?? 0);
+
+		const dayMap = new Map<string, { views: number; clicks: number; orders: number }>();
+		for (let i = 0; i < days; i++) {
+			const day = new Date(sinceMs + i * 86_400_000).toISOString().slice(0, 10);
+			dayMap.set(day, { views: 0, clicks: 0, orders: 0 });
+		}
+		for (const r of d.results ?? []) {
+			const entry = dayMap.get(r.day);
+			if (entry) Object.assign(entry, { views: Number(r.views), clicks: Number(r.clicks) });
+		}
+		for (const r of od.results ?? []) {
+			const entry = dayMap.get(r.day);
+			if (entry) entry.orders = Number(r.n);
+		}
+		byDay = [...dayMap.entries()].map(([day, v]) => ({ day, ...v })).reverse();
+
+		byPage = (p.results ?? []).map((r) => ({ path: r.path, views: Number(r.views), clicks: Number(r.clicks) }));
+
+		const orderBySource = new Map((os.results ?? []).map((r) => [r.source, Number(r.n)]));
+		bySource = (s.results ?? []).map((r) => ({
+			source: r.source,
+			views: Number(r.views),
+			clicks: Number(r.clicks),
+			orders: orderBySource.get(r.source) ?? 0,
+		}));
+	} catch (e) {
+		console.error("Buzzyfly admin funnel: query failed", e);
+		error = "Could not load funnel numbers.";
+	}
+}
+
+const pct = (part: number, whole: number) => (whole > 0 ? `${((part / whole) * 100).toFixed(1)}%` : "—");
+---
+
+<AdminLayout title="Funnel" active="funnel">
+	<h1>Funnel</h1>
+	<p class="admin-subtitle">
+		Last {days} days: visits → buy-button clicks → paid orders.
+		<a href={days === 30 ? "/admin/funnel?days=7" : "/admin/funnel"}>Show {days === 30 ? 7 : 30} days</a>
+	</p>
+
+	{!env.DB && <p class="admin-notice admin-notice--warn">No D1 database bound — nothing to show.</p>}
+	{error && <p class="admin-notice admin-notice--error">{error}</p>}
+
+	<div class="admin-stats">
+		<div class="admin-stat">
+			<div class="admin-stat__value">{totals.views}</div>
+			<div class="admin-stat__label">Page views</div>
+		</div>
+		<div class="admin-stat">
+			<div class="admin-stat__value">{totals.clicks}</div>
+			<div class="admin-stat__label">Buy clicks ({pct(totals.clicks, totals.views)} of views)</div>
+		</div>
+		<div class="admin-stat">
+			<div class="admin-stat__value">{orders}</div>
+			<div class="admin-stat__label">Paid orders ({pct(orders, totals.clicks)} of clicks)</div>
+		</div>
+	</div>
+
+	<div class="admin-card">
+		<h2>What the numbers mean</h2>
+		<p>Few buy clicks per view: the page isn't convincing. Many clicks but few orders: people leave on the Stripe checkout page (price, trust or payment options). Few views overall: the site needs traffic.</p>
+	</div>
+
+	<div class="admin-card">
+		<h2>Pages</h2>
+		{byPage.length === 0 ? <p>No visits recorded yet.</p> : (
+			<table>
+				<thead><tr><th>Page</th><th>Views</th><th>Buy clicks</th><th>Click rate</th></tr></thead>
+				<tbody>
+					{byPage.map((r) => (
+						<tr><td><a href={r.path}>{r.path}</a></td><td>{r.views}</td><td>{r.clicks}</td><td>{pct(r.clicks, r.views)}</td></tr>
+					))}
+				</tbody>
+			</table>
+		)}
+	</div>
+
+	<div class="admin-card">
+		<h2>Traffic sources</h2>
+		<p>From the utm_ tags on the links you share. Untagged visits show as Direct.</p>
+		{bySource.length === 0 ? <p>No visits recorded yet.</p> : (
+			<table>
+				<thead><tr><th>Source</th><th>Views</th><th>Buy clicks</th><th>Paid orders</th></tr></thead>
+				<tbody>
+					{bySource.map((r) => (
+						<tr><td>{r.source === "direct" ? "Direct / unknown" : describeSource(r.source)}</td><td>{r.views}</td><td>{r.clicks}</td><td>{r.orders}</td></tr>
+					))}
+				</tbody>
+			</table>
+		)}
+	</div>
+
+	<div class="admin-card">
+		<h2>By day</h2>
+		<table>
+			<thead><tr><th>Day (UTC)</th><th>Views</th><th>Buy clicks</th><th>Paid orders</th></tr></thead>
+			<tbody>
+				{byDay.map((r) => (
+					<tr><td>{r.day}</td><td>{r.views}</td><td>{r.clicks}</td><td>{r.orders}</td></tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+</AdminLayout>
