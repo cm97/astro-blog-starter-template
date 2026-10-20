@@ -29,7 +29,8 @@ const Heading = props.headingLevel ?? "h3";
 // Crossed-out price only where it is true: the bundle vs buying each piece.
 const compareAt = product?.id === "complete-business-bundle" && product.buyUrl ? bundleSeparatePrice() : null;
 
-// Buy buttons always go to a real checkout route for a known product.
+// Buy buttons always go to a real checkout route for a known product. They open
+// checkout in the same tab on purpose: a new tab mid-purchase loses buyers, most of all on phones.
 const order = product
 	? getOrderAction(product.id)
 	: props.url
@@ -64,11 +65,7 @@ const order = product
 			{price}
 		</span>
 		{order.live ? (
-			<a
-				class="product-callout__cta"
-				href={order.href}
-				{...(order.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-			>
+			<a class="product-callout__cta" href={order.href}>
 				{order.label}
 				<span class="sr-only"> {title}</span>
 			</a>
@@ -78,7 +75,7 @@ const order = product
 	</div>
 	{order.live ? (
 		<p class="product-callout__guarantee">
-			One-time payment. Download after purchase on the thank-you page. {BUZZYFLY_CONFIG.guarantee}
+			Secure checkout by Stripe. One-time payment. Your download is on the next page after you pay. {BUZZYFLY_CONFIG.guarantee}
 		</p>
 	) : (
 		<p class="product-callout__guarantee">Not for sale yet. Everything in it is already inside the $49 Digital System.</p>
