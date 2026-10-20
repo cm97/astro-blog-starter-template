@@ -2,7 +2,7 @@
 title: "The 20-Minute Onboarding Checklist That Survives a Slammed Week"
 description: "Exact 20-minute client onboarding checklist for coaches and solo operators — welcome, intake, kickoff, and day-7 hold so the process still runs when you are busy."
 pubDate: "Oct 16 2026"
-updatedDate: "Oct 16 2026"
+updatedDate: "Oct 20 2026"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -97,6 +97,43 @@ Put a 15-minute block on the calendar the same day you send the welcome. Title: 
 If they have not returned the intake, the same block becomes:
 
 > Still need the intake before we can move the first deliverable. Here is the link again.
+
+## Extra concrete steps that stop the leak
+
+- Paste the original scope line into the private note the day payment clears. Clients forget what they signed.
+- If intake is not back in 48 hours, send one nudge the same day. Do not wait for day 7.
+- After kickoff, send the one-paragraph summary within 60 minutes. Do not let it sit until tomorrow.
+- Add the client to next Monday’s weekly reset “Still open” row so week two is not silence.
+- Keep the welcome, intake, and kickoff templates in the same folder as the weekly reset and the scope reply. One open, all available.
+- Cap the first-week touches at four. More becomes a blast and the habit dies.
+- If any day is missed, send the missed touch the same day you notice it. Do not restart the whole list.
+
+## Day-by-day first week (run the list, do not invent)
+
+**Day 0 (payment day)**  
+- Welcome sent  
+- Intake link sent with 3-day deadline  
+- Kickoff hold on calendar  
+- Private note written  
+- Day-7 block set  
+
+**Day 2**  
+- Confirm intake received or send the 48-hour nudge  
+- Fill-in: “Still need the intake before kickoff so we use the time well. Link again: [link]. Deadline stays [date].”  
+
+**Day 3–4**  
+- Review intake, write 2 clarifying questions  
+- Kickoff held or rescheduled with new date written  
+- Kickoff summary sent within 60 minutes  
+
+**Day 6**  
+- Mid-point status line: “Quick status: [what moved]. Next piece due [date]. Anything blocked on your side?”  
+
+**Day 7**  
+- Day-7 check-in sent  
+- Client added to weekly reset “Still open” so week two stays quiet-free  
+
+If any day is late, send the late version the same day. Never skip because you are behind.
 
 ## What still breaks when this only lives in your head
 
