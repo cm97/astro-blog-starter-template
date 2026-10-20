@@ -3,28 +3,46 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { BUZZYFLY_CONFIG, ALL_PRODUCTS, UPSELL_MAP } from "../data/monetization";
+import { createDownloadToken, resolveProductFile } from "../lib/fulfillment";
 
 export const prerender = false;
 
 // Stripe passes the session ID in ?s= when the Payment Link success URL is
 // https://buzzyfly.com/thank-you?s={CHECKOUT_SESSION_ID}
 const sessionId = Astro.url.searchParams.get("s") ?? "";
+const isStripeSession = /^cs_(live|test)_[A-Za-z0-9]+$/.test(sessionId);
 
-// Look up what they bought from D1 so we can show a targeted upsell.
+// The Stripe webhook records the paid order in D1. Email delivery is not
+// reliable, so this page is the main delivery path: once the order is on
+// record it shows the download button right here.
 let purchasedItemId: string | null = null;
 const env = Astro.locals.runtime?.env;
-if (sessionId && env?.DB) {
+if (isStripeSession && env?.DB) {
 	try {
 		const row = await env.DB.prepare(
-			`SELECT item_id FROM fulfillments WHERE order_id = ? LIMIT 1`,
+			`SELECT item_id FROM fulfillments WHERE provider = 'stripe' AND order_id = ? LIMIT 1`,
 		)
 			.bind(sessionId)
 			.first<{ item_id: string }>();
 		if (row) purchasedItemId = row.item_id;
-	} catch {
-		// non-critical — no upsell shown
+	} catch (error) {
+		console.error("Buzzyfly thank-you: order lookup failed", error);
 	}
 }
+
+let downloadPath: string | null = null;
+if (purchasedItemId && resolveProductFile(purchasedItemId) && env?.DOWNLOAD_TOKEN_SECRET) {
+	const token = await createDownloadToken({ orderId: sessionId, itemId: purchasedItemId }, env.DOWNLOAD_TOKEN_SECRET);
+	downloadPath = `/api/download?token=${encodeURIComponent(token)}`;
+}
+const purchasedTitle = purchasedItemId ? ALL_PRODUCTS.find((p) => p.id === purchasedItemId)?.title ?? null : null;
+
+// Stripe can redirect here a few seconds before its webhook lands. Reload a
+// few times while we wait, then fall back to the support line.
+const attempt = Math.min(Number(Astro.url.searchParams.get("t")) || 0, 20);
+const waiting = isStripeSession && !downloadPath && attempt < 12;
+const retryUrl = waiting ? `/thank-you?s=${encodeURIComponent(sessionId)}&t=${attempt + 1}` : null;
+if (isStripeSession) Astro.response.headers.set("cache-control", "private, no-store");
 
 // Only products that are for sale (have a buyUrl) are offered.
 const upsellId = purchasedItemId ? UPSELL_MAP[purchasedItemId] : null;
@@ -36,23 +54,45 @@ const upsell = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId && p.buyUrl
 	<head>
 		<BaseHead
 			title={`Order confirmed — ${BUZZYFLY_CONFIG.brandName}`}
-			description="Your order is confirmed. Download your files from the checkout confirmation page."
+			description="Your order is confirmed. Download your files on this page."
 		/>
+		<meta name="robots" content="noindex" />
+		{retryUrl && <meta http-equiv="refresh" content={`3;url=${retryUrl}`} />}
 	</head>
 	<body>
 		<Header />
 		<main>
 			<section class="ty-hero">
 				<div class="ty-check">✓</div>
-				<h1>You're all set.</h1>
-				<p class="ty-lede">
-					Thanks for your order. Download your files from the link on the
-					checkout confirmation page you saw right after paying.
-				</p>
+				{downloadPath ? (
+					<>
+						<h1>Your download is ready.</h1>
+						<p class="ty-lede">Thanks for buying the {purchasedTitle ?? "Buzzyfly Digital System"}.</p>
+						<p><a class="btn btn--primary ty-download" href={downloadPath}>Download now</a></p>
+						<p class="ty-note">
+							Bookmark this page. The link works for 3 days.
+						</p>
+					</>
+				) : waiting ? (
+					<>
+						<h1>Payment received. Preparing your download…</h1>
+						<p class="ty-lede" role="status">This takes a few seconds. The page refreshes on its own.</p>
+						<p class="ty-note"><a href={retryUrl!}>Refresh now</a></p>
+					</>
+				) : (
+					<>
+						<h1>Thanks for your order.</h1>
+						<p class="ty-lede">
+							{isStripeSession
+								? "Your payment went through, but we couldn't load your download here."
+								: "Open this page from the link Stripe sends you to after paying to get your download."}
+						</p>
+					</>
+				)}
 				<p class="ty-note">
-					Can't find the link? Email
+					Need help? Email
 					<a href={`mailto:${BUZZYFLY_CONFIG.supportEmail}`}>{BUZZYFLY_CONFIG.supportEmail}</a>
-					from the address you checked out with. You'll get a person, not a ticket queue.
+					from the address you checked out with. You'll get your file from a person, not a ticket queue.
 				</p>
 			</section>
 

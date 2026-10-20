@@ -1,4 +1,4 @@
-import { ALL_PRODUCTS, PRODUCT_FILE_MAP } from "../data/monetization";
+import { ALL_PRODUCTS, BUZZYFLY_CONFIG, PRODUCT_FILE_MAP } from "../data/monetization";
 import { verifyDownloadToken } from "./fulfillment";
 import { productBuyUrl } from "./productCheckout";
 
@@ -77,9 +77,9 @@ export function productLockedPage(itemId: string | null): Response {
 	const html = `<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex"><title>Buzzyfly download</title>
 <style>body{margin:0;background:#faf7ef;color:#23201a;font:16px/1.55 system-ui,-apple-system,Segoe UI,Roboto,sans-serif}main{max-width:560px;margin:0 auto;padding:48px 18px}h1{font-size:1.6rem;margin:0 0 8px}p{color:#6b6455}a.btn{display:inline-block;background:#e0a012;color:#1d1606;font-weight:600;padding:12px 18px;border-radius:6px;text-decoration:none;margin-top:12px}a.btn:focus-visible{outline:3px solid #23201a;outline-offset:2px}small{display:block;margin-top:18px}</style></head>
 <body><main><h1>${escapeHtml(title)}</h1>
-<p>Files are delivered only after a completed payment. Your receipt email contains a personal download link.</p>
+<p>Files are delivered only after a completed payment. Your download button is on the thank-you page you land on after paying.</p>
 ${action}
-<small>Already bought? Open the download link from your order email, or reply to it and we will send a fresh one.</small></main></body></html>`;
+<small>Already bought and lost the link? Email ${escapeHtml(BUZZYFLY_CONFIG.supportEmail)} from your checkout address and we will send a fresh one.</small></main></body></html>`;
 	return new Response(html, {
 		status: 402,
 		headers: { "content-type": "text/html; charset=utf-8", "cache-control": "private, no-store" },
