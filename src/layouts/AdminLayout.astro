@@ -3,13 +3,14 @@ import "../styles/global.css";
 
 interface Props {
 	title: string;
-	active?: "dashboard" | "posts" | "media" | "subscribers" | "orders" | "domains" | "compose" | "settings" | "log";
+	active?: "dashboard" | "funnel" | "posts" | "media" | "subscribers" | "orders" | "domains" | "compose" | "settings" | "log";
 }
 
 const { title, active } = Astro.props;
 
 const navItems = [
 	{ id: "dashboard", href: "/admin", label: "Dashboard" },
+	{ id: "funnel", href: "/admin/funnel", label: "Funnel" },
 	{ id: "posts", href: "/admin/posts", label: "Posts" },
 	{ id: "media", href: "/admin/media", label: "Media" },
 	{ id: "subscribers", href: "/admin/subscribers", label: "Subscribers" },
