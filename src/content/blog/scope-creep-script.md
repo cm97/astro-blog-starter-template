@@ -2,7 +2,7 @@
 title: "How to Stop Scope Creep Without Losing the Client"
 description: "The exact reply when a client asks for one more thing — pause, price, two options, written yes — so the extra work is a line item, not a free favor."
 pubDate: "2026-09-01"
-updatedDate: "Oct 13 2026"
+updatedDate: "Oct 20 2026"
 category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -64,6 +64,9 @@ Round up to the nearest $25. Do not round down.
 - Book the pause reply as a calendar hold if you cannot do it in the next hour. Unscheduled pauses get forgotten.
 - After they say yes, add the line item to the invoice before you open the file. Work that is not invoiced is still free.
 - At the next weekly reset, add a row: "Open scope asks waiting on yes." If none, write none.
+- Screenshot or copy the original scope into the project note the day the ask arrives. Do not rely on searching email later.
+- If the ask is a third or fourth extra, send the full script again. Do not soften the second one.
+- Set a 24-hour timer on the two-option email. If no reply by then, send the day-3 bump without starting the work.
 
 ## The script
 
