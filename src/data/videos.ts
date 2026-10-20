@@ -46,39 +46,9 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 		],
 		script: "Here is exactly what is in the forty-nine dollar Digital System. Three folders: checklists, templates, and scripts. An onboarding checklist, a weekly reset, a follow-up sequence, and a proposal template. Everything to run a client business without improvising from memory. One download. Yours forever. Forty-nine dollars at buzzyfly dot com.",
 	},
-	{
-		slug: "how-to-use",
-		title: "Day-one setup: pay, unzip, run the first checklist",
-		description: "Pay. Inbox. Unzip. Run the list. Do not rebuild Monday.",
-		views: "5.4K",
-		date: "5 hours ago",
-		seconds: 34,
-		src: "/videos/how-to-use.mp4",
-		poster: "/videos/how-to-use.svg",
-		slides: [
-			["HOW", "Pay. Inbox. Unzip.", "Stripe. Private link. One-time payment."],
-			["FOLDERS", "Match folder to the job", "checklists to run, templates to send."],
-			["RUN", "Do not rebuild Monday", "Tick the list. Send the template. Move on."],
-		],
-		script: "Most people buy systems and never open them. Here is how to use Buzzyfly the day you buy it. Pay — download link arrives in your email — unzip — open the onboarding checklist — run it with your next client. That is the whole setup. Stop rebuilding your process from scratch. Start at buzzyfly dot com.",
-	},
-	{
-		slug: "advantages",
-		title: "Why the Digital System is $49 one-time (not a subscription)",
-		description: "Onboarding leaves your head. Follow-ups actually get sent.",
-		views: "10.4K",
-		date: "3 days ago",
-		seconds: 36,
-		src: "/videos/advantages.mp4",
-		poster: "/videos/advantages.svg",
-		slides: [
-			["WHY", "Onboarding leaves your head", "Same steps every new client."],
-			["FOLLOW-UPS", "They actually get sent", "Five ready emails. Name in. Send."],
-			["PRICE", "Digital System $49 one-time", "Download after purchase."],
-		],
-		script: "Why forty-nine dollars one time instead of a monthly subscription? Because it is files. Checklists and templates you download, keep, and use forever. No login, no renewal. Your onboarding process leaves your head. Your follow-ups actually get sent. Forty-nine dollars at buzzyfly dot com. One time.",
-	},
 ];
+// Removed "how-to-use" (its audio promises the download by email) and "advantages"
+// (its audio promises a 7-day refund). Re-record before adding them back.
 
 export function getVideo(slug: string) {
 	return EXPLAINER_VIDEOS.find((v) => v.slug === slug) ?? null;
