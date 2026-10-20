@@ -14,7 +14,7 @@ export const BUZZYFLY_CONFIG = {
 		"Free. No spam. Just the checklist, plus one email a week with the next piece of the system.",
 	brandEmail: "hello@buzzyfly.com",
 	orderEmail: "coachmanager@gmail.com",
-	guarantee: "30-day money-back guarantee — email us if it doesn't deliver.",
+	guarantee: "30-day money-back guarantee. If it doesn't help, email us within 30 days for a full refund.",
 	emailSignature: "Buzzyfly",
 	mailingAddress: "",
 };

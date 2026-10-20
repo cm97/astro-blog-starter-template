@@ -67,7 +67,7 @@ Friday, take 10 minutes. What got done? What rolls to Monday? What dies?
 
 That's the whole weekly rhythm. Monday 20 minutes, Wednesday 5, Friday 10.
 
-The full version, with the Monday, Wednesday and Friday sheets ready to print, is part of the Buzzyfly Digital System. More on that later. Next week: the follow-up email people actually answer.`,
+The full version is the Weekly reset tab in the Buzzyfly Digital System. It scores your tasks and picks your #1 for you. More on that later. Next week: the follow-up email people actually answer.`,
 	},
 	{
 		subject: "The follow-up email people actually answer",
@@ -88,7 +88,7 @@ The break-up email is the one people reply to. It gives them a real deadline. It
 
 This week's homework: find one proposal that's gone quiet. Send the right email for where it's at.
 
-These two are from a set of five in the Digital System. The other three cover mid-project check-ins, referrals and project wrap-ups.`,
+These two are in the Digital System's email writer, along with emails for mid-project check-ins, referrals and project wrap-ups. It fills in each client's name and project for you.`,
 	},
 	{
 		subject: "“I'll just build my own”",
@@ -116,7 +116,7 @@ That's the outline. Turning it into emails you can actually send takes a few eve
 
 If you enjoy that work, do it. The outlines in these emails are yours to keep.
 
-If you'd rather open a folder and run it tonight, that's what the Digital System is. Every piece, already written: {store}`,
+If you'd rather open one workbook and run it tonight, that's what the Digital System is. Every piece, already written: {store}`,
 	},
 	{
 		subject: "What if it doesn't work for you?",
@@ -137,7 +137,7 @@ Three rules:
 2. Always name a price, even $25.
 3. Always give them the out: "No worries, we stick to the original scope."
 
-The system has five more scripts for the harder moments. Pushback. Endless revisions. "I thought that was included."
+The Scope guard tab has replies for the harder moments. Pushback. Endless revisions. "I thought that was included."
 
 If this one is useful, the rest will be too. If it isn't, the system probably isn't for you. Either way you've lost nothing.`,
 	},
@@ -157,7 +157,7 @@ Your floor isn't your price. It's the number you never go under.
 
 Try it on the next thing you quote. See if the number surprises you.
 
-The fill-in-the-blanks version of this worksheet is in the Digital System, next to the one-page proposal it feeds. When you're ready: {store}`,
+The Digital System does this math for you on the pricing tab. Then it writes the proposal from it. When you're ready: {store}`,
 	},
 	{
 		subject: "Stop rebuilding it from memory",
@@ -166,13 +166,16 @@ The fill-in-the-blanks version of this worksheet is in the Digital System, next 
 
 Over the last six weeks I've sent you pieces of the system. The weekly reset. The Thursday check. Follow-ups. Onboarding. Scope creep. Pricing.
 
-The Buzzyfly Digital System is all of it in one download, ready to use:
+The Buzzyfly Digital System is all of it in one Excel workbook, ready to use:
 
-- Client onboarding: checklist, intake form, kickoff agenda
-- Weekly planning: the Monday, Wednesday and Friday reset
-- Follow-ups: templates, timing, and the break-up email
-- Scope and proposals: six scope scripts, a one-page proposal, a pricing worksheet
-- Retention: checklist and re-engagement email
+- Today: who needs a follow-up and what to send
+- Follow-ups: every lead and client, with the next date worked out for you
+- Email writer: emails that fill in each client's name and project
+- Onboarding: a 10-step plan for each new client
+- Weekly reset: the Monday plan, a priority scorer and a 52-week log
+- Proposals, pricing and scope replies
+
+Works in Excel and Google Sheets. No macros.
 
 Who it's for: one- or few-person businesses where the process lives in your head.
 

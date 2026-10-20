@@ -12,7 +12,7 @@ const settings = await getSettings(Astro.locals.runtime?.env);
 
 const digitalSystem = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
 const order = getOrderAction(digitalSystem.id);
-const guarantee = "30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.";
+const guarantee = BUZZYFLY_CONFIG.guarantee;
 ---
 
 <!doctype html>
@@ -20,7 +20,7 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 	<head>
 		<BaseHead
 			title={settings.brandName || SITE_TITLE}
-			description="Stop rebuilding your client process from scratch every week. Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes. $49 one-time."
+			description="Stop rebuilding your client process from scratch every week. One Excel workbook shows who to follow up with today, writes the email and onboards new clients. $49 one-time. 30-day money-back guarantee."
 		/>
 		<style>
 			.hero { padding: 4em 0 3.5em; text-align: center; border-bottom: 1px solid rgb(var(--gray-light)); }
@@ -72,7 +72,7 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 				<span class="hero__eyebrow">For coaches and solo service providers</span>
 				<h1>Stop rebuilding your client process from scratch every week.</h1>
 				<p class="hero__sub">
-					Onboarding, weekly planning and follow-ups become checklists you run in 20 minutes. The process still works on the weeks you're slammed.
+					One Excel workbook tells you who to follow up with today and writes the email. New clients get onboarded the same way every time. It still works on the weeks you're slammed.
 				</p>
 				<div class="hero__cta-group">
 					<a class="btn-primary" href={order.href}>Get the Digital System — {digitalSystem.price}</a>
@@ -81,7 +81,7 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 					<li>✓ One-time payment</li>
 					<li>✓ Download after purchase</li>
 					<li>✓ No subscription</li>
-					<li>✓ 30-day delivery guarantee</li>
+					<li>✓ 30-day money-back guarantee</li>
 				</ul>
 			</section>
 
@@ -107,8 +107,8 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 				<p class="outcome__sub">Not more templates. A process that survives a slammed week.</p>
 				<div class="outcome__grid">
 					<div class="outcome__card"><span class="outcome__card-icon">📋</span><h3>New client signs → you're ready in 20 minutes</h3><p>Welcome email, intake form, and kickoff agenda are already written. Fill in the name, hit send.</p></div>
-					<div class="outcome__card"><span class="outcome__card-icon">📨</span><h3>Quiet lead → a reply-generating follow-up</h3><p>Five word-for-word emails for every stage — proposal, mid-project, re-engagement. No staring at a blank screen.</p></div>
-					<div class="outcome__card"><span class="outcome__card-icon">🛡️</span><h3>Scope creep → a script that says no</h3><p>Six exact lines for when a client asks for "just one more thing" — without losing the client.</p></div>
+					<div class="outcome__card"><span class="outcome__card-icon">📨</span><h3>Quiet lead → the right follow-up, already written</h3><p>The Today tab shows who is due. The email writer fills in their name and project. No staring at a blank screen.</p></div>
+					<div class="outcome__card"><span class="outcome__card-icon">🛡️</span><h3>Scope creep → the exact words to say</h3><p>Ready replies for when a client asks for "just one more thing." You get paid for it and keep the client.</p></div>
 					<div class="outcome__card"><span class="outcome__card-icon">📅</span><h3>Monday → a 20-minute reset, not a scramble</h3><p>Clear inboxes, set one priority, check on every client. Same way every week.</p></div>
 				</div>
 			</section>
@@ -128,11 +128,11 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 					</div>
 					<div class="faq__item">
 						<h3>What's actually in the download?</h3>
-						<p>Six checklists, six templates, and one script — onboarding, weekly reset, follow-up emails, scope-creep scripts, retention, proposals, intake forms, and a pricing worksheet. Plain files. No course. No 200-tab spreadsheet.</p>
+						<p>One Excel workbook with seven tabs: Today, Follow-ups, Email writer, Onboarding, Weekly reset, Proposals and pricing, and Scope guard. Works in Excel and Google Sheets. No macros. No course.</p>
 					</div>
 					<div class="faq__item">
 						<h3>How do I get it?</h3>
-						<p>Pay once through Stripe. Download from the thank-you page right after purchase. The files are yours to keep, with lifetime updates.</p>
+						<p>Pay once through Stripe. Download from the thank-you page right after purchase. The workbook is yours to keep.</p>
 					</div>
 					<div class="faq__item">
 						<h3>What if it doesn't work for me?</h3>
@@ -140,7 +140,7 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 					</div>
 					<div class="faq__item">
 						<h3>Do I need the whole thing at once?</h3>
-						<p>No. Pick the one checklist that fixes your biggest problem this week, run it, then add the next. The system works because it's the same every time — not because it's perfect.</p>
+						<p>No. Start with the tab that fixes your biggest problem this week. Add the next one when you're ready. The system works because it's the same every time. It doesn't need to be perfect.</p>
 					</div>
 				</div>
 			</section>
@@ -149,7 +149,7 @@ const guarantee = "30-day refund if files were not delivered or are materially n
 				<div class="guarantee__box">
 					<span class="guarantee__icon" aria-hidden="true">🛡️</span>
 					<div class="guarantee__copy">
-						<h2>30-day delivery guarantee</h2>
+						<h2>30-day money-back guarantee</h2>
 						<p>{guarantee} Support: {BUZZYFLY_CONFIG.orderEmail}</p>
 					</div>
 				</div>
