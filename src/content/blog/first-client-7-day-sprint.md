@@ -2,7 +2,7 @@
 title: 'The 7-Day Sprint to Land Your First Paying Client'
 description: 'No audience required. A day-by-day sprint to get one paying client, then run the same-day start line so week one does not die in your head.'
 pubDate: '2026-09-01'
-updatedDate: 'Oct 15 2026'
+updatedDate: 'Oct 20 2026'
 category: 'sales'
 heroImage: '/blog-placeholder-2.jpg'
 featuredProductTitle: 'Buzzyfly Digital System'
@@ -176,7 +176,12 @@ Run these lines the hour the invoice clears. Do not invent a new sequence.
 
 If a line is late, send the late version the same day. Never skip because you are behind.
 
-If those five live in your head, the first client is a one-off. The Digital System ($49) is that kit plus the weekly reset and the follow-up emails so week two does not go quiet.
+## Extra cash protectors most people skip
+
+- Put the invoice amount and due date on the client note the same minute payment is confirmed. If the number is not written, week-two collection becomes a feeling.
+- After the day-7 wrap, add one line to next Monday's reset: "First client still open? Next date: ________". Silence after week one is how first clients become one-offs.
+- Cap free audits at three. A fourth is unpaid delivery dressed as sales.
+- If they ask for a discount on day 6, restate the scope and the start date. Do not cut the number to "land the first one." Cheap clients train you to undercharge forever.
 
 ## What still breaks if you only do the sprint
 
