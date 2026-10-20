@@ -98,8 +98,7 @@ If you cannot name the next date after a paid reply, the client is not retained.
 
 You can paste them today. They work until a slammed Thursday. Then the day-3 window passes, the log is empty, and the invoice sits in sent items until you notice it two weeks later.
 
-The same two lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One zip. One-time $49. Download after purchase. 30-day refund if the files are not delivered or not what the listing describes. No change-of-mind refunds after a valid download.
+The same two lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One zip. One-time $49. Download after purchase. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-All packs: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)

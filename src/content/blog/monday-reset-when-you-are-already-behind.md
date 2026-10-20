@@ -172,10 +172,9 @@ The three priorities change every time you remember a new fire. Client dates liv
 
 The words have to sit next to onboarding and the proposal follow-up, in the same folder, so a slammed Monday still has a list to open. That is the weekly reset inside the Digital System, with the onboarding checklist and the follow-up lines in the same zip.
 
-The Weekly Reset Checklist ($15) is this sheet alone. The Digital System ($49) is the reset plus onboarding and follow-ups so a slammed Monday still has the list. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
+The Digital System ($49) is the reset plus onboarding and follow-ups so a slammed Monday still has the list.
 
-One-time payment. Files plus lifetime updates. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if files were not delivered or are materially not what the listing described. No change-of-mind refunds after a valid download.
+One-time payment. Yours to keep. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-All packs: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)

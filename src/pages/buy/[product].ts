@@ -18,7 +18,7 @@ export const GET: APIRoute = async ({ params, url, locals }) => {
 		const body = encodeURIComponent(`Hi,\n\nI'd like to order the ${product.title} ($${product.amount}).\n\nPlease send payment details.\n\nThanks,\n`);
 		return new Response(null, {
 			status: 302,
-			headers: { location: `mailto:${BUZZYFLY_CONFIG.orderEmail}?subject=${subject}&body=${body}`, "cache-control": "no-store" },
+			headers: { location: `mailto:${BUZZYFLY_CONFIG.supportEmail}?subject=${subject}&body=${body}`, "cache-control": "no-store" },
 		});
 	}
 

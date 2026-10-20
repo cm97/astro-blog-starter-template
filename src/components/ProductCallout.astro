@@ -27,15 +27,13 @@ const badge = props.badge !== undefined ? props.badge : product?.badge ?? null;
 const featured = props.featured ?? badge === "Most popular";
 const Heading = props.headingLevel ?? "h3";
 // Crossed-out price only where it is true: the bundle vs buying each piece.
-const compareAt = product?.id === "complete-business-bundle" ? bundleSeparatePrice() : null;
-// Subscriptions bill monthly and open as a web app, so the one-time download line would be false.
-const isSubscription = price.includes("/month");
+const compareAt = product?.id === "complete-business-bundle" && product.buyUrl ? bundleSeparatePrice() : null;
 
 // Buy buttons always go to a real checkout route for a known product.
 const order = product
 	? getOrderAction(product.id)
 	: props.url
-		? { live: true, href: props.url, label: "Buy now", external: /^https?:/.test(props.url) }
+		? { live: true as const, href: props.url, label: "Buy now", external: /^https?:/.test(props.url) }
 		: getOrderAction();
 ---
 
@@ -65,21 +63,26 @@ const order = product
 			{compareAt && <span class="sr-only">Bundle price: </span>}
 			{price}
 		</span>
-		<a
-			class="product-callout__cta"
-			href={order.href}
-			{...(order.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-		>
-			{order.label}
-			<span class="sr-only"> {title}</span>
-		</a>
+		{order.live ? (
+			<a
+				class="product-callout__cta"
+				href={order.href}
+				{...(order.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+			>
+				{order.label}
+				<span class="sr-only"> {title}</span>
+			</a>
+		) : (
+			<span class="product-callout__soon">Coming soon</span>
+		)}
 	</div>
-	{compareAt && <p class="product-callout__note">{compareAt} if you buy each piece separately.</p>}
-	<p class="product-callout__guarantee">
-		{isSubscription
-			? "Billed monthly. Cancel anytime. Installs on any phone or computer."
-			: `One-time payment. Instant download. ${BUZZYFLY_CONFIG.guarantee}`}
-	</p>
+	{order.live ? (
+		<p class="product-callout__guarantee">
+			One-time payment. Download after purchase on the thank-you page. {BUZZYFLY_CONFIG.guarantee}
+		</p>
+	) : (
+		<p class="product-callout__guarantee">Not for sale yet. Everything in it is already inside the $49 Digital System.</p>
+	)}
 </aside>
 
 <style>
@@ -168,6 +171,16 @@ const order = product
 		font-weight: 700;
 		text-decoration: none;
 		transition: background-color 0.15s ease-in-out;
+	}
+	.product-callout__soon {
+		display: inline-flex;
+		align-items: center;
+		min-height: 44px;
+		padding: 0.6em 1.2em;
+		border-radius: 999px;
+		background: rgb(var(--gray-light));
+		color: rgb(var(--gray-dark));
+		font-weight: 700;
 	}
 	.product-callout__cta:hover {
 		background: var(--accent-dark);

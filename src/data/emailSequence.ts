@@ -16,7 +16,7 @@
 //   - "- item"            -> bullet list
 //   - "1. item"           -> numbered list
 //   - "> text"            -> quoted text (for copy-paste templates)
-//   - {checklist} {store} {orderEmail} -> replaced with real values
+//   - {checklist} {store} {supportEmail} -> replaced with real values
 //   - bare https:// URLs  -> links
 // The signature and unsubscribe footer are added automatically.
 
@@ -42,7 +42,7 @@ That calendar block matters more than the checklist. Most planning systems fail 
 
 What to expect from me: one short email a week. Each one is a piece of the system you can use that day. Next week is the part that stops the reset from falling apart by Thursday.
 
-P.S. What's the one thing that derails your week most often? Tell me at {orderEmail}. I read every one.`,
+P.S. What's the one thing that derails your week most often? Tell me at {supportEmail}. I read every one.`,
 	},
 	{
 		subject: "Did Thursday happen?",
@@ -125,9 +125,11 @@ If you'd rather open one workbook and run it tonight, that's what the Digital Sy
 
 The biggest worry with any digital product is simple. What if it's not what I need?
 
-So here's the deal on the Digital System. Use it for 30 days. If it doesn't help, email {orderEmail} and you get a full refund. No form. No hoops. You keep nothing you didn't want.
+So here's how to judge it before you buy. Read the sample below. If this is useful, the rest will be too.
 
-And here's a sample, so you can judge the quality yourself. The scope creep line:
+The refund rule is simple: 30-day refund if your files weren't delivered or aren't what the listing described. Email {supportEmail}. No change-of-mind refunds after a valid download.
+
+Here's the sample. The scope creep line:
 
 > "I can do that. It's outside what we agreed on, so it's a separate line item: [price]. Want me to add it, or keep it for after this project wraps?"
 
@@ -139,7 +141,7 @@ Three rules:
 
 The Scope guard tab has replies for the harder moments. Pushback. Endless revisions. "I thought that was included."
 
-If this one is useful, the rest will be too. If it isn't, the system probably isn't for you. Either way you've lost nothing.`,
+If this one isn't useful, the system probably isn't for you. Better to know now.`,
 	},
 	{
 		subject: "$500 or $1,200?",
@@ -181,10 +183,10 @@ Who it's for: one- or few-person businesses where the process lives in your head
 
 Who it's not for: anyone who already has a documented system that works. You'd be buying what you already have.
 
-$49 once. No subscription. 30-day money-back guarantee.
+$49 once. No subscription. 30-day refund for non-delivery or files not as described.
 
 There's no deadline and no countdown. The price isn't going up on Friday. When you're ready, it's here: {store}
 
-P.S. Got a question before buying? Email {orderEmail}. You're writing to the person who built it.`,
+P.S. Got a question before buying? Email {supportEmail}. You're writing to the person who built it.`,
 	},
 ];

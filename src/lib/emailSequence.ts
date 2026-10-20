@@ -15,7 +15,7 @@ function fillVars(value: string): string {
 	return value
 		.replace(/\{checklist\}/g, CHECKLIST_URL)
 		.replace(/\{store\}/g, STORE_URL)
-		.replace(/\{orderEmail\}/g, BUZZYFLY_CONFIG.orderEmail);
+		.replace(/\{supportEmail\}/g, BUZZYFLY_CONFIG.supportEmail);
 }
 
 // Escape, then turn bare URLs and email addresses into links.

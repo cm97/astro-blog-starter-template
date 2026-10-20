@@ -13,8 +13,12 @@ export const BUZZYFLY_CONFIG = {
 	newsletterDescription:
 		"Free. No spam. Just the checklist, plus one email a week with the next piece of the system.",
 	brandEmail: "hello@buzzyfly.com",
+	/** Public contact on pages and in emails. */
+	supportEmail: "support@buzzyfly.com",
+	/** Owner inbox for internal order alerts only. Never shown on public pages. */
 	orderEmail: "coachmanager@gmail.com",
-	guarantee: "30-day money-back guarantee. If it doesn't help, email us within 30 days for a full refund.",
+	guarantee: "30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.",
+	guaranteeShort: "30-day refund for non-delivery or files not as described.",
 	emailSignature: "Buzzyfly",
 	mailingAddress: "",
 };
@@ -23,10 +27,12 @@ export const STRIPE_CHECKOUT_URL = "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa
 
 export const AUTOMATIC_DELIVERY_ENABLED = true;
 
+/** A product's buy button. Products with no buyUrl are not for sale yet and get no link. */
 export function getOrderAction(productIdOrTitle: string = BUZZYFLY_CONFIG.defaultProductTitle) {
 	const product = getProduct(productIdOrTitle) ?? getProduct("buzzyfly-digital-system")!;
+	if (!product.buyUrl) return { live: false as const, href: null, label: "Coming soon", external: false };
 	return {
-		live: true,
+		live: true as const,
 		href: product.buyUrl,
 		label: "Buy now",
 		external: product.buyUrl.startsWith("http"),
@@ -39,7 +45,8 @@ export function getProduct(idOrTitle: string) {
 }
 
 /** A product's buy link as a full URL, for emails and copy-paste text where a site-relative path will not work. */
-export function absoluteBuyUrl(product: { buyUrl: string }) {
+export function absoluteBuyUrl(product: { buyUrl: string | null }) {
+	if (!product.buyUrl) return `${BUZZYFLY_CONFIG.siteUrl}/store`;
 	return product.buyUrl.startsWith("http") ? product.buyUrl : `${BUZZYFLY_CONFIG.siteUrl}${product.buyUrl}`;
 }
 
@@ -47,6 +54,17 @@ export function bundleSeparatePrice(): string {
 	const parts = ["weekly-reset-checklist", "follow-up-email-templates", "client-onboarding-kit", "buzzyfly-digital-system"];
 	const total = parts.reduce((sum, id) => sum + Number(getProduct(id)!.price.replace(/[^0-9.]/g, "")), 0);
 	return `$${total}`;
+}
+
+export interface Product {
+	id: string;
+	title: string;
+	price: string;
+	description: string;
+	features: string[];
+	/** Checkout link. null means "Coming soon": no buy button anywhere. */
+	buyUrl: string | null;
+	badge: string | null;
 }
 
 export const PRODUCT_FILE_MAP: Record<
@@ -80,24 +98,25 @@ export const PRODUCT_FILE_MAP: Record<
 	},
 };
 
+// Only the Digital System is for sale, so it is the only upsell target.
 export const UPSELL_MAP: Record<string, string | null> = {
-	"weekly-reset-checklist": "client-onboarding-kit",
+	"weekly-reset-checklist": "buzzyfly-digital-system",
 	"follow-up-email-templates": "buzzyfly-digital-system",
 	"client-onboarding-kit": "buzzyfly-digital-system",
-	"buzzyfly-digital-system": "complete-business-bundle",
+	"buzzyfly-digital-system": null,
 	"complete-business-bundle": null,
-	"buzzyfly-monthly-drop": null,
 };
 
-export const ALL_PRODUCTS = [
+// Only the $49 Digital System is buyable. The rest stay "Coming soon" with buyUrl: null.
+export const ALL_PRODUCTS: Product[] = [
 	{
 		id: "weekly-reset-checklist",
 		title: "Weekly Reset Checklist",
 		price: "$15",
 		description: "Stop losing Monday to figuring out what to work on. An Excel planner walks you through a 20-minute reset, scores your tasks and picks your #1 priority.",
 		features: ["Guided 20-minute Monday reset", "Priority scorer that picks your #1", "Thursday check-in and Friday close", "52-week log with a revenue chart"],
-		buyUrl: "https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05",
-		badge: null,
+		buyUrl: null,
+		badge: "Coming soon",
 	},
 	{
 		id: "follow-up-email-templates",
@@ -105,8 +124,8 @@ export const ALL_PRODUCTS = [
 		price: "$19",
 		description: "Stop letting quiet leads go cold. An Excel tracker that shows who to follow up with today and writes the email for you.",
 		features: ["Follow-up dates worked out for you", "20 emails that fill in each person's details", "Today dashboard: who is due right now", "Add your own email templates"],
-		buyUrl: "https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06",
-		badge: null,
+		buyUrl: null,
+		badge: "Coming soon",
 	},
 	{
 		id: "client-onboarding-kit",
@@ -114,8 +133,8 @@ export const ALL_PRODUCTS = [
 		price: "$29",
 		description: "A new client signs and the Excel workbook lays out their first ten days. It shows what's due and writes each email for you.",
 		features: ["10-step onboarding plan for every client", "Welcome, intake, kickoff and summary emails, pre-filled", "Intake form builder", "Client notes and progress tracking"],
-		buyUrl: "https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07",
-		badge: null,
+		buyUrl: null,
+		badge: "Coming soon",
 	},
 	{
 		id: "buzzyfly-digital-system",
@@ -132,16 +151,7 @@ export const ALL_PRODUCTS = [
 		price: "$97",
 		description: "Every Buzzyfly workbook in one download. Client OS plus the stand-alone Follow-Up, Onboarding and Weekly Reset workbooks.",
 		features: ["Buzzyfly Client OS (the Digital System workbook)", "Client Onboarding workbook", "Follow-Up Tracker workbook", "Weekly Reset Planner workbook"],
-		buyUrl: "https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08",
-		badge: "Best value",
-	},
-	{
-		id: "buzzyfly-monthly-drop",
-		title: "Buzzyfly Monthly Drop",
-		price: "$19/month",
-		description: "A web app that gets new client tools every month. Emails that write themselves, an updated weekly reset, a new onboarding piece and a planning tool. Install it with one tap on any phone or computer. Your work saves to your account.",
-		features: ["New email templates every month that fill in each client's details", "Updated weekly reset checklist that tracks your progress", "New client onboarding asset", "New planning tool for your business", "Install it on your phone or computer with one tap. Opens like any app"],
-		buyUrl: "https://buy.stripe.com/eVq4gB7963AWfned3UaVa09",
-		badge: "Monthly",
+		buyUrl: null,
+		badge: "Coming soon",
 	},
 ];

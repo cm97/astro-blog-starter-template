@@ -176,14 +176,13 @@ Run these lines the hour the invoice clears. Do not invent a new sequence.
 
 If a line is late, send the late version the same day. Never skip because you are behind.
 
-If those five live in your head, the first client is a one-off. The Client Onboarding Kit ($29) is those files alone. The Digital System ($49) is that kit plus the weekly reset and the follow-up emails so week two does not go quiet. The Complete Business Bundle ($97) is every pack in one download if you want the kit, the follow-ups, and the reset as separate files too.
+If those five live in your head, the first client is a one-off. The Digital System ($49) is that kit plus the weekly reset and the follow-up emails so week two does not go quiet.
 
 ## What still breaks if you only do the sprint
 
 Landing the client is day 7. Keeping them is the next Monday. Without a reset and a follow-up you already wrote, you hunt a new client every time the last one goes silent.
 
-Get the Digital System — $49. One-time. Files plus lifetime updates. Not a subscription. Not a coaching call. 30-day refund if files were not delivered or are materially not what the listing described.
+Get the Digital System — $49. One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-All five packs, one download: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)

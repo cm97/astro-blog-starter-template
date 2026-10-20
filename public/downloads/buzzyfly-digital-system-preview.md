@@ -77,8 +77,8 @@ Personal and commercial use. You can use these files in your own business. You c
 
 ---
 
-Questions? Email coachmanager@gmail.com. This is a small operation and real questions get real answers.
+Questions? Email support@buzzyfly.com. This is a small operation and real questions get real answers.
 
 ---
 
-You're holding the actual product. If it doesn't deliver, you have 30 days to email for a full refund.
+You're holding the actual product. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.

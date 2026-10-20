@@ -11,17 +11,19 @@ interface Props {
 
 const bundle = getProduct("complete-business-bundle")!;
 const {
-	bundleUrl = getOrderAction(bundle.id).href,
+	bundleUrl = getOrderAction(bundle.id).href ?? "/store",
 	bundlePrice = bundle.price,
 	variant = "strip",
 } = Astro.props;
 const separate = bundleSeparatePrice();
+// The bundle is "Coming soon" until it has a buyUrl. No banner, no dead button.
+const forSale = Boolean(bundle.buyUrl);
 ---
 
 {
-	variant === "section" ? (
+	!forSale ? null : variant === "section" ? (
 		<section class="printer-section" aria-labelledby="bundle-heading">
-			<p class="printer-banner__kicker">Best value · One-time · Instant download</p>
+			<p class="printer-banner__kicker">Best value · One-time · Download after purchase</p>
 			<h2 id="bundle-heading">Want every file? Get the Complete Bundle.</h2>
 			<p class="printer-section__lede">{bundle.description}</p>
 			<ul class="printer-section__list">
@@ -37,7 +39,7 @@ const separate = bundleSeparatePrice();
 		</section>
 	) : (
 		<div class="printer-banner">
-			<p class="printer-banner__kicker">One-time. Instant download. No subscription.</p>
+			<p class="printer-banner__kicker">One-time. Download after purchase. No subscription.</p>
 			<p class="printer-banner__line">
 				Every Buzzyfly workbook in one download. <s>{separate}</s> {bundlePrice} Complete Bundle.
 			</p>

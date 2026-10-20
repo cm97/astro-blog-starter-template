@@ -64,8 +64,7 @@ You can fill it on a calm Sunday. It works until the next inquiry lands on a sla
 
 Client outcomes live in the discovery call you will not reopen. The out-of-scope sentence never gets written. Scope creep starts the week after they pay because the guard was never on paper.
 
-The same worksheet, plus the onboarding checklist and the follow-up cadence, lives inside the Buzzyfly Digital System so the number still gets calculated when delivery is on fire. One zip. One-time $49. Download after purchase. 30-day refund if the files are not delivered or not what the listing describes. No change-of-mind refunds after a valid download.
+The same worksheet, plus the onboarding checklist and the follow-up cadence, lives inside the Buzzyfly Digital System so the number still gets calculated when delivery is on fire. One zip. One-time $49. Download after purchase. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-All packs: [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)

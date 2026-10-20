@@ -19,7 +19,7 @@ const STATIC_PAGES = [
 			"Buy the Buzzyfly Digital System. $49 one-time payment, no subscription, " +
 			"secure checkout by Stripe. The core operating framework: onboarding, weekly " +
 			"planning, and follow-up workflows, plus the 20-minute weekly reset checklist " +
-			"and lifetime access with future updates. Price, order, buy, checkout, purchase.",
+			"and the workbook is yours to keep. Price, order, buy, checkout, purchase.",
 	},
 	{
 		title: "Home",

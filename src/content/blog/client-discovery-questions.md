@@ -57,6 +57,6 @@ The questions work once. They die the next time you are slammed, because the scr
 
 The fix is the same list, in the same order, every new name. Discovery answers go into the proposal. The proposal go-live date goes into the kickoff email. The kickoff email goes into the intake. None of that is a new app.
 
-The Buzzyfly Digital System is that set: discovery notes, intake, kickoff, weekly reset, and the follow-up you send when they go quiet. $49 once. Download after checkout. 30-day money-back guarantee — email us if it doesn't deliver.
+The Buzzyfly Digital System is that set: discovery notes, intake, kickoff, weekly reset, and the follow-up you send when they go quiet. $49 once. Download after checkout. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
