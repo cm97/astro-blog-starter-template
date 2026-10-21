@@ -8,7 +8,7 @@ export const BUZZYFLY_CONFIG = {
 	defaultProductTitle: "Buzzyfly Digital System",
 	defaultProductPrice: "$49",
 	defaultProductDescription:
-		"One Excel workbook that runs your client business. It shows who to follow up with today, writes the email, and walks every new client through onboarding.",
+		"Browser web app for your client business. Login and see who to follow up with today, the email to send, onboarding steps for new clients, and your Monday reset — no download, no Excel.",
 	newsletterTitle: "Send me the 20-minute weekly reset checklist",
 	newsletterDescription:
 		"Free. No spam. Just the checklist, plus one email a week with the next piece of the system.",
@@ -17,8 +17,8 @@ export const BUZZYFLY_CONFIG = {
 	supportEmail: "support@buzzyfly.com",
 	/** Owner inbox for internal order alerts only. Never shown on public pages. */
 	orderEmail: "coachmanager@gmail.com",
-	guarantee: "30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.",
-	guaranteeShort: "30-day refund for non-delivery or files not as described.",
+	guarantee: "30-day refund if the app wasn't accessible or isn't what the listing described. No change-of-mind refunds after access is granted.",
+	guaranteeShort: "30-day refund for non-access or app not as described.",
 	emailSignature: "Buzzyfly",
 	mailingAddress: "",
 };
@@ -62,7 +62,7 @@ export interface Product {
 	price: string;
 	description: string;
 	features: string[];
-	/** Checkout link. null means "Coming soon": no buy button anywhere. */
+	/** Checkout link. null means "Coming soon", no buy button anywhere. */
 	buyUrl: string | null;
 	badge: string | null;
 }
@@ -140,8 +140,8 @@ export const ALL_PRODUCTS: Product[] = [
 		id: "buzzyfly-digital-system",
 		title: "Buzzyfly Digital System",
 		price: "$49",
-		description: "One Excel workbook for your client business. It shows who to follow up with today, writes the email, onboards new clients and runs your Monday reset.",
-		features: ["Today dashboard: who needs you and what to send", "Follow-ups, onboarding and weekly reset in one workbook", "Proposal builder, pricing calculator, scope-creep replies", "Works in Excel and Google Sheets. No macros."],
+		description: "Browser web app. Login and see who to follow up with today, the email to send, onboarding for new clients, and your Monday reset. No download. No Excel.",
+		features: ["Today dashboard: who needs you and what to send", "Follow-ups, onboarding and weekly reset in the browser", "Proposal and scope replies ready to copy", "Works on phone. No files."],
 		buyUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00",
 		badge: "Most popular",
 	},
