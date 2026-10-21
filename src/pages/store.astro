@@ -25,38 +25,38 @@ const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id && p.id !== "compl
 const guarantee = BUZZYFLY_CONFIG.guarantee;
 
 const TRUST = [
-	{ icon: "⚡", label: "Download after purchase" },
+	{ icon: "⚡", label: "Open in your browser after purchase" },
 	{ icon: "🔁", label: "No subscription" },
-	{ icon: "🛡️", label: "30-day refund for non-delivery or files not as described" },
+	{ icon: "🛡️", label: "30-day refund for non-access or app not as described" },
 	{ icon: "🐝", label: "Built by a solo creator" },
 ];
 
 const CONTENTS = [
 	{ folder: "Today", items: "Who needs a follow-up today, onboarding steps due, and this week's #1 priority" },
 	{ folder: "Follow-ups", items: "Every lead, proposal and client, with the next follow-up date worked out for you" },
-	{ folder: "Email writer", items: "30 emails that fill in the client's name, project and your sign-off. Copy and paste into your email" },
+	{ folder: "Email writer", items: "Emails that fill in the client's name, project and your sign-off. Copy and paste." },
 	{ folder: "Onboarding", items: "A 10-step plan for each new client, with due dates and client notes" },
-	{ folder: "Weekly reset", items: "A guided 20-minute Monday plan, a priority scorer, and a 52-week log with a revenue chart" },
-	{ folder: "Proposals and pricing", items: "Your hourly floor, project and retainer prices, and a proposal that writes itself" },
+	{ folder: "Weekly reset", items: "A guided 20-minute Monday plan and priority scorer" },
+	{ folder: "Proposals and pricing", items: "Your hourly floor, project and retainer prices" },
 	{ folder: "Scope guard", items: "The exact words when a client asks for more than they paid for" },
 ];
 
 const FAQ = [
 	{
 		q: "Which one should I buy?",
-		a: "The $49 Digital System. It is the only product for sale right now, and it is the full Client OS workbook: follow-ups, onboarding, weekly planning, proposals and pricing. The single workbooks below are coming soon. Everything in them is already inside the Digital System.",
+		a: "The $49 Digital System. It is the browser web app: follow-ups, onboarding, weekly reset, proposals and pricing. Everything runs in the browser. No download.",
 	},
 	{
-		q: "Is this a course?",
-		a: "No. It is an Excel workbook that works like software. Open it in Excel or Google Sheets and use it today. No macros, no account, no videos.",
+		q: "Is this a course or a spreadsheet?",
+		a: "No. It is a web app. Open it in your browser on phone or computer. No Excel, no files, no macros.",
 	},
 	{
 		q: "How do I get it?",
-		a: "Pay once through Stripe. Download from the thank-you page right after purchase.",
+		a: "Pay once through Stripe. After purchase you land in the app. No download.",
 	},
 	{
 		q: "Do I need an account?",
-		a: "No. There is no login and no subscription. Pay once and the workbook is yours to keep. Your data stays in your own file."
+		a: "Yes — simple login after purchase so your data stays with you. No subscription.",
 	},
 	{
 		q: "What is the refund policy?",
@@ -64,7 +64,7 @@ const FAQ = [
 	},
 	{
 		q: "Who is it not for?",
-		a: "If you already run a documented system that works, skip it. You would be buying what you already have.",
+		a: "If you already run a documented system that works, skip it.",
 	},
 ];
 ---
@@ -74,7 +74,7 @@ const FAQ = [
 	<head>
 		<BaseHead
 			title={`Store — ${BUZZYFLY_CONFIG.brandName}`}
-			description="Run your client business from one workbook, not memory. Follow-up, onboarding and weekly planning in one Excel workbook for coaches and solo service providers. $49 one-time payment."
+			description="Run your client business from a browser web app, not memory. Follow-up, onboarding and weekly reset in one place. $49 one-time."
 		/>
 		<style>
 			main { width: 1000px; }
@@ -102,7 +102,6 @@ const FAQ = [
 			.contents-table { width: 100%; border-collapse: collapse; margin-top: 1em; }
 			.contents-table th, .contents-table td { text-align: left; padding: 0.6em 0.8em; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.92em; vertical-align: top; }
 			.contents-table th { color: rgb(var(--gray)); font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.05em; }
-			.contents-table code { background: rgb(var(--gray-light)); padding: 0.1em 0.4em; border-radius: 4px; white-space: nowrap; }
 			.faq details { border-bottom: 1px solid rgb(var(--gray-light)); }
 			.faq summary { cursor: pointer; padding: 0.7em 0; min-height: 44px; box-sizing: border-box; font-weight: 700; color: rgb(var(--black)); list-style-position: inside; }
 			.faq details p { margin: 0 0 1em; color: rgb(var(--gray-dark)); font-size: 0.95em; }
@@ -116,10 +115,10 @@ const FAQ = [
 		<main>
 			<section class="store-hero">
 				<p class="store-eyebrow">For coaches, consultants and solo service providers</p>
-				<h1>Run your client business from one workbook, not memory.</h1>
+				<h1>Run your client business from a browser app, not memory.</h1>
 				<p class="store-lede">
 					You lose hours rebuilding onboarding emails. Proposals go quiet and you never follow up.
-					Monday starts with a scramble. Pick the system that ends it.
+					Monday starts with a scramble. Open the app. See who needs you today and the email to send.
 				</p>
 				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
 				<br />
@@ -136,7 +135,7 @@ const FAQ = [
 			<section id="all-products" aria-labelledby="singles-heading">
 				<div class="section-head">
 					<h2 id="singles-heading">Coming soon</h2>
-					<p>Single workbooks, not for sale yet. Each one is already inside the Digital System.</p>
+					<p>Single tools, not for sale yet. Each one is already inside the Digital System app.</p>
 				</div>
 				<div class="singles">
 					{singles.map((p) => <ProductCallout productId={p.id} />)}
@@ -146,18 +145,16 @@ const FAQ = [
 			<MoneyPrinterBanner variant="section" />
 
 			<section class="store-section">
-				<h2>What's inside the Digital System workbook</h2>
+				<h2>What's inside the Digital System app</h2>
 				<table class="contents-table">
-					<thead><tr><th>Tab</th><th>What it does</th></tr></thead>
+					<thead><tr><th>Screen</th><th>What it does</th></tr></thead>
 					<tbody>
 						{CONTENTS.map((c) => (
 							<tr><td><strong>{c.folder}</strong></td><td>{c.items}</td></tr>
 						))}
 					</tbody>
 				</table>
-				<p>
-					Works in Excel 2016 or newer, Microsoft 365 (Windows and Mac) and Google Sheets. No macros.
-				</p>
+				<p>Works in any modern browser on phone or computer. No download. No Excel.</p>
 			</section>
 
 			<section class="store-section faq" aria-labelledby="faq-heading">
