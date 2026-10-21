@@ -2,7 +2,7 @@
 title: "New Client Just Signed? Do This in the First 10 Minutes"
 description: "Exact sequence to run the moment a new client pays — welcome email, intake form, kickoff agenda, and calendar hold — so onboarding does not live in your head."
 pubDate: "Oct 16 2026"
-updatedDate: "Oct 16 2026"
+updatedDate: "Oct 21 2026"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -36,6 +36,7 @@ Intake sent: yes / no — link: ________
 Kickoff booked: ________ (day/time)
 Private note written: yes / no
 Day-7 check-in on calendar: ________
+Invoice amount logged: yes / no
 ```
 
 ## Exact welcome email
@@ -85,6 +86,7 @@ First-week goal: ________
 Next check-in: ________
 Who decides: ________
 Open risk: ________
+Amount paid: $________
 ```
 
 Write it in the same place you keep the weekly reset. If the note is not there, the client is not onboarded.
@@ -98,6 +100,20 @@ Put a 15-minute block on the calendar the same day you send the welcome. Title: 
 If they have not returned the intake, the same block becomes:
 
 > Still need the intake before we can move the first deliverable. Here is the link again.
+
+## Extra cash-protect lines for the first 48 hours
+
+Most first-week chaos is unpaid work and missing dates. Add these three before you close the laptop.
+
+1. **Log the exact amount and due status.** On the private note write the dollar figure and "paid in full / deposit only". If it is a deposit, write the remaining date right next to it. Missing numbers become missing invoices.
+
+2. **One out-of-scope line in the welcome.** Add this sentence to the welcome if it is not already there: "This start covers [exact thing]. Anything outside that is a separate quote." It stops the first "can you just also..." from becoming free work.
+
+3. **48-hour intake nudge, pre-written.** Put this on the calendar for 48 hours later:
+
+> Hi [Name] — still need the intake so kickoff is useful. Link again: [link]. Deadline stays [date]. Reply if something is blocking it.
+
+Send it even if you feel awkward. The form is the process.
 
 ## What still breaks when this lives only in your head
 
@@ -113,3 +129,4 @@ One-time payment. Yours to keep. Not a subscription. Not a coaching call. Downlo
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
+Want every workbook instead? Complete Business Bundle — $97: https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
