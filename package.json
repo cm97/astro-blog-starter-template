@@ -17,6 +17,7 @@
 		"@astrojs/rss": "4.0.19",
 		"@astrojs/sitemap": "3.6.1",
 		"astro": "5.16.9",
+		"postal-mime": "4.0.4",
 		"typescript": "5.9.3"
 	},
 	"devDependencies": {

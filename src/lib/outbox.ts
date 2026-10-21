@@ -1,5 +1,5 @@
 import { BUZZYFLY_CONFIG } from "../data/monetization";
-import { escapeHtml, type EmailBinding, type EmailResult } from "./email";
+import { ALLOWED_SENDERS, escapeHtml, type EmailBinding, type EmailResult } from "./email";
 
 /**
  * One-off email from the brand address (Admin > Send email), sent through the
@@ -53,12 +53,23 @@ function bodyToHtml(body: string): string {
 
 export async function sendBrandEmail(
 	env: { DB?: D1Database; EMAIL?: EmailBinding },
-	message: { to: string; subject: string; body: string; fromName: string },
+	message: {
+		to: string;
+		subject: string;
+		body: string;
+		fromName: string;
+		/** One of ALLOWED_SENDERS; anything else falls back to the brand address. */
+		fromEmail?: string;
+		/** Extra headers, e.g. In-Reply-To so a reply threads in the recipient's mail app. */
+		headers?: Record<string, string>;
+	},
 ): Promise<EmailResult> {
 	const to = message.to.trim();
 	const subject = message.subject.trim().slice(0, 200);
 	const body = message.body.trim();
 	const fromName = cleanFromName(message.fromName);
+	const requestedFrom = message.fromEmail?.trim().toLowerCase();
+	const fromEmail = requestedFrom && ALLOWED_SENDERS.includes(requestedFrom) ? requestedFrom : BUZZYFLY_CONFIG.brandEmail;
 
 	if (!EMAIL_RE.test(to)) return { sent: false, reason: "That email address doesn't look right." };
 	if (!subject || !body) return { sent: false, reason: "Subject and message are both required." };
@@ -69,10 +80,11 @@ export async function sendBrandEmail(
 	} else {
 		try {
 			await env.EMAIL.send({
-				from: `${fromName} <${BUZZYFLY_CONFIG.brandEmail}>`,
+				from: `${fromName} <${fromEmail}>`,
 				to,
 				subject,
 				text: body,
+				...(message.headers ? { headers: message.headers } : {}),
 				html: `<!doctype html><html><body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#16191c;max-width:560px;margin:0 auto;padding:24px">${bodyToHtml(body)}</body></html>`,
 			});
 			result = { sent: true };

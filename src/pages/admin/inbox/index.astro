@@ -1,0 +1,222 @@
+---
+export const prerender = false;
+
+import AdminLayout from "../../../layouts/AdminLayout.astro";
+import AdminHelp from "../../../components/AdminHelp.astro";
+import { listInbox, type InboxFolder } from "../../../lib/inbox";
+
+const env = Astro.locals.runtime.env;
+const folder: InboxFolder = Astro.url.searchParams.get("folder") === "archived" ? "archived" : "inbox";
+const query = (Astro.url.searchParams.get("q") ?? "").slice(0, 200);
+const page = Math.max(1, Number(Astro.url.searchParams.get("page")) || 1);
+const status = Astro.url.searchParams.get("status");
+const error = Astro.url.searchParams.get("error");
+
+const { items, hasMore } = await listInbox(env, { folder, query, page });
+
+const pageLink = (n: number) => {
+	const params = new URLSearchParams();
+	if (folder === "archived") params.set("folder", "archived");
+	if (query) params.set("q", query);
+	if (n > 1) params.set("page", String(n));
+	const qs = params.toString();
+	return qs ? `/admin/inbox?${qs}` : "/admin/inbox";
+};
+
+const notices: Record<string, string> = {
+	archived: "Archived.",
+	deleted: "Deleted.",
+};
+
+function when(ms: number): string {
+	const date = new Date(ms);
+	const sameDay = new Date().toDateString() === date.toDateString();
+	return sameDay
+		? date.toLocaleTimeString("en-US", { hour: "numeric", minute: "2-digit" })
+		: date.toLocaleDateString("en-US", { month: "short", day: "numeric" });
+}
+---
+
+<AdminLayout title="Inbox" active="inbox">
+	<h1>Inbox</h1>
+	<p class="admin-subtitle">Mail sent to your @buzzyfly.com addresses. Only you can see this page.</p>
+
+	<AdminHelp title="How mail gets here" open={items.length === 0 && folder === "inbox" && !query}>
+		<p>Turn this on once in Cloudflare (free, about 5 minutes):</p>
+		<ol>
+			<li>Cloudflare dashboard → <strong>buzzyfly.com</strong> → <strong>Email</strong> → <strong>Email Routing</strong>. If it asks, click <strong>Enable</strong> and let it add its DNS records.</li>
+			<li>Open <strong>Routing rules</strong>. Under <strong>Catch-all address</strong>, choose the action <strong>Send to a Worker</strong>, pick the <strong>buzzyfly</strong> worker, and save. Turn the catch-all on.</li>
+			<li>Send a test email to <code>support@buzzyfly.com</code> from your phone. It shows up here within a minute.</li>
+		</ol>
+		<p>
+			Replies go out from the address the mail was sent to (support@, hello@ or orders@). Any other
+			@buzzyfly.com address replies from hello@buzzyfly.com. Replies need Cloudflare Email Sending
+			working, the same as order emails. If a reply fails, the error shows on the message.
+		</p>
+	</AdminHelp>
+
+	{status && notices[status] && <p class="admin-notice admin-notice--success">{notices[status]}</p>}
+	{error && <p class="admin-notice admin-notice--error">{error}</p>}
+	{!env.DB && <p class="admin-notice admin-notice--warn">No D1 database bound, so mail can't be stored.</p>}
+
+	<div class="inbox-bar">
+		<nav class="inbox-tabs" aria-label="Folders">
+			<a href="/admin/inbox" class:list={["admin-btn", { "admin-btn--primary": folder === "inbox" }]}>Inbox</a>
+			<a href="/admin/inbox?folder=archived" class:list={["admin-btn", { "admin-btn--primary": folder === "archived" }]}>Archived</a>
+		</nav>
+		<form class="inbox-search" method="GET" action="/admin/inbox" role="search">
+			{folder === "archived" && <input type="hidden" name="folder" value="archived" />}
+			<label class="visually-hidden" for="q">Search mail</label>
+			<input id="q" name="q" type="search" value={query} placeholder="Search mail" />
+			<button class="admin-btn" type="submit">Search</button>
+		</form>
+	</div>
+
+	<div class="admin-card inbox-card">
+		{
+			items.length === 0 && (
+				<p class="inbox-empty">
+					{query ? `No mail matches "${query}".` : folder === "archived" ? "Nothing archived." : "No mail yet."}
+				</p>
+			)
+		}
+		{
+			items.length > 0 && (
+				<ul class="inbox-list">
+					{items.map((m) => (
+						<li class:list={["inbox-row", { unread: !m.read_at }]}>
+							<a href={`/admin/inbox/${m.id}`}>
+								<span class="inbox-from">{m.from_name || m.from_address}</span>
+								<span class="inbox-subject">
+									<strong>{m.subject || "(no subject)"}</strong>
+									{m.snippet.trim() && <span class="inbox-snippet"> — {m.snippet.replace(/\s+/g, " ")}</span>}
+								</span>
+								<span class="inbox-meta">
+									{m.attachments > 0 && <span title={`${m.attachments} attachment(s)`}>📎</span>}
+									<time datetime={new Date(m.received_at).toISOString()}>{when(m.received_at)}</time>
+								</span>
+							</a>
+						</li>
+					))}
+				</ul>
+			)
+		}
+	</div>
+
+	{
+		(page > 1 || hasMore) && (
+			<p class="inbox-pages">
+				{page > 1 && <a class="admin-btn" href={pageLink(page - 1)}>Newer</a>}
+				{hasMore && <a class="admin-btn" href={pageLink(page + 1)}>Older</a>}
+			</p>
+		)
+	}
+</AdminLayout>
+
+<style>
+	.inbox-bar {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.75em;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: 1em;
+	}
+	.inbox-tabs {
+		display: flex;
+		gap: 0.5em;
+	}
+	.inbox-search {
+		display: flex;
+		gap: 0.5em;
+		flex: 1;
+		max-width: 420px;
+	}
+	.inbox-search input {
+		flex: 1;
+		min-width: 0;
+		padding: 0.55em 0.75em;
+		border: 1px solid rgb(var(--gray-light));
+		border-radius: 8px;
+		font-family: inherit;
+	}
+	.admin-card.inbox-card {
+		padding: 0;
+		overflow: hidden;
+	}
+	.inbox-empty {
+		padding: 1.5em;
+		margin: 0;
+	}
+	.inbox-list {
+		list-style: none;
+		margin: 0;
+		padding: 0;
+	}
+	.inbox-row + .inbox-row {
+		border-top: 1px solid rgb(var(--gray-light));
+	}
+	.inbox-row a {
+		display: grid;
+		grid-template-columns: minmax(8em, 14em) 1fr auto;
+		gap: 1em;
+		align-items: center;
+		min-height: 44px;
+		padding: 0.6em 1em;
+		color: rgb(var(--gray-dark));
+		text-decoration: none;
+		background: #f8f9fb;
+	}
+	.inbox-row.unread a {
+		background: #fff;
+	}
+	.inbox-row a:hover,
+	.inbox-row a:focus-visible {
+		background: #eef1ff;
+	}
+	.inbox-from,
+	.inbox-subject {
+		overflow: hidden;
+		white-space: nowrap;
+		text-overflow: ellipsis;
+	}
+	.inbox-subject strong {
+		font-weight: 400;
+	}
+	.inbox-row.unread .inbox-from,
+	.inbox-row.unread .inbox-subject strong {
+		font-weight: 700;
+		color: rgb(var(--black));
+	}
+	.inbox-snippet {
+		color: rgb(var(--gray));
+	}
+	.inbox-meta {
+		display: flex;
+		gap: 0.5em;
+		font-size: 0.85em;
+		color: rgb(var(--gray));
+		white-space: nowrap;
+	}
+	.inbox-pages {
+		display: flex;
+		gap: 0.5em;
+	}
+	.visually-hidden {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip: rect(0 0 0 0);
+		white-space: nowrap;
+	}
+	@media (max-width: 640px) {
+		.inbox-row a {
+			grid-template-columns: 1fr auto;
+		}
+		.inbox-subject {
+			grid-column: 1 / -1;
+			grid-row: 2;
+		}
+	}
+</style>

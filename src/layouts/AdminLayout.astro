@@ -1,15 +1,17 @@
 ---
 import "../styles/global.css";
+import { unreadCount } from "../lib/inbox";
 
 interface Props {
 	title: string;
-	active?: "dashboard" | "funnel" | "posts" | "media" | "subscribers" | "orders" | "domains" | "compose" | "settings" | "log";
+	active?: "dashboard" | "inbox" | "funnel" | "posts" | "media" | "subscribers" | "orders" | "domains" | "compose" | "settings" | "log";
 }
 
 const { title, active } = Astro.props;
 
 const navItems = [
 	{ id: "dashboard", href: "/admin", label: "Dashboard" },
+	{ id: "inbox", href: "/admin/inbox", label: "Inbox" },
 	{ id: "funnel", href: "/admin/funnel", label: "Funnel" },
 	{ id: "posts", href: "/admin/posts", label: "Posts" },
 	{ id: "media", href: "/admin/media", label: "Media" },
@@ -22,6 +24,7 @@ const navItems = [
 ] as const;
 
 const adminUser = Astro.locals.adminUser;
+const unread = await unreadCount(Astro.locals.runtime.env);
 ---
 
 <!doctype html>
@@ -41,6 +44,7 @@ const adminUser = Astro.locals.adminUser;
 						navItems.map((item) => (
 							<a href={item.href} class:list={["admin-nav__link", { active: active === item.id }]}>
 								{item.label}
+								{item.id === "inbox" && unread > 0 && <span class="admin-nav__badge" aria-label={`${unread} unread`}>{unread}</span>}
 							</a>
 						))
 					}
@@ -149,6 +153,18 @@ const adminUser = Astro.locals.adminUser;
 		color: rgba(255, 255, 255, 0.75);
 		text-decoration: none;
 		font-size: 0.95em;
+	}
+	.admin-nav__badge {
+		float: right;
+		min-width: 1.6em;
+		padding: 0 0.45em;
+		border-radius: 999px;
+		background: #fff;
+		color: rgb(var(--black));
+		font-size: 0.8em;
+		font-weight: 700;
+		text-align: center;
+		line-height: 1.6;
 	}
 	.admin-nav__link:hover {
 		background: rgba(255, 255, 255, 0.08);

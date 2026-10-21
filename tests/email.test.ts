@@ -14,6 +14,7 @@ import {
 } from "../src/lib/email";
 import { renderSequenceEmail, sendDueSequenceEmails, sendSequenceEmail } from "../src/lib/emailSequence";
 import { sendBrandEmail } from "../src/lib/outbox";
+import { parseIncoming, replyFromAddress, replySubject, sendReply } from "../src/lib/inbox";
 import { EMAIL_SEQUENCE } from "../src/data/emailSequence";
 
 type Sent = Parameters<EmailBinding["send"]>[0];
@@ -320,4 +321,91 @@ test("admin outbox sends from hello@buzzyfly.com", async () => {
 	assert.ok(ALLOWED_SENDERS.includes(addressOf(msg.from)));
 	assertValidHtml(msg.html!);
 	assert.equal(msg.text, "Line one\n\nLine two");
+});
+
+// --- Admin inbox --------------------------------------------------------------
+
+const RAW_INCOMING = [
+	"From: Jane Customer <Jane@Example.com>",
+	"Reply-To: jane.replies@example.com",
+	"To: support@buzzyfly.com",
+	"Subject: Question about my order",
+	"Message-ID: <abc123@example.com>",
+	"References: <earlier@example.com>",
+	"MIME-Version: 1.0",
+	'Content-Type: multipart/mixed; boundary="b1"',
+	"",
+	"--b1",
+	"Content-Type: text/plain; charset=utf-8",
+	"",
+	"Hi, I can't find my download.",
+	"Thanks!",
+	"--b1",
+	'Content-Type: text/html; charset=utf-8',
+	"",
+	"<p>Hi, I can't find my download.</p><p>Thanks!</p>",
+	"--b1",
+	'Content-Type: application/pdf; name="receipt.pdf"',
+	'Content-Disposition: attachment; filename="../receipt.pdf"',
+	"Content-Transfer-Encoding: base64",
+	"",
+	"JVBERi0xLjQK",
+	"--b1--",
+	"",
+].join("\r\n");
+
+test("inbox parses an incoming email with an attachment", async () => {
+	const parsed = await parseIncoming(RAW_INCOMING, { from: "bounce@example.com", to: "Support@Buzzyfly.com" }, 1000);
+	assert.equal(parsed.message.from_address, "jane@example.com");
+	assert.equal(parsed.message.from_name, "Jane Customer");
+	assert.equal(parsed.message.reply_to, "jane.replies@example.com");
+	assert.equal(parsed.message.to_address, "support@buzzyfly.com");
+	assert.equal(parsed.message.subject, "Question about my order");
+	assert.equal(parsed.message.message_id, "<abc123@example.com>");
+	assert.match(parsed.message.text_body, /can't find my download/);
+	assert.match(parsed.message.html_body ?? "", /<p>Hi/);
+	assert.equal(parsed.attachments.length, 1);
+	assert.equal(parsed.attachments[0].filename, "..receipt.pdf", "path separators stripped");
+	assert.equal(parsed.attachments[0].mimeType, "application/pdf");
+	assert.equal(new TextDecoder().decode(parsed.attachments[0].bytes), "%PDF-1.4\n");
+});
+
+test("inbox replies come from an allowed sender", () => {
+	assert.equal(replyFromAddress("support@buzzyfly.com"), "support@buzzyfly.com");
+	assert.equal(replyFromAddress("Orders@Buzzyfly.com"), "orders@buzzyfly.com");
+	assert.equal(replyFromAddress("random@buzzyfly.com"), "hello@buzzyfly.com");
+	for (const to of ["support@buzzyfly.com", "x@buzzyfly.com"]) assert.ok(ALLOWED_SENDERS.includes(replyFromAddress(to)));
+	assert.equal(replySubject("Question"), "Re: Question");
+	assert.equal(replySubject("RE: Question"), "RE: Question");
+	assert.equal(replySubject(""), "Re: your email");
+});
+
+test("inbox reply threads, quotes the original and goes to Reply-To", async () => {
+	const parsed = await parseIncoming(RAW_INCOMING, { from: "bounce@example.com", to: "support@buzzyfly.com" }, 1000);
+	const message = { ...parsed.message, id: 7, read_at: null, archived: 0, replied_at: null };
+	const EMAIL = mockEmail();
+	const result = await sendReply({ EMAIL }, message, { body: "Here is a fresh link.", fromName: "Buzzyfly" });
+	assert.deepEqual(result, { sent: true });
+	const msg = EMAIL.sent[0];
+	assert.equal(msg.to, "jane.replies@example.com");
+	assert.equal(addressOf(msg.from), "support@buzzyfly.com");
+	assert.equal(msg.subject, "Re: Question about my order");
+	assert.equal(msg.headers?.["In-Reply-To"], "<abc123@example.com>");
+	assert.equal(msg.headers?.["References"], "<earlier@example.com> <abc123@example.com>");
+	assert.match(msg.text!, /^Here is a fresh link\.\n\nOn .* wrote:\n> Hi, I can't find my download\./);
+	assertValidHtml(msg.html!);
+});
+
+test("inbox reply refuses an empty message", async () => {
+	const parsed = await parseIncoming(RAW_INCOMING, { from: "a@example.com", to: "support@buzzyfly.com" });
+	const EMAIL = mockEmail();
+	const result = await sendReply({ EMAIL }, { ...parsed.message, id: 1, read_at: null, archived: 0, replied_at: null }, { body: "  ", fromName: "" });
+	assert.equal(result.sent, false);
+	assert.equal(EMAIL.sent.length, 0);
+});
+
+test("inbox gives HTML-only mail a plain-text version", async () => {
+	const raw = "From: a@example.com\r\nTo: hello@buzzyfly.com\r\nSubject: Hi\r\nContent-Type: text/html; charset=utf-8\r\n\r\n<style>p{color:red}</style><p>Hello &amp; welcome</p><p>Line two<br>three</p>";
+	const parsed = await parseIncoming(raw, { from: "a@example.com", to: "hello@buzzyfly.com" });
+	assert.equal(parsed.message.text_body, "Hello & welcome\nLine two\nthree");
 });
