@@ -3,8 +3,9 @@
  *
  * Registered in astro.config.mjs as `workerEntryPoint`. Astro calls
  * `createExports` with the build manifest; we return the usual `fetch`
- * handler plus a `scheduled` handler for the hourly cron trigger in
- * wrangler.json.
+ * handler, a `scheduled` handler for the hourly cron trigger in
+ * wrangler.json, and an `email` handler for mail that Cloudflare Email
+ * Routing sends to this Worker (it lands in /admin/inbox).
  */
 
 import type { SSRManifest } from "astro";
@@ -13,6 +14,7 @@ import { handle } from "@astrojs/cloudflare/handler";
 import { BUZZYFLY_CONFIG } from "./data/monetization";
 import { escapeHtml, resolveFrom, sendFollowUpEmail } from "./lib/email";
 import { sendDueSequenceEmails } from "./lib/emailSequence";
+import { receiveEmail } from "./lib/inbox";
 import { ensureDownloadSchema, ensureEmailSequenceSchema, ensureFunnelSchema } from "./lib/schema";
 
 interface Env {
@@ -20,6 +22,7 @@ interface Env {
 	EMAIL?: { send(msg: { from: string; to: string; subject: string; html?: string; text?: string }): Promise<{ messageId: string }> };
 	EMAIL_FROM?: string;
 	KIDS?: Fetcher;
+	MY_PRODUCTS?: R2Bucket;
 }
 
 // The Buzzyfly Kids app (cm97/react-router-starter-template) is its own
@@ -210,6 +213,14 @@ async function scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext
 	);
 }
 
+// Mail to @buzzyfly.com, routed here by Cloudflare Email Routing. If it can't
+// be stored the error propagates, so the sender gets a bounce instead of the
+// message vanishing.
+async function email(message: ForwardableEmailMessage, env: Env): Promise<void> {
+	const id = await receiveEmail(message, env);
+	console.log(`Buzzyfly inbox: message ${id} from ${message.from} to ${message.to}`);
+}
+
 export function createExports(manifest: SSRManifest) {
 	const app = new App(manifest);
 	return {
@@ -219,6 +230,7 @@ export function createExports(manifest: SSRManifest) {
 				return handle(manifest, app, request as never, env as never, ctx as never);
 			},
 			scheduled,
+			email,
 		},
 	};
 }

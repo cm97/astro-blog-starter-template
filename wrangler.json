@@ -40,7 +40,7 @@
 	"send_email": [
 		{
 			"name": "EMAIL",
-			"allowed_sender_addresses": ["orders@buzzyfly.com", "hello@buzzyfly.com"]
+			"allowed_sender_addresses": ["orders@buzzyfly.com", "hello@buzzyfly.com", "support@buzzyfly.com"]
 		}
 	],
 	"vars": {

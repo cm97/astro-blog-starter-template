@@ -117,13 +117,14 @@ export interface EmailBinding {
 		subject: string;
 		html?: string;
 		text?: string;
+		headers?: Record<string, string>;
 	}): Promise<{ messageId: string }>;
 }
 
 // Must match `send_email[0].allowed_sender_addresses` in wrangler.json. The
 // binding rejects any other From address at runtime, so a typo in EMAIL_FROM
 // would otherwise fail every send.
-export const ALLOWED_SENDERS = ["orders@buzzyfly.com", "hello@buzzyfly.com"];
+export const ALLOWED_SENDERS = ["orders@buzzyfly.com", "hello@buzzyfly.com", "support@buzzyfly.com"];
 const DEFAULT_FROM = `${BUZZYFLY_CONFIG.brandName} <orders@buzzyfly.com>`;
 
 export function resolveFrom(env: { EMAIL_FROM?: string }): string {
