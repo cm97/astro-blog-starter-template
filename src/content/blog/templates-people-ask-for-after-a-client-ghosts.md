@@ -3,11 +3,10 @@ title: The 5 Templates People Ask For After a Client Ghosts
 description: Exact day-3, day-6, and day-12 follow-up lines plus intake, scope, and Monday reset copy after a client goes quiet.
 category: sales
 pubDate: Oct 02 2026
-updatedDate: Oct 06 2026
+updatedDate: Oct 21 2026
 heroImage: '/blog-placeholder-1.jpg'
 featuredProductTitle: Buzzyfly Digital System
 featuredProductPrice: $49
-featuredProductUrl: /buy/buzzyfly-digital-system
 featuredProductDescription: Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.
 ---
 
@@ -123,17 +122,20 @@ Close date if no reply: ________
 
 If this list lives only in your head, the ghosted client stays ghosted.
 
+## Extra concrete steps that stop the ghost from eating the week
+
+1. Put the Day 3, Day 6, and Day 12 dates on the calendar the same minute you hit send on the proposal. Blank calendar means the follow-up does not exist.
+2. Keep the five templates in the same note as the Monday reset sheet. One open, both available when Thursday is on fire.
+3. Cap the sequence at three emails. A fourth becomes a novel and they mute the thread.
+4. After any YES, add the client name to next Monday's "Still open" row so the intake and day-7 touch do not live only in your head.
+5. On Day 6, if they ask a price or scope question, answer in one paragraph and restate the close date. Do not open a new proposal.
+6. After Day 12, do not send a fourth email because you felt guilty on a quiet Friday. Close the file and move to the next name.
+7. At the next weekly reset, add a row: "Open proposals past Day 6." If none, write none.
+
 ## What still breaks when the lines live in a draft folder
 
 The day-3 bump waits for a calm hour. The day-6 note gets rewritten until it is a new proposal. The Friday close never gets sent, so the pipeline is a pile of open maybes. Monday fills with new outreach and the person who already had a proposal gets leftover attention.
 
-The five emails alone are the Follow-Up Email Templates, $19.
+The five emails, the intake, and the Monday reset live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One zip. One-time $49. Download after purchase. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
 
-Intake plus kickoff is the Client Onboarding Kit, $29.
-
-All of it in one zip — onboarding, weekly reset, follow-ups — is the Digital System, $49: /buy/buzzyfly-digital-system
-
-
-One-time payment. Download after purchase from the thank-you page. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
-
-[Get the Digital System — $49](/buy/buzzyfly-digital-system)
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
