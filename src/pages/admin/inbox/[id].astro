@@ -40,7 +40,7 @@ function formatBytes(bytes: number): string {
 ---
 
 <AdminLayout title={message.subject || "(no subject)"} active="inbox">
-	<p><a href={message.archived ? "/admin/inbox?folder=archived" : "/admin/inbox"}>← Back to {message.archived ? "Archived" : "Inbox"}</a></p>
+	<p><a href={message.archived ? "/admin/inbox?folder=archived" : "/admin/inbox"}>← Back to {message.archived ? "Archived" : "Buzzy Mail"}</a></p>
 	<h1>{message.subject || "(no subject)"}</h1>
 
 	{status === "sent" && <p class="admin-notice admin-notice--success">Reply sent to {replyTo}.</p>}
