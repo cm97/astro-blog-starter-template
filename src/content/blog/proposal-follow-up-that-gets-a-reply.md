@@ -2,7 +2,7 @@
 title: "The Proposal Follow-Up That Gets a Reply"
 description: "Three paste-ready follow-ups for when a proposal goes quiet — so the deal does not die because you stopped chasing it."
 pubDate: 2026-10-16
-updatedDate: 2026-10-19
+updatedDate: 2026-10-21
 category: sales
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -26,6 +26,7 @@ Name: ________
 Proposal sent: ________ (date / time)
 Start date you named: ________
 Deliverable named: ________
+Price named: $________
 Day 3 due: ________
 Day 7 due: ________
 Day 14 due: ________
@@ -73,11 +74,14 @@ This one either gets a reply or cleanly kills the lead so it stops living in you
 - Day 14: any weekday before 11am.
 - Never Friday. Never after 3pm. The reply rate drops and the thread dies over the weekend.
 
+If a due date lands on Friday or Monday, move it to the nearest Tuesday or Wednesday morning. Do not skip.
+
 ## What you do when they reply
 
 - Yes: send the invoice the same hour. Welcome note with the start date and the one thing you need from them. Mark the log closed.
 - Later: write the month they named. One note that month. Not a drip. Status = parked.
-- Price question: restate what is in and what is out. Do not cut the number. One line.
+- Price question: restate what is in and what is out. Do not cut the number. One line: "The [price] covers [exact deliverable]. Outside that is a separate quote. Still want the hold?"
+- Scope question: "Original scope is [in]. [New ask] is out unless we add it at [price]. Which do you want?"
 - No: mark closed. Do not argue. Do not send a fourth email.
 
 If you cannot name the next date after a yes, the client is not onboarded. That is a separate checklist.
@@ -89,6 +93,16 @@ If you cannot name the next date after a yes, the client is not onboarded. That 
 - Cap at three emails. A fourth becomes a novel and they mute you.
 - If day 3 falls on a Friday, send Thursday instead. Do not slide it to Monday and lose the window.
 - After any yes, add the client to next Monday’s “Still open” so the day-7 onboarding touch does not live only in your head.
+- Log the reply time and the next action in the same block. Blank next action means the thread dies again.
+
+Fill-in after any reply:
+
+```
+Reply received: ________ (date/time)
+Decision: yes / later / price / no
+Next action: invoice sent / parked until ________ / closed
+Onboarding note started: yes / no
+```
 
 ## Why this works when “just checking in” fails
 
@@ -100,5 +114,6 @@ You can paste them today. They work until a slammed Thursday. Then the day-3 win
 
 The same three lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One zip. One-time $49. Download after purchase. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
 
-[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+The Digital System ($49) is those follow-up lines plus the onboarding checklist and the weekly reset so the sends still happen on a slammed Thursday.
 
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
