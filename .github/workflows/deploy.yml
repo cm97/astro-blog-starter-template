@@ -1,8 +1,11 @@
 name: Deploy
 
-# Auto-deploy on push is OFF (owner-approved freeze, 2026-10-19).
-# Pushes to main no longer overwrite the live site. Deploy manually only.
+# Auto-deploy on push to main is ON again (owner request, 2026-10-21).
+# The weekly improvement task merges to main, so merges go live on their own.
+# Manual runs still work from the Actions tab.
 on:
+  push:
+    branches: [main]
   workflow_dispatch:
 
 concurrency:
