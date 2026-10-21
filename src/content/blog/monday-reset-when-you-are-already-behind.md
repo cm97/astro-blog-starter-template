@@ -2,7 +2,7 @@
 title: "The Monday Reset When You Are Already Behind"
 description: "A 20-minute Monday plan for the week that is already late — three priorities, client dates, and the two follow-ups that protect cash."
 pubDate: 2026-09-29
-updatedDate: 2026-10-14
+updatedDate: 2026-10-21
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -165,6 +165,14 @@ Moved: ________
 Slid (next Monday line 1 unless killed): ________
 Invoice or close-out sent: ________
 ```
+
+## Extra cash-protect moves when the week is already late
+
+- If any open invoice is older than 7 days, it becomes priority 3 before any new delivery.
+- If a proposal is older than 10 days with no reply, the day-2 bump goes out the same day you notice it. Do not wait for the "right" moment.
+- After you send the two follow-ups, write the next touch date on the same card. Thursday cannot invent a different version.
+- Cap the open-client scan at paid clients plus proposals out. Leads with no date and no reply in 21 days are closed rows, not open work.
+- If the three priorities do not include one money move, swap one in before you leave the 8-minute block.
 
 ## What still breaks if this only lives in your head
 
