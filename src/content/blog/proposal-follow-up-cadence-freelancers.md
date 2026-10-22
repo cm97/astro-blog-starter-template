@@ -147,6 +147,6 @@ Run the cadence like a checklist, not a mood:
 
 If you want the five ready-to-send notes only — proposal follow-up, mid-project check-in, quiet-lead poke, referral ask, wrap-up — that pack is $19.
 
-The full set is the $49 Digital System: the follow-up checklist, the onboarding checklist, and the 20-minute weekly reset in one download. One-time. Yours to keep. Not a subscription and not a coaching call. Download after purchase from the thank-you page. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The full set is the $49 Digital System: the follow-up checklist, the onboarding checklist, and the 20-minute weekly reset in one browser app. One-time. Yours to keep. Not a subscription and not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

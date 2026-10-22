@@ -100,7 +100,7 @@ You will remember them on a calm Tuesday. You will forget them on a slammed Thur
 
 The words have to sit next to the weekly reset and the onboarding checklist so a slammed week still has the sequence. That is the follow-up system inside the Digital System.
 
-One-time payment. Yours to keep. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+One-time payment. Yours to keep. Not a subscription. Not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 

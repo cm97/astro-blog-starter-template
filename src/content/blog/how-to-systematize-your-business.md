@@ -6,7 +6,7 @@ heroImage: "/blog-placeholder-5.jpg"
 category: "systems"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "The complete operating framework — onboarding, weekly planning, and follow-up workflows in one download."
+featuredProductDescription: "The complete operating framework — onboarding, weekly planning, and follow-up workflows in one browser app."
 ---
 
 Most business owners know they need better systems. They've read enough articles about it. They've told themselves after a chaotic week that they'll finally document everything properly.
