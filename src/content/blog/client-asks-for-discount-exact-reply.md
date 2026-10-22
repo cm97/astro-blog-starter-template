@@ -5,7 +5,7 @@ pubDate: 2026-10-21
 category: sales
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, follow-ups, and the pricing calculator in one Excel workbook you run in 20 minutes — so the price stays locked even on a slammed week."
+featuredProductDescription: "Onboarding, weekly planning, follow-ups, and the pricing calculator in one browser app you run in 20 minutes — so the price stays locked even on a slammed week."
 ---
 
 They liked the proposal. Then they asked if you could "do better on the number."
@@ -77,8 +77,8 @@ If they go quiet after the two options:
 
 You will remember it on a calm Tuesday. You will freeze on a slammed Thursday when they text "can you come down at all?" The price drops before you open the proposal. The scope expands later because the lower number was never written next to a shorter list.
 
-The words have to sit next to the proposal template and the weekly reset. Same folder. Same 20-minute run. Not a speech you invent again.
+The words have to sit next to the proposal template and the weekly reset. Same app. Same 20-minute run. Not a speech you invent again.
 
-The pricing calculator and the proposal that writes itself are in the Digital System with the follow-up cadence. One zip. One-time $49. Download after purchase from the thank-you page. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The pricing calculator and the proposal that writes itself are in the Digital System with the follow-up cadence. One app. One-time $49. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

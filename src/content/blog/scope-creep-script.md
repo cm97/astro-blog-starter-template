@@ -140,10 +140,10 @@ Day-6 close, one sentence:
 
 You will remember it on a calm Tuesday. You will forget it on a slammed Thursday when they text during delivery week. The pause line never gets sent. The price gets rounded down. The extra work starts before the written yes. Next week's reset has no row for the add-on, so it eats the original deadline.
 
-The words have to sit next to onboarding and the weekly reset. Same folder. Same 20-minute run. Not a speech you invent again.
+The words have to sit next to onboarding and the weekly reset. Same app. Same 20-minute run. Not a speech you invent again.
 
 The follow-up if they ghost after the price is the same day-3 / day-6 pattern as a quiet proposal. The onboarding checklist is where the original scope line should have been written. Both are in the Digital System with the scope reply.
 
-One-time payment. Yours to keep. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+One-time payment. Yours to keep. Not a subscription. Not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

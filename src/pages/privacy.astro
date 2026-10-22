@@ -7,24 +7,25 @@ import Layout from '../layouts/BlogPost.astro';
 	description="How Buzzyfly collects, uses, and stores information when you buy a product or join the email list."
 	pubDate={new Date('September 16 2026')}
 >
-	<p>Last updated: September 16, 2026</p>
+	<p>Last updated: October 22, 2026</p>
 
 	<p>
-		Buzzyfly (buzzyfly.com) sells digital templates and checklists. This page explains what we collect, why, and how to reach us. Contact: support@buzzyfly.com.
+		Buzzyfly (buzzyfly.com) sells a web app and digital templates for running a client business. This page explains what we collect, why, and how to reach us. Contact: support@buzzyfly.com.
 	</p>
 
 	<h2>What we collect</h2>
 	<ul>
-		<li>Email address when you join the list or check out through PayPal.</li>
-		<li>Name and payment details handled by PayPal. We do not store your full card number.</li>
-		<li>Order records needed to send your download link and handle refunds.</li>
+		<li>Email address when you join the list or check out through Stripe or PayPal.</li>
+		<li>Name and payment details handled by Stripe or PayPal. We never see or store your full card number.</li>
+		<li>Order records needed to send your access link and handle refunds.</li>
 		<li>Basic site analytics and security logs from our host (Cloudflare).</li>
+		<li>Not your app data. The clients, notes and emails you enter in the web app are saved in your own browser. They are not sent to us.</li>
 		<li>If you arrive through a campaign link, the campaign it came from (for example "reddit"), kept in your browser for 30 days and saved with your signup or order so we know which posts and ads work.</li>
 	</ul>
 
 	<h2>How we use it</h2>
 	<ul>
-		<li>Deliver the file you paid for.</li>
+		<li>Give you access to what you paid for.</li>
 		<li>Send the free weekly-reset checklist if you opted in.</li>
 		<li>Send occasional product email if you are on the list. You can unsubscribe on any email.</li>
 		<li>Answer support and process refunds.</li>
@@ -32,7 +33,7 @@ import Layout from '../layouts/BlogPost.astro';
 
 	<h2>Who else sees it</h2>
 	<p>
-		PayPal processes payments. Cloudflare hosts the site and stores product files. Email is sent through our email provider when delivery and list emails go out. We do not sell your email or order data.
+		Stripe and PayPal process payments. Cloudflare hosts the site and stores order records. Email is sent through our email provider when delivery and list emails go out. We do not sell your email or order data.
 	</p>
 
 	<h2>How long we keep it</h2>
@@ -42,7 +43,7 @@ import Layout from '../layouts/BlogPost.astro';
 
 	<h2>Your choices</h2>
 	<p>
-		Email support@buzzyfly.com to get a copy of what we have, correct it, or delete list and account data we control. PayPal holds payment records under their own policy.
+		Email support@buzzyfly.com to get a copy of what we have, correct it, or delete list and account data we control. Stripe and PayPal hold payment records under their own policies.
 	</p>
 
 	<h2>Cookies</h2>

@@ -1,67 +1,47 @@
 ---
 title: "The Buzzyfly Digital System — Full Product"
-description: "Everything in the $49 zip, in one place."
+description: "Everything in the $49 web app, in one place."
 pubDate: "2026-09-01"
+updatedDate: "2026-10-22"
 category: "product"
 heroImage: "/buzzyfly-brand-about.jpg"
 ---
 
 # The Buzzyfly Digital System
 
-This is the product. Not a description of the product. The product.
+A web app for running a client business. It opens in your browser on your phone or computer. Nothing to download or install.
 
-## What's in the zip
+## What's in the app
 
-```
-buzzyfly-digital-system/
-├── README.md
-├── 01-onboarding/
-│   ├── client-onboarding-checklist.md
-│   ├── intake-form-template.md
-│   └── kickoff-call-agenda.md
-├── 02-weekly-planning/
-│   ├── 20-minute-weekly-reset.md
-│   ├── monday-setup-checklist.md
-│   └── friday-review-template.md
-├── 03-follow-ups/
-│   ├── follow-up-email-templates.md
-│   ├── follow-up-cadence.md
-│   └── breakup-email.md
-├── 04-scope-and-proposals/
-│   ├── scope-creep-script.md
-│   ├── proposal-template.md
-│   └── pricing-worksheet.md
-├── 05-retention/
-│   ├── retention-checklist.md
-│   └── re-engagement-email.md
-└── LICENSE.md
-```
+**Today** — Who needs a follow-up today, which onboarding steps are due, and this week's #1 priority.
 
-## What each section does
+**Clients** — Every lead, proposal, active client and open invoice. Follow-up dates are worked out from where each one is: proposal follow-ups on days 3, 7 and 14, invoice reminders on days 1, 7 and 14.
 
-**01-onboarding** — From signed contract to first deliverable. The checklist, the intake form, the kickoff agenda.
+**Email writer** — 21 emails for follow-ups, onboarding, proposals, discount requests and scope changes. They fill in the client's name, project, amount and your sign-off. You copy the email, or open it in your email app, and send it yourself.
 
-**02-weekly-planning** — The 20-minute reset. Monday setup, Friday review. Short. Repeatable.
+**Onboarding** — A 10-step plan for each new client, from the welcome email to the first delivery, with a due date on every step.
 
-**03-follow-ups** — Three email templates that get replies. The cadence. The breakup email.
+**Weekly reset** — A guided 20-minute Monday checklist and a priority scorer that picks your #1 for the week.
 
-**04-scope-and-proposals** — The words to say no. The proposal that closes. The pricing worksheet.
+**Proposals and pricing** — Your hourly floor, plus project and retainer prices worked out from it.
 
-**05-retention** — How to keep clients. The re-engagement email.
+**Scope guard** — The words for a request that's outside the scope, a change you need confirmed in writing, and revisions that are used up.
 
 ## How to use it
 
-1. Download.
-2. Unzip.
-3. Read the README.
-4. Pick one checklist. Run it this week.
-5. Don't try to do everything at once.
+1. Buy once. The app unlocks on the page you land on after checkout.
+2. Save your access link. Open it on each device you use.
+3. Add the clients you're working with right now.
+4. Open Today and send whatever is due.
+5. Do the Monday reset once a week.
+
+Your clients are saved in your own browser. Use the backup button to move them to another device.
 
 ## License
 
-Personal and commercial use. You can use these in your business. You cannot resell them as your own.
+Use it in your own business. Don't resell it or share your access link.
 
-## 30-day guarantee
+## 30-day refund
 
 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access. Email support@buzzyfly.com.
 

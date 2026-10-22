@@ -178,11 +178,11 @@ Invoice or close-out sent: ________
 
 The three priorities change every time you remember a new fire. Client dates live in threads you will not reopen until they complain. Follow-ups wait for a good moment, and the moment is never Monday at 9:12. The invoice stays a feeling instead of a sent file.
 
-The words have to sit next to onboarding and the proposal follow-up, in the same folder, so a slammed Monday still has a list to open. That is the weekly reset inside the Digital System, with the onboarding checklist and the follow-up lines in the same zip.
+The words have to sit next to onboarding and the proposal follow-up, in the same place, so a slammed Monday still has a list to open. That is the weekly reset inside the Digital System, with the onboarding checklist and the follow-up lines in the same app.
 
 The Digital System ($49) is the reset plus onboarding and follow-ups so a slammed Monday still has the list.
 
-One-time payment. Yours to keep. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+One-time payment. Yours to keep. Not a subscription. Not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 

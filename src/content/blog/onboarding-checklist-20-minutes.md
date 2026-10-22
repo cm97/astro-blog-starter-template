@@ -141,11 +141,11 @@ You can paste the email above into a note right now. It works until the next cli
 
 Client dates live in threads you will not reopen until they complain. The day-7 check-in waits for a good moment, and the moment is never Monday at 9:12. The private note is a feeling instead of a written card.
 
-The words have to sit next to the weekly reset and the follow-up lines, in the same folder, so a slammed week still has a list to open. That is the onboarding checklist inside the Digital System, with the weekly reset and the follow-up templates in the same zip.
+The words have to sit next to the weekly reset and the follow-up lines, in the same place, so a slammed week still has a list to open. That is the onboarding checklist inside the Digital System, with the weekly reset and the follow-up templates in the same app.
 
 The Digital System ($49) is the onboarding checklist plus weekly planning and follow-ups so a slammed week still has the list.
 
-One-time payment. Yours to keep. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+One-time payment. Yours to keep. Not a subscription. Not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 

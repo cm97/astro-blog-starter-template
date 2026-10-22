@@ -136,6 +136,6 @@ If this list lives only in your head, the ghosted client stays ghosted.
 
 The day-3 bump waits for a calm hour. The day-6 note gets rewritten until it is a new proposal. The Friday close never gets sent, so the pipeline is a pile of open maybes. Monday fills with new outreach and the person who already had a proposal gets leftover attention.
 
-The five emails, the intake, and the Monday reset live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One zip. One-time $49. Download after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The five emails, the intake, and the Monday reset live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One app. One-time $49. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

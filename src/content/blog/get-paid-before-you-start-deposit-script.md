@@ -79,11 +79,11 @@ Day-2 bump, same thread:
 
 You will remember it on a calm Monday. You will forget it on a slammed Thursday when they text "excited to start tomorrow." The deposit email never gets sent. You open the file. The payment becomes another follow-up that dies in the inbox.
 
-The words have to sit next to the onboarding checklist and the weekly reset. Same folder. Same 20-minute run. Not a speech you invent again.
+The words have to sit next to the onboarding checklist and the weekly reset. Same app. Same 20-minute run. Not a speech you invent again.
 
 The follow-up if they ghost after the deposit request is the same day-2 pattern as a quiet proposal. The onboarding checklist is what you run only after the money clears. Both are in the Digital System with the deposit script.
 
-One-time payment. Yours to keep. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+One-time payment. Yours to keep. Not a subscription. Not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
