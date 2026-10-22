@@ -8,7 +8,7 @@ export const BUZZYFLY_CONFIG = {
 	defaultProductTitle: "Buzzyfly Digital System",
 	defaultProductPrice: "$49",
 	defaultProductDescription:
-		"Browser web app for your client business. Login and see who to follow up with today, the email to send, onboarding steps for new clients, and your Monday reset — no download, no Excel.",
+		"Browser web app for your client business. Open it and see who to follow up with today, the email to send, onboarding steps for new clients, and your Monday reset — no download, no Excel.",
 	newsletterTitle: "Send me the 20-minute weekly reset checklist",
 	newsletterDescription:
 		"Free. No spam. Just the checklist, plus one email a week with the next piece of the system.",
@@ -140,7 +140,7 @@ export const ALL_PRODUCTS: Product[] = [
 		id: "buzzyfly-digital-system",
 		title: "Buzzyfly Digital System",
 		price: "$49",
-		description: "Browser web app. Login and see who to follow up with today, the email to send, onboarding for new clients, and your Monday reset. No download. No Excel.",
+		description: "Browser web app. Open it and see who to follow up with today, the email to send, onboarding for new clients, and your Monday reset. No download. No Excel.",
 		features: ["Today dashboard: who needs you and what to send", "Follow-ups, onboarding and weekly reset in the browser", "Proposal and scope replies ready to copy", "Works on phone. No files."],
 		buyUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00",
 		badge: "Most popular",

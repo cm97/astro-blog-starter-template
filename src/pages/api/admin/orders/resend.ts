@@ -4,6 +4,7 @@ import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../../../../data/monetization";
 import { logAdminAction } from "../../../../lib/audit";
 import { sendDeliveryEmail, sendDropWelcomeEmail } from "../../../../lib/email";
 import { isDropItem, issueDropToken } from "../../../../lib/dropAccess";
+import { appKeyForOrder, appKeyUrl, isAppItem } from "../../../../lib/appAccess";
 
 export const prerender = false;
 
@@ -56,13 +57,16 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return redirect(backParams);
 	}
 
+	const isApp = isAppItem(order.item_id);
 	let token: string | null = null;
 	try {
-		token = await issueStoredDownloadToken(env, {
-			orderId: order.order_id,
-			itemId: order.item_id,
-			customerEmail: order.customer_email,
-		});
+		token = isApp
+			? await appKeyForOrder(env, { orderId: order.order_id, customerEmail: order.customer_email })
+			: await issueStoredDownloadToken(env, {
+					orderId: order.order_id,
+					itemId: order.item_id,
+					customerEmail: order.customer_email,
+				});
 	} catch (error) {
 		console.error("Buzzyfly admin: failed to issue download token", error);
 	}
@@ -72,7 +76,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return redirect(backParams);
 	}
 
-	const downloadUrl = `${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${token}`;
+	const downloadUrl = isApp ? appKeyUrl(token) : `${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${token}`;
 	backParams.set("resent", downloadUrl);
 
 	let outcome: string;

@@ -3,10 +3,44 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { BUZZYFLY_CONFIG } from "../data/monetization";
+import { APP_COOKIE, appCookieOptions, appKeyForOrder, appKeyUrl, isAppItem } from "../lib/appAccess";
 
 export const prerender = false;
----
 
+// Stripe passes the session ID in ?s= when the Payment Link success URL is
+// https://buzzyfly.com/thank-you?s={CHECKOUT_SESSION_ID}
+const sessionId = Astro.url.searchParams.get("s") ?? "";
+const isStripeSession = /^cs_(live|test)_[A-Za-z0-9]+$/.test(sessionId);
+if (isStripeSession) Astro.response.headers.set("cache-control", "private, no-store");
+
+// The Stripe webhook records the paid order in D1. Email delivery is not
+// reliable, so this page is the main delivery path: once the order is on
+// record it unlocks the app in this browser and shows the access link.
+let appKey: string | null = null;
+const env = Astro.locals.runtime?.env;
+if (isStripeSession && env?.DB) {
+	try {
+		const row = await env.DB.prepare(
+			`SELECT item_id, customer_email FROM fulfillments WHERE provider = 'stripe' AND order_id = ? LIMIT 1`,
+		)
+			.bind(sessionId)
+			.first<{ item_id: string; customer_email: string | null }>();
+		if (row && isAppItem(row.item_id)) {
+			appKey = await appKeyForOrder(env, { orderId: sessionId, customerEmail: row.customer_email });
+		}
+	} catch (error) {
+		console.error("Buzzyfly thank-you: order lookup failed", error);
+	}
+}
+if (appKey) Astro.cookies.set(APP_COOKIE, appKey, appCookieOptions(Astro.url));
+const accessUrl = appKey ? appKeyUrl(appKey) : null;
+
+// Stripe can redirect here a few seconds before its webhook lands. Reload a
+// few times while we wait, then fall back to the support line.
+const attempt = Math.min(Number(Astro.url.searchParams.get("t")) || 0, 20);
+const waiting = isStripeSession && !appKey && attempt < 12;
+const retryUrl = waiting ? `/thank-you?s=${encodeURIComponent(sessionId)}&t=${attempt + 1}` : null;
+---
 <!doctype html>
 <html lang="en">
 	<head>
@@ -15,25 +49,49 @@ export const prerender = false;
 			description="Your order is confirmed. Open the app."
 		/>
 		<meta name="robots" content="noindex" />
+		{retryUrl && <meta http-equiv="refresh" content={`3;url=${retryUrl}`} />}
 	</head>
 	<body>
 		<Header />
 		<main>
 			<section class="ty-hero">
-				<div class="ty-check">✓</div>
-				<h1>Your app is ready.</h1>
-				<p class="ty-lede">Thanks for buying the Buzzyfly Digital System.</p>
-				<p><a class="btn btn--primary" href="/app">Open the app</a></p>
-				<p class="ty-note">
-					No download. Bookmark /app or open it from your phone.
-				</p>
+				{accessUrl ? (
+					<>
+						<div class="ty-check">✓</div>
+						<h1>Your app is ready.</h1>
+						<p class="ty-lede">Thanks for buying the Buzzyfly Digital System. It's unlocked in this browser.</p>
+						<p><a class="btn btn--primary" href="/app">Open the app</a></p>
+						<div class="ty-key">
+							<strong>Save your access link.</strong> Open it once on each phone or computer you want to use.
+							<br /><code>{accessUrl}</code>
+						</div>
+					</>
+				) : waiting ? (
+					<>
+						<div class="ty-check">✓</div>
+						<h1>Payment received. Unlocking your app…</h1>
+						<p class="ty-lede" role="status">This takes a few seconds. The page refreshes on its own.</p>
+						<p class="ty-note"><a href={retryUrl!}>Refresh now</a></p>
+					</>
+				) : isStripeSession ? (
+					<>
+						<h1>Payment received.</h1>
+						<p class="ty-lede">We're still confirming it with Stripe. Try refreshing in a minute.</p>
+						<p><a class="btn btn--primary" href={`/thank-you?s=${encodeURIComponent(sessionId)}`}>Check again</a></p>
+					</>
+				) : (
+					<>
+						<h1>Already bought the Digital System?</h1>
+						<p class="ty-lede">Open the app with the access link from your order, or from the page you saw right after paying.</p>
+						<p><a class="btn btn--primary" href="/app">Go to the app</a></p>
+					</>
+				)}
 				<p class="ty-note">
 					Need help? Email
 					<a href={`mailto:${BUZZYFLY_CONFIG.supportEmail}`}>{BUZZYFLY_CONFIG.supportEmail}</a>
 					from the address you checked out with.
 				</p>
 			</section>
-
 			<div class="ty-actions">
 				<a class="btn btn--secondary" href="/store">Back to store</a>
 			</div>
@@ -100,4 +158,16 @@ export const prerender = false;
 		color: rgb(var(--gray-dark));
 	}
 	.btn--secondary:hover { border-color: var(--accent); color: var(--accent); }
+	.btn:focus-visible { outline: 3px solid rgb(var(--black)); outline-offset: 3px; }
+	.ty-key {
+		margin: 1.25em auto 0;
+		padding: 0.9em 1em;
+		border: 1px dashed rgb(var(--gray-light));
+		border-radius: 8px;
+		text-align: left;
+		font-size: 0.85em;
+		color: rgb(var(--gray-dark));
+		overflow-wrap: anywhere;
+	}
+	.ty-key code { font-size: 0.95em; }
 </style>
