@@ -1,4 +1,5 @@
 import { APPS_TOKEN_TTL_SECONDS, isAppsItem } from "../../lib/appsAccess";
+import { appKeyForOrder, appKeyUrl, isAppItem } from "../../lib/appAccess";
 import type { APIRoute } from "astro";
 import { verifyLemonSqueezySignature, verifyStripeSignature } from "../../lib/webhookSecurity";
 import {
@@ -96,7 +97,10 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		});
 	}
 
-	if (!env.DOWNLOAD_TOKEN_SECRET) {
+	// The Digital System is a web app: access is a D1-stored key, so it doesn't
+	// need DOWNLOAD_TOKEN_SECRET.
+	const isApp = isAppItem(order.itemId);
+	if (!isApp && !env.DOWNLOAD_TOKEN_SECRET) {
 		console.error("Buzzyfly webhook: DOWNLOAD_TOKEN_SECRET is not configured");
 		return new Response("Fulfillment not configured", { status: 500 });
 	}
@@ -133,14 +137,27 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		}
 	}
 
-	const downloadToken = await createDownloadToken(
-		order,
-		env.DOWNLOAD_TOKEN_SECRET,
-		isApps ? APPS_TOKEN_TTL_SECONDS : undefined,
-	);
-	const downloadUrl = isApps
-		? `${BUZZYFLY_CONFIG.siteUrl}/apps/unlock?token=${downloadToken}`
-		: `${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${downloadToken}`;
+	let downloadUrl: string;
+	if (isApp) {
+		let appKey: string | null = null;
+		try {
+			appKey = await appKeyForOrder(env, order);
+		} catch (error) {
+			console.error("Buzzyfly webhook: failed to issue app key", error);
+		}
+		// Without a key the buyer still gets in from the thank-you page, which
+		// issues one from the order record.
+		downloadUrl = appKey ? appKeyUrl(appKey) : `${BUZZYFLY_CONFIG.siteUrl}/thank-you`;
+	} else {
+		const downloadToken = await createDownloadToken(
+			order,
+			env.DOWNLOAD_TOKEN_SECRET!,
+			isApps ? APPS_TOKEN_TTL_SECONDS : undefined,
+		);
+		downloadUrl = isApps
+			? `${BUZZYFLY_CONFIG.siteUrl}/apps/unlock?token=${downloadToken}`
+			: `${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${downloadToken}`;
+	}
 
 	// Deliver the link to the customer. Until this existed, the URL was only
 	// written to the console and returned in the HTTP response body — and that
