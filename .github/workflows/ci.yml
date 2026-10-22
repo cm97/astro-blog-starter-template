@@ -28,6 +28,8 @@ jobs:
         run: npx tsc --noEmit
       - name: Email tests
         run: npm run test:email
+      - name: Rate limit tests
+        run: npm run test:ratelimit
       # Validates wrangler.json and bindings against the built worker.
       # Needs no Cloudflare credentials, so it runs on fork PRs too.
       - name: Wrangler dry run
