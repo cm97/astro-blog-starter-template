@@ -2,7 +2,7 @@
 title: "The 20-Minute Weekly Reset for Solo Operators That Survives a Slammed Week"
 description: "Exact 20-minute weekly reset checklist for coaches and freelancers — clear the board, three priorities, follow-ups, and tomorrow’s first move so the week still runs when you are busy."
 pubDate: "Oct 16 2026"
-updatedDate: "Oct 20 2026"
+updatedDate: "Oct 22 2026"
 category: "planning"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -76,6 +76,41 @@ Skip the three priorities. Do this instead:
 4. Stop.
 
 The full reset returns next Monday. The salvage keeps money moving this week.
+
+## If you skipped Monday entirely
+
+Do not wait for next Monday. Run the salvage version the moment you notice. Then do a 7-minute recovery:
+
+1. Write the three priorities for the remaining days (not the full week).
+2. Send the two oldest follow-ups.
+3. Put tomorrow’s first move on the calendar.
+
+Recovery fill-in:
+
+```
+Skipped Monday: yes
+Recovery date/time: ________
+Remaining three:
+1) ________ — by ________
+2) ________ — by ________
+3) ________ — by ________
+Oldest two follow-ups sent: ________ / ________
+Tomorrow first move: ________
+```
+
+Missing one Monday does not kill the habit. Missing the recovery does.
+
+## Extra cash-protect fill-ins
+
+Before you close the reset window, answer these three lines:
+
+```
+Open invoices older than 7 days: ________ (send or kill)
+Proposals older than 10 days: ________ (bump or close)
+Clients with no next date: ________ (set date or pause)
+```
+
+If any line is blank, the money is still a feeling. Fill it before the timer ends.
 
 ## What still breaks when this only lives in your head
 
