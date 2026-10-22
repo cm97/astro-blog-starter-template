@@ -2,7 +2,7 @@
 title: "The 20-Minute Onboarding Checklist That Survives a Slammed Week"
 description: "Exact 20-minute client onboarding checklist for coaches and solo operators — welcome, intake, kickoff, and day-7 hold so the process still runs when you are busy."
 pubDate: "Oct 16 2026"
-updatedDate: "Oct 20 2026"
+updatedDate: "Oct 22 2026"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -35,6 +35,7 @@ Intake sent: yes / no — link: ________
 Kickoff booked: ________ (day/time)
 Private note written: yes / no
 Day-7 check-in on calendar: ________
+Scope line logged: yes / no
 ```
 
 ## Exact welcome email
@@ -48,6 +49,8 @@ Day-7 check-in on calendar: ________
 > Next step is the short intake form (link). Once that is back I will send the kickoff agenda and the first-week checklist.
 >
 > Kickoff is on the calendar for [day/time]. Reply if that slot does not work.
+>
+> This start covers [exact deliverable]. Anything outside that is a separate quote.
 >
 > [Your name]
 
@@ -73,7 +76,7 @@ Deadline in the form or the email: three business days. If it is not back by the
 - Agree the day-7 check-in and the channel (2 min)
 - Anything out of scope this week (2 min)
 
-The invite exists before you write the agenda. The agenda is three bullets. Do not redesign it per client.
+The invite exists before you write the agenda. The agenda is five bullets. Do not redesign it per client.
 
 ## Private note (the part that dies in your head)
 
@@ -84,6 +87,8 @@ First-week goal: ________
 Next check-in: ________
 Who decides: ________
 Open risk: ________
+Amount paid: $________
+Out of scope: ________
 ```
 
 Write it in the same place you keep the weekly reset. If the note is not there, the client is not onboarded.
@@ -116,6 +121,7 @@ If they have not returned the intake, the same block becomes:
 - Kickoff hold on calendar  
 - Private note written  
 - Day-7 block set  
+- Scope sentence in welcome  
 
 **Day 2**  
 - Confirm intake received or send the 48-hour nudge  
@@ -124,7 +130,7 @@ If they have not returned the intake, the same block becomes:
 **Day 3–4**  
 - Review intake, write 2 clarifying questions  
 - Kickoff held or rescheduled with new date written  
-- Kickoff summary sent within 60 minutes  
+- Kickoff summary sent within 60 minutes: “Here is what we covered: [outcome], first deliverable due [date], day-7 check on [date]. Reply if I missed anything.”  
 
 **Day 6**  
 - Mid-point status line: “Quick status: [what moved]. Next piece due [date]. Anything blocked on your side?”  
@@ -134,6 +140,16 @@ If they have not returned the intake, the same block becomes:
 - Client added to weekly reset “Still open” so week two stays quiet-free  
 
 If any day is late, send the late version the same day. Never skip because you are behind.
+
+## Exact lines that protect the cash
+
+Add these three before you close the laptop on day 0:
+
+1. Scope line in welcome: "This start covers [exact thing]. Anything outside that is a separate quote."
+2. Private note amount: write the dollar figure and "paid in full / deposit only". If deposit, write remaining date next to it.
+3. Pre-written 48-hour nudge on calendar:
+
+> Hi [Name] — still need the intake so kickoff is useful. Link again: [link]. Deadline stays [date]. Reply if something is blocking it.
 
 ## What still breaks when this only lives in your head
 
@@ -148,4 +164,3 @@ The Digital System ($49) is the onboarding checklist plus weekly planning and fo
 One-time payment. Yours to keep. Not a subscription. Not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
-
