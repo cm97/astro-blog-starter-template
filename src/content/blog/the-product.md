@@ -63,6 +63,6 @@ Personal and commercial use. You can use these in your business. You cannot rese
 
 ## 30-day guarantee
 
-30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download. Email support@buzzyfly.com.
+30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access. Email support@buzzyfly.com.
 
 [Get it now — $49](/store)

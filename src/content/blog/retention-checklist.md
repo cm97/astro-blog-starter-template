@@ -160,6 +160,6 @@ The words have to sit next to onboarding and the weekly reset. Same folder. Same
 
 The follow-up if a proposal goes quiet before they pay is a different list (day 3, day 7, day 12). This list starts the day money lands. Both are in the Digital System with the onboarding checklist.
 
-One-time payment. Yours to keep. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
+One-time payment. Yours to keep. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

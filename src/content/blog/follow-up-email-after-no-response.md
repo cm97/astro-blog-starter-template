@@ -239,7 +239,7 @@ The $19 follow-up pack is the emails alone. The $49 system is those emails plus 
 
 The Digital System ($49) is those emails plus the onboarding checklist and the weekly reset so the sends still happen on a slammed Thursday.
 
-One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
+One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 

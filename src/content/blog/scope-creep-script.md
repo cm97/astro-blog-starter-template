@@ -144,6 +144,6 @@ The words have to sit next to onboarding and the weekly reset. Same folder. Same
 
 The follow-up if they ghost after the price is the same day-3 / day-6 pattern as a quiet proposal. The onboarding checklist is where the original scope line should have been written. Both are in the Digital System with the scope reply.
 
-One-time payment. Yours to keep. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
+One-time payment. Yours to keep. Not a subscription. Not a coaching call. Download after purchase from the thank-you page. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

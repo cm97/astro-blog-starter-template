@@ -127,7 +127,7 @@ The biggest worry with any digital product is simple. What if it's not what I ne
 
 So here's how to judge it before you buy. Read the sample below. If this is useful, the rest will be too.
 
-The refund rule is simple: 30-day refund if your files weren't delivered or aren't what the listing described. Email {supportEmail}. No change-of-mind refunds after a valid download.
+The refund rule is simple: 30-day refund if you can't get into the app or it isn't what the listing described. Email {supportEmail}. No change-of-mind refunds once you've had access.
 
 Here's the sample. The scope creep line:
 
@@ -183,7 +183,7 @@ Who it's for: one- or few-person businesses where the process lives in your head
 
 Who it's not for: anyone who already has a documented system that works. You'd be buying what you already have.
 
-$49 once. No subscription. 30-day refund for non-delivery or files not as described.
+$49 once. No subscription. 30-day refund if you can't access the app or it isn't as described.
 
 There's no deadline and no countdown. The price isn't going up on Friday. When you're ready, it's here: {store}
 

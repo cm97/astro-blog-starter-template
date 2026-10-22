@@ -112,7 +112,7 @@ Onboarding note started: yes / no
 
 You can paste them today. They work until a slammed Thursday. Then the day-3 window passes, the log is empty, and the proposal sits in sent items until you notice it two weeks later.
 
-The same three lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One zip. One-time $49. Download after purchase. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
+The same three lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One zip. One-time $49. Download after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 The Digital System ($49) is those follow-up lines plus the onboarding checklist and the weekly reset so the sends still happen on a slammed Thursday.
 
