@@ -50,7 +50,7 @@ function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string
     <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
       You have <strong>${escapeHtml(productName)}</strong>. The logical next piece is the
       <strong>${escapeHtml(upsellProduct.title)}</strong>. ${escapeHtml(upsellProduct.description)}
-      Same refund rule: 30-day refund for non-delivery or files not as described.
+      Same refund rule: 30-day refund if you can't access the app or it isn't as described.
     </p>
     <p style="margin:0">
       <a href="${absoluteBuyUrl(upsellProduct)}" style="display:inline-block;background:#374151;color:#fff;text-decoration:none;padding:10px 20px;border-radius:4px;font-weight:600;font-size:14px">
@@ -120,7 +120,7 @@ function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string
 			"",
 			`You have ${productName}. The logical next piece is the ${upsellProduct.title}.`,
 			upsellProduct.description,
-			"Same refund rule: 30-day refund for non-delivery or files not as described.",
+			"Same refund rule: 30-day refund if you can't access the app or it isn't as described.",
 			`Get it here (${upsellProduct.price}): ${absoluteBuyUrl(upsellProduct)}`,
 		);
 	}

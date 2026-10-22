@@ -79,6 +79,6 @@ You will remember it on a calm Tuesday. You will freeze on a slammed Thursday wh
 
 The words have to sit next to the proposal template and the weekly reset. Same folder. Same 20-minute run. Not a speech you invent again.
 
-The pricing calculator and the proposal that writes itself are in the Digital System with the follow-up cadence. One zip. One-time $49. Download after purchase from the thank-you page. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
+The pricing calculator and the proposal that writes itself are in the Digital System with the follow-up cadence. One zip. One-time $49. Download after purchase from the thank-you page. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

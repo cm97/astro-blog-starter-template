@@ -85,4 +85,4 @@ The Digital System is the same sequence written down so it still runs when you a
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
+30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.

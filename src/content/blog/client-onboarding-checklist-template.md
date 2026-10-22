@@ -208,7 +208,7 @@ The welcome email gets rewritten every time. The 48-hour intake nudge never gets
 
 The Digital System ($49) is that kit plus the weekly reset and the follow-up emails so week two does not go quiet.
 
-One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
+One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 

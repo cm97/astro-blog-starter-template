@@ -17,8 +17,8 @@ export const BUZZYFLY_CONFIG = {
 	supportEmail: "support@buzzyfly.com",
 	/** Owner inbox for internal order alerts only. Never shown on public pages. */
 	orderEmail: "coachmanager@gmail.com",
-	guarantee: "30-day refund if the app wasn't accessible or isn't what the listing described. No change-of-mind refunds after access is granted.",
-	guaranteeShort: "30-day refund for non-access or app not as described.",
+	guarantee: "30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.",
+	guaranteeShort: "30-day refund if you can't access the app or it isn't as described.",
 	emailSignature: "Buzzyfly",
 	mailingAddress: "",
 };

@@ -4,10 +4,10 @@
 
 Do not reintroduce any of the following. Check `src/`, emails (`src/data/emailSequence.ts`, `src/lib/email.ts`), `/terms`, `/privacy` and `/thank-you` before you ship.
 
-1. **No "Instant download"** (or instant delivery/access claims). Buyers download on the Stripe thank-you page. Automatic email delivery is not working, so never promise emailed delivery as the main path.
+1. **No "Instant download"** (or instant delivery/access claims). Buyers unlock the web app on the thank-you page after Stripe checkout, and the delivery email is a backup. Never promise emailed delivery as the main path.
 2. **No subscriptions.** No $19/mo Monthly Drop offer and no `eVq4gB…` Payment Link anywhere.
 3. **No `coachmanager@gmail.com` on public pages.** Use `support@buzzyfly.com` for any public contact.
-4. **One refund rule everywhere** (pages, footer, `/terms`, emails): "30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download." Footer short form: "30-day refund for non-delivery or files not as described." No "if it doesn't help", satisfaction or results-based money-back wording, no 7-day refunds. Keep the "Limits on our liability" section and the narrowed updates line in `/terms`.
+4. **One refund rule everywhere** (pages, footer, `/terms`, emails): "30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access." Footer short form: "30-day refund if you can't access the app or it isn't as described." No "if it doesn't help", satisfaction or results-based money-back wording, no 7-day refunds. Keep the "Limits on our liability" section and the narrowed updates line in `/terms`.
 5. **Only the $49 Digital System is buyable.** Its Payment Link `https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00` is the only `buy.stripe.com` URL allowed in `src/`. The $15, $19, $29 and $97 products stay "Coming soon" with `buyUrl: null` and no buy links.
 
 Also: no "reply-generating" or other outcome promises, the buyer copies and sends emails themselves, and no invented view counts, dates, testimonials or stats.
@@ -42,7 +42,7 @@ This site must outperform the revenue-generating pages of Google, GoDaddy, and a
 
 ### 1. Store page (`src/pages/store.astro` or wherever ALL_PRODUCTS renders)
 - Hero above the product grid: one outcome-first headline, one pain-point subheadline, one primary CTA.
-- Trust-signal row: download after purchase, no subscription, 30-day refund for non-delivery or files not as described, built by a solo creator.
+- Trust-signal row: open the app after purchase, no subscription, 30-day refund if you can't access the app or it isn't as described, built by a solo creator.
 - Product grid using `ProductCallout.astro` for each product in `ALL_PRODUCTS`.
 - The $49 Digital System (badge: "Most popular") gets visual prominence — larger card, glow, or top placement.
 - The $97 Complete Bundle (badge: "Best value") gets a dedicated banner section using `MoneyPrinterBanner.astro`.

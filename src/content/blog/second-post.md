@@ -92,7 +92,7 @@ If you skip it, signs 1–3 come back by Thursday. If you also need onboarding a
 - Day 3 and day 6 are not written, so the quiet lead never gets the same five lines.
 - The reset is a mood, not a clock, so the week dies on Thursday.
 
-Get the Digital System — $49. One-time. Yours to keep. Not a subscription. Not a coaching call. Download from the thank-you page after purchase. 30-day refund if your files weren't delivered or aren't what the listing described. No change-of-mind refunds after a valid download.
+Get the Digital System — $49. One-time. Yours to keep. Not a subscription. Not a coaching call. Download from the thank-you page after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](/buy/buzzyfly-digital-system)
 
