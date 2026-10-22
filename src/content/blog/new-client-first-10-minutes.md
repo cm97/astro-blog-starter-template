@@ -2,7 +2,7 @@
 title: "New Client Just Signed? Do This in the First 10 Minutes"
 description: "Exact sequence to run the moment a new client pays — welcome email, intake form, kickoff agenda, and calendar hold — so onboarding does not live in your head."
 pubDate: "Oct 16 2026"
-updatedDate: "Oct 21 2026"
+updatedDate: "Oct 22 2026"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -51,6 +51,8 @@ Invoice amount logged: yes / no
 >
 > Kickoff is on the calendar for [day/time]. Reply if that slot does not work.
 >
+> This start covers [exact deliverable or outcome]. Anything outside that is a separate quote.
+>
 > [Your name]
 
 Send it before you do anything else. The form and the calendar hold do the rest of the work.
@@ -87,6 +89,7 @@ Next check-in: ________
 Who decides: ________
 Open risk: ________
 Amount paid: $________
+Out of scope: ________
 ```
 
 Write it in the same place you keep the weekly reset. If the note is not there, the client is not onboarded.
@@ -114,6 +117,16 @@ Most first-week chaos is unpaid work and missing dates. Add these three before y
 > Hi [Name] — still need the intake so kickoff is useful. Link again: [link]. Deadline stays [date]. Reply if something is blocking it.
 
 Send it even if you feel awkward. The form is the process.
+
+## If the intake is late
+
+Day 3 with no form: send the 48-hour nudge above. Do not rewrite it.
+
+Day 5: move the kickoff or cancel it. Message:
+
+> Hi [Name] — moving the kickoff until the intake is back so the call is useful. Here is the link again. New slot options: [two times].
+
+Do not start the work. The form is the gate.
 
 ## What still breaks when this lives only in your head
 
