@@ -26,6 +26,7 @@ Name: ________
 Proposal sent: ________ (date / time)
 Start date you named: ________
 Deliverable named: ________
+Price named: $________
 Day 3 due: ________
 Day 7 due: ________
 Day 14 due: ________
@@ -121,6 +122,20 @@ If you cannot name the next date after a yes, the client is not onboarded. That 
 8. Screenshot or copy the proposal send time into the log. Memory of “I sent it last week” is not a date.
 9. If the start date you named has already passed by Day 7, replace it with the next available start you can actually hold before you send the line.
 10. Set a phone reminder for the 8-minute block the night before. The calendar alone dies when the week is on fire.
+11. If they reply with a question instead of yes/no, answer in one short paragraph, then restate the binary close in the same email. Do not leave the decision open-ended.
+12. Write the next touch date on the log the second the current email leaves. Blank next-touch is how the cadence dies.
+13. Cap open proposal rows at five. Older ones past Day 14 are closed or parked. More than five is noise, not a pipeline.
+14. After any paid yes, open the onboarding checklist the same day. The follow-up sequence ends when money lands; the onboarding sequence starts.
+
+## Fill-in after every send or reply
+
+```
+Touch sent: Day 3 / 7 / 14 — time: ________
+Reply received: ________ (date/time) or none
+Decision: yes / later / price / scope / no / silent
+Next action: invoice / park until ________ / closed / answer + restate binary
+Onboarding started: yes / no
+```
 
 ## Why these work when “just checking in” fails
 
@@ -133,4 +148,3 @@ You can paste them today. They work until a slammed Thursday. Then the day-3 win
 The same three lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One Excel workbook (opens in Excel or Google Sheets). One-time $49. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if your files weren’t delivered or aren’t what the listing described. No change-of-mind refunds after a valid download.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
-
