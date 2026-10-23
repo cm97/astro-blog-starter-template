@@ -2,7 +2,7 @@
 title: "How to Stop Scope Creep Without Losing the Client"
 description: "The exact reply when a client asks for one more thing — pause, price, two options, written yes — so the extra work is a line item, not a free favor."
 pubDate: "2026-09-01"
-updatedDate: "Oct 20 2026"
+updatedDate: "Oct 23 2026"
 category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -67,6 +67,8 @@ Round up to the nearest $25. Do not round down.
 - Screenshot or copy the original scope into the project note the day the ask arrives. Do not rely on searching email later.
 - If the ask is a third or fourth extra, send the full script again. Do not soften the second one.
 - Set a 24-hour timer on the two-option email. If no reply by then, send the day-3 bump without starting the work.
+- Log the ask on the same card as the original onboarding note so the weekly reset can see it.
+- If the client texts the ask during a call, pause the call: "Let me note that and reply with two options after we hang up."
 
 ## The script
 
@@ -135,6 +137,30 @@ Day-6 close, one sentence:
 1. Never say yes in the moment. Buy the hour.
 2. Always name the price. Even if it is small. Naming it resets the frame.
 3. Always give the out. "If it is not worth it, we stick to the original scope."
+
+## Common ask examples with filled numbers
+
+Example 1: "Can you also add a short email sequence?"
+
+- Minutes: 90
+- Hourly: $150
+- Line item: $225 → round to $225
+- Reply: "I can do that. It is outside what we agreed on, so it is a separate line item at $225. Want me to add it, or park it?"
+
+Example 2: "Just tweak the landing page copy one more time."
+
+- Minutes: 45
+- Line item: $125
+- Reply same shape. Do not call it "just."
+
+Fill your own before sending:
+
+```
+Ask example: ________
+Minutes logged: ________
+Line item calculated: ________
+Two-option sent: yes / no
+```
 
 ## What still breaks when the script lives in your head
 
