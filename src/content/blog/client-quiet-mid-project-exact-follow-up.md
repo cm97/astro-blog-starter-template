@@ -67,6 +67,51 @@ Same window: before 11am, mid-week. Same subject.
 - They ask a question: answer in one paragraph and restate the original ask and date. Do not cut scope.
 - No reply after day 7: mark paused. One line on the next Monday reset: “Paused — waiting on [client].” Do not send a third email this week.
 
+## Multi-client scan (when more than one is quiet)
+
+Do this inside the same 20-minute Monday reset, not as a separate task.
+
+1. Open the list of open projects.
+2. Write one line per quiet client: last touch date + the exact item still needed.
+3. Rank by cash at risk (unpaid invoice or largest remaining fee first).
+4. Cap the day at two day-3 or day-7 sends. The rest wait until Wednesday or next Monday.
+5. Log every send on the same card so Thursday cannot invent a different version.
+
+Fill-in for the scan:
+
+```
+Quiet clients this Monday:
+1) ________ — last touch ________ — need ________ — send day 3/7 on ________
+2) ________ — last touch ________ — need ________ — send day 3/7 on ________
+Cash-at-risk order: ________
+Sends today (max 2): ________
+```
+
+If the scan takes more than four minutes you are rewriting history. Use the dates already on the calendar.
+
+## Pause recovery (when they come back after day 7)
+
+They reply weeks later. Do not restart the whole project from memory.
+
+1. Open the original log row.
+2. Restate the last agreed next deliverable and the date that was on the table.
+3. Send one line:
+
+> Good to hear from you. Last open item was [specific]. Still the right next piece, or has the priority shifted? Reply with a date and I will lock it.
+
+4. Put the new date on the weekly reset card the same day.
+5. If scope has drifted, do not absorb it in the reply. Park it: “Got the new ask. I will check what we locked and come back with two options.”
+
+Recovery fill-in:
+
+```
+Client: ________
+Original need: ________
+New date or shift: ________
+Scope still same? yes / park for quote
+Next reset row: ________
+```
+
 ## Extra steps that stop the stall
 
 1. Paste the exact thing you need into the log the same minute you notice the quiet. Without the specific ask the day-3 line has nothing to hold.
@@ -75,6 +120,7 @@ Same window: before 11am, mid-week. Same subject.
 4. After any reply, add the client to next Monday’s “Still open” so the next touch does not live only in your head.
 5. On day 7, if they say pause, write the pause date. Do not keep working on speculation.
 6. At the next weekly reset, scan for open mid-project rows older than 7 days. If none, write none.
+7. Never send the day-3 or day-7 line from a blank screen. Copy the template, swap the brackets, send.
 
 ## Why these work when “just checking in” fails
 
