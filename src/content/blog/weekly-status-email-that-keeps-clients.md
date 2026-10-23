@@ -3,6 +3,7 @@ title: The Weekly Status Email That Stops Clients From Going Quiet
 description: The exact 6-line update you send every Friday so retainers do not die from silence and you never have to invent the note from scratch.
 category: systems
 pubDate: Oct 22 2026
+updatedDate: Oct 23 2026
 featuredProductTitle: Buzzyfly Digital System
 featuredProductPrice: $49
 featuredProductDescription: Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.
@@ -41,6 +42,50 @@ Any questions, reply to this thread.
 
 That is the whole email. No project-management software required. No 400-word narrative.
 
+## Example fills for common clients
+
+**Coaching client (retainer):**
+Done this week:
+- Session notes from Tuesday sent
+- Homework outline for next call
+
+In progress:
+- Custom worksheet, lands Monday
+
+Need from you by Monday:
+- Confirm the new time slot for next session
+
+Next week:
+- First draft of the 30-day plan
+
+**Freelance design or dev:**
+Done this week:
+- Homepage mock approved and pushed
+- Two revision rounds closed
+
+In progress:
+- Mobile breakpoints, lands Wednesday
+
+Need from you by Tuesday:
+- Logo files in the shared folder
+
+Next week:
+- Contact page live
+
+**Consultant:**
+Done this week:
+- Audit report delivered
+- Three priority fixes listed
+
+In progress:
+- Implementation checklist, lands Friday
+
+Need from you by Thursday:
+- Access to the analytics dashboard
+
+Next week:
+- First fix live and measured
+
 ## Why this exact shape
 
 1. **Done** shows progress without asking them to hunt for it.
@@ -60,6 +105,25 @@ If you have nothing new to report, still send it. Write “No new deliverables t
 
 If you manage more than three active clients, do them in one sitting. Same template, different names.
 
+Calendar hold: Friday 3:45–3:55pm. Name it “Status emails.” If it is not on the calendar, it dies.
+
+## What to do if they do not reply
+
+Do not write a longer email. Send the same shape the next Friday. Add one line at the top: “Still waiting on [item] from last week — everything else on track.”
+
+After two silent Fridays, one short follow-up:
+
+> Subject: Re: Weekly update — [project]
+> Hi [Name] — still need [item] to keep the date. Reply yes or a new date and I will lock it.
+
+Then log it. Do not chase daily.
+
+## Tie it to the Monday reset
+
+The Friday status only works if Monday already named the next deliverable. Run the 20-minute weekly reset first. The Friday note is just the public version of what you already wrote.
+
+If the reset did not happen, the Friday email becomes another invention. Do the reset on Monday so Friday is copy-paste.
+
 ## What still breaks when this only lives in your head
 
 You skip a week because delivery ran long. The client notices the gap and starts wondering if the work is on track. You then write a longer apology email that still does not give them a clear next step. The cycle repeats until the retainer ends or they quietly stop replying.
@@ -70,9 +134,11 @@ A written checklist removes the decision. You either run the five minutes or you
 
 The Buzzyfly Digital System keeps the client list, the next touch date, and the email writer in one browser tab. Open it, see who needs the Friday note, fill the same six lines, copy, send. The process still exists on the weeks you are slammed.
 
+It also holds the onboarding checklist and the Monday reset so the status email is never the first time you look at the client.
+
 Get the Digital System — $49  
 https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
 
-One-time payment. Opens in your browser. 30-day refund if you cannot access the app or it is not as described.
+One-time payment. Opens in your browser. 30-day refund if you cannot access the app or it is not as described. No change-of-mind refunds once you have had access.
 
 The free weekly-reset checklist is also on the homepage if you want the Monday version first.
