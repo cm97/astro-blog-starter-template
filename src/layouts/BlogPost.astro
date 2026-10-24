@@ -40,11 +40,29 @@ const displayHero =
 	heroImage.includes('buzzyfly-brand-about.jpg')
 		? brandHero
 		: heroImage;
+
+// Article structured data so search engines show the post as an article.
+// `<` is escaped so a title can't close the script tag.
+const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const articleLd = JSON.stringify({
+	'@context': 'https://schema.org',
+	'@type': 'BlogPosting',
+	headline: title,
+	description,
+	datePublished: pubDate.toISOString(),
+	dateModified: (updatedDate ?? pubDate).toISOString(),
+	image: new URL(displayHero, Astro.site).href,
+	mainEntityOfPage: pageUrl,
+	url: pageUrl,
+	author: { '@type': 'Organization', name: BUZZYFLY_CONFIG.brandName, url: BUZZYFLY_CONFIG.siteUrl },
+	publisher: { '@type': 'Organization', name: BUZZYFLY_CONFIG.brandName, url: BUZZYFLY_CONFIG.siteUrl },
+}).replace(/</g, '\\u003c');
 ---
 
 <html lang="en">
 	<head>
 		<BaseHead title={title} description={description} image={displayHero} />
+		<script type="application/ld+json" set:html={articleLd} />
 		<style>
 			main { width: calc(100% - 2em); max-width: 100%; margin: 0; }
 			.hero-image { width: 100%; }
