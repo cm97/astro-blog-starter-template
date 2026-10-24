@@ -59,6 +59,15 @@ export const ONBOARDING_STEPS: { id: string; day: number; label: string; templat
 	{ id: "first-delivery", day: 10, label: "Deliver the first piece and ask for feedback", template: "first-delivery" },
 ];
 
+/** The intake questions {questions} fills in, until the buyer writes their own. */
+export const INTAKE_QUESTIONS = [
+	"What does a great result look like for {project}?",
+	"Who else needs to see or approve the work?",
+	"Is there a hard deadline I should know about?",
+	"What have you tried before, and what didn't work?",
+	"Which logins, files or brand assets will I need?",
+];
+
 /**
  * The guided Monday reset. Minutes add up to 20. `standalone` replaces the
  * detail in the Weekly Reset app, which has no Today list or client records.
@@ -156,7 +165,7 @@ export const TEMPLATES: Template[] = [
 		label: "Intake questions",
 		group: "Onboarding",
 		subject: "A few questions before we start {project}",
-		body: "Hi {first},\n\nBefore our kickoff, could you answer these? Short answers are fine.\n\n1. What does a great result look like for {project}?\n2. Who else needs to see or approve the work?\n3. Is there a hard deadline I should know about?\n4. What have you tried before, and what didn't work?\n5. Which logins, files or brand assets will I need?\n\nThanks,\n{me}",
+		body: "Hi {first},\n\nBefore our kickoff, could you answer these? Short answers are fine.\n\n{questions}\n\nThanks,\n{me}",
 	},
 	{
 		id: "kickoff-invite",

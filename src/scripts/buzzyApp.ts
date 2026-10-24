@@ -5,11 +5,13 @@
  *
  * One script serves every edition, set by <body data-edition>: the Digital
  * System (/app, every screen), the Weekly Reset (/app/reset, the weekly
- * screens) and Follow-Ups (/app/follow-ups, clients and follow-up emails).
+ * screens), Follow-Ups (/app/follow-ups, clients and follow-up emails) and
+ * Onboarding (/app/onboarding, the new-client plan and its emails).
  * They share one store, so upgrading keeps everything.
  */
 import {
 	FOLLOW_UPS,
+	INTAKE_QUESTIONS,
 	ONBOARDING_STEPS,
 	RESET_STEPS,
 	STAGES,
@@ -80,21 +82,33 @@ interface State {
 	pricing: Pricing;
 	log: Record<string, WeekLog>;
 	custom: CustomTemplate[];
+	/** The buyer's intake questions, or null for the defaults. */
+	intake: string[] | null;
 }
 
 type View = "today" | "clients" | "emails" | "reset" | "week" | "log" | "pricing" | "settings";
 
 const STORAGE_KEY = "buzzyfly-app-v1";
-type Edition = "system" | "reset" | "followups";
-const EDITION: Edition = (["reset", "followups"] as const).find((e) => e === document.body.dataset.edition) ?? "system";
+type Edition = "system" | "reset" | "followups" | "onboarding";
+const EDITION: Edition =
+	(["reset", "followups", "onboarding"] as const).find((e) => e === document.body.dataset.edition) ?? "system";
 const EDITION_VIEWS: Record<Edition, View[]> = {
 	system: ["today", "clients", "emails", "reset", "week", "log", "pricing", "settings"],
 	reset: ["reset", "week", "log", "settings"],
 	followups: ["today", "clients", "emails", "settings"],
+	onboarding: ["today", "clients", "emails", "settings"],
 };
+/** Which parts of the client screens this edition shows. */
+const SHOWS_FOLLOW_UPS = EDITION === "system" || EDITION === "followups";
+const SHOWS_ONBOARDING = EDITION === "system" || EDITION === "onboarding";
 const VIEWS = EDITION_VIEWS[EDITION];
-/** The built-in emails this edition offers. Follow-Ups gets the follow-up group only. */
-const BUILT_IN = EDITION === "followups" ? TEMPLATES.filter((t) => t.group === "Follow-ups") : TEMPLATES;
+/** The built-in emails this edition offers. The smaller apps get their own group only. */
+const BUILT_IN =
+	EDITION === "followups"
+		? TEMPLATES.filter((t) => t.group === "Follow-ups")
+		: EDITION === "onboarding"
+			? TEMPLATES.filter((t) => t.group === "Onboarding")
+			: TEMPLATES;
 const CUSTOM_GROUP = "Your emails";
 const HOME: View = VIEWS[0];
 
@@ -145,6 +159,7 @@ function defaultState(): State {
 		pricing: { income: 60000, expenses: 6000, weeks: 46, hours: 20, buffer: 20, projectHours: 15, retainerHours: 10 },
 		log: {},
 		custom: [],
+		intake: null,
 	};
 }
 
@@ -268,7 +283,10 @@ function fill(text: string, client: Client | undefined): string {
 		start: client?.stage === "active" && client.stageDate ? fmtDate(client.stageDate) : "[start date]",
 		me: state.me.trim() || "[your name]",
 	};
-	return text.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match);
+	const questions = (state.intake ?? INTAKE_QUESTIONS).map((q, i) => `${i + 1}. ${q}`).join("\n");
+	return text
+		.replace(/\{questions\}/g, questions)
+		.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match);
 }
 
 function money(amount: string): number {
@@ -299,16 +317,20 @@ function emptyNote(text: string, action?: { label: string; view: View }): string
 
 function renderToday(): string {
 	const today = todayIso();
-	const followUps = state.clients.map((c) => dueFollowUp(c, today)).filter((f): f is DueFollowUp => !!f);
-	const onboarding = state.clients.flatMap((c) => dueOnboarding(c, today).map((step) => ({ client: c, step })));
+	const followUps = SHOWS_FOLLOW_UPS ? state.clients.map((c) => dueFollowUp(c, today)).filter((f): f is DueFollowUp => !!f) : [];
+	const onboarding = SHOWS_ONBOARDING ? state.clients.flatMap((c) => dueOnboarding(c, today).map((step) => ({ client: c, step }))) : [];
 	const top = topTask();
-	const soon = state.clients
+	const soon = (SHOWS_FOLLOW_UPS ? state.clients : [])
 		.map((c) => ({ client: c, next: nextFollowUp(c, today) }))
 		.filter((x) => x.next && daysSince(today, x.next.dueOn) <= 7)
 		.sort((a, b) => a.next!.dueOn.localeCompare(b.next!.dueOn));
 
 	if (!state.clients.length) {
-		return `<section class="card hero"><h2>Start here</h2><p>Add the leads, proposals and clients you're working with. The app works out who needs a follow-up and when, and writes the email.</p><button class="btn" data-action="new-client">Add your first client</button></section>
+		return `<section class="card hero"><h2>Start here</h2><p>${
+			EDITION === "onboarding"
+				? "Add a client who just signed. The app lays out their first ten days, shows what's due, and writes each email."
+				: "Add the leads, proposals and clients you're working with. The app works out who needs a follow-up and when, and writes the email."
+		}</p><button class="btn" data-action="new-client">Add your first client</button></section>
 		${!state.me ? `<section class="card"><h3>Your sign-off</h3><p class="muted">Emails end with your name.</p><form data-form="me" class="row"><label class="grow"><span class="sr">Your name</span><input name="me" placeholder="Your name" autocomplete="name" required></label><button class="btn">Save</button></form></section>` : ""}`;
 	}
 
@@ -320,7 +342,7 @@ function renderToday(): string {
 				}</section>`
 			: ""
 	}
-	<section><h2 class="section-title">Follow-ups due <span class="count">${followUps.length}</span></h2>
+	${SHOWS_FOLLOW_UPS ? `<section><h2 class="section-title">Follow-ups due <span class="count">${followUps.length}</span></h2>
 	${
 		followUps.length
 			? followUps
@@ -330,8 +352,8 @@ function renderToday(): string {
 					)
 					.join("")
 			: `<p class="muted pad">Nothing due. You're caught up.</p>`
-	}</section>
-	${EDITION === "system" ? `<section><h2 class="section-title">Onboarding steps due <span class="count">${onboarding.length}</span></h2>
+	}</section>` : ""}
+	${SHOWS_ONBOARDING ? `<section><h2 class="section-title">Onboarding steps due <span class="count">${onboarding.length}</span></h2>
 	${
 		onboarding.length
 			? onboarding
@@ -352,7 +374,7 @@ function renderToday(): string {
 }
 
 function clientForm(c?: Client): string {
-	const stage = c?.stage ?? "lead";
+	const stage = c?.stage ?? (EDITION === "onboarding" ? "active" : "lead");
 	return `<form data-form="client" class="card form">
 	<h2>${c ? "Edit client" : "Add a client"}</h2>
 	<input type="hidden" name="id" value="${esc(c?.id ?? "")}">
@@ -368,11 +390,11 @@ function clientForm(c?: Client): string {
 }
 
 function renderClientDetail(c: Client): string {
-	const due = dueFollowUp(c);
-	const next = nextFollowUp(c);
+	const due = SHOWS_FOLLOW_UPS ? dueFollowUp(c) : null;
+	const next = SHOWS_FOLLOW_UPS ? nextFollowUp(c) : null;
 	const steps =
-		c.stage === "active" && EDITION === "system"
-			? `<h3>Onboarding plan</h3><ul class="checklist">${ONBOARDING_STEPS.map(
+		c.stage === "active" && SHOWS_ONBOARDING
+			? `<h3>Onboarding plan <span class="count">${ONBOARDING_STEPS.filter((s) => c.onboarding[s.id]).length} of ${ONBOARDING_STEPS.length}</span></h3><ul class="checklist">${ONBOARDING_STEPS.map(
 					(s) => `<li><label><input type="checkbox" data-action="toggle-step" data-client="${c.id}" data-step="${s.id}"${c.onboarding[s.id] ? " checked" : ""}> <span>${esc(s.label)}</span> <small class="muted">${esc(fmtDate(addDays(c.stageDate, s.day)))}</small></label>${
 						s.template && !c.onboarding[s.id] ? ` <button class="link" data-action="write" data-client="${c.id}" data-template="${s.template}" data-step="${s.id}">Write email</button>` : ""
 					}</li>`,
@@ -407,9 +429,17 @@ function renderClients(): string {
 		.map(
 			(g) => `<section><h2 class="section-title">${esc(g.stage.label)} <span class="count">${g.clients.length}</span></h2>${g.clients
 				.map((c) => {
-					const due = dueFollowUp(c);
-					const next = nextFollowUp(c);
-					const status = due ? `<span class="due">Follow-up due</span>` : next ? `Next ${esc(fmtDate(next.dueOn))}` : "";
+					const due = SHOWS_FOLLOW_UPS ? dueFollowUp(c) : null;
+					const next = SHOWS_FOLLOW_UPS ? nextFollowUp(c) : null;
+					const status = due
+						? `<span class="due">Follow-up due</span>`
+						: next
+							? `Next ${esc(fmtDate(next.dueOn))}`
+							: EDITION === "onboarding" && c.stage === "active"
+								? dueOnboarding(c).length
+									? `<span class="due">Step due</span>`
+									: `${ONBOARDING_STEPS.filter((s) => c.onboarding[s.id]).length} of ${ONBOARDING_STEPS.length} done`
+								: "";
 					return `<button class="card row-card" data-action="open-client" data-client="${c.id}"><span><strong>${esc(c.name)}</strong><br><small class="muted">${esc(c.project || c.email || "")}</small></span><small>${status}</small></button>`;
 				})
 				.join("")}</section>`,
@@ -454,6 +484,18 @@ function renderEmails(): string {
 		${custom ? `<button class="link" data-action="edit-template" data-template="${custom.id}">Edit this email</button>` : ""}
 	</div>
 	</section>
+	${
+		SHOWS_ONBOARDING
+			? `<section class="card form">
+	<h2>Your intake questions</h2>
+	<p class="muted small">These go into the Intake questions email. One question per line. {project} fills in the project name.</p>
+	<form data-form="intake" class="form">
+		<label><span class="sr">Intake questions</span><textarea name="questions" rows="7">${esc((state.intake ?? INTAKE_QUESTIONS).join("\n"))}</textarea></label>
+		<div class="actions"><button class="btn">Save questions</button>${state.intake ? `<button type="button" class="btn btn-ghost" data-action="reset-intake">Use the default questions</button>` : ""}<button type="button" class="link" data-action="write" data-template="intake">Open the intake email</button></div>
+	</form>
+	</section>`
+			: ""
+	}
 	<section class="card form">
 	<h2>${editing ? "Edit your email" : "Add your own email"}</h2>
 	<p class="muted small">Write it once and it's here every time. Use {first}, {name}, {project}, {amount}, {date} and {me} to fill in each person's details.</p>
@@ -623,7 +665,9 @@ function renderSettings(): string {
 			? `<section class="card"><h2>Want follow-ups and onboarding too?</h2><p class="muted">The Buzzyfly Digital System includes this app, plus who to follow up with today, the email to send, and onboarding for new clients. Your weeks come with you.</p><a class="btn btn-ghost" href="/store">See the Digital System</a></section>`
 			: EDITION === "followups"
 				? `<section class="card"><h2>Want onboarding and your Monday reset too?</h2><p class="muted">The Buzzyfly Digital System includes this app, plus a 10-step onboarding plan for each new client, proposal and scope replies, and the weekly reset. Your clients and emails come with you.</p><a class="btn btn-ghost" href="/store">See the Digital System</a></section>`
-				: ""
+				: EDITION === "onboarding"
+					? `<section class="card"><h2>Want follow-ups and your Monday reset too?</h2><p class="muted">The Buzzyfly Digital System includes this app, plus who to follow up with today, proposal and scope replies, and the weekly reset. Your clients and emails come with you.</p><a class="btn btn-ghost" href="/store">See the Digital System</a></section>`
+					: ""
 	}
 	<section class="card">
 	<h2>Help</h2>
@@ -804,6 +848,12 @@ document.addEventListener("click", async (event) => {
 				announce("Email deleted");
 			}
 			break;
+		case "reset-intake":
+			state.intake = null;
+			save();
+			render();
+			announce("Default questions back");
+			break;
 		case "remove-task":
 			state.reset.tasks = state.reset.tasks.filter((t) => t.id !== task);
 			save();
@@ -946,6 +996,15 @@ document.addEventListener("submit", (event) => {
 		save();
 		render();
 		announce("Email saved");
+	} else if (kind === "intake") {
+		const questions = String(data.get("questions") ?? "")
+			.split("\n")
+			.map((q) => q.trim().replace(/^\d+[.)]\s*/, ""))
+			.filter(Boolean);
+		state.intake = questions.length ? questions : null;
+		save();
+		render();
+		announce("Questions saved");
 	} else if (kind === "thursday" || kind === "friday") {
 		const log = weekLog();
 		const top = topTask();

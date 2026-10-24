@@ -1,0 +1,22 @@
+---
+// The $29 Onboarding web app: the Digital System's new-client plan, its
+// emails and the intake questions on their own. The Digital System's key
+// opens it too.
+import AppShell from "../../components/AppShell.astro";
+import { ONBOARDING_APP_ITEM_ID, resolveAppAccess } from "../../lib/appAccess";
+
+export const prerender = false;
+Astro.response.headers.set("cache-control", "private, no-store");
+
+const access = await resolveAppAccess(Astro.locals.runtime.env, Astro.url, Astro.cookies, ONBOARDING_APP_ITEM_ID);
+if (access.redirect) return Astro.redirect(access.redirect, 302);
+if (!access.unlocked) Astro.response.status = 402;
+
+const NAV = [
+	{ id: "today", label: "Today", icon: "☀️" },
+	{ id: "clients", label: "Clients", icon: "👥" },
+	{ id: "emails", label: "Emails", icon: "✉️" },
+	{ id: "settings", label: "More", icon: "⚙️" },
+];
+---
+<AppShell itemId={ONBOARDING_APP_ITEM_ID} unlocked={access.unlocked} badLink={access.badLink} edition="onboarding" nav={NAV} appName="Onboarding" />

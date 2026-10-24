@@ -60,11 +60,11 @@ const ENV_FROM = "Buzzyfly <orders@buzzyfly.com>"; // wrangler.json vars.EMAIL_F
 
 // --- Delivery ---------------------------------------------------------------
 
-test("delivery email sends from an allowed address with link, expiry and upsell", async () => {
+test("delivery email sends from an allowed address with link and expiry", async () => {
 	const EMAIL = mockEmail();
 	const url = "https://buzzyfly.com/api/download?token=abc.def";
 	const result = await sendDeliveryEmail(
-		{ to: "buyer@example.com", downloadUrl: url, productName: "Client Onboarding Kit", orderId: "cs_test_1", itemId: "client-onboarding-kit" },
+		{ to: "buyer@example.com", downloadUrl: url, productName: "Complete Business Bundle", orderId: "cs_test_1", itemId: "complete-business-bundle" },
 		{ EMAIL, EMAIL_FROM: ENV_FROM },
 	);
 	assert.deepEqual(result, { sent: true });
@@ -72,15 +72,12 @@ test("delivery email sends from an allowed address with link, expiry and upsell"
 	const msg = EMAIL.sent[0];
 	assert.ok(ALLOWED_SENDERS.includes(addressOf(msg.from)), msg.from);
 	assert.equal(msg.to, "buyer@example.com");
-	assert.equal(msg.subject, "Your Client Onboarding Kit download");
+	assert.equal(msg.subject, "Your Complete Business Bundle download");
 	assertValidHtml(msg.html!);
 	assert.ok(msg.html!.includes(`href="${url}"`));
 	assert.match(msg.html!, /expires in 3 days/);
-	assert.match(msg.html!, /Buzzyfly Digital System/); // UPSELL_MAP: onboarding kit -> digital system
-	assert.ok(msg.html!.includes('href="https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"')); // system checkout, not prefixed with the site URL
 	assert.doesNotMatch(msg.html!, /buzzyfly\.comhttps?:/);
 	assert.ok(msg.text!.includes(url));
-	assert.match(msg.text!, /Buzzyfly Digital System/);
 	assert.doesNotMatch(msg.text!, /</);
 });
 
@@ -97,7 +94,10 @@ test("a smaller web app's delivery email sends an access link, not a download", 
 	assert.ok(msg.html!.includes(`href="${url}"`));
 	assert.match(msg.html!, /Open the app/);
 	assert.doesNotMatch(msg.html!, /expires in 3 days|unzip/);
-	assert.match(msg.html!, /Buzzyfly Digital System/);
+	assert.match(msg.html!, /Buzzyfly Digital System/); // UPSELL_MAP: follow-ups -> digital system
+	assert.ok(msg.html!.includes('href="https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"')); // system checkout, not prefixed with the site URL
+	assert.doesNotMatch(msg.html!, /buzzyfly\.comhttps?:/);
+	assert.match(msg.text!, /Buzzyfly Digital System/);
 });
 
 test("every product's delivery email carries the upsell from UPSELL_MAP", async () => {

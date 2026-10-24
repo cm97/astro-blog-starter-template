@@ -129,10 +129,10 @@ export const ALL_PRODUCTS: Product[] = [
 	},
 	{
 		id: "client-onboarding-kit",
-		title: "Client Onboarding Kit",
+		title: "Onboarding App",
 		price: "$29",
-		description: "A new client signs and the Excel workbook lays out their first ten days. It shows what's due and writes each email for you.",
-		features: ["10-step onboarding plan for every client", "Welcome, intake, kickoff and summary emails, pre-filled", "Intake form builder", "Client notes and progress tracking"],
+		description: "A new client signs and the web app lays out their first ten days. It shows what's due today and fills in each email for you. No download.",
+		features: ["10-step onboarding plan for every client", "Welcome, intake, kickoff, summary, check-in and first-delivery emails, filled in", "Intake questions you write once and reuse", "Client notes and progress for each client", "Works on phone. Included in the Digital System."],
 		buyUrl: null,
 		badge: "Coming soon",
 	},

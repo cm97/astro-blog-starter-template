@@ -3,8 +3,8 @@ import { issueStoredDownloadToken } from "./fulfillment";
 
 /**
  * Access control for the Buzzyfly web apps: the $49 Digital System at /app
- * and the smaller apps cut from it (the $15 Weekly Reset at /app/reset and
- * the $19 Follow-Ups at /app/follow-ups).
+ * and the smaller apps cut from it (the $15 Weekly Reset at /app/reset, the
+ * $19 Follow-Ups at /app/follow-ups and the $29 Onboarding at /app/onboarding).
  *
  *  - after a verified payment, a buyer gets a random access key stored in D1
  *    `download_tokens` (the same table the download links use), bound to
@@ -20,12 +20,14 @@ import { issueStoredDownloadToken } from "./fulfillment";
 export const APP_ITEM_ID = "buzzyfly-digital-system";
 export const RESET_APP_ITEM_ID = "weekly-reset-checklist";
 export const FOLLOWUPS_APP_ITEM_ID = "follow-up-email-templates";
+export const ONBOARDING_APP_ITEM_ID = "client-onboarding-kit";
 
 /** Every web-app product: where it lives and which cookie holds its key. */
 export const APP_PRODUCTS: Record<string, { path: string; cookie: string }> = {
 	[APP_ITEM_ID]: { path: "/app", cookie: "bf_app" },
 	[RESET_APP_ITEM_ID]: { path: "/app/reset", cookie: "bf_app_reset" },
 	[FOLLOWUPS_APP_ITEM_ID]: { path: "/app/follow-ups", cookie: "bf_app_followups" },
+	[ONBOARDING_APP_ITEM_ID]: { path: "/app/onboarding", cookie: "bf_app_onboarding" },
 };
 
 export const APP_COOKIE = APP_PRODUCTS[APP_ITEM_ID].cookie;
