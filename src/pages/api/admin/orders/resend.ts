@@ -61,7 +61,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	let token: string | null = null;
 	try {
 		token = isApp
-			? await appKeyForOrder(env, { orderId: order.order_id, customerEmail: order.customer_email })
+			? await appKeyForOrder(env, { orderId: order.order_id, itemId: order.item_id, customerEmail: order.customer_email })
 			: await issueStoredDownloadToken(env, {
 					orderId: order.order_id,
 					itemId: order.item_id,
@@ -76,7 +76,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		return redirect(backParams);
 	}
 
-	const downloadUrl = isApp ? appKeyUrl(token) : `${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${token}`;
+	const downloadUrl = isApp ? appKeyUrl(token, order.item_id) :`${BUZZYFLY_CONFIG.siteUrl}/api/download?token=${token}`;
 	backParams.set("resent", downloadUrl);
 
 	let outcome: string;

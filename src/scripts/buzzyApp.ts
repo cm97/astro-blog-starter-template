@@ -1,7 +1,11 @@
 /**
- * The Digital System web app (/app). Plain DOM code, no framework. All data
- * lives in this browser's localStorage. Backup / Restore move it between
- * devices as a JSON file.
+ * The Buzzyfly web apps. Plain DOM code, no framework. All data lives in this
+ * browser's localStorage. Backup / Restore move it between devices as a JSON
+ * file.
+ *
+ * One script serves two editions, set by <body data-edition>: the Digital
+ * System (/app, every screen) and the Weekly Reset (/app/reset, the weekly
+ * screens only). Both share one store, so upgrading keeps everything.
  */
 import {
 	FOLLOW_UPS,
@@ -45,18 +49,38 @@ interface Pricing {
 	retainerHours: number;
 }
 
+/** One week's Thursday check-in and Friday close, keyed by ISO week in State.log. */
+interface WeekLog {
+	top: string;
+	onTrack: "" | "yes" | "no";
+	blocker: string;
+	drop: string;
+	done: "" | "yes" | "no";
+	money: number | null;
+	hours: number | null;
+	wins: string;
+	slipped: string;
+	next: string;
+}
+
 interface State {
 	v: 1;
 	me: string;
 	clients: Client[];
 	reset: { week: string; done: Record<string, boolean>; tasks: Task[] };
 	pricing: Pricing;
+	log: Record<string, WeekLog>;
 }
 
-type View = "today" | "clients" | "emails" | "reset" | "pricing" | "settings";
+type View = "today" | "clients" | "emails" | "reset" | "week" | "log" | "pricing" | "settings";
 
 const STORAGE_KEY = "buzzyfly-app-v1";
-const VIEWS: View[] = ["today", "clients", "emails", "reset", "pricing", "settings"];
+const EDITION = document.body.dataset.edition === "reset" ? "reset" : "system";
+const VIEWS: View[] =
+	EDITION === "reset"
+		? ["reset", "week", "log", "settings"]
+		: ["today", "clients", "emails", "reset", "week", "log", "pricing", "settings"];
+const HOME: View = VIEWS[0];
 
 // ---------- dates ----------
 
@@ -103,6 +127,7 @@ function defaultState(): State {
 		clients: [],
 		reset: { week: isoWeek(), done: {}, tasks: [] },
 		pricing: { income: 60000, expenses: 6000, weeks: 46, hours: 20, buffer: 20, projectHours: 15, retainerHours: 10 },
+		log: {},
 	};
 }
 
@@ -136,13 +161,25 @@ function save(): void {
 	}
 }
 
-/** A new week clears the reset checklist but keeps unfinished tasks. */
+/** A new week clears the reset checklist but keeps unfinished tasks. The old week's #1 stays in the log. */
 function rollWeek(): void {
 	const week = isoWeek();
 	if (state.reset.week !== week) {
+		const top = topTask();
+		if (top && !weekLog(state.reset.week).top) weekLog(state.reset.week).top = top.text;
 		state.reset = { week, done: {}, tasks: state.reset.tasks };
 		save();
 	}
+}
+
+function emptyWeek(): WeekLog {
+	return { top: "", onTrack: "", blocker: "", drop: "", done: "", money: null, hours: null, wins: "", slipped: "", next: "" };
+}
+
+/** This week's log entry, created on first use. */
+function weekLog(week = isoWeek()): WeekLog {
+	state.log[week] ??= emptyWeek();
+	return state.log[week];
 }
 
 function uid(): string {
@@ -228,7 +265,7 @@ function currency(n: number): string {
 
 // ---------- views ----------
 
-let view: View = "today";
+let view: View = HOME;
 let selectedClientId: string | null = null;
 let editingClientId: string | null = null;
 let email: { clientId: string; templateId: string; followUpKey: string | null; onboardingStep: string | null } = {
@@ -399,12 +436,18 @@ function renderReset(): string {
 		`<label>${esc(label)}<select name="${name}">${Array.from({ length: max - min + 1 }, (_, i) => min + i)
 			.map((n) => `<option value="${n}">${n}</option>`)
 			.join("")}</select><small class="muted">${esc(hint)}</small></label>`;
-	return `<section class="card">
+	const lastWeek = Object.keys(state.log).filter((w) => w < state.reset.week).sort().pop();
+	const carried = lastWeek ? state.log[lastWeek].next : "";
+	return `${carried ? `<section class="card hero"><p class="eyebrow">From last Friday</p><h2>${esc(carried)}</h2><p class="muted small">The first task you picked for this Monday.</p></section>` : ""}<section class="card">
 	<p class="eyebrow">Week ${esc(state.reset.week.split("-W")[1])} · ${done} of ${RESET_STEPS.length} done</p>
 	<h2>Monday reset, 20 minutes</h2>
-	<div class="stats"><div><strong>${invoiced.length}</strong><small>open invoices${owed ? ` · ${esc(currency(owed))}` : ""}</small></div><div><strong>${followUps}</strong><small>follow-ups due</small></div><div><strong>${onboarding}</strong><small>onboarding steps due</small></div></div>
+	${
+		EDITION === "system"
+			? `<div class="stats"><div><strong>${invoiced.length}</strong><small>open invoices${owed ? ` · ${esc(currency(owed))}` : ""}</small></div><div><strong>${followUps}</strong><small>follow-ups due</small></div><div><strong>${onboarding}</strong><small>onboarding steps due</small></div></div>`
+			: `<p class="muted">Work down the list. Tick each step when it's done.</p>`
+	}
 	<ul class="checklist">${RESET_STEPS.map(
-		(s) => `<li><label><input type="checkbox" data-action="toggle-reset" data-step="${s.id}"${state.reset.done[s.id] ? " checked" : ""}> <span><strong>${esc(s.label)}</strong> <small class="muted">${s.minutes} min</small><br><small class="muted">${esc(s.detail)}</small></span></label></li>`,
+		(s) => `<li><label><input type="checkbox" data-action="toggle-reset" data-step="${s.id}"${state.reset.done[s.id] ? " checked" : ""}> <span><strong>${esc(s.label)}</strong> <small class="muted">${s.minutes} min</small><br><small class="muted">${esc(EDITION === "reset" && s.standalone ? s.standalone : s.detail)}</small></span></label></li>`,
 	).join("")}</ul>
 	</section>
 	<section class="card form">
@@ -422,7 +465,77 @@ function renderReset(): string {
 					.join("")}</ol>`
 			: ""
 	}
+	</section>
+	${
+		EDITION === "system"
+			? `<section class="card"><h2>The rest of the week</h2><p class="muted">A 5-minute check on Thursday, a 10-minute close on Friday, and a log of every week.</p><div class="actions"><button class="btn" data-go="week">Thursday and Friday</button><button class="btn btn-ghost" data-go="log">Weekly log</button></div></section>`
+			: ""
+	}`;
+}
+
+function yesNo(name: string, value: string, label: string): string {
+	return `<label>${esc(label)}<select name="${name}"><option value=""${value ? "" : " selected"}>Not yet</option><option value="yes"${value === "yes" ? " selected" : ""}>Yes</option><option value="no"${value === "no" ? " selected" : ""}>No</option></select></label>`;
+}
+
+function renderWeek(): string {
+	const week = isoWeek();
+	const log = state.log[week] ?? emptyWeek();
+	const top = topTask()?.text || log.top;
+	const field = (name: keyof WeekLog, label: string, hint = "") =>
+		`<label>${esc(label)}${hint ? `<small class="muted">${esc(hint)}</small>` : ""}<textarea name="${name}" rows="2">${esc(log[name])}</textarea></label>`;
+	const num = (name: "money" | "hours", label: string, step: string) =>
+		`<label>${esc(label)}<input name="${name}" type="number" inputmode="decimal" min="0" step="${step}" value="${log[name] ?? ""}"></label>`;
+	return `<section class="card priority"><p class="eyebrow">Week ${esc(week.split("-W")[1])} · your #1</p>${
+		top ? `<h2>${esc(top)}</h2>` : `<p>No #1 yet.</p><button class="btn btn-ghost" data-go="reset">Do the Monday reset</button>`
+	}</section>
+	<section class="card form">
+	<h2>Thursday check-in, 5 minutes</h2>
+	<p class="muted small">Catch the week before it slips.</p>
+	<form data-form="thursday" class="form">
+		${yesNo("onTrack", log.onTrack, "Is your #1 done or on track?")}
+		${field("blocker", "If not, what's in the way?")}
+		${field("drop", "One thing you can drop or move to next week")}
+		<button class="btn">Save check-in</button>
+	</form>
+	</section>
+	<section class="card form">
+	<h2>Friday close, 10 minutes</h2>
+	<p class="muted small">Write the week down. It goes straight into your log.</p>
+	<form data-form="friday" class="form">
+		${yesNo("done", log.done, "Did your #1 get done?")}
+		<div class="grid2">${num("money", "Money that came in ($)", "1")}${num("hours", "Hours on client work", "0.5")}</div>
+		${field("wins", "Three things that got done")}
+		${field("slipped", "What slipped, and why")}
+		${field("next", "First task for next Monday", "It shows at the top of your Monday reset.")}
+		<button class="btn">Save and close the week</button>
+	</form>
 	</section>`;
+}
+
+function renderLog(): string {
+	const weeks = Object.entries(state.log)
+		.filter(([, l]) => l.top || l.done || l.money !== null || l.wins)
+		.sort(([a], [b]) => b.localeCompare(a));
+	const doneCount = weeks.filter(([, l]) => l.done === "yes").length;
+	const total = weeks.reduce((sum, [, l]) => sum + (l.money ?? 0), 0);
+	const recent = weeks.slice(0, 52).reverse();
+	const max = Math.max(1, ...recent.map(([, l]) => l.money ?? 0));
+	if (!weeks.length) {
+		return `<section class="card"><h2>Your weekly log</h2>${emptyNote("Close your first week on Friday and it shows up here.", { label: "Go to this week", view: "week" })}</section>`;
+	}
+	return `<section class="card">
+	<h2>Your weekly log</h2>
+	<div class="stats"><div><strong>${weeks.length}</strong><small>weeks logged</small></div><div><strong>${doneCount}</strong><small>#1 done${weeks.length ? ` · ${Math.round((doneCount / weeks.length) * 100)}%` : ""}</small></div><div><strong>${esc(currency(total))}</strong><small>money in</small></div></div>
+	<h3>Money in by week</h3>
+	<div class="bars" role="img" aria-label="Money in for the last ${recent.length} logged weeks">${recent
+		.map(([w, l]) => `<span style="height:${Math.round(((l.money ?? 0) / max) * 100)}%" title="Week ${esc(w.split("-W")[1])}: ${esc(currency(l.money ?? 0))}"></span>`)
+		.join("")}</div>
+	</section>
+	${weeks
+		.map(
+			([w, l]) => `<article class="card"><p class="eyebrow">Week ${esc(w.split("-W")[1])}, ${esc(w.split("-W")[0])}${l.done ? ` · #1 ${l.done === "yes" ? "done" : "not done"}` : ""}</p>${l.top ? `<h3>${esc(l.top)}</h3>` : ""}<p class="muted small">${l.money !== null ? `${esc(currency(l.money))} in` : "No money logged"}${l.hours !== null ? ` · ${esc(l.hours)} h` : ""}</p>${l.wins ? `<p class="notes">${esc(l.wins)}</p>` : ""}${l.slipped ? `<p class="muted small notes">Slipped: ${esc(l.slipped)}</p>` : ""}</article>`,
+		)
+		.join("")}`;
 }
 
 function renderPricing(): string {
@@ -456,9 +569,14 @@ function renderSettings(): string {
 	</section>
 	<section class="card">
 	<h2>Your data</h2>
-	<p class="muted">Your clients are saved in this browser on this device. Nothing is sent to Buzzyfly. To use the app on another device, open your access link there, then restore a backup.</p>
+	<p class="muted">Your ${EDITION === "reset" ? "weeks are" : "clients are"} saved in this browser on this device. Nothing is sent to Buzzyfly. To use the app on another device, open your access link there, then restore a backup.</p>
 	<div class="actions"><button class="btn" data-action="backup">Download a backup</button><label class="btn btn-ghost file">Restore a backup<input type="file" accept="application/json,.json" data-action="restore"></label></div>
 	</section>
+	${
+		EDITION === "reset"
+			? `<section class="card"><h2>Want follow-ups and onboarding too?</h2><p class="muted">The Buzzyfly Digital System includes this app, plus who to follow up with today, the email to send, and onboarding for new clients. Your weeks come with you.</p><a class="btn btn-ghost" href="/store">See the Digital System</a></section>`
+			: ""
+	}
 	<section class="card">
 	<h2>Help</h2>
 	<p class="muted">Lost your access link or need a hand? Email <a href="mailto:support@buzzyfly.com">support@buzzyfly.com</a> from the address you checked out with.</p>
@@ -482,6 +600,8 @@ function render(): void {
 		clients: renderClients,
 		emails: renderEmails,
 		reset: renderReset,
+		week: renderWeek,
+		log: renderLog,
 		pricing: renderPricing,
 		settings: renderSettings,
 	};
@@ -749,6 +869,22 @@ document.addEventListener("submit", (event) => {
 		save();
 		render();
 		announce("Client saved");
+	} else if (kind === "thursday" || kind === "friday") {
+		const log = weekLog();
+		const top = topTask();
+		if (top) log.top = top.text;
+		const choice = (name: string) => (["yes", "no"].includes(get(name)) ? get(name) : "") as WeekLog["done"];
+		const amount = (name: string) => (get(name) === "" || !Number.isFinite(Number(get(name))) ? null : Math.max(0, Number(get(name))));
+		if (kind === "thursday") Object.assign(log, { onTrack: choice("onTrack"), blocker: get("blocker"), drop: get("drop") });
+		else Object.assign(log, { done: choice("done"), money: amount("money"), hours: amount("hours"), wins: get("wins"), slipped: get("slipped"), next: get("next") });
+		save();
+		if (kind === "friday") {
+			announce("Week closed");
+			go("log");
+		} else {
+			render();
+			announce("Check-in saved");
+		}
 	} else if (kind === "task") {
 		state.reset.tasks.push({
 			id: uid(),
@@ -768,5 +904,5 @@ window.addEventListener("hashchange", () => {
 });
 
 const initial = location.hash.slice(1) as View;
-view = VIEWS.includes(initial) ? initial : "today";
+view = VIEWS.includes(initial) ? initial : HOME;
 render();

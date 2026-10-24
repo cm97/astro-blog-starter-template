@@ -2,8 +2,8 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { BUZZYFLY_CONFIG } from "../data/monetization";
-import { APP_COOKIE, appCookieOptions, appKeyForOrder, appKeyUrl, isAppItem } from "../lib/appAccess";
+import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../data/monetization";
+import { APP_ITEM_ID, appCookieName, appCookieOptions, appKeyForOrder, appKeyUrl, appPath, isAppItem } from "../lib/appAccess";
 
 export const prerender = false;
 
@@ -17,6 +17,7 @@ if (isStripeSession) Astro.response.headers.set("cache-control", "private, no-st
 // reliable, so this page is the main delivery path: once the order is on
 // record it unlocks the app in this browser and shows the access link.
 let appKey: string | null = null;
+let appItemId = APP_ITEM_ID;
 const env = Astro.locals.runtime?.env;
 if (isStripeSession && env?.DB) {
 	try {
@@ -26,14 +27,16 @@ if (isStripeSession && env?.DB) {
 			.bind(sessionId)
 			.first<{ item_id: string; customer_email: string | null }>();
 		if (row && isAppItem(row.item_id)) {
-			appKey = await appKeyForOrder(env, { orderId: sessionId, customerEmail: row.customer_email });
+			appItemId = row.item_id;
+			appKey = await appKeyForOrder(env, { orderId: sessionId, itemId: row.item_id, customerEmail: row.customer_email });
 		}
 	} catch (error) {
 		console.error("Buzzyfly thank-you: order lookup failed", error);
 	}
 }
-if (appKey) Astro.cookies.set(APP_COOKIE, appKey, appCookieOptions(Astro.url));
-const accessUrl = appKey ? appKeyUrl(appKey) : null;
+if (appKey) Astro.cookies.set(appCookieName(appItemId), appKey, appCookieOptions(Astro.url));
+const accessUrl = appKey ? appKeyUrl(appKey, appItemId) : null;
+const appTitle = ALL_PRODUCTS.find((p) => p.id === appItemId)?.title ?? "your app";
 
 // Stripe can redirect here a few seconds before its webhook lands. Reload a
 // few times while we wait, then fall back to the support line.
@@ -59,8 +62,8 @@ const retryUrl = waiting ? `/thank-you?s=${encodeURIComponent(sessionId)}&t=${at
 					<>
 						<div class="ty-check">✓</div>
 						<h1>Your app is ready.</h1>
-						<p class="ty-lede">Thanks for buying the Buzzyfly Digital System. It's unlocked in this browser.</p>
-						<p><a class="btn btn--primary" href="/app">Open the app</a></p>
+						<p class="ty-lede">Thanks for buying the {appTitle}. It's unlocked in this browser.</p>
+						<p><a class="btn btn--primary" href={appPath(appItemId)}>Open the app</a></p>
 						<div class="ty-key">
 							<strong>Save your access link.</strong> Open it once on each phone or computer you want to use.
 							<br /><code>{accessUrl}</code>
@@ -81,8 +84,8 @@ const retryUrl = waiting ? `/thank-you?s=${encodeURIComponent(sessionId)}&t=${at
 					</>
 				) : (
 					<>
-						<h1>Already bought the Digital System?</h1>
-						<p class="ty-lede">Open the app with the access link from your order, or from the page you saw right after paying.</p>
+						<h1>Already bought a Buzzyfly app?</h1>
+						<p class="ty-lede">Open it with the access link from your order, or from the page you saw right after paying.</p>
 						<p><a class="btn btn--primary" href="/app">Go to the app</a></p>
 					</>
 				)}

@@ -97,8 +97,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		});
 	}
 
-	// The Digital System is a web app: access is a D1-stored key, so it doesn't
-	// need DOWNLOAD_TOKEN_SECRET.
+	// The web apps (Digital System, Weekly Reset) use a D1-stored key, so they
+	// don't need DOWNLOAD_TOKEN_SECRET.
 	const isApp = isAppItem(order.itemId);
 	if (!isApp && !env.DOWNLOAD_TOKEN_SECRET) {
 		console.error("Buzzyfly webhook: DOWNLOAD_TOKEN_SECRET is not configured");
@@ -147,7 +147,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		}
 		// Without a key the buyer still gets in from the thank-you page, which
 		// issues one from the order record.
-		downloadUrl = appKey ? appKeyUrl(appKey) : `${BUZZYFLY_CONFIG.siteUrl}/thank-you`;
+		downloadUrl = appKey ? appKeyUrl(appKey, order.itemId) : `${BUZZYFLY_CONFIG.siteUrl}/thank-you`;
 	} else {
 		const downloadToken = await createDownloadToken(
 			order,

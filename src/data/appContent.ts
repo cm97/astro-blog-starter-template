@@ -59,11 +59,14 @@ export const ONBOARDING_STEPS: { id: string; day: number; label: string; templat
 	{ id: "first-delivery", day: 10, label: "Deliver the first piece and ask for feedback", template: "first-delivery" },
 ];
 
-/** The guided Monday reset. Minutes add up to 20. */
-export const RESET_STEPS: { id: string; minutes: number; label: string; detail: string }[] = [
+/**
+ * The guided Monday reset. Minutes add up to 20. `standalone` replaces the
+ * detail in the Weekly Reset app, which has no Today list or client records.
+ */
+export const RESET_STEPS: { id: string; minutes: number; label: string; detail: string; standalone?: string }[] = [
 	{ id: "money", minutes: 3, label: "Check the money", detail: "Open invoices and anything due to be paid this week." },
-	{ id: "follow-ups", minutes: 5, label: "Send this week's follow-ups", detail: "Work through the Today list until it's empty." },
-	{ id: "onboarding", minutes: 2, label: "Move each new client forward", detail: "Tick off or send any onboarding step that's due." },
+	{ id: "follow-ups", minutes: 5, label: "Send this week's follow-ups", detail: "Work through the Today list until it's empty.", standalone: "Reply to or nudge everyone you owe a message. Do it now, before the week fills up." },
+	{ id: "onboarding", minutes: 2, label: "Move each new client forward", detail: "Tick off or send any onboarding step that's due.", standalone: "Send each new client the next thing they're waiting on from you." },
 	{ id: "tasks", minutes: 5, label: "List the week's tasks and score them", detail: "Use the priority scorer below. The top score is your #1." },
 	{ id: "block", minutes: 3, label: "Block time for your #1", detail: "Put it in your calendar before anything else." },
 	{ id: "drop", minutes: 2, label: "Drop or delay one thing", detail: "Pick the task that can wait and tell anyone affected." },

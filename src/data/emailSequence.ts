@@ -168,16 +168,16 @@ The Digital System does this math for you on the pricing tab. Then it writes the
 
 Over the last six weeks I've sent you pieces of the system. The weekly reset. The Thursday check. Follow-ups. Onboarding. Scope creep. Pricing.
 
-The Buzzyfly Digital System is all of it in one Excel workbook, ready to use:
+The Buzzyfly Digital System is all of it in one web app, ready to use:
 
 - Today: who needs a follow-up and what to send
 - Follow-ups: every lead and client, with the next date worked out for you
 - Email writer: emails that fill in each client's name and project
 - Onboarding: a 10-step plan for each new client
-- Weekly reset: the Monday plan, a priority scorer and a 52-week log
+- Weekly reset: the Monday plan, a priority scorer, the Thursday check and Friday close, and a log of every week
 - Proposals, pricing and scope replies
 
-Works in Excel and Google Sheets. No macros.
+It opens in your browser on your phone or computer. Nothing to download or install.
 
 Who it's for: one- or few-person businesses where the process lives in your head.
 

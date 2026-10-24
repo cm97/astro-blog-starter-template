@@ -111,10 +111,10 @@ export const UPSELL_MAP: Record<string, string | null> = {
 export const ALL_PRODUCTS: Product[] = [
 	{
 		id: "weekly-reset-checklist",
-		title: "Weekly Reset Checklist",
+		title: "Weekly Reset App",
 		price: "$15",
-		description: "Stop losing Monday to figuring out what to work on. An Excel planner walks you through a 20-minute reset, scores your tasks and picks your #1 priority.",
-		features: ["Guided 20-minute Monday reset", "Priority scorer that picks your #1", "Thursday check-in and Friday close", "52-week log with a revenue chart"],
+		description: "Stop losing Monday to figuring out what to work on. A browser web app walks you through a 20-minute reset, scores your tasks and picks your #1. No download.",
+		features: ["Guided 20-minute Monday reset", "Priority scorer that picks your #1", "Thursday check-in and Friday close", "Weekly log with a money-in chart", "Works on phone. Included in the Digital System."],
 		buyUrl: null,
 		badge: "Coming soon",
 	},
