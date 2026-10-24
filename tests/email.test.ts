@@ -64,7 +64,7 @@ test("delivery email sends from an allowed address with link and expiry", async 
 	const EMAIL = mockEmail();
 	const url = "https://buzzyfly.com/api/download?token=abc.def";
 	const result = await sendDeliveryEmail(
-		{ to: "buyer@example.com", downloadUrl: url, productName: "Complete Business Bundle", orderId: "cs_test_1", itemId: "complete-business-bundle" },
+		{ to: "buyer@example.com", downloadUrl: url, productName: "Buzzyfly Workbook", orderId: "cs_test_1", itemId: "legacy-workbook" },
 		{ EMAIL, EMAIL_FROM: ENV_FROM },
 	);
 	assert.deepEqual(result, { sent: true });
@@ -72,7 +72,7 @@ test("delivery email sends from an allowed address with link and expiry", async 
 	const msg = EMAIL.sent[0];
 	assert.ok(ALLOWED_SENDERS.includes(addressOf(msg.from)), msg.from);
 	assert.equal(msg.to, "buyer@example.com");
-	assert.equal(msg.subject, "Your Complete Business Bundle download");
+	assert.equal(msg.subject, "Your Buzzyfly Workbook download");
 	assertValidHtml(msg.html!);
 	assert.ok(msg.html!.includes(`href="${url}"`));
 	assert.match(msg.html!, /expires in 3 days/);
@@ -106,7 +106,6 @@ test("every product's delivery email carries the upsell from UPSELL_MAP", async 
 		"follow-up-email-templates": "Buzzyfly Digital System",
 		"client-onboarding-kit": "Buzzyfly Digital System",
 		"buzzyfly-digital-system": null, // only the system is for sale, so nothing to upsell
-		"complete-business-bundle": null,
 	};
 	for (const [itemId, upsell] of Object.entries(ladder)) {
 		const EMAIL = mockEmail();

@@ -4,7 +4,6 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import EmailOptin from "../components/EmailOptin.astro";
 import ProductCallout from "../components/ProductCallout.astro";
-import MoneyPrinterBanner from "../components/MoneyPrinterBanner.astro";
 import {
 	ALL_PRODUCTS,
 	BUZZYFLY_CONFIG,
@@ -21,7 +20,7 @@ const systemDescription =
 		? settings.defaultProductDescription
 		: system.description;
 const systemOrder = getOrderAction(system.id);
-const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id && p.id !== "complete-business-bundle");
+const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id);
 const guarantee = BUZZYFLY_CONFIG.guarantee;
 
 const TRUST = [
@@ -141,8 +140,6 @@ const FAQ = [
 					{singles.map((p) => <ProductCallout productId={p.id} />)}
 				</div>
 			</section>
-
-			<MoneyPrinterBanner variant="section" />
 
 			<section class="store-section">
 				<h2>What's inside the Digital System app</h2>
