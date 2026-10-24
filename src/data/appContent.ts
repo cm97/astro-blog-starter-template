@@ -59,11 +59,23 @@ export const ONBOARDING_STEPS: { id: string; day: number; label: string; templat
 	{ id: "first-delivery", day: 10, label: "Deliver the first piece and ask for feedback", template: "first-delivery" },
 ];
 
-/** The guided Monday reset. Minutes add up to 20. */
-export const RESET_STEPS: { id: string; minutes: number; label: string; detail: string }[] = [
+/** The intake questions {questions} fills in, until the buyer writes their own. */
+export const INTAKE_QUESTIONS = [
+	"What does a great result look like for {project}?",
+	"Who else needs to see or approve the work?",
+	"Is there a hard deadline I should know about?",
+	"What have you tried before, and what didn't work?",
+	"Which logins, files or brand assets will I need?",
+];
+
+/**
+ * The guided Monday reset. Minutes add up to 20. `standalone` replaces the
+ * detail in the Weekly Reset app, which has no Today list or client records.
+ */
+export const RESET_STEPS: { id: string; minutes: number; label: string; detail: string; standalone?: string }[] = [
 	{ id: "money", minutes: 3, label: "Check the money", detail: "Open invoices and anything due to be paid this week." },
-	{ id: "follow-ups", minutes: 5, label: "Send this week's follow-ups", detail: "Work through the Today list until it's empty." },
-	{ id: "onboarding", minutes: 2, label: "Move each new client forward", detail: "Tick off or send any onboarding step that's due." },
+	{ id: "follow-ups", minutes: 5, label: "Send this week's follow-ups", detail: "Work through the Today list until it's empty.", standalone: "Reply to or nudge everyone you owe a message. Do it now, before the week fills up." },
+	{ id: "onboarding", minutes: 2, label: "Move each new client forward", detail: "Tick off or send any onboarding step that's due.", standalone: "Send each new client the next thing they're waiting on from you." },
 	{ id: "tasks", minutes: 5, label: "List the week's tasks and score them", detail: "Use the priority scorer below. The top score is your #1." },
 	{ id: "block", minutes: 3, label: "Block time for your #1", detail: "Put it in your calendar before anything else." },
 	{ id: "drop", minutes: 2, label: "Drop or delay one thing", detail: "Pick the task that can wait and tell anyone affected." },
@@ -153,7 +165,7 @@ export const TEMPLATES: Template[] = [
 		label: "Intake questions",
 		group: "Onboarding",
 		subject: "A few questions before we start {project}",
-		body: "Hi {first},\n\nBefore our kickoff, could you answer these? Short answers are fine.\n\n1. What does a great result look like for {project}?\n2. Who else needs to see or approve the work?\n3. Is there a hard deadline I should know about?\n4. What have you tried before, and what didn't work?\n5. Which logins, files or brand assets will I need?\n\nThanks,\n{me}",
+		body: "Hi {first},\n\nBefore our kickoff, could you answer these? Short answers are fine.\n\n{questions}\n\nThanks,\n{me}",
 	},
 	{
 		id: "kickoff-invite",

@@ -50,12 +50,6 @@ export function absoluteBuyUrl(product: { buyUrl: string | null }) {
 	return product.buyUrl.startsWith("http") ? product.buyUrl : `${BUZZYFLY_CONFIG.siteUrl}${product.buyUrl}`;
 }
 
-export function bundleSeparatePrice(): string {
-	const parts = ["weekly-reset-checklist", "follow-up-email-templates", "client-onboarding-kit", "buzzyfly-digital-system"];
-	const total = parts.reduce((sum, id) => sum + Number(getProduct(id)!.price.replace(/[^0-9.]/g, "")), 0);
-	return `$${total}`;
-}
-
 export interface Product {
 	id: string;
 	title: string;
@@ -91,11 +85,6 @@ export const PRODUCT_FILE_MAP: Record<
 		fileName: "client-onboarding-kit.zip",
 		contentType: "application/zip",
 	},
-	"complete-business-bundle": {
-		r2Key: "products/complete-business-bundle.zip",
-		fileName: "complete-business-bundle.zip",
-		contentType: "application/zip",
-	},
 };
 
 // Only the Digital System is for sale, so it is the only upsell target.
@@ -104,35 +93,34 @@ export const UPSELL_MAP: Record<string, string | null> = {
 	"follow-up-email-templates": "buzzyfly-digital-system",
 	"client-onboarding-kit": "buzzyfly-digital-system",
 	"buzzyfly-digital-system": null,
-	"complete-business-bundle": null,
 };
 
-// Only the $49 Digital System is buyable. The rest stay "Coming soon" with buyUrl: null.
+// Only the $49 Digital System is buyable. The $15, $19 and $29 apps stay "Coming soon" with buyUrl: null until each has a Payment Link.
 export const ALL_PRODUCTS: Product[] = [
 	{
 		id: "weekly-reset-checklist",
-		title: "Weekly Reset Checklist",
+		title: "Weekly Reset App",
 		price: "$15",
-		description: "Stop losing Monday to figuring out what to work on. An Excel planner walks you through a 20-minute reset, scores your tasks and picks your #1 priority.",
-		features: ["Guided 20-minute Monday reset", "Priority scorer that picks your #1", "Thursday check-in and Friday close", "52-week log with a revenue chart"],
+		description: "Stop losing Monday to figuring out what to work on. A browser web app walks you through a 20-minute reset, scores your tasks and picks your #1. No download.",
+		features: ["Guided 20-minute Monday reset", "Priority scorer that picks your #1", "Thursday check-in and Friday close", "Weekly log with a money-in chart", "Works on phone. Included in the Digital System."],
 		buyUrl: null,
 		badge: "Coming soon",
 	},
 	{
 		id: "follow-up-email-templates",
-		title: "Follow-Up Email Templates",
+		title: "Follow-Ups App",
 		price: "$19",
-		description: "Stop letting quiet leads go cold. An Excel tracker that shows who to follow up with today and writes the email for you.",
-		features: ["Follow-up dates worked out for you", "20 emails that fill in each person's details", "Today dashboard: who is due right now", "Add your own email templates"],
+		description: "Stop letting quiet leads and late invoices go cold. A browser web app shows who to follow up with today and fills in the email for you. No download.",
+		features: ["Follow-up dates worked out for you", "9 follow-up emails that fill in each person's details", "Today screen: who is due right now", "Add and save your own emails", "Works on phone. Included in the Digital System."],
 		buyUrl: null,
 		badge: "Coming soon",
 	},
 	{
 		id: "client-onboarding-kit",
-		title: "Client Onboarding Kit",
+		title: "Onboarding App",
 		price: "$29",
-		description: "A new client signs and the Excel workbook lays out their first ten days. It shows what's due and writes each email for you.",
-		features: ["10-step onboarding plan for every client", "Welcome, intake, kickoff and summary emails, pre-filled", "Intake form builder", "Client notes and progress tracking"],
+		description: "A new client signs and the web app lays out their first ten days. It shows what's due today and fills in each email for you. No download.",
+		features: ["10-step onboarding plan for every client", "Welcome, intake, kickoff, summary, check-in and first-delivery emails, filled in", "Intake questions you write once and reuse", "Client notes and progress for each client", "Works on phone. Included in the Digital System."],
 		buyUrl: null,
 		badge: "Coming soon",
 	},
@@ -144,14 +132,5 @@ export const ALL_PRODUCTS: Product[] = [
 		features: ["Today dashboard: who needs you and what to send", "Follow-ups, onboarding and weekly reset in the browser", "Proposal and scope replies ready to copy", "Works on phone. No files."],
 		buyUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00",
 		badge: "Most popular",
-	},
-	{
-		id: "complete-business-bundle",
-		title: "Complete Business Bundle",
-		price: "$97",
-		description: "Every Buzzyfly workbook in one download. Client OS plus the stand-alone Follow-Up, Onboarding and Weekly Reset workbooks.",
-		features: ["Buzzyfly Client OS (the Digital System workbook)", "Client Onboarding workbook", "Follow-Up Tracker workbook", "Weekly Reset Planner workbook"],
-		buyUrl: null,
-		badge: "Coming soon",
 	},
 ];

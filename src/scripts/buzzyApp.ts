@@ -1,10 +1,17 @@
 /**
- * The Digital System web app (/app). Plain DOM code, no framework. All data
- * lives in this browser's localStorage. Backup / Restore move it between
- * devices as a JSON file.
+ * The Buzzyfly web apps. Plain DOM code, no framework. All data lives in this
+ * browser's localStorage. Backup / Restore move it between devices as a JSON
+ * file.
+ *
+ * One script serves every edition, set by <body data-edition>: the Digital
+ * System (/app, every screen), the Weekly Reset (/app/reset, the weekly
+ * screens), Follow-Ups (/app/follow-ups, clients and follow-up emails) and
+ * Onboarding (/app/onboarding, the new-client plan and its emails).
+ * They share one store, so upgrading keeps everything.
  */
 import {
 	FOLLOW_UPS,
+	INTAKE_QUESTIONS,
 	ONBOARDING_STEPS,
 	RESET_STEPS,
 	STAGES,
@@ -45,18 +52,65 @@ interface Pricing {
 	retainerHours: number;
 }
 
+/** One week's Thursday check-in and Friday close, keyed by ISO week in State.log. */
+interface WeekLog {
+	top: string;
+	onTrack: "" | "yes" | "no";
+	blocker: string;
+	drop: string;
+	done: "" | "yes" | "no";
+	money: number | null;
+	hours: number | null;
+	wins: string;
+	slipped: string;
+	next: string;
+}
+
+/** An email the buyer wrote and saved. Same {placeholders} as the built-in ones. */
+interface CustomTemplate {
+	id: string;
+	label: string;
+	subject: string;
+	body: string;
+}
+
 interface State {
 	v: 1;
 	me: string;
 	clients: Client[];
 	reset: { week: string; done: Record<string, boolean>; tasks: Task[] };
 	pricing: Pricing;
+	log: Record<string, WeekLog>;
+	custom: CustomTemplate[];
+	/** The buyer's intake questions, or null for the defaults. */
+	intake: string[] | null;
 }
 
-type View = "today" | "clients" | "emails" | "reset" | "pricing" | "settings";
+type View = "today" | "clients" | "emails" | "reset" | "week" | "log" | "pricing" | "settings";
 
 const STORAGE_KEY = "buzzyfly-app-v1";
-const VIEWS: View[] = ["today", "clients", "emails", "reset", "pricing", "settings"];
+type Edition = "system" | "reset" | "followups" | "onboarding";
+const EDITION: Edition =
+	(["reset", "followups", "onboarding"] as const).find((e) => e === document.body.dataset.edition) ?? "system";
+const EDITION_VIEWS: Record<Edition, View[]> = {
+	system: ["today", "clients", "emails", "reset", "week", "log", "pricing", "settings"],
+	reset: ["reset", "week", "log", "settings"],
+	followups: ["today", "clients", "emails", "settings"],
+	onboarding: ["today", "clients", "emails", "settings"],
+};
+/** Which parts of the client screens this edition shows. */
+const SHOWS_FOLLOW_UPS = EDITION === "system" || EDITION === "followups";
+const SHOWS_ONBOARDING = EDITION === "system" || EDITION === "onboarding";
+const VIEWS = EDITION_VIEWS[EDITION];
+/** The built-in emails this edition offers. The smaller apps get their own group only. */
+const BUILT_IN =
+	EDITION === "followups"
+		? TEMPLATES.filter((t) => t.group === "Follow-ups")
+		: EDITION === "onboarding"
+			? TEMPLATES.filter((t) => t.group === "Onboarding")
+			: TEMPLATES;
+const CUSTOM_GROUP = "Your emails";
+const HOME: View = VIEWS[0];
 
 // ---------- dates ----------
 
@@ -103,6 +157,9 @@ function defaultState(): State {
 		clients: [],
 		reset: { week: isoWeek(), done: {}, tasks: [] },
 		pricing: { income: 60000, expenses: 6000, weeks: 46, hours: 20, buffer: 20, projectHours: 15, retainerHours: 10 },
+		log: {},
+		custom: [],
+		intake: null,
 	};
 }
 
@@ -136,13 +193,25 @@ function save(): void {
 	}
 }
 
-/** A new week clears the reset checklist but keeps unfinished tasks. */
+/** A new week clears the reset checklist but keeps unfinished tasks. The old week's #1 stays in the log. */
 function rollWeek(): void {
 	const week = isoWeek();
 	if (state.reset.week !== week) {
+		const top = topTask();
+		if (top && !weekLog(state.reset.week).top) weekLog(state.reset.week).top = top.text;
 		state.reset = { week, done: {}, tasks: state.reset.tasks };
 		save();
 	}
+}
+
+function emptyWeek(): WeekLog {
+	return { top: "", onTrack: "", blocker: "", drop: "", done: "", money: null, hours: null, wins: "", slipped: "", next: "" };
+}
+
+/** This week's log entry, created on first use. */
+function weekLog(week = isoWeek()): WeekLog {
+	state.log[week] ??= emptyWeek();
+	return state.log[week];
 }
 
 function uid(): string {
@@ -159,8 +228,8 @@ function stageLabel(id: StageId): string {
 	return STAGES.find((s) => s.id === id)?.label ?? id;
 }
 
-function template(id: string): Template | undefined {
-	return TEMPLATES.find((t) => t.id === id);
+function template(id: string): Pick<Template, "id" | "label" | "subject" | "body"> | undefined {
+	return TEMPLATES.find((t) => t.id === id) ?? state.custom.find((t) => t.id === id);
 }
 
 interface DueFollowUp {
@@ -214,7 +283,10 @@ function fill(text: string, client: Client | undefined): string {
 		start: client?.stage === "active" && client.stageDate ? fmtDate(client.stageDate) : "[start date]",
 		me: state.me.trim() || "[your name]",
 	};
-	return text.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match);
+	const questions = (state.intake ?? INTAKE_QUESTIONS).map((q, i) => `${i + 1}. ${q}`).join("\n");
+	return text
+		.replace(/\{questions\}/g, questions)
+		.replace(/\{(\w+)\}/g, (match, key: string) => values[key] ?? match);
 }
 
 function money(amount: string): number {
@@ -228,12 +300,13 @@ function currency(n: number): string {
 
 // ---------- views ----------
 
-let view: View = "today";
+let view: View = HOME;
 let selectedClientId: string | null = null;
 let editingClientId: string | null = null;
+let editingTemplateId: string | null = null;
 let email: { clientId: string; templateId: string; followUpKey: string | null; onboardingStep: string | null } = {
 	clientId: "",
-	templateId: TEMPLATES[0].id,
+	templateId: BUILT_IN[0].id,
 	followUpKey: null,
 	onboardingStep: null,
 };
@@ -244,24 +317,32 @@ function emptyNote(text: string, action?: { label: string; view: View }): string
 
 function renderToday(): string {
 	const today = todayIso();
-	const followUps = state.clients.map((c) => dueFollowUp(c, today)).filter((f): f is DueFollowUp => !!f);
-	const onboarding = state.clients.flatMap((c) => dueOnboarding(c, today).map((step) => ({ client: c, step })));
+	const followUps = SHOWS_FOLLOW_UPS ? state.clients.map((c) => dueFollowUp(c, today)).filter((f): f is DueFollowUp => !!f) : [];
+	const onboarding = SHOWS_ONBOARDING ? state.clients.flatMap((c) => dueOnboarding(c, today).map((step) => ({ client: c, step }))) : [];
 	const top = topTask();
-	const soon = state.clients
+	const soon = (SHOWS_FOLLOW_UPS ? state.clients : [])
 		.map((c) => ({ client: c, next: nextFollowUp(c, today) }))
 		.filter((x) => x.next && daysSince(today, x.next.dueOn) <= 7)
 		.sort((a, b) => a.next!.dueOn.localeCompare(b.next!.dueOn));
 
 	if (!state.clients.length) {
-		return `<section class="card hero"><h2>Start here</h2><p>Add the leads, proposals and clients you're working with. The app works out who needs a follow-up and when, and writes the email.</p><button class="btn" data-action="new-client">Add your first client</button></section>
+		return `<section class="card hero"><h2>Start here</h2><p>${
+			EDITION === "onboarding"
+				? "Add a client who just signed. The app lays out their first ten days, shows what's due, and writes each email."
+				: "Add the leads, proposals and clients you're working with. The app works out who needs a follow-up and when, and writes the email."
+		}</p><button class="btn" data-action="new-client">Add your first client</button></section>
 		${!state.me ? `<section class="card"><h3>Your sign-off</h3><p class="muted">Emails end with your name.</p><form data-form="me" class="row"><label class="grow"><span class="sr">Your name</span><input name="me" placeholder="Your name" autocomplete="name" required></label><button class="btn">Save</button></form></section>` : ""}`;
 	}
 
 	return `
-	<section class="card priority"><p class="eyebrow">This week's #1</p>${
-		top ? `<h2>${esc(top.text)}</h2>` : `<p>No priority picked yet.</p><button class="btn btn-ghost" data-go="reset">Do the Monday reset</button>`
-	}</section>
-	<section><h2 class="section-title">Follow-ups due <span class="count">${followUps.length}</span></h2>
+	${
+		EDITION === "system"
+			? `<section class="card priority"><p class="eyebrow">This week's #1</p>${
+					top ? `<h2>${esc(top.text)}</h2>` : `<p>No priority picked yet.</p><button class="btn btn-ghost" data-go="reset">Do the Monday reset</button>`
+				}</section>`
+			: ""
+	}
+	${SHOWS_FOLLOW_UPS ? `<section><h2 class="section-title">Follow-ups due <span class="count">${followUps.length}</span></h2>
 	${
 		followUps.length
 			? followUps
@@ -271,8 +352,8 @@ function renderToday(): string {
 					)
 					.join("")
 			: `<p class="muted pad">Nothing due. You're caught up.</p>`
-	}</section>
-	<section><h2 class="section-title">Onboarding steps due <span class="count">${onboarding.length}</span></h2>
+	}</section>` : ""}
+	${SHOWS_ONBOARDING ? `<section><h2 class="section-title">Onboarding steps due <span class="count">${onboarding.length}</span></h2>
 	${
 		onboarding.length
 			? onboarding
@@ -282,7 +363,7 @@ function renderToday(): string {
 					)
 					.join("")
 			: `<p class="muted pad">No onboarding steps due.</p>`
-	}</section>
+	}</section>` : ""}
 	${
 		soon.length
 			? `<section><h2 class="section-title">Coming up this week</h2><ul class="list">${soon
@@ -293,7 +374,7 @@ function renderToday(): string {
 }
 
 function clientForm(c?: Client): string {
-	const stage = c?.stage ?? "lead";
+	const stage = c?.stage ?? (EDITION === "onboarding" ? "active" : "lead");
 	return `<form data-form="client" class="card form">
 	<h2>${c ? "Edit client" : "Add a client"}</h2>
 	<input type="hidden" name="id" value="${esc(c?.id ?? "")}">
@@ -309,11 +390,11 @@ function clientForm(c?: Client): string {
 }
 
 function renderClientDetail(c: Client): string {
-	const due = dueFollowUp(c);
-	const next = nextFollowUp(c);
+	const due = SHOWS_FOLLOW_UPS ? dueFollowUp(c) : null;
+	const next = SHOWS_FOLLOW_UPS ? nextFollowUp(c) : null;
 	const steps =
-		c.stage === "active"
-			? `<h3>Onboarding plan</h3><ul class="checklist">${ONBOARDING_STEPS.map(
+		c.stage === "active" && SHOWS_ONBOARDING
+			? `<h3>Onboarding plan <span class="count">${ONBOARDING_STEPS.filter((s) => c.onboarding[s.id]).length} of ${ONBOARDING_STEPS.length}</span></h3><ul class="checklist">${ONBOARDING_STEPS.map(
 					(s) => `<li><label><input type="checkbox" data-action="toggle-step" data-client="${c.id}" data-step="${s.id}"${c.onboarding[s.id] ? " checked" : ""}> <span>${esc(s.label)}</span> <small class="muted">${esc(fmtDate(addDays(c.stageDate, s.day)))}</small></label>${
 						s.template && !c.onboarding[s.id] ? ` <button class="link" data-action="write" data-client="${c.id}" data-template="${s.template}" data-step="${s.id}">Write email</button>` : ""
 					}</li>`,
@@ -348,9 +429,17 @@ function renderClients(): string {
 		.map(
 			(g) => `<section><h2 class="section-title">${esc(g.stage.label)} <span class="count">${g.clients.length}</span></h2>${g.clients
 				.map((c) => {
-					const due = dueFollowUp(c);
-					const next = nextFollowUp(c);
-					const status = due ? `<span class="due">Follow-up due</span>` : next ? `Next ${esc(fmtDate(next.dueOn))}` : "";
+					const due = SHOWS_FOLLOW_UPS ? dueFollowUp(c) : null;
+					const next = SHOWS_FOLLOW_UPS ? nextFollowUp(c) : null;
+					const status = due
+						? `<span class="due">Follow-up due</span>`
+						: next
+							? `Next ${esc(fmtDate(next.dueOn))}`
+							: EDITION === "onboarding" && c.stage === "active"
+								? dueOnboarding(c).length
+									? `<span class="due">Step due</span>`
+									: `${ONBOARDING_STEPS.filter((s) => c.onboarding[s.id]).length} of ${ONBOARDING_STEPS.length} done`
+								: "";
 					return `<button class="card row-card" data-action="open-client" data-client="${c.id}"><span><strong>${esc(c.name)}</strong><br><small class="muted">${esc(c.project || c.email || "")}</small></span><small>${status}</small></button>`;
 				})
 				.join("")}</section>`,
@@ -360,8 +449,10 @@ function renderClients(): string {
 
 function renderEmails(): string {
 	const client = state.clients.find((c) => c.id === email.clientId);
-	const t = template(email.templateId) ?? TEMPLATES[0];
-	const groups = [...new Set(TEMPLATES.map((x) => x.group))];
+	const t = template(email.templateId) ?? BUILT_IN[0];
+	const groups = [...new Set(BUILT_IN.map((x) => x.group))];
+	const custom = state.custom.find((x) => x.id === t.id);
+	const editing = state.custom.find((x) => x.id === editingTemplateId);
 	const subject = fill(t.subject, client);
 	const body = fill(t.body, client);
 	const to = client?.email ?? "";
@@ -372,11 +463,17 @@ function renderEmails(): string {
 		.join("")}</select></label>
 	<label>Email<select data-action="email-template">${groups
 		.map(
-			(g) => `<optgroup label="${esc(g)}">${TEMPLATES.filter((x) => x.group === g)
+			(g) => `<optgroup label="${esc(g)}">${BUILT_IN.filter((x) => x.group === g)
 				.map((x) => `<option value="${x.id}"${x.id === t.id ? " selected" : ""}>${esc(x.label)}</option>`)
 				.join("")}</optgroup>`,
 		)
-		.join("")}</select></label>
+		.join("")}${
+		state.custom.length
+			? `<optgroup label="${CUSTOM_GROUP}">${state.custom
+					.map((x) => `<option value="${x.id}"${x.id === t.id ? " selected" : ""}>${esc(x.label)}</option>`)
+					.join("")}</optgroup>`
+			: ""
+	}</select></label>
 	<label>Subject<input id="email-subject" value="${esc(subject)}"></label>
 	<label>Message<textarea id="email-body" rows="12">${esc(body)}</textarea></label>
 	<p class="muted small">Replace anything in [brackets] before you send.</p>
@@ -384,7 +481,35 @@ function renderEmails(): string {
 		<button class="btn" data-action="copy-email">Copy email</button>
 		<a class="btn btn-ghost" id="email-open" href="mailto:${encodeURIComponent(to)}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}">Open in my email app</a>
 		${email.followUpKey || email.onboardingStep ? `<button class="btn btn-ghost" data-action="email-done">Mark as sent</button>` : ""}
+		${custom ? `<button class="link" data-action="edit-template" data-template="${custom.id}">Edit this email</button>` : ""}
 	</div>
+	</section>
+	${
+		SHOWS_ONBOARDING
+			? `<section class="card form">
+	<h2>Your intake questions</h2>
+	<p class="muted small">These go into the Intake questions email. One question per line. {project} fills in the project name.</p>
+	<form data-form="intake" class="form">
+		<label><span class="sr">Intake questions</span><textarea name="questions" rows="7">${esc((state.intake ?? INTAKE_QUESTIONS).join("\n"))}</textarea></label>
+		<div class="actions"><button class="btn">Save questions</button>${state.intake ? `<button type="button" class="btn btn-ghost" data-action="reset-intake">Use the default questions</button>` : ""}<button type="button" class="link" data-action="write" data-template="intake">Open the intake email</button></div>
+	</form>
+	</section>`
+			: ""
+	}
+	<section class="card form">
+	<h2>${editing ? "Edit your email" : "Add your own email"}</h2>
+	<p class="muted small">Write it once and it's here every time. Use {first}, {name}, {project}, {amount}, {date} and {me} to fill in each person's details.</p>
+	<form data-form="template" class="form">
+		<input type="hidden" name="id" value="${esc(editing?.id ?? "")}">
+		<label>Name<input name="label" required maxlength="80" value="${esc(editing?.label ?? "")}" placeholder="e.g. Check-in after a quiet month"></label>
+		<label>Subject<input name="subject" required value="${esc(editing?.subject ?? "")}" placeholder="Quick check-in on {project}"></label>
+		<label>Message<textarea name="body" rows="8" required placeholder="Hi {first},">${esc(editing?.body ?? "")}</textarea></label>
+		<div class="actions"><button class="btn">${editing ? "Save changes" : "Save my email"}</button>${
+			editing
+				? `<button type="button" class="btn btn-ghost" data-action="cancel-template">Cancel</button><button type="button" class="btn btn-danger" data-action="delete-template" data-template="${editing.id}">Delete</button>`
+				: ""
+		}</div>
+	</form>
 	</section>`;
 }
 
@@ -399,12 +524,18 @@ function renderReset(): string {
 		`<label>${esc(label)}<select name="${name}">${Array.from({ length: max - min + 1 }, (_, i) => min + i)
 			.map((n) => `<option value="${n}">${n}</option>`)
 			.join("")}</select><small class="muted">${esc(hint)}</small></label>`;
-	return `<section class="card">
+	const lastWeek = Object.keys(state.log).filter((w) => w < state.reset.week).sort().pop();
+	const carried = lastWeek ? state.log[lastWeek].next : "";
+	return `${carried ? `<section class="card hero"><p class="eyebrow">From last Friday</p><h2>${esc(carried)}</h2><p class="muted small">The first task you picked for this Monday.</p></section>` : ""}<section class="card">
 	<p class="eyebrow">Week ${esc(state.reset.week.split("-W")[1])} · ${done} of ${RESET_STEPS.length} done</p>
 	<h2>Monday reset, 20 minutes</h2>
-	<div class="stats"><div><strong>${invoiced.length}</strong><small>open invoices${owed ? ` · ${esc(currency(owed))}` : ""}</small></div><div><strong>${followUps}</strong><small>follow-ups due</small></div><div><strong>${onboarding}</strong><small>onboarding steps due</small></div></div>
+	${
+		EDITION === "system"
+			? `<div class="stats"><div><strong>${invoiced.length}</strong><small>open invoices${owed ? ` · ${esc(currency(owed))}` : ""}</small></div><div><strong>${followUps}</strong><small>follow-ups due</small></div><div><strong>${onboarding}</strong><small>onboarding steps due</small></div></div>`
+			: `<p class="muted">Work down the list. Tick each step when it's done.</p>`
+	}
 	<ul class="checklist">${RESET_STEPS.map(
-		(s) => `<li><label><input type="checkbox" data-action="toggle-reset" data-step="${s.id}"${state.reset.done[s.id] ? " checked" : ""}> <span><strong>${esc(s.label)}</strong> <small class="muted">${s.minutes} min</small><br><small class="muted">${esc(s.detail)}</small></span></label></li>`,
+		(s) => `<li><label><input type="checkbox" data-action="toggle-reset" data-step="${s.id}"${state.reset.done[s.id] ? " checked" : ""}> <span><strong>${esc(s.label)}</strong> <small class="muted">${s.minutes} min</small><br><small class="muted">${esc(EDITION === "reset" && s.standalone ? s.standalone : s.detail)}</small></span></label></li>`,
 	).join("")}</ul>
 	</section>
 	<section class="card form">
@@ -422,7 +553,77 @@ function renderReset(): string {
 					.join("")}</ol>`
 			: ""
 	}
+	</section>
+	${
+		EDITION === "system"
+			? `<section class="card"><h2>The rest of the week</h2><p class="muted">A 5-minute check on Thursday, a 10-minute close on Friday, and a log of every week.</p><div class="actions"><button class="btn" data-go="week">Thursday and Friday</button><button class="btn btn-ghost" data-go="log">Weekly log</button></div></section>`
+			: ""
+	}`;
+}
+
+function yesNo(name: string, value: string, label: string): string {
+	return `<label>${esc(label)}<select name="${name}"><option value=""${value ? "" : " selected"}>Not yet</option><option value="yes"${value === "yes" ? " selected" : ""}>Yes</option><option value="no"${value === "no" ? " selected" : ""}>No</option></select></label>`;
+}
+
+function renderWeek(): string {
+	const week = isoWeek();
+	const log = state.log[week] ?? emptyWeek();
+	const top = topTask()?.text || log.top;
+	const field = (name: keyof WeekLog, label: string, hint = "") =>
+		`<label>${esc(label)}${hint ? `<small class="muted">${esc(hint)}</small>` : ""}<textarea name="${name}" rows="2">${esc(log[name])}</textarea></label>`;
+	const num = (name: "money" | "hours", label: string, step: string) =>
+		`<label>${esc(label)}<input name="${name}" type="number" inputmode="decimal" min="0" step="${step}" value="${log[name] ?? ""}"></label>`;
+	return `<section class="card priority"><p class="eyebrow">Week ${esc(week.split("-W")[1])} · your #1</p>${
+		top ? `<h2>${esc(top)}</h2>` : `<p>No #1 yet.</p><button class="btn btn-ghost" data-go="reset">Do the Monday reset</button>`
+	}</section>
+	<section class="card form">
+	<h2>Thursday check-in, 5 minutes</h2>
+	<p class="muted small">Catch the week before it slips.</p>
+	<form data-form="thursday" class="form">
+		${yesNo("onTrack", log.onTrack, "Is your #1 done or on track?")}
+		${field("blocker", "If not, what's in the way?")}
+		${field("drop", "One thing you can drop or move to next week")}
+		<button class="btn">Save check-in</button>
+	</form>
+	</section>
+	<section class="card form">
+	<h2>Friday close, 10 minutes</h2>
+	<p class="muted small">Write the week down. It goes straight into your log.</p>
+	<form data-form="friday" class="form">
+		${yesNo("done", log.done, "Did your #1 get done?")}
+		<div class="grid2">${num("money", "Money that came in ($)", "1")}${num("hours", "Hours on client work", "0.5")}</div>
+		${field("wins", "Three things that got done")}
+		${field("slipped", "What slipped, and why")}
+		${field("next", "First task for next Monday", "It shows at the top of your Monday reset.")}
+		<button class="btn">Save and close the week</button>
+	</form>
 	</section>`;
+}
+
+function renderLog(): string {
+	const weeks = Object.entries(state.log)
+		.filter(([, l]) => l.top || l.done || l.money !== null || l.wins)
+		.sort(([a], [b]) => b.localeCompare(a));
+	const doneCount = weeks.filter(([, l]) => l.done === "yes").length;
+	const total = weeks.reduce((sum, [, l]) => sum + (l.money ?? 0), 0);
+	const recent = weeks.slice(0, 52).reverse();
+	const max = Math.max(1, ...recent.map(([, l]) => l.money ?? 0));
+	if (!weeks.length) {
+		return `<section class="card"><h2>Your weekly log</h2>${emptyNote("Close your first week on Friday and it shows up here.", { label: "Go to this week", view: "week" })}</section>`;
+	}
+	return `<section class="card">
+	<h2>Your weekly log</h2>
+	<div class="stats"><div><strong>${weeks.length}</strong><small>weeks logged</small></div><div><strong>${doneCount}</strong><small>#1 done${weeks.length ? ` · ${Math.round((doneCount / weeks.length) * 100)}%` : ""}</small></div><div><strong>${esc(currency(total))}</strong><small>money in</small></div></div>
+	<h3>Money in by week</h3>
+	<div class="bars" role="img" aria-label="Money in for the last ${recent.length} logged weeks">${recent
+		.map(([w, l]) => `<span style="height:${Math.round(((l.money ?? 0) / max) * 100)}%" title="Week ${esc(w.split("-W")[1])}: ${esc(currency(l.money ?? 0))}"></span>`)
+		.join("")}</div>
+	</section>
+	${weeks
+		.map(
+			([w, l]) => `<article class="card"><p class="eyebrow">Week ${esc(w.split("-W")[1])}, ${esc(w.split("-W")[0])}${l.done ? ` · #1 ${l.done === "yes" ? "done" : "not done"}` : ""}</p>${l.top ? `<h3>${esc(l.top)}</h3>` : ""}<p class="muted small">${l.money !== null ? `${esc(currency(l.money))} in` : "No money logged"}${l.hours !== null ? ` · ${esc(l.hours)} h` : ""}</p>${l.wins ? `<p class="notes">${esc(l.wins)}</p>` : ""}${l.slipped ? `<p class="muted small notes">Slipped: ${esc(l.slipped)}</p>` : ""}</article>`,
+		)
+		.join("")}`;
 }
 
 function renderPricing(): string {
@@ -456,9 +657,18 @@ function renderSettings(): string {
 	</section>
 	<section class="card">
 	<h2>Your data</h2>
-	<p class="muted">Your clients are saved in this browser on this device. Nothing is sent to Buzzyfly. To use the app on another device, open your access link there, then restore a backup.</p>
+	<p class="muted">Your ${EDITION === "reset" ? "weeks are" : "clients are"} saved in this browser on this device. Nothing is sent to Buzzyfly. To use the app on another device, open your access link there, then restore a backup.</p>
 	<div class="actions"><button class="btn" data-action="backup">Download a backup</button><label class="btn btn-ghost file">Restore a backup<input type="file" accept="application/json,.json" data-action="restore"></label></div>
 	</section>
+	${
+		EDITION === "reset"
+			? `<section class="card"><h2>Want follow-ups and onboarding too?</h2><p class="muted">The Buzzyfly Digital System includes this app, plus who to follow up with today, the email to send, and onboarding for new clients. Your weeks come with you.</p><a class="btn btn-ghost" href="/store">See the Digital System</a></section>`
+			: EDITION === "followups"
+				? `<section class="card"><h2>Want onboarding and your Monday reset too?</h2><p class="muted">The Buzzyfly Digital System includes this app, plus a 10-step onboarding plan for each new client, proposal and scope replies, and the weekly reset. Your clients and emails come with you.</p><a class="btn btn-ghost" href="/store">See the Digital System</a></section>`
+				: EDITION === "onboarding"
+					? `<section class="card"><h2>Want follow-ups and your Monday reset too?</h2><p class="muted">The Buzzyfly Digital System includes this app, plus who to follow up with today, proposal and scope replies, and the weekly reset. Your clients and emails come with you.</p><a class="btn btn-ghost" href="/store">See the Digital System</a></section>`
+					: ""
+	}
 	<section class="card">
 	<h2>Help</h2>
 	<p class="muted">Lost your access link or need a hand? Email <a href="mailto:support@buzzyfly.com">support@buzzyfly.com</a> from the address you checked out with.</p>
@@ -482,6 +692,8 @@ function render(): void {
 		clients: renderClients,
 		emails: renderEmails,
 		reset: renderReset,
+		week: renderWeek,
+		log: renderLog,
 		pricing: renderPricing,
 		settings: renderSettings,
 	};
@@ -597,7 +809,7 @@ document.addEventListener("click", async (event) => {
 			}
 			break;
 		case "write":
-			email = { clientId: client?.id ?? "", templateId: templateId ?? TEMPLATES[0].id, followUpKey: key ?? null, onboardingStep: step ?? null };
+			email = { clientId: client?.id ?? "", templateId: templateId ?? BUILT_IN[0].id, followUpKey: key ?? null, onboardingStep: step ?? null };
 			go("emails");
 			break;
 		case "copy-email": {
@@ -617,6 +829,31 @@ document.addEventListener("click", async (event) => {
 			go("today");
 			break;
 		}
+		case "edit-template":
+			editingTemplateId = templateId ?? null;
+			render();
+			document.querySelector<HTMLInputElement>('form[data-form="template"] input[name="label"]')?.focus();
+			break;
+		case "cancel-template":
+			editingTemplateId = null;
+			render();
+			break;
+		case "delete-template":
+			if (templateId && confirm("Delete this email? This can't be undone.")) {
+				state.custom = state.custom.filter((t) => t.id !== templateId);
+				if (email.templateId === templateId) email = { ...email, templateId: BUILT_IN[0].id };
+				editingTemplateId = null;
+				save();
+				render();
+				announce("Email deleted");
+			}
+			break;
+		case "reset-intake":
+			state.intake = null;
+			save();
+			render();
+			announce("Default questions back");
+			break;
 		case "remove-task":
 			state.reset.tasks = state.reset.tasks.filter((t) => t.id !== task);
 			save();
@@ -749,6 +986,41 @@ document.addEventListener("submit", (event) => {
 		save();
 		render();
 		announce("Client saved");
+	} else if (kind === "template") {
+		const fields = { label: get("label"), subject: get("subject"), body: String(data.get("body") ?? "") };
+		const existing = state.custom.find((t) => t.id === get("id"));
+		if (existing) Object.assign(existing, fields);
+		else state.custom.push({ id: `custom-${uid()}`, ...fields });
+		email = { ...email, templateId: existing?.id ?? state.custom[state.custom.length - 1].id, followUpKey: null, onboardingStep: null };
+		editingTemplateId = null;
+		save();
+		render();
+		announce("Email saved");
+	} else if (kind === "intake") {
+		const questions = String(data.get("questions") ?? "")
+			.split("\n")
+			.map((q) => q.trim().replace(/^\d+[.)]\s*/, ""))
+			.filter(Boolean);
+		state.intake = questions.length ? questions : null;
+		save();
+		render();
+		announce("Questions saved");
+	} else if (kind === "thursday" || kind === "friday") {
+		const log = weekLog();
+		const top = topTask();
+		if (top) log.top = top.text;
+		const choice = (name: string) => (["yes", "no"].includes(get(name)) ? get(name) : "") as WeekLog["done"];
+		const amount = (name: string) => (get(name) === "" || !Number.isFinite(Number(get(name))) ? null : Math.max(0, Number(get(name))));
+		if (kind === "thursday") Object.assign(log, { onTrack: choice("onTrack"), blocker: get("blocker"), drop: get("drop") });
+		else Object.assign(log, { done: choice("done"), money: amount("money"), hours: amount("hours"), wins: get("wins"), slipped: get("slipped"), next: get("next") });
+		save();
+		if (kind === "friday") {
+			announce("Week closed");
+			go("log");
+		} else {
+			render();
+			announce("Check-in saved");
+		}
 	} else if (kind === "task") {
 		state.reset.tasks.push({
 			id: uid(),
@@ -768,5 +1040,5 @@ window.addEventListener("hashchange", () => {
 });
 
 const initial = location.hash.slice(1) as View;
-view = VIEWS.includes(initial) ? initial : "today";
+view = VIEWS.includes(initial) ? initial : HOME;
 render();

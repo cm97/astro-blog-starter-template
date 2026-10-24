@@ -1,5 +1,5 @@
 ---
-import { BUZZYFLY_CONFIG, bundleSeparatePrice, getOrderAction, getProduct } from "../data/monetization";
+import { BUZZYFLY_CONFIG, getOrderAction, getProduct } from "../data/monetization";
 
 interface Props {
 	/** Product id from ALL_PRODUCTS. Fills in any field not passed explicitly. */
@@ -26,9 +26,6 @@ const features = props.features ?? product?.features ?? [];
 const badge = props.badge !== undefined ? props.badge : product?.badge ?? null;
 const featured = props.featured ?? badge === "Most popular";
 const Heading = props.headingLevel ?? "h3";
-// Crossed-out price only where it is true: the bundle vs buying each piece.
-const compareAt = product?.id === "complete-business-bundle" && product.buyUrl ? bundleSeparatePrice() : null;
-
 // Buy buttons always go to a real checkout route for a known product. They open
 // checkout in the same tab on purpose: a new tab mid-purchase loses buyers, most of all on phones.
 const order = product
@@ -56,12 +53,6 @@ const order = product
 	}
 	<div class="product-callout__footer">
 		<span class="product-callout__price">
-			{compareAt && (
-				<s class="product-callout__compare">
-					<span class="sr-only">Bought separately: </span>{compareAt}
-				</s>
-			)}
-			{compareAt && <span class="sr-only">Bundle price: </span>}
 			{price}
 		</span>
 		{order.live ? (
@@ -75,7 +66,7 @@ const order = product
 	</div>
 	{order.live ? (
 		<p class="product-callout__guarantee">
-			Secure checkout by Stripe. One-time payment. Your download is on the next page after you pay. {BUZZYFLY_CONFIG.guarantee}
+			Secure checkout by Stripe. One-time payment. Your app unlocks on the next page after you pay. {BUZZYFLY_CONFIG.guarantee}
 		</p>
 	) : (
 		<p class="product-callout__guarantee">Not for sale yet. Everything in it is already inside the $49 Digital System.</p>
@@ -149,12 +140,6 @@ const order = product
 		font-size: 1.6em;
 		font-weight: 700;
 		color: rgb(var(--black));
-	}
-	.product-callout__compare {
-		margin-right: 0.35em;
-		font-size: 0.65em;
-		font-weight: 400;
-		color: rgb(var(--gray));
 	}
 	.product-callout__cta {
 		display: inline-flex;
