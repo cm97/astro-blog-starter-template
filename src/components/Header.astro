@@ -19,12 +19,13 @@ try {
 				<span>{brand}</span>
 			</a>
 		</h2>
+		<a href="/store#digital-system" class="store-pill mobile-pill">Get the $49 System</a>
 		<div class="internal-links">
 			<HeaderLink href="/">Home</HeaderLink>
 			<HeaderLink href="/store">Store</HeaderLink>
 			<HeaderLink href="/apps-pro">Apps</HeaderLink>
 			<HeaderLink href="/overdue-invoice-email">Free invoice tool</HeaderLink>
-			<HeaderLink href="/store#digital-system" class="store-pill">Get the $49 System</HeaderLink>
+			<HeaderLink href="/store#digital-system" class="store-pill desktop-pill">Get the $49 System</HeaderLink>
 			<HeaderLink href="/blog">Blog</HeaderLink>
 			<HeaderLink href="/about">How it works</HeaderLink>
 		</div>
@@ -55,9 +56,21 @@ try {
 		padding: 0.4em 0.9em !important; font-weight: 700; font-size: 0.9em;
 	}
 	.store-pill:hover { background: var(--accent-dark); }
+	.mobile-pill { display: none; }
+	/* Phones: logo and the buy button on one row, the other links on one
+	   scrollable row below, so the page content starts near the top. */
 	@media (max-width: 640px) {
 		header { padding: 0 0.6em; }
+		nav { flex-wrap: wrap; row-gap: 0; }
 		.brand span { display: none; }
-		nav a { padding: 0.9em 0.35em; font-size: 0.92em; }
+		.brand { padding: 0.35em 0.2em !important; }
+		.mobile-pill { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 0; }
+		.desktop-pill { display: none !important; }
+		.internal-links {
+			order: 3; width: 100%; flex-wrap: nowrap; overflow-x: auto;
+			-webkit-overflow-scrolling: touch; scrollbar-width: none;
+		}
+		.internal-links::-webkit-scrollbar { display: none; }
+		nav a { padding: 0.6em 0.55em; font-size: 0.92em; white-space: nowrap; }
 	}
 </style>
