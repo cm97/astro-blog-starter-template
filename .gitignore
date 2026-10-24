@@ -207,3 +207,6 @@ dist
 
 ### Local test bundles ###
 .test-build/
+
+# Built product files (upload the zip to R2; rebuild with product-sources/*/build.py)
+product-sources/dist/
