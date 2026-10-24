@@ -120,10 +120,10 @@ export const ALL_PRODUCTS: Product[] = [
 	},
 	{
 		id: "follow-up-email-templates",
-		title: "Follow-Up Email Templates",
+		title: "Follow-Ups App",
 		price: "$19",
-		description: "Stop letting quiet leads go cold. An Excel tracker that shows who to follow up with today and writes the email for you.",
-		features: ["Follow-up dates worked out for you", "20 emails that fill in each person's details", "Today dashboard: who is due right now", "Add your own email templates"],
+		description: "Stop letting quiet leads and late invoices go cold. A browser web app shows who to follow up with today and fills in the email for you. No download.",
+		features: ["Follow-up dates worked out for you", "9 follow-up emails that fill in each person's details", "Today screen: who is due right now", "Add and save your own emails", "Works on phone. Included in the Digital System."],
 		buyUrl: null,
 		badge: "Coming soon",
 	},
