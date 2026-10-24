@@ -44,6 +44,13 @@ export default defineConfig({
 		"/blog/first-client-sprint": { status: 301, destination: "/blog/first-client-7-day-sprint/" },
 		"/blog/time-blocking": { status: 301, destination: "/blog/time-blocking-for-solo-operators/" },
 	},
-	integrations: [mdx(), sitemap()],
+	// Keep private and post-checkout pages out of the sitemap: the admin
+	// console, the paid apps, and the order/unsubscribe screens.
+	integrations: [
+		mdx(),
+		sitemap({
+			filter: (page) => !/^https:\/\/buzzyfly\.com\/(admin|app|success|thank-you|unsubscribe)(\/|$)/.test(page),
+		}),
+	],
 	devToolbar: { enabled: false },
 });
