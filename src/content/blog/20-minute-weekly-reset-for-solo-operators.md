@@ -116,7 +116,7 @@ If any line is blank, the money is still a feeling. Fill it before the timer end
 
 You can run the sheet on a calm Monday. It works until three clients reply at once. Then Wednesday never gets a calendar hold. Thursday becomes inbox, and the proposal follow-up waits for a good moment that is not on the clock. The Friday close never happens, so Monday starts with a blank page again.
 
-The Digital System is the same sequence written down so it still runs when you are busy: weekly reset, onboarding checklist, follow-ups. One-time $49. Files you keep. Not a subscription.
+The Digital System is the same sequence written down so it still runs when you are busy: weekly reset, onboarding checklist, follow-ups. One browser app. One-time $49. No download. Not a subscription.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 

@@ -145,6 +145,6 @@ Onboarding started: yes / no
 
 You can paste them today. They work until a slammed Thursday. Then the day-3 window passes, the log is empty, and the proposal sits in sent items until you notice it two weeks later.
 
-The same three lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One Excel workbook (opens in Excel or Google Sheets). One-time $49. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if your files weren’t delivered or aren’t what the listing described. No change-of-mind refunds after a valid download.
+The same three lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if your files weren’t delivered or aren’t what the listing described. No change-of-mind refunds after a valid download.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
