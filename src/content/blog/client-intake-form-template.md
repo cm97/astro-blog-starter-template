@@ -4,9 +4,9 @@ description: "A client intake form template for coaches and consultants — five
 pubDate: "Sep 13 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "onboarding"
-featuredProductTitle: "Client Onboarding Kit"
-featuredProductPrice: "$29"
-featuredProductDescription: "Includes the intake form questions, welcome email, kickoff agenda, and internal notes format — ready to run in one download."
+featuredProductTitle: "Buzzyfly Digital System"
+featuredProductPrice: "$49"
+featuredProductDescription: "Onboarding for every new client in one browser app: intake questions you write once, welcome and kickoff emails filled in, and notes for each client. Plus follow-ups and your Monday reset."
 ---
 
 Most client intake forms have two problems: they're too long, and they ask the wrong questions.
@@ -122,4 +122,6 @@ An intake form is not a contract substitute. It doesn't establish scope, terms, 
 
 ---
 
-The Client Onboarding Kit includes the intake form questions, the welcome email, the kickoff agenda, and the internal client notes format — pre-written and ready to use in one download. [Get the Client Onboarding Kit →](/store)
+The Buzzyfly Digital System puts this inside one browser app. Write your intake questions once and reuse them. The welcome and kickoff emails are filled in for each client. Notes for each client sit next to the onboarding steps. Follow-ups and the 20-minute Monday reset are in the same app. One-time $49. No download. Not a subscription.
+
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
