@@ -3,7 +3,7 @@ title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
 description: "A 20-minute weekly reset for solo operators — Monday sheet, Wednesday check, and a 12-minute Thursday cash salvage so priorities and follow-ups still exist when the week breaks."
 category: "planning"
 pubDate: "Sep 01 2026"
-updatedDate: "Oct 16 2026"
+updatedDate: "Oct 26 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -156,6 +156,24 @@ Stop at 12 minutes. A salvage that becomes a new planning system is how Friday d
 - Dies (no guilt): ________
 - Step that failed twice: ________
 
+## Link the reset to the first client so week two is not silence
+
+After a new client pays, the reset is what keeps them. Add one line to next Monday's Still open the hour the payment clears:
+
+```
+New client [Name] — day-2 intake check or day-7 wrap due: ________
+```
+
+Exact paste for the day-2 line inside the reset:
+
+> Still need the intake before kickoff so we use the time well. Link: [link]. Deadline stays [date].
+
+Exact paste for the day-7 line:
+
+> Quick status: [what moved]. Next piece due [date]. Anything blocked on your side?
+
+If the first client is not on the Monday sheet, the reset is still a personal productivity trick. The cash lives in the client date.
+
 ## Extra concrete steps that keep the reset alive
 
 - Put the Monday slot on the calendar as a recurring 20-minute block titled "Reset — do not move." If it is not protected, delivery eats it.
@@ -163,6 +181,7 @@ Stop at 12 minutes. A salvage that becomes a new planning system is how Friday d
 - When a fourth priority appears mid-week, write it on a parking line. It does not enter the three until Monday.
 - After any client payment clears, add one line to next Monday's "Still open": the day-2 or day-7 onboarding touch. The reset is how week two stays quiet-free.
 - Cap follow-ups at two per reset. Five becomes a blast and the habit dies.
+- Log the invoice amount on the same note the day it leaves. Missing numbers become missing cash.
 
 ## Phrases so you do not draft from a blank screen
 
