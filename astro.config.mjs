@@ -43,6 +43,9 @@ export default defineConfig({
 		"/blog/discovery-questions": { status: 301, destination: "/blog/client-discovery-questions/" },
 		"/blog/first-client-sprint": { status: 301, destination: "/blog/first-client-7-day-sprint/" },
 		"/blog/time-blocking": { status: 301, destination: "/blog/time-blocking-for-solo-operators/" },
+		// Explainer videos renamed or removed when the store moved to web apps.
+		"/videos/whats-in-the-zip": { status: 301, destination: "/videos/whats-inside-the-app/" },
+		"/videos/complete-bundle": { status: 301, destination: "/store/" },
 	},
 	// Keep private and post-checkout pages out of the sitemap: the admin
 	// console, the paid apps, and the order/unsubscribe screens.

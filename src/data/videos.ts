@@ -4,111 +4,82 @@ export type ExplainerVideo = {
 	slug: string;
 	title: string;
 	description: string;
-	views: string;
-	date: string;
 	seconds: number;
-	src: string;
 	poster: string;
 	slides: ExplainerSlide[];
 	script: string;
 };
 
+// What each explainer says on screen and reads aloud. It has to match the
+// live store: the $49 Digital System is a browser app (no download), the
+// $15/$19/$29 apps are "Coming soon" and already inside the $49 app, and the
+// refund rule is the one in CLAUDE.md. No view counts or upload dates: there
+// is no real audience data for these.
 export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 	{
 		slug: "meet-buzzyfly",
 		title: "Meet Buzzyfly — the $49 Digital System that holds a slammed week",
-		description: "One-time zip: checklists, templates, scripts for onboarding, weekly reset, follow-ups.",
-		views: "2.4K",
-		date: "12 minutes ago",
+		description: "A browser app for coaches and solo service providers: who to follow up with today, the email to send, onboarding for new clients and your Monday reset. One-time $49. No download.",
 		seconds: 32,
-		src: "/videos/meet-buzzyfly.mp4",
 		poster: "/videos/meet-buzzyfly.svg",
 		slides: [
-			["SYSTEM", "$49 one-time", "Zip of checklists, templates, scripts."],
-			["HOLD", "Survives a slammed week", "Open the folder. Run the list."],
-			["REFUND", "7-day on the system", "Files not as listed? Email for refund."],
+			["SYSTEM", "$49 one-time", "A browser app. No download."],
+			["TODAY", "Who needs you", "And the email to send."],
+			["REFUND", "30 days", "If you can't get in or it isn't as described."],
 		],
-		script: "Buzzyfly is the forty-nine dollar Digital System. One-time payment. A zip with checklists, templates, and scripts. Onboarding, weekly reset, follow-ups. It holds when the week gets slammed. Seven-day refund if the files are not what the store lists.",
+		script: "Buzzyfly is the forty-nine dollar Digital System. A web app that opens in your browser, on your phone or computer. It shows who to follow up with today and fills in the email. New clients get the same onboarding every time. One-time payment. Thirty-day refund if you can't get into the app or it isn't what the listing described.",
 	},
 	{
-		slug: "whats-in-the-zip",
-		title: "Inside the $49 zip — checklists / templates / scripts",
-		description: "Three folders only. No subscription. Yours to keep.",
-		views: "1.8K",
-		date: "34 minutes ago",
+		slug: "whats-inside-the-app",
+		title: "Inside the $49 app — Today, clients, emails, reset, pricing",
+		description: "A tour of the Digital System's screens. Your data stays in your browser. No subscription.",
 		seconds: 28,
-		src: "/videos/whats-in-the-zip.mp4",
 		poster: "/videos/whats-in-the-zip.svg",
 		slides: [
-			["FOLDERS", "Three folders", "checklists / templates / scripts"],
-			["RUN", "Tick and close", "Intake, reset, follow-up ready."],
-			["KEEP", "One-time payment", "Download once. Use forever."],
+			["TODAY", "One screen", "Follow-ups and onboarding steps due."],
+			["EMAILS", "Filled in for you", "Copy it, send it yourself."],
+			["RESET", "Monday, 20 minutes", "Score your tasks. Pick your #1."],
 		],
-		script: "What is in the forty-nine dollar zip. Three folders: checklists, templates, scripts. Onboarding checklist, weekly reset, follow-up sequence. One-time payment. No subscription. Yours to keep.",
+		script: "Inside the forty-nine dollar app. The Today screen shows the follow-ups and onboarding steps that are due. The email writer fills in each client's name and project, and you copy and send it yourself. The Monday reset takes twenty minutes and picks your number one task. One-time payment. No subscription.",
 	},
 	{
 		slug: "weekly-reset",
-		title: "Weekly Reset Checklist — $15 for a 20-minute Monday",
-		description: "Same reset every Monday. Priority, inbox, week plan.",
-		views: "956",
-		date: "1 hour ago",
+		title: "Weekly Reset — a 20-minute Monday that still works by Thursday",
+		description: "The Monday reset, a priority scorer, a Thursday check-in and a Friday close. Inside the $49 Digital System today. A $15 version is coming soon.",
 		seconds: 30,
-		src: "/videos/weekly-reset.mp4",
 		poster: "/videos/weekly-reset.svg",
 		slides: [
-			["MONDAY", "20-minute reset", "Clear inbox. Set one priority."],
-			["SAME", "Every week", "No scramble. Same list."],
-			["PRICE", "$15 one-time", "Checklist only. Included in the system."],
+			["MONDAY", "20-minute reset", "Score tasks. Pick your #1."],
+			["THURSDAY", "5-minute check", "Catch the week before it slips."],
+			["INSIDE", "The $49 system", "A $15 version is coming soon."],
 		],
-		script: "The Weekly Reset is fifteen dollars. A twenty-minute Monday checklist. Clear the inbox, set the priority, plan the week the same way every time. One-time. Or get it inside the forty-nine dollar system.",
+		script: "The weekly reset. Twenty minutes on Monday to score your tasks and pick your number one. A five-minute check on Thursday, and a Friday close that goes into your weekly log. It's inside the forty-nine dollar Digital System today. A fifteen dollar version on its own is coming soon.",
 	},
 	{
 		slug: "onboarding-kit",
-		title: "Client Onboarding Kit — $29 so week one is documented",
-		description: "Welcome, intake, kickoff. Same sequence every new client.",
-		views: "1.1K",
-		date: "3 hours ago",
+		title: "Client onboarding — the same first ten days for every new client",
+		description: "A 10-step plan for each new client, the welcome, intake and kickoff emails filled in, and your own intake questions. Inside the $49 Digital System today. A $29 version is coming soon.",
 		seconds: 34,
-		src: "/videos/onboarding-kit.mp4",
 		poster: "/videos/onboarding-kit.svg",
 		slides: [
-			["WEEK ONE", "Documented", "Welcome email. Intake. Kickoff."],
+			["WEEK ONE", "10 steps", "Welcome. Intake. Kickoff."],
 			["SAME", "Every client", "No rebuild from memory."],
-			["KIT", "$29 one-time", "Or inside the $49 system."],
+			["INSIDE", "The $49 system", "A $29 version is coming soon."],
 		],
-		script: "Client Onboarding Kit. Twenty-nine dollars. Welcome email, intake questions, kickoff agenda. Same process for every new client. One-time payment. Also inside the Digital System zip.",
+		script: "Client onboarding. A ten-step plan for every new client, with the welcome, intake and kickoff emails filled in. You write your intake questions once and reuse them. It's inside the forty-nine dollar Digital System today. A twenty-nine dollar version on its own is coming soon.",
 	},
 	{
 		slug: "follow-up-templates",
-		title: "Follow-Up Templates — $19, emails ready to send",
-		description: "Five follow-up emails. Quiet leads and late invoices.",
-		views: "742",
-		date: "6 hours ago",
+		title: "Follow-ups — who to nudge today and the email to send",
+		description: "Follow-up dates worked out for leads, proposals and late invoices, with 9 follow-up emails filled in. Inside the $49 Digital System today. A $19 version is coming soon.",
 		seconds: 26,
-		src: "/videos/follow-up-emails.mp4",
 		poster: "/videos/follow-up-emails.svg",
 		slides: [
-			["FOLLOW-UP", "Ready emails", "Quiet lead. Late invoice."],
-			["SEND", "Copy and send", "No blank next email."],
-			["PRICE", "$19 one-time", "Templates only."],
+			["FOLLOW-UP", "Dates worked out", "Quiet lead. Late invoice."],
+			["SEND", "Filled in for you", "Copy it and send it."],
+			["INSIDE", "The $49 system", "A $19 version is coming soon."],
 		],
-		script: "Follow-Up Templates. Nineteen dollars. Five emails ready to send for quiet leads and late invoices. One-time. Or get the full set in the forty-nine dollar Digital System.",
-	},
-	{
-		slug: "complete-bundle",
-		title: "Complete Bundle — $97, every product in one download",
-		description: "Digital System + Onboarding Kit + Follow-Ups + Weekly Reset.",
-		views: "1.5K",
-		date: "1 day ago",
-		seconds: 36,
-		src: "/videos/complete-bundle.mp4",
-		poster: "/videos/complete-bundle.svg",
-		slides: [
-			["BUNDLE", "$97 one-time", "All products in one zip."],
-			["EVERY", "System + kits", "Onboarding, reset, follow-ups."],
-			["KEEP", "Future updates", "One payment. All files."],
-		],
-		script: "The Complete Bundle is ninety-seven dollars. The Digital System plus the Onboarding Kit, Follow-Up Templates, and Weekly Reset. One download. One-time payment. Every file you need.",
+		script: "Follow-ups. The app works out who is due today, for quiet leads, proposals and late invoices, and fills in the email. You copy it and send it yourself. It's inside the forty-nine dollar Digital System today. A nineteen dollar version on its own is coming soon.",
 	},
 ];
 

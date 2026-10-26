@@ -23,7 +23,7 @@ const perSlide = Math.round((featured.seconds / featured.slides.length) * 1000);
 			body.yt-page footer a,
 			body.yt-page footer p { color:#f1f1f1 !important; }
 
-			.yt { max-width:1280px; margin:0 auto; padding:0 16px 48px; }
+			.yt { width:100%; max-width:1280px; box-sizing:border-box; margin:0 auto; padding:0 16px 48px; }
 
 			.ch-banner {
 				display:flex;
@@ -315,7 +315,7 @@ const perSlide = Math.round((featured.seconds / featured.slides.length) * 1000);
 				<div class="ch-info">
 					<h1>Buzzyfly</h1>
 					<p class="ch-meta">{EXPLAINER_VIDEOS.length} videos · Official explainers</p>
-					<p class="ch-desc">Short videos for every part of the Buzzyfly system — Digital System $49, Weekly Reset $15, Onboarding Kit $29, Follow-Up Templates $19, Bundle $97. Zip folders of checklists, templates, scripts. One-time payment.</p>
+					<p class="ch-desc">Short explainers for the Buzzyfly Digital System, a $49 browser app for coaches and solo service providers. No download. No subscription.</p>
 				</div>
 			</div>
 
@@ -351,7 +351,7 @@ const perSlide = Math.round((featured.seconds / featured.slides.length) * 1000);
 						</div>
 					</div>
 					<h2 class="video-title">{featured.title}</h2>
-					<p class="video-stats">Buzzyfly · {featured.views} views · {featured.date}</p>
+					<p class="video-stats">Buzzyfly · {fmtTime(featured.seconds)}</p>
 				</div>
 
 				<aside class="sidebar">
@@ -365,7 +365,7 @@ const perSlide = Math.round((featured.seconds / featured.slides.length) * 1000);
 								</div>
 								<div>
 									<p class="qtitle">{v.title}</p>
-									<p class="qmeta">Buzzyfly · {v.views} views · {v.date}</p>
+									<p class="qmeta">Buzzyfly · {fmtTime(v.seconds)}</p>
 								</div>
 							</a>
 						))}
@@ -387,7 +387,7 @@ const perSlide = Math.round((featured.seconds / featured.slides.length) * 1000);
 							</div>
 						</div>
 						<p class="vtitle">{v.title}</p>
-						<p class="vmeta">Buzzyfly · {v.views} views · {v.date}</p>
+						<p class="vmeta">Buzzyfly · {fmtTime(v.seconds)}</p>
 					</a>
 				))}
 			</div>
