@@ -52,6 +52,8 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		sitemap({
+			// /jobs renders on each request, so the sitemap can't find it on its own.
+			customPages: ["https://buzzyfly.com/jobs"],
 			filter: (page) => !/^https:\/\/buzzyfly\.com\/(admin|app|success|thank-you|unsubscribe)(\/|$)/.test(page),
 		}),
 	],
