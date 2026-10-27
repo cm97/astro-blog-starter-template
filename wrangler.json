@@ -46,6 +46,6 @@
 	"vars": {
 		"EMAIL_FROM": "Buzzyfly <orders@buzzyfly.com>",
 		"JOBS_MEMBERSHIP_PRICE": "$5/month",
-		"JOBS_MEMBERSHIP_URL": ""
+		"JOBS_MEMBERSHIP_URL": "https://buy.stripe.com/6oUaEZeBy6N88YQ7JAaVa0c"
 	}
 }
