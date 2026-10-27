@@ -2,6 +2,7 @@
 title: "Client Just Paid? Run This 15-Minute Onboarding Sequence So Week One Doesn't Collapse"
 description: "Exact 15-minute sequence after payment so the welcome email, intake, and first deliverable date exist before Thursday erases them."
 pubDate: 2026-10-26
+updatedDate: 2026-10-27
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -45,7 +46,7 @@ Subject: Welcome + next step for [Project name]
 >
 > Welcome email and intake are below. Fill the intake by [date 48 hours out] so I can lock the first deliverable for [date].
 >
-> [Paste intake questions or link]
+> [Paste the five intake fields below]
 >
 > Reply with any hard constraints on the start date and I'll confirm the calendar hold.
 >
@@ -79,17 +80,53 @@ Keep it to these so they finish it:
 
 More than five questions and the intake sits unfinished. These five are enough to run the first week.
 
-## What you do in the next 48 hours
+## Day-by-day first week (run the list, do not invent)
 
-- Intake arrives: reply within 4 hours with the locked start date and the one thing you need from them next. Mark status active.
-- No intake: send one short nudge on day 2. "Still want me to hold [date]? Reply with the intake or 'later' and I'll release the hold."
-- They ask for a call: book a 15-minute slot in the next 48 hours. Do not let the call replace the written intake.
-- Scope question: answer in one paragraph, restate what is in the paid package, and restate the first deliverable date. Do not add work.
+**Day 0 (payment day — the 15 minutes above)**
 
-## Why the first week collapses when this only lives in your head
+- Log filled
+- Welcome + intake sent
+- First deliverable date on calendar
+- Client added to next Monday reset
 
-You can do the steps today. They work until a slammed Thursday. Then the welcome is still in drafts, the start date is "next week sometime," and the client is waiting while you rebuild the sequence from memory.
+**Day 1**
+
+- Check the thread once. If they already replied with constraints, confirm the date in one line. Do not wait.
+
+**Day 2 (48-hour mark)**
+
+- Intake arrived: reply within 4 hours. Lock the start date. Name the one thing you need next. Mark status active.
+- No intake: send the nudge. "Still want me to hold [date]? Reply with the intake or 'later' and I'll release the hold."
+
+**Day 3–4**
+
+- If intake is in, start the first piece only if the date is locked. Do not invent extra scope.
+- If still silent after the day-2 nudge, one more line on day 4: "Holding [date] until end of day. Reply or I release it." Then stop.
+
+**Day 5–7**
+
+- Send the first short status if work has started: "Quick status: [what moved]. Next piece due [date]. Anything blocked on your side?"
+- Add them to the Friday status slot if you run one. Same words every week.
+
+Late is better than rewritten. If any day is missed, send the same line the same day you remember.
+
+## Exact phrases that keep the week from collapsing
+
+- Scope creep on day 1: "Happy to do that — it's $X and adds two days. Want me to add it or keep the original scope?"
+- They ask for a call before intake: "Booked 15 minutes [day/time]. Please fill the five fields before the call so we use the time on decisions, not basics."
+- Invoice or deposit question: "The [amount] already received covers [package]. First deliverable is locked for [date]."
+- Quiet after welcome: use the day-2 hold-or-release line above. Do not write a new pitch.
+
+## What still breaks when this only lives in your head
+
+You can do the steps today. They work until a slammed Thursday. Then the welcome is still in drafts, the start date is "next week sometime," the intake never left, and the client is waiting while you rebuild the sequence from memory.
+
+The private note is a feeling instead of a written card. The day-2 nudge never goes out. The first deliverable date was never put on the calendar, so it moves every time delivery gets loud.
+
+The words have to sit next to the weekly reset and the follow-up lines, in the same place, so a slammed week still has a list to open.
 
 The same 15-minute sequence, plus the follow-up cadence and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the process still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+
+Want the full set of checklists in one place? [Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
