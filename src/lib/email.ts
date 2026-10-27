@@ -338,3 +338,69 @@ export async function sendDropWelcomeEmail(
 		return { sent: false, reason: `send failed: ${String(error)}` };
 	}
 }
+
+export interface JobsWelcomeEmail {
+	to: string;
+	unlockUrl: string;
+	orderId: string;
+}
+
+/**
+ * Welcome email for a new Jobs member. The thank-you page already unlocks
+ * /jobs in the browser they paid in; this link is for their other devices.
+ */
+export async function sendJobsWelcomeEmail(
+	message: JobsWelcomeEmail,
+	env: { EMAIL?: EmailBinding; EMAIL_FROM?: string },
+): Promise<EmailResult> {
+	if (!env.EMAIL) return { sent: false, reason: "EMAIL binding is not configured in wrangler.json" };
+	if (!message.to) return { sent: false, reason: "no customer email on the order" };
+
+	const brand = escapeHtml(BUZZYFLY_CONFIG.brandName);
+	const support = escapeHtml(BUZZYFLY_CONFIG.supportEmail);
+	const html = `<!doctype html>
+<html>
+  <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#16191c;max-width:520px;margin:0 auto;padding:24px">
+    <h1 style="font-size:20px;margin:0 0 16px">Your Buzzyfly Jobs membership is active</h1>
+    <p style="margin:0 0 16px">Thanks for joining. The full remote jobs board is open in the browser you paid in.</p>
+    <p style="margin:0 0 24px">
+      <a href="${message.unlockUrl}" style="display:inline-block;background:#2337ff;color:#fff;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:600">Open the jobs board</a>
+    </p>
+    <p style="margin:0 0 16px;font-size:14px">
+      Open this link once on each phone or computer you want to use. Keep this email. The link is your key.
+    </p>
+    <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
+      Your membership renews monthly until you cancel. To cancel, email ${support} and we stop it before your next billing date.
+    </p>
+    <p style="margin:24px 0 0;color:#6b6a64;font-size:14px">— ${brand}</p>
+  </body>
+</html>`;
+	const text = [
+		"Your Buzzyfly Jobs membership is active.",
+		"",
+		"Thanks for joining. The full remote jobs board is open in the browser you paid in.",
+		"",
+		"Open the jobs board on any other device:",
+		message.unlockUrl,
+		"",
+		"Open this link once on each phone or computer you want to use. Keep this email. The link is your key.",
+		"",
+		`Your membership renews monthly until you cancel. To cancel, email ${BUZZYFLY_CONFIG.supportEmail} and we stop it before your next billing date.`,
+		"",
+		`— ${BUZZYFLY_CONFIG.brandName}`,
+	].join("\n");
+
+	try {
+		await env.EMAIL.send({
+			from: resolveFrom(env),
+			to: message.to,
+			subject: "Your Buzzyfly Jobs membership is active",
+			html,
+			text,
+		});
+		return { sent: true };
+	} catch (error) {
+		console.error(`Buzzyfly email: jobs welcome send failed for order ${message.orderId} to ${message.to}`, error);
+		return { sent: false, reason: `send failed: ${String(error)}` };
+	}
+}

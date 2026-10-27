@@ -44,6 +44,8 @@
 		}
 	],
 	"vars": {
-		"EMAIL_FROM": "Buzzyfly <orders@buzzyfly.com>"
+		"EMAIL_FROM": "Buzzyfly <orders@buzzyfly.com>",
+		"JOBS_MEMBERSHIP_PRICE": "$5/month",
+		"JOBS_MEMBERSHIP_URL": ""
 	}
 }

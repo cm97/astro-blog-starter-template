@@ -8,6 +8,7 @@ export interface RemotiveJob {
 	salary?: string;
 	category?: string;
 	tags?: string[];
+	publication_date?: string;
 }
 
 export interface JobsFeed {
@@ -15,7 +16,7 @@ export interface JobsFeed {
 	fetchedAt: number | null;
 }
 
-const REMOTIVE_URL = "https://remotive.com/api/remote-jobs?limit=25";
+const REMOTIVE_URL = "https://remotive.com/api/remote-jobs?limit=100";
 
 // Remotive asks API users to keep requests to a handful per day, so the list is
 // stored in D1 and only re-fetched once it is older than this.
@@ -61,6 +62,7 @@ async function fetchFromRemotive(): Promise<RemotiveJob[] | null> {
 				salary: job.salary,
 				category: job.category,
 				tags: Array.isArray(job.tags) ? job.tags.slice(0, 8) : undefined,
+				publication_date: job.publication_date,
 			}));
 	} catch (error) {
 		lastFailureAt = Date.now();

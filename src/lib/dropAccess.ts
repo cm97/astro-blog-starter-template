@@ -129,7 +129,20 @@ export type DropAccess = { ok: true; account: DropAccount } | { ok: false; reaso
  * admin console before the status events existed) is honoured: there is no
  * cancellation to enforce. Once Stripe reports a status, that status wins.
  */
-export async function checkDropAccess(env: Env, token: string | null | undefined): Promise<DropAccess> {
+export function checkDropAccess(env: Env, token: string | null | undefined): Promise<DropAccess> {
+	return checkSubscriptionAccess(env, token, DROP_ITEM_ID);
+}
+
+/**
+ * The same check for any Stripe subscription product whose token is stored in
+ * `download_tokens` under `itemId` (the Monthly Drop, the jobs membership).
+ * `drop_subscriptions` holds every subscription, whatever the product.
+ */
+export async function checkSubscriptionAccess(
+	env: Env,
+	token: string | null | undefined,
+	itemId: string,
+): Promise<DropAccess> {
 	if (!token || !/^[0-9a-f]{64}$/.test(token)) return { ok: false, reason: "no-token" };
 	if (!env.DB) return { ok: false, reason: "invalid" };
 
@@ -138,7 +151,7 @@ export async function checkDropAccess(env: Env, token: string | null | undefined
 	)
 		.bind(token)
 		.first<{ order_id: string; item_id: string; customer_email: string | null; expires_at: number }>();
-	if (!row || !isDropItem(String(row.item_id)) || Number(row.expires_at) < Date.now()) {
+	if (!row || String(row.item_id) !== itemId || Number(row.expires_at) < Date.now()) {
 		return { ok: false, reason: "invalid" };
 	}
 
@@ -152,14 +165,19 @@ export async function checkDropAccess(env: Env, token: string | null | undefined
 			.all<{ status: string }>();
 		subs = bySession.results ?? [];
 		if (subs.length === 0 && account.email) {
-			const byEmail = await env.DB.prepare(`SELECT status FROM drop_subscriptions WHERE customer_email = ?`)
-				.bind(account.email.toLowerCase())
+			// Only this product's subscriptions: one email can hold several.
+			const byEmail = await env.DB.prepare(
+				`SELECT s.status FROM drop_subscriptions s
+				 LEFT JOIN fulfillments f ON f.provider = 'stripe' AND f.order_id = s.checkout_session_id
+				 WHERE s.customer_email = ? AND (f.item_id IS NULL OR f.item_id = ?)`,
+			)
+				.bind(account.email.toLowerCase(), itemId)
 				.all<{ status: string }>();
 			subs = byEmail.results ?? [];
 		}
 	} catch (error) {
 		// Don't lock a paying subscriber out because of a storage hiccup.
-		console.error("Buzzyfly drop: subscription lookup failed", error);
+		console.error(`Buzzyfly ${itemId}: subscription lookup failed`, error);
 		return { ok: true, account };
 	}
 
