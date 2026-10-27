@@ -10,5 +10,8 @@
 declare namespace Cloudflare {
 	interface Env {
 		EMAIL_FROM?: string;
+		// Jobs membership (src/lib/jobsAccess.ts). Both unset = /jobs stays fully open.
+		JOBS_MEMBERSHIP_URL?: string;
+		JOBS_MEMBERSHIP_PRICE?: string;
 	}
 }

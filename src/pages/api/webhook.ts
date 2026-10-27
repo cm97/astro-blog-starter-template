@@ -11,7 +11,8 @@ import {
 	type FulfillmentOrder,
 } from "../../lib/fulfillment";
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../../data/monetization";
-import { sendDeliveryEmail, sendDropWelcomeEmail } from "../../lib/email";
+import { sendDeliveryEmail, sendDropWelcomeEmail, sendJobsWelcomeEmail } from "../../lib/email";
+import { isJobsItem, jobsTokenForOrder } from "../../lib/jobsAccess";
 import {
 	ensureDropSchema,
 	isDropItem,
@@ -84,8 +85,9 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		});
 	}
 
-	// The Monthly Drop is a subscription to a web app, not a file download.
-	if (isDropItem(order.itemId)) return fulfillDropOrder(order, env);
+	// The Monthly Drop and the Jobs membership are subscriptions, not file downloads.
+	if (isDropItem(order.itemId)) return fulfillSubscriptionOrder(order, env, DROP_FULFILLMENT);
+	if (isJobsItem(order.itemId)) return fulfillSubscriptionOrder(order, env, JOBS_FULFILLMENT);
 
 	const productFile = resolveProductFile(order.itemId);
 	const isApps = isAppsItem(order.itemId);
@@ -201,9 +203,9 @@ function json(body: unknown): Response {
 }
 
 /**
- * Keeps drop_subscriptions in step with Stripe so /drop closes when a
- * subscription is canceled or goes unpaid. Subscriptions that aren't the
- * Monthly Drop are ignored unless they're already on record.
+ * Keeps drop_subscriptions in step with Stripe so /drop and the /jobs
+ * membership close when a subscription is canceled or goes unpaid.
+ * Subscriptions for other products are ignored unless already on record.
  */
 async function handleSubscriptionEvent(
 	event: NonNullable<ReturnType<typeof parseStripeSubscriptionEvent>>,
@@ -215,7 +217,7 @@ async function handleSubscriptionEvent(
 	}
 	try {
 		await ensureDropSchema(env.DB);
-		if (event.itemId && isDropItem(event.itemId)) {
+		if (event.itemId && (isDropItem(event.itemId) || isJobsItem(event.itemId))) {
 			await recordDropStatus(env.DB, event);
 		} else {
 			await env.DB.prepare(`UPDATE drop_subscriptions SET status = ?, updated_at = ? WHERE subscription_id = ?`)
@@ -231,14 +233,44 @@ async function handleSubscriptionEvent(
 	return json({ received: true, recorded: true });
 }
 
+interface SubscriptionFulfillment {
+	/** For log lines. */
+	label: string;
+	issueToken(env: Env, order: FulfillmentOrder): Promise<string | null>;
+	unlockUrl(token: string): string;
+	sendWelcome(
+		message: { to: string; unlockUrl: string; orderId: string },
+		env: Env,
+	): Promise<{ sent: boolean; reason?: string }>;
+}
+
+const DROP_FULFILLMENT: SubscriptionFulfillment = {
+	label: "drop",
+	issueToken: (env, order) => issueDropToken(env, { orderId: order.orderId, customerEmail: order.customerEmail }),
+	unlockUrl: (token) => `${BUZZYFLY_CONFIG.siteUrl}/drop/unlock?token=${token}`,
+	sendWelcome: sendDropWelcomeEmail,
+};
+
+const JOBS_FULFILLMENT: SubscriptionFulfillment = {
+	label: "jobs",
+	issueToken: (env, order) => jobsTokenForOrder(env, { orderId: order.orderId, customerEmail: order.customerEmail }),
+	unlockUrl: (token) => `${BUZZYFLY_CONFIG.siteUrl}/jobs/unlock?token=${token}`,
+	sendWelcome: sendJobsWelcomeEmail,
+};
+
 /**
- * New Monthly Drop subscriber: record the order and subscription, mint a
- * stored unlock token (works without DOWNLOAD_TOKEN_SECRET) and email the
- * link to the /drop web app.
+ * New subscriber (Monthly Drop or Jobs membership): record the order and
+ * subscription, mint a stored unlock token (works without
+ * DOWNLOAD_TOKEN_SECRET) and email the unlock link.
  */
-async function fulfillDropOrder(order: FulfillmentOrder, env: Env): Promise<Response> {
+async function fulfillSubscriptionOrder(
+	order: FulfillmentOrder,
+	env: Env,
+	product: SubscriptionFulfillment,
+): Promise<Response> {
+	const { label } = product;
 	if (!env.DB) {
-		console.error(`Buzzyfly webhook: no D1 binding; cannot fulfill Monthly Drop order ${order.orderId}`);
+		console.error(`Buzzyfly webhook: no D1 binding; cannot fulfill ${label} order ${order.orderId}`);
 		return new Response("Fulfillment not configured", { status: 500 });
 	}
 
@@ -250,7 +282,7 @@ async function fulfillDropOrder(order: FulfillmentOrder, env: Env): Promise<Resp
 		.bind(order.provider, order.orderId, order.itemId, order.customerEmail, Date.now())
 		.run();
 	if (insert.meta.changes === 0) {
-		console.log(`Buzzyfly webhook: drop order ${order.orderId} already fulfilled; ignoring retry`);
+		console.log(`Buzzyfly webhook: ${label} order ${order.orderId} already fulfilled; ignoring retry`);
 		return json({ received: true, fulfilled: true, duplicate: true });
 	}
 	if (order.source) {
@@ -270,33 +302,28 @@ async function fulfillDropOrder(order: FulfillmentOrder, env: Env): Promise<Resp
 				customerEmail: order.customerEmail,
 			});
 		} catch (error) {
-			console.error(`Buzzyfly webhook: failed to record drop subscription for ${order.orderId}`, error);
+			console.error(`Buzzyfly webhook: failed to record ${label} subscription for ${order.orderId}`, error);
 		}
 	} else {
-		console.error(`Buzzyfly webhook: drop order ${order.orderId} has no subscription id`);
+		console.error(`Buzzyfly webhook: ${label} order ${order.orderId} has no subscription id`);
 	}
 
-	const token = await issueDropToken(env, { orderId: order.orderId, customerEmail: order.customerEmail }).catch(
-		(error) => {
-			console.error(`Buzzyfly webhook: failed to issue drop token for ${order.orderId}`, error);
-			return null;
-		},
-	);
+	const token = await product.issueToken(env, order).catch((error) => {
+		console.error(`Buzzyfly webhook: failed to issue ${label} token for ${order.orderId}`, error);
+		return null;
+	});
 	if (!token) {
-		console.error(`Buzzyfly webhook: DELIVERY FAILED for drop order ${order.orderId}: no unlock token`);
+		console.error(`Buzzyfly webhook: DELIVERY FAILED for ${label} order ${order.orderId}: no unlock token`);
 		return json({ received: true, fulfilled: false });
 	}
 
-	const unlockUrl = `${BUZZYFLY_CONFIG.siteUrl}/drop/unlock?token=${token}`;
-	const delivery = await sendDropWelcomeEmail(
-		{ to: order.customerEmail ?? "", unlockUrl, orderId: order.orderId },
-		env,
-	);
+	const unlockUrl = product.unlockUrl(token);
+	const delivery = await product.sendWelcome({ to: order.customerEmail ?? "", unlockUrl, orderId: order.orderId }, env);
 	if (!delivery.sent) {
 		console.error(
-			`Buzzyfly webhook: DELIVERY FAILED for drop order ${order.orderId} (${order.customerEmail ?? "no email"}): ${delivery.reason}. Unlock URL: ${unlockUrl}`,
+			`Buzzyfly webhook: DELIVERY FAILED for ${label} order ${order.orderId} (${order.customerEmail ?? "no email"}): ${delivery.reason}. Unlock URL: ${unlockUrl}`,
 		);
 	}
-	console.log(`Buzzyfly webhook: fulfilled drop order ${order.orderId} -> delivered=${delivery.sent}`);
+	console.log(`Buzzyfly webhook: fulfilled ${label} order ${order.orderId} -> delivered=${delivery.sent}`);
 	return json({ received: true, fulfilled: true, delivered: delivery.sent });
 }

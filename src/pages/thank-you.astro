@@ -3,6 +3,7 @@ import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../data/monetization";
+import { JOBS_COOKIE, isJobsItem, jobsCookieOptions, jobsTokenForOrder } from "../lib/jobsAccess";
 import { APP_ITEM_ID, appCookieName, appCookieOptions, appKeyForOrder, appKeyUrl, appPath, isAppItem } from "../lib/appAccess";
 
 export const prerender = false;
@@ -18,6 +19,7 @@ if (isStripeSession) Astro.response.headers.set("cache-control", "private, no-st
 // record it unlocks the app in this browser and shows the access link.
 let appKey: string | null = null;
 let appItemId = APP_ITEM_ID;
+let jobsToken: string | null = null;
 const env = Astro.locals.runtime?.env;
 if (isStripeSession && env?.DB) {
 	try {
@@ -26,7 +28,9 @@ if (isStripeSession && env?.DB) {
 		)
 			.bind(sessionId)
 			.first<{ item_id: string; customer_email: string | null }>();
-		if (row && isAppItem(row.item_id)) {
+		if (row && isJobsItem(row.item_id)) {
+			jobsToken = await jobsTokenForOrder(env, { orderId: sessionId, customerEmail: row.customer_email });
+		} else if (row && isAppItem(row.item_id)) {
 			appItemId = row.item_id;
 			appKey = await appKeyForOrder(env, { orderId: sessionId, itemId: row.item_id, customerEmail: row.customer_email });
 		}
@@ -34,6 +38,8 @@ if (isStripeSession && env?.DB) {
 		console.error("Buzzyfly thank-you: order lookup failed", error);
 	}
 }
+if (jobsToken) Astro.cookies.set(JOBS_COOKIE, jobsToken, jobsCookieOptions(Astro.url));
+const jobsAccessUrl = jobsToken ? `${BUZZYFLY_CONFIG.siteUrl}/jobs/unlock?token=${jobsToken}` : null;
 if (appKey) Astro.cookies.set(appCookieName(appItemId), appKey, appCookieOptions(Astro.url));
 const accessUrl = appKey ? appKeyUrl(appKey, appItemId) : null;
 const appTitle = ALL_PRODUCTS.find((p) => p.id === appItemId)?.title ?? "your app";
@@ -41,7 +47,7 @@ const appTitle = ALL_PRODUCTS.find((p) => p.id === appItemId)?.title ?? "your ap
 // Stripe can redirect here a few seconds before its webhook lands. Reload a
 // few times while we wait, then fall back to the support line.
 const attempt = Math.min(Number(Astro.url.searchParams.get("t")) || 0, 20);
-const waiting = isStripeSession && !appKey && attempt < 12;
+const waiting = isStripeSession && !appKey && !jobsToken && attempt < 12;
 const retryUrl = waiting ? `/thank-you?s=${encodeURIComponent(sessionId)}&t=${attempt + 1}` : null;
 ---
 <!doctype html>
@@ -58,7 +64,18 @@ const retryUrl = waiting ? `/thank-you?s=${encodeURIComponent(sessionId)}&t=${at
 		<Header />
 		<main>
 			<section class="ty-hero">
-				{accessUrl ? (
+				{jobsAccessUrl ? (
+					<>
+						<div class="ty-check">✓</div>
+						<h1>Your jobs membership is active.</h1>
+						<p class="ty-lede">Every listing on the jobs board is unlocked in this browser.</p>
+						<p><a class="btn btn--primary" href="/jobs">Open the jobs board</a></p>
+						<div class="ty-key">
+							<strong>Save your access link.</strong> Open it once on each phone or computer you want to use.
+							<br /><code>{jobsAccessUrl}</code>
+						</div>
+					</>
+				) : accessUrl ? (
 					<>
 						<div class="ty-check">✓</div>
 						<h1>Your app is ready.</h1>
