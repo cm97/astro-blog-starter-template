@@ -60,11 +60,11 @@ const ENV_FROM = "Buzzyfly <orders@buzzyfly.com>"; // wrangler.json vars.EMAIL_F
 
 // --- Delivery ---------------------------------------------------------------
 
-test("delivery email sends from an allowed address with link and expiry", async () => {
+test("Apps Pro delivery email sends an access link from an allowed address, never a zip or workbook", async () => {
 	const EMAIL = mockEmail();
-	const url = "https://buzzyfly.com/api/download?token=abc.def";
+	const url = "https://buzzyfly.com/apps/unlock?token=abc.def";
 	const result = await sendDeliveryEmail(
-		{ to: "buyer@example.com", downloadUrl: url, productName: "Buzzyfly Workbook", orderId: "cs_test_1", itemId: "legacy-workbook" },
+		{ to: "buyer@example.com", downloadUrl: url, productName: "Buzzyfly Apps Pro", orderId: "cs_test_1", itemId: "apps-pro" },
 		{ EMAIL, EMAIL_FROM: ENV_FROM },
 	);
 	assert.deepEqual(result, { sent: true });
@@ -72,10 +72,11 @@ test("delivery email sends from an allowed address with link and expiry", async 
 	const msg = EMAIL.sent[0];
 	assert.ok(ALLOWED_SENDERS.includes(addressOf(msg.from)), msg.from);
 	assert.equal(msg.to, "buyer@example.com");
-	assert.equal(msg.subject, "Your Buzzyfly Workbook download");
+	assert.equal(msg.subject, "Your Buzzyfly Apps Pro access link");
 	assertValidHtml(msg.html!);
 	assert.ok(msg.html!.includes(`href="${url}"`));
-	assert.match(msg.html!, /expires in 3 days/);
+	assert.match(msg.html!, /Open the app/);
+	assert.doesNotMatch(msg.html! + msg.text!, /unzip|workbook|Excel|expires in 3 days/i);
 	assert.doesNotMatch(msg.html!, /buzzyfly\.comhttps?:/);
 	assert.ok(msg.text!.includes(url));
 	assert.doesNotMatch(msg.text!, /</);

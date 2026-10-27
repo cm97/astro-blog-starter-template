@@ -7,7 +7,7 @@ category: 'sales'
 heroImage: '/blog-placeholder-2.jpg'
 featuredProductTitle: 'Buzzyfly Digital System'
 featuredProductPrice: '$49'
-featuredProductDescription: 'Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. Includes the same-day start line after the first yes.'
+featuredProductDescription: 'A browser web app that shows who to follow up with today, writes the email, and runs onboarding and your Monday reset. No download. Includes the same-day start line after the first yes.'
 ---
 
 You do not need a brand, a following, or a funnel to get paid. You need one person with the problem, one short message, and a same-day start line the hour they say yes. If the first week after they pay is rebuilt from memory, they go quiet and you are back at zero.

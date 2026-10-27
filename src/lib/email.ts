@@ -1,5 +1,4 @@
 import { BUZZYFLY_CONFIG, ALL_PRODUCTS, UPSELL_MAP, absoluteBuyUrl } from "../data/monetization";
-import { isAppItem } from "./appAccess";
 
 /**
  * Transactional email for order fulfillment via the Cloudflare Email Service
@@ -40,7 +39,6 @@ export function escapeHtml(value: string): string {
 }
 
 function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string {
-	const isApp = isAppItem(itemId);
 	const upsellId = itemId ? UPSELL_MAP[itemId] : null;
 	const upsellProduct = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) : null;
 
@@ -62,7 +60,7 @@ function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string
 	return `<!doctype html>
 <html>
   <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#16191c;max-width:520px;margin:0 auto;padding:24px">
-    ${isApp ? `<h1 style="font-size:20px;margin:0 0 16px">Your app is ready</h1>
+    <h1 style="font-size:20px;margin:0 0 16px">Your app is ready</h1>
     <p style="margin:0 0 16px">Thanks for buying <strong>${escapeHtml(productName)}</strong>.</p>
     <p style="margin:0 0 24px">
       <a href="${downloadUrl}" style="display:inline-block;background:#1f4d3a;color:#fff;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:600">Open the app</a>
@@ -70,19 +68,7 @@ function renderHtml({ downloadUrl, productName, itemId }: DeliveryEmail): string
     <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
       This is your personal access link. Keep this email. Open the link once on each
       phone or computer you want to use. Nothing to download or install.
-    </p>` : `<h1 style="font-size:20px;margin:0 0 16px">Your download is ready</h1>
-    <p style="margin:0 0 16px">Thanks for buying <strong>${escapeHtml(productName)}</strong>.</p>
-    <p style="margin:0 0 24px">
-      <a href="${downloadUrl}" style="display:inline-block;background:#1f4d3a;color:#fff;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:600">Download ${escapeHtml(productName)}</a>
     </p>
-    <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
-      This link expires in 3 days. If it lapses before you grab the file, reply to this
-      email and you'll get a fresh one.
-    </p>
-    <p style="margin:0 0 16px;font-size:14px">
-      <strong>To get started:</strong> unzip the download and double-click the workbook.
-      It opens in Excel, or upload it to Google Sheets. Start on the Start Here tab.
-    </p>`}
     ${upsellBlock}
     <p style="margin:24px 0 0;color:#6b6a64;font-size:14px">— ${escapeHtml(BUZZYFLY_CONFIG.brandName)}</p>
   </body>
@@ -93,25 +79,14 @@ function renderText({ downloadUrl, productName, itemId }: DeliveryEmail): string
 	const upsellId = itemId ? UPSELL_MAP[itemId] : null;
 	const upsellProduct = upsellId ? ALL_PRODUCTS.find((p) => p.id === upsellId) : null;
 
-	const lines = isAppItem(itemId)
-		? [
-				`Thanks for buying ${productName}.`,
-				"",
-				"Open the app:",
-				downloadUrl,
-				"",
-				"This is your personal access link. Keep this email. Open the link once on each phone or computer you want to use. Nothing to download or install.",
-			]
-		: [
-				`Thanks for buying ${productName}.`,
-				"",
-				"Your download link:",
-				downloadUrl,
-				"",
-				"This link expires in 3 days. If it lapses before you grab the file, reply to this email and you'll get a fresh one.",
-				"",
-				"To get started: unzip the download and double-click the workbook. It opens in Excel, or upload it to Google Sheets. Start on the Start Here tab.",
-			];
+	const lines = [
+		`Thanks for buying ${productName}.`,
+		"",
+		"Open the app:",
+		downloadUrl,
+		"",
+		"This is your personal access link. Keep this email. Open the link once on each phone or computer you want to use. Nothing to download or install.",
+	];
 
 	if (upsellProduct) {
 		lines.push(
@@ -253,9 +228,7 @@ export async function sendDeliveryEmail(
 		await env.EMAIL.send({
 			from: resolveFrom(env),
 			to: message.to,
-			subject: isAppItem(message.itemId)
-				? `Your ${message.productName} access link`
-				: `Your ${message.productName} download`,
+			subject: `Your ${message.productName} access link`,
 			html: renderHtml(message),
 			text: renderText(message),
 		});
@@ -275,7 +248,7 @@ export interface DropWelcomeEmail {
 /**
  * Welcome email for a new Monthly Drop subscriber. Unlike the download email,
  * the link opens the web app at /drop and keeps working while the
- * subscription is active, so there is no expiry warning and nothing to unzip.
+ * subscription is active, so there is no expiry warning.
  */
 export async function sendDropWelcomeEmail(
 	message: DropWelcomeEmail,

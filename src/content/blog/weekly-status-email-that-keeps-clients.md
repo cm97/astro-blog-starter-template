@@ -6,7 +6,7 @@ pubDate: Oct 22 2026
 updatedDate: Oct 23 2026
 featuredProductTitle: Buzzyfly Digital System
 featuredProductPrice: $49
-featuredProductDescription: Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.
+featuredProductDescription: A browser web app that shows who to follow up with today, writes the email, and runs onboarding and your Monday reset. No download.
 ---
 
 A retainer starts strong. Then week three hits and you have not sent an update. The client assumes the work is stuck or, worse, that you forgot them. They go quiet. You spend Thursday night drafting a novel to re-engage. That draft dies in drafts. Next week the same thing happens.

@@ -7,7 +7,7 @@ category: 'sales'
 heroImage: '/blog-placeholder-2.jpg'
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "A browser web app that shows who to follow up with today, writes the email, and runs onboarding and your Monday reset. No download."
 ---
 
 You spent four hours on a proposal. Twelve pages. Brand colors. A cover letter. They read the first paragraph and replied: "Can you just send a price?"

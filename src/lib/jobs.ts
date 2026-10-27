@@ -43,6 +43,31 @@ function isWebUrl(value: unknown): value is string {
 	}
 }
 
+// Remotive sends some text HTML-encoded ("R&amp;D", "Manager &#8211; EMEA"). The page escapes
+// text itself, so undecoded entities showed up literally. Decode once, here, as plain text.
+const NAMED_ENTITIES: Record<string, string> = { amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " " };
+function decodeEntities(value: string | undefined): string | undefined {
+	if (!value) return value;
+	return value.replace(/&(#x[0-9a-f]+|#\d+|[a-z]+);/gi, (match, code: string) => {
+		if (code[0] !== "#") return NAMED_ENTITIES[code.toLowerCase()] ?? match;
+		const point = code[1] === "x" || code[1] === "X" ? parseInt(code.slice(2), 16) : parseInt(code.slice(1), 10);
+		return point > 0 && point <= 0x10ffff ? String.fromCodePoint(point) : match;
+	});
+}
+
+/** Plain-text fields only, so cached rows written before decoding existed are fixed too. */
+function cleanJob(job: RemotiveJob): RemotiveJob {
+	return {
+		...job,
+		title: decodeEntities(job.title)!,
+		company_name: decodeEntities(job.company_name)!,
+		candidate_required_location: decodeEntities(job.candidate_required_location),
+		salary: decodeEntities(job.salary),
+		category: decodeEntities(job.category),
+		tags: job.tags?.map((tag) => decodeEntities(tag)!),
+	};
+}
+
 async function fetchFromRemotive(): Promise<RemotiveJob[] | null> {
 	if (Date.now() - lastFailureAt < RETRY_AFTER_FAILURE_MS) return null;
 	try {
@@ -63,7 +88,8 @@ async function fetchFromRemotive(): Promise<RemotiveJob[] | null> {
 				category: job.category,
 				tags: Array.isArray(job.tags) ? job.tags.slice(0, 8) : undefined,
 				publication_date: job.publication_date,
-			}));
+			}))
+			.map(cleanJob);
 	} catch (error) {
 		lastFailureAt = Date.now();
 		console.error("Buzzyfly jobs: failed to fetch from Remotive", error);
@@ -85,7 +111,7 @@ export async function getJobsFeed(env: Env): Promise<JobsFeed> {
 			.first<{ value: string; updated_at: number }>();
 		if (row) {
 			const stored = JSON.parse(row.value) as RemotiveJob[];
-			cached = { jobs: stored.filter((job) => isWebUrl(job.url)), fetchedAt: row.updated_at };
+			cached = { jobs: stored.filter((job) => isWebUrl(job.url)).map(cleanJob), fetchedAt: row.updated_at };
 		}
 	} catch (error) {
 		console.error("Buzzyfly jobs: failed to read cached jobs from D1", error);

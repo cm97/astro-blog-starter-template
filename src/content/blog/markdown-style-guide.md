@@ -6,7 +6,7 @@ pubDate: "Jul 28 2026"
 heroImage: "/blog-placeholder-4.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "A browser web app that shows who to follow up with today, writes the email, and runs onboarding and your Monday reset. No download."
 ---
 
 If you've bought a business template before — a Notion dashboard, a spreadsheet, a swipe file — you already know the pattern. You get excited, you spend an hour customizing it, and then it sits there. Not because the template was bad. Because a template is a starting point, not a system, and nobody ever tells you that on the sales page.

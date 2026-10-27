@@ -5,7 +5,7 @@ category: systems
 pubDate: Oct 23 2026
 featuredProductTitle: Buzzyfly Digital System
 featuredProductPrice: $49
-featuredProductDescription: Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. Includes the retention sequence and cancel reply.
+featuredProductDescription: A browser web app that shows who to follow up with today, writes the email, and runs onboarding and your Monday reset. No download. Includes the retention sequence and cancel reply.
 ---
 
 A retainer client emails on a random Tuesday: "I think we should pause for a bit."

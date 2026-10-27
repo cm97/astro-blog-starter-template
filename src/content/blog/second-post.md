@@ -7,7 +7,7 @@ updatedDate: "Oct 08 2026"
 heroImage: "/blog-placeholder-2.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "A browser web app that shows who to follow up with today, writes the email, and runs onboarding and your Monday reset. No download."
 ---
 
 None of these show up as one bad day. They show up as money you cannot point at: a new client who goes quiet in week two, a proposal that never gets a day-6 note, a Monday plan that is dead by Thursday. You are the system. When you get slammed, the system stops.

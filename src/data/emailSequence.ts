@@ -116,10 +116,10 @@ That's the outline. Turning it into emails you can actually send takes a few eve
 
 If you enjoy that work, do it. The outlines in these emails are yours to keep.
 
-If you'd rather open one workbook and run it tonight, that's what the Digital System is. Every piece, already written: {store}`,
+If you'd rather open one web app and run it tonight, that's what the Digital System is. Every piece, already written: {store}`,
 	},
 	{
-		subject: "What if it doesn't work for you?",
+		subject: "How to judge it before you buy",
 		preview: "The honest answer, plus a script you can use today.",
 		body: `Hi,
 

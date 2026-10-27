@@ -6,7 +6,7 @@ heroImage: "/blog-placeholder-1.jpg"
 category: "systems"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-up workflows as checklists you run in 20 minutes — so the process still exists on the weeks you're slammed."
+featuredProductDescription: "A browser web app that shows who to follow up with today, writes the email, and runs onboarding and your Monday reset. No download."
 ---
 
 If you've been coaching for more than a year, you've probably noticed that the client work isn't what makes the business hard.
