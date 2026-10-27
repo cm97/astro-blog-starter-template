@@ -362,9 +362,9 @@ export async function sendJobsWelcomeEmail(
 <html>
   <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#16191c;max-width:520px;margin:0 auto;padding:24px">
     <h1 style="font-size:20px;margin:0 0 16px">Your Buzzyfly Jobs membership is active</h1>
-    <p style="margin:0 0 16px">Thanks for joining. The full remote jobs board is open in the browser you paid in.</p>
+    <p style="margin:0 0 16px">Thanks for joining. Every listing on Buzzyfly Jobs is open in the browser you paid in.</p>
     <p style="margin:0 0 24px">
-      <a href="${message.unlockUrl}" style="display:inline-block;background:#2337ff;color:#fff;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:600">Open the jobs board</a>
+      <a href="${message.unlockUrl}" style="display:inline-block;background:#2337ff;color:#fff;text-decoration:none;padding:12px 24px;border-radius:4px;font-weight:600">Open Buzzyfly Jobs</a>
     </p>
     <p style="margin:0 0 16px;font-size:14px">
       Open this link once on each phone or computer you want to use. Keep this email. The link is your key.
@@ -378,9 +378,9 @@ export async function sendJobsWelcomeEmail(
 	const text = [
 		"Your Buzzyfly Jobs membership is active.",
 		"",
-		"Thanks for joining. The full remote jobs board is open in the browser you paid in.",
+		"Thanks for joining. Every listing on Buzzyfly Jobs is open in the browser you paid in.",
 		"",
-		"Open the jobs board on any other device:",
+		"Open Buzzyfly Jobs on any other device:",
 		message.unlockUrl,
 		"",
 		"Open this link once on each phone or computer you want to use. Keep this email. The link is your key.",
