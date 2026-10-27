@@ -23,7 +23,7 @@ export const prerender = true;
 		</section>
 		<section id="play" class="cabinet">
 			<div class="stage">
-				<canvas id="buzzy-kids" width="960" height="540"></canvas>
+				<canvas id="buzzy-kids" width="960" height="540" tabindex="-1" aria-label="Buzzy Lands game"></canvas>
 				<div id="kids-overlay" class="overlay">
 					<img src="/buzzy-lands/buzzy-face.jpg" width="88" height="88" alt="" class="face" />
 					<p class="overlay-kicker">Retro platform</p>
@@ -35,12 +35,13 @@ export const prerender = true;
 			<div class="hud-hint">
 				<p><strong>Phone:</strong> on-screen Left · Jump · Right</p>
 				<p><strong>Keys:</strong> A D or arrows + Space / Up</p>
+				<p><strong>Pause:</strong> ❚❚ button, Esc or P</p>
 			</div>
 		</section>
 		<p class="parents">More to learn: <a href="/kids">Buzzyfly Kids</a>. Grown-ups: shop is on the <a href="/">main site</a>.</p>
 	</main>
 	<Footer />
-	<script src="/buzzy-lands/nectar-rush.js?v=plat1" defer></script>
+	<script src="/buzzy-lands/nectar-rush.js?v=plat2" defer></script>
 </body>
 </html>
 <style>
