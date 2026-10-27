@@ -54,7 +54,7 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={`Buzzyfly Jobs | ${SITE_TITLE}`} description="Buzzyfly Jobs: remote job openings in one place, sourced from Remotive." />
+    <BaseHead title={`Buzzyfly Jobs | ${SITE_TITLE}`} description="Buzzyfly Jobs: remote job openings in one place, refreshed a few times a day." />
     <style>
       .job-container {
         width: auto;
@@ -208,6 +208,17 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
         border-radius: 999px;
         margin-right: 0.4rem;
       }
+      .job-title a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .job-title a:hover {
+        color: var(--accent);
+      }
+      .job-title a:focus-visible {
+        outline: 3px solid var(--accent-dark);
+        outline-offset: 2px;
+      }
       .job-title {
         font-size: 1.25rem;
         font-weight: 700;
@@ -330,7 +341,7 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
         {isMember && <span class="member-badge">Member: every listing unlocked</span>}
         <h1 style="font-size: 2rem; margin: 0 0 0.5rem 0;">Buzzyfly Jobs</h1>
         <p style="color: #64748b; margin: 0 0 1.5rem 0;">
-          Remote job openings in one place, sourced from <a href="https://remotive.com" target="_blank" rel="noopener">Remotive</a>. The list refreshes a few times a day.
+          Remote job openings in one place. The list refreshes a few times a day.
         </p>
       </div>
 
@@ -397,15 +408,15 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
                         </span>
                       )}
                     </div>
-                    <h2 class="job-title">{job.title}</h2>
+                    <h2 class="job-title"><a href={`/jobs/${job.id}`}>{job.title}</a></h2>
                     <div class="job-tags">
                       <span class="tag-item">📍 {job.candidate_required_location || 'Remote'}</span>
                       <span class="tag-item">💼 {formatJobType(job.job_type)}</span>
                       {job.category && <span class="tag-item">🗂 {job.category}</span>}
                       {job.salary && <span class="tag-item">💰 {job.salary}</span>}
                     </div>
-                    <a href={job.url} target="_blank" rel="noopener noreferrer" class="apply-btn" aria-label={`View ${job.title} at ${job.company_name} on Remotive (opens in a new tab)`}>
-                      View on Remotive →
+                    <a href={`/jobs/${job.id}`} class="apply-btn" aria-label={`View ${job.title} at ${job.company_name}`}>
+                      View job →
                     </a>
                   </article>
                 );
@@ -436,8 +447,8 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
         <aside class="sidebar-panel">
           <h2>About these listings</h2>
           <ul style="padding-left: 1.2rem; color: #475569; font-size: 0.9rem; line-height: 1.6;">
-            <li><strong>Source:</strong> Jobs come from <a href="https://remotive.com" target="_blank" rel="noopener">Remotive</a>'s public job board. Buzzyfly doesn't screen or verify employers.</li>
-            <li><strong>Applying:</strong> Each link opens the listing on Remotive, where you'll find how to apply.</li>
+            <li><strong>Fresh list:</strong> New remote jobs are added a few times a day. Buzzyfly doesn't screen or verify employers.</li>
+            <li><strong>Applying:</strong> Open a job to read the full listing, then tap Apply.</li>
             <li><strong>Stay safe:</strong> Never pay a fee to apply or share bank details before a real offer. If a listing looks off, skip it.</li>
           </ul>
           <div class="side-cta">

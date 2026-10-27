@@ -1,0 +1,222 @@
+---
+export const prerender = false;
+
+import BaseHead from '../../components/BaseHead.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { SITE_TITLE } from '../../consts';
+import { getJob } from '../../lib/jobs';
+import { FREE_JOBS_PREVIEW, JOBS_COOKIE, checkJobsAccess, getJobsOffer } from '../../lib/jobsAccess';
+
+const env = Astro.locals.runtime.env;
+const id = /^\d{1,12}$/.test(Astro.params.id ?? '') ? Number(Astro.params.id) : null;
+const found = id === null ? null : await getJob(env, id);
+const job = found?.job ?? null;
+
+// Same rule as the list: with the paywall on, only the first few listings are open to visitors.
+const offer = getJobsOffer(env);
+let isMember = false;
+if (offer && found && found.index >= FREE_JOBS_PREVIEW) {
+  const token = Astro.cookies.get(JOBS_COOKIE)?.value;
+  isMember = token ? (await checkJobsAccess(env, token)).ok : false;
+}
+const locked = !!offer && !!found && found.index >= FREE_JOBS_PREVIEW && !isMember;
+
+// A job drops out of the feed once it closes, so an old link gets a "closed" page, not a dead end.
+if (!job) Astro.response.status = 404;
+Astro.response.headers.set('Cache-Control', offer ? 'private, max-age=60' : 'public, max-age=300');
+Astro.response.headers.set('X-Frame-Options', 'DENY');
+Astro.response.headers.set('X-Content-Type-Options', 'nosniff');
+Astro.response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+const formatJobType = (type?: string) =>
+  type ? type.replace(/_/g, '-').replace(/^./, (c) => c.toUpperCase()) : 'Not specified';
+const posted = job?.publication_date ? Date.parse(job.publication_date) : NaN;
+const postedLabel = Number.isFinite(posted)
+  ? new Date(posted).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+  : null;
+const paragraphs = (job?.description ?? '').split(/\n{2,}/).map((p) => p.trim()).filter(Boolean);
+const pageTitle = job ? `${job.title} at ${job.company_name} | Buzzyfly Jobs` : `Job closed | Buzzyfly Jobs`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={`${pageTitle} | ${SITE_TITLE}`}
+      description={job ? `${job.title} at ${job.company_name}. ${job.candidate_required_location || 'Remote'}. On Buzzyfly Jobs.` : 'This job has closed. See the open jobs on Buzzyfly Jobs.'}
+    />
+    {/* The listings also appear on the source board, so these pages stay out of search results. */}
+    <meta name="robots" content="noindex, follow" />
+    <style>
+      .job-page {
+        width: auto;
+        max-width: 760px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .back-link:focus-visible,
+      .apply-btn:focus-visible {
+        outline: 3px solid var(--accent-dark);
+        outline-offset: 2px;
+      }
+      .company-name {
+        font-weight: 600;
+        color: #1e293b;
+        margin: 0.75rem 0 0.25rem 0;
+      }
+      h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+        margin: 0 0 0.75rem 0;
+        color: #0f172a;
+        overflow-wrap: anywhere;
+      }
+      .job-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.25rem;
+        font-size: 0.85rem;
+        color: #475569;
+      }
+      .tag-item {
+        background: #f1f5f9;
+        padding: 0.2rem 0.6rem;
+        border-radius: 4px;
+      }
+      .apply-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        box-sizing: border-box;
+        background: var(--accent);
+        color: #fff;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .apply-btn:hover {
+        background: var(--accent-dark);
+        color: #fff;
+      }
+      .apply-box {
+        border: 1px solid #e2e8f0;
+        background: #f8fafc;
+        border-radius: 10px;
+        padding: 1.25rem;
+        margin: 1.5rem 0;
+      }
+      .apply-box p {
+        margin: 0.75rem 0 0 0;
+        color: #64748b;
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+      .description {
+        color: #1e293b;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+      }
+      .description p {
+        margin: 0 0 1rem 0;
+        white-space: pre-line;
+      }
+      .paywall {
+        border: 2px solid var(--accent);
+        border-radius: 12px;
+        padding: 1.5rem;
+        margin: 1.5rem 0;
+        background: linear-gradient(180deg, #f5f6ff, #fff);
+        text-align: center;
+      }
+      .paywall h2 {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.4rem;
+      }
+      .fine {
+        color: #64748b;
+        font-size: 0.85rem;
+        line-height: 1.6;
+        margin: 0.9rem 0 0 0;
+      }
+      .credit {
+        color: #94a3b8;
+        font-size: 0.8rem;
+        margin: 2rem 0 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main class="job-page">
+      <a class="back-link" href="/jobs">← All Buzzyfly Jobs</a>
+
+      {!job ? (
+        <>
+          <h1>This job has closed</h1>
+          <p class="description">The employer has stopped taking applications, or the listing was removed. New jobs are added a few times a day.</p>
+          <a class="apply-btn" href="/jobs">See open jobs on Buzzyfly Jobs</a>
+        </>
+      ) : (
+        <article>
+          <p class="company-name">{job.company_name}</p>
+          <h1>{job.title}</h1>
+          <div class="job-tags">
+            <span class="tag-item">📍 {job.candidate_required_location || 'Remote'}</span>
+            <span class="tag-item">💼 {formatJobType(job.job_type)}</span>
+            {job.category && <span class="tag-item">🗂 {job.category}</span>}
+            {job.salary && <span class="tag-item">💰 {job.salary}</span>}
+            {postedLabel && <span class="tag-item">🗓 Posted {postedLabel}</span>}
+          </div>
+
+          {locked && offer ? (
+            <section class="paywall" aria-labelledby="paywall-heading">
+              <h2 id="paywall-heading">This job is for Buzzyfly Jobs members</h2>
+              <p style="color: #475569; margin: 0 0 1rem 0;">Join to read the full listing, apply, and see every job on Buzzyfly Jobs.</p>
+              <a class="apply-btn" href={offer.url}>Join for {offer.price}</a>
+              <p class="fine">
+                Billed monthly. Cancel anytime by emailing support@buzzyfly.com.<br />
+                30-day refund if you can't access the app or it isn't as described.<br />
+                Already a member? Open the link in your welcome email.
+              </p>
+            </section>
+          ) : (
+            <>
+              <div class="apply-box">
+                <a class="apply-btn" href={job.url} target="_blank" rel="noopener noreferrer">Apply for this job →</a>
+                <p>The application opens in a new tab. Never pay a fee to apply or share bank details before a real offer.</p>
+              </div>
+
+              {paragraphs.length > 0 ? (
+                <div class="description">
+                  {paragraphs.map((p) => <p>{p}</p>)}
+                </div>
+              ) : (
+                <p class="description">The full description is on the application page.</p>
+              )}
+
+              {paragraphs.length > 0 && (
+                <div class="apply-box">
+                  <a class="apply-btn" href={job.url} target="_blank" rel="noopener noreferrer">Apply for this job →</a>
+                </div>
+              )}
+              <p class="credit">Listing via Remotive. Buzzyfly doesn't screen or verify employers.</p>
+            </>
+          )}
+        </article>
+      )}
+    </main>
+    <Footer />
+  </body>
+</html>
