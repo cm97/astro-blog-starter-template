@@ -54,7 +54,7 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={`Remote Jobs | ${SITE_TITLE}`} description="Browse remote job openings, sourced from Remotive." />
+    <BaseHead title={`Buzzyfly Jobs | ${SITE_TITLE}`} description="Buzzyfly Jobs: remote job openings in one place, sourced from Remotive." />
     <style>
       .job-container {
         width: auto;
@@ -328,9 +328,9 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
           </div>
         )}
         {isMember && <span class="member-badge">Member: every listing unlocked</span>}
-        <h1 style="font-size: 2rem; margin: 0 0 0.5rem 0;">Remote Jobs</h1>
+        <h1 style="font-size: 2rem; margin: 0 0 0.5rem 0;">Buzzyfly Jobs</h1>
         <p style="color: #64748b; margin: 0 0 1.5rem 0;">
-          Recent remote job openings, sourced from <a href="https://remotive.com" target="_blank" rel="noopener">Remotive</a>. The list refreshes a few times a day.
+          Remote job openings in one place, sourced from <a href="https://remotive.com" target="_blank" rel="noopener">Remotive</a>. The list refreshes a few times a day.
         </p>
       </div>
 
@@ -416,7 +416,7 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
 
           {locked && lockedCount > 0 && offer && (
             <section class="paywall" aria-labelledby="paywall-heading">
-              <h2 id="paywall-heading">{lockedCount} more remote jobs are waiting</h2>
+              <h2 id="paywall-heading">{lockedCount} more jobs on Buzzyfly Jobs</h2>
               <p style="color: #475569; margin: 0 0 1rem 0;">Join to see every listing on one page.</p>
               <ul>
                 <li>Every listing, refreshed a few times a day</li>
