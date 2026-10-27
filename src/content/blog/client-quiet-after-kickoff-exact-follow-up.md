@@ -2,6 +2,7 @@
 title: "Client Went Quiet After Kickoff? Send This Exact Follow-Up"
 description: "Paste-ready day-3 and day-7 emails for when a new client stops replying after the kickoff so the project does not stall and the next deliverable still has a date."
 pubDate: 2026-10-26
+updatedDate: 2026-10-27
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -63,6 +64,51 @@ Write the new date on the same card the same day. Do not leave it in the thread.
 
 > Got it. New date is [date]. Day-3 and day-7 follow-ups reset to that. Original scope stays the same.
 
+## Multi-client scan (when more than one is quiet after kickoff)
+
+Do this inside the same 20-minute Monday reset, not as a separate task.
+
+1. Open the list of clients who finished kickoff in the last 14 days.
+2. Write one line per quiet client: kickoff date + the exact item still needed (files, access, decision).
+3. Rank by cash at risk (largest remaining fee or unpaid next invoice first).
+4. Cap the day at two day-3 or day-7 sends. The rest wait until Wednesday or next Monday.
+5. Log every send on the same card so Thursday cannot invent a different version.
+
+Fill-in for the scan:
+
+```
+Quiet after kickoff this Monday:
+1) ________ — kickoff ________ — need ________ — send day 3/7 on ________
+2) ________ — kickoff ________ — need ________ — send day 3/7 on ________
+Cash-at-risk order: ________
+Sends today (max 2): ________
+```
+
+If the scan takes more than four minutes you are rewriting history. Use the dates already on the calendar.
+
+## Pause recovery (when they come back after day 7)
+
+They reply weeks later. Do not restart the whole project from memory.
+
+1. Open the original log row.
+2. Restate the last agreed first deliverable and the date that was on the table.
+3. Send one line:
+
+> Good to hear from you. Last open item was [specific files / access]. Still the right next piece, or has the priority shifted? Reply with a date and I will lock it.
+
+4. Put the new date on the weekly reset card the same day.
+5. If scope has drifted, do not absorb it in the reply. Park it: “Got the new ask. I will check what we locked and come back with two options.”
+
+Recovery fill-in:
+
+```
+Client: ________
+Original need: ________
+New date or shift: ________
+Scope still same? yes / park for quote
+Next reset row: ________
+```
+
 ## Extra steps that stop the stall
 
 - Log the kickoff date and the promised file list in the same place you log the first deliverable. If the file list is only in the Zoom chat, it vanishes.
@@ -72,6 +118,7 @@ Write the new date on the same card the same day. Do not leave it in the thread.
 - On the next Monday reset, scan for any paused rows older than 14 days. One line: “Still paused or close?" Send or archive.
 - Never send a third novel. The two lines above are the whole set. A third email is how you start negotiating with yourself.
 - If they reply with the files on day 4, still log the original date and the actual arrival date. The gap is the data for the next client.
+- Cap recovery replies at one. A second novel reopens the silence.
 
 ## What still breaks if this only lives in your head
 
