@@ -7,7 +7,7 @@ category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "A browser web app that shows who to follow up with today, writes the email, and runs onboarding and your Monday reset. No download."
 ---
 
 A new client just paid. Your stomach drops because you know what comes next: digging through old emails for the welcome note, inventing an intake form on the spot, and hoping you remember to send the kickoff agenda before Thursday.

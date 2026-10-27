@@ -6,7 +6,7 @@ pubDate: "Jun 02 2026"
 heroImage: "/blog-placeholder-1.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you're slammed."
+featuredProductDescription: "A browser web app that shows who to follow up with today, writes the email, and runs onboarding and your Monday reset. No download."
 ---
 
 Most business advice sounds the same after a while: get organized, be consistent, follow up faster. All true, and all pretty useless without something to hold that advice in place once the week actually gets busy.

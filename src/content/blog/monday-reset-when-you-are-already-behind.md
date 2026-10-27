@@ -6,7 +6,7 @@ updatedDate: 2026-10-21
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "A browser web app that shows who to follow up with today, writes the email, and runs onboarding and your Monday reset. No download."
 ---
 
 Monday is not the problem. The first hour is.

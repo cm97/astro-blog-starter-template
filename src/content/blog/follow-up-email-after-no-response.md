@@ -8,7 +8,7 @@ category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "A browser web app that shows who to follow up with today, writes the email, and runs onboarding and your Monday reset. No download."
 ---
 
 You sent the proposal. Or you finished the project. Or you had a great call and said you'd follow up. And then: nothing.
