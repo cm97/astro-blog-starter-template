@@ -34,7 +34,7 @@ Astro.response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
 const updatedLabel = fetchedAt
   ? new Date(fetchedAt).toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short', timeZone: 'UTC' }) + ' UTC'
   : null;
-// Older than a day means Remotive has been unreachable for a while; don't show it as fresh.
+// Older than a day means Himalayas has been unreachable for a while; don't show it as fresh.
 const isStale = fetchedAt ? Date.now() - fetchedAt > 24 * 60 * 60 * 1000 : false;
 const searchText = (job: (typeof jobs)[number]) =>
   [job.title, job.company_name, job.category, ...(job.tags ?? [])].filter(Boolean).join(' ').toLowerCase();
@@ -54,7 +54,7 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
 <!doctype html>
 <html lang="en">
   <head>
-    <BaseHead title={`Buzzyfly Jobs | ${SITE_TITLE}`} description="Buzzyfly Jobs: remote job openings in one place, refreshed a few times a day." />
+    <BaseHead title={`Buzzyfly Jobs | ${SITE_TITLE}`} description="Buzzyfly Jobs: remote job openings in one place, refreshed every day." />
     <style>
       .job-container {
         width: auto;
@@ -341,7 +341,7 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
         {isMember && <span class="member-badge">Member: every listing unlocked</span>}
         <h1 style="font-size: 2rem; margin: 0 0 0.5rem 0;">Buzzyfly Jobs</h1>
         <p style="color: #64748b; margin: 0 0 1.5rem 0;">
-          Remote job openings in one place. The list refreshes a few times a day.
+          Remote job openings in one place. The list refreshes every day.
         </p>
       </div>
 
@@ -430,7 +430,7 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
               <h2 id="paywall-heading">{lockedCount} more jobs on Buzzyfly Jobs</h2>
               <p style="color: #475569; margin: 0 0 1rem 0;">Join to see every listing on one page.</p>
               <ul>
-                <li>Every listing, refreshed a few times a day</li>
+                <li>Every listing, refreshed every day</li>
                 <li>Search and filter the full list by skill, category, job type and location</li>
                 <li>A "New" tag on jobs posted since your last visit</li>
               </ul>
@@ -447,7 +447,7 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
         <aside class="sidebar-panel">
           <h2>About these listings</h2>
           <ul style="padding-left: 1.2rem; color: #475569; font-size: 0.9rem; line-height: 1.6;">
-            <li><strong>Fresh list:</strong> New remote jobs are added a few times a day. Buzzyfly doesn't screen or verify employers.</li>
+            <li><strong>Fresh list:</strong> New remote jobs are added every day. Listings come from <a href="https://himalayas.app" target="_blank" rel="noopener noreferrer">Himalayas</a>. Buzzyfly doesn't screen or verify employers.</li>
             <li><strong>Applying:</strong> Open a job to read the full listing, then tap Apply.</li>
             <li><strong>Stay safe:</strong> Never pay a fee to apply or share bank details before a real offer. If a listing looks off, skip it.</li>
           </ul>

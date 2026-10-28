@@ -165,7 +165,7 @@ const pageTitle = job ? `${job.title} at ${job.company_name} | Buzzyfly Jobs` : 
       {!job ? (
         <>
           <h1>This job has closed</h1>
-          <p class="description">The employer has stopped taking applications, or the listing was removed. New jobs are added a few times a day.</p>
+          <p class="description">The employer has stopped taking applications, or the listing was removed. New jobs are added every day.</p>
           <a class="apply-btn" href="/jobs">See open jobs on Buzzyfly Jobs</a>
         </>
       ) : (
@@ -211,7 +211,7 @@ const pageTitle = job ? `${job.title} at ${job.company_name} | Buzzyfly Jobs` : 
                   <a class="apply-btn" href={job.url} target="_blank" rel="noopener noreferrer">Apply for this job →</a>
                 </div>
               )}
-              <p class="credit">Listing via Remotive. Buzzyfly doesn't screen or verify employers.</p>
+              <p class="credit">Listing via <a href={job.url} target="_blank" rel="noopener noreferrer">Himalayas</a>. Buzzyfly doesn't screen or verify employers.</p>
             </>
           )}
         </article>
