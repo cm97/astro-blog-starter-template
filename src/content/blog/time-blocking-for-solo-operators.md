@@ -2,7 +2,7 @@
 title: "Time Blocking for Solo Operators (The 3-Block System)"
 description: "Three calendar blocks so Monday still has a plan when the inbox is already on fire."
 pubDate: 2026-09-01
-updatedDate: 2026-10-02
+updatedDate: 2026-10-28
 category: systems
 heroImage: "/blog-placeholder-1.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -88,14 +88,24 @@ A client with no next date is drifting. Drift is how a paid project never become
 
 Wednesday, five minutes, on the calendar: still the right three? If a fire ate one, replace it. Do not add a fourth. Send any follow-up that is now overdue. One sentence each.
 
+## Thursday cash salvage (when Block 3 never happened)
+
+If the week already collapsed, do not rebuild the calendar. Rescue the cash in 12 minutes.
+
+1. Cross out any Monday priority that is no longer true.
+2. Name the one late or due delivery. Put a 45-minute block today or send: "Moving [deliverable] to [date]. Still the right piece?"
+3. Send the two skipped follow-ups using the exact lines above.
+4. Park any scope ask: "Got it. I'll check what we locked and come back with two options."
+
+Stop at 12 minutes. A salvage that becomes a new planning system is how Friday disappears too.
+
 ## What still breaks if the blocks only live in your head
 
 - Block 1 starts after the inbox, so it never starts
 - Follow-ups wait for a calm hour that does not exist
 - The weekly three get rewritten every time you remember a new fire
+- Day-7 onboarding check-ins never land because they are not on the same sheet as the three priorities
 
-The 3-block day is the weekly reset plus the follow-up lines, written down. The Buzzyfly Digital System ships that sequence with the onboarding checklists so a new client does not restart the same scramble. One-time. $49. Opens in your browser after purchase.
+The 3-block day is the weekly reset plus the follow-up lines, written down. Add the new-client day-2 intake or day-7 check to next Monday's "Still open" the hour payment clears. The Buzzyfly Digital System ships that sequence with the onboarding checklists so a new client does not restart the same scramble. One-time. $49. Opens in your browser after purchase.
 
-
-[Get the Digital System — $49](/buy/buzzyfly-digital-system)
-
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
