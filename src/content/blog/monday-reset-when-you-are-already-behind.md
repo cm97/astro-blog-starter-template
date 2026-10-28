@@ -2,7 +2,7 @@
 title: "The Monday Reset When You Are Already Behind"
 description: "A 20-minute Monday plan for the week that is already late — three priorities, client dates, and the two follow-ups that protect cash."
 pubDate: 2026-09-29
-updatedDate: 2026-10-21
+updatedDate: 2026-10-28
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -173,6 +173,15 @@ Invoice or close-out sent: ________
 - After you send the two follow-ups, write the next touch date on the same card. Thursday cannot invent a different version.
 - Cap the open-client scan at paid clients plus proposals out. Leads with no date and no reply in 21 days are closed rows, not open work.
 - If the three priorities do not include one money move, swap one in before you leave the 8-minute block.
+- Put the three calendar blocks before you leave the 8-minute window. A priority without a block is a wish.
+- Screenshot or copy the three lines into the same note as last week’s Friday close so Monday never starts from a blank page.
+- If you only have 12 minutes total, stop after the three priorities and the two follow-ups. Skip the open-client scan. Cash first.
+- After any paid reply lands, open the onboarding checklist the same day. The reset ends when money moves; onboarding starts.
+- At the end of the 20 minutes write one number: open invoices older than 7 days. If the number is not zero, priority 3 is already chosen.
+- Phone reminder the night before for the 20-minute block. Calendar alone dies when the week is on fire.
+- Cap open proposal rows at five. Anything past Day 14 is closed or parked before you write the three.
+- If a client texts a new ask during the reset, do not answer it. Log it as a scope line and finish the three first.
+- After the two follow-ups leave, close the email tab for 30 minutes. The reset is done; delivery starts.
 
 ## What still breaks if this only lives in your head
 
@@ -185,4 +194,3 @@ The Digital System ($49) is the reset plus onboarding and follow-ups so a slamme
 One-time payment. Yours to keep. Not a subscription. Not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
-
