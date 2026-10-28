@@ -2,7 +2,7 @@
 title: "The 20-Minute Onboarding Checklist That Survives a Slammed Week"
 description: "Exact 20-minute client onboarding checklist for coaches and solo operators — welcome, intake, kickoff, and day-7 hold so the process still runs when you are busy."
 pubDate: "Oct 16 2026"
-updatedDate: "Oct 22 2026"
+updatedDate: "Oct 28 2026"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -150,6 +150,38 @@ Add these three before you close the laptop on day 0:
 3. Pre-written 48-hour nudge on calendar:
 
 > Hi [Name] — still need the intake so kickoff is useful. Link again: [link]. Deadline stays [date]. Reply if something is blocking it.
+
+## More exact emails for the first week (paste these, do not draft)
+
+**48-hour intake nudge:**
+
+> **Subject:** Intake still needed for kickoff
+>
+> Hi [Name],
+>
+> Still need the short intake so the kickoff is useful. Link again: [link]. Deadline stays [date].
+>
+> Reply if something is blocking it.
+>
+> [Your name]
+
+**Kickoff summary (send within 60 minutes of the call):**
+
+> **Subject:** What we covered
+>
+> Here is what we covered: [outcome], first deliverable due [date], day-7 check on [date].
+>
+> Reply if I missed anything.
+
+**Day-7 check-in:**
+
+> **Subject:** Day-7 check — [project]
+>
+> Quick check — did the first deliverable land as expected, or is something blocking it?
+>
+> Next piece is due [date]. Reply with one line if anything changed.
+
+These three sit next to the welcome so you never open a blank email on a slammed Thursday.
 
 ## What still breaks when this only lives in your head
 
