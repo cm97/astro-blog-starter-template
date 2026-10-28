@@ -2,7 +2,7 @@
 title: "How to Stop Scope Creep Without Losing the Client"
 description: "The exact reply when a client asks for one more thing — pause, price, two options, written yes — so the extra work is a line item, not a free favor."
 pubDate: "2026-09-01"
-updatedDate: "Oct 23 2026"
+updatedDate: "Oct 28 2026"
 category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -69,6 +69,11 @@ Round up to the nearest $25. Do not round down.
 - Set a 24-hour timer on the two-option email. If no reply by then, send the day-3 bump without starting the work.
 - Log the ask on the same card as the original onboarding note so the weekly reset can see it.
 - If the client texts the ask during a call, pause the call: "Let me note that and reply with two options after we hang up."
+- Cap open scope asks at three. A fourth means you are rewriting the engagement. Close or re-scope the whole job.
+- After any yes, write the invoice line the same hour. The file does not open until the line is on the invoice.
+- At Friday close, mark every parked ask with a date or mark it declined. Unmarked parks become free work next month.
+- If the client sends the ask in Slack or text, move the two-option reply to email within 15 minutes. The channel that got the ask is not the channel that records the yes.
+- Add a line to the next Monday reset: "Scope asks waiting on written yes: [count]." Zero is the goal.
 
 ## The script
 
