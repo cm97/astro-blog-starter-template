@@ -26,7 +26,7 @@ const guarantee = BUZZYFLY_CONFIG.guarantee;
 const TRUST = [
 	{ icon: "⚡", label: "Open in your browser after purchase" },
 	{ icon: "🔁", label: "No subscription" },
-	{ icon: "🛡️", label: "30-day refund if you can't access the app or it isn't as described" },
+	{ icon: "🛡️", label: guarantee },
 	{ icon: "🐝", label: "Built by a solo creator" },
 ];
 
@@ -81,10 +81,10 @@ const FAQ = [
 			.store-eyebrow { margin: 0 0 0.8em; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 			.store-hero h1 { font-size: clamp(1.8em, 6vw, 2.8em); line-height: 1.12; max-width: 15em; margin: 0 auto 0.5em; }
 			.store-lede { max-width: 32em; margin: 0 auto 1.6em; color: rgb(var(--gray-dark)); font-size: 1.05em; }
-			.store-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 60px; max-width: 100%; white-space: normal; text-align: center; padding: 1em 2.8em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.45em; text-decoration: none; box-shadow: 0 6px 18px rgba(35, 55, 255, 0.35); transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+			.store-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 72px; max-width: 100%; white-space: normal; text-align: center; padding: 1.2em 3.2em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.65em; text-decoration: none; box-shadow: 0 6px 18px rgba(35, 55, 255, 0.35); transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
 			.store-cta:hover { background: var(--accent-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 13, 138, 0.4); }
 			.store-cta:active { transform: translateY(0); box-shadow: 0 3px 10px rgba(35, 55, 255, 0.35); }
-			@media (max-width: 720px) { .store-cta { padding: 0.9em 1.6em; font-size: 1.2em; } }
+			@media (max-width: 720px) { .store-cta { padding: 1em 1.8em; font-size: 1.35em; } }
 			.store-secondary { display: inline-block; margin-top: 0.9em; font-size: 0.9em; padding: 0.6em 0.4em; }
 			.trust-row { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6em; padding: 0; margin: 1.5em 0 0; }
 			@media (max-width: 720px) { .trust-row { grid-template-columns: 1fr 1fr; } }
