@@ -3,9 +3,10 @@ title: "Client Said ‘Let Me Think About It’? Send This Exact Reply"
 description: "Paste-ready reply when a prospect goes quiet after the call or proposal so the deal does not die in your inbox."
 category: sales
 pubDate: 2026-10-28
+updatedDate: 2026-10-29
 featuredProductTitle: Buzzyfly Digital System
 featuredProductPrice: $49
-featuredProductDescription: Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.
+featuredProductDescription: Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. Includes the exact reply for ‘let me think about it.’
 ---
 
 They liked the call. They said the proposal looked good. Then: “Let me think about it.”
@@ -44,6 +45,28 @@ Subject: Re: [Project name]
 > Either way is fine. Just need the word so it does not sit open.
 
 One paragraph. Binary. Dated. No “let me know if you have questions.”
+
+## Extra concrete steps that force the decision
+
+1. Send the reply within 2 hours of their message. After that the window cools and the date loses weight.
+2. Put the reply-due date on your calendar as an 8-minute block titled “Close [Name] think-about-it.” If it is not on the calendar it dies.
+3. Fill the log the same minute. Screenshot the original message into the note. Memory of the exact words is not reliable on Thursday.
+4. If they named a specific concern in the “think about it,” restate it in one line above the binary close so they see you heard it. Do not add a new paragraph of selling.
+5. After you send, set a phone reminder for the due date morning. Calendar alone gets ignored when delivery is on fire.
+6. Cap open “think about it” rows at three. A fourth means you are collecting maybes instead of closing. Close or park the oldest.
+7. If the start date you named has already passed by the reply-due day, replace it with the next date you can actually hold before you send the close email.
+8. On the reply-due morning, open the log first. If status is still waiting, send the closing email before 11am. Do not wait for a “better” feeling.
+9. After any yes, invoice the same hour and add one line to next Monday’s onboarding sheet: “[Name] — day-2 intake or kickoff due.” The follow-up ends when money lands; onboarding starts.
+10. At the next weekly reset, add a row: “Open ‘think about it’ past reply-due.” If none, write none.
+
+Fill this after every send:
+
+```
+Reply sent: yes / no — time: ________
+Reply-due date: ________
+Log filled: yes / no
+Calendar block set: yes / no
+```
 
 ## If they go quiet after that reply
 
