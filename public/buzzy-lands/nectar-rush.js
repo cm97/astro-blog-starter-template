@@ -25,25 +25,40 @@
 
 	// Level: ground segments with gaps, floating ledges, nectar, wasps, hive.
 	const ground = [[0, 900], [1020, 1700], [1820, 2500], [2640, 3400], [3520, 4400]];
-	const ledges = [[420, 360, 140], [700, 300, 120], [1180, 340, 160], [1500, 280, 120], [1960, 330, 140], [2250, 260, 140], [2780, 340, 160], [3080, 280, 140], [3640, 330, 160], [3950, 270, 140]];
+	// Raised ground: steps and hills [x, top, width], solid down to the ground.
+	const blocks = [[300, 420, 80], [380, 380, 80], [460, 420, 80], [1100, 410, 120], [1260, 370, 100], [1360, 410, 80], [1900, 400, 140], [2080, 360, 90], [2700, 420, 100], [2800, 380, 100], [2900, 340, 100], [3000, 400, 100], [3600, 400, 120], [3780, 360, 120]];
+	// Floating ledges [x, y, width]; the high ones are reached from a lower ledge.
+	const ledges = [[620, 320, 140], [760, 260, 100], [1500, 300, 140], [2250, 280, 140], [2400, 220, 100], [3150, 300, 140], [3300, 240, 90], [3950, 290, 140], [4080, 230, 100]];
 	const LEVEL_END = 4400, HIVE_X = 4250;
 	const solids = [
 		...ground.map(([a, b]) => ({ x: a, y: GROUND, w: b - a, h: H - GROUND })),
+		...blocks.map(([x, top, w]) => ({ x, y: top, w, h: GROUND - top })),
 		...ledges.map(([x, y, w]) => ({ x, y, w, h: 18 })),
 	];
+
+	// Height of the ground or step under x (GROUND over gaps).
+	function surfaceAt(x) {
+		let top = GROUND;
+		for (const [bx, bt, bw] of blocks) if (x >= bx && x <= bx + bw) top = Math.min(top, bt);
+		return top;
+	}
 
 	function reset() {
 		score = 0; lives = 3; cameraX = 0; invuln = 0; won = false;
 		player = { x: 80, y: GROUND - 44, w: 40, h: 44, vx: 0, vy: 0, onGround: false, face: 1 };
 		nectar = [];
 		for (const [x, y, w] of ledges) nectar.push({ x: x + w / 2, y: y - 34, got: false });
-		for (let x = 250; x < LEVEL_END - 300; x += 230) nectar.push({ x, y: GROUND - 40, got: false });
-		wasps = [[600, 260], [1350, 200], [2100, 220], [2950, 240], [3800, 220]].map(([x, range]) => ({ x, home: x, range, w: 36, h: 26, dir: 1, alive: true }));
+		for (let x = 250; x < LEVEL_END - 300; x += 230) nectar.push({ x, y: surfaceAt(x) - 40, got: false });
+		// [x, patrol range, height]: low wasps must be jumped or stomped, high ones guard the ledges.
+		wasps = [[800, 80, 450], [1600, 80, 450], [2300, 110, 450], [2460, 60, 180], [3220, 70, 450], [4000, 80, 450]].map(([x, range, y]) => ({ x, home: x, range, y, w: 36, h: 26, dir: 1, alive: true }));
 	}
 
 	// Input: keyboard plus on-screen buttons.
 	const keys = { left: false, right: false, jump: false };
+	const hasTouch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 	let jumpQueued = false;
+	// A jump pressed a moment before landing, or just after running off an edge, still counts.
+	let jumpBuffer = 0, coyote = 0;
 	const KEYMAP = { ArrowLeft: 'left', KeyA: 'left', ArrowRight: 'right', KeyD: 'right', ArrowUp: 'jump', KeyW: 'jump', Space: 'jump' };
 	window.addEventListener('keydown', (e) => {
 		if (state === 'playing' && (e.code === 'Escape' || e.code === 'KeyP')) { e.preventDefault(); pause(); return; }
@@ -72,7 +87,6 @@
 		.bl-row{display:flex;gap:.6em;flex-wrap:wrap;justify-content:center}
 		.bl-ov-btn{padding:.8em 1.5em;border:0;border-radius:999px;font-weight:700;font-size:1.05em;min-height:48px;cursor:pointer;background:#e8a317}
 		.bl-ov-btn.alt{background:#fff8e7;border:2px solid #2c5e4a;color:#2c5e4a}
-		@media (hover:hover) and (pointer:fine){.bl-pad{display:none}}
 		@media (max-width:760px){
 			#kids-overlay{padding:.4em .6em;justify-content:center}
 			#kids-overlay .face{display:none}
@@ -130,7 +144,8 @@
 	}
 	function hideOverlay() {
 		if (overlay) overlay.hidden = true;
-		pad.hidden = false; closeBtn.hidden = false;
+		// Any touch screen gets the buttons, including touch laptops that also have a mouse.
+		pad.hidden = !hasTouch; closeBtn.hidden = false;
 		canvas.focus?.({ preventScroll: true });
 	}
 
@@ -181,16 +196,19 @@
 	function respawn() {
 		// Back to the start of the ground segment before the gap.
 		const seg = [...ground].reverse().find(([a]) => a <= player.x) || ground[0];
-		player.x = seg[0] + 40; player.y = GROUND - player.h - 60; player.vx = 0; player.vy = 0;
+		player.x = seg[0] + 40; player.y = surfaceAt(player.x + player.w / 2) - player.h - 60; player.vx = 0; player.vy = 0;
 	}
 
 	function update(dt) {
 		const p = player;
 		p.vx = (keys.right ? RUN : 0) - (keys.left ? RUN : 0);
 		if (p.vx) p.face = Math.sign(p.vx);
-		if (jumpQueued && p.onGround) { p.vy = -JUMP; p.onGround = false; beep(620, 0.08, 'square'); }
+		if (jumpQueued) jumpBuffer = 0.12;
 		jumpQueued = false;
-		if (!keys.jump && p.vy < -300) p.vy = -300; // short hop when jump is released early
+		coyote = p.onGround ? 0.1 : Math.max(0, coyote - dt);
+		jumpBuffer = Math.max(0, jumpBuffer - dt);
+		// Every jump is a full jump: a quick tap on a phone used to give a tiny hop.
+		if (jumpBuffer > 0 && coyote > 0) { p.vy = -JUMP; p.onGround = false; jumpBuffer = 0; coyote = 0; beep(620, 0.08, 'square'); }
 		p.vy = Math.min(p.vy + GRAVITY * dt, 1400);
 
 		p.x = Math.max(0, Math.min(LEVEL_END - p.w, p.x + p.vx * dt));
@@ -213,7 +231,7 @@
 			if (!w.alive) continue;
 			w.x += w.dir * 90 * dt;
 			if (Math.abs(w.x - w.home) > w.range) w.dir *= -1;
-			const box = { x: w.x - w.w / 2, y: GROUND - 150, w: w.w, h: w.h };
+			const box = { x: w.x - w.w / 2, y: w.y - w.h / 2, w: w.w, h: w.h };
 			if (!overlaps(p, box)) continue;
 			if (p.vy > 0 && prevBottom <= box.y + 12) { w.alive = false; p.vy = -JUMP * 0.6; score += 5; beep(300, 0.12, 'square'); }
 			else hurt();
@@ -255,7 +273,7 @@
 		}
 		for (const w of wasps) {
 			if (!w.alive) continue;
-			const y = GROUND - 137;
+			const y = w.y;
 			gfx.fillStyle = '#111'; gfx.beginPath(); gfx.ellipse(w.x, y, 20, 13, 0, 0, Math.PI * 2); gfx.fill();
 			gfx.fillStyle = '#f5d000'; gfx.fillRect(w.x - 12, y - 8, 7, 16); gfx.fillRect(w.x, y - 8, 7, 16);
 			gfx.fillStyle = 'rgba(255,255,255,0.7)'; gfx.beginPath(); gfx.ellipse(w.x - 6, y - 16, 10, 6, -0.4, 0, Math.PI * 2); gfx.fill();
