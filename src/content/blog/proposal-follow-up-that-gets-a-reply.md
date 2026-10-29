@@ -2,7 +2,7 @@
 title: "The Proposal Follow-Up That Gets a Reply"
 description: "Three paste-ready follow-ups for when a proposal goes quiet — so the deal does not die because you stopped chasing it."
 pubDate: 2026-10-16
-updatedDate: 2026-10-21
+updatedDate: 2026-10-29
 category: sales
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -103,6 +103,22 @@ Decision: yes / later / price / no
 Next action: invoice sent / parked until ________ / closed
 Onboarding note started: yes / no
 ```
+
+## Phone-paste variants (send from the car or between calls)
+
+Same lines, shorter subjects so they fit a notification:
+
+Day 3 subject: Hold or release [start date]?
+
+Day 7 subject: Lock [deliverable] for [date]?
+
+Day 14 subject: Closing [project] — later or release?
+
+Body stays one line. Copy the body from the sections above. Log the send time in the same 4-minute block so the next due date is already written.
+
+## 60-second version when you only have the phone
+
+Open the log. Confirm the start date is still real. Paste the day-3 or day-7 line. Send. Write the next due date. Close the app. That is the whole follow-up. The system is the log plus the three lines, not a new draft.
 
 ## Why this works when “just checking in” fails
 
