@@ -1,0 +1,225 @@
+---
+export const prerender = false;
+
+import BaseHead from '../../../components/BaseHead.astro';
+import Header from '../../../components/Header.astro';
+import Footer from '../../../components/Footer.astro';
+import { SITE_TITLE } from '../../../consts';
+import { getJob } from '../../../lib/jobs';
+import { FREE_JOBS_PREVIEW, JOBS_COOKIE, checkJobsAccess, getJobsOffer } from '../../../lib/jobsAccess';
+
+// The Buzzyfly step between a job page and the employer's own application:
+// a ready-to-copy cover note and a checklist, then one hand-off link.
+const env = Astro.locals.runtime.env;
+const id = /^\d{1,12}$/.test(Astro.params.id ?? '') ? Number(Astro.params.id) : null;
+const found = id === null ? null : await getJob(env, id);
+const job = found?.job ?? null;
+
+const offer = getJobsOffer(env);
+let isMember = false;
+if (offer && found && found.index >= FREE_JOBS_PREVIEW) {
+  const token = Astro.cookies.get(JOBS_COOKIE)?.value;
+  isMember = token ? (await checkJobsAccess(env, token)).ok : false;
+}
+const locked = !!offer && !!found && found.index >= FREE_JOBS_PREVIEW && !isMember;
+
+// Closed or locked jobs go back to the job page, which explains either case.
+if (!job || locked) return Astro.redirect(id === null ? '/jobs' : `/jobs/${id}`, 302);
+
+Astro.response.headers.set('Cache-Control', offer ? 'private, max-age=60' : 'public, max-age=300');
+Astro.response.headers.set('X-Frame-Options', 'DENY');
+Astro.response.headers.set('X-Content-Type-Options', 'nosniff');
+Astro.response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin');
+
+const coverNote = `Hi ${job.company_name} team,
+
+I'm applying for the ${job.title} role. [One line on the most relevant thing you've done, with a result.]
+
+What I'd bring:
+• [Skill or tool from the listing you have used]
+• [A second match to what they asked for]
+• [How you work remotely: hours, time zone, how you communicate]
+
+I'd welcome a short call to talk about the role.
+
+[Your name]
+[Portfolio or LinkedIn link]`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <BaseHead
+      title={`Apply: ${job.title} at ${job.company_name} | Buzzyfly Jobs | ${SITE_TITLE}`}
+      description={`Apply for ${job.title} at ${job.company_name} with Buzzyfly Jobs: a ready cover note and a quick checklist.`}
+    />
+    <meta name="robots" content="noindex, follow" />
+    <style>
+      .apply-page {
+        width: auto;
+        max-width: 760px;
+        margin: 2rem auto;
+        padding: 0 1rem;
+      }
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        color: var(--accent);
+        font-weight: 600;
+        text-decoration: none;
+      }
+      .eyebrow {
+        margin: 0.75rem 0 0.25rem 0;
+        font-size: 0.8rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      h1 {
+        font-size: 1.8rem;
+        line-height: 1.2;
+        margin: 0 0 1.25rem 0;
+        overflow-wrap: anywhere;
+      }
+      h2 {
+        font-size: 1.15rem;
+        margin: 1.75rem 0 0.6rem 0;
+      }
+      .steps {
+        padding-left: 1.2rem;
+        line-height: 1.7;
+        color: #1e293b;
+      }
+      .steps li {
+        margin-bottom: 0.4rem;
+      }
+      .note {
+        width: 100%;
+        min-height: 300px;
+        box-sizing: border-box;
+        padding: 0.9rem;
+        border: 1px solid #cbd5e1;
+        border-radius: 8px;
+        font: inherit;
+        font-size: 0.95rem;
+        line-height: 1.6;
+        resize: vertical;
+      }
+      .row {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 0.6rem;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        box-sizing: border-box;
+        padding: 0.7rem 1.4rem;
+        border-radius: 6px;
+        font-weight: 700;
+        font-size: 1rem;
+        text-decoration: none;
+        border: 0;
+        cursor: pointer;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--accent-dark);
+        color: #fff;
+      }
+      .btn-secondary {
+        background: #fff;
+        color: var(--accent);
+        border: 2px solid var(--accent);
+      }
+      .btn:focus-visible,
+      .back-link:focus-visible,
+      .note:focus-visible {
+        outline: 3px solid var(--accent-dark);
+        outline-offset: 2px;
+      }
+      .handoff {
+        border: 2px solid var(--accent);
+        border-radius: 12px;
+        padding: 1.25rem;
+        margin: 2rem 0 1rem 0;
+        background: #f5f6ff;
+      }
+      .handoff p {
+        margin: 0 0 0.9rem 0;
+        color: #334155;
+        line-height: 1.6;
+      }
+      .status {
+        color: #137333;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+      .credit {
+        color: #94a3b8;
+        font-size: 0.8rem;
+        margin: 2rem 0 0 0;
+      }
+    </style>
+  </head>
+  <body>
+    <Header />
+    <main class="apply-page">
+      <a class="back-link" href={`/jobs/${job.id}`}>← Back to the job</a>
+      <p class="eyebrow">Apply with Buzzyfly Jobs</p>
+      <h1>{job.title} at {job.company_name}</h1>
+
+      <h2>1. Check the basics</h2>
+      <ol class="steps">
+        <li>Location: <strong>{job.candidate_required_location || 'Remote'}</strong>. Make sure you can work from where you live.</li>
+        <li>Match two or three skills from the listing to things you have done. Put them at the top of your CV.</li>
+        <li>Never pay a fee to apply or send bank details before a written offer.</li>
+      </ol>
+
+      <h2>2. Copy your cover note</h2>
+      <p style="margin: 0 0 0.6rem 0; color: #475569;">Fill in the brackets, then copy it into the application.</p>
+      <label for="coverNote" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);">Cover note</label>
+      <textarea id="coverNote" class="note">{coverNote}</textarea>
+      <div class="row">
+        <button type="button" class="btn btn-secondary" id="copyNote">Copy cover note</button>
+        <span class="status" id="copyStatus" role="status" aria-live="polite"></span>
+      </div>
+
+      <section class="handoff" aria-labelledby="handoff-heading">
+        <h2 id="handoff-heading" style="margin-top: 0;">3. Send your application</h2>
+        <p>{job.company_name} takes applications on their own form. It opens in a new tab, so Buzzyfly Jobs stays open here for your next job.</p>
+        <a class="btn btn-primary" href={job.url} target="_blank" rel="noopener noreferrer" id="applyLink">Open the employer's application →</a>
+      </section>
+
+      <a class="back-link" href="/jobs">← More jobs on Buzzyfly Jobs</a>
+      <p class="credit">Listing via Remotive. Buzzyfly doesn't screen or verify employers.</p>
+    </main>
+    <Footer />
+
+    <script>
+      const note = document.getElementById('coverNote') as HTMLTextAreaElement | null;
+      const copyBtn = document.getElementById('copyNote');
+      const status = document.getElementById('copyStatus');
+      copyBtn?.addEventListener('click', async () => {
+        if (!note) return;
+        try {
+          await navigator.clipboard.writeText(note.value);
+        } catch {
+          // Older browsers and some in-app browsers block the clipboard API.
+          note.select();
+          document.execCommand('copy');
+        }
+        if (status) status.textContent = 'Copied. Paste it into the application.';
+      });
+    </script>
+  </body>
+</html>
