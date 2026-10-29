@@ -2,7 +2,7 @@
 title: 'The 7-Day Sprint to Land Your First Paying Client'
 description: 'No audience required. A day-by-day sprint to get one paying client, then run the same-day start line so week one does not die in your head.'
 pubDate: '2026-09-01'
-updatedDate: 'Oct 20 2026'
+updatedDate: 'Oct 29 2026'
 category: 'sales'
 heroImage: '/blog-placeholder-2.jpg'
 featuredProductTitle: 'Buzzyfly Digital System'
@@ -182,6 +182,16 @@ If a line is late, send the late version the same day. Never skip because you ar
 - After the day-7 wrap, add one line to next Monday's reset: "First client still open? Next date: ________". Silence after week one is how first clients become one-offs.
 - Cap free audits at three. A fourth is unpaid delivery dressed as sales.
 - If they ask for a discount on day 6, restate the scope and the start date. Do not cut the number to "land the first one." Cheap clients train you to undercharge forever.
+- Write the out-of-scope line in the welcome before you send it. Blank scope becomes free work by day 4.
+- Pre-schedule the 48-hour nudge the same minute the welcome goes out. If it is not on the calendar, it dies when the next message arrives.
+
+## Day-0 cash lock (add these three before you close the laptop)
+
+1. Scope sentence in the welcome: "This start covers [exact deliverable]. Anything outside that is a separate quote."
+2. Amount on the client note: "$[number] paid in full on [date]" or "deposit $[amount], balance due [date]".
+3. Pre-written day-2 nudge on calendar:
+
+> Hi [Name] — still need the intake so kickoff is useful. Link again: [link]. Deadline stays [date]. Reply if something is blocking it.
 
 ## What still breaks if you only do the sprint
 
@@ -190,4 +200,3 @@ Landing the client is day 7. Keeping them is the next Monday. Without a reset an
 Get the Digital System — $49. One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
-
