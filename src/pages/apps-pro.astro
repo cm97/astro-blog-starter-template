@@ -9,7 +9,7 @@ import { paypalConfigured } from "../lib/paypal";
 export const prerender = false;
 
 const payEnabled = paypalConfigured(Astro.locals.runtime?.env);
-const mail = `mailto:${BUZZYFLY_CONFIG.supportEmail}?subject=${encodeURIComponent("Buzzyfly Apps Pro")}&body=${encodeURIComponent("Hi, I'd like Buzzyfly Apps Pro. Please send payment details and my access code.")}`;
+const priceLabel = `$${APPS_PRICE.replace(/\.00$/, "")}`;
 
 const APPS = [
 	{ slug: "invoice-maker", problem: "Getting paid", name: "Invoice Maker", does: "Build a clean invoice with line items, tax and discount, then print or save as PDF." },
@@ -35,6 +35,15 @@ const APPS = [
 			.hero p { color: rgb(var(--gray-dark)); line-height: 1.6; }
 			.buy { display: inline-block; padding: 0.9em 2em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.1em; text-decoration: none; }
 			.buy:hover { background: var(--accent-dark); color: #fff; }
+			.buy { border: 0; cursor: pointer; font-family: inherit; min-height: 48px; }
+			.buy:focus-visible, .order input:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 2px; }
+			.order { max-width: 34em; margin: 0 auto; }
+			.order-label { display: block; font-weight: 600; margin-bottom: 0.4em; }
+			.order-row { display: flex; gap: 0.6em; flex-wrap: wrap; justify-content: center; }
+			.order input { flex: 1 1 14em; min-width: 0; min-height: 48px; box-sizing: border-box; padding: 0.6em 0.9em; border: 1px solid rgb(var(--gray-light)); border-radius: 999px; font: inherit; }
+			.order-status { min-height: 1.4em; margin: 0.6em 0 0; font-weight: 600; }
+			.order-status.ok { color: #137333; }
+			.order-status.err { color: #b42318; }
 			.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr)); gap: 1.2em; max-width: 1050px; margin: 2em auto; padding: 0 1em; }
 			.card { border: 1px solid rgb(var(--gray-light)); border-radius: 14px; padding: 1.2em 1.3em; background: #fff; }
 			.card .tag { display: inline-block; font-size: 0.72em; letter-spacing: 0.06em; text-transform: uppercase; color: rgb(var(--gray)); margin-bottom: 0.4em; }
@@ -55,7 +64,19 @@ const APPS = [
 				<p>Getting paid, chasing leads, hiring, deadlines, messy spreadsheets, debt. Open them in your browser, use them today. One payment of ${APPS_PRICE.replace(/\.00$/, "")}, no subscription. Your data stays in your own browser.</p>
 				{payEnabled
 					? <a class="buy" href="/apps/buy">Pay with PayPal: ${APPS_PRICE.replace(/\.00$/, "")}</a>
-					: <a class="buy" href={mail}>Email to buy: ${APPS_PRICE.replace(/\.00$/, "")}</a>}
+					: (
+						// Without PayPal, buyers leave their email here and it lands in /admin/orders.
+						// This replaced a mailto: button, which did nothing on computers with no mail app set up.
+						<form class="order" id="appsOrder" data-price={priceLabel}>
+							<label for="orderEmail" class="order-label">Your email</label>
+							<div class="order-row">
+								<input id="orderEmail" name="email" type="email" required autocomplete="email" placeholder="you@example.com" />
+								<button type="submit" class="buy">Request Apps Pro: {priceLabel}</button>
+							</div>
+							<p class="order-status" id="orderStatus" role="status" aria-live="polite"></p>
+							<p class="note">We email you payment details and your access code. Or write to <strong>{BUZZYFLY_CONFIG.supportEmail}</strong>.</p>
+						</form>
+					)}
 				<p class="note" style="margin-top:0.8em">{payEnabled ? "Secure PayPal checkout. You are unlocked the moment payment clears." : "You get an access code by email after payment."} {BUZZYFLY_CONFIG.guarantee}</p>
 			</section>
 
@@ -78,5 +99,31 @@ const APPS = [
 			</form>
 		</main>
 		<Footer />
+		<script>
+			const form = document.getElementById("appsOrder") as HTMLFormElement | null;
+			const status = document.getElementById("orderStatus");
+			form?.addEventListener("submit", async (event) => {
+				event.preventDefault();
+				const email = (form.elements.namedItem("email") as HTMLInputElement).value.trim();
+				const button = form.querySelector("button");
+				if (button) button.disabled = true;
+				if (status) { status.className = "order-status"; status.textContent = "Sending…"; }
+				try {
+					const res = await fetch("/api/purchase-request", {
+						method: "POST",
+						headers: { "content-type": "application/json" },
+						body: JSON.stringify({ email, title: "Buzzyfly Apps Pro", price: form.dataset.price }),
+					});
+					const data = (await res.json().catch(() => ({}))) as { ok?: boolean; error?: string };
+					if (!res.ok || !data.ok) throw new Error(data.error || "Could not send that.");
+					if (status) { status.className = "order-status ok"; status.textContent = `Got it. Payment details and your access code are coming to ${email}.`; }
+					form.reset();
+				} catch (error) {
+					if (status) { status.className = "order-status err"; status.textContent = `${(error as Error).message} You can also email support@buzzyfly.com.`; }
+				} finally {
+					if (button) button.disabled = false;
+				}
+			});
+		</script>
 	</body>
 </html>
