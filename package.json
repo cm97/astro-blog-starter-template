@@ -36,6 +36,7 @@
 		"deploy": "wrangler deploy",
 		"dev": "astro dev",
 		"preview": "astro build && wrangler dev",
+		"test:ratelimit": "esbuild tests/rateLimit.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/rateLimit.test.mjs && node --test .test-build/rateLimit.test.mjs",
 		"test:email": "esbuild tests/email.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/email.test.mjs && node --test .test-build/email.test.mjs"
 	},
 	"type": "module"
