@@ -37,7 +37,7 @@ If something feels off, skip it. Another job will come along. Your bank details 
 
 Start from a list that is already filtered to remote work, so you spend your time applying, not sorting.
 
-[Buzzyfly Jobs](/jobs) puts remote openings on one page and refreshes the list a few times a day. Filter by skill, category, job type and location, then open a job to read the full listing before you apply. Buzzyfly doesn't screen employers, so run the checks above on every job, wherever you found it.
+[Buzzyfly Jobs](/jobs) puts remote openings on one page and refreshes the list every day. Filter by skill, category, job type and location, then open a job to read the full listing before you apply. Buzzyfly doesn't screen employers, so run the checks above on every job, wherever you found it.
 
 **[Browse Buzzyfly Jobs →](/jobs)**
 
