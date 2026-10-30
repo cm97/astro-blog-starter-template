@@ -1,0 +1,39 @@
+---
+/** "Pay with PayPal" beside a Stripe buy button. Points at our own PayPal checkout route. */
+interface Props {
+	href: string | null | undefined;
+	price?: string;
+}
+const { href, price } = Astro.props;
+---
+
+{href && (
+	<a class="paypal-link" href={href}>
+		<span>Or pay with <strong>PayPal</strong>{price ? ` · ${price}` : ""}</span>
+	</a>
+)}
+
+<style>
+	.paypal-link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		box-sizing: border-box;
+		margin-top: 0.6em;
+		padding: 0.5em 1.4em;
+		border: 2px solid #003087;
+		border-radius: 999px;
+		background: #ffc439;
+		color: #003087 !important;
+		font-weight: 600;
+		text-decoration: none;
+	}
+	.paypal-link:hover {
+		background: #f2b71f;
+	}
+	.paypal-link:focus-visible {
+		outline: 3px solid #003087;
+		outline-offset: 2px;
+	}
+</style>

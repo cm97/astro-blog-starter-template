@@ -41,7 +41,7 @@ jobs:
         run: |
           sleep 15
           python3 - <<'PY'
-          import json, sys, urllib.request
+          import json, sys, urllib.error, urllib.parse, urllib.request
           base = "https://www.buzzyfly.com"
           def get(path):
               req = urllib.request.Request(base + path, headers={"User-Agent": "buzzyfly-deploy-check"})
@@ -66,6 +66,27 @@ jobs:
           print("apps-pro shows PayPal button:", shows_paypal)
           if health.get("paypal") and not shows_paypal:
               failed.append("PayPal is configured but /apps-pro does not show the PayPal button")
+          _, store = get("/store")
+          store_paypal = 'href="/buy/buzzyfly-digital-system"' in store
+          print("store shows $49 PayPal button:", store_paypal)
+          if health.get("paypal"):
+              if not store_paypal:
+                  failed.append("/store does not show the $49 PayPal button")
+              # Start a real $49 PayPal order (unpaid, it expires on its own) and check PayPal's checkout opens.
+              class NoRedirect(urllib.request.HTTPRedirectHandler):
+                  def redirect_request(self, *a, **k):
+                      return None
+              opener = urllib.request.build_opener(NoRedirect)
+              req = urllib.request.Request(base + "/buy/buzzyfly-digital-system", headers={"User-Agent": "buzzyfly-deploy-check"})
+              try:
+                  r = opener.open(req, timeout=30)
+                  code, loc = r.status, r.headers.get("location", "")
+              except urllib.error.HTTPError as e:
+                  code, loc = e.code, e.headers.get("location", "")
+              host = urllib.parse.urlparse(loc).hostname or ""
+              print(f"$49 PayPal checkout: {code} -> {host}{urllib.parse.urlparse(loc).path}")
+              if code != 302 or not (host == "paypal.com" or host.endswith(".paypal.com")):
+                  failed.append(f"$49 PayPal checkout did not open PayPal (status {code}, went to {host or 'nowhere'})")
           if not health.get("paypal"):
               print("::warning::PayPal keys not found (PayPal names on the Worker: " + (", ".join(health.get("paypalNamesFound") or []) or "none") + "); /apps-pro shows the request form")
           if failed:

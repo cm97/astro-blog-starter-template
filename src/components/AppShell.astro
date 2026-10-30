@@ -3,6 +3,7 @@
 // itself for buyers, or the locked product card for everyone else. Each page
 // checks access with resolveAppAccess() before rendering this.
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../data/monetization";
+import PayPalLink from "./PayPalLink.astro";
 
 interface Props {
 	itemId: string;
@@ -60,6 +61,7 @@ const product = ALL_PRODUCTS.find((p) => p.id === itemId)!;
 						{product.features.map((f) => <li>{f}</li>)}
 					</ul>
 					{product.buyUrl && <a class="btn block" href={product.buyUrl}>Get it for {product.price}, one time</a>}
+					{product.buyUrl && <p style="text-align:center;margin:0"><PayPalLink href={`/buy/${product.id}`} /></p>}
 					<p class="muted small">{BUZZYFLY_CONFIG.guarantee}</p>
 					<p class="muted small">
 						Already bought it? Open the access link from your thank-you page or order email. Lost it? Email

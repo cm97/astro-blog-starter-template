@@ -4,6 +4,7 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import EmailOptin from "../components/EmailOptin.astro";
 import ProductCallout from "../components/ProductCallout.astro";
+import PayPalLink from "../components/PayPalLink.astro";
 import {
 	ALL_PRODUCTS,
 	BUZZYFLY_CONFIG,
@@ -121,6 +122,8 @@ const FAQ = [
 				</p>
 				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
 				<br />
+				{systemOrder.live && <PayPalLink href={systemOrder.paypalHref} />}
+				<br />
 				<a class="store-secondary" href="#digital-system">See what's inside ↓</a>
 				<ul class="trust-row" aria-label="Why buying here is low risk">
 					{TRUST.map((t) => <li><span aria-hidden="true">{t.icon}</span>{t.label}</li>)}
@@ -167,6 +170,8 @@ const FAQ = [
 			<section class="final-cta">
 				<h2>Stop rebuilding your process from memory.</h2>
 				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
+				<br />
+				{systemOrder.live && <PayPalLink href={systemOrder.paypalHref} />}
 				<p>One-time payment. No subscription. {guarantee}</p>
 			</section>
 
