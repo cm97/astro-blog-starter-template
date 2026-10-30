@@ -6,6 +6,7 @@ import EmailOptin from "../components/EmailOptin.astro";
 import ProductCallout from "../components/ProductCallout.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { BUZZYFLY_CONFIG, ALL_PRODUCTS, getOrderAction } from "../data/monetization";
+import PayPalLink from "../components/PayPalLink.astro";
 import { getSettings } from "../lib/settings";
 
 const settings = await getSettings(Astro.locals.runtime?.env);
@@ -30,6 +31,7 @@ const guarantee = BUZZYFLY_CONFIG.guarantee;
 			.hero__cta-group { display: flex; align-items: center; justify-content: center; gap: 0.9em; flex-wrap: wrap; margin-bottom: 1em; }
 			.btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 72px; max-width: 100%; white-space: normal; text-align: center; padding: 1.4em 3.4em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 800; font-size: 1.65em; text-decoration: none; }
 			.btn-primary:hover { background: var(--accent-dark); }
+			@media (max-width: 560px) { .btn-primary { min-height: 56px; padding: 0.9em 1.4em; font-size: 1.2em; } }
 			.hero__trust { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.3em 1.1em; font-size: 0.85em; color: rgb(var(--gray-dark)); font-weight: 700; }
 			.pain { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
 			.pain h2 { font-size: 1.4em; color: rgb(var(--gray)); font-weight: 400; margin: 0 0 1.5em; text-align: center; }
@@ -76,6 +78,7 @@ const guarantee = BUZZYFLY_CONFIG.guarantee;
 				</p>
 				<div class="hero__cta-group">
 					<a class="btn-primary" href={order.href}>Get the Digital System — {digitalSystem.price}</a>
+					{order.live && <PayPalLink href={order.paypalHref} />}
 				</div>
 				<ul class="hero__trust" aria-label="Purchase details">
 					<li>✓ One-time payment</li>
@@ -151,6 +154,8 @@ const guarantee = BUZZYFLY_CONFIG.guarantee;
 				</div>
 				<div class="final-cta">
 					<a class="btn-primary" href={order.href}>Get the Digital System — {digitalSystem.price}</a>
+					<br />
+					{order.live && <PayPalLink href={order.paypalHref} />}
 					<p class="final-cta__alt">Want the details first? <a href="/store">See what's inside</a>.</p>
 				</div>
 			</section>

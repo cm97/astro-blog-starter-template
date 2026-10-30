@@ -1,25 +1,21 @@
 import type { APIRoute } from "astro";
-import { BUZZYFLY_CONFIG } from "../../data/monetization";
+import { getProduct } from "../../data/monetization";
 import { PRODUCT_CURRENCY, findSellableProduct } from "../../lib/productCheckout";
 import { createOrder, paypalConfigured } from "../../lib/paypal";
 import { cleanSourceTriple } from "../../lib/trafficSource";
 
 export const prerender = false;
 
-/** Starts a PayPal checkout for one digital product and sends the buyer to PayPal to approve it. */
+/** Starts a PayPal checkout for one web app and sends the buyer to PayPal to approve it. */
 export const GET: APIRoute = async ({ params, url, locals }) => {
 	const product = findSellableProduct(params.product ?? "");
 	if (!product) return new Response("Not found", { status: 404 });
 
 	const env = locals.runtime.env;
 	if (!paypalConfigured(env)) {
-		// No working card checkout yet: send the buyer to a real email order instead of a dead button.
-		const subject = encodeURIComponent(`Order: ${product.title}`);
-		const body = encodeURIComponent(`Hi,\n\nI'd like to order the ${product.title} ($${product.amount}).\n\nPlease send payment details.\n\nThanks,\n`);
-		return new Response(null, {
-			status: 302,
-			headers: { location: `mailto:${BUZZYFLY_CONFIG.supportEmail}?subject=${subject}&body=${body}`, "cache-control": "no-store" },
-		});
+		// PayPal keys missing: send the buyer to the card checkout rather than a dead end.
+		const buyUrl = getProduct(product.id)?.buyUrl ?? "/store";
+		return new Response(null, { status: 302, headers: { location: buyUrl, "cache-control": "no-store" } });
 	}
 
 	try {
@@ -27,7 +23,7 @@ export const GET: APIRoute = async ({ params, url, locals }) => {
 			itemId: product.id,
 			amount: product.amount,
 			currency: PRODUCT_CURRENCY,
-			description: `Buzzyfly ${product.title}`,
+			description: product.title.startsWith("Buzzyfly") ? product.title : `Buzzyfly ${product.title}`,
 			returnUrl: `${url.origin}/buy/paypal-return`,
 			cancelUrl: `${url.origin}/store`,
 			// Set by TrafficSource.astro from the visitor's utm_* params.

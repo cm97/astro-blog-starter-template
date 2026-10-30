@@ -1,5 +1,6 @@
 ---
 import { BUZZYFLY_CONFIG, getOrderAction, getProduct } from "../data/monetization";
+import PayPalLink from "./PayPalLink.astro";
 
 interface Props {
 	/** Product id from ALL_PRODUCTS. Fills in any field not passed explicitly. */
@@ -64,9 +65,10 @@ const order = product
 			<span class="product-callout__soon">Coming soon</span>
 		)}
 	</div>
+	{order.live && "paypalHref" in order && <PayPalLink href={order.paypalHref} />}
 	{order.live ? (
 		<p class="product-callout__guarantee">
-			Secure checkout by Stripe. One-time payment. Your app unlocks on the next page after you pay. {BUZZYFLY_CONFIG.guarantee}
+			Secure checkout by Stripe or PayPal. One-time payment. Your app unlocks on the next page after you pay. {BUZZYFLY_CONFIG.guarantee}
 		</p>
 	) : (
 		<p class="product-callout__guarantee">Not for sale yet. Everything in it is already inside the $49 Digital System.</p>

@@ -36,6 +36,8 @@ export function getOrderAction(productIdOrTitle: string = BUZZYFLY_CONFIG.defaul
 		href: product.buyUrl,
 		label: "Buy now",
 		external: product.buyUrl.startsWith("http"),
+		/** Our own PayPal checkout (src/pages/buy/[product].ts), offered beside Stripe. */
+		paypalHref: `/buy/${product.id}`,
 	};
 }
 
