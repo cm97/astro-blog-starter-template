@@ -1,4 +1,6 @@
 ---
+import { paypalConfigured } from "../lib/paypal";
+import { paypalBuyUrl } from "../lib/productCheckout";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -20,6 +22,7 @@ const systemDescription =
 		? settings.defaultProductDescription
 		: system.description;
 const systemOrder = getOrderAction(system.id);
+const paypalHref = systemOrder.live && paypalConfigured(Astro.locals.runtime?.env) ? paypalBuyUrl("buzzyfly-digital-system") : null;
 const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id);
 const guarantee = BUZZYFLY_CONFIG.guarantee;
 
@@ -76,6 +79,8 @@ const FAQ = [
 			description="Run your client business from a browser web app, not memory. Follow-up, onboarding and weekly reset in one place. $49 one-time."
 		/>
 		<style>
+			.paypal-alt { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.6em; margin-left: 0.4em; font-weight: 600; color: inherit; text-decoration: underline; }
+			.paypal-alt:focus-visible { outline: 3px solid rgb(var(--black)); outline-offset: 2px; }
 			main { width: 1000px; }
 			.store-hero { text-align: center; padding: 1em 0 1.5em; }
 			.store-eyebrow { margin: 0 0 0.8em; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
@@ -120,6 +125,7 @@ const FAQ = [
 					Monday starts with a scramble. Open the app. See who needs you today and the email to send.
 				</p>
 				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
+				{paypalHref && <a class="paypal-alt" href={paypalHref}>Or pay with PayPal</a>}
 				<br />
 				<a class="store-secondary" href="#digital-system">See what's inside ↓</a>
 				<ul class="trust-row" aria-label="Why buying here is low risk">
@@ -167,6 +173,7 @@ const FAQ = [
 			<section class="final-cta">
 				<h2>Stop rebuilding your process from memory.</h2>
 				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
+				{paypalHref && <a class="paypal-alt" href={paypalHref}>Or pay with PayPal</a>}
 				<p>One-time payment. No subscription. {guarantee}</p>
 			</section>
 

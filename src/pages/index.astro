@@ -1,4 +1,6 @@
 ---
+import { paypalConfigured } from "../lib/paypal";
+import { paypalBuyUrl } from "../lib/productCheckout";
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
@@ -12,6 +14,7 @@ const settings = await getSettings(Astro.locals.runtime?.env);
 
 const digitalSystem = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
 const order = getOrderAction(digitalSystem.id);
+const paypalHref = order.live && paypalConfigured(Astro.locals.runtime?.env) ? paypalBuyUrl("buzzyfly-digital-system") : null;
 const guarantee = BUZZYFLY_CONFIG.guarantee;
 ---
 
@@ -23,6 +26,8 @@ const guarantee = BUZZYFLY_CONFIG.guarantee;
 			description="Stop rebuilding your client process from scratch every week. Browser web app shows who to follow up with today, writes the email and onboards new clients. $49 one-time."
 		/>
 		<style>
+			.paypal-alt { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.6em; margin-left: 0.4em; font-weight: 600; color: inherit; text-decoration: underline; }
+			.paypal-alt:focus-visible { outline: 3px solid rgb(var(--black)); outline-offset: 2px; }
 			.hero { padding: 4em 0 3.5em; text-align: center; border-bottom: 1px solid rgb(var(--gray-light)); }
 			.hero__eyebrow { display: inline-block; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1em; }
 			.hero h1 { font-size: clamp(1.9em, 5.5vw, 2.8em); line-height: 1.12; margin: 0 auto 0.6em; color: rgb(var(--black)); max-width: 16em; }
@@ -76,6 +81,7 @@ const guarantee = BUZZYFLY_CONFIG.guarantee;
 				</p>
 				<div class="hero__cta-group">
 					<a class="btn-primary" href={order.href}>Get the Digital System — {digitalSystem.price}</a>
+				{paypalHref && <a class="paypal-alt" href={paypalHref}>Or pay with PayPal</a>}
 				</div>
 				<ul class="hero__trust" aria-label="Purchase details">
 					<li>✓ One-time payment</li>
@@ -151,6 +157,7 @@ const guarantee = BUZZYFLY_CONFIG.guarantee;
 				</div>
 				<div class="final-cta">
 					<a class="btn-primary" href={order.href}>Get the Digital System — {digitalSystem.price}</a>
+				{paypalHref && <a class="paypal-alt" href={paypalHref}>Or pay with PayPal</a>}
 					<p class="final-cta__alt">Want the details first? <a href="/store">See what's inside</a>.</p>
 				</div>
 			</section>

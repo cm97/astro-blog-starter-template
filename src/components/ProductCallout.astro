@@ -1,5 +1,7 @@
 ---
 import { BUZZYFLY_CONFIG, getOrderAction, getProduct } from "../data/monetization";
+import { paypalConfigured } from "../lib/paypal";
+import { findSellableProduct, paypalBuyUrl } from "../lib/productCheckout";
 
 interface Props {
 	/** Product id from ALL_PRODUCTS. Fills in any field not passed explicitly. */
@@ -33,6 +35,17 @@ const order = product
 	: props.url
 		? { live: true as const, href: props.url, label: "Buy now", external: /^https?:/.test(props.url) }
 		: getOrderAction();
+
+// A PayPal button next to Stripe, only on server-rendered pages where the
+// PayPal secrets are set. Prerendered pages (blog posts) have no env.
+let paypalEnv: unknown;
+try {
+	paypalEnv = Astro.locals.runtime?.env;
+} catch {
+	paypalEnv = undefined;
+}
+const paypalHref =
+	order.live && product && findSellableProduct(product.id) && paypalConfigured(paypalEnv) ? paypalBuyUrl(product.id) : null;
 ---
 
 <aside
@@ -64,9 +77,15 @@ const order = product
 			<span class="product-callout__soon">Coming soon</span>
 		)}
 	</div>
+	{paypalHref && (
+		<a class="product-callout__paypal" href={paypalHref}>
+			Pay with PayPal
+			<span class="sr-only"> for {title}</span>
+		</a>
+	)}
 	{order.live ? (
 		<p class="product-callout__guarantee">
-			Secure checkout by Stripe. One-time payment. Your app unlocks on the next page after you pay. {BUZZYFLY_CONFIG.guarantee}
+			Secure checkout by Stripe{paypalHref ? " or PayPal" : ""}. One-time payment. Your app unlocks on the next page after you pay. {BUZZYFLY_CONFIG.guarantee}
 		</p>
 	) : (
 		<p class="product-callout__guarantee">Not for sale yet. Everything in it is already inside the $49 Digital System.</p>
@@ -169,6 +188,27 @@ const order = product
 		color: #fff;
 	}
 	.product-callout__cta:focus-visible {
+		outline: 3px solid rgb(var(--black));
+		outline-offset: 3px;
+	}
+	.product-callout__paypal {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 44px;
+		margin-top: 0.75em;
+		padding: 0.6em 1.2em;
+		border-radius: 999px;
+		background: #ffc439;
+		color: #111;
+		font-weight: 700;
+		text-decoration: none;
+	}
+	.product-callout__paypal:hover {
+		background: #f2ba36;
+		color: #111;
+	}
+	.product-callout__paypal:focus-visible {
 		outline: 3px solid rgb(var(--black));
 		outline-offset: 3px;
 	}

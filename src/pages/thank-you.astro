@@ -12,7 +12,10 @@ export const prerender = false;
 // https://buzzyfly.com/thank-you?s={CHECKOUT_SESSION_ID}
 const sessionId = Astro.url.searchParams.get("s") ?? "";
 const isStripeSession = /^cs_(live|test)_[A-Za-z0-9]+$/.test(sessionId);
-if (isStripeSession) Astro.response.headers.set("cache-control", "private, no-store");
+// PayPal orders arrive from /buy/paypal-return as ?pp=<order id>, already recorded.
+const paypalOrderId = Astro.url.searchParams.get("pp") ?? "";
+const isPaypalOrder = /^[A-Za-z0-9_-]{6,64}$/.test(paypalOrderId);
+if (isStripeSession || isPaypalOrder) Astro.response.headers.set("cache-control", "private, no-store");
 
 // The Stripe webhook records the paid order in D1. Email delivery is not
 // reliable, so this page is the main delivery path: once the order is on
@@ -36,6 +39,25 @@ if (isStripeSession && env?.DB) {
 		}
 	} catch (error) {
 		console.error("Buzzyfly thank-you: order lookup failed", error);
+	}
+} else if (isPaypalOrder && env?.DB) {
+	try {
+		const row = await env.DB.prepare(
+			`SELECT item_id, customer_email FROM fulfillments WHERE provider = 'paypal' AND order_id = ? LIMIT 1`,
+		)
+			.bind(paypalOrderId)
+			.first<{ item_id: string; customer_email: string | null }>();
+		if (row && isAppItem(row.item_id)) {
+			const key = await appKeyForOrder(env, { orderId: paypalOrderId, itemId: row.item_id, customerEmail: row.customer_email });
+			// PayPal order IDs show up on receipts, so only show the link to the
+			// browser /buy/paypal-return already unlocked.
+			if (key && Astro.cookies.get(appCookieName(row.item_id))?.value === key) {
+				appItemId = row.item_id;
+				appKey = key;
+			}
+		}
+	} catch (error) {
+		console.error("Buzzyfly thank-you: PayPal order lookup failed", error);
 	}
 }
 if (jobsToken) Astro.cookies.set(JOBS_COOKIE, jobsToken, jobsCookieOptions(Astro.url));
