@@ -6,14 +6,26 @@
 export interface PaypalEnv {
 	PAYPAL_CLIENT_ID?: string;
 	PAYPAL_SECRET?: string;
+	/** Accepted in place of PAYPAL_CLIENT_ID / PAYPAL_SECRET: the names PayPal's dashboard and docs use. */
+	PAYPAL_CLIENT_SECRET?: string;
+	PAYPAL_SECRET_KEY?: string;
+	PAYPAL_CLIENTID?: string;
+	PAYPAL_ID?: string;
 	PAYPAL_ENV?: string;
 	/** Test hook only: overrides the PayPal API origin. */
 	PAYPAL_API_BASE?: string;
 }
 
+/** The PayPal app's client ID and secret, whichever of the accepted names they were saved under. */
+export function paypalCredentials(env: unknown): { clientId: string; secret: string } | null {
+	const e = (env ?? {}) as PaypalEnv;
+	const clientId = (e.PAYPAL_CLIENT_ID || e.PAYPAL_CLIENTID || e.PAYPAL_ID || "").trim();
+	const secret = (e.PAYPAL_SECRET || e.PAYPAL_CLIENT_SECRET || e.PAYPAL_SECRET_KEY || "").trim();
+	return clientId && secret ? { clientId, secret } : null;
+}
+
 export function paypalConfigured(env: unknown): boolean {
-	const e = env as PaypalEnv;
-	return Boolean(e?.PAYPAL_CLIENT_ID && e?.PAYPAL_SECRET);
+	return paypalCredentials(env) !== null;
 }
 
 function apiBase(e: PaypalEnv): string {
@@ -25,7 +37,7 @@ async function accessToken(e: PaypalEnv): Promise<string> {
 	const res = await fetch(`${apiBase(e)}/v1/oauth2/token`, {
 		method: "POST",
 		headers: {
-			authorization: `Basic ${btoa(`${e.PAYPAL_CLIENT_ID}:${e.PAYPAL_SECRET}`)}`,
+			authorization: `Basic ${btoa(`${paypalCredentials(e)?.clientId}:${paypalCredentials(e)?.secret}`)}`,
 			"content-type": "application/x-www-form-urlencoded",
 		},
 		body: "grant_type=client_credentials",

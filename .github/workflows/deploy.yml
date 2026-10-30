@@ -67,7 +67,7 @@ jobs:
           if health.get("paypal") and not shows_paypal:
               failed.append("PayPal is configured but /apps-pro does not show the PayPal button")
           if not health.get("paypal"):
-              print("::warning::PayPal keys are not set; /apps-pro shows the request form")
+              print("::warning::PayPal keys not found (PayPal names on the Worker: " + (", ".join(health.get("paypalNamesFound") or []) or "none") + "); /apps-pro shows the request form")
           if failed:
               for f in failed:
                   print(f"::error::{f}")
