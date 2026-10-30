@@ -36,6 +36,19 @@ async function accessToken(e: PaypalEnv): Promise<string> {
 	return json.access_token;
 }
 
+/** For the admin status panel: are the keys set, which PayPal they point at, and does PayPal accept them. */
+export async function paypalKeyStatus(env: unknown): Promise<{ configured: boolean; mode: "live" | "sandbox"; accepted: boolean | null; error: string | null }> {
+	const e = env as PaypalEnv;
+	const mode = e?.PAYPAL_ENV === "sandbox" ? "sandbox" : "live";
+	if (!paypalConfigured(e)) return { configured: false, mode, accepted: null, error: null };
+	try {
+		await accessToken(e);
+		return { configured: true, mode, accepted: true, error: null };
+	} catch (error) {
+		return { configured: true, mode, accepted: false, error: (error as Error).message };
+	}
+}
+
 export interface CreatedOrder {
 	id: string;
 	approveUrl: string;

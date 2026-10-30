@@ -5,9 +5,13 @@ import AdminLayout from "../../layouts/AdminLayout.astro";
 import AdminHelp from "../../components/AdminHelp.astro";
 import { getSettings } from "../../lib/settings";
 import { getGitHubConfig } from "../../lib/github";
+import { paypalKeyStatus } from "../../lib/paypal";
 
 const env = Astro.locals.runtime.env;
 const settings = await getSettings(env);
+const paypal = await paypalKeyStatus(env);
+const hasTokenSecret = Boolean(env.DOWNLOAD_TOKEN_SECRET);
+const checkoutLive = paypal.accepted === true && hasTokenSecret && paypal.mode === "live";
 const githubConfig = getGitHubConfig(env);
 const status = Astro.url.searchParams.get("status");
 const error = Astro.url.searchParams.get("error");
@@ -25,6 +29,23 @@ const error = Astro.url.searchParams.get("error");
 	{status === "saved" && <p class="admin-notice admin-notice--success">Saved to admin records.</p>}
 	{status === "published" && <p class="admin-notice admin-notice--success">Saved and committed — the live site will update after the redeploy finishes.</p>}
 	{error && <p class="admin-notice admin-notice--error">{error}</p>}
+
+	<div class="admin-card">
+		<h2 style="margin-top:0">Apps Pro checkout (PayPal)</h2>
+		<p class={`admin-notice ${checkoutLive ? "admin-notice--success" : "admin-notice--error"}`}>
+			{checkoutLive
+				? "Live. /apps-pro shows \"Pay with PayPal\" and buyers are unlocked after paying."
+				: "Not live yet. /apps-pro shows the \"Request Apps Pro\" form until every line below says OK."}
+		</p>
+		<ul>
+			<li>PAYPAL_CLIENT_ID and PAYPAL_SECRET: {paypal.configured ? "OK, both found" : "MISSING. Add both in Cloudflare → buzzyfly → Settings → Variables and Secrets, type Secret, then Deploy."}</li>
+			{paypal.configured && (
+				<li>PayPal accepts the keys: {paypal.accepted ? "OK" : `NO (${paypal.error}). Re-copy the Client ID and Secret from the Live tab at developer.paypal.com.`}</li>
+			)}
+			<li>PayPal mode: {paypal.mode === "live" ? "OK, live (real payments)" : "sandbox (test money only). Remove PAYPAL_ENV in Cloudflare to take real payments."}</li>
+			<li>DOWNLOAD_TOKEN_SECRET: {hasTokenSecret ? "OK" : "MISSING. Checkout refuses to charge without it. Add any long random text as a Secret with this name."}</li>
+		</ul>
+	</div>
 
 	<div class="admin-card">
 		<form class="admin-form" method="POST" action="/api/admin/settings">
