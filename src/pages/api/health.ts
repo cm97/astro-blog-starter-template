@@ -19,6 +19,8 @@ export const GET: APIRoute = ({ locals }) => {
 		paypal: paypalConfigured(env),
 		downloadTokenSecret: Boolean(env.DOWNLOAD_TOKEN_SECRET),
 		jobsMembership: Boolean(getJobsOffer(env)),
+		// Names only, so a key saved under an unexpected name can be spotted without exposing it.
+		paypalNamesFound: Object.keys(env).filter((name) => /paypal/i.test(name) && Boolean(env[name])).sort(),
 	};
 	return Response.json(status, { headers: { "cache-control": "no-store" } });
 };
