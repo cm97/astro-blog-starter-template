@@ -34,6 +34,45 @@ jobs:
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN || secrets.CLOUDFLARE_API_SECRET || secrets.CF_API_TOKEN || secrets.CLOUDFLARE_TOKEN || secrets.WRANGLER_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID || 'a5780ae59a275c38ad62c2f9a3636c75' }}
+      # Load the live site after every deploy and fail the run if a key page is
+      # down or a payment setting is half-configured. GitHub's runners can reach
+      # the site, so this check works without anyone opening a browser.
+      - name: Check the live site
+        run: |
+          sleep 15
+          python3 - <<'PY'
+          import json, sys, urllib.request
+          base = "https://www.buzzyfly.com"
+          def get(path):
+              req = urllib.request.Request(base + path, headers={"User-Agent": "buzzyfly-deploy-check"})
+              with urllib.request.urlopen(req, timeout=30) as r:
+                  return r.status, r.read().decode("utf-8", "replace")
+          failed = []
+          for path in ["/", "/store", "/jobs", "/apps-pro", "/buzzy-lands", "/blog"]:
+              try:
+                  code, _ = get(path)
+              except Exception as e:
+                  code = getattr(e, "code", str(e))
+              print(f"{path}: {code}")
+              if code != 200:
+                  failed.append(f"{path} returned {code}")
+          code, body = get("/api/health")
+          health = json.loads(body)
+          print("settings:", json.dumps(health))
+          if health.get("paypal") and not health.get("downloadTokenSecret"):
+              failed.append("PayPal keys are set but DOWNLOAD_TOKEN_SECRET is missing: buyers would pay and get no access code")
+          _, apps = get("/apps-pro")
+          shows_paypal = "Pay with PayPal" in apps
+          print("apps-pro shows PayPal button:", shows_paypal)
+          if health.get("paypal") and not shows_paypal:
+              failed.append("PayPal is configured but /apps-pro does not show the PayPal button")
+          if not health.get("paypal"):
+              print("::warning::PayPal keys are not set; /apps-pro shows the request form")
+          if failed:
+              for f in failed:
+                  print(f"::error::{f}")
+              sys.exit(1)
+          PY
       # Tell Bing, Yandex and the other IndexNow engines about every page in the
       # sitemap, so new posts get crawled in hours instead of weeks. The key
       # file lives in public/. A failure here never fails the deploy.
