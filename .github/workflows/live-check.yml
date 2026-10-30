@@ -1,0 +1,25 @@
+name: Live check
+
+# Loads the live site and reports whether PayPal checkout for Apps Pro is on.
+# Read-only: it never pays or changes anything. Never fails a PR.
+on:
+  pull_request:
+    paths: [".github/workflows/live-check.yml"]
+  workflow_dispatch:
+
+jobs:
+  apps-pro:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Check /apps-pro button and /apps/buy
+        continue-on-error: true
+        run: |
+          page=$(curl -sS -m 30 -A "BuzzyflyLiveCheck" "https://buzzyfly.com/apps-pro?nocache=$(date +%s)")
+          echo "Button on /apps-pro:"
+          echo "$page" | grep -o -i 'Pay with PayPal[^<]*\|Request Apps Pro[^<]*\|Email to buy[^<]*' | sort -u || echo "  (no buy button text found)"
+          echo
+          echo "/apps/buy response (302 to paypal.com = checkout works, 503 = keys missing, 502 = keys wrong):"
+          curl -sS -m 30 -o /tmp/buy.txt -w "  status %{http_code}  redirect %{redirect_url}\n" https://buzzyfly.com/apps/buy
+          head -c 300 /tmp/buy.txt; echo
