@@ -2,6 +2,7 @@
 title: "The 12-Minute Weekly Reset When You Have Three Clients and No Time"
 description: "Exact 12-minute Monday reset for solo operators with multiple clients — three cash moves, two follow-ups, one open date list so the week cannot erase them."
 pubDate: 2026-10-28
+updatedDate: 2026-10-30
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -101,6 +102,20 @@ Moved: ________
 Slid (next Monday line 1 unless killed): ________
 Invoice or close-out sent: ________
 ```
+
+## Exact copy blocks you can paste today
+
+When a client asks "where are we on this?" mid-week:
+
+> Status: [one deliverable] due [date]. Next from me: [action] by [date]. Next from you: [action] by [date]. Reply if that still holds.
+
+When you need to pause a non-paying lead:
+
+> Closing this for now. Reply if you still want the [date] slot and I will reopen the thread.
+
+When the invoice is ready but you keep delaying the send:
+
+> Invoice [number] for [deliverable] attached. Due [date]. Reply if the billing address changed.
 
 ## Extra moves when three clients already feel like six
 
