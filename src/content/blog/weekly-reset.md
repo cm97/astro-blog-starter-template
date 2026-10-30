@@ -3,7 +3,7 @@ title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
 description: "A 20-minute weekly reset for solo operators — Monday sheet, Wednesday check, and a 12-minute Thursday cash salvage so priorities and follow-ups still exist when the week breaks."
 category: "planning"
 pubDate: "Sep 01 2026"
-updatedDate: "Oct 26 2026"
+updatedDate: "Oct 30 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -182,6 +182,7 @@ If the first client is not on the Monday sheet, the reset is still a personal pr
 - After any client payment clears, add one line to next Monday's "Still open": the day-2 or day-7 onboarding touch. The reset is how week two stays quiet-free.
 - Cap follow-ups at two per reset. Five becomes a blast and the habit dies.
 - Log the invoice amount on the same note the day it leaves. Missing numbers become missing cash.
+- If three clients reply at once, park the non-cash ones. The reset only protects money and the next delivery date.
 
 ## Phrases so you do not draft from a blank screen
 
@@ -200,5 +201,8 @@ The Digital System ($49) is the reset plus onboarding and follow-ups, so a slamm
 
 One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
+Want every checklist in one place instead of piecing them together? The Complete Business Bundle ($97) is the Digital System plus the Onboarding Kit, Follow-Up Templates, and Weekly Reset Checklist. Same browser app. One payment. No subscription.
+
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
+[Get the Complete Business Bundle — $97](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
