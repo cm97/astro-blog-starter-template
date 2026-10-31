@@ -43,15 +43,12 @@ const product = ALL_PRODUCTS.find((p) => p.id === itemId)!;
 						<a href={`#${n.id}`} data-nav={n.id}><span aria-hidden="true">{n.icon}</span>{n.label}</a>
 					))}
 				</nav>
-				{edition === "budget" ? (
-					<script>
-						import "../scripts/budgetApp";
-					</script>
-				) : (
-					<script>
-						import "../scripts/buzzyApp";
-					</script>
-				)}
+				<script>
+					// Astro bundles every <script> in a component regardless of
+					// conditions, so pick the app at runtime. Each loads as its own chunk.
+					if (document.body.dataset.edition === "budget") import("../scripts/budgetApp");
+					else import("../scripts/buzzyApp");
+				</script>
 			</>
 		) : (
 			<main class="wrap locked">
