@@ -42,9 +42,9 @@ const payload = JSON.stringify({
 });
 
 // Stripe signature: "t=<unix_seconds>,v1=<hmac_sha256(t.payload, secret)>"
-const secret = WEBHOOK_SECRET.replace(/^whsec_/, "");
+// Stripe uses the whole secret string (including "whsec_") as the HMAC key.
 const timestamp = Math.floor(Date.now() / 1000);
-const signed = createHmac("sha256", Buffer.from(secret, "base64"))
+const signed = createHmac("sha256", WEBHOOK_SECRET)
   .update(`${timestamp}.${payload}`)
   .digest("hex");
 const stripeSignature = `t=${timestamp},v1=${signed}`;
