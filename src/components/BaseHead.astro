@@ -8,11 +8,12 @@ interface Props {
 	title: string;
 	description: string;
 	image?: string;
+	noindex?: boolean;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image: requested } = Astro.props;
+const { title, description, image: requested, noindex = false } = Astro.props;
 
 // Social platforms (Facebook, X, LinkedIn) don't render SVG share images and
 // the blog-placeholder files are starter-template stock art, so both fall
@@ -38,6 +39,8 @@ const isDefaultImage = image === DEFAULT_OG;
 <!-- Font preloads -->
 <link rel="preload" href="/fonts/atkinson-regular.woff" as="font" type="font/woff" crossorigin />
 <link rel="preload" href="/fonts/atkinson-bold.woff" as="font" type="font/woff" crossorigin />
+
+{noindex && <meta name="robots" content="noindex" />}
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />

@@ -54,7 +54,7 @@ export default defineConfig({
 		sitemap({
 			// /jobs renders on each request, so the sitemap can't find it on its own.
 			customPages: ["https://buzzyfly.com/jobs"],
-			filter: (page) => !/^https:\/\/buzzyfly\.com\/(admin|app|success|thank-you|unsubscribe)(\/|$)/.test(page),
+			filter: (page) => !/^https:\/\/buzzyfly\.com\/(admin|agent|app|success|thank-you|unsubscribe)(\/|$)/.test(page),
 		}),
 	],
 	devToolbar: { enabled: false },

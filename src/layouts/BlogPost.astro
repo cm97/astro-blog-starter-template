@@ -11,6 +11,7 @@ import { BUZZYFLY_CONFIG, getProduct } from '../data/monetization';
 type Props = CollectionEntry<'blog'>['data'] & {
 	prev?: CollectionEntry<'blog'> | null;
 	next?: CollectionEntry<'blog'> | null;
+	noindex?: boolean;
 	related?: CollectionEntry<'blog'>[];
 	currentId?: string;
 };
@@ -28,6 +29,7 @@ const {
 	prev,
 	next,
 	related = [],
+	noindex = false,
 } = Astro.props;
 
 // Every post ends with a product callout: the post's own product when it names
@@ -61,7 +63,7 @@ const articleLd = JSON.stringify({
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} image={displayHero} />
+		<BaseHead title={title} description={description} image={displayHero} noindex={noindex} />
 		<script type="application/ld+json" set:html={articleLd} />
 		<style>
 			main { width: calc(100% - 2em); max-width: 100%; margin: 0; }
