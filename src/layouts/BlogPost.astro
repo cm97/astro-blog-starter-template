@@ -51,7 +51,7 @@ const articleLd = JSON.stringify({
 	description,
 	datePublished: pubDate.toISOString(),
 	dateModified: (updatedDate ?? pubDate).toISOString(),
-	image: new URL(displayHero, Astro.site).href,
+	image: new URL(displayHero.endsWith('.svg') ? '/og-default.jpg' : displayHero, Astro.site).href,
 	mainEntityOfPage: pageUrl,
 	url: pageUrl,
 	author: { '@type': 'Organization', name: BUZZYFLY_CONFIG.brandName, url: BUZZYFLY_CONFIG.siteUrl },
