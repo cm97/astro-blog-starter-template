@@ -1,0 +1,22 @@
+---
+// Buzzyfly Budget ($19): a browser budget planner. A separate product from the
+// Digital System, so only a Budget key opens it.
+import AppShell from "../../components/AppShell.astro";
+import { BUDGET_APP_ITEM_ID, resolveAppAccess } from "../../lib/appAccess";
+
+export const prerender = false;
+Astro.response.headers.set("cache-control", "private, no-store");
+
+const access = await resolveAppAccess(Astro.locals.runtime.env, Astro.url, Astro.cookies, BUDGET_APP_ITEM_ID);
+if (access.redirect) return Astro.redirect(access.redirect, 302);
+if (!access.unlocked) Astro.response.status = 402;
+
+const NAV = [
+	{ id: "month", label: "Month", icon: "🗓️" },
+	{ id: "spend", label: "Spend", icon: "➕" },
+	{ id: "bills", label: "Bills", icon: "🧾" },
+	{ id: "debt", label: "Debt", icon: "📉" },
+	{ id: "more", label: "More", icon: "⚙️" },
+];
+---
+<AppShell itemId={BUDGET_APP_ITEM_ID} unlocked={access.unlocked} badLink={access.badLink} edition="budget" nav={NAV} appName="Budget" />

@@ -10,7 +10,7 @@ interface Props {
 	unlocked: boolean;
 	badLink: boolean;
 	/** Which app this is. The script shows only that edition's screens. */
-	edition: "system" | "reset" | "followups" | "onboarding";
+	edition: "system" | "reset" | "followups" | "onboarding" | "budget";
 	nav: { id: string; label: string; icon: string }[];
 	appName: string;
 }
@@ -43,9 +43,15 @@ const product = ALL_PRODUCTS.find((p) => p.id === itemId)!;
 						<a href={`#${n.id}`} data-nav={n.id}><span aria-hidden="true">{n.icon}</span>{n.label}</a>
 					))}
 				</nav>
-				<script>
-					import "../scripts/buzzyApp";
-				</script>
+				{edition === "budget" ? (
+					<script>
+						import "../scripts/budgetApp";
+					</script>
+				) : (
+					<script>
+						import "../scripts/buzzyApp";
+					</script>
+				)}
 			</>
 		) : (
 			<main class="wrap locked">
@@ -184,9 +190,9 @@ const product = ALL_PRODUCTS.find((p) => p.id === itemId)!;
 	.checklist li { border-top: 1px solid var(--line); padding: 8px 0; }
 	.checklist label { display: flex; gap: 10px; align-items: flex-start; cursor: pointer; min-height: 44px; }
 	.notes { white-space: pre-wrap; }
-	.stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0; }
-	.stats div { background: var(--bg); border-radius: 10px; padding: 10px; text-align: center; }
-	.stats strong { display: block; font-size: 1.4rem; }
+	.stats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin: 12px 0; }
+	.stats div { background: var(--bg); border-radius: 10px; padding: 10px 6px; text-align: center; min-width: 0; }
+	.stats strong { display: block; font-size: clamp(0.95rem, 4.2vw, 1.4rem); overflow-wrap: anywhere; }
 	.stats small { color: var(--muted); font-size: 0.75rem; }
 	.result { font-size: 1.05rem; display: flex; justify-content: space-between; border-top: 1px solid var(--line); padding-top: 10px; }
 	.tasks { padding-left: 1.4em; margin: 12px 0 0; }

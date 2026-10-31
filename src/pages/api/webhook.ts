@@ -91,7 +91,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
 	const productFile = resolveProductFile(order.itemId);
 	const isApps = isAppsItem(order.itemId);
-	if (!productFile && !isApps) {
+	if (!productFile && !isApps && !isAppItem(order.itemId)) {
 		console.error(`Buzzyfly webhook: no product file mapped for item ${order.itemId}`);
 		return new Response(JSON.stringify({ received: true, fulfilled: false }), {
 			status: 200,

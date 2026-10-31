@@ -1,0 +1,104 @@
+---
+export const prerender = true;
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../data/monetization";
+
+// Landing page for Buzzyfly Budget. One job: get the visitor to the buy button.
+const product = ALL_PRODUCTS.find((p) => p.id === "budget-planner")!;
+const buyable = !!product.buyUrl;
+
+const PAINS = [
+	"Payday comes, and by the 20th you're not sure where it went.",
+	"A bill you forgot about hits the same week as rent.",
+	"You've downloaded three budget spreadsheets. You opened each one once.",
+	"You pay every card's minimum and the balances barely move.",
+];
+const SCREENS = [
+	{ icon: "🗓️", title: "Plan the month in 10 minutes", text: "Add your paychecks. Give every dollar a job. The app shows what's left to assign, so you know before you spend." },
+	{ icon: "➕", title: "Log spending in seconds", text: "Amount, category, done. Each category shows what's left this month, on your phone, right at the register." },
+	{ icon: "🧾", title: "Never miss a bill", text: "Add bills once with their due day. Tick them off each month. Overdue and due-soon bills stand out." },
+	{ icon: "📉", title: "See your debt-free month", text: "Enter your cards and loans. Pick snowball or avalanche. The app works out the month you'll be debt-free and the interest you'll pay." },
+	{ icon: "🎯", title: "Savings goals and couples mode", text: "Track an emergency fund or a trip. Budgeting with a partner? Tag income and spending by person." },
+];
+const FAQ = [
+	{ q: "Is this a spreadsheet?", a: "No. It's an app that runs in your browser on your phone or computer. Nothing to download, no formulas to break." },
+	{ q: "Is my money data safe?", a: "Your numbers stay on your device. They're saved in your browser and never sent to us. You don't connect a bank account. Download a backup any time." },
+	{ q: "Is it a subscription?", a: "No. You pay once and keep it." },
+	{ q: "How do I get it?", a: "Pay through Stripe. You land on a page that opens the app right away and gives you your personal access link." },
+	{ q: "What if I can't get in?", a: BUZZYFLY_CONFIG.guarantee },
+];
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Buzzyfly Budget: Paycheck Budget Planner App, No Spreadsheet"
+			description="A budget planner that runs in your browser. Plan each paycheck, log spending, track bill due dates and see your debt-free date. One payment, no subscription."
+		/>
+		<style>
+			.lp { max-width: min(680px, calc(100% - 2em)); margin: 0 auto; }
+			.lp-hero { text-align: center; padding: 2em 0 1em; }
+			.lp-hero h1 { font-size: 2.3em; line-height: 1.15; margin-bottom: 0.4em; }
+			.lp-hero p { font-size: 1.15em; color: rgb(var(--gray-dark)); }
+			.buy { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; padding: 0.85em 1.4em; border-radius: 10px; text-decoration: none; min-height: 44px; font-size: 1.1em; }
+			.buy:hover { background: var(--accent-dark); }
+			.buy:focus-visible { outline: 3px solid #e0a012; outline-offset: 2px; }
+			.soon { display: inline-block; background: rgb(var(--gray-light)); padding: 0.85em 1.4em; border-radius: 10px; font-weight: 700; }
+			.trust { list-style: none; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4em 1.2em; margin: 1em 0 0; font-size: 0.95em; color: rgb(var(--gray-dark)); }
+			.pains { background: rgb(var(--gray-light)); border-radius: 10px; padding: 1em 1.4em; margin: 1.5em 0; }
+			.pains li { margin: 0.4em 0; }
+			.screens { list-style: none; padding: 0; margin: 1.5em 0; }
+			.screens li { display: flex; gap: 0.9em; padding: 1em 0; border-top: 1px solid rgb(var(--gray-light)); }
+			.screens li:first-child { border-top: none; }
+			.screens .ic { font-size: 1.6em; flex: 0 0 1.6em; }
+			.screens strong { display: block; font-size: 1.1em; }
+			.price { text-align: center; border: 2px solid var(--accent); border-radius: 14px; padding: 1.5em 1em; margin: 2em 0; }
+			.price .amt { font-size: 2.6em; font-weight: 800; line-height: 1; margin: 0.2em 0; }
+			.faq dt { font-weight: 700; margin-top: 1em; }
+			.faq dd { margin: 0.3em 0 0; }
+			.small { font-size: 0.9em; color: rgb(var(--gray)); }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main class="lp">
+			<section class="lp-hero">
+				<h1>Know where every dollar goes before the month starts.</h1>
+				<p>A paycheck budget planner that runs in your browser. Plan the month, log spending, never miss a bill, and see the month you'll be debt-free.</p>
+				{buyable
+					? <a class="buy" href={product.buyUrl!}>Get Buzzyfly Budget — {product.price}</a>
+					: <span class="soon">Coming soon</span>}
+				<ul class="trust">
+					<li>✓ One payment</li>
+					<li>✓ No subscription</li>
+					<li>✓ No spreadsheet</li>
+					<li>✓ Your data stays on your device</li>
+				</ul>
+			</section>
+
+			<h2>Sound familiar?</h2>
+			<ul class="pains">{PAINS.map((p) => <li>{p}</li>)}</ul>
+
+			<h2>What you get</h2>
+			<ul class="screens">
+				{SCREENS.map((s) => <li><span class="ic" aria-hidden="true">{s.icon}</span><span><strong>{s.title}</strong>{s.text}</span></li>)}
+			</ul>
+
+			<section class="price">
+				<p><strong>{product.title}</strong></p>
+				<p class="amt">{product.price}</p>
+				<p>One time. Works on phone and computer.</p>
+				{buyable ? <a class="buy" href={product.buyUrl!}>Get it now</a> : <span class="soon">Coming soon</span>}
+				<p class="small">{BUZZYFLY_CONFIG.guarantee}</p>
+			</section>
+
+			<h2>Questions</h2>
+			<dl class="faq">{FAQ.map((f) => <><dt>{f.q}</dt><dd>{f.a}</dd></>)}</dl>
+			<p class="small">Questions? <a href={`mailto:${BUZZYFLY_CONFIG.supportEmail}`}>{BUZZYFLY_CONFIG.supportEmail}</a></p>
+		</main>
+		<Footer />
+	</body>
+</html>

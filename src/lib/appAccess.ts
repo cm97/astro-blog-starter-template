@@ -21,6 +21,8 @@ export const APP_ITEM_ID = "buzzyfly-digital-system";
 export const RESET_APP_ITEM_ID = "weekly-reset-checklist";
 export const FOLLOWUPS_APP_ITEM_ID = "follow-up-email-templates";
 export const ONBOARDING_APP_ITEM_ID = "client-onboarding-kit";
+/** Buzzyfly Budget: a separate product, not part of the Digital System. */
+export const BUDGET_APP_ITEM_ID = "budget-planner";
 
 /** Every web-app product: where it lives and which cookie holds its key. */
 export const APP_PRODUCTS: Record<string, { path: string; cookie: string }> = {
@@ -28,6 +30,7 @@ export const APP_PRODUCTS: Record<string, { path: string; cookie: string }> = {
 	[RESET_APP_ITEM_ID]: { path: "/app/reset", cookie: "bf_app_reset" },
 	[FOLLOWUPS_APP_ITEM_ID]: { path: "/app/follow-ups", cookie: "bf_app_followups" },
 	[ONBOARDING_APP_ITEM_ID]: { path: "/app/onboarding", cookie: "bf_app_onboarding" },
+	[BUDGET_APP_ITEM_ID]: { path: "/app/budget", cookie: "bf_app_budget" },
 };
 
 export const APP_COOKIE = APP_PRODUCTS[APP_ITEM_ID].cookie;
@@ -75,7 +78,7 @@ export async function verifyAppKey(
 			.bind(key)
 			.first<{ order_id: string; item_id: string; expires_at: number }>();
 		if (!row || Number(row.expires_at) < Date.now()) return null;
-		if (row.item_id !== itemId && row.item_id !== APP_ITEM_ID) return null;
+		if (row.item_id !== itemId && (row.item_id !== APP_ITEM_ID || itemId === BUDGET_APP_ITEM_ID)) return null;
 		return { orderId: String(row.order_id) };
 	} catch (error) {
 		console.error("Buzzyfly app: key lookup failed", error);

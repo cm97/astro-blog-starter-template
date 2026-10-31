@@ -52,7 +52,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 
 	if (isDropItem(order.item_id)) return resendDropLink(order, env, locals.adminUser ?? "unknown", backParams);
 
-	if (!resolveProductFile(order.item_id)) {
+	if (!resolveProductFile(order.item_id) && !isAppItem(order.item_id)) {
 		backParams.set("error", `No product file is mapped for item "${order.item_id}".`);
 		return redirect(backParams);
 	}
