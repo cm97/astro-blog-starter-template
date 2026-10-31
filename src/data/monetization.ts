@@ -98,7 +98,8 @@ export const UPSELL_MAP: Record<string, string | null> = {
 	"buzzyfly-digital-system": null,
 };
 
-// Only the $49 Digital System is buyable. The $15, $19 and $29 apps stay "Coming soon" with buyUrl: null until each has a Payment Link.
+// Buyable: the $49 Digital System and the $19 Buzzyfly Budget (its own Payment Link, item_id budget-planner).
+// The $15, $19 and $29 Digital System editions stay "Coming soon" with buyUrl: null until each has a Payment Link.
 export const ALL_PRODUCTS: Product[] = [
 	{
 		id: "budget-planner",
@@ -106,8 +107,8 @@ export const ALL_PRODUCTS: Product[] = [
 		price: "$19",
 		description: "Know where every dollar goes before the month starts. A budget planner that runs in your browser: paycheck plan, spending log, bill due dates and your debt-free date. No spreadsheet. No download.",
 		features: ["Paycheck budget that shows what's left to assign", "Log spending in seconds from your phone", "Bill tracker with due dates and paid ticks", "Debt payoff plan: snowball or avalanche, with your debt-free month", "Savings goals and couples mode", "Private: your numbers stay on your device"],
-		buyUrl: null,
-		badge: "Coming soon",
+		buyUrl: "https://buy.stripe.com/9B6cN71OM5J41wo7JAaVa0d",
+		badge: "New",
 	},
 	{
 		id: "weekly-reset-checklist",
