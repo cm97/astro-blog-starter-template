@@ -3,13 +3,14 @@ import Layout from '../layouts/BlogPost.astro';
 import { ALL_PRODUCTS, absoluteBuyUrl } from '../data/monetization';
 
 const system = ALL_PRODUCTS.find((p) => p.id === 'buzzyfly-digital-system')!;
-const paste = `Onboarding still lives in your head. ${system.price} ${system.title}, one-time, download after checkout: ${absoluteBuyUrl(system)}`;
+const paste = `Onboarding still lives in your head. ${system.price} ${system.title}, one-time, open it in your browser after checkout: ${absoluteBuyUrl(system)}`;
 ---
 
 <Layout
 	title="Buzzyfly agent — $49 Digital System"
 	description="Cash agent for the live Buzzyfly store. One paste. The $49 Digital System."
 	pubDate={new Date('October 7 2026')}
+	noindex
 >
 	<h1>Buzzyfly agent</h1>
 	<p>This page is the agent on the Cloudflare site. It sells the existing {system.title}. No new product.</p>
