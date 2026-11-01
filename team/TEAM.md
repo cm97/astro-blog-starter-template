@@ -1,6 +1,6 @@
 # Buzzyfly team playbook
 
-Buzzyfly is run by three AI agents. Each one is a scheduled Claude session that
+Buzzyfly is run by four AI agents. Each one is a scheduled Claude session that
 starts fresh every run. This folder is their shared memory: read it at the start
 of every run and update it at the end.
 
@@ -20,8 +20,21 @@ visitors clicking buy.
 | Agent | Runs (New York time) | Job |
 |---|---|---|
 | CEO | Monday 7:47 | Reads the numbers, picks the week's top 3 priorities, writes `PRIORITIES.md`, reports to the owner. |
-| Marketer | Mon, Wed, Fri 13:17 | One blog post or social image + posts per run, aimed at a real buyer problem. |
+| Marketer | Mon, Wed, Fri 13:17 | One blog post or social image per run, aimed at a real buyer problem. |
+| Content Creator | Tue, Thu 14:23 | One short vertical video (9:16, 15 to 30 seconds, on-screen text) per run, plus ready-to-paste captions for TikTok, Reels and Shorts. |
 | Developer | Every day 16:37 | Keeps the site, checkout and app working. Then ships the next site priority. |
+
+## Videos (Content Creator)
+
+- Make each video for free: render frames from HTML with Playwright, then join
+  them with ffmpeg into a silent 1080x1920 H.264 MP4. No paid video tools,
+  no stock footage, no music, no voice clones, no real people's faces.
+- Save it as `public/social/video/<slug>.mp4` (under 5 MB) with a matching
+  `<slug>.jpg` cover frame. Watch a few frames before shipping.
+- One idea per video: hook in the first 2 seconds, one useful tip, then
+  "buzzyfly.com/store" on the last screen. Large text, safe margins for app UI.
+- Put the captions (TikTok, Instagram Reels, YouTube Shorts title + description)
+  in `team/LOG.md` next to the video path. Do not post to any account.
 
 ## Where the numbers are
 
