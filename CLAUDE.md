@@ -10,6 +10,8 @@ Do not reintroduce any of the following. Check `src/`, emails (`src/data/emailSe
 4. **One refund rule everywhere** (pages, footer, `/terms`, emails): "30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access." Footer short form: "30-day refund if you can't access the app or it isn't as described." No "if it doesn't help", satisfaction or results-based money-back wording, no 7-day refunds. Keep the "Limits on our liability" section and the narrowed updates line in `/terms`.
 5. **Only the $49 Digital System is buyable.** Its Payment Link `https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00` is the only `buy.stripe.com` URL allowed in `src/`. The $15, $19 and $29 apps stay "Coming soon" with `buyUrl: null` and no buy links until each has its own Payment Link. There is no $97 bundle: the $49 Digital System already includes every app.
 
+6. **Buzzyfly Jobs (`/jobs`) is a paid product. Don't break it** (owner, 2026-11-01). Listings come from Jobicy's free API (`src/lib/jobs.ts`), whose terms allow paid job boards if Jobicy is credited with a link and Apply goes to the listing's own Jobicy URL. Never switch back to Remotive: its terms forbid putting its jobs behind a signup, and it only sends a handful. Never fetch the feed more than once an hour. Any change touching `/jobs`, `src/lib/jobs.ts`, `src/lib/jobsAccess.ts`, the layout or the header must pass `npm run test:jobs`. After it deploys, the live check must show 20+ jobs on `/jobs`.
+
 Also: no "reply-generating" or other outcome promises, the buyer copies and sends emails themselves, and no invented view counts, dates, testimonials or stats.
 
 ## How to work (owner, 2026-10-24 — read before doing anything else)
