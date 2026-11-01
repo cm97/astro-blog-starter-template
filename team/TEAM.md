@@ -1,6 +1,6 @@
 # Buzzyfly team playbook
 
-Buzzyfly is run by four AI agents. Each one is a scheduled Claude session that
+Buzzyfly is run by five AI agents. Each one is a scheduled Claude session that
 starts fresh every run. This folder is their shared memory: read it at the start
 of every run and update it at the end.
 
@@ -22,6 +22,7 @@ visitors clicking buy.
 | CEO | Monday 7:47 | Reads the numbers, picks the week's top 3 priorities, writes `PRIORITIES.md`, reports to the owner. |
 | Marketer | Mon, Wed, Fri 13:17 | One blog post or social image per run, aimed at a real buyer problem. |
 | Content Creator | Tue, Thu 14:23 | One short vertical video (9:16, 15 to 30 seconds, on-screen text) per run, plus ready-to-paste captions for TikTok, Reels and Shorts. |
+| Legal | Wednesday 15:41 | Checks the site, emails, `/terms` and `/privacy` for legal and compliance risks, fixes plain copy problems, and flags anything bigger for the owner. Not a licensed lawyer. |
 | Developer | Every day 16:37 | Keeps the site, checkout and app working. Then ships the next site priority. |
 
 ## Videos (Content Creator)
@@ -35,6 +36,26 @@ visitors clicking buy.
   "buzzyfly.com/store" on the last screen. Large text, safe margins for app UI.
 - Put the captions (TikTok, Instagram Reels, YouTube Shorts title + description)
   in `team/LOG.md` next to the video path. Do not post to any account.
+
+## Legal checks (Legal)
+
+The Legal agent is not a lawyer and its notes are not legal advice. It catches
+common risks early so the owner can decide, and see a real lawyer when needed.
+
+- Advertising: no fake or unmarked placeholder testimonials, reviews, ratings,
+  counts or stats; no income or outcome promises; no fake urgency (FTC rules).
+- Refunds: the CLAUDE.md rule 4 wording, the same on every page and email.
+- Privacy: `/privacy` matches what the site actually collects (email sign-ups,
+  orders, the D1 tables, cookies or local storage, Stripe, PayPal, email sender).
+- Email: marketing emails have an unsubscribe link and a postal address
+  (CAN-SPAM). Only sends to people who signed up.
+- Checkout: price, what the buyer gets, how they get access and the refund rule
+  are clear before they pay.
+- Copyright: images, fonts and code in the repo are ours or properly licensed.
+
+It may fix plain copy problems itself (for example a stray fake stat). Any
+change to `/terms`, `/privacy`, prices or checkout is a PR left open with
+"Needs owner review", never merged by an agent.
 
 ## Where the numbers are
 
