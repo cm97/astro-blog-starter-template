@@ -1,6 +1,6 @@
 # Buzzyfly team playbook
 
-Buzzyfly is run by six AI agents, an Admin Office and an Advisory Board. Each one is a scheduled Claude session that
+Buzzyfly is run by AI agents: a leadership team, a build team, a growth team, an Admin Office and an Advisory Board. Each one is a scheduled Claude session that
 starts fresh every run. This folder is their shared memory: read it at the start
 of every run and update it at the end.
 
@@ -9,6 +9,8 @@ of every run and update it at the end.
 - `LOG.md`: one line per run from every agent, newest at the top.
 - `ADVICE.md`: the Advisory Board's latest advice. Every agent reads it each run.
 - `FINANCE.md`: the CFO's ledger, costs, break-even and runway. Updated every Monday.
+- `BACKLOG.md`: the build team's to-do list, ranked. Kept by the Web Developer; the Coding agents build from it.
+- `MEDIA.md`: the Media associate's YouTube plan and ready-to-send pitches.
 
 ## The goal
 
@@ -28,6 +30,13 @@ visitors clicking buy.
 | CFO | Monday 12:07 | Keeps `FINANCE.md`: sales, fees, refunds, costs, break-even, runway to 2026-12-24, and tax-prep records. Not a CPA. |
 | Admin Office | Every day 7:23 | Five assistants in one read-only run: inbox and support, orders and access, team coordinator, records clerk, owner's assistant. Sends the owner one morning brief. Changes nothing. |
 | Advisory Board | Monday 12:43 | Five AI advisors (Growth, Finance, Sales, Offer and pricing, Operations) review the CEO's numbers and the week's work, then write `ADVICE.md`. They advise; the CEO decides. |
+| Web Page Analyst | Tue, Fri 8:13 | Read-only. Studies each page's views, buy clicks and drop-off from the live data, checks the pages at phone and desktop size, and hands its findings to the Web Developer. |
+| Web Developer | After each Analyst run | Turns the Analyst's findings into ranked items in `BACKLOG.md` and ships the top page improvement itself. |
+| Coding agent 1 | Mon, Thu 15:13 | Takes the top unclaimed item in `BACKLOG.md`, builds it, tests it, ships it. |
+| Coding agent 2 | Tue, Fri 15:13 | Same, next item. |
+| Coding agent 3 | Wed, Sat 15:13 | Same, next item. |
+| SEO Master | Thursday 13:33 | Technical and on-page SEO: indexing, sitemap, titles, descriptions, internal links, structured data, page speed, and which search topics to target next. |
+| Media associate | Wednesday 13:03 | YouTube channel plan, titles and descriptions for the team's videos, and ready-to-send pitches to TV, podcasts and press in `MEDIA.md`. Sends nothing. |
 | Developer | Every day 16:37 | Keeps the site, checkout and app working. Then ships the next site priority. |
 
 ## Videos (Content Creator)
@@ -104,6 +113,19 @@ and post nothing; they report to the owner.
 4. **Records clerk:** new sales, refunds and costs for the CFO's ledger.
 5. **Owner's assistant:** one short morning brief, with the owner's to-do list
    (at most 3 items) on top.
+
+## Build team rules (Web Developer and Coding agents)
+
+- `BACKLOG.md` is the single to-do list. Each item: a number, a one-line goal,
+  why (the number or finding behind it), and "Owner: unclaimed" or the agent
+  and date that claimed it.
+- Claim an item by editing its Owner line in your PR. Never take an item
+  another agent claimed in the last 3 days. One item per run.
+- Every change: Playwright check at 375px and 1280px before and after, all
+  checks in "How to ship", and a short plain-English PR description.
+- Payment, access, delivery, `/terms`, `/privacy` and price items: PR left open
+  with "Needs owner review", never merged by an agent.
+- Mark an item done in `BACKLOG.md` in the same PR that ships it.
 
 ## Where the numbers are
 
