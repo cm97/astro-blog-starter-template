@@ -52,7 +52,17 @@
 			} catch {
 				// no saved source: counted as direct
 			}
-			const body = new Blob([JSON.stringify({ event, path: location.pathname, source })], { type: "application/json" });
+			let path = location.pathname;
+			// /thank-you: only a return from a Stripe checkout (?s=cs_...) counts as
+			// /thank-you. The page's own wait-for-payment reloads (?t=1..) are not new
+			// views, and a visit without a checkout session (owner checks, old links)
+			// is counted apart so the funnel shows real buyer returns.
+			if (path.replace(/\/+$/, "") === "/thank-you") {
+				const q = new URLSearchParams(location.search);
+				if (event === "view" && q.has("t")) return;
+				if (!/^cs_(live|test)_[A-Za-z0-9]+$/.test(q.get("s") ?? "")) path = "/thank-you/no-session";
+			}
+			const body = new Blob([JSON.stringify({ event, path, source })], { type: "application/json" });
 			navigator.sendBeacon("/api/track", body);
 		};
 		send("view");
