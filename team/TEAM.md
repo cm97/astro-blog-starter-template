@@ -1,6 +1,6 @@
 # Buzzyfly team playbook
 
-Buzzyfly is run by five AI agents plus an Advisory Board. Each one is a scheduled Claude session that
+Buzzyfly is run by AI agents: a leadership team, a build team, a growth team, an Admin Office and an Advisory Board. Each one is a scheduled Claude session that
 starts fresh every run. This folder is their shared memory: read it at the start
 of every run and update it at the end.
 
@@ -8,6 +8,10 @@ of every run and update it at the end.
 - `PRIORITIES.md`: this week's top 3 priorities. Written by the CEO every Monday.
 - `LOG.md`: one line per run from every agent, newest at the top.
 - `ADVICE.md`: the Advisory Board's latest advice. Every agent reads it each run.
+- `FINANCE.md`: the CFO's ledger, costs, break-even and runway. Updated every Monday.
+- `BACKLOG.md`: the build team's to-do list, ranked. Kept by the Web Developer; the Coding agents build from it.
+- `MEDIA.md`: the Media associate's YouTube plan and ready-to-send pitches.
+- `DESIGN.md`: the Design Lead's style rules and specs. The other designers build to it.
 
 ## The goal
 
@@ -24,7 +28,20 @@ visitors clicking buy.
 | Marketer | Mon, Wed, Fri 13:17 | One blog post or social image per run, aimed at a real buyer problem. |
 | Content Creator | Tue, Thu 14:23 | One short vertical video (9:16, 15 to 30 seconds, on-screen text) per run, plus ready-to-paste captions for TikTok, Reels and Shorts. |
 | Legal | Wednesday 15:41 | Checks the site, emails, `/terms` and `/privacy` for legal and compliance risks, fixes plain copy problems, and flags anything bigger for the owner. Not a licensed lawyer. |
+| CFO | Monday 12:07 | Keeps `FINANCE.md`: sales, fees, refunds, costs, break-even, runway to 2026-12-24, and tax-prep records. Not a CPA. |
+| Admin Office | Every day 7:23 | Five assistants in one read-only run: inbox and support, orders and access, team coordinator, records clerk, owner's assistant. Sends the owner one morning brief. Changes nothing. |
 | Advisory Board | Monday 12:43 | Five AI advisors (Growth, Finance, Sales, Offer and pricing, Operations) review the CEO's numbers and the week's work, then write `ADVICE.md`. They advise; the CEO decides. |
+| Web Page Analyst | Tue, Fri 8:13 | Read-only. Studies each page's views, buy clicks and drop-off from the live data, checks the pages at phone and desktop size, and hands its findings to the Web Developer. |
+| Web Developer | After each Analyst run | Turns the Analyst's findings into ranked items in `BACKLOG.md` and ships the top page improvement itself. |
+| Coding agent 1 | Mon, Thu 15:13 | Takes the top unclaimed item in `BACKLOG.md`, builds it, tests it, ships it. |
+| Coding agent 2 | Tue, Fri 15:13 | Same, next item. |
+| Coding agent 3 | Wed, Sat 15:13 | Same, next item. |
+| SEO Master | Thursday 13:33 | Technical and on-page SEO: indexing, sitemap, titles, descriptions, internal links, structured data, page speed, and which search topics to target next. |
+| Media associate | Wednesday 13:03 | YouTube channel plan, titles and descriptions for the team's videos, and ready-to-send pitches to TV, podcasts and press in `MEDIA.md`. Sends nothing. |
+| Design Lead | Monday 11:00 | Owns the look. Keeps `DESIGN.md` (colors, type, spacing, components) and polishes the global styles and shared components. |
+| Designer: Home & Store | Tuesday 11:00 | Visual design of `/` and `/store` only. |
+| Designer: App & Blog | Thursday 11:00 | Visual design of `/app` and the blog post and listing layouts only. |
+| Designer: Mobile & Access | Saturday 11:00 | Mobile layout at 375px and accessibility (contrast, focus, tap targets, alt text) across pages. |
 | Developer | Every day 16:37 | Keeps the site, checkout and app working. Then ships the next site priority. |
 
 ## Videos (Content Creator)
@@ -75,6 +92,61 @@ people, and never claim a track record or results they don't have.
 recommendation from each advisor based on real numbers, anything they think the
 CEO's priorities miss, and decisions only the owner can make. The CEO weighs it
 next run. Agents follow `PRIORITIES.md` first and use `ADVICE.md` to choose how.
+
+## CFO
+
+The CFO is AI, not a CPA or licensed accountant, and gives no tax or legal
+advice. It keeps simple, accurate records so the owner (or a real accountant)
+can act on them.
+
+- Uses only real numbers: the CEO's weekly numbers in `PRIORITIES.md` and
+  `LOG.md`, and the costs the owner lists in `FINANCE.md`. Never guesses.
+- Tracks revenue, payment fees, refunds, costs, profit, sales needed to break
+  even, and weeks of runway left before 2026-12-24.
+- Flags any spending decision for the owner. Never spends or moves money.
+
+## Admin Office
+
+Five assistants in one daily, read-only run. They change nothing, send nothing
+and post nothing; they report to the owner.
+
+1. **Inbox and support:** new contact-form and inbox messages; drafts replies.
+2. **Orders and access:** every payment has a fulfillment and an unlocked app;
+   flags delivery alerts.
+3. **Team coordinator:** every scheduled agent ran, what merged, what is stuck
+   or failed, PRs waiting for the owner.
+4. **Records clerk:** new sales, refunds and costs for the CFO's ledger.
+5. **Owner's assistant:** one short morning brief, with the owner's to-do list
+   (at most 3 items) on top.
+
+## Build team rules (Web Developer and Coding agents)
+
+- `BACKLOG.md` is the single to-do list. Each item: a number, a one-line goal,
+  why (the number or finding behind it), and "Owner: unclaimed" or the agent
+  and date that claimed it.
+- Claim an item by editing its Owner line in your PR. Never take an item
+  another agent claimed in the last 3 days. One item per run.
+- Every change: Playwright check at 375px and 1280px before and after, all
+  checks in "How to ship", and a short plain-English PR description.
+- Payment, access, delivery, `/terms`, `/privacy` and price items: PR left open
+  with "Needs owner review", never merged by an agent.
+- Mark an item done in `BACKLOG.md` in the same PR that ships it.
+
+## Design team rules
+
+Four designers, each with its own lane so they don't edit the same files:
+- **Design Lead:** `src/styles/`, global CSS, shared components, and `DESIGN.md`.
+- **Home & Store:** `src/pages/index.astro` and `src/pages/store.astro`.
+- **App & Blog:** `src/pages/app.astro`, `src/layouts/BlogPost.astro`, the blog
+  listing.
+- **Mobile & Access:** responsive and accessibility fixes anywhere, but no change
+  to copy, price or structure another designer owns.
+
+Rules: follow `DESIGN.md`; one focused change per run; Playwright screenshot at
+375px and 1280px before and after; respect the CSS variables already defined; no
+new fonts or heavy JavaScript; keep Astro's static output fast. Never touch
+payment, access, delivery, `/terms`, `/privacy` or prices. Ship via "How to
+ship"; add your line to `team/LOG.md` in the same PR.
 
 ## Where the numbers are
 

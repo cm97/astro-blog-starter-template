@@ -70,6 +70,6 @@ Three minutes total. The scan is useless if the next date is blank.
 
 You can run it today. It works until a slammed Thursday. Then the note is buried, the day-5 window passes, and the pipeline sits in sent items until Friday afternoon when you notice two deposits are still unpaid and one client has been quiet for 11 days.
 
-The same three rows, plus the exact emails and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the scan still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if your files weren’t delivered or aren’t what the listing described. No change-of-mind refunds after a valid download.
+The same three rows, plus the exact emails and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the scan still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
