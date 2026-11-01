@@ -56,6 +56,27 @@ visitors clicking buy.
 - Put the captions (TikTok, Instagram Reels, YouTube Shorts title + description)
   in `team/LOG.md` next to the video path. Do not post to any account.
 
+## Google Search Console (SEO Master)
+
+Owner, 2026-11-01: the SEO Master handles Google once the owner has verified
+buzzyfly.com in Search Console. Verifying needs the owner's Google login, so
+no agent can do that step.
+
+- Until it's verified: if the owner sends an HTML-tag code (URL-prefix
+  method), add `<meta name="google-site-verification" content="...">` next to
+  the Bing `msvalidate.01` tag in `src/components/BaseHead.astro` and ship it.
+  If they use the DNS method, there's nothing to ship.
+- Once it's verified, every run: check the sitemap
+  (`https://buzzyfly.com/sitemap-index.xml`) is submitted and error-free, fix
+  any indexing or coverage problems on our side, and get new posts indexed. Log
+  impressions, clicks and the top queries in `LOG.md` for the CEO.
+- Bing, Yahoo, DuckDuckGo and Yandex use IndexNow. The key is
+  `public/673ef3d149a75388065f766b7b7a90bc.txt`. Submit new and changed URLs to
+  `https://api.indexnow.org/indexnow` after they deploy.
+- If the Search Console data can't be reached in a run (no connector), say so
+  in the log. Never ask the owner to sign in again unless verification has
+  been lost.
+
 ## Legal checks (Legal)
 
 The Legal agent is not a lawyer and its notes are not legal advice. It catches
