@@ -87,6 +87,17 @@ jobs:
               print(f"$49 PayPal checkout: {code} -> {host}{urllib.parse.urlparse(loc).path}")
               if code != 302 or not (host == "paypal.com" or host.endswith(".paypal.com")):
                   failed.append(f"$49 PayPal checkout did not open PayPal (status {code}, went to {host or 'nowhere'})")
+          # Buzzyfly Jobs: the board must have a real list of jobs, and the
+          # $5/month Join button must be there while the paywall is on.
+          import re
+          _, jobs_page = get("/jobs")
+          m = re.search(r"Showing \d+ of (\d+) jobs", jobs_page) or re.search(r'id="resultCount"[^>]*>\s*(\d+) jobs?', jobs_page)
+          total_jobs = int(m.group(1)) if m else 0
+          print("jobs on /jobs:", total_jobs)
+          if total_jobs < 20:
+              failed.append(f"/jobs lists only {total_jobs} jobs (expected 20+): the job feed in src/lib/jobs.ts is broken or empty")
+          if "buy.stripe.com/" in jobs_page:
+              print("jobs paywall: on, Join button present")
           if not health.get("paypal"):
               print("::warning::PayPal keys not found (PayPal names on the Worker: " + (", ".join(health.get("paypalNamesFound") or []) or "none") + "); /apps-pro shows the request form")
           if failed:
