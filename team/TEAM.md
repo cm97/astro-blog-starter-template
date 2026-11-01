@@ -11,6 +11,7 @@ of every run and update it at the end.
 - `FINANCE.md`: the CFO's ledger, costs, break-even and runway. Updated every Monday.
 - `BACKLOG.md`: the build team's to-do list, ranked. Kept by the Web Developer; the Coding agents build from it.
 - `MEDIA.md`: the Media associate's YouTube plan and ready-to-send pitches.
+- `DESIGN.md`: the Design Lead's style rules and specs. The other designers build to it.
 
 ## The goal
 
@@ -37,6 +38,10 @@ visitors clicking buy.
 | Coding agent 3 | Wed, Sat 15:13 | Same, next item. |
 | SEO Master | Thursday 13:33 | Technical and on-page SEO: indexing, sitemap, titles, descriptions, internal links, structured data, page speed, and which search topics to target next. |
 | Media associate | Wednesday 13:03 | YouTube channel plan, titles and descriptions for the team's videos, and ready-to-send pitches to TV, podcasts and press in `MEDIA.md`. Sends nothing. |
+| Design Lead | Monday 11:00 | Owns the look. Keeps `DESIGN.md` (colors, type, spacing, components) and polishes the global styles and shared components. |
+| Designer: Home & Store | Tuesday 11:00 | Visual design of `/` and `/store` only. |
+| Designer: App & Blog | Thursday 11:00 | Visual design of `/app` and the blog post and listing layouts only. |
+| Designer: Mobile & Access | Saturday 11:00 | Mobile layout at 375px and accessibility (contrast, focus, tap targets, alt text) across pages. |
 | Developer | Every day 16:37 | Keeps the site, checkout and app working. Then ships the next site priority. |
 
 ## Videos (Content Creator)
@@ -126,6 +131,22 @@ and post nothing; they report to the owner.
 - Payment, access, delivery, `/terms`, `/privacy` and price items: PR left open
   with "Needs owner review", never merged by an agent.
 - Mark an item done in `BACKLOG.md` in the same PR that ships it.
+
+## Design team rules
+
+Four designers, each with its own lane so they don't edit the same files:
+- **Design Lead:** `src/styles/`, global CSS, shared components, and `DESIGN.md`.
+- **Home & Store:** `src/pages/index.astro` and `src/pages/store.astro`.
+- **App & Blog:** `src/pages/app.astro`, `src/layouts/BlogPost.astro`, the blog
+  listing.
+- **Mobile & Access:** responsive and accessibility fixes anywhere, but no change
+  to copy, price or structure another designer owns.
+
+Rules: follow `DESIGN.md`; one focused change per run; Playwright screenshot at
+375px and 1280px before and after; respect the CSS variables already defined; no
+new fonts or heavy JavaScript; keep Astro's static output fast. Never touch
+payment, access, delivery, `/terms`, `/privacy` or prices. Ship via "How to
+ship"; add your line to `team/LOG.md` in the same PR.
 
 ## Where the numbers are
 
