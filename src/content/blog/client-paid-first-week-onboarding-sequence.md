@@ -1,5 +1,6 @@
 ---
 title: "Client Just Paid? Run This 15-Minute Onboarding Sequence So Week One Doesn't Collapse"
+seoTitle: "Client Just Paid? 15-Minute Onboarding Sequence"
 description: "Exact 15-minute sequence after payment so the welcome email, intake, and first deliverable date exist before Thursday erases them."
 pubDate: 2026-10-26
 updatedDate: 2026-10-27

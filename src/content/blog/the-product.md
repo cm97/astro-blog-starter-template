@@ -1,13 +1,11 @@
 ---
 title: "The Buzzyfly Digital System — Full Product"
-description: "Everything in the $49 web app, in one place."
+description: "Everything inside the Buzzyfly Digital System: a $49 browser app for client follow-ups, onboarding, scope replies and your Monday reset."
 pubDate: "2026-09-01"
 updatedDate: "2026-10-22"
 category: "product"
 heroImage: "/buzzyfly-brand-about.jpg"
 ---
-
-# The Buzzyfly Digital System
 
 A web app for running a client business. It opens in your browser on your phone or computer. Nothing to download or install.
 

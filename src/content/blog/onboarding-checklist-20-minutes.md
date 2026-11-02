@@ -1,6 +1,7 @@
 ---
 title: "The 20-Minute Onboarding Checklist That Survives a Slammed Week"
-description: "Exact 20-minute client onboarding checklist for coaches and solo operators — welcome, intake, kickoff, and day-7 hold so the process still runs when you are busy."
+seoTitle: "20-Minute Client Onboarding Checklist for Busy Weeks"
+description: "A 20-minute client onboarding checklist for coaches and solo operators. Welcome, intake, kickoff and a day-7 check so it still runs on busy weeks."
 pubDate: "Oct 16 2026"
 updatedDate: "Oct 28 2026"
 category: "onboarding"

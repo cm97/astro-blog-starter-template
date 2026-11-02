@@ -1,5 +1,6 @@
 ---
 title: "Get Paid Before You Start: Exact Deposit Script for Coaches and Freelancers"
+seoTitle: "Get Paid Before You Start: Exact Deposit Script"
 description: "Paste-ready deposit request that collects 50% before any work starts so you stop delivering for free and chasing payment later."
 pubDate: 2026-10-20
 category: sales

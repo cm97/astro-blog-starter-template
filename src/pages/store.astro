@@ -24,6 +24,26 @@ const systemOrder = getOrderAction(system.id);
 const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id);
 const guarantee = BUZZYFLY_CONFIG.guarantee;
 
+// Product structured data for the one product on sale. The price comes from
+// the product data, and there are no ratings or reviews because none exist yet.
+const productLd = JSON.stringify({
+	'@context': 'https://schema.org',
+	'@type': 'Product',
+	name: system.title,
+	description: system.description,
+	image: `${BUZZYFLY_CONFIG.siteUrl}/og-default.jpg`,
+	url: `${BUZZYFLY_CONFIG.siteUrl}/store`,
+	brand: { '@type': 'Brand', name: BUZZYFLY_CONFIG.brandName },
+	offers: {
+		'@type': 'Offer',
+		price: system.price.replace(/[^0-9.]/g, ''),
+		priceCurrency: 'USD',
+		availability: 'https://schema.org/InStock',
+		url: `${BUZZYFLY_CONFIG.siteUrl}/store`,
+		seller: { '@type': 'Organization', name: BUZZYFLY_CONFIG.brandName, url: BUZZYFLY_CONFIG.siteUrl },
+	},
+}).replace(/</g, '\\u003c');
+
 const TRUST = [
 	{ icon: "⚡", label: "Open in your browser after purchase" },
 	{ icon: "🔁", label: "No subscription" },
@@ -73,9 +93,10 @@ const FAQ = [
 <html lang="en">
 	<head>
 		<BaseHead
-			title={`Store — ${BUZZYFLY_CONFIG.brandName}`}
+			title={`Store: Client Follow-Up and Onboarding App | ${BUZZYFLY_CONFIG.brandName}`}
 			description="Run your client business from a browser web app, not memory. Follow-up, onboarding and weekly reset in one place. $49 one-time."
 		/>
+		<script type="application/ld+json" set:html={productLd} />
 		<style>
 			main { width: 1000px; }
 			.store-hero { text-align: center; padding: 1em 0 1.5em; }

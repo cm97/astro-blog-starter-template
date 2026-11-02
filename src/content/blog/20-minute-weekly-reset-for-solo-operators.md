@@ -1,6 +1,7 @@
 ---
 title: "The 20-Minute Weekly Reset for Solo Operators That Survives a Slammed Week"
-description: "Exact 20-minute weekly reset checklist for coaches and freelancers — clear the board, three priorities, follow-ups, and tomorrow’s first move so the week still runs when you are busy."
+seoTitle: "20-Minute Weekly Reset for Solo Operators"
+description: "A 20-minute weekly reset checklist for coaches and freelancers. Clear the board, pick three priorities, send follow-ups and set tomorrow's first move."
 pubDate: "Oct 16 2026"
 updatedDate: "Oct 22 2026"
 category: "planning"

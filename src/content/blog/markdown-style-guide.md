@@ -1,6 +1,6 @@
 ---
 title: "Templates vs. Systems: What Buzzyfly Actually Is"
-description: "Why 'just download a template' doesn't fix the actual problem."
+description: "Why downloading another template doesn't fix a messy client business, and what a system does differently for follow-ups, onboarding and planning."
 category: "systems"
 pubDate: "Jul 28 2026"
 heroImage: "/blog-placeholder-4.jpg"

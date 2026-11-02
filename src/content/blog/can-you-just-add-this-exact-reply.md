@@ -1,5 +1,6 @@
 ---
 title: "Client Says \"Can You Just Add This?\" — Send This Exact Reply"
+seoTitle: "Client Says \"Can You Just Add This?\" Send This Reply"
 description: "Paste-ready reply that protects the scope you already sold without sounding defensive or killing the relationship."
 pubDate: 2026-10-31
 category: systems

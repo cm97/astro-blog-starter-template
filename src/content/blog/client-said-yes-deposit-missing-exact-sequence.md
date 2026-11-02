@@ -1,5 +1,6 @@
 ---
 title: "Client Said Yes But the Deposit Hasn't Landed? Send This Exact Sequence"
+seoTitle: "Client Said Yes, No Deposit Yet? Send This Sequence"
 description: "Paste-ready day 2, day 5 and day 8 emails for when they agreed to the proposal but the money never arrived so the project does not start in limbo."
 pubDate: 2026-10-29
 category: sales

@@ -1,6 +1,7 @@
 ---
 title: "Business Systems for Coaches: The 3 Processes That Run Everything Else"
-description: "The three business systems every coaching practice needs — client onboarding, weekly planning, and follow-up — and how to build them without turning into a systems consultant."
+seoTitle: "Business Systems for Coaches: The 3 That Matter"
+description: "The three business systems every coaching practice needs: onboarding, weekly planning and follow-up. How to build them without becoming a systems person."
 pubDate: "Sep 13 2026"
 heroImage: "/blog-placeholder-1.jpg"
 category: "systems"

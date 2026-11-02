@@ -3,4 +3,4 @@
 
 export const SITE_TITLE = "Buzzyfly";
 export const SITE_DESCRIPTION =
-	"Stop rebuilding client onboarding from memory. The Buzzyfly Digital System — onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes. $49 one-time.";
+	"Client follow-ups, onboarding and a weekly reset in one browser app. Practical guides and exact emails for coaches and freelancers. $49 one-time.";

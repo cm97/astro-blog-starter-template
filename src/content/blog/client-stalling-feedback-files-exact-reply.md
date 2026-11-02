@@ -1,6 +1,7 @@
 ---
 title: "Client Won't Send Feedback or Files? The Exact Reply That Restarts the Project"
-description: "Paste-ready reply for when a client sits on feedback, logins, or content and your deadline slides. Names the missing item, moves the date, and gives them a clear choice."
+seoTitle: "Client Won't Send Feedback or Files? The Exact Reply"
+description: "A paste-ready reply for when a client sits on feedback, logins or content. It names the missing item, moves the date and gives them a clear choice."
 pubDate: 2026-11-01
 category: "client-management"
 featuredProductTitle: "Buzzyfly Digital System"

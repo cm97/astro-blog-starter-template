@@ -1,6 +1,6 @@
 ---
 title: "3 Quiet Leads on Monday? Run This 20-Minute Scan"
-description: "Exact 20-minute Monday scan and paste-ready emails for when three proposals or leads have gone quiet so you send the next follow-up instead of opening a blank document."
+description: "A 20-minute Monday scan with paste-ready emails for when three proposals or leads go quiet, so you send the next follow-up instead of a blank page."
 pubDate: 2026-10-27
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"

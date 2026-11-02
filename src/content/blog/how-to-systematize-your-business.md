@@ -1,5 +1,6 @@
 ---
 title: "How to Systematize Your Business (Without Becoming a Process Person)"
+seoTitle: "How to Systematize Your Business (Without the Jargon)"
 description: "A practical guide to building business systems that run without you — for coaches, consultants, and solo operators who want processes that actually stick."
 pubDate: "Sep 13 2026"
 heroImage: "/blog-placeholder-5.jpg"

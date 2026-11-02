@@ -1,6 +1,6 @@
 ---
 title: "Client Went Quiet After Kickoff? Send This Exact Follow-Up"
-description: "Paste-ready day-3 and day-7 emails for when a new client stops replying after the kickoff so the project does not stall and the next deliverable still has a date."
+description: "Paste-ready day-3 and day-7 emails for when a new client stops replying after kickoff, so the project doesn't stall and the next deliverable has a date."
 pubDate: 2026-10-26
 updatedDate: 2026-10-27
 category: "follow-up"
