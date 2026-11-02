@@ -73,6 +73,11 @@ Rules:
 - Log each post in `LOG.md` with the account, the post ID from Zapier and the
   campaign tag. Never delete or edit a post someone has replied to.
 - Paid boosts or ads still need the owner's yes and a daily budget.
+- **Marketer and Content Creator:** every caption, social image or video you
+  make also goes into `team/POSTS.md` as a `ready` post for the approved account
+  (the format is at the top of that file). That is how your work gets posted.
+  This replaces the older "do not post" line in your run instructions: you still
+  never post directly, the Social poster does it.
 
 ## The team
 
