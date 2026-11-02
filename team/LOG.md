@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-02 seo: added "Grok bots" rules to TEAM.md at the owner's request: Grok bots follow the same playbook, own branch and log prefix, no overwriting another bot's work, owner settles disagreements (PR #TBD) | Grok also runs inside the site (draft.ts, domains.ts) as a feature, not a bot | owner: fill in the Grok bot table (name, schedule, job)
 2026-11-02 seo: Google readiness: short search titles (seoTitle) on 20 posts, 16 descriptions cut to 160, build now fails on long titles/descriptions, one H1 on the-product, 3 related links on every post, Organization+WebSite JSON-LD on /, Product JSON-LD ($49) on /store, 5-topic plan in BACKLOG.md (PR #152) | 20 of 56 posts had titles Google would cut off; related links only matched category so some posts had none | no Search Console or Ahrefs API connector, so no keyword data
 2026-11-02 developer: Worker now submits the whole sitemap to IndexNow (Bing, Yahoo, DuckDuckGo, Yandex) every Monday 06:00 UTC from the hourly cron (PR pending); fired the SEO Master early for a Google-readiness pass | sandbox network blocks IndexNow, so the site itself submits; Google has no API without owner OAuth | -
 2026-11-01 developer: handed Google Search Console to the SEO Master (TEAM.md section + BACKLOG item 5); closed BACKLOG item 3 (indexability verified) | - | owner: verify buzzyfly.com in Search Console
