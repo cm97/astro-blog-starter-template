@@ -31,8 +31,10 @@ Terms, and how they apply here (CLAUDE.md still wins):
      cancellation stops future billing and isn't refunded for part-months unless
      the law requires it. Until a self-serve cancel page exists, route every
      cancellation to the owner the same day so nobody is billed again.
-   - **Disputes or exceptions:** don't argue. Collect the checkout email and
-     order ID and route the case to support@buzzyfly.com.
+   - **Disputes, chargeback threats or exceptions:** don't argue. Collect the
+     checkout email and the Stripe receipt or invoice ID, and route the case to
+     support@buzzyfly.com right away. Chargebacks cost a fee and can put the
+     Stripe account at risk, so these come first.
    - **Who moves money:** bots never issue refunds, reversals or
      cancellations. They decide which rule applies, draft the reply, and hand
      the owner a one-line action (for example "Refund duplicate charge ch_...
@@ -50,6 +52,16 @@ Terms, and how they apply here (CLAUDE.md still wins):
    "Feedback log" below. The Web Developer turns repeats into BACKLOG items.
 6. **Guardrails:** never share database structures, Cloudflare Worker
    endpoints, API keys, admin console details or other customers' records.
+
+**Owner decisions on the third version of the mandate (2026-11-02):** keep the
+public 30-day rule above. The 7-day and 14-day windows and the store credit
+from the third version don't apply. **No free trial exists or is planned**
+(the free /demo does that job). If the owner ever adds a trial, its rules are
+already agreed: exactly 7 days; tell people before signup that billing starts
+automatically at the end of day 7 unless they cancel; anyone who cancels within
+24 hours after their first charge, having forgotten, gets a one-time courtesy
+refund and loses access; after that, cancelling stops renewals, access lasts
+to the end of the paid period, and there are no part-period refunds.
 
 ## Answers to common problems
 
