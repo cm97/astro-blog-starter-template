@@ -3,7 +3,7 @@ title: "Client Went Quiet After the Proposal? Send This Exact Follow-Up"
 seoTitle: "Client Quiet After the Proposal? Send This Follow-Up"
 description: "Paste-ready day 3, 7 and 14 emails for when a proposal goes silent so the deal does not die in your inbox."
 pubDate: 2026-10-19
-updatedDate: 2026-10-22
+updatedDate: 2026-11-02
 category: sales
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -111,6 +111,48 @@ Keep the Re: even if it is a new thread. It reads as continuation.
 
 If you cannot name the next date after a yes, the client is not onboarded. That is a separate checklist.
 
+## Concrete reply scripts for the five most common objections
+
+Copy these the moment the reply lands. Do not open a blank draft.
+
+**1. "Still thinking / need more time"**
+
+> Understood. I’ll hold the [start date] until [specific day 5–7 days out]. Reply by then with yes or release, and I’ll either send the invoice or close the file.
+
+Log the new hold date. Do not send another touch before that day.
+
+**2. "Budget is tighter than I thought"**
+
+> The scope is [exact deliverable]. Price stays [price]. Want to lock the [date] at that number, or should I release the slot?
+
+Do not invent a discount in the same email. If they still push, offer a smaller scope at a lower number only after they name the ceiling.
+
+**3. "Can we start smaller / just the first piece?"**
+
+> Yes. The first piece is [smaller deliverable] at [lower price]. Same start date or [new date]? Reply with the start and I send the invoice the same day.
+
+Write the reduced scope on the original log so the original proposal stays the record.
+
+**4. "I need to check with my partner / team"**
+
+> Makes sense. Forward this note if it helps. I’ll hold the [date] until [day 7 from now]. If I don’t hear back by then I’ll release it so the slot does not sit open.
+
+One hold. No weekly drip while they “check.”
+
+**5. "Timing is off right now"**
+
+> Got it. Reply with the month that works better and I’ll note it. No chase until then. If that month never comes, no hard feelings.
+
+Park the row with the month they named. One note that month. Nothing else.
+
+After any of the five, update the log the same hour:
+
+```
+Reply type: thinking / budget / smaller / partner / timing
+New hold or park date: ________
+Next action: wait / invoice / reduced scope / closed
+```
+
 ## Extra concrete steps that stop the ghost
 
 1. Paste the original start date into the log the same minute you send the proposal. Without the date the day-3 line has nothing to hold.
@@ -127,6 +169,8 @@ If you cannot name the next date after a yes, the client is not onboarded. That 
 12. Write the next touch date on the log the second the current email leaves. Blank next-touch is how the cadence dies.
 13. Cap open proposal rows at five. Older ones past Day 14 are closed or parked. More than five is noise, not a pipeline.
 14. After any paid yes, open the onboarding checklist the same day. The follow-up sequence ends when money lands; the onboarding sequence starts.
+15. When they reply with any of the five objections above, send the matching script within 60 minutes. Delayed answers lose the urgency the date created.
+16. Keep the five objection scripts in the same note as the three cadence lines so you never search for them under pressure.
 
 ## Fill-in after every send or reply
 
