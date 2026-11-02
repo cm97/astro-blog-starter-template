@@ -1,5 +1,6 @@
-// Where a visitor came from, taken from the utm_* parameters on the link that
-// brought them (e.g. ?utm_source=reddit&utm_medium=social&utm_campaign=scope-creep).
+// Where a visitor came from: the utm_* parameters on the link that
+// brought them (e.g. ?utm_source=reddit&utm_medium=social&utm_campaign=scope-creep),
+// or, without utm tags, the referring site (see referrerSource below).
 //
 // The browser remembers it for 30 days (localStorage), sends it with email
 // signups, adds it to Stripe buy links as `client_reference_id` (the webhook
@@ -38,4 +39,58 @@ export function cleanSourceTriple(value: unknown): string | null {
 /** "reddit__social__scope-creep" -> "reddit / social / scope-creep" for display. */
 export function describeSource(source: string | null): string {
 	return source ? source.split("__").filter(Boolean).join(" / ") : "Direct / unknown";
+}
+
+// Visitors without utm tags still tell us where they came from through
+// document.referrer (usually just the origin, e.g. "https://www.google.com/").
+const SEARCH_ENGINES: Record<string, string> = {
+	google: "google",
+	bing: "bing",
+	duckduckgo: "duckduckgo",
+	yahoo: "yahoo",
+	ecosia: "ecosia",
+	yandex: "yandex",
+	baidu: "baidu",
+	brave: "brave",
+};
+const SOCIAL: Record<string, string> = {
+	reddit: "reddit",
+	facebook: "facebook",
+	fb: "facebook",
+	instagram: "instagram",
+	linkedin: "linkedin",
+	lnkd: "linkedin",
+	"t.co": "x",
+	twitter: "x",
+	x: "x",
+	youtube: "youtube",
+	tiktok: "tiktok",
+	pinterest: "pinterest",
+	threads: "threads",
+};
+// Hosts that send people back to us mid-purchase; never a traffic source.
+const IGNORED = /(^|\.)(buzzyfly\.com|stripe\.com|paypal\.com|localhost)$/;
+
+/**
+ * "https://www.google.com/" -> "google__organic", "https://old.reddit.com/r/x" ->
+ * "reddit__social", "https://example.org/post" -> "example-org__referral".
+ * Returns null for no referrer, our own site, or the payment pages.
+ */
+export function referrerSource(referrer: unknown): string | null {
+	if (typeof referrer !== "string" || !referrer) return null;
+	let host: string;
+	try {
+		host = new URL(referrer).hostname.toLowerCase().replace(/^www\./, "");
+	} catch {
+		return null;
+	}
+	if (!host || IGNORED.test(host)) return null;
+	const labels = host.split(".");
+	for (const [key, name] of Object.entries(SOCIAL)) {
+		if (host === key || labels.includes(key) || host.endsWith(`.${key}`)) return `${name}__social`;
+	}
+	for (const [key, name] of Object.entries(SEARCH_ENGINES)) {
+		if (labels.includes(key)) return `${name}__organic`;
+	}
+	return cleanSourceTriple(`${cleanSource(host) ?? ""}__referral`);
 }
