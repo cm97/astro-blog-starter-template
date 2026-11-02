@@ -21,6 +21,35 @@ funds the project until then. After that, grow sales of the $49 Digital System.
 Every run must move toward a sale: more of the right visitors, or more of those
 visitors clicking buy.
 
+## Revenue first (owner, 2026-11-02, overrides how every agent picks its work)
+
+The only score is money that reaches the owner's bank account: paid Stripe and
+PayPal orders, net of refunds. Views, posts, PRs and playbook edits are not
+results. On 2026-11-02 Stripe showed 0 charges ever, so every run aims at the
+**first paid order**, then the next one. The owner's target is $25,000 a month
+and up. At $49 that is about 510 orders a month, so the team must find
+buyers at that scale, not just publish pages.
+
+Before starting, each agent picks the one task most likely to bring in paid
+orders soonest, using this order:
+1. **Fix anything that blocks a payment**: checkout, PayPal, unlocking the
+   app, the thank-you page. A broken buy path loses every visitor.
+2. **Put the offer in front of buyers this week**: posts and pitches written to
+   be shared where freelancers and coaches already gather, outreach lists, ad
+   copy waiting for the owner's yes, and SEO pages that answer buying-intent
+   searches.
+3. **Turn more visitors into buyers**: the homepage, /store, the price, the
+   offer, the guarantee wording, the email sequence.
+4. Everything else only when 1 to 3 have nothing left to do.
+
+Stop doing work that can't lead to a sale: re-expanding old posts that get no
+traffic, new team roles, renaming, cosmetic changes no buyer would notice, and
+reports that repeat last week's numbers. Each `LOG.md` line names which of 1 to 4
+the run served and the number it should move. Every Monday the CEO opens the report with
+Stripe and PayPal net revenue and paid orders for the week and the month so far.
+The same rules still apply: no fake urgency, no invented proof, no income
+promises to buyers, and no money spent without the owner's yes.
+
 ## The team
 
 | Agent | Runs (New York time) | Job |
