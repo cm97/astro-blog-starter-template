@@ -337,10 +337,10 @@ Social poster, Sales team A roles 1 to 3, 9):**
 How it applies today:
 - **Send all traffic to buzzyfly.com** (`/store`, `/`, the free tools and, once
   live, `/demo`). Every link carries utm tags.
-- **agent.buzzyfly.com is not a page for visitors yet.** The deployed
-  `buzzyfly-agent` worker returns raw JSON with an outdated catalog (old
-  download packs and the retired $97 bundle). Don't link to it until the
-  Developer has rebuilt it as a real page that matches CLAUDE.md (BACKLOG item 0c).
+- **agent.buzzyfly.com is Buzzyfly's back-end AI worker (owner, 2026-11-02), not a
+  page for visitors.** "Driving traffic" means traffic to buzzyfly.com. Never
+  send visitors, ads or posts to agent.buzzyfly.com. Bots may use it as a tool
+  only once its catalog matches CLAUDE.md (BACKLOG item 0c).
 - Brand visibility means the same name, logo, colors and promise everywhere:
   "Buzzyfly: a browser app for client follow-ups and onboarding. $49 once."
 
