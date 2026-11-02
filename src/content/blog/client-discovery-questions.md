@@ -1,5 +1,6 @@
 ---
 title: 'Client Discovery Questions That Stop You From Guessing What They Need'
+seoTitle: "Client Discovery Questions That Stop the Guessing"
 description: 'Eight questions to ask before you quote, so the proposal matches the job and tire-kickers leave early.'
 pubDate: '2026-09-01'
 updatedDate: 'Oct 09 2026'

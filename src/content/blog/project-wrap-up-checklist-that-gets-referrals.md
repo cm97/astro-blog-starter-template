@@ -1,6 +1,7 @@
 ---
 title: "The Project Wrap-Up Checklist That Gets Referrals Without an Awkward Ask"
-description: "Exact 15-minute wrap-up checklist for coaches and solo operators — final delivery, testimonial ask, and next-step hold so clients come back or send someone else."
+seoTitle: "Project Wrap-Up Checklist That Gets Referrals"
+description: "A 15-minute wrap-up checklist for coaches and solo operators. Final delivery, testimonial ask and next step so clients come back or refer someone."
 pubDate: "Oct 24 2026"
 category: "systems"
 featuredProductTitle: "Buzzyfly Digital System"

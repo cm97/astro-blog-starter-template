@@ -1,5 +1,6 @@
 ---
 title: "Reconnect With Past Clients: The Check-In Email That Doesn't Feel Awkward"
+seoTitle: "Reconnect With Past Clients: The Check-In Email"
 description: "Paste-ready check-in emails for a client you finished work with months ago. Three versions, when to send each, and how to keep it from becoming a one-off."
 pubDate: "Oct 31 2026"
 updatedDate: "Oct 31 2026"

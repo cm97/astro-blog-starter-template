@@ -1,5 +1,6 @@
 ---
 title: "Client Wants to Cancel the Retainer? Exact Reply That Holds the Revenue"
+seoTitle: "Client Wants to Cancel the Retainer? The Exact Reply"
 description: "Paste-ready response when a client asks to pause or end the retainer so you stop the leak and still keep the monthly number."
 category: systems
 pubDate: Oct 23 2026

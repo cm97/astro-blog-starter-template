@@ -1,6 +1,6 @@
 ---
 title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
-description: "A 20-minute weekly reset for solo operators — Monday sheet, Wednesday check, and a 12-minute Thursday cash salvage so priorities and follow-ups still exist when the week breaks."
+description: "A 20-minute weekly reset for solo operators. A Monday sheet, a Wednesday check and a 12-minute Thursday cash salvage that keep follow-ups alive."
 category: "planning"
 pubDate: "Sep 01 2026"
 updatedDate: "Oct 30 2026"

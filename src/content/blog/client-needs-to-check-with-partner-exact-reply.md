@@ -1,5 +1,6 @@
 ---
 title: "Client Needs to Check With Their Partner? Send This Exact Reply"
+seoTitle: "Client Needs to Check With Their Partner? The Reply"
 description: "Paste-ready sequence when a prospect says they need to run the proposal by their partner, team, or accountant so the deal does not die in their inbox."
 category: sales
 pubDate: 2026-11-01

@@ -1,6 +1,6 @@
 ---
 title: "Why I Built the Buzzyfly Digital System"
-description: "Too many tools, no system holding them together — so I built one."
+description: "Too many tools and no system holding them together. Why I built a browser app for client follow-ups, onboarding and the weekly reset."
 category: "systems"
 pubDate: "Jun 02 2026"
 heroImage: "/blog-placeholder-1.jpg"

@@ -1,5 +1,6 @@
 ---
 title: "Client Went Quiet After the Proposal? Send This Exact Follow-Up"
+seoTitle: "Client Quiet After the Proposal? Send This Follow-Up"
 description: "Paste-ready day 3, 7 and 14 emails for when a proposal goes silent so the deal does not die in your inbox."
 pubDate: 2026-10-19
 updatedDate: 2026-10-22

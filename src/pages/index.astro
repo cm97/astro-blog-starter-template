@@ -14,15 +14,39 @@ const settings = await getSettings(Astro.locals.runtime?.env);
 const digitalSystem = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
 const order = getOrderAction(digitalSystem.id);
 const guarantee = BUZZYFLY_CONFIG.guarantee;
+
+// Organization and WebSite structured data so Google knows who runs the site.
+const brand = settings.brandName || SITE_TITLE;
+const homeLd = JSON.stringify({
+	'@context': 'https://schema.org',
+	'@graph': [
+		{
+			'@type': 'Organization',
+			'@id': `${BUZZYFLY_CONFIG.siteUrl}/#organization`,
+			name: brand,
+			url: BUZZYFLY_CONFIG.siteUrl,
+			logo: `${BUZZYFLY_CONFIG.siteUrl}/buzzyfly-logo.svg`,
+			email: BUZZYFLY_CONFIG.supportEmail,
+		},
+		{
+			'@type': 'WebSite',
+			'@id': `${BUZZYFLY_CONFIG.siteUrl}/#website`,
+			name: brand,
+			url: BUZZYFLY_CONFIG.siteUrl,
+			publisher: { '@id': `${BUZZYFLY_CONFIG.siteUrl}/#organization` },
+		},
+	],
+}).replace(/</g, '\\u003c');
 ---
 
 <!doctype html>
 <html lang="en">
 	<head>
 		<BaseHead
-			title={settings.brandName || SITE_TITLE}
-			description="Stop rebuilding your client process from scratch every week. Browser web app shows who to follow up with today, writes the email and onboards new clients. $49 one-time."
+			title={`${brand}: Client Follow-Up and Onboarding App`}
+			description="Stop rebuilding your client process every week. A browser app that shows who to follow up with today, drafts the email and onboards new clients. $49."
 		/>
+		<script type="application/ld+json" set:html={homeLd} />
 		<style>
 			.hero { padding: 4em 0 3.5em; text-align: center; border-bottom: 1px solid rgb(var(--gray-light)); }
 			.hero__eyebrow { display: inline-block; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 1em; }

@@ -1,6 +1,7 @@
 ---
 title: "Weekly Planning Template for Small Business Owners (20-Minute Version)"
-description: "A 20-minute weekly planning template for solo operators — clear the board, three priorities, follow-ups that die, and a Thursday salvage so the plan still exists when the week breaks."
+seoTitle: "Weekly Planning Template for Small Business (20 Min)"
+description: "A 20-minute weekly planning template for solo operators. Clear the board, set three priorities, catch dying follow-ups and save Thursday."
 pubDate: "Sep 13 2026"
 updatedDate: "Oct 13 2026"
 heroImage: "/blog-placeholder-4.jpg"

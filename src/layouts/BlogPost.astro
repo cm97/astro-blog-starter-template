@@ -18,6 +18,7 @@ type Props = CollectionEntry<'blog'>['data'] & {
 
 const {
 	title,
+	seoTitle,
 	description,
 	pubDate,
 	updatedDate,
@@ -63,7 +64,7 @@ const articleLd = JSON.stringify({
 
 <html lang="en">
 	<head>
-		<BaseHead title={title} description={description} image={displayHero} noindex={noindex} />
+		<BaseHead title={seoTitle ?? title} description={description} image={displayHero} noindex={noindex} />
 		<script type="application/ld+json" set:html={articleLd} />
 		<style>
 			main { width: calc(100% - 2em); max-width: 100%; margin: 0; }

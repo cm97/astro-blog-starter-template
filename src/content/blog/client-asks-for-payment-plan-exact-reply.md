@@ -1,5 +1,6 @@
 ---
 title: "Client Asks for a Payment Plan — Exact Reply That Protects Cash and Still Closes"
+seoTitle: "Client Asks for a Payment Plan? The Exact Reply"
 description: "Paste-ready reply when a prospect asks to split the invoice. Keeps the deposit rule, protects cash flow, and gives them a clear yes path."
 category: systems
 pubDate: Nov 1 2026

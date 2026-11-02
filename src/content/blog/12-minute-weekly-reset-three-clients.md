@@ -1,5 +1,6 @@
 ---
 title: "The 12-Minute Weekly Reset When You Have Three Clients and No Time"
+seoTitle: "12-Minute Weekly Reset for Three Clients and No Time"
 description: "Exact 12-minute Monday reset for solo operators with multiple clients — three cash moves, two follow-ups, one open date list so the week cannot erase them."
 pubDate: 2026-10-28
 updatedDate: 2026-10-30

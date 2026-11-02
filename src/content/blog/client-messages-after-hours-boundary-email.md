@@ -1,5 +1,6 @@
 ---
 title: "Client Messaging You at 10pm? The Boundary Email That Keeps the Client"
+seoTitle: "Client Messaging at 10pm? The Boundary Email to Send"
 description: "A short, friendly email for freelancers and coaches whose clients text and email at all hours. Set your hours once, without losing the client or sounding cold."
 category: systems
 pubDate: 2026-10-26

@@ -1,5 +1,6 @@
 ---
 title: "Open Proposals, Unpaid Deposits, Quiet Clients? Run This 15-Minute Monday Scan"
+seoTitle: "15-Minute Monday Scan: Proposals, Deposits, Quiet Clients"
 description: "The exact list you open every Monday so you send the right follow-up before the week burns the pipeline."
 pubDate: 2026-10-30
 category: systems

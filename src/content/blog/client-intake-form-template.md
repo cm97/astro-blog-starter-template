@@ -1,6 +1,7 @@
 ---
 title: "Client Intake Form Template: The 5 Questions That Actually Matter"
-description: "A client intake form template for coaches and consultants — five questions that prepare you for a better first call without overwhelming the client before they've started."
+seoTitle: "Client Intake Form Template: 5 Questions That Matter"
+description: "A client intake form template for coaches and consultants. Five questions that prepare you for a better first call without overwhelming the client."
 pubDate: "Sep 13 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "onboarding"
