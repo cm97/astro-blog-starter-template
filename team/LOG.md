@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-02 coder1: (3) BACKLOG 0a homepage offer card: $49 price, one-time/no subscription, buy button, refund line and PayPal now in the first screen of / at 375px and 1280px (before: buy button at 725px/811px, refund line far below) (PR pending) | should move homepage buy clicks off 0 of 41 views | /demo doesn't exist yet, so no demo link
 2026-11-02 builders-a: (2) Spanish store /es/store with hreflang (en, es, x-default) on both /store and /es/store, an Español/English link, Spanish refund line with the same meaning, same $49 USD Payment Link; ProductCallout and PayPalLink take optional translated labels (PR #168) | the app and its email templates are English-only, so the Spanish page says so up front to avoid "not as described" refunds | -
 2026-11-02 marketer: social image public/social/buzzyfly-late-invoice.jpg (late invoices; render script scripts/make-social-late-invoice.cjs) + IG/FB captions + 2 community posts below; image post queued in POSTS.md (PR #167) | the app's invoice reminders (1, 7, 14 days overdue, with name, project and amount filled in) are confirmed in src/data/appContent.ts, so the image only claims that | owner: post the community posts by hand (agents don't post)
   Image: https://buzzyfly.com/social/buzzyfly-late-invoice.jpg
