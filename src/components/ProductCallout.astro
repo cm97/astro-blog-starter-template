@@ -15,6 +15,8 @@ interface Props {
 	/** Larger card with a glow, for the recommended product. */
 	featured?: boolean;
 	headingLevel?: "h2" | "h3";
+	/** Translated button and footnote text, for language versions of a page. */
+	labels?: { buy?: string; soon?: string; checkoutNote?: string; notForSale?: string; paypalLead?: string };
 }
 
 const props = Astro.props;
@@ -27,6 +29,7 @@ const features = props.features ?? product?.features ?? [];
 const badge = props.badge !== undefined ? props.badge : product?.badge ?? null;
 const featured = props.featured ?? badge === "Most popular";
 const Heading = props.headingLevel ?? "h3";
+const labels = props.labels ?? {};
 // Buy buttons always go to a real checkout route for a known product. They open
 // checkout in the same tab on purpose: a new tab mid-purchase loses buyers, most of all on phones.
 const order = product
@@ -58,20 +61,20 @@ const order = product
 		</span>
 		{order.live ? (
 			<a class="product-callout__cta" href={order.href}>
-				{order.label}
+				{labels.buy ?? order.label}
 				<span class="sr-only"> {title}</span>
 			</a>
 		) : (
-			<span class="product-callout__soon">Coming soon</span>
+			<span class="product-callout__soon">{labels.soon ?? "Coming soon"}</span>
 		)}
 	</div>
-	{order.live && "paypalHref" in order && <PayPalLink href={order.paypalHref} />}
+	{order.live && "paypalHref" in order && <PayPalLink href={order.paypalHref} lead={labels.paypalLead} />}
 	{order.live ? (
 		<p class="product-callout__guarantee">
-			Secure checkout by Stripe or PayPal. One-time payment. Your app unlocks on the next page after you pay. {BUZZYFLY_CONFIG.guarantee}
+			{labels.checkoutNote ?? `Secure checkout by Stripe or PayPal. One-time payment. Your app unlocks on the next page after you pay. ${BUZZYFLY_CONFIG.guarantee}`}
 		</p>
 	) : (
-		<p class="product-callout__guarantee">Not for sale yet. Everything in it is already inside the $49 Digital System.</p>
+		<p class="product-callout__guarantee">{labels.notForSale ?? "Not for sale yet. Everything in it is already inside the $49 Digital System."}</p>
 	)}
 </aside>
 

@@ -11,6 +11,7 @@ import {
 	getOrderAction,
 } from "../data/monetization";
 import { getSettings } from "../lib/settings";
+import { STORE_ALTERNATES } from "../data/i18n";
 
 export const prerender = false;
 
@@ -95,11 +96,14 @@ const FAQ = [
 		<BaseHead
 			title={`Store: Client Follow-Up and Onboarding App | ${BUZZYFLY_CONFIG.brandName}`}
 			description="Run your client business from a browser web app, not memory. Follow-up, onboarding and weekly reset in one place. $49 one-time."
+			alternates={STORE_ALTERNATES}
 		/>
 		<script type="application/ld+json" set:html={productLd} />
 		<style>
 			main { width: 1000px; }
 			.store-hero { text-align: center; padding: 1em 0 1.5em; }
+			.lang-link { display: flex; justify-content: flex-end; margin: 0 0 0.4em; font-size: 0.85em; }
+			.lang-link a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.4em; }
 			.store-eyebrow { margin: 0 0 0.8em; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 			.store-hero h1 { font-size: clamp(1.8em, 6vw, 2.8em); line-height: 1.12; max-width: 15em; margin: 0 auto 0.5em; }
 			.store-lede { max-width: 32em; margin: 0 auto 1.6em; color: rgb(var(--gray-dark)); font-size: 1.05em; }
@@ -134,6 +138,7 @@ const FAQ = [
 	<body>
 		<Header />
 		<main>
+			<p class="lang-link"><a href="/es/store" hreflang="es" lang="es">Español</a></p>
 			<section class="store-hero">
 				<p class="store-eyebrow">For coaches, consultants and solo service providers</p>
 				<h1>Run your client business from a browser app, not memory.</h1>

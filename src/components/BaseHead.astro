@@ -9,11 +9,13 @@ interface Props {
 	description: string;
 	image?: string;
 	noindex?: boolean;
+	/** Language versions of this page, for hreflang tags. Include this page itself. */
+	alternates?: { hreflang: string; href: string }[];
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image: requested, noindex = false } = Astro.props;
+const { title, description, image: requested, noindex = false, alternates = [] } = Astro.props;
 
 // Social platforms (Facebook, X, LinkedIn) don't render SVG share images and
 // the blog-placeholder files are starter-template stock art, so both fall
@@ -44,6 +46,7 @@ const isDefaultImage = image === DEFAULT_OG;
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+{alternates.map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
