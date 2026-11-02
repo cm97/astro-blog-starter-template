@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-02 seo: Customer Success & Support playbook (owner mandate) in team/SUPPORT.md, wired into TEAM.md; ad launch-ad-1 logged in SALES.md ($15 spent, 0 tracked visits so far) (PR #161) | inbox clear: 0 purchase requests, 0 fulfillment alerts | owner: send Ads Manager impressions, link clicks and landing page views
 2026-11-02 seo: AppSumo application kit in team/APPSUMO.md (terms checked, listing draft, checklist, owner decisions) (PR #160) | no upfront cost; we keep ~30% of AppSumo-brought sales and ~95% of our own | owner: accept terms, refund window and price, then apply once /demo is live
 2026-11-02 seo: owner mandates for the marketing bots (Digital Growth Marketer) and sales bots (Conversion Specialist) added to TEAM.md, with how they apply within CLAUDE.md (PR #159) | agent.buzzyfly.com is the back-end AI worker (owner), not a visitor page; its catalog is outdated, so it is backlog item 0c for the Developer | -
 2026-11-02 seo: funnel review since launch: 163 views (100% direct), 4 buy clicks, 0 orders, 5 subscribers (none since 10-20). Homepage 41 views and 0 buy clicks is the biggest leak, so it went to the top of BACKLOG.md; /apps-pro $29 flagged for the owner (PR #158) | traffic, not the product, is the constraint | owner: ad budget, branded social page, Apps Pro decision

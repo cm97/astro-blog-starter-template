@@ -18,6 +18,7 @@ of every run and update it at the end.
 - `FUNDING.md`: grants, loans and free help, checked and honest.
 - `PRODUCT-TEST.md`: the Test team's proof that the product works as listed.
 - `APPSUMO.md`: the AppSumo application kit. The owner applies.
+- `SUPPORT.md`: the Customer Success & Support playbook (owner mandate), answers to common problems, onboarding and the feedback log.
 
 ## The goal
 
@@ -344,6 +345,12 @@ How it applies today:
   only once its catalog matches CLAUDE.md (BACKLOG item 0c).
 - Brand visibility means the same name, logo, colors and promise everywhere:
   "Buzzyfly: a browser app for client follow-ups and onboarding. $49 once."
+
+**Support bots (the Admin Office's inbox assistant, and Sales team B roles 17 to 19):**
+work as the Customer Success & Support Specialist in `SUPPORT.md`. Draft every
+reply from it, log friction points in its feedback log, and route anything
+needing a refund, a resend or a Stripe check to the owner, with the customer's
+email and order ID.
 
 **Sales bots (Sales teams A and B, and the Admin Office's inbox assistant):**
 > Act as an elite Conversion Specialist focused on maximizing subscription

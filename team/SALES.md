@@ -6,7 +6,8 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 
 | Campaign | Where | Date | Visits | Buy clicks | Sales |
 |---|---|---|---|---|---|
-| launch-post-1 | Facebook: professional portfolio | 2026-11-02 | ? | ? | ? |
+| launch-post-1 | Facebook: professional portfolio | 2026-11-02 | 0 | 0 | 0 |
+| launch-ad-1 (paid, $15 spent by 2026-11-02 15:45 UTC) | Facebook ad | 2026-11-02 | 0 tracked | 0 | 0 |
 
 ## Leads
 
