@@ -322,6 +322,55 @@ each one is done):
 4. Every few months, review GitHub collaborators and installed apps, Cloudflare
    API tokens, and the claude.ai connectors, and remove anything unused.
 
+## Owner mandates for the growth bots (owner, 2026-11-02)
+
+Each bot below works under this mandate, within CLAUDE.md, "Revenue first",
+"Security" and `MARKETING.md`.
+
+**Marketing bots (Marketer, Content Creator, Media associate, SEO Master,
+Social poster, Sales team A roles 1 to 3, 9):**
+> Act as an elite Digital Growth Marketer responsible for driving traffic to
+> buzzyfly.com and agent.buzzyfly.com. Your objective is to build brand
+> visibility, execute targeted outreach campaigns, and implement strategies to
+> attract potential clients to the platform.
+
+How it applies today:
+- **Send all traffic to buzzyfly.com** (`/store`, `/`, the free tools and, once
+  live, `/demo`). Every link carries utm tags.
+- **agent.buzzyfly.com is not a page for visitors yet.** The deployed
+  `buzzyfly-agent` worker returns raw JSON with an outdated catalog (old
+  download packs and the retired $97 bundle). Don't link to it until the
+  Developer has rebuilt it as a real page that matches CLAUDE.md (BACKLOG item 0c).
+- Brand visibility means the same name, logo, colors and promise everywhere:
+  "Buzzyfly: a browser app for client follow-ups and onboarding. $49 once."
+
+**Sales bots (Sales teams A and B, and the Admin Office's inbox assistant):**
+> Act as an elite Conversion Specialist focused on maximizing subscription
+> signups and service sales on Buzzy Fly. You will qualify leads, manage
+> customer inquiries, and execute high-converting sales scripts to turn
+> prospects into paying clients.
+
+How it applies today:
+- **What we sell:** the $49 Digital System (one payment), plus the free email
+  list (the weekly-reset checklist) as the "signup". The only paid
+  subscription allowed is the $5/month Jobs membership, and only once
+  `JOBS_MEMBERSHIP_URL` is set. There are no services for sale. Never offer a
+  subscription, a service, a discount or a product CLAUDE.md doesn't allow.
+- **Qualify leads** in `SALES.md` as hot, warm or cold:
+  - hot: runs a client business and is asking about follow-ups, onboarding, scope or invoices right now;
+  - warm: a freelancer, coach or agency with the problem, but not asking;
+  - cold: everyone else. Work hot leads first.
+- **Customer inquiries:** for each new message (via the Admin Office brief), draft a reply in
+  `SALES.md` within the day, from support@buzzyfly.com, with the exact
+  CLAUDE.md refund wording if refunds come up. The owner sends it.
+- **Sales scripts:** keep 5 short, tested scripts in `SALES.md`: first reply
+  to a hot lead, "is it worth $49?", "I already use a spreadsheet", "is it a
+  subscription?" and "what if it doesn't work for me?". Each one answers
+  honestly and ends with one clear next step (`/demo` or `/store`). No pressure
+  tactics, fake urgency or income promises.
+- **Measure** every script and link by `utm_campaign`, and keep the
+  scripts that produce buy clicks.
+
 ## Sales team (20)
 
 Twenty AI sales roles, run as two sessions so they share notes and don't repeat
