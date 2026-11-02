@@ -15,12 +15,14 @@ import { BUZZYFLY_CONFIG } from "./data/monetization";
 import { escapeHtml, resolveFrom, sendFollowUpEmail } from "./lib/email";
 import { sendDueSequenceEmails } from "./lib/emailSequence";
 import { receiveEmail } from "./lib/inbox";
+import { isIndexNowRun, submitSitemapToIndexNow } from "./lib/indexNow";
 import { ensureDownloadSchema, ensureEmailSequenceSchema, ensureFunnelSchema } from "./lib/schema";
 
 interface Env {
 	DB?: D1Database;
 	EMAIL?: { send(msg: { from: string; to: string; subject: string; html?: string; text?: string }): Promise<{ messageId: string }> };
 	EMAIL_FROM?: string;
+	ASSETS?: Fetcher;
 	KIDS?: Fetcher;
 	MY_PRODUCTS?: R2Bucket;
 }
@@ -188,7 +190,19 @@ async function followUpRecentBuyers(db: D1Database, env: Env): Promise<void> {
 	}
 }
 
-async function scheduled(_event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
+async function scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext): Promise<void> {
+	// Weekly: tell Bing, Yahoo, DuckDuckGo and the other IndexNow engines about
+	// every page in the sitemap. Doesn't need the database.
+	const assets = env.ASSETS;
+	if (assets && isIndexNowRun(event.scheduledTime)) {
+		ctx.waitUntil(
+			runJob("indexnow", async () => {
+				const status = await submitSitemapToIndexNow(assets);
+				console.log(`Buzzyfly IndexNow: sitemap submitted (${status})`);
+			}),
+		);
+	}
+
 	const db = env.DB;
 	if (!db) return;
 
