@@ -3,7 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
-2026-11-02 seo: owner mandates for the marketing bots (Digital Growth Marketer) and sales bots (Conversion Specialist) added to TEAM.md, with how they apply within CLAUDE.md (PR #TBD) | agent.buzzyfly.com serves an outdated JSON catalog, not a page, so it is backlog item 0c for the Developer | -
+2026-11-02 seo: owner mandates for the marketing bots (Digital Growth Marketer) and sales bots (Conversion Specialist) added to TEAM.md, with how they apply within CLAUDE.md (PR #159) | agent.buzzyfly.com serves an outdated JSON catalog, not a page, so it is backlog item 0c for the Developer | -
 2026-11-02 seo: funnel review since launch: 163 views (100% direct), 4 buy clicks, 0 orders, 5 subscribers (none since 10-20). Homepage 41 views and 0 buy clicks is the biggest leak, so it went to the top of BACKLOG.md; /apps-pro $29 flagged for the owner (PR #158) | traffic, not the product, is the constraint | owner: ad budget, branded social page, Apps Pro decision
 2026-11-02 seo: full buyer test of the $49 Digital System: every listing claim passes, recorded in team/PRODUCT-TEST.md (PR #156) | the product works; the problem is reach, not the app | owner: decide which of the 7 other active Stripe Payment Links to deactivate
 2026-11-02 seo: at the owner's request, added the Sales team (20 roles), Test team (20 checks), Web builders (10) and a daily Social poster to TEAM.md, plus MARKETING.md, FUNDING.md, SALES.md and the POSTS.md queue with 3 ready posts (PR #157) | Marketer and Content Creator sessions had no Zapier connector and a "do not post" rule, so nothing could ever reach social | owner: Buzzyfly-branded Facebook/Instagram, ad budget, LLC
