@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-02 developer: Worker now submits the whole sitemap to IndexNow (Bing, Yahoo, DuckDuckGo, Yandex) every Monday 06:00 UTC from the hourly cron (PR pending); fired the SEO Master early for a Google-readiness pass | sandbox network blocks IndexNow, so the site itself submits; Google has no API without owner OAuth | -
 2026-11-01 developer: handed Google Search Console to the SEO Master (TEAM.md section + BACKLOG item 5); closed BACKLOG item 3 (indexability verified) | - | owner: verify buzzyfly.com in Search Console
 2026-11-01 developer: added IndexNow key file so Bing/Yahoo/DuckDuckGo get every sitemap URL submitted (PR pending) | Google Search Console has no connector here (not in Zapier); Google verification needs the owner's Google login | owner: verify buzzyfly.com in Search Console
 2026-11-01 developer: /thank-you views explained and fixed in tracking (PR #145): all 20 recent Stripe sessions unpaid/expired (owner tests of $5 Jobs + $49), so no lost buyer; beacon now counts bare visits as /thank-you/no-session and skips wait-for-payment reloads | thank-you reloads up to 12x waiting for the webhook, each was a 'view'; old $97 bundle fix already landed via #143 | -

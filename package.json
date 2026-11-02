@@ -37,6 +37,7 @@
 		"dev": "astro dev",
 		"preview": "astro build && wrangler dev",
 		"test:jobs": "esbuild tests/jobs.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/jobs.test.mjs && node --test .test-build/jobs.test.mjs",
+		"test:indexnow": "esbuild tests/indexnow.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/indexnow.test.mjs && node --test .test-build/indexnow.test.mjs",
 		"test:email": "esbuild tests/email.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/email.test.mjs && node --test .test-build/email.test.mjs"
 	},
 	"type": "module"
