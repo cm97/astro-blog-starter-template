@@ -36,3 +36,24 @@ https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=sc
 Image: none
 Invoice a week overdue and you're dreading the email? We made a free tool for it. Pick how late it is, and it writes a polite, firm reminder you can send in 30 seconds. No sign-up.
 https://buzzyfly.com/overdue-invoice-email?utm_source=facebook&utm_medium=social&utm_campaign=overdue-invoice-free-tool
+
+### unpaid-invoice-steps | ready | facebook: professional portfolio
+Image: none
+Client paid part of the invoice and went quiet? Before you think about court, send one clear written note:
+
+"Hi [name], invoice [#] for [project] was due on [date]. You've paid [amount], so [balance] is still outstanding. Please pay the balance by [date, 7 days out]. If there's a problem with the invoice, tell me this week so we can sort it."
+
+Attach the invoice and the message where they agreed the price. It's short, it's polite, and it puts a date on it. If you'd rather not write it from scratch, our free tool writes the reminder for you, no sign-up.
+https://buzzyfly.com/overdue-invoice-email?utm_source=facebook&utm_medium=social&utm_campaign=unpaid-invoice-steps
+
+### retainer-menu-scope | ready | facebook: professional portfolio
+Image: none
+Monthly retainer keeps growing but the price doesn't? Write it as a menu, not a task list:
+
+"Each month: 4 short edits, up to 60 seconds, 2 revision rounds each."
+
+Then when they ask for more:
+"Happy to. That's outside this month's 4, so it's [price], or we can swap it for one of this month's. Which do you prefer?"
+
+They choose, you stay paid. The Buzzyfly Digital System keeps this reply and others for revisions, discounts and retainers ready to copy, next to every client's follow-ups. $49 once, no subscription.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=retainer-menu-scope

@@ -141,4 +141,3 @@ The same three rows, plus the exact emails and the 20-minute Monday reset, live 
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-Or the Complete Business Bundle — $97 if you want every file and the full app stack. [Get the Bundle](https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08)
