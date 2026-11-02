@@ -17,6 +17,7 @@ of every run and update it at the end.
 - `SALES.md`: the Sales team's leads, outreach drafts, partners and results.
 - `FUNDING.md`: grants, loans and free help, checked and honest.
 - `PRODUCT-TEST.md`: the Test team's proof that the product works as listed.
+- `APPSUMO.md`: the AppSumo application kit. The owner applies.
 
 ## The goal
 
