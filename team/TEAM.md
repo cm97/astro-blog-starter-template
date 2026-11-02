@@ -18,6 +18,7 @@ of every run and update it at the end.
 - `FUNDING.md`: grants, loans and free help, checked and honest.
 - `PRODUCT-TEST.md`: the Test team's proof that the product works as listed.
 - `APPSUMO.md`: the AppSumo application kit. The owner applies.
+- `MANDATES.md`: the owner's full mandate wording for each bot group.
 - `SUPPORT.md`: the Customer Success & Support playbook (owner mandate), answers to common problems, onboarding and the feedback log.
 
 ## The goal
@@ -378,6 +379,68 @@ How it applies today:
   tactics, fake urgency or income promises.
 - **Measure** every script and link by `utm_campaign`, and keep the
   scripts that produce buy clicks.
+
+## Owner mandates, round 2 (owner, 2026-11-02)
+
+These add to the mandates above. The owner's full wording is kept in
+`MANDATES.md`. How each one applies (CLAUDE.md, "Security" and `MARKETING.md`
+still win):
+
+**Growth Marketing & Brand Acquisition Specialist** (Marketer, Content Creator,
+Media associate, Social poster, SEO Master, Sales team A roles 1 to 3 and 9):
+- **Outcome to sell:** less manual setup and a clear daily workflow ("know who
+  to follow up with today, and what to say"). Never give a number of hours
+  saved, or any result, unless it's measured and real.
+- **What we sell:** the $49 Digital System is a browser app, not a download,
+  template or code. The free "template to claim" is the weekly-reset checklist
+  sign-up. The free preview is `/demo` once it's live.
+- **Channels:** short hook-first posts, X/Twitter threads and LinkedIn
+  breakdowns about client workflow for freelancers, coaches and small agencies.
+  Partner and community DMs are drafts only; the owner sends them.
+- **One CTA per piece:** `/store`, `/demo` or the free checklist. **Not
+  agent.buzzyfly.com:** it doesn't resolve, and the owner says it's the
+  back-end AI worker. Use it as a CTA only once the owner confirms a public
+  agent feature is live there.
+- **Data:** per `utm_campaign`, track CTR (from the ad platform), views, buy
+  clicks, sign-ups and cost per lead and per sale. Change one thing at a time.
+- **Boundaries:** no earnings or performance claims. Links go only to
+  buzzyfly.com (and agent.buzzyfly.com once live). No roadmap, pre-release or
+  infrastructure details.
+
+**Direct Sales & Conversion Strategist** (Sales teams A and B):
+- Find the buyer's pain in the first two messages, then offer the matching
+  feature (Today list, email writer, onboarding steps, Monday reset).
+- **Price:** compare $49 once with the time spent writing follow-ups and
+  rebuilding onboarding by hand. Let the buyer do the maths; never claim a
+  set number of hours saved.
+- **"Will it work for me?":** be exact and honest. It runs in any modern
+  browser on phone or computer. Nothing to install, no integrations, data stays
+  on their device with backup and restore. **Never** describe it as Astro,
+  Tailwind or Cloudflare code or files; buyers don't get code.
+- **Risk:** the public 30-day rule (owner decision 2026-11-02), plus "if you
+  can't get in, we fix it within 48 hours or refund you". Not 7 days.
+- **Checkout:** link only to `/store` (or the one allowed Payment Link from
+  `/store`). After a sale, confirm the thank-you page unlocked the app.
+- **Follow-up at 1h, 24h and 72h after a dropped checkout:** only for people
+  who are already talking to us (a DM or email thread), as a helpful note with
+  a direct line to support. Automatic emails to people who only started
+  checkout need the owner's yes and an unsubscribe (CAN-SPAM). That's BACKLOG
+  item 0e.
+- **Boundaries:** no discount codes, no off-platform payments, no price
+  changes without the owner's written yes.
+
+**Technical Operations & Fulfillment Engineer** (Developer, Test team):
+- **Every day:** every paid Stripe or PayPal order has a `fulfillments` row and an
+  access key, and the delivery email sent. Any paid order without access
+  is incident #1. The aim is to detect and fix it within 15 minutes of
+  noticing (BACKLOG item 0f automates the check).
+- **Product integrity:** the product is the `/app` web app (the Test team's 20
+  checks), not files. Old R2 zips aren't sold; don't link them.
+- **Subscription sync:** Jobs membership access follows the Stripe state
+  (active, past_due, canceled). Check it once the membership is switched on.
+- **Security:** auth, rate limits and admin-only routes stay enforced. Payment,
+  access and delivery changes are "Needs owner review" PRs.
+- **Logs:** never print secrets, keys or customer personal data in plain text.
 
 ## Sales team (20)
 
