@@ -13,6 +13,10 @@ of every run and update it at the end.
 - `BACKLOG.md`: the build team's to-do list, ranked. Kept by the Web Developer; the Coding agents build from it.
 - `MEDIA.md`: the Media associate's YouTube plan and ready-to-send pitches.
 - `DESIGN.md`: the Design Lead's style rules and specs. The other designers build to it.
+- `MARKETING.md`: what sells and what we never do. Every marketing, sales and web agent reads it.
+- `SALES.md`: the Sales team's leads, outreach drafts, partners and results.
+- `FUNDING.md`: grants, loans and free help, checked and honest.
+- `PRODUCT-TEST.md`: the Test team's proof that the product works as listed.
 
 ## The goal
 
@@ -59,7 +63,8 @@ connector to the approved accounts:
   the Facebook "Test page" and YouTube stay off-limits for now.
 
 Rules:
-- The Marketer and Content Creator post their own work: at most one post per
+- The Social poster (a daily session with the Zapier connector) posts the newest
+  ready post from the Marketer, Content Creator or Sales team. At most one post per
   account per day, on a real buyer problem, ending on
   `https://buzzyfly.com/store?utm_source=<site>&utm_medium=social&utm_campaign=<slug>`
   so every visit traces back to the post.
@@ -92,6 +97,12 @@ Rules:
 | Designer: App & Blog | Thursday 11:00 | Visual design of `/app` and the blog post and listing layouts only. |
 | Designer: Mobile & Access | Saturday 11:00 | Mobile layout at 375px and accessibility (contrast, focus, tap targets, alt text) across pages. |
 | Developer | Every day 16:37 | Keeps the site, checkout and app working. Then ships the next site priority. |
+| Sales team A (10) | Mon, Wed, Fri 10:19 | Finding and reaching buyers: see "Sales team". |
+| Sales team B (10) | Tue, Thu 10:19 | Partners, launches, funding and follow-up: see "Sales team". |
+| Test team (20) | Every day 9:07 | 20 testers check that the product, checkout and pages work as listed: see "Test team". |
+| Web builders A (5) | Mon, Thu 14:07 | International and new landing pages: see "Web builders". |
+| Web builders B (5) | Tue, Fri 14:07 | Demo, free tools and speed: see "Web builders". |
+| Social poster | Every day 12:11 | Posts the team's ready posts to the approved accounts through Zapier: see "Social posting". |
 
 ## Videos (Content Creator)
 
@@ -305,6 +316,97 @@ each one is done):
 3. Two-factor sign-in on GitHub, Cloudflare, Stripe, PayPal and the email inbox.
 4. Every few months, review GitHub collaborators and installed apps, Cloudflare
    API tokens, and the claude.ai connectors, and remove anything unused.
+
+## Sales team (20)
+
+Twenty AI sales roles, run as two sessions so they share notes and don't repeat
+each other. They follow `MARKETING.md`. All their work lands in `SALES.md`:
+leads (public source link, the problem they posted about, status), drafts,
+partners, and results by `utm_campaign`.
+
+**Team A, finding and reaching buyers (10):**
+1. Community scout, Reddit: threads where freelancers or coaches ask about follow-ups, onboarding, scope creep or ghosting.
+2. Community scout, Facebook groups and LinkedIn.
+3. Community scout, Indie Hackers, Quora and forums.
+4. Reply writer: a complete, helpful answer for each thread, link last and only where the rules allow.
+5. Lead researcher: public business pages of freelancers and small agencies who fit.
+6. Outreach writer: short personal notes to those leads, value first.
+7. Objection handler: collects real questions and doubts and turns them into FAQ and post ideas for the Web builders and Marketer.
+8. Offer tester: proposes headline and offer tests for /store (owner-approved changes only).
+9. Ad copywriter: ad sets ready for the owner's yes (audience, copy, image, budget).
+10. Scoreboard keeper: tracks every link by `utm_campaign` and reports what produced buy clicks.
+
+**Team B, partners, launches and money (10):**
+11. Partner scout: coaches, VAs, bookkeepers and community owners whose audience fits.
+12. Partner pitch writer: a referral offer (terms decided by the owner) and a free review copy.
+13. Newsletter scout: freelancer and small-business newsletters that take sponsors or guest tips.
+14. Podcast and press: hands angles to the Media associate.
+15. Launch manager: Product Hunt, Show HN, Indie Hackers and BetaList launch kits.
+16. Free-tool promoter: shares the free tools (`/overdue-invoice-email` and new ones) where they help.
+17. Email follow-up writer: suggests improvements to the subscriber sequence (the Developer ships them).
+18. Customer success: after each sale, a check-in draft and a request for honest feedback. Testimonials only with written permission.
+19. Upsell and retention: what buyers might want next (ideas for the owner, within CLAUDE.md).
+20. Funding researcher: keeps `FUNDING.md` current with real, checked programs and deadlines.
+
+Sales rules:
+- Drafts only, unless the owner approves a channel here. The Social poster posts to the approved accounts.
+- Never send bulk or cold email, never buy lists, never DM strangers in bulk, never break a group's rules.
+- Every lead comes from a public post or page and has a source link. Never invent leads, quotes, numbers or partners.
+- Spend nothing. Applications, fees, contracts and referral terms are the owner's call.
+
+## Test team (20)
+
+Twenty AI testers, run as one daily session. Each tester owns one check, and
+results go at the top of `PRODUCT-TEST.md` with PASS or FAIL. Any FAIL becomes
+a top item in `BACKLOG.md` and a line in the owner report. A FAIL on payment or
+access goes first in the report.
+
+1. Lock: `/app` refuses without a key and opens with one.
+2. Today list: due follow-ups, overdue invoices and onboarding steps appear on the right dates.
+3. Email writer: every built-in email fills in the name, project, date and sign-off, with no broken placeholders.
+4. Copy and open-in-email-app work.
+5. Mark sent: the item clears and the next one is scheduled.
+6. Weekly reset counts match the client list.
+7. Scope and proposal replies all open and fill in.
+8. Pricing calculator maths are correct.
+9. Data survives reload; backup downloads; restore works.
+10. The smaller apps open with the system key and share data.
+11. Phone, 375px: no sideways scroll, tap targets at least 44px, on `/`, `/store`, a post and `/app`.
+12. Desktop, 1280px: the same pages look right.
+13. Accessibility: contrast, focus rings, alt text and heading order.
+14. Speed: page weight and slow loads on `/` and `/store`.
+15. Links: no broken internal or external links on `/`, `/store` and the blog.
+16. Buy path: every buy button points to the one allowed Payment Link or `/buy/` (PayPal). Payment Link settings are read from Stripe read-only. Never pay.
+17. Thank-you page: shows the right message for paid, unpaid and missing sessions (test sessions only).
+18. Copy check: what each page promises matches what the app does (the store listing, the homepage and the posts).
+19. Rules check: the CLAUDE.md banned items and the refund wording everywhere.
+20. Search check: titles, descriptions, one H1 and structured data (`npm run build` enforces titles and descriptions).
+
+Testers never pay, never refund, never change Stripe, PayPal or Cloudflare, and
+never use real customer data.
+
+## Web builders (10)
+
+Ten AI web builders, run as two sessions. They ship through "How to ship" and the
+"Build team rules", claim items in `BACKLOG.md`, and keep the site fast.
+
+**Builders A, international and new pages (5):**
+1. International setup: language versions of `/` and `/store` under `/es/`, `/pt/`, `/fr/` and `/de/`, with `hreflang` tags and a language switcher.
+2. Translator, Spanish and Portuguese: natural, checked translations of the offer, FAQ and refund line (the refund meaning must not change).
+3. Translator, French and German.
+4. Audience pages: landing pages for one buyer type each (coaches, designers, VAs, consultants), aimed at their exact problem.
+5. Comparison and "how to" pages that answer buying-intent searches.
+
+**Builders B, proof, free tools and speed (5):**
+6. Demo: a free `/demo` that runs the real app with sample clients and saves nothing, plus the screen-recorded demo video on `/store`.
+7. Free tools: one-job tools (a proposal follow-up writer, a scope-creep reply, a rate floor) that end on the $49 offer.
+8. Conversion: `/store` and `/` improvements the Sales team's findings and the numbers support.
+9. Speed and Core Web Vitals.
+10. Quality: cross-page consistency, broken states and the Test team's FAILs.
+
+The price stays in US dollars (Stripe shows local payment methods). Translated
+pages must keep the same price, refund rule and claims, and must never promise
+more than the English page.
 
 ## Where the numbers are
 
