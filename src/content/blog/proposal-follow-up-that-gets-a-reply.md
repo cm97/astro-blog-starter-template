@@ -2,7 +2,7 @@
 title: "The Proposal Follow-Up That Gets a Reply"
 description: "Three paste-ready follow-ups for when a proposal goes quiet — so the deal does not die because you stopped chasing it."
 pubDate: 2026-10-16
-updatedDate: 2026-10-29
+updatedDate: 2026-11-02
 category: sales
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -31,9 +31,20 @@ Day 3 due: ________
 Day 7 due: ________
 Day 14 due: ________
 Status: waiting / replied / closed
+Channel: email / other
+Last touch sent: ________
+Next action: ________
 ```
 
 Four minutes. Do it while the proposal is still open. Thursday will erase it if you wait.
+
+Put three 8-minute blocks on the calendar labeled "Proposal: [name] day 3/7/14". If the date lands on Friday, move it to Thursday morning. Do not skip.
+
+Block template (paste into calendar):
+
+- Title: Proposal follow-up [Name] day [3/7/14]
+- Duration: 8 minutes
+- Note: Send the exact line. Log the send. Do not rewrite.
 
 ## Day 3 — One line, one ask
 
@@ -47,6 +58,8 @@ Subject: Re: [Project name] proposal
 
 Send it. Log the date. Move on. Do not rewrite it.
 
+After send: update log with time sent. Move status to waiting. Do not check for a reply for 24 hours.
+
 ## Day 7 — Specific next step
 
 If day 3 got nothing:
@@ -57,6 +70,8 @@ Same idea. Still one line. Still a binary choice. People reply to binary choices
 
 Same window: before 11am. Same subject: Re: [Project name] proposal
 
+After send: log the time. If they asked a clarifying question, answer in one paragraph and restate the binary close. Do not open a new scope talk.
+
 ## Day 14 — Close the loop or kill it
 
 If still quiet:
@@ -66,6 +81,8 @@ If still quiet:
 Subject: Closing the file on [Project name]
 
 This one either gets a reply or cleanly kills the lead so it stops living in your head.
+
+After send: set status to closed or parked. Delete the remaining calendar blocks. Do not send a fourth email.
 
 ## Exact timing windows
 
@@ -78,10 +95,11 @@ If a due date lands on Friday or Monday, move it to the nearest Tuesday or Wedne
 
 ## What you do when they reply
 
-- Yes: send the invoice the same hour. Welcome note with the start date and the one thing you need from them. Mark the log closed.
+- Yes: send the invoice the same hour. Welcome note with the start date and the one thing you need from them. Mark the log closed. Add them to next Monday’s onboarding row.
 - Later: write the month they named. One note that month. Not a drip. Status = parked.
 - Price question: restate what is in and what is out. Do not cut the number. One line: "The [price] covers [exact deliverable]. Outside that is a separate quote. Still want the hold?"
 - Scope question: "Original scope is [in]. [New ask] is out unless we add it at [price]. Which do you want?"
+- Busy / later this week: reply "Understood. I’ll hold the [date] until [next specific day]. Reply by then or I release it." Log the new date.
 - No: mark closed. Do not argue. Do not send a fourth email.
 
 If you cannot name the next date after a yes, the client is not onboarded. That is a separate checklist.
@@ -94,14 +112,22 @@ If you cannot name the next date after a yes, the client is not onboarded. That 
 - If day 3 falls on a Friday, send Thursday instead. Do not slide it to Monday and lose the window.
 - After any yes, add the client to next Monday’s “Still open” so the day-7 onboarding touch does not live only in your head.
 - Log the reply time and the next action in the same block. Blank next action means the thread dies again.
+- Set a phone reminder for the 8-minute block the night before. The calendar alone dies when the week is on fire.
+- If they reply with a question instead of yes/no, answer in one short paragraph, then restate the binary close in the same email. Do not leave the decision open-ended.
+- Write the next touch date on the log the second the current email leaves. Blank next-touch is how the cadence dies.
+- Cap open proposal rows at five. Older ones past Day 14 are closed or parked. More than five is noise, not a pipeline.
+- After any paid yes, open the onboarding checklist the same day. The follow-up sequence ends when money lands; the onboarding sequence starts.
+- Screenshot or copy the proposal send time into the log. Memory of “I sent it last week” is not a date.
+- If the start date you named has already passed by Day 7, replace it with the next available start you can actually hold before you send the line.
 
 Fill-in after any reply:
 
 ```
 Reply received: ________ (date/time)
-Decision: yes / later / price / no
-Next action: invoice sent / parked until ________ / closed
+Decision: yes / later / price / scope / no / silent
+Next action: invoice sent / parked until ________ / closed / answer + restate binary
 Onboarding note started: yes / no
+Open cash still at risk: $________
 ```
 
 ## Phone-paste variants (send from the car or between calls)
@@ -128,8 +154,8 @@ Open the log. Confirm the start date is still real. Paste the day-3 or day-7 lin
 
 You can paste them today. They work until a slammed Thursday. Then the day-3 window passes, the log is empty, and the proposal sits in sent items until you notice it two weeks later.
 
-The same three lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One app. One-time $49. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The ranking never happens because the largest fee is buried in an old thread. The binary line gets rewritten into a longer email. One lead gets three messages and the other two get none. Next Monday the note is gone and you rebuild the list from memory again.
 
-The Digital System ($49) is those follow-up lines plus the onboarding checklist and the weekly reset so the sends still happen on a slammed Thursday.
+The same three lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
