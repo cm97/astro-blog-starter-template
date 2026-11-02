@@ -50,6 +50,25 @@ Stripe and PayPal net revenue and paid orders for the week and the month so far.
 The same rules still apply: no fake urgency, no invented proof, no income
 promises to buyers, and no money spent without the owner's yes.
 
+## Social posting (owner approved automatic posting, 2026-11-02)
+
+The owner told the team to post on its own. Posts go out through the Zapier
+connector to the approved accounts:
+- Facebook Page **"professional portfolio"** (first post: 2026-11-02).
+- No other account until the owner names it here. Instagram "SAMS Service",
+  the Facebook "Test page" and YouTube stay off-limits for now.
+
+Rules:
+- The Marketer and Content Creator post their own work: at most one post per
+  account per day, on a real buyer problem, ending on
+  `https://buzzyfly.com/store?utm_source=<site>&utm_medium=social&utm_campaign=<slug>`
+  so every visit traces back to the post.
+- Every post follows CLAUDE.md: no income or outcome promises, no fake urgency,
+  no invented proof, and the refund line exactly as written if refunds come up.
+- Log each post in `LOG.md` with the account, the post ID from Zapier and the
+  campaign tag. Never delete or edit a post someone has replied to.
+- Paid boosts or ads still need the owner's yes and a daily budget.
+
 ## The team
 
 | Agent | Runs (New York time) | Job |
@@ -84,7 +103,7 @@ promises to buyers, and no money spent without the owner's yes.
 - One idea per video: hook in the first 2 seconds, one useful tip, then
   "buzzyfly.com/store" on the last screen. Large text, safe margins for app UI.
 - Put the captions (TikTok, Instagram Reels, YouTube Shorts title + description)
-  in `team/LOG.md` next to the video path. Do not post to any account.
+  in `team/LOG.md` next to the video path. Post it yourself under "Social posting".
 
 ## Google Search Console (SEO Master)
 
