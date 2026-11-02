@@ -57,3 +57,9 @@ Then when they ask for more:
 
 They choose, you stay paid. The Buzzyfly Digital System keeps this reply and others for revisions, discounts and retainers ready to copy, next to every client's follow-ups. $49 once, no subscription.
 https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=retainer-menu-scope
+
+### late-invoice-image | ready | facebook: professional portfolio
+Image: https://buzzyfly.com/social/buzzyfly-late-invoice.jpg
+Late invoices get chased from memory, so they get chased late. The Buzzyfly Digital System shows which invoice is overdue and has the reminder email ready, with the client's name, project and amount filled in. Copy, send, mark done. Reminders for 1 day, 1 week and 2 weeks overdue. $49 once, works in your browser, no subscription.
+
+https://www.buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=late-invoice-image
