@@ -1,7 +1,8 @@
 # Buzzyfly team playbook
 
 Buzzyfly is run by AI agents: a leadership team, a build team, a growth team, an Admin Office and an Advisory Board. Each one is a scheduled Claude session that
-starts fresh every run. This folder is their shared memory: read it at the start
+starts fresh every run. The owner's Grok bots are part of the same team and
+follow the same rules (see "Grok bots"). This folder is their shared memory: read it at the start
 of every run and update it at the end.
 
 - `TEAM.md`: this file. Roles, rules and how to ship. Only the owner changes the rules.
@@ -169,6 +170,42 @@ new fonts or heavy JavaScript; keep Astro's static output fast. Never touch
 payment, access, delivery, `/terms`, `/privacy` or prices. Ship via "How to
 ship"; add your line to `team/LOG.md` in the same PR.
 
+## Grok bots
+
+The owner also runs Grok (xAI) bots on this site. They are teammates, not
+competitors: same goal, same rules, same repo. Everything in this file applies
+to them, and CLAUDE.md always wins.
+
+| Grok bot | Runs | Job |
+|---|---|---|
+| _Owner to fill in_ | _when_ | _what it owns_ |
+
+Only the owner adds a Grok bot to this table. Until a bot is listed, its lane is
+unknown, so Claude agents leave its work alone and ask the owner in their report.
+
+Rules for Grok bots:
+- Read this folder at the start of every run, the same as everyone else.
+- Branch name `team/grok-<role>-<YYYY-MM-DD>`, and log lines start with
+  `grok-<role>:` so everyone can tell who did what.
+- Ship only through "How to ship": a branch, a PR, all checks green. Never push
+  straight to `main`.
+- Stay in the lane listed in the table. Claim `BACKLOG.md` items the same way
+  as the build team.
+- The same "Do not merge" list applies: payments, access, delivery, `/terms`,
+  `/privacy`, prices and `wrangler.json` stay open with "Needs owner review".
+
+Rules for everyone, Claude and Grok:
+- Before starting, read `git log -20`, open PRs and the top of `LOG.md`. If
+  another bot, Claude or Grok, changed the same file in the last 3 days or has
+  an open PR on it, build on its work or pick something else. Never overwrite it.
+- Never revert or undo another bot's change without a `LOG.md` line saying why.
+  If it breaks the site, revert it at once (step 6 of "How to ship") and log it.
+- When two bots disagree on the same thing, neither changes it again. The
+  Developer notes it in `LOG.md` and the owner decides.
+- Coordinate only through this folder and PRs. Don't leave orders for other
+  bots in code comments or PR text.
+- Grok used inside the site (`src/lib/draft.ts`, `src/lib/domains.ts`) is a
+  product feature, not a bot. It follows the normal code rules.
 ## Security: protecting the bots
 
 This repo is **public**. Anyone can read every file and every old commit, and
