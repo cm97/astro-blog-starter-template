@@ -21,6 +21,54 @@ funds the project until then. After that, grow sales of the $49 Digital System.
 Every run must move toward a sale: more of the right visitors, or more of those
 visitors clicking buy.
 
+## Revenue first (owner, 2026-11-02, overrides how every agent picks its work)
+
+The only score is money that reaches the owner's bank account: paid Stripe and
+PayPal orders, net of refunds. Views, posts, PRs and playbook edits are not
+results. On 2026-11-02 Stripe showed 0 charges ever, so every run aims at the
+**first paid order**, then the next one. The owner's target is $25,000 a month
+and up. At $49 that is about 510 orders a month, so the team must find
+buyers at that scale, not just publish pages.
+
+Before starting, each agent picks the one task most likely to bring in paid
+orders soonest, using this order:
+1. **Fix anything that blocks a payment**: checkout, PayPal, unlocking the
+   app, the thank-you page. A broken buy path loses every visitor.
+2. **Put the offer in front of buyers this week**: posts and pitches written to
+   be shared where freelancers and coaches already gather, outreach lists, ad
+   copy waiting for the owner's yes, and SEO pages that answer buying-intent
+   searches.
+3. **Turn more visitors into buyers**: the homepage, /store, the price, the
+   offer, the guarantee wording, the email sequence.
+4. Everything else only when 1 to 3 have nothing left to do.
+
+Stop doing work that can't lead to a sale: re-expanding old posts that get no
+traffic, new team roles, renaming, cosmetic changes no buyer would notice, and
+reports that repeat last week's numbers. Each `LOG.md` line names which of 1 to 4
+the run served and the number it should move. Every Monday the CEO opens the report with
+Stripe and PayPal net revenue and paid orders for the week and the month so far.
+The same rules still apply: no fake urgency, no invented proof, no income
+promises to buyers, and no money spent without the owner's yes.
+
+## Social posting (owner approved automatic posting, 2026-11-02)
+
+The owner told the team to post on its own. Posts go out through the Zapier
+connector to the approved accounts:
+- Facebook Page **"professional portfolio"** (first post: 2026-11-02).
+- No other account until the owner names it here. Instagram "SAMS Service",
+  the Facebook "Test page" and YouTube stay off-limits for now.
+
+Rules:
+- The Marketer and Content Creator post their own work: at most one post per
+  account per day, on a real buyer problem, ending on
+  `https://buzzyfly.com/store?utm_source=<site>&utm_medium=social&utm_campaign=<slug>`
+  so every visit traces back to the post.
+- Every post follows CLAUDE.md: no income or outcome promises, no fake urgency,
+  no invented proof, and the refund line exactly as written if refunds come up.
+- Log each post in `LOG.md` with the account, the post ID from Zapier and the
+  campaign tag. Never delete or edit a post someone has replied to.
+- Paid boosts or ads still need the owner's yes and a daily budget.
+
 ## The team
 
 | Agent | Runs (New York time) | Job |
@@ -55,7 +103,7 @@ visitors clicking buy.
 - One idea per video: hook in the first 2 seconds, one useful tip, then
   "buzzyfly.com/store" on the last screen. Large text, safe margins for app UI.
 - Put the captions (TikTok, Instagram Reels, YouTube Shorts title + description)
-  in `team/LOG.md` next to the video path. Do not post to any account.
+  in `team/LOG.md` next to the video path. Post it yourself under "Social posting".
 
 ## Google Search Console (SEO Master)
 
