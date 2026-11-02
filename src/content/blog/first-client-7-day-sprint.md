@@ -2,7 +2,7 @@
 title: 'The 7-Day Sprint to Land Your First Paying Client'
 description: 'No audience required. A day-by-day sprint to get one paying client, then run the same-day start line so week one does not die in your head.'
 pubDate: '2026-09-01'
-updatedDate: 'Oct 29 2026'
+updatedDate: 'Nov 02 2026'
 category: 'sales'
 heroImage: '/blog-placeholder-2.jpg'
 featuredProductTitle: 'Buzzyfly Digital System'
@@ -116,6 +116,28 @@ If nobody said yes, the sprint is not failed. You have 20 notes and a message yo
 Invoice note you can paste the moment they say yes:
 
 > Invoice for [offer] is attached. $[number] due [date]. Reply once paid and I send the welcome note today.
+
+## If day 7 arrives with zero yeses — the recovery loop
+
+Do not redesign the offer. Do not write a new funnel. Run this 15-minute loop the same Monday:
+
+1. Open the 20 name cards. Cross out anyone who already got the day-4 bump and stayed quiet.
+2. Add 10 fresh names that show the same broken thing. Same rules as Day 2.
+3. Send the same Day-3 message to the new 10 plus any Day-4 that you marked "next Monday list."
+4. Log every send. Cap free audits at three again next week.
+5. Put one line on next Monday's reset: "Sprint recovery — 10 new names sent. Next check: ________."
+
+Exact recovery log:
+
+```
+Recovery Monday: ________
+New names added: ________
+Messages sent: ________
+Audits still open: ________
+Next Monday check: ________
+```
+
+The offer sentence stays the same. The list grows. The process does not change.
 
 ## The same-day start line (the part that keeps the money)
 
