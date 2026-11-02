@@ -6,13 +6,14 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 
 | Campaign | Where | Date | Visits | Buy clicks | Sales |
 |---|---|---|---|---|---|
-| launch-post-1 | Facebook: professional portfolio | 2026-11-02 | ? | ? | ? |
+| launch-post-1 | Facebook: professional portfolio | 2026-11-02 | 0 | 0 | 0 |
+| launch-ad-1 (paid, $15 spent by 2026-11-02 15:45 UTC) | Facebook ad | 2026-11-02 | 0 tracked | 0 | 0 |
 | proposal-quiet-day-6, scope-creep-reply, overdue-invoice-free-tool | Facebook queue (POSTS.md) | not posted yet | - | - | - |
 | unpaid-invoice-steps, retainer-menu-scope | Facebook queue (POSTS.md, added 2026-11-02) | not posted yet | - | - | - |
 | Community replies (leads below) | Reddit / Facebook groups, owner posts | not posted yet | - | - | - |
 | Whole site since 2026-10-20 (LOG.md, 2026-11-02) | all direct | - | 163 views | 4 | 0 |
 
-Per-campaign visits and buy clicks are not in the repo yet ("?"). Stripe: 0 charges ever (2026-11-02).
+Per-campaign numbers for the queued posts and replies: "?" until posted. Stripe: 0 charges ever (2026-11-02).
 
 ## Leads
 
@@ -107,7 +108,7 @@ Buyer doubts about Buzzyfly to answer on /store (for the Web builders): "Is it a
 
 ## Ready ad set (role 9, waiting for the owner's yes and daily budget)
 
-Not running. Needs the owner's yes, the ad account, and a daily budget.
+`launch-ad-1` is already running (scoreboard). This is a second variant, not running: it needs the owner's yes and a daily budget. Use it if launch-ad-1 gets 0 buy clicks in 3 days.
 - Platform: Facebook and Instagram (Meta), objective "Traffic" to /store.
 - Audience: US, UK, CA, AU; ages 25 to 55; interests freelancing, Upwork, Fiverr, life coaching, small business owners, self-employment.
 - Image: https://buzzyfly.com/social/buzzyfly-digital-system-1.jpg
