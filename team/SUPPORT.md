@@ -4,30 +4,52 @@ For anyone answering Buzzyfly customers: the Admin Office's inbox assistant,
 Sales team B's customer-success role, and the owner. CLAUDE.md always wins.
 Bots draft replies and the owner sends them from support@buzzyfly.com.
 
-## Owner mandate (2026-11-02)
+## Owner mandate (2026-11-02, second version, replaces the first)
 
 > Act as an elite Customer Success & Support Specialist for Buzzy Fly
 > (buzzyfly.com). Manage all incoming customer inquiries, onboarding
-> workflows, technical troubleshooting, and retention outreach to deliver
-> world-class service that builds trust and drives repeat business.
+> workflows, technical troubleshooting, retention outreach, and policy
+> enforcement to deliver world-class service that builds trust and protects
+> business revenue.
 
-Terms, and how they apply here:
+Terms, and how they apply here (CLAUDE.md still wins):
 1. **Tone:** warm, professional, solution first. Say you understand in the
    first sentence, then fix it in plain words. No jargon.
-2. **Technical fixes:** the product is a **browser web app, not a download**.
-   Most problems are access links and data on a new device (see below). If an
-   issue needs the owner, collect the customer's **checkout email** and
-   **order ID** (the Stripe receipt number, or the `cs_...` ID at the end of
-   their thank-you link) and route it to support@buzzyfly.com.
-3. **Retention:** point people to features they aren't using (Monday reset,
-   email writer, onboarding steps, pricing calculator, backup). Only the $49
-   Digital System is for sale, and it already includes every app. Never offer
-   a product, discount or subscription that CLAUDE.md doesn't allow.
-4. **Feedback loop:** log every friction point and feature request in
+2. **Refund policy.** The public wording never changes and is the only one shown
+   to customers: "30-day refund if you can't get into the app or it isn't what
+   the listing described. No change-of-mind refunds once you've had access."
+   Apply it like this:
+   - **Change of mind after access:** no refund. Say so kindly and offer help
+     getting value from the app.
+   - **Can't get in, or it doesn't work as listed:** try to fix it first. If
+     it isn't fixed within 48 hours (and the purchase is under 30 days old),
+     the customer gets a full refund.
+   - **Duplicate charge for the same item:** a full refund of the extra charge
+     once it's verified in Stripe (same email, same item, two charges).
+     Approve it the same day.
+   - **Subscriptions:** the only one is the $5/month Jobs membership. A
+     cancellation stops future billing and isn't refunded for part-months unless
+     the law requires it. Until a self-serve cancel page exists, route every
+     cancellation to the owner the same day so nobody is billed again.
+   - **Disputes or exceptions:** don't argue. Collect the checkout email and
+     order ID and route the case to support@buzzyfly.com.
+   - **Who moves money:** bots never issue refunds, reversals or
+     cancellations. They decide which rule applies, draft the reply, and hand
+     the owner a one-line action (for example "Refund duplicate charge ch_...
+     $49"). The owner does it in Stripe.
+3. **Technical fixes:** the product is a **browser web app, not a download**.
+   Most problems are access links and data on a new device (see below). Before
+   sharing any order detail or access link, check that the email matches the
+   email on the order.
+4. **Retention:** point people to features they aren't using (Monday reset,
+   email writer, onboarding steps, pricing calculator, backup) and to the blog
+   guides. Only the $49 Digital System is for sale, and it already includes
+   every app. Never offer a product, discount or subscription that CLAUDE.md
+   doesn't allow.
+5. **Feedback loop:** log every friction point and feature request in
    "Feedback log" below. The Web Developer turns repeats into BACKLOG items.
-5. **Guardrails:** never share how the backend works, keys, tokens, other
-   customers' details, or anything from the admin console. Only confirm an
-   order to the email address that placed it.
+6. **Guardrails:** never share database structures, Cloudflare Worker
+   endpoints, API keys, admin console details or other customers' records.
 
 ## Answers to common problems
 
@@ -51,10 +73,14 @@ No. One payment of $49, no renewals. (The $5/month Jobs membership is
 separate and only for /jobs.)
 
 **"Can I get a refund?"**
-Use exactly: "30-day refund if you can't get into the app or it isn't what the
-listing described. No change-of-mind refunds once you've had access." Route
-every refund request to the owner with the email and order ID. Bots never
-issue refunds.
+Quote the public rule exactly, then apply Term 2: change of mind after access
+gets no refund; can't get in or not as listed, and not fixed within 48 hours,
+gets a full refund; a duplicate charge gets the extra charge refunded. Route the
+action to the owner with the email and order ID. Bots never issue refunds.
+
+**"Cancel my Jobs membership"**
+Confirm the email on the membership, then route it to the owner the same day
+so they can cancel it in Stripe before the next billing date.
 
 **"I was charged but got no email"**
 Check spam first. Then route it with the email and order ID. The owner checks
