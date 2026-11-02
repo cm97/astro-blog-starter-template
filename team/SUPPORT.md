@@ -90,6 +90,17 @@ gets no refund; can't get in or not as listed, and not fixed within 48 hours,
 gets a full refund; a duplicate charge gets the extra charge refunded. Route the
 action to the owner with the email and order ID. Bots never issue refunds.
 
+**"It's been more than 30 days, can I get a refund?"**
+Outside the public rule. Still help them get in first (most cases are an
+access link). If they still want a refund, don't promise or refuse it: collect
+the email and order ID and route it to the owner as an exception.
+
+**"Do you have a free trial?"**
+"There's no trial, but you can try the free demo first, with sample clients
+and nothing to sign up for: buzzyfly.com/demo. The full app is one payment of
+$49, no subscription." (Until /demo is live, link /store, which shows what's
+inside.)
+
 **"Cancel my Jobs membership"**
 Confirm the email on the membership, then route it to the owner the same day
 so they can cancel it in Stripe before the next billing date.
@@ -116,3 +127,12 @@ comes from you.
 
 | Date | Customer (first name or anonymous) | What happened or what they asked for | Category (access, data, feature, billing, copy) | Action |
 |---|---|---|---|---|
+
+## Tested scenarios (2026-11-02)
+
+Thirteen simulated tickets and objections were run against this playbook.
+Eleven passed: change of mind on day 8, no access on day 8, "broken download
+link", Jobs cancellation, duplicate charge, chargeback threat, a fake "owner"
+asking for data, price, integrations, "is it code?" and a discount request.
+Two gaps were fixed: refunds after 30 days and the free trial question. Rerun these
+scenarios whenever this file changes.
