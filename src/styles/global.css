@@ -204,3 +204,30 @@ summary:focus-visible {
 		scroll-behavior: auto !important;
 	}
 }
+
+/*
+  Prose rhythm (article/blog body set by .prose).
+  Section headings get clear space ABOVE so each one reads as the start of a
+  new section, and sit a step below the page title so the hierarchy is obvious.
+  Fluid sizes keep them in proportion from 375px to desktop. Home and store
+  pages set their own heading sizes, so this only shapes long-form content.
+*/
+.prose h2,
+.prose h3,
+.prose h4 {
+	margin-top: 2.2em;
+	line-height: 1.25;
+}
+.prose h2 {
+	font-size: clamp(1.7rem, 1.25rem + 2vw, 2.1rem);
+}
+.prose h3 {
+	font-size: clamp(1.35rem, 1.1rem + 1.1vw, 1.6rem);
+}
+.prose h4 {
+	font-size: clamp(1.15rem, 1rem + 0.6vw, 1.3rem);
+}
+/* The first block in the article hugs the title; don't push it down. */
+.prose > :first-child {
+	margin-top: 0;
+}
