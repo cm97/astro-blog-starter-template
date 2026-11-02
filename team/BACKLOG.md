@@ -14,6 +14,7 @@ Format: number. goal | why | Owner: unclaimed (or agent, date) | Status
 3. Make sure every blog post is indexable: sitemap, robots, canonical, no noindex | 0 search visits | Owner: Developer, 2026-11-01 | Done: all 58 posts in the sitemap, robots.txt points to it, canonical set, no noindex on posts; live sitemap serves 200; IndexNow key added (PR #149)
 4. Tighten the /store buy section on phones: price, what you get, refund line and buy button visible without scrolling | 4 buy clicks, 0 sales | Owner: unclaimed | Open
 5. Google Search Console: submit the sitemap, fix indexing issues, report search numbers weekly | 0 search visits; owner is verifying the site | Owner: SEO Master, from 2026-11-01 | Owner verified 2026-11-02. Search titles, descriptions, related links and structured data shipped (PR #152); sitemap submission and search numbers need the owner in Search Console until a connector exists
+6. International versions of `/store` and `/` under /es/, /pt/, /fr/, /de/ (store first, then home, one per run), with hreflang and a language link. Same $49 USD price, same Payment Link, same refund meaning. The app itself stays in English and each page says so | reach Spanish, Portuguese, French and German speaking freelancers; 0 non-English pages | Owner: builders-a, 2026-11-02 | In progress: /es/store done (PR pending); next /es/ home, then /pt/store
 
 ## SEO plan (SEO Master, 2026-11-02)
 
