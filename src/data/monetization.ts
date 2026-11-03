@@ -97,7 +97,7 @@ export const UPSELL_MAP: Record<string, string | null> = {
 	"buzzyfly-digital-system": null,
 };
 
-// Only the $49 Digital System is buyable. The $15, $19 and $29 apps stay "Coming soon" with buyUrl: null until each has a Payment Link.
+// Each web app has its own Stripe Payment Link (owner, 2026-11-03: "make the $15, $19 and $29 apps buyable"). The $49 Digital System includes all of them.
 export const ALL_PRODUCTS: Product[] = [
 	{
 		id: "weekly-reset-checklist",
@@ -105,8 +105,8 @@ export const ALL_PRODUCTS: Product[] = [
 		price: "$15",
 		description: "Stop losing Monday to figuring out what to work on. A browser web app walks you through a 20-minute reset, scores your tasks and picks your #1. No download.",
 		features: ["Guided 20-minute Monday reset", "Priority scorer that picks your #1", "Thursday check-in and Friday close", "Weekly log with a money-in chart", "Works on phone. Included in the Digital System."],
-		buyUrl: null,
-		badge: "Coming soon",
+		buyUrl: "https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05",
+		badge: null,
 	},
 	{
 		id: "follow-up-email-templates",
@@ -114,8 +114,8 @@ export const ALL_PRODUCTS: Product[] = [
 		price: "$19",
 		description: "Stop letting quiet leads and late invoices go cold. A browser web app shows who to follow up with today and fills in the email for you. No download.",
 		features: ["Follow-up dates worked out for you", "9 follow-up emails that fill in each person's details", "Today screen: who is due right now", "Add and save your own emails", "Works on phone. Included in the Digital System."],
-		buyUrl: null,
-		badge: "Coming soon",
+		buyUrl: "https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06",
+		badge: null,
 	},
 	{
 		id: "client-onboarding-kit",
@@ -123,8 +123,8 @@ export const ALL_PRODUCTS: Product[] = [
 		price: "$29",
 		description: "A new client signs and the web app lays out their first ten days. It shows what's due today and fills in each email for you. No download.",
 		features: ["10-step onboarding plan for every client", "Welcome, intake, kickoff, summary, check-in and first-delivery emails, filled in", "Intake questions you write once and reuse", "Client notes and progress for each client", "Works on phone. Included in the Digital System."],
-		buyUrl: null,
-		badge: "Coming soon",
+		buyUrl: "https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07",
+		badge: null,
 	},
 	{
 		id: "buzzyfly-digital-system",

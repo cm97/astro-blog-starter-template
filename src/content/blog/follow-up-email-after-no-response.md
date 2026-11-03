@@ -236,7 +236,7 @@ You can copy the five emails above into a Google Doc right now and they will wor
 
 That is the gap the full system closes. The templates are the words. The Digital System is the 20-minute checklists that keep the words getting sent even when the week is on fire: follow-up, onboarding, weekly reset, intake, scope, retention.
 
-The $19 Follow-Ups app (coming soon) will be the follow-ups alone. The $49 Digital System has those follow-ups plus onboarding and the weekly reset, in one browser app you can open today.
+The $19 Follow-Ups app is the follow-ups alone. The $49 Digital System has those follow-ups plus onboarding and the weekly reset, in one browser app you can open today.
 
 The Digital System ($49) is those emails plus the onboarding checklist and the weekly reset so the sends still happen on a slammed Thursday.
 
