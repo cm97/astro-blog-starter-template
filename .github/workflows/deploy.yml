@@ -48,7 +48,7 @@ jobs:
               with urllib.request.urlopen(req, timeout=30) as r:
                   return r.status, r.read().decode("utf-8", "replace")
           failed = []
-          for path in ["/", "/store", "/jobs", "/apps-pro", "/buzzy-lands", "/blog"]:
+          for path in ["/", "/store", "/jobs", "/apps-pro", "/buzzy-lands", "/blog", "/support"]:
               try:
                   code, _ = get(path)
               except Exception as e:
@@ -104,6 +104,39 @@ jobs:
               for f in failed:
                   print(f"::error::{f}")
               sys.exit(1)
+          PY
+      # Ask the free AI helpers (/api/ai, Groq with Gemini fallback) one real
+      # question each and print the answers. 503 means no GROQ_API_KEY or
+      # GEMINI_API_KEY secret on the Worker. Free tiers can hiccup, so this
+      # warns instead of failing the deploy.
+      - name: Check the AI helpers
+        continue-on-error: true
+        run: |
+          python3 - <<'PY'
+          import json, urllib.error, urllib.request
+          def ask(payload):
+              req = urllib.request.Request("https://www.buzzyfly.com/api/ai", data=json.dumps(payload).encode(),
+                  headers={"Content-Type": "application/json", "User-Agent": "buzzyfly-deploy-check"})
+              try:
+                  with urllib.request.urlopen(req, timeout=45) as r:
+                      return r.status, json.loads(r.read().decode())
+              except urllib.error.HTTPError as e:
+                  try:
+                      return e.code, json.loads(e.read().decode())
+                  except Exception:
+                      return e.code, {}
+          checks = [
+              ("support bot", {"kind": "support", "messages": [{"role": "user", "content": "How do I get into my app after paying, and can I get a refund?"}]}),
+              ("follow-up writer", {"kind": "followup", "situation": "proposal", "name": "Sam", "thing": "the website refresh"}),
+          ]
+          for label, payload in checks:
+              code, data = ask(payload)
+              print(f"--- {label}: HTTP {code}")
+              print(data.get("reply") or ((data.get("subject", "") + "\n\n" + data.get("body", "")).strip()) or data.get("error", data))
+              if code == 503:
+                  print(f"::warning::{label}: no AI key on the Worker (set GROQ_API_KEY as a secret)")
+              elif code != 200:
+                  print(f"::warning::{label}: AI helper returned {code}")
           PY
       # Tell Bing, Yandex and the other IndexNow engines about every page in the
       # sitemap, so new posts get crawled in hours instead of weeks. The key
