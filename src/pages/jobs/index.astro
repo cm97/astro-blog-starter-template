@@ -7,6 +7,7 @@ import Footer from '../../components/Footer.astro';
 import { SITE_TITLE } from '../../consts';
 import { getJobsFeed } from '../../lib/jobs';
 import { FREE_JOBS_PREVIEW, JOBS_COOKIE, checkJobsAccess, getJobsOffer } from '../../lib/jobsAccess';
+import { getJobsCancelLink } from '../../lib/jobsCancel';
 
 const env = Astro.locals.runtime.env;
 const { jobs, fetchedAt } = await getJobsFeed(env);
@@ -23,6 +24,8 @@ const locked = !!offer && !isMember;
 const shownJobs = locked ? jobs.slice(0, FREE_JOBS_PREVIEW) : jobs;
 const lockedCount = jobs.length - shownJobs.length;
 const accessNote = Astro.url.searchParams.get('access');
+// Members can always find how to cancel: Stripe's portal once it's set up, otherwise an email to support.
+const cancelLink = isMember ? getJobsCancelLink(env) : null;
 
 // The page differs per visitor once the paywall is on, so only the visitor's own browser may cache it.
 // The other headers stop framing and MIME sniffing.
@@ -81,6 +84,19 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
       }
       .live-indicator.is-stale .pulse-dot {
         background: #94a3b8;
+      }
+      .manage-link {
+        display: inline-flex;
+        align-items: center;
+        min-height: 44px;
+        margin: 0 0 0.5rem 0.75rem;
+        font-size: 0.85rem;
+        color: #475569;
+        text-decoration: underline;
+      }
+      .manage-link:focus-visible {
+        outline: 2px solid var(--accent, #2337ff);
+        outline-offset: 2px;
       }
       .member-badge {
         display: inline-flex;
@@ -339,6 +355,11 @@ const jobTypes = unique(shownJobs.map((job) => job.job_type));
           </div>
         )}
         {isMember && <span class="member-badge">Member: every listing unlocked</span>}
+        {cancelLink && (
+          <a class="manage-link" href={cancelLink.url} {...(cancelLink.selfServe ? { rel: 'noopener', target: '_blank' } : {})}>
+            {cancelLink.selfServe ? 'Manage or cancel membership' : 'Cancel membership (email support)'}
+          </a>
+        )}
         <h1 style="font-size: 2rem; margin: 0 0 0.5rem 0;">Buzzyfly Jobs</h1>
         <p style="color: #64748b; margin: 0 0 1.5rem 0;">
           Remote job openings in one place. The list refreshes a few times a day.

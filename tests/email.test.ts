@@ -10,12 +10,14 @@ import {
 	resolveFrom,
 	sendDeliveryEmail,
 	sendFollowUpEmail,
+	sendJobsWelcomeEmail,
 	type EmailBinding,
 } from "../src/lib/email";
 import { renderSequenceEmail, sendDueSequenceEmails, sendSequenceEmail } from "../src/lib/emailSequence";
 import { sendBrandEmail } from "../src/lib/outbox";
 import { parseIncoming, replyFromAddress, replySubject, sendReply } from "../src/lib/inbox";
 import { EMAIL_SEQUENCE } from "../src/data/emailSequence";
+import { getJobsCancelLink } from "../src/lib/jobsCancel";
 
 type Sent = Parameters<EmailBinding["send"]>[0];
 
@@ -423,4 +425,33 @@ test("inbox gives HTML-only mail a plain-text version", async () => {
 	const raw = "From: a@example.com\r\nTo: hello@buzzyfly.com\r\nSubject: Hi\r\nContent-Type: text/html; charset=utf-8\r\n\r\n<style>p{color:red}</style><p>Hello &amp; welcome</p><p>Line two<br>three</p>";
 	const parsed = await parseIncoming(raw, { from: "a@example.com", to: "hello@buzzyfly.com" });
 	assert.equal(parsed.message.text_body, "Hello & welcome\nLine two\nthree");
+});
+
+// --- Jobs membership cancel route ---------------------------------------------
+
+test("jobs cancel link falls back to a prefilled support email until a portal is set", () => {
+	for (const value of [undefined, "", "  ", "http://billing.stripe.com/p/login/x", "https://evil.example/p/login/x", "not a url"]) {
+		const link = getJobsCancelLink({ JOBS_PORTAL_URL: value });
+		assert.equal(link.selfServe, false, `value ${JSON.stringify(value)} must not be used`);
+		assert.match(link.url, /^mailto:support@buzzyfly\.com\?subject=Cancel/);
+	}
+	const portal = getJobsCancelLink({ JOBS_PORTAL_URL: "https://billing.stripe.com/p/login/test_abc" });
+	assert.deepEqual(portal, { url: "https://billing.stripe.com/p/login/test_abc", selfServe: true });
+});
+
+test("jobs welcome email always tells the member how to cancel", async () => {
+	const msg = { to: "member@example.com", unlockUrl: "https://buzzyfly.com/jobs/unlock?token=abc", orderId: "cs_1" };
+
+	const byEmail = mockEmail();
+	assert.deepEqual(await sendJobsWelcomeEmail(msg, { EMAIL: byEmail, EMAIL_FROM: ENV_FROM }), { sent: true });
+	assertValidHtml(byEmail.sent[0].html!);
+	assert.match(byEmail.sent[0].html!, /mailto:support@buzzyfly\.com\?subject=Cancel/);
+	assert.match(byEmail.sent[0].text!, /To cancel, email support@buzzyfly\.com/);
+
+	const selfServe = mockEmail();
+	const env = { EMAIL: selfServe, EMAIL_FROM: ENV_FROM, JOBS_PORTAL_URL: "https://billing.stripe.com/p/login/test_abc" };
+	assert.deepEqual(await sendJobsWelcomeEmail(msg, env), { sent: true });
+	assertValidHtml(selfServe.sent[0].html!);
+	assert.match(selfServe.sent[0].html!, /href="https:\/\/billing\.stripe\.com\/p\/login\/test_abc"/);
+	assert.match(selfServe.sent[0].text!, /https:\/\/billing\.stripe\.com\/p\/login\/test_abc/);
 });
