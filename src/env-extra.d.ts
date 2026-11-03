@@ -13,5 +13,8 @@ declare namespace Cloudflare {
 		// Jobs membership (src/lib/jobsAccess.ts). Both unset = /jobs stays fully open.
 		JOBS_MEMBERSHIP_URL?: string;
 		JOBS_MEMBERSHIP_PRICE?: string;
+		// Free-tier LLM keys for /api/ai (src/lib/freeLlm.ts). Set as Cloudflare secrets, never as vars.
+		GROQ_API_KEY?: string;
+		GEMINI_API_KEY?: string;
 	}
 }
