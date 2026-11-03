@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-03 social-poster: YouTube Shorts demo-video-invoice (vVbRrGDkiaM) and demo-video-scope (dq1INZCsWio), posted at the owner's direct request ("get my page seen"); Instagram and Facebook copies stay ready for the daily video poster (PR pending) | - | -
 2026-11-03 sales-b: 2 more demo videos (late invoice, scope creep) from the real /demo; scripts/make-demo-video.cjs now takes a scene name (invoice, scope) (PR pending) | - | -
 2026-11-03 design-homestore: moved the /store "Coming soon" block (not-for-sale $15/$19/$29 cards) below the "What's inside" explainer and FAQ, so the $49 offer and its proof lead and the roadmap no longer sits between the offer and its details (PR #177) | on a phone three disabled "Coming soon" cards sat right after the main buy card, pushing the real sell down; reorder keeps every card, price, link and the #all-products anchor (/products redirect) | priority 3 (tighten /store); should lift /store buy clicks off the recent 2-of-116-views rate
 2026-11-03 social-poster: demo video posted as a YouTube Short (qfNEhxYFFTg) and an Instagram Reel (18114694163143220); Facebook video queued as demo-video-1-fb (PR pending) | Cloudflare's bot challenge on buzzyfly.com returns "Just a moment..." to Zapier, so videos are fetched from the public GitHub raw URL; the same challenge may also block Facebook/LinkedIn link previews of buzzyfly.com | owner: check Cloudflare Security (Bot Fight Mode / challenge rules) for buzzyfly.com
