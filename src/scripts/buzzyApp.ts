@@ -181,10 +181,29 @@ function load(): State {
 	return defaultState();
 }
 
-let state = load();
+/** /demo: the real app with made-up sample clients. Nothing is read from or written to storage. */
+const DEMO = document.body.dataset.demo === "1";
+
+function demoState(): State {
+	const s = defaultState();
+	s.me = "Sam";
+	const client = (id: string, name: string, project: string, amount: string, stage: StageId, days: number): Client => ({
+		id, name, email: `${name.split(" ")[0].toLowerCase()}@example.com`, project, amount, stage,
+		stageDate: addDays(todayIso(), -days), notes: "Sample client for the demo.", sent: {}, onboarding: {},
+	});
+	s.clients = [
+		client("demo-1", "Jane Rivera", "Website refresh", "$2,400", "proposal", 5),
+		client("demo-2", "Acme Studio", "Logo and brand kit", "$800", "invoiced", 8),
+		client("demo-3", "Priya Shah", "Monthly coaching", "$450", "active", 0),
+	];
+	return s;
+}
+
+let state = DEMO ? demoState() : load();
 let saveFailed = false;
 
 function save(): void {
+	if (DEMO) return;
 	try {
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
 		saveFailed = false;

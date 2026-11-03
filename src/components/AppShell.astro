@@ -13,9 +13,11 @@ interface Props {
 	edition: "system" | "reset" | "followups" | "onboarding";
 	nav: { id: string; label: string; icon: string }[];
 	appName: string;
+	/** /demo: sample data, nothing saved, with a banner linking to the store. */
+	demo?: boolean;
 }
 
-const { itemId, unlocked, badLink, edition, nav, appName } = Astro.props;
+const { itemId, unlocked, badLink, edition, nav, appName, demo = false } = Astro.props;
 const product = ALL_PRODUCTS.find((p) => p.id === itemId)!;
 ---
 <!doctype html>
@@ -28,13 +30,19 @@ const product = ALL_PRODUCTS.find((p) => p.id === itemId)!;
 		<title>{unlocked ? `Buzzyfly ${appName}` : `${product.title} — ${BUZZYFLY_CONFIG.brandName}`}</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 	</head>
-	<body data-edition={edition}>
+	<body data-edition={edition} data-demo={demo ? "1" : undefined}>
 		{unlocked ? (
 			<>
 				<header class="top">
 					<a class="brand" href={`#${nav[0].id}`} data-nav={nav[0].id}><span class="logo" aria-hidden="true">B</span> Buzzyfly <span class="sub">{appName}</span></a>
 					<h1 class="sr">{product.title}</h1>
 				</header>
+				{demo && (
+					<div class="demo-bar" role="note">
+						<span><strong>Demo with sample clients.</strong> Nothing you type is saved.</span>
+						<a class="btn" href="/store?utm_source=demo&utm_medium=site&utm_campaign=demo-bar">Get it for {product.price}, one time</a>
+					</div>
+				)}
 				<main id="app-root" class="wrap" tabindex="-1">
 					<noscript><p class="card">The app needs JavaScript turned on.</p></noscript>
 				</main>
@@ -200,6 +208,8 @@ const product = ALL_PRODUCTS.find((p) => p.id === itemId)!;
 	.empty { text-align: center; padding: 24px 8px; color: var(--muted); }
 	.bars { display: flex; align-items: flex-end; gap: 2px; height: 96px; padding: 4px 0; border-bottom: 1px solid var(--line); }
 	.bars span { flex: 0 1 16px; min-height: 2px; background: var(--brand); border-radius: 2px 2px 0 0; }
+	.demo-bar { display: flex; flex-wrap: wrap; gap: 8px 12px; align-items: center; justify-content: space-between; max-width: 640px; margin: 12px auto 0; padding: 10px 16px; background: color-mix(in srgb, var(--accent) 22%, var(--card)); border-radius: 12px; font-size: 0.9rem; }
+	@media (max-width: 672px) { .demo-bar { margin: 12px 16px 0; } }
 	.sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 	.tabs {
 		position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
