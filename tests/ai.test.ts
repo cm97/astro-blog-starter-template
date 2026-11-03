@@ -2,10 +2,10 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { POST } from "../src/pages/api/ai";
 
-type Handler = (ctx: { request: Request; locals: { runtime: { env: Record<string, string> } } }) => Promise<Response>;
+type Handler = (ctx: { request: Request; locals: { runtime: { env: Record<string, unknown> } } }) => Promise<Response>;
 const post = POST as unknown as Handler;
 
-function call(body: unknown, env: Record<string, string>, headers: Record<string, string> = {}, ip = "1.1.1.1") {
+function call(body: unknown, env: Record<string, unknown>, headers: Record<string, string> = {}, ip = "1.1.1.1") {
 	return post({
 		request: new Request("https://buzzyfly.com/api/ai", {
 			method: "POST",
@@ -73,6 +73,30 @@ test("support input is truncated to 500 chars and 6 turns", async () => {
 	assert.ok(payload.messages.length <= 7);
 	assert.ok(payload.messages.every((m) => m.content.length <= 4000));
 	assert.ok(payload.messages.slice(1).every((m) => m.content.length <= 500));
+});
+
+test("works with no key at all through the Workers AI binding", async () => {
+	const seen: string[] = [];
+	const AI = { run: async (model: string) => { seen.push(model); return { response: "Workers AI answer" }; } };
+	const r = await call({ kind: "support", messages: [{ role: "user", content: "hi" }] }, { AI }, {}, "2.0.0.8");
+	assert.equal(r.status, 200);
+	assert.equal(((await r.json()) as { reply: string }).reply, "Workers AI answer");
+	assert.equal(seen[0], "@cf/meta/llama-3.3-70b-instruct-fp8-fast");
+});
+
+test("falls back to Workers AI when Groq fails, and to the smaller model when the big one fails", async () => {
+	mockFetch(() => new Response("no", { status: 429 }));
+	const seen: string[] = [];
+	const AI = {
+		run: async (model: string) => {
+			seen.push(model);
+			if (model.includes("70b")) throw new Error("capacity");
+			return { response: "small model answer" };
+		},
+	};
+	const r = await call({ kind: "support", messages: [{ role: "user", content: "hi" }] }, { GROQ_API_KEY: "x", AI }, {}, "2.0.0.9");
+	assert.equal(((await r.json()) as { reply: string }).reply, "small model answer");
+	assert.equal(seen.length, 2);
 });
 
 test("rate limit kicks in per IP", async () => {

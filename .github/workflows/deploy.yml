@@ -98,7 +98,7 @@ jobs:
               failed.append(f"/jobs lists only {total_jobs} jobs (expected 20+): the job feed in src/lib/jobs.ts is broken or empty")
           if "buy.stripe.com/" in jobs_page:
               print("jobs paywall: on, Join button present")
-          print("AI key found:", health.get("ai"), "| AI key names on the Worker:", ", ".join(health.get("aiNamesFound") or []) or "none")
+          print("AI helpers available:", health.get("ai"), "| Workers AI binding:", health.get("workersAi"), "| AI key names on the Worker:", ", ".join(health.get("aiNamesFound") or []) or "none")
           if not health.get("paypal"):
               print("::warning::PayPal keys not found (PayPal names on the Worker: " + (", ".join(health.get("paypalNamesFound") or []) or "none") + "); /apps-pro shows the request form")
           if failed:
@@ -106,9 +106,9 @@ jobs:
                   print(f"::error::{f}")
               sys.exit(1)
           PY
-      # Ask the free AI helpers (/api/ai, Groq with Gemini fallback) one real
-      # question each and print the answers. 503 means no GROQ_API_KEY or
-      # GEMINI_API_KEY secret on the Worker. Free tiers can hiccup, so this
+      # Ask the free AI helpers (/api/ai: Groq or Gemini if a key is set,
+      # otherwise Cloudflare Workers AI) one real question each and print the
+      # answers. 503 means no provider at all. Free tiers can hiccup, so this
       # warns instead of failing the deploy.
       - name: Check the AI helpers
         continue-on-error: true
@@ -135,7 +135,7 @@ jobs:
               print(f"--- {label}: HTTP {code}")
               print(data.get("reply") or ((data.get("subject", "") + "\n\n" + data.get("body", "")).strip()) or data.get("error", data))
               if code == 503:
-                  print(f"::warning::{label}: no AI key on the Worker (set GROQ_API_KEY as a secret)")
+                  print(f"::warning::{label}: no AI provider on the Worker (Workers AI binding missing and no GROQ_API_KEY)")
               elif code != 200:
                   print(f"::warning::{label}: AI helper returned {code}")
           PY

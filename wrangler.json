@@ -34,6 +34,9 @@
 			"service": "react-router-starter-template"
 		}
 	],
+	"ai": {
+		"binding": "AI"
+	},
 	"triggers": {
 		"crons": ["0 * * * *"]
 	},
