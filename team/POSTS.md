@@ -12,7 +12,7 @@ Format: `### <slug> | <status> | <account>`, then the image URL (optional), then
 Image: https://buzzyfly.com/social/buzzyfly-digital-system-1.jpg
 (The Digital System intro post.)
 
-### proposal-quiet-day-6 | ready | facebook: professional portfolio
+### proposal-quiet-day-6 | posted 2026-11-03, id 1115192551682116_122144710539356277 | facebook: professional portfolio
 Image: none
 Sent a proposal 6 days ago and heard nothing? Don't send "just checking in". Send this:
 
