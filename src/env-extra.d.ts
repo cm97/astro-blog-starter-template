@@ -13,5 +13,7 @@ declare namespace Cloudflare {
 		// Jobs membership (src/lib/jobsAccess.ts). Both unset = /jobs stays fully open.
 		JOBS_MEMBERSHIP_URL?: string;
 		JOBS_MEMBERSHIP_PRICE?: string;
+		// Stripe customer-portal login link (billing.stripe.com). Unset = members cancel by email.
+		JOBS_PORTAL_URL?: string;
 	}
 }

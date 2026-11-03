@@ -1,5 +1,6 @@
 import { BUZZYFLY_CONFIG, ALL_PRODUCTS, UPSELL_MAP, absoluteBuyUrl } from "../data/monetization";
 import { isAppItem } from "./appAccess";
+import { getJobsCancelLink } from "./jobsCancel";
 
 /**
  * Transactional email for order fulfillment via the Cloudflare Email Service
@@ -351,13 +352,20 @@ export interface JobsWelcomeEmail {
  */
 export async function sendJobsWelcomeEmail(
 	message: JobsWelcomeEmail,
-	env: { EMAIL?: EmailBinding; EMAIL_FROM?: string },
+	env: { EMAIL?: EmailBinding; EMAIL_FROM?: string; JOBS_PORTAL_URL?: string },
 ): Promise<EmailResult> {
 	if (!env.EMAIL) return { sent: false, reason: "EMAIL binding is not configured in wrangler.json" };
 	if (!message.to) return { sent: false, reason: "no customer email on the order" };
 
 	const brand = escapeHtml(BUZZYFLY_CONFIG.brandName);
 	const support = escapeHtml(BUZZYFLY_CONFIG.supportEmail);
+	const cancel = getJobsCancelLink(env);
+	const cancelHtml = cancel.selfServe
+		? `Your membership renews monthly until you cancel. Cancel any time, no email needed: <a href="${escapeHtml(cancel.url)}" style="color:#2337ff">manage or cancel your membership</a>. Sign in there with this email address.`
+		: `Your membership renews monthly until you cancel. To cancel, <a href="${escapeHtml(cancel.url)}" style="color:#2337ff">email ${support}</a> and we stop it before your next billing date.`;
+	const cancelText = cancel.selfServe
+		? `Your membership renews monthly until you cancel. Cancel any time, no email needed: ${cancel.url} (sign in with this email address).`
+		: `Your membership renews monthly until you cancel. To cancel, email ${BUZZYFLY_CONFIG.supportEmail} and we stop it before your next billing date.`;
 	const html = `<!doctype html>
 <html>
   <body style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;line-height:1.6;color:#16191c;max-width:520px;margin:0 auto;padding:24px">
@@ -370,7 +378,7 @@ export async function sendJobsWelcomeEmail(
       Open this link once on each phone or computer you want to use. Keep this email. The link is your key.
     </p>
     <p style="margin:0 0 16px;color:#6b6a64;font-size:14px">
-      Your membership renews monthly until you cancel. To cancel, email ${support} and we stop it before your next billing date.
+      ${cancelHtml}
     </p>
     <p style="margin:24px 0 0;color:#6b6a64;font-size:14px">— ${brand}</p>
   </body>
@@ -385,7 +393,7 @@ export async function sendJobsWelcomeEmail(
 		"",
 		"Open this link once on each phone or computer you want to use. Keep this email. The link is your key.",
 		"",
-		`Your membership renews monthly until you cancel. To cancel, email ${BUZZYFLY_CONFIG.supportEmail} and we stop it before your next billing date.`,
+		cancelText,
 		"",
 		`— ${BUZZYFLY_CONFIG.brandName}`,
 	].join("\n");
