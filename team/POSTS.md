@@ -6,7 +6,7 @@ approved accounts in TEAM.md "Social posting", then marks it `posted` with the
 date and the post ID. Every post follows CLAUDE.md and `MARKETING.md`, and ends
 on a link with `utm_campaign` set to the post's slug.
 
-Format: `### <slug> | <status> | <account>`, then the image URL (optional) or `Video:` URL plus `Title:` for YouTube, then the text.
+Format: `### <slug> | <status> | <account>`, then the image URL (optional) or `Video:` URL plus `Title:` for YouTube, then the text. Video URLs must be the raw.githubusercontent.com copy: Cloudflare's bot check on buzzyfly.com blocks Zapier from fetching files there.
 
 ### launch-post-1 | posted 2026-11-02, id 1115192551682116_122144500281356277 | facebook: professional portfolio
 Image: https://buzzyfly.com/social/buzzyfly-digital-system-1.jpg
@@ -64,12 +64,21 @@ Late invoices get chased from memory, so they get chased late. The Buzzyfly Digi
 
 https://www.buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=late-invoice-image
 
-### demo-video-1 | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
-Video: https://buzzyfly.com/social/video/buzzyfly-demo.mp4
+### demo-video-1 | posted 2026-11-03: youtube id qfNEhxYFFTg (https://www.youtube.com/watch?v=qfNEhxYFFTg), instagram id 18114694163143220 | instagram: SAMS Service, youtube
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo.mp4
 Title: Proposal sent, no reply? The follow-up is already written
 Proposal sent. No reply. Now what?
 
 Here's the real Buzzyfly app with sample clients. It shows who needs a follow-up today, and the email is already written with their name and project. Copy it, send it from your own inbox, mark it sent. Late invoices and new-client onboarding too.
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-1
+$49 once, no subscription.
+
+### demo-video-1-fb | ready | facebook: professional portfolio
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo.mp4
+Proposal sent. No reply. Now what?
+
+Here's the real Buzzyfly app with sample clients. It shows who needs a follow-up today, and the email is already written with their name and project. Copy it, send it from your own inbox, mark it sent. Late invoices and new-client onboarding too.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=demo-video-1
 $49 once, no subscription.
