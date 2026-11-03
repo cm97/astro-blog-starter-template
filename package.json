@@ -40,7 +40,8 @@
 		"test:indexnow": "esbuild tests/indexnow.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/indexnow.test.mjs && node --test .test-build/indexnow.test.mjs",
 		"check:secrets": "node scripts/check-secrets.mjs",
 		"test:traffic": "esbuild tests/trafficSource.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/trafficSource.test.mjs && node --test .test-build/trafficSource.test.mjs",
-		"test:email": "esbuild tests/email.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/email.test.mjs && node --test .test-build/email.test.mjs"
+		"test:email": "esbuild tests/email.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/email.test.mjs && node --test .test-build/email.test.mjs",
+		"test:ai": "esbuild tests/ai.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/ai.test.mjs && node --test .test-build/ai.test.mjs"
 	},
 	"type": "module"
 }
