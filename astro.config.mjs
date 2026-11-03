@@ -48,13 +48,13 @@ export default defineConfig({
 		"/videos/complete-bundle": { status: 301, destination: "/store/" },
 	},
 	// Keep private and post-checkout pages out of the sitemap: the admin
-	// console, the paid apps, and the order/unsubscribe screens.
+	// console, the paid apps, the demo, and the order/unsubscribe screens.
 	integrations: [
 		mdx(),
 		sitemap({
 			// /jobs renders on each request, so the sitemap can't find it on its own.
 			customPages: ["https://buzzyfly.com/jobs"],
-			filter: (page) => !/^https:\/\/buzzyfly\.com\/(admin|agent|app|success|thank-you|unsubscribe)(\/|$)/.test(page),
+			filter: (page) => !/^https:\/\/buzzyfly\.com\/(admin|agent|app|demo|success|thank-you|unsubscribe)(\/|$)/.test(page),
 		}),
 	],
 	devToolbar: { enabled: false },

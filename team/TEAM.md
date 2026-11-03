@@ -62,12 +62,17 @@ promises to buyers, and no money spent without the owner's yes.
 The owner told the team to post on its own. Posts go out through the Zapier
 connector to the approved accounts:
 - Facebook Page **"professional portfolio"** (first post: 2026-11-02).
-- No other account until the owner names it here. Instagram "SAMS Service",
-  the Facebook "Test page" and YouTube stay off-limits for now.
+- Instagram **"SAMS Service"** (Instagram for Business, Reels) and the
+  **YouTube** channel connected in Zapier (Shorts): approved by the owner on
+  2026-11-03 ("yes to YouTube and Instagram, start today").
+- No other account until the owner names it here. The Facebook "Test page"
+  stays off-limits.
 
 Rules:
 - The Social poster (a daily session with the Zapier connector) posts the newest
-  ready post from the Marketer, Content Creator or Sales team. At most one post per
+  ready post from the Marketer, Content Creator or Sales team. A video post
+  (`Video:` line in POSTS.md) goes to all three accounts: Facebook, an Instagram
+  Reel and a YouTube Short (title under 70 characters, public). At most one post per
   account per day, on a real buyer problem, ending on
   `https://buzzyfly.com/store?utm_source=<site>&utm_medium=social&utm_campaign=<slug>`
   so every visit traces back to the post.
