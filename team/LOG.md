@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-03 builders-b: demo video on /store ("See it work in 23 seconds", under the $49 card, links to /demo; 27 KB poster, video loads only on Play so the page stays light) (PR pending) | /demo, the video and its post already existed from sales-b; only the /store spot was missing | -
 2026-11-03 sales-b: $15 Weekly Reset, $19 Follow-Ups and $29 Onboarding apps made buyable at the owner's word: reactivated their existing Stripe Payment Links (metadata item_id already matched, redirect to /thank-you?s=), renamed the Stripe products to the app names, added the "unlocks on the next page" + refund note; buyUrl set, "Coming soon" removed on /store and in one post; CLAUDE.md rule 5 lists the 4 allowed links (PR pending) | the webhook, thank-you unlock and PayPal route already supported these item ids, only the links were off | -
 2026-11-03 sales-b: 3 more demo videos (onboarding, pricing, Monday reset) queued for YouTube, Instagram and Facebook, so the daily video poster has a week of free posts; owner said no paid ads (PR pending) | - | -
 2026-11-03 social-poster: YouTube Shorts demo-video-invoice (vVbRrGDkiaM) and demo-video-scope (dq1INZCsWio), posted at the owner's direct request ("get my page seen"); Instagram and Facebook copies stay ready for the daily video poster (PR pending) | - | -

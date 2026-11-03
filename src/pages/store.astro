@@ -122,6 +122,12 @@ const FAQ = [
 			.featured-wrap :global(.product-callout) { margin-top: 1.5em; }
 			.singles { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 0 1.5em; }
 			.singles :global(.product-callout) { margin: 1.5em 0 0; font-size: 0.92em; }
+			.demo-video { max-width: 720px; margin: 2.5em auto 0; display: grid; grid-template-columns: 1fr; gap: 1.2em; align-items: center; justify-items: center; text-align: center; }
+			.demo-video video { width: min(100%, 280px); aspect-ratio: 9 / 16; height: auto; border-radius: 16px; background: #1f2bd1; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); display: block; }
+			.demo-video h2 { font-size: 1.5em; margin: 0 0 0.4em; }
+			.demo-video p { margin: 0 0 0.8em; color: rgb(var(--gray-dark)); }
+			.demo-video a { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; }
+			@media (min-width: 720px) { .demo-video { grid-template-columns: 280px 1fr; justify-items: start; text-align: left; gap: 2.5em; } }
 			.store-section { max-width: 720px; margin: 3em auto 0; }
 			.store-section h2 { font-size: 1.6em; }
 			.contents-table { width: 100%; border-collapse: collapse; margin-top: 1em; }
@@ -161,6 +167,18 @@ const FAQ = [
 			<div class="featured-wrap" id="digital-system">
 				<ProductCallout productId={system.id} description={systemDescription} featured headingLevel="h2" />
 			</div>
+
+			<section class="demo-video" aria-labelledby="demo-video-heading">
+				<video controls muted playsinline preload="none" poster="/social/video/buzzyfly-demo-poster.jpg" width="280" height="498" aria-describedby="demo-video-desc">
+					<source src="/social/video/buzzyfly-demo.mp4" type="video/mp4" />
+					<a href="/social/video/buzzyfly-demo.mp4">Watch the 23-second demo video</a>
+				</video>
+				<div>
+					<h2 id="demo-video-heading">See it work in 23 seconds</h2>
+					<p id="demo-video-desc">A proposal goes quiet. The app shows it on Today with the follow-up ready, the client's name and project filled in. You copy it, send it from your own inbox, and mark it sent. Real app, sample clients, no sound.</p>
+					<a href="/demo">Try it yourself in the free demo →</a>
+				</div>
+			</section>
 
 			<section class="store-section">
 				<h2>What's inside the Digital System app</h2>
