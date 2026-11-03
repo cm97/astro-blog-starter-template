@@ -47,6 +47,10 @@ pre.email{font-family:var(--mono);font-size:14px;line-height:1.65;white-space:pr
 .next-step h2{font-family:var(--display);font-weight:700;font-size:20px;margin:0}
 .next-step p{margin:0;color:var(--muted);font-size:16px}
 a.cta{font-family:var(--display);font-weight:700;font-size:15px;color:var(--paper);background:var(--accent);border-radius:3px;padding:12px 20px;text-decoration:none;align-self:flex-start;margin-top:6px}
+button.ai{background:var(--accent);border-color:var(--accent);color:var(--paper)}
+button:disabled{opacity:.6;cursor:wait}
+.ai-row{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin-top:14px}
+.ai-note{font-size:14px;color:var(--muted);margin:0}
 footer{color:var(--muted);font-size:14px}
 footer a{color:inherit}
 </style>
@@ -68,6 +72,10 @@ footer a{color:inherit}
 <div class="fields">
 <input type="text" id="name" placeholder="Their first name" value="Sam" autocomplete="off">
 <input type="text" id="thing" placeholder="The project or proposal" value="the website refresh" autocomplete="off">
+</div>
+<div class="ai-row">
+<button id="ai" class="ai" type="button">Write it with AI</button>
+<p class="ai-note" id="ai-note">Optional. Rewrites the email for your details. Don't paste private client information.</p>
 </div>
 </fieldset>
 <div class="out">
@@ -94,14 +102,21 @@ var T=[
 {id:"referral",label:"Asking for a referral",subject:"A small ask",when:"Send 2–4 weeks after a project lands well, once they've seen the result. Never in the same breath as an invoice.",body:"Hi {name},\n\nHope {thing} is still holding up well.\n\nSmall ask, and a genuine no is fine: do you know anyone else who'd get something out of the same kind of work? Most of what I do comes through people passing my name along, and yours would carry weight.\n\nHappy to write the intro so it's a forward rather than a favour.\n\nBest,"},
 {id:"wrap",label:"Project wrap-up",subject:"{thing} — wrapped",when:"Send the day you finish, not a week later. This is the email that makes people come back.",body:"Hi {name},\n\n{thing} is done and everything's handed over.\n\nWhat you've got: [deliverables and where they live]\nIf you need to change something later: [how]\nStill open: [anything outstanding, or \"nothing\"]\n\nIt was a good one to work on. If anything comes up in the next few weeks, just reply here — you don't need to start a new thread.\n\nBest,"}
 ];
-var current=T[0];
+var current=T[0];var aiText=null;
 var chips=document.getElementById("chips");
-T.forEach(function(t,i){var l=document.createElement("label");l.className="chip";var r=document.createElement("input");r.type="radio";r.name="situation";r.id="sit-"+t.id;r.value=t.id;r.checked=i===0;var s=document.createElement("span");s.textContent=t.label;r.addEventListener("change",function(){current=t;render()});l.appendChild(r);l.appendChild(s);chips.appendChild(l)});
+T.forEach(function(t,i){var l=document.createElement("label");l.className="chip";var r=document.createElement("input");r.type="radio";r.name="situation";r.id="sit-"+t.id;r.value=t.id;r.checked=i===0;var s=document.createElement("span");s.textContent=t.label;r.addEventListener("change",function(){current=t;aiText=null;render()});l.appendChild(r);l.appendChild(s);chips.appendChild(l)});
 function fill(str){var n=document.getElementById("name").value.trim()||"there";var th=document.getElementById("thing").value.trim()||"the project";return str.split("{name}").join(n).split("{thing}").join(th)}
-function render(){document.getElementById("subject").textContent=fill(current.subject);document.getElementById("body").textContent=fill(current.body);document.getElementById("when").textContent=current.when}
-document.getElementById("name").addEventListener("input",render);
-document.getElementById("thing").addEventListener("input",render);
-document.getElementById("copy").addEventListener("click",function(){var text=fill(current.subject)+"\n\n"+fill(current.body);var btn=this;function done(){btn.textContent="Copied";setTimeout(function(){btn.textContent="Copy email"},1600)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,function(){done()})}else{var ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done()}});
+function render(){if(aiText){document.getElementById("subject").textContent=aiText.subject;document.getElementById("body").textContent=aiText.body}else{document.getElementById("subject").textContent=fill(current.subject);document.getElementById("body").textContent=fill(current.body)}document.getElementById("when").textContent=current.when}
+document.getElementById("name").addEventListener("input",function(){aiText=null;render()});
+document.getElementById("thing").addEventListener("input",function(){aiText=null;render()});
+document.getElementById("copy").addEventListener("click",function(){var text=aiText?aiText.subject+"\n\n"+aiText.body:fill(current.subject)+"\n\n"+fill(current.body);var btn=this;function done(){btn.textContent="Copied";setTimeout(function(){btn.textContent="Copy email"},1600)}if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(text).then(done,function(){done()})}else{var ta=document.createElement("textarea");ta.value=text;document.body.appendChild(ta);ta.select();try{document.execCommand("copy")}catch(e){}document.body.removeChild(ta);done()}});
+var aiBtn=document.getElementById("ai"),aiNote=document.getElementById("ai-note");
+aiBtn.addEventListener("click",function(){aiBtn.disabled=true;aiNote.textContent="Writing…";
+fetch("/api/ai",{method:"POST",headers:{"content-type":"application/json"},body:JSON.stringify({kind:"followup",situation:current.id,name:document.getElementById("name").value,thing:document.getElementById("thing").value})})
+.then(function(r){return r.json().then(function(d){return{ok:r.ok,d:d}})})
+.then(function(x){if(x.ok&&x.d.body){aiText={subject:x.d.subject||fill(current.subject),body:x.d.body};render();aiNote.textContent="AI draft. Read it and fix the [brackets] before you send."}else{aiNote.textContent=x.d.error||"Couldn't write that. The template above still works."}})
+.catch(function(){aiNote.textContent="Couldn't reach the helper. The template above still works."})
+.then(function(){aiBtn.disabled=false})});
 render();
 </script>
 </body>
