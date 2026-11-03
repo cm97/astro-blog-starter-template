@@ -3,13 +3,13 @@ title: "The Client Follow-Up System That Runs Itself (Even on a Slammed Week)"
 seoTitle: "Client Follow-Up System That Runs Itself"
 description: "A 20-minute weekly process plus ready emails so follow-ups still happen when you are buried in delivery. No new tools required."
 pubDate: "Nov 02 2026"
-updatedDate: "Nov 02 2026"
+updatedDate: "Nov 03 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 ---
 
 You know the follow-up should go out. The proposal went quiet. The new client has not sent the intake. The past client has not heard from you in three months.
@@ -69,9 +69,31 @@ Anything you want to flag before [next date]?
 
 [Your name]
 
-These three cover 80% of the silence that kills cash.
+**Re-engagement for past client**
+Subject: Checking in after [project]
 
-## Why it still fails without the checklist
+Hi [Name],
+
+It has been a while since we wrapped [project]. Curious if anything new came up that matches what we did before.
+
+Happy to hop on a short call this week if useful.
+
+[Your name]
+
+**Break-up / close the loop (day 21+)**
+Subject: Closing the loop on [project]
+
+Hi [Name],
+
+I have not heard back on the [proposal / next step] from [date]. I am closing this out on my side so the calendar stays clear.
+
+If timing changes later, reply and I will reopen it.
+
+[Your name]
+
+These five cover the silence that kills cash.
+
+## What still breaks when templates live only in a doc
 
 Templates in a doc work until the week is on fire. Then you skip the scan because finding the right email and the right name takes longer than the 20 minutes you have.
 
@@ -82,3 +104,5 @@ That is what the $49 Digital System is. The Today screen shows who needs a follo
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
 One primary move. The system keeps the follow-ups happening when you do not feel like doing them.
+
+Not ready? The free weekly-reset checklist is on the homepage. Run it once, then the full system keeps the rest of the week alive.
