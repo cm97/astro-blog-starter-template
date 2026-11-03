@@ -82,3 +82,19 @@ Here's the real Buzzyfly app with sample clients. It shows who needs a follow-up
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=demo-video-1
 $49 once, no subscription.
+
+### demo-video-invoice | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-invoice.mp4
+Title: Invoice a week late? The reminder is already written
+Invoice a week late and you don't want to write the awkward email? This is the real Buzzyfly app with sample clients. It shows which invoice is overdue and by how long, and the reminder is already written with their name, project and amount. Copy it, send it, mark it sent. The 2-week reminder comes next.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-invoice
+$49 once, no subscription.
+
+### demo-video-scope | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-scope.mp4
+Title: Client asks "can you just add this?" Send this reply
+Client asks "can you just add this?" and it isn't in the project. This is the real Buzzyfly app with sample clients: pick the client, pick the scope reply, and it's written. Stay helpful, quote the extra work separately, and let them choose.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-scope
+$49 once, no subscription.
