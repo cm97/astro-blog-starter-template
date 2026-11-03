@@ -98,6 +98,7 @@ jobs:
               failed.append(f"/jobs lists only {total_jobs} jobs (expected 20+): the job feed in src/lib/jobs.ts is broken or empty")
           if "buy.stripe.com/" in jobs_page:
               print("jobs paywall: on, Join button present")
+          print("AI key found:", health.get("ai"), "| AI key names on the Worker:", ", ".join(health.get("aiNamesFound") or []) or "none")
           if not health.get("paypal"):
               print("::warning::PayPal keys not found (PayPal names on the Worker: " + (", ".join(health.get("paypalNamesFound") or []) or "none") + "); /apps-pro shows the request form")
           if failed:
