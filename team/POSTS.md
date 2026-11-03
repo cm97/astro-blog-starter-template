@@ -122,3 +122,13 @@ Monday starts with a scramble? The Buzzyfly app has a 20-minute Monday reset: op
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-reset
 $49 once, no subscription.
+
+### cartoon-forgot-recap | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-forgot-recap.mp4
+Title: Promised a recap after the call? It's already written
+Great first call. You promise a recap tomorrow. Then the week happens, and by Friday it feels too awkward to send.
+
+The Buzzyfly Digital System shows who needs a follow-up today, with the recap email already written: their name, the project, what you heard. Copy it, send it from your own inbox, mark it sent.
+
+$49 once. Browser app. No subscription.
+https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-forgot-recap
