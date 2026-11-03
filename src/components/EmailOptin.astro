@@ -18,7 +18,7 @@ const brand = settings.brandName || BUZZYFLY_CONFIG.brandName;
 ---
 
 <section class="email-optin" aria-label={`${brand} newsletter signup`}>
-	<h3 class="email-optin__title">{title}</h3>
+	<h2 class="email-optin__title">{title}</h2>
 	<p class="email-optin__description">{description}</p>
 	<form class="email-optin__form" data-email-optin-form method="POST" action="/api/subscribe">
 		<label class="sr-only" for="email-optin-input">Email address</label>
