@@ -88,15 +88,14 @@ const retryUrl = waiting ? `/thank-you?s=${encodeURIComponent(sessionId)}&t=${at
 					</>
 				) : waiting ? (
 					<>
-						<div class="ty-check">✓</div>
-						<h1>Payment received. Unlocking your app…</h1>
-						<p class="ty-lede" role="status">This takes a few seconds. The page refreshes on its own.</p>
+						<h1>Checking your payment…</h1>
+						<p class="ty-lede" role="status">If you just paid, your app unlocks here in a few seconds. The page refreshes on its own.</p>
 						<p class="ty-note"><a href={retryUrl!}>Refresh now</a></p>
 					</>
 				) : isStripeSession ? (
 					<>
-						<h1>Payment received.</h1>
-						<p class="ty-lede">We're still confirming it with Stripe. Try refreshing in a minute.</p>
+						<h1>We can't confirm this payment yet.</h1>
+						<p class="ty-lede">If you just paid, Stripe may still be sending it to us. Try again in a minute. If it still doesn't unlock, email us below and we'll sort it out.</p>
 						<p><a class="btn btn--primary" href={`/thank-you?s=${encodeURIComponent(sessionId)}`}>Check again</a></p>
 					</>
 				) : (
