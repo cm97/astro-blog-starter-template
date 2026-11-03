@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/BlogPost.astro';
+---
+
+<Layout
+	title="Help — Buzzyfly"
+	description="Ask a question about Buzzyfly's apps, free tools, access links or refunds."
+	pubDate={new Date('November 3 2026')}
+	heroImage="/buzzyfly-brand-about.svg"
+>
+	<p>Ask about the apps, the free tools, your access link or refunds. For anything about a specific order, email <a href="mailto:support@buzzyfly.com">support@buzzyfly.com</a> from your checkout address.</p>
+
+	<div id="bot" class="bot" aria-live="polite">
+		<ol id="log" class="log" aria-label="Conversation"></ol>
+		<form id="form" class="form" autocomplete="off">
+			<label for="q" class="sr">Your question</label>
+			<input id="q" name="q" type="text" maxlength="500" placeholder="e.g. How do I get into my app after paying?" required />
+			<button type="submit" id="send">Ask</button>
+		</form>
+		<p class="note">AI answers can be wrong. Don't type payment details or private client information. We can't see orders here: email support@buzzyfly.com for those.</p>
+	</div>
+
+	<style>
+		.bot { display: flex; flex-direction: column; gap: 14px; margin-block: 24px; }
+		.log { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+		.log li { padding: 10px 14px; border-radius: 6px; max-width: 90%; line-height: 1.5; white-space: pre-wrap; }
+		.log .user { align-self: flex-end; background: var(--accent, #0d7a6b); color: #fff; }
+		.log .bot { align-self: flex-start; border: 1px solid #d2dcd8; }
+		.form { display: flex; gap: 8px; }
+		.form input { flex: 1; min-height: 44px; padding: 8px 12px; font: inherit; border: 1px solid #8a9a96; border-radius: 4px; }
+		.form button { min-height: 44px; padding: 0 20px; font: inherit; font-weight: 700; border: 0; border-radius: 4px; background: var(--accent, #0d7a6b); color: #fff; cursor: pointer; }
+		.form button:disabled { opacity: 0.6; cursor: wait; }
+		.form input:focus-visible, .form button:focus-visible { outline: 3px solid var(--accent, #0d7a6b); outline-offset: 2px; }
+		.note { font-size: 0.9rem; opacity: 0.8; margin: 0; }
+		.sr { position: absolute; left: -9999px; }
+	</style>
+
+	<script>
+		const log = document.getElementById('log') as HTMLOListElement;
+		const form = document.getElementById('form') as HTMLFormElement;
+		const input = document.getElementById('q') as HTMLInputElement;
+		const send = document.getElementById('send') as HTMLButtonElement;
+		const history: { role: 'user' | 'assistant'; content: string }[] = [];
+
+		function add(role: 'user' | 'bot', text: string) {
+			const li = document.createElement('li');
+			li.className = role;
+			li.textContent = text;
+			log.appendChild(li);
+			li.scrollIntoView({ block: 'nearest' });
+		}
+
+		add('bot', 'Hi, I can answer questions about Buzzyfly. What do you want to know?');
+
+		form.addEventListener('submit', async (event) => {
+			event.preventDefault();
+			const text = input.value.trim();
+			if (!text) return;
+			add('user', text);
+			history.push({ role: 'user', content: text });
+			input.value = '';
+			send.disabled = true;
+			try {
+				const res = await fetch('/api/ai', {
+					method: 'POST',
+					headers: { 'content-type': 'application/json' },
+					body: JSON.stringify({ kind: 'support', messages: history }),
+				});
+				const data = (await res.json().catch(() => ({}))) as { reply?: string; error?: string };
+				const answer = data.reply ?? data.error ?? 'Something went wrong. Email support@buzzyfly.com.';
+				add('bot', answer);
+				if (data.reply) history.push({ role: 'assistant', content: data.reply });
+				else history.pop();
+			} catch {
+				add('bot', 'Could not reach the helper. Email support@buzzyfly.com.');
+				history.pop();
+			} finally {
+				send.disabled = false;
+				input.focus();
+			}
+		});
+	</script>
+</Layout>
