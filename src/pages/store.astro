@@ -24,6 +24,7 @@ const systemDescription =
 const systemOrder = getOrderAction(system.id);
 const singles = ALL_PRODUCTS.filter((p) => p.id !== system.id);
 const guarantee = BUZZYFLY_CONFIG.guarantee;
+const guaranteeShort = BUZZYFLY_CONFIG.guaranteeShort;
 
 // Product structured data for the one product on sale. The price comes from
 // the product data, and there are no ratings or reviews because none exist yet.
@@ -111,6 +112,16 @@ const FAQ = [
 			.store-cta:hover { background: var(--accent-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 13, 138, 0.4); }
 			.store-cta:active { transform: translateY(0); box-shadow: 0 3px 10px rgba(35, 55, 255, 0.35); }
 			@media (max-width: 720px) { .store-cta { padding: 1em 1.8em; font-size: 1.35em; } }
+			.store-cta-note { max-width: 26em; margin: 0.7em auto 0; font-size: 0.85em; color: rgb(var(--gray-dark)); }
+			/* Phones: price, buy button and refund line all fit in the first screen. */
+			@media (max-width: 720px) {
+				.lang-link { margin: 0; }
+				.store-hero { padding-top: 0; }
+				.store-eyebrow { margin-bottom: 0.5em; font-size: 0.7em; letter-spacing: 0.04em; }
+				.store-hero h1 { font-size: 1.6em; margin-bottom: 0.4em; }
+				.store-lede { font-size: 0.98em; margin-bottom: 1em; }
+				.store-cta { min-height: 56px; padding: 0.7em 1.1em; font-size: 1.15em; }
+			}
 			.store-secondary { display: inline-block; margin-top: 0.9em; font-size: 0.9em; padding: 0.6em 0.4em; }
 			.trust-row { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6em; padding: 0; margin: 1.5em 0 0; }
 			@media (max-width: 720px) { .trust-row { grid-template-columns: 1fr 1fr; } }
@@ -153,7 +164,7 @@ const FAQ = [
 					Monday starts with a scramble. Open the app. See who needs you today and the email to send.
 				</p>
 				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
-				<br />
+				<p class="store-cta-note">One-time payment. No subscription. {guaranteeShort}</p>
 				{systemOrder.live && <PayPalLink href={systemOrder.paypalHref} />}
 				<br />
 				<a class="store-secondary" href="/demo">Try the free demo first, no sign-up →</a>

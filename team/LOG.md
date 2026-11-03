@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-03 developer: /store phone first screen now shows the $49 buy button (one line, ends 585px of 667) plus "One-time payment. No subscription." and the short refund line right under it; refund line was at 1994px and the button was cut off (BACKLOG 4, PR pending) | health: all checks green, Deploy green, rule 5 now allows the $15/$19/$29 links (owner, #181) | -
 2026-11-03 content-creator: (2) 18-second cartoon video "forgot the recap after a good call" (flat SVG freelancer, Mon→Fri calendar, sticky notes, then the Today list and the ready recap email, $49 end card): public/social/video/cartoon-forgot-recap.mp4 + .jpg, render script scripts/make-cartoon-followup.cjs; queued as cartoon-forgot-recap in POSTS.md (PR pending) | the lead-stage "Recap the conversation" follow-up (day 1) had no video yet; earlier ones covered proposals, invoices, scope, onboarding, pricing, reset | -
   Video: https://www.buzzyfly.com/social/video/cartoon-forgot-recap.mp4 (cover: cartoon-forgot-recap.jpg). Sound: any free trending "oops/awkward" sound from the TikTok, Reels or Shorts library, low volume.
   TikTok: Great call Monday. "I'll send a recap tomorrow." It's Friday. Buzzyfly shows who needs a follow-up today and has the recap email written with their name and project. You copy it and send it. $49 once, no subscription. #freelancer #freelancetips #smallbusiness #clientcommunication
