@@ -33,6 +33,7 @@ const product = ALL_PRODUCTS.find((p) => p.id === itemId)!;
 			<>
 				<header class="top">
 					<a class="brand" href={`#${nav[0].id}`} data-nav={nav[0].id}><span class="logo" aria-hidden="true">B</span> Buzzyfly <span class="sub">{appName}</span></a>
+					<h1 class="sr">{product.title}</h1>
 				</header>
 				<main id="app-root" class="wrap" tabindex="-1">
 					<noscript><p class="card">The app needs JavaScript turned on.</p></noscript>

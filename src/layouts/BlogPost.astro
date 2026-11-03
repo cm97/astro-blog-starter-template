@@ -88,7 +88,8 @@ const articleLd = JSON.stringify({
 			.related { margin: 2em 0; }
 			.related h3 { font-size: 1.2em; margin-bottom: 0.8em; }
 			.related ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6em; }
-			.related a { color: rgb(var(--black)); text-decoration: none; font-weight: 600; }
+			.related a { color: rgb(var(--black)); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; min-height: 44px; }
+			.prose :global(p > a:only-child) { display: inline-flex; align-items: center; min-height: 44px; }
 			.related a:hover { color: var(--accent); }
 			.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid rgb(var(--gray-light)); box-shadow: 0 -4px 16px rgba(0,0,0,0.08); padding: 0.7em 1em; display: flex; align-items: center; justify-content: space-between; gap: 1em; z-index: 50; }
 			.sticky-cta .price { font-weight: 700; }
