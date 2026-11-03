@@ -2,6 +2,7 @@
 // Needs the built site served locally: `npm run build`, then serve dist/ on DEMO_URL
 // (default http://localhost:8765/demo/), then: node scripts/make-demo-video.cjs
 // Writes public/social/video/buzzyfly-demo.mp4. Every screen is the real app with sample clients.
+// Other scenes: `node scripts/make-demo-video.cjs invoice` or `... scope` write buzzyfly-demo-<scene>.mp4.
 const { chromium } = require('playwright');
 const { execFileSync } = require('child_process');
 const fs = require('fs');
@@ -40,33 +41,56 @@ const caption = async (page, text) => page.evaluate((t) => {
 	const frames = [];
 	const shot = async (secs) => { const f = path.join(tmp, `f${frames.length}.png`); await page.screenshot({ path: f }); frames.push([f, secs]); };
 
-	await page.setContent(card('Proposal sent. No reply. Now what?', 'Here is how Buzzyfly handles it. Real app, sample clients.'));
-	await page.evaluate(() => document.fonts.ready); await shot(3);
+	const hide = () => page.addStyleTag({ content: '.demo-bar{display:none!important}.wrap{padding-top:36px!important}' });
+	const scrollToCard = (text) => page.evaluate((t) => { const c = [...document.querySelectorAll('.card')].find((x) => x.textContent.includes(t)); if (c) window.scrollTo(0, c.getBoundingClientRect().top + window.scrollY - 100); }, text);
+	const scrollToButton = (label) => page.evaluate((l) => { const b = [...document.querySelectorAll('button')].find((x) => x.textContent.trim() === l); b && b.scrollIntoView({ block: 'center' }); }, label);
+	const endCard = async () => { await page.setContent(card('Buzzyfly Digital System', 'Follow-ups, late invoices, onboarding and scope replies. $49 once. No subscription.<br><br><b>Try the free demo: buzzyfly.com/demo</b>')); await page.evaluate(() => document.fonts.ready); await shot(4); };
+	const scene = process.argv[2] || 'proposal';
 
-	await page.goto(URL); await page.waitForTimeout(600);
-	await page.addStyleTag({ content: '.demo-bar{display:none!important}.wrap{padding-top:36px!important}' });
-	await caption(page, 'Open the app. It shows who needs a follow-up today.'); await shot(4);
-
-	await page.getByText('Write the email').first().click(); await page.waitForTimeout(400);
-	await caption(page, 'The email is already written, with their name and project.');
-	await page.evaluate(() => window.scrollTo(0, 120)); await shot(4.5);
-
-	await page.evaluate(() => { const b = [...document.querySelectorAll('button')].find((x) => x.textContent.trim() === 'Copy email'); b && b.scrollIntoView({ block: 'center' }); });
-	await caption(page, 'Copy it. Send it from your own inbox. Mark it sent.'); await shot(4);
-
-	await page.goto(URL + '#today'); await page.waitForTimeout(500);
-	await page.addStyleTag({ content: '.demo-bar{display:none!important}.wrap{padding-top:36px!important}' });
-	await page.evaluate(() => { const c = [...document.querySelectorAll('.card')].find((x) => x.textContent.includes('Acme Studio')); if (c) window.scrollTo(0, c.getBoundingClientRect().top + window.scrollY - 100); });
-	await page.waitForTimeout(200);
-	await caption(page, 'Invoice a week late? The reminder is ready too.'); await shot(4);
-
-	await page.setContent(card('Buzzyfly Digital System', 'Follow-ups, late invoices, onboarding and scope replies. $49 once. No subscription.<br><br><b>Try the free demo: buzzyfly.com/demo</b>'));
-	await page.evaluate(() => document.fonts.ready); await shot(4);
+	if (scene === 'invoice') {
+		await page.setContent(card('Invoice a week late?', "Don't write the reminder from scratch. Real app, sample clients."));
+		await page.evaluate(() => document.fonts.ready); await shot(3);
+		await page.goto(URL); await page.waitForTimeout(600); await hide();
+		await scrollToCard('Acme Studio'); await page.waitForTimeout(200);
+		await caption(page, 'It shows which invoice is overdue, and by how long.'); await shot(4);
+		await page.locator('.card', { hasText: 'Acme Studio' }).first().getByText('Write the email').click(); await page.waitForTimeout(400);
+		await page.evaluate(() => window.scrollTo(0, 120));
+		await caption(page, 'The reminder is written. Name, project and amount filled in.'); await shot(4.5);
+		await scrollToButton('Copy email');
+		await caption(page, 'Copy it. Send it. Mark it sent. The 2-week reminder is next.'); await shot(4);
+		await endCard();
+	} else if (scene === 'scope') {
+		await page.setContent(card('"Can you just add this?"', 'A polite reply that quotes the extra work. Real app, sample clients.'));
+		await page.evaluate(() => document.fonts.ready); await shot(3);
+		await page.goto(URL + '#emails'); await page.waitForTimeout(600); await hide();
+		await page.selectOption('select[data-action="email-client"]', 'demo-1'); await page.waitForTimeout(200);
+		await page.selectOption('select[data-action="email-template"]', 'scope-reply'); await page.waitForTimeout(300);
+		await caption(page, 'Pick the client. Pick the scope reply.'); await shot(4);
+		await page.evaluate(() => window.scrollTo(0, 120));
+		await caption(page, 'Stay helpful. Quote it separately. They choose.'); await shot(4.5);
+		await scrollToButton('Copy email');
+		await caption(page, 'Copy it and send it from your own inbox.'); await shot(3.5);
+		await endCard();
+	} else {
+		await page.setContent(card('Proposal sent. No reply. Now what?', 'Here is how Buzzyfly handles it. Real app, sample clients.'));
+		await page.evaluate(() => document.fonts.ready); await shot(3);
+		await page.goto(URL); await page.waitForTimeout(600); await hide();
+		await caption(page, 'Open the app. It shows who needs a follow-up today.'); await shot(4);
+		await page.getByText('Write the email').first().click(); await page.waitForTimeout(400);
+		await caption(page, 'The email is already written, with their name and project.');
+		await page.evaluate(() => window.scrollTo(0, 120)); await shot(4.5);
+		await scrollToButton('Copy email');
+		await caption(page, 'Copy it. Send it from your own inbox. Mark it sent.'); await shot(4);
+		await page.goto(URL + '#today'); await page.waitForTimeout(500); await hide();
+		await scrollToCard('Acme Studio'); await page.waitForTimeout(200);
+		await caption(page, 'Invoice a week late? The reminder is ready too.'); await shot(4);
+		await endCard();
+	}
 	await browser.close();
 
 	const list = frames.map(([f, s]) => `file '${f}'\nduration ${s}`).join('\n') + `\nfile '${frames[frames.length - 1][0]}'\n`;
 	fs.writeFileSync(path.join(tmp, 'list.txt'), list);
-	const out = path.join(outDir, 'buzzyfly-demo.mp4');
+	const out = path.join(outDir, scene === 'proposal' ? 'buzzyfly-demo.mp4' : `buzzyfly-demo-${scene}.mp4`);
 	execFileSync('ffmpeg', ['-y', '-loglevel', 'error', '-f', 'concat', '-safe', '0', '-i', path.join(tmp, 'list.txt'),
 		'-f', 'lavfi', '-i', 'anullsrc=r=44100:cl=stereo', '-shortest',
 		'-vf', 'scale=1080:1920,fps=30,format=yuv420p', '-c:v', 'libx264', '-preset', 'medium', '-crf', '26', '-c:a', 'aac', '-b:a', '64k', '-movflags', '+faststart', out]);
