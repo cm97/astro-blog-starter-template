@@ -98,3 +98,27 @@ Client asks "can you just add this?" and it isn't in the project. This is the re
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-scope
 $49 once, no subscription.
+
+### demo-video-onboarding | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-onboarding.mp4
+Title: New client just paid? Your welcome email is already written
+New client just paid and you're rewriting the same welcome email again? This is the real Buzzyfly app with sample clients. On day 1 it lists the welcome email and the intake questions, already written with their name and project. Copy, send, tick it off. The next onboarding steps come up on schedule.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-onboarding
+$49 once, no subscription.
+
+### demo-video-pricing | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-pricing.mp4
+Title: Not sure what to charge? Find your hourly floor in 30 seconds
+Not sure what to charge? Put in what you want to take home, what the business costs and how many hours you can bill. The Buzzyfly app shows the lowest hourly rate that covers it, plus a project price and a monthly retainer price. This is the real app.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-pricing
+$49 once, no subscription.
+
+### demo-video-reset | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-reset.mp4
+Title: Monday chaos? Do this 20-minute reset instead
+Monday starts with a scramble? The Buzzyfly app has a 20-minute Monday reset: open invoices, follow-ups due and onboarding steps on one screen, then six short steps, money first. This is the real app with sample clients.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-reset
+$49 once, no subscription.

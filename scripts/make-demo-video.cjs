@@ -71,6 +71,36 @@ const caption = async (page, text) => page.evaluate((t) => {
 		await scrollToButton('Copy email');
 		await caption(page, 'Copy it and send it from your own inbox.'); await shot(3.5);
 		await endCard();
+	} else if (scene === 'onboarding') {
+		await page.setContent(card('New client just paid?', 'Welcome email, intake questions, kickoff. Real app, sample clients.'));
+		await page.evaluate(() => document.fonts.ready); await shot(3);
+		await page.goto(URL); await page.waitForTimeout(600); await hide();
+		await scrollToCard('Priya Shah'); await page.waitForTimeout(200);
+		await caption(page, 'Day 1: it lists the welcome email and the intake questions.'); await shot(4);
+		await page.locator('.card', { hasText: 'Send the welcome email' }).first().getByText('Write the email').click(); await page.waitForTimeout(400);
+		await page.evaluate(() => window.scrollTo(0, 120));
+		await caption(page, 'The welcome email is written, with their name and project.'); await shot(4.5);
+		await scrollToButton('Copy email');
+		await caption(page, 'Copy, send, tick it off. The next steps follow on schedule.'); await shot(4);
+		await endCard();
+	} else if (scene === 'pricing') {
+		await page.setContent(card('Not sure what to charge?', 'Find your hourly floor in 30 seconds. Real app.'));
+		await page.evaluate(() => document.fonts.ready); await shot(3);
+		await page.goto(URL + '#pricing'); await page.waitForTimeout(600); await hide();
+		await caption(page, 'Put in what you want to earn, your costs and your hours.'); await shot(4);
+		await page.evaluate(() => window.scrollTo(0, 240));
+		await caption(page, 'It shows the lowest hourly rate that covers it.'); await shot(4);
+		await page.evaluate(() => window.scrollTo(0, document.body.scrollHeight));
+		await caption(page, 'Plus a project price and a monthly retainer price.'); await shot(4);
+		await endCard();
+	} else if (scene === 'reset') {
+		await page.setContent(card('Monday morning chaos?', 'A 20-minute reset that tells you what matters this week. Real app, sample clients.'));
+		await page.evaluate(() => document.fonts.ready); await shot(3);
+		await page.goto(URL + '#reset'); await page.waitForTimeout(600); await hide();
+		await caption(page, 'Open invoices, follow-ups due, onboarding steps. One screen.'); await shot(4.5);
+		await page.evaluate(() => window.scrollTo(0, 320));
+		await caption(page, 'Six short steps. Money first, then follow-ups.'); await shot(4);
+		await endCard();
 	} else {
 		await page.setContent(card('Proposal sent. No reply. Now what?', 'Here is how Buzzyfly handles it. Real app, sample clients.'));
 		await page.evaluate(() => document.fonts.ready); await shot(3);
