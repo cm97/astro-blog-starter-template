@@ -82,13 +82,100 @@ warm leads: reply in the thread, never by DM.
 
 ## Partners
 
-| Name | Audience | Why they fit | Pitch | Status |
-|---|---|---|---|---|
+Found by Sales team B on 2026-11-03 (roles 11 and 12). Every name was confirmed on its own
+public page today. Audience sizes are left out unless the partner publishes them. Nothing has
+been sent. **Owner: you send these yourself, one at a time, from support@buzzyfly.com, and set
+the referral terms first** (a suggestion: a free copy now, and a fixed share of each sale they
+refer, paid by you by hand until there is an affiliate tool). The review copy is a normal
+unlock key for the $49 Digital System that you create for them.
+
+| # | Name | Audience | Why they fit | Contact path (public) | Pitch | Status |
+|---|---|---|---|---|---|---|
+| P1 | Melissa Smith, founder and CEO of the Association of Virtual Assistants (AVA), host of [The No Frills VA Podcast](https://podcasts.apple.com/us/podcast/the-no-frills-va-podcast/id1533663005) | Virtual assistants building their own practice | VAs chase proposals, invoices and onboarding for their own clients every week. The app is a ready set of those emails. | AVA site / podcast page, or [LinkedIn](https://www.linkedin.com/in/melissasmiththepva) | PP1 | draft, owner sends |
+| P2 | Lyn Prowse-Bishop, host of [The Virtual Business Show](https://podcasts.apple.com/us/podcast/the-virtual-business-show/id381061982) (VA podcast since 2010), runs [Executive Stress Office Support](https://www.execstress.com/about-australian-virtual-assistant/) | VAs and small business owners, mostly Australia | Long-running VA show that covers tools and systems for small practices. | Contact form on execstress.com, or [LinkedIn](https://au.linkedin.com/in/lynprowsebishop) | PP2 | draft, owner sends |
+| P3 | Hannah Cole, [Sunlight Tax](https://www.sunlighttax.com/podcast) (podcast still publishing, latest episode 2026-11-03) | Self-employed creatives: designers, artists, therapists, consultants | Her topic is getting money and business systems in order. Late-invoice reminders and a Monday money check fit that. | Contact page on sunlighttax.com (not linked from the podcast page; check the site menu) | PP3 | draft, owner sends |
+| P4 | [The Coaching Tools Company](https://www.thecoachingtoolscompany.com/) (coaching templates and a coach community; founder Emma-Louise Elsey has since moved to [Fierce Kindness](https://fiercekindness.com/big-news-from-emma-louise-october-2024/)) | Life and business coaches | They sell coaching tools, not client admin. Buzzyfly covers the business side (follow-ups, onboarding emails, invoices) without competing. | Contact page or FAQ on thecoachingtoolscompany.com | PP4 | draft, owner sends |
+
+### Partner pitches (role 12)
+
+All four use the same offer, so the owner only has to decide the terms once:
+a free copy to review, no obligation, and a referral share on terms the owner sets.
+
+**PP1 (Melissa Smith, AVA).**
+Subject: A free tool for your VAs to review
+Hi Melissa, I run Buzzyfly, a small browser app for solo service businesses. It shows which client to follow up with today and has the email ready: proposal follow-ups, late-invoice reminders, onboarding emails and scope-creep replies. The VA copies it and sends it from their own inbox. I'd like to give you a free copy to try, no strings. If you think it's useful for AVA members, I'd also be glad to set up a referral share for anyone who buys through you, on terms we agree. Either way I'd value your honest view. [Owner name], support@buzzyfly.com, https://buzzyfly.com/store?utm_source=ava&utm_medium=partner&utm_campaign=partner-ava
+
+**PP2 (Lyn Prowse-Bishop, Virtual Business Show).**
+Subject: Free review copy for The Virtual Business Show
+Hi Lyn, I've been looking at The Virtual Business Show and the tools-and-systems side of your episodes. I make Buzzyfly, a browser app for solo practices: it lists who needs a follow-up today and writes the email, with the client's name, project and date filled in. That covers proposals, overdue invoices, new-client onboarding and scope replies. It's $49 once, no subscription. I'd like to send you a free copy to try. If it earns a mention, I'm happy to agree a referral share for your listeners. No obligation. [Owner name], support@buzzyfly.com, https://buzzyfly.com/store?utm_source=virtualbusinessshow&utm_medium=partner&utm_campaign=partner-vbs
+
+**PP3 (Hannah Cole, Sunlight Tax).**
+Subject: A free tool for late invoices, to review
+Hi Hannah, your listeners are freelancers getting their money systems in order. One gap I keep seeing is chasing late invoices: people put it off because the email feels awkward. Buzzyfly is a small browser app that shows which invoice is overdue and has the reminder ready for 1 day, 1 week and 2 weeks late, with the client's name and amount filled in. It also covers proposal follow-ups and onboarding. I'd like to give you a free copy, no strings. If you'd ever recommend it, I can set up a referral share on terms we agree. There's also a free reminder writer, no sign-up, if that's easier to share: https://buzzyfly.com/overdue-invoice-email?utm_source=sunlighttax&utm_medium=partner&utm_campaign=partner-sunlighttax. [Owner name], support@buzzyfly.com
+
+**PP4 (The Coaching Tools Company).**
+Subject: A business-side tool for your coaches
+Hi, I make Buzzyfly, a browser app for solo coaches and freelancers. It doesn't overlap with your coaching tools. It covers the admin side: which prospect to follow up with today, welcome and intake emails for new clients, invoice reminders and replies to scope creep, all written and ready to copy. I'd like to give your team a free copy to review. If it fits your community, I'd be glad to talk about a referral share on terms we agree. [Owner name], support@buzzyfly.com, https://buzzyfly.com/store?utm_source=coachingtoolscompany&utm_medium=partner&utm_campaign=partner-ctc
+
+## Newsletters (role 13)
+
+Checked on each newsletter's own booking page on 2026-11-03. Numbers are what the publisher
+states, not ours. **Every one is paid placement: it needs the owner's yes and budget first.**
+
+| # | Newsletter | Audience (publisher's own figure) | Cheapest option | Bigger option | How to book |
+|---|---|---|---|---|---|
+| N1 | The Freelance Gig | "12,000+ freelancers", weekly on Fridays; states 47.3% open rate, 4% click rate | "Bonus Points" link, **$27**: a link to a blog post or social post of ours | Participating Sponsor $197, Premier Headlining Sponsor $277, 4-issue packages $597 / $947 | [passionfroot.me/the-freelance-gig](https://www.passionfroot.me/the-freelance-gig) |
+| N2 | All Things Freelance Writing (founder Jessica Walrack) | Weekly jobs email to freelance writers; page states "over 7,400 subscribers" | Primary sponsorship, one week (image, up to 50 words, one link; price shown only at booking) | Primary sponsorship one month $1,500; LinkedIn sponsored post $600 | [passionfroot.me/all-things-freelance-writing](https://www.passionfroot.me/all-things-freelance-writing) |
+| N3 | Letters for Creatives (Celeste Tsang, Substack) | Creatives and writers; page states 634 subscribers, 35% open rate (page last updated 2025-02-03, so confirm) | Sponsorship from **$15** | Up to $80 | [celestetsang.substack.com/p/sponsorship](https://celestetsang.substack.com/p/sponsorship) |
+
+Recommendation if the owner wants one cheap test: **N1 "Bonus Points" at $27**, linking the
+free tool post (people click free tools), with
+`?utm_source=thefreelancegig&utm_medium=newsletter&utm_campaign=nl-freelancegig-bonus`.
+Ad copy (under 50 words, also fits N2 and N3): "Invoice a week late and dreading the email?
+This free tool writes a polite, firm reminder in 30 seconds. Pick how late it is, copy, send.
+No sign-up." Link: https://buzzyfly.com/overdue-invoice-email
 
 ## Launches
 
 | Platform | Kit ready? | Date | Result |
 |---|---|---|---|
+| Product Hunt | yes (below) | owner picks; schedule up to 1 month ahead | - |
+| Show HN | **not yet**: HN rules say people must be able to try it without signups, and the $49 app is behind payment. Launch once `/demo` exists (MARKETING.md tactic 1). | - | - |
+
+### Product Hunt launch kit (role 15, 2026-11-03)
+
+Checked against Product Hunt's own guide
+([producthunt.com/launch/preparing-for-launch](https://www.producthunt.com/launch/preparing-for-launch)):
+anyone can submit their own product for free, a thumbnail (240x240) and at least 2 gallery
+images (1270x760, under 3MB) are needed, launches can be scheduled up to 1 month ahead,
+12:01am Pacific gives the full 24 hours, and asking for upvotes is against the spirit of the
+guide (ask for feedback).
+
+- **Name:** Buzzyfly
+- **Tagline (max 60 chars):** "Know which client to follow up with, and what to send"
+- **Link:** https://buzzyfly.com/store?utm_source=producthunt&utm_medium=launch&utm_campaign=ph-launch
+- **Pricing field:** Paid
+- **Topics:** Productivity, Freelance, Email
+- **Thumbnail:** https://buzzyfly.com/social/launch/ph-thumb.png
+- **Gallery (in this order):**
+  1. https://buzzyfly.com/social/launch/ph-gallery-1.jpg (Today list, sample clients)
+  2. https://buzzyfly.com/social/launch/ph-gallery-2.jpg (the real day-3 proposal follow-up, filled in)
+  3. https://buzzyfly.com/social/launch/ph-gallery-3.jpg (what's inside, price and refund rule)
+  Rebuild with `node scripts/make-launch-images.cjs`. A 20 to 30 second screen recording of the real app would be a stronger first slot when it exists.
+- **Description (260 chars):** "A browser app for freelancers and coaches. It shows who needs a follow-up today (proposals, late invoices, new clients) and has the email ready with their name, project and date filled in. You copy it and send it. $49 once, no subscription."
+- **First comment (owner posts it as the maker):**
+  "Hi Product Hunt. I built Buzzyfly because the hard part of client work for me was never the work. It was remembering who I owed a follow-up, and then writing the email. Proposals went quiet, invoices went late, and new clients waited for a welcome email I meant to send.
+  Buzzyfly is a small browser app. You add a client and where they are (proposal sent, invoiced, new). Each day it lists who needs you and has the email ready: 3 follow-ups for a quiet proposal, reminders at 1, 7 and 14 days for a late invoice, onboarding emails, and replies for scope creep, discounts and revisions. You copy the email and send it from your own inbox. Your data stays in your browser, and you can back it up.
+  It's $49 once, no subscription. 30-day refund if you can't access the app or it isn't as described.
+  I'd love feedback: what follow-up do you dread writing, and is there an email you'd want added?"
+- **Checklist:**
+  1. Owner: create or log in to a personal Product Hunt account (makers must have accounts before launch day).
+  2. Owner: confirm `/store` loads and the $49 link opens Stripe that morning.
+  3. Owner: Submit, New Product, paste the link, then the fields above. Schedule for 12:01am PT on the chosen day.
+  4. Post the first comment as soon as it's live.
+  5. Reply to every comment that day. Ask for feedback, never for upvotes, and don't ask friends to upvote.
+  6. Share the launch once from the Facebook Page (Social poster, POSTS.md) and anywhere the owner already has contacts.
+  7. Next day: log visits, buy clicks and sales for `ph-launch` on the scoreboard.
 
 ## Sales FAQ and post ideas (role 7, from real posts seen 2026-11-02)
 
