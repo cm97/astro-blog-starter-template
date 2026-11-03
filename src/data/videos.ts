@@ -12,7 +12,8 @@ export type ExplainerVideo = {
 
 // What each explainer says on screen and reads aloud. It has to match the
 // live store: the $49 Digital System is a browser app (no download), the
-// $15/$19/$29 apps are "Coming soon" and already inside the $49 app, and the
+// $15/$19/$29 apps are sold on their own and also inside the $49 app (the
+// rendered videos predate 2026-11-03 and still say "coming soon"), and the
 // refund rule is the one in CLAUDE.md. No view counts or upload dates: there
 // is no real audience data for these.
 export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
@@ -45,7 +46,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 	{
 		slug: "weekly-reset",
 		title: "Weekly Reset — a 20-minute Monday that still works by Thursday",
-		description: "The Monday reset, a priority scorer, a Thursday check-in and a Friday close. Inside the $49 Digital System today. A $15 version is coming soon.",
+		description: "The Monday reset, a priority scorer, a Thursday check-in and a Friday close. Inside the $49 Digital System today. A $15 version is also sold on its own.",
 		seconds: 30,
 		poster: "/videos/weekly-reset.svg",
 		slides: [
@@ -58,7 +59,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 	{
 		slug: "onboarding-kit",
 		title: "Client onboarding — the same first ten days for every new client",
-		description: "A 10-step plan for each new client, the welcome, intake and kickoff emails filled in, and your own intake questions. Inside the $49 Digital System today. A $29 version is coming soon.",
+		description: "A 10-step plan for each new client, the welcome, intake and kickoff emails filled in, and your own intake questions. Inside the $49 Digital System today. A $29 version is also sold on its own.",
 		seconds: 34,
 		poster: "/videos/onboarding-kit.svg",
 		slides: [
@@ -71,7 +72,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 	{
 		slug: "follow-up-templates",
 		title: "Follow-ups — who to nudge today and the email to send",
-		description: "Follow-up dates worked out for leads, proposals and late invoices, with 9 follow-up emails filled in. Inside the $49 Digital System today. A $19 version is coming soon.",
+		description: "Follow-up dates worked out for leads, proposals and late invoices, with 9 follow-up emails filled in. Inside the $49 Digital System today. A $19 version is also sold on its own.",
 		seconds: 26,
 		poster: "/videos/follow-up-emails.svg",
 		slides: [
