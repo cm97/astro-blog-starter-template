@@ -16,5 +16,6 @@ declare namespace Cloudflare {
 		// Free-tier LLM keys for /api/ai (src/lib/freeLlm.ts). Set as Cloudflare secrets, never as vars.
 		GROQ_API_KEY?: string;
 		GEMINI_API_KEY?: string;
+		XAI_API_KEY?: string;
 	}
 }

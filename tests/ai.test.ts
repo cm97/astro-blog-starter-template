@@ -99,6 +99,24 @@ test("falls back to Workers AI when Groq fails, and to the smaller model when th
 	assert.equal(seen.length, 2);
 });
 
+test("Grok is used only after every free option fails", async () => {
+	const urls: string[] = [];
+	mockFetch((u) => { urls.push(u); return u.includes("x.ai") ? ok("grok answer") : new Response("no", { status: 500 }); });
+	const AI = { run: async () => { throw new Error("quota"); } };
+	const r = await call({ kind: "support", messages: [{ role: "user", content: "hi" }] }, { GROQ_API_KEY: "x", XAI_API_KEY: "z", AI }, {}, "2.0.1.0");
+	assert.equal(((await r.json()) as { reply: string }).reply, "grok answer");
+	assert.ok(urls[0].includes("groq") && urls[urls.length - 1].includes("x.ai"));
+});
+
+test("Grok is not called when Workers AI answers", async () => {
+	const urls: string[] = [];
+	mockFetch((u) => { urls.push(u); return ok("grok answer"); });
+	const AI = { run: async () => ({ response: "free answer" }) };
+	const r = await call({ kind: "support", messages: [{ role: "user", content: "hi" }] }, { XAI_API_KEY: "z", AI }, {}, "2.0.1.1");
+	assert.equal(((await r.json()) as { reply: string }).reply, "free answer");
+	assert.equal(urls.length, 0);
+});
+
 test("rate limit kicks in per IP", async () => {
 	mockFetch(() => ok("ok"));
 	const env = { GROQ_API_KEY: "x" };

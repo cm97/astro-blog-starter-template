@@ -25,7 +25,7 @@ export const GET: APIRoute = ({ locals }) => {
 		// Free AI helpers (/api/ai): Groq/Gemini keys if set, otherwise the Workers AI binding.
 		ai: hasFreeLlm(env as unknown as FreeLlmEnv),
 		workersAi: typeof (env as { AI?: { run?: unknown } }).AI?.run === "function",
-		aiNamesFound: Object.keys(env).filter((name) => /groq|gemini/i.test(name) && Boolean(env[name])).sort(),
+		aiNamesFound: Object.keys(env).filter((name) => /groq|gemini|xai/i.test(name) && Boolean(env[name])).sort(),
 	};
 	return Response.json(status, { headers: { "cache-control": "no-store" } });
 };

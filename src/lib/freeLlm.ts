@@ -15,6 +15,9 @@
  * the `AI` binding in wrangler.json. It runs inside the Buzzyfly Cloudflare
  * account on the free 10,000 Neurons/day allocation and does not train on
  * prompts.
+ *
+ * Order: Groq, Gemini (free, when keys exist), Workers AI (free, no key),
+ * then Grok via XAI_API_KEY (paid per use) only if all free options fail.
  */
 
 export interface ChatMessage {
@@ -38,6 +41,19 @@ export interface FreeLlmEnv {
 	GROQ_API_KEY?: string;
 	GEMINI_API_KEY?: string;
 	AI?: WorkersAiBinding;
+	/** xAI Grok, already used by the admin draft tool. Paid per use, so it is tried last. */
+	XAI_API_KEY?: string;
+}
+
+function paidProviders(env: FreeLlmEnv): Provider[] {
+	return [
+		{
+			name: "grok",
+			url: "https://api.x.ai/v1/chat/completions",
+			model: "grok-4.5",
+			key: env.XAI_API_KEY,
+		},
+	].filter((p) => Boolean(p.key));
 }
 
 // Free-plan Workers AI models, best first.
@@ -86,7 +102,7 @@ function providers(env: FreeLlmEnv): Provider[] {
 }
 
 export function hasFreeLlm(env: FreeLlmEnv): boolean {
-	return providers(env).length > 0 || hasWorkersAi(env);
+	return providers(env).length > 0 || hasWorkersAi(env) || paidProviders(env).length > 0;
 }
 
 async function callProvider(p: Provider, messages: ChatMessage[], maxTokens: number): Promise<string> {
@@ -112,7 +128,8 @@ async function callProvider(p: Provider, messages: ChatMessage[], maxTokens: num
 /** Tries each configured provider in order; throws only if all of them fail. */
 export async function freeChat(env: FreeLlmEnv, messages: ChatMessage[], maxTokens = 500): Promise<string> {
 	const list = providers(env);
-	if (list.length === 0 && !hasWorkersAi(env)) throw new Error("No free LLM configured");
+	const paid = paidProviders(env);
+	if (list.length === 0 && !hasWorkersAi(env) && paid.length === 0) throw new Error("No LLM configured");
 	let last: unknown;
 	for (const p of list) {
 		try {
@@ -130,6 +147,15 @@ export async function freeChat(env: FreeLlmEnv, messages: ChatMessage[], maxToke
 				last = error;
 				console.error("Buzzyfly free LLM provider failed", model, error instanceof Error ? error.message : error);
 			}
+		}
+	}
+	// Paid last resort: only reached when every free option failed.
+	for (const p of paid) {
+		try {
+			return await callProvider(p, messages, maxTokens);
+		} catch (error) {
+			last = error;
+			console.error("Buzzyfly LLM provider failed", p.name, error instanceof Error ? error.message : error);
 		}
 	}
 	throw last instanceof Error ? last : new Error("All free LLM providers failed");
