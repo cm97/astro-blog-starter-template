@@ -1,15 +1,15 @@
 ---
 title: "The Client Follow-Up System That Runs Itself (Even on a Slammed Week)"
 seoTitle: "Client Follow-Up System That Runs Itself"
-description: "A 20-minute weekly process plus ready emails so follow-ups still happen when you are buried in delivery. No new tools required."
+description: "A 20-minute weekly process plus ready emails so follow-ups still happen when you are buried in delivery. Exact templates included."
 pubDate: "Nov 02 2026"
 updatedDate: "Nov 03 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
+featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
 You know the follow-up should go out. The proposal went quiet. The new client has not sent the intake. The past client has not heard from you in three months.
@@ -20,7 +20,7 @@ The fix is not more willpower. It is a system that still runs when you are slamm
 
 ## The 20-minute weekly follow-up scan
 
-Do this every Monday (or the first 20 minutes of your week). Same order every time.
+Do this every Monday (or the first 20 minutes of your week). Same order every time. Timer on. Stop at 20.
 
 1. Open the list of open proposals older than 5 days. Send the day-5/7 template if none exists.
 2. Check new clients from the last 7 days. Confirm intake arrived. If not, send the intake nudge.
@@ -30,7 +30,23 @@ Do this every Monday (or the first 20 minutes of your week). Same order every ti
 
 That is the entire process. Five actions. Twenty minutes. The emails are already written.
 
+Fill this log before you start so the scan has a record:
+
+```
+Date: ________
+Proposals >5 days, no reply: ________ ________ ________
+Intakes missing: ________
+Quiet mid-project (>7 days): ________ ________
+Past client re-engage: ________
+Break-ups sent: ________
+Next scan date: ________
+```
+
+If any field is blank after the 20 minutes, the scan was incomplete. Do not open new work until the five actions are done.
+
 ## Exact emails that do the work
+
+Copy these. Fill the blanks. Send. Do not rewrite.
 
 **Day 5–7 proposal follow-up**
 Subject: Re: [Project] proposal
@@ -91,7 +107,13 @@ If timing changes later, reply and I will reopen it.
 
 [Your name]
 
-These five cover the silence that kills cash.
+## Timing rules that keep replies coming
+
+- Send all follow-ups before 11am, Tuesday–Thursday only.
+- Never Friday. The thread dies over the weekend.
+- After you send, write the next check date in the log the same minute.
+- Cap the scan at three names per category. More than that is noise; the rest wait until next Monday.
+- If a reply lands mid-week, update the log in 60 seconds. Do not rewrite the email.
 
 ## What still breaks when templates live only in a doc
 
