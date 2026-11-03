@@ -162,16 +162,6 @@ const FAQ = [
 				<ProductCallout productId={system.id} description={systemDescription} featured headingLevel="h2" />
 			</div>
 
-			<section id="all-products" aria-labelledby="singles-heading">
-				<div class="section-head">
-					<h2 id="singles-heading">Coming soon</h2>
-					<p>Single tools, not for sale yet. Each one is already inside the Digital System app.</p>
-				</div>
-				<div class="singles">
-					{singles.map((p) => <ProductCallout productId={p.id} />)}
-				</div>
-			</section>
-
 			<section class="store-section">
 				<h2>What's inside the Digital System app</h2>
 				<table class="contents-table">
@@ -193,6 +183,16 @@ const FAQ = [
 						<p>{item.a}</p>
 					</details>
 				))}
+			</section>
+
+			<section id="all-products" aria-labelledby="singles-heading">
+				<div class="section-head">
+					<h2 id="singles-heading">Coming soon</h2>
+					<p>Single tools, not for sale yet. Each one is already inside the Digital System app.</p>
+				</div>
+				<div class="singles">
+					{singles.map((p) => <ProductCallout productId={p.id} />)}
+				</div>
 			</section>
 
 			<section class="final-cta">
