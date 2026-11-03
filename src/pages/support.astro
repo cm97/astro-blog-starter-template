@@ -23,9 +23,10 @@ import Layout from '../layouts/BlogPost.astro';
 	<style>
 		.bot { display: flex; flex-direction: column; gap: 14px; margin-block: 24px; }
 		.log { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
-		.log li { padding: 10px 14px; border-radius: 6px; max-width: 90%; line-height: 1.5; white-space: pre-wrap; }
-		.log .user { align-self: flex-end; background: var(--accent, #0d7a6b); color: #fff; }
-		.log .bot { align-self: flex-start; border: 1px solid #d2dcd8; }
+		/* Messages are created by the script below, so they don't get Astro's scoped attribute. */
+		.log :global(li) { padding: 10px 14px; border-radius: 6px; max-width: 90%; line-height: 1.5; white-space: pre-wrap; margin: 0; }
+		.log :global(.msg-user) { align-self: flex-end; background: var(--accent, #0d7a6b); color: #fff; }
+		.log :global(.msg-bot) { align-self: flex-start; background: #fff; border: 1px solid #d2dcd8; }
 		.form { display: flex; gap: 8px; }
 		.form input { flex: 1; min-height: 44px; padding: 8px 12px; font: inherit; border: 1px solid #8a9a96; border-radius: 4px; }
 		.form button { min-height: 44px; padding: 0 20px; font: inherit; font-weight: 700; border: 0; border-radius: 4px; background: var(--accent, #0d7a6b); color: #fff; cursor: pointer; }
@@ -44,7 +45,7 @@ import Layout from '../layouts/BlogPost.astro';
 
 		function add(role: 'user' | 'bot', text: string) {
 			const li = document.createElement('li');
-			li.className = role;
+			li.className = role === 'user' ? 'msg-user' : 'msg-bot';
 			li.textContent = text;
 			log.appendChild(li);
 			li.scrollIntoView({ block: 'nearest' });
