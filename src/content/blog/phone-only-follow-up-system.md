@@ -1,14 +1,15 @@
 ---
 title: "The Phone-Only Follow-Up System That Still Runs on a Slammed Week"
 seoTitle: "Phone-Only Client Follow-Up System"
-description: "Copy the email, send, log the next date — all from your phone so follow-ups still leave when you are not at a desk."
+description: "Copy the email, send, log the next date — all from your phone so follow-ups still leave when you are not at a desk. Exact lines for proposals, intakes, and first-client day-2."
 pubDate: "Nov 03 2026"
+updatedDate: "Nov 04 2026"
 heroImage: "/blog-placeholder-1.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "Browser app that shows who to follow up with today and drafts the email. Onboarding, weekly reset, and follow-ups in one place so the process still exists on the weeks you are slammed. One-time."
 ---
 
 You are between calls or in the car. The proposal went quiet three days ago. The new client has not sent the intake. You know a follow-up should go out.
@@ -95,6 +96,30 @@ If timing changes later, reply and I will reopen it.
 
 [Your name]
 
+**First-client day-2 nudge (phone version)**
+Subject: Still need the intake
+
+Hi [Name],
+
+Deposit is in. Kickoff is [date].
+
+Still need the intake so we use the time well. Link: [link]. Deadline stays [date].
+
+[Your name]
+
+**Weekly status from the car**
+Subject: Weekly update — [project]
+
+Hi [Name],
+
+Done this week: [one thing].
+
+Next: [next piece] by [date].
+
+Need from you: [one item or nothing].
+
+[Your name]
+
 ## Timing rules that keep replies coming from the phone
 
 - Send all follow-ups before 11am, Tuesday–Thursday only.
@@ -102,6 +127,16 @@ If timing changes later, reply and I will reopen it.
 - After you send, write the next check date in the log the same minute. The phone note is the system.
 - Cap the scan at three names per category. More than that is noise; the rest wait until next Monday.
 - If a reply lands mid-week, update the log in 60 seconds. Do not rewrite the email.
+
+## Thursday cash salvage from the phone (6 minutes)
+
+When Monday never happened, do this instead of opening the full list.
+
+1. Open the note. Name the one late delivery or the one quiet proposal that still has a date.
+2. Send the exact proposal or mid-project line above. One only.
+3. Write the next date. Close the app.
+
+That keeps cash moving without a desk.
 
 ## What still breaks when the lines only live in a desktop doc
 
