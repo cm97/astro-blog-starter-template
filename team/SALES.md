@@ -8,12 +8,17 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 |---|---|---|---|---|---|
 | launch-post-1 | Facebook: professional portfolio | 2026-11-02 | 0 | 0 | 0 |
 | launch-ad-1 (paid, $15 spent by 2026-11-02 15:45 UTC) | Facebook ad | 2026-11-02 | 0 tracked | 0 | 0 |
-| proposal-quiet-day-6, scope-creep-reply, overdue-invoice-free-tool | Facebook queue (POSTS.md) | not posted yet | - | - | - |
-| unpaid-invoice-steps, retainer-menu-scope | Facebook queue (POSTS.md, added 2026-11-02) | not posted yet | - | - | - |
-| Community replies (leads below) | Reddit / Facebook groups, owner posts | not posted yet | - | - | - |
+| proposal-quiet-day-6 | Facebook: professional portfolio | 2026-11-03 | ? | ? | ? |
+| demo-video-1 | YouTube Shorts + Instagram | 2026-11-03 | ? | ? | ? |
+| demo-video-invoice, demo-video-scope | YouTube Shorts | 2026-11-03 | ? | ? | ? |
+| All YouTube Shorts together (sales-b, LOG 2026-11-04) | YouTube | 11-03..04 | 9 | 0 | 0 |
+| scope-creep-reply, overdue-invoice-free-tool, unpaid-invoice-steps, retainer-menu-scope, late-invoice-image | Facebook queue (POSTS.md) | not posted yet | - | - | - |
+| paid-late-partial-steps, scope-change-log | Facebook queue (POSTS.md, added 2026-11-04) | not posted yet | - | - | - |
+| Community replies R1 to R14 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
+| Whole site 11-03..04 (sales-b, LOG 2026-11-04) | 9 YouTube, rest direct | - | 38 views | 0 | 0 |
 | Whole site since 2026-10-20 (LOG.md, 2026-11-02) | all direct | - | 163 views | 4 | 0 |
 
-Per-campaign numbers for the queued posts and replies: "?" until posted. Stripe: 0 charges ever (2026-11-02).
+Per-post numbers: "?" until the CEO or sales-b report breaks visits down by utm_campaign. Stripe: 0 charges ever as of 2026-11-02; the Stripe connector needed re-auth on 2026-11-04, so later sales are "?".
 
 ## Leads
 
@@ -33,6 +38,12 @@ self-promotion rule in the sidebar, then post.** Reddit replies carry no link by
 | L6 | Oct 2026 (past month) | [r/videography](https://www.reddit.com/r/videography/comments/1x1qccv/retainer_clients_not_as_i_expected/) | "How should I structure content retainers so the scope is actually clear and profitable?" | hot | R6 | draft, owner posts |
 | L7 | Oct 2026 (past month) | [r/SocialMediaManagers](https://www.reddit.com/r/SocialMediaManagers/comments/1x092vx/is_650month_ridiculous_for_this_social_media/) | "Is $650/month ridiculous for this social media workload?" | warm | R7 | draft, owner posts |
 | L8 | date not shown | [Facebook group: Upwork freelancer community](https://www.facebook.com/groups/upworkfreelancercommunity/posts/28821628494170697/) | "Clients come, send a message and then ghost. Ask for samples, audits and trial..." | warm | R8 | draft, owner posts |
+| L9 | ~2026-11-02 ("2 days ago") | [r/freelance](https://www.reddit.com/r/freelance/comments/1xlzz9p/how_do_you_prevent_scope_creep_when_working_with/) | "How do you prevent scope creep when working with clients?" | hot | R9 | draft, owner posts |
+| L10 | ~2026-10-29 ("6 days ago") | [r/LaborLaw](https://www.reddit.com/r/LaborLaw/comments/1xive7c/startup_didnt_pay_me_after_a_month_of_design_work/) | "Startup didn't pay me after a month of design work ... no signed contract. What would you do? Should I send a formal demand?" | hot | R10 | draft, owner posts |
+| L11 | ~2026-10-31 ("4 days ago") | [r/indianstartups](https://www.reddit.com/r/indianstartups/comments/1xkax4n/small_agencybusiness_owners_how_do_you_handle/) | "how do you handle cash flow when clients pay 60-90 days late?" | hot | R11 | draft, owner posts |
+| L12 | ~2026-11-01 ("3 days ago") | [r/stagehands](https://www.reddit.com/r/stagehands/comments/1xktn07/question_about_invoicing_as_a_freelancer/) | "I'm relatively green when it comes to invoicing my company/clients for my work" | warm | R12 | draft, owner posts |
+| L13 | ~2026-10-28 ("7 days ago") | [r/graphic_design](https://www.reddit.com/r/graphic_design/comments/1xi7z9f/freelancers_how_do_you_accept_payments_from_your/) | "Freelancers, how do you accept payments from your clients?" | warm | R13 | draft, owner posts |
+| L14 | ~2026-11-02 ("2 days ago") | [r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1xlwbes/my_best_month_nearly_broke_me_because_i_had_no/) | "my best month nearly broke me because i had no system to..." (title cut off in search) | hot | R14 | draft, owner posts |
 
 ### Draft replies (team A, role 4, 2026-11-02)
 
@@ -73,12 +84,61 @@ Only if the group allows tool mentions (check the rules; most Upwork groups don'
 
 Best two to post first: **R1** (hot, specific, recent) and **R6** (hot, asks exactly what the app's scope replies cover).
 
+### Draft replies, round 2 (team A, role 4, 2026-11-04)
+
+Found 2026-11-04 by web search limited to the past week; same limits as above (titles and
+snippets only, owner checks each thread and sub rules first, no link on Reddit).
+
+**R9 (L9, preventing scope creep).**
+Three things did most of the work for me.
+1. Write the scope as a list with numbers, not a description. "Homepage + 4 inner pages, 2 revision rounds each, copy supplied by you by [date]" leaves much less to argue about than "website redesign".
+2. Add one line to the proposal: "Anything not on this list is quoted separately before I start it."
+3. Keep a change log. Every new ask goes in it with the date, even small ones. When something comes in, reply the same way every time: "Happy to. That's not in the current scope, so it's [price] and adds [X days]. Or we can swap it for [item]. Which would you like?" The log makes the end-of-project conversation easy because it's all written down, and the fixed reply means you never have to decide on the spot.
+
+**R10 (L10, a month of unpaid design work, no signed contract).**
+Not a lawyer, but emails and Slack messages where they asked for the work and promised to pay usually count as evidence of an agreement in most places, so no signed contract doesn't mean no claim. A sensible order:
+1. One clear written demand, by email: "Hi [name], I completed [work] between [dates] at your request (see [message/date]). The agreed fee was [amount]. Please pay it by [date, 7 to 14 days out] to [details]. If it isn't paid by then I'll file a small claim for the amount."
+2. Stop any further work until it's paid.
+3. Save everything now (screenshots of Slack with dates), before access gets removed.
+4. If the date passes, file in small claims where you or they are based. Check your local limit and whether a "letter before action" is required (in England it is).
+Keep it factual and short. Startups often pay once there's a date and a named next step.
+
+**R11 (L11, clients paying 60 to 90 days late).**
+Plan for when money actually lands, not when it's due. Take your last 5 to 10 invoices, note due date vs paid date per client, and use that average delay in your cash plan. Then work on shortening it:
+- 30 to 50% upfront on new work, and milestone billing on long projects.
+- Invoice the day work is delivered, with the due date and payment details in the email itself, not just the PDF.
+- A fixed reminder schedule: 3 days before due, on the due date, 7 days after, then a call at 14. Most of the delay is the invoice sitting in an approval queue, and the reminders keep it moving.
+- For the worst payers, quote higher or ask for payment before release of the final files.
+
+**R12 (L12, new to invoicing as a freelancer).**
+Simple version that covers most of it: your name and contact details, the client's company name and the contact who booked you, an invoice number (just count up from 001), the date, the job (date, venue, what you did), hours or day rate x quantity, the total, the due date ("due within 14 days"), and how to pay (bank details or a card link). Email it the day the job ends, with the total and due date written in the email body too. Keep a simple list of invoices sent and paid, and send a polite reminder the day after the due date if nothing has come in: "Hi [name], invoice [#] for [job on date] was due yesterday. Could you check it's in the payment run? Thanks."
+
+**R13 (L13, how to accept payments).**
+Make paying one click and put the terms in writing. Put the due date and late terms on every invoice ("due in 14 days"), and offer a bank transfer plus a card payment link next to it so the client never has to ask how. Take a deposit before starting (30 to 50% is common), and release final files on final payment. Then reminders do the rest: a friendly nudge the day after the due date, a firmer one at 7 days with the invoice attached again.
+
+**R14 (L14, best month nearly broke them with no system).**
+Same thing happened to me. What fixed it was smaller than I expected: one list of every active client with their next step and its date, checked every morning, and a 20-minute reset every Monday (who's waiting on me, who owes me a reply, which invoices are due). Cap how many active jobs you take at once, and when it's full, new clients get a start date instead of a yes for this week. And write down the emails you keep retyping (kickoff, "where are the files", the invoice reminder) so busy weeks don't mean writing from scratch.
+Only if the sub allows tool mentions in comments (r/smallbusiness generally doesn't), you could add: "I built a small browser app that does the client list and the ready emails: https://buzzyfly.com/store?utm_source=reddit&utm_medium=community&utm_campaign=reddit-best-month-no-system". Otherwise post without it.
+
+Best two to post first this round: **R9** (exact question the app answers, fresh, big sub) and **R10** (urgent, high need for the exact wording).
+
 ### Lead research and outreach (roles 5 and 6)
 
 No businesses added this run. The searches found only vendor blogs and courses, not small
 businesses that publicly stated this problem, and a cold note to a business that hasn't
 asked is outreach we don't do (MARKETING.md "no spam"). The people in L1 to L8 are the
 warm leads: reply in the thread, never by DM.
+
+**2026-11-04:** 1 business added (public page, a direct fit for the "partner" angle; the
+owner decides whether to send it, by hand, once).
+
+| Business | Public page | Why it fits | Personal note (draft, owner sends) | Status |
+|---|---|---|---|---|
+| Sphere Rocket VA (virtual assistant business) | [Facebook post](https://www.facebook.com/sphererocketva/posts/running-a-high-output-brand-without-support-traps-you-in-administrative-tasks-in/1607109634764331/) | Their post names "The client follow-ups you keep forgetting?" as the pain they solve for busy owners, so their clients have the problem Buzzyfly fixes | "Hi, I liked your post about the client follow-ups people keep forgetting. I make a small browser app for exactly that: it lists which follow-up is due today and has the email written for the VA or owner to copy. If it would help you run follow-ups for your clients, I'm happy to give you access to try it, no strings. Either way, thanks for the post." | draft, owner decides (free access is the owner's call) |
+
+The other searches found VA agencies selling their own service and job boards (an Upwork
+"VA for coaches" job): contacting a client through an Upwork job post breaks Upwork's terms,
+so it's not listed.
 
 ## Partners
 
@@ -193,9 +253,18 @@ Buyer doubts about Buzzyfly to answer on /store (for the Web builders): "Is it a
 "I already use a spreadsheet" (it tells you which follow-up is due today and writes the email, the spreadsheet doesn't);
 "What if it doesn't work for me?" (30-day refund if you can't access the app or it isn't as described).
 
+### Added 2026-11-04 (from L9 to L14)
+- "How do I prevent scope creep?" Post idea: the numbered scope list + one proposal line + the change log (POSTS.md scope-change-log).
+- "No signed contract and they haven't paid. Do I have a claim?" FAQ: messages that show the request and the promise to pay are evidence; send a dated written demand first. Post idea: paid-late-partial-steps.
+- "Clients pay 60 to 90 days late. How do I plan cash?" Post idea: plan on average paid-date per client, not due date.
+- "I'm new to invoicing. What goes on it?" Post idea / free-tool idea for the Web builders: an invoice checklist next to /overdue-invoice-email.
+- "How should clients pay me?" FAQ: deposit, one-click payment link, due date on the invoice.
+- "My best month nearly broke me." Post idea: one client list with next step + date, checked daily; cap active jobs.
+- Seen in the same searches: competitors launching small paid kits for late-invoice wording and scope templates on r/SideProject (PDF kits, Notion portals). Buyers can compare, so /store should keep saying what we are: a browser app with the emails filled in, one payment.
+
 ## Ready ad set (role 9, waiting for the owner's yes and daily budget)
 
-`launch-ad-1` is already running (scoreboard). This is a second variant, not running: it needs the owner's yes and a daily budget. Use it if launch-ad-1 gets 0 buy clicks in 3 days.
+Parked: the owner said no paid ads on 2026-11-03 (LOG). Kept ready in case that changes; it needs the owner's yes and a daily budget. `launch-ad-1` ($15) showed 0 tracked visits.
 - Platform: Facebook and Instagram (Meta), objective "Traffic" to /store.
 - Audience: US, UK, CA, AU; ages 25 to 55; interests freelancing, Upwork, Fiverr, life coaching, small business owners, self-employment.
 - Image: https://buzzyfly.com/social/buzzyfly-digital-system-1.jpg
