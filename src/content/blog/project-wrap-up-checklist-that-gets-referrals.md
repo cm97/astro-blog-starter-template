@@ -1,6 +1,6 @@
 ---
-title: "The Project Wrap-Up Checklist That Gets Referrals Without an Awkward Ask"
-seoTitle: "Project Wrap-Up Checklist That Gets Referrals"
+title: "The Project Wrap-Up Checklist: Ask for Referrals Without the Awkwardness"
+seoTitle: "Project Wrap-Up Checklist for Referrals"
 description: "A 15-minute wrap-up checklist for coaches and solo operators. Final delivery, testimonial ask and next step so clients come back or refer someone."
 pubDate: "Oct 24 2026"
 category: "systems"

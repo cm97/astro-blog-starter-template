@@ -1,5 +1,5 @@
 ---
-title: "Follow-Up Email After No Response: 5 Templates That Actually Get Replies"
+title: "Follow-Up Email After No Response: 5 Templates to Copy"
 seoTitle: "Follow-Up Email After No Response: 5 Templates"
 description: "Five ready-to-send follow-up emails for when a prospect or client goes quiet: proposals, check-ins, re-engagement, referral asks and project wrap-ups."
 pubDate: "Sep 13 2026"
@@ -35,8 +35,8 @@ Before the templates: a follow-up email that gets a reply does three things.
 Most people treat follow-up as a one-off email. That is why it fails. Run this instead:
 
 1. **Log the send date and channel.** Proposal sent Tuesday 10:14am via email. Write it down. If it only lives in your head, Thursday wipes it.
-2. **Set the first nudge for day 5–7.** Not day 2 (too soon) and not day 14 (they forgot you). Tuesday or Wednesday morning gets the highest reply rate.
-3. **Use the exact subject line below.** "Re: [Project name] proposal" outperforms "Just checking in" every time.
+2. **Set the first nudge for day 5–7.** Not day 2 (too soon) and not day 14 (they forgot you). A Tuesday or Wednesday morning is a good default.
+3. **Use the exact subject line below.** "Re: [Project name] proposal" tells them what it is about. "Just checking in" does not.
 4. **Ask one binary question.** Yes/no or "still interested / take it off my plate." Never "thoughts?"
 5. **Offer one concrete next step.** "Happy to adjust scope" or "I can send a shorter version" — not "let me know how I can help."
 6. **If no reply after the first nudge, send template 3 on day 21.** Same problem, different frame. Do not invent a new novel.
@@ -96,7 +96,7 @@ Use when: You sent a proposal or quote and haven't heard back.
 
 Why it works: It's four sentences. It restates what it's about. It asks one question. It offers flexibility without being needy. The subject line starts with "Re:" — not because it's a reply, but because "Re:" in a subject line reads as a continuation of a conversation, which it is.
 
-**Send on a Tuesday or Wednesday morning.** Response rates on follow-up emails drop significantly on Fridays and Mondays.
+**Send on a Tuesday or Wednesday morning.** Friday and Monday inboxes are often at their fullest.
 
 Fill-in line before you send: "I am holding [start date] until [break-up date]." Add that only if you actually named a start date. A floating "let me know" gives them nothing to answer.
 
