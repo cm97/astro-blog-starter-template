@@ -1,4 +1,5 @@
 ---
+import { canonicalPath } from '../lib/canonical';
 // Import the global.css file here so that it is included on
 // all pages through the use of the <BaseHead /> component.
 import '../styles/global.css';
@@ -13,7 +14,7 @@ interface Props {
 	alternates?: { hreflang: string; href: string }[];
 }
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const canonicalURL = new URL(canonicalPath(Astro.url.pathname), Astro.site);
 
 const { title, description, image: requested, noindex = false, alternates = [] } = Astro.props;
 

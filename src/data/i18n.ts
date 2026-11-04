@@ -5,9 +5,9 @@ import { BUZZYFLY_CONFIG } from "./monetization";
 const site = BUZZYFLY_CONFIG.siteUrl;
 
 export const STORE_ALTERNATES = [
-	{ hreflang: "en", href: `${site}/store` },
-	{ hreflang: "es", href: `${site}/es/store` },
-	{ hreflang: "x-default", href: `${site}/store` },
+	{ hreflang: "en", href: `${site}/store/` },
+	{ hreflang: "es", href: `${site}/es/store/` },
+	{ hreflang: "x-default", href: `${site}/store/` },
 ];
 
 /** Spanish refund rule. Same meaning as BUZZYFLY_CONFIG.guarantee. */

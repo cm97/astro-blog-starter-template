@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import { EXPLAINER_VIDEOS } from "./src/data/videos.ts";
 
 import cloudflare from "@astrojs/cloudflare";
 
@@ -52,8 +53,9 @@ export default defineConfig({
 	integrations: [
 		mdx(),
 		sitemap({
-			// /jobs renders on each request, so the sitemap can't find it on its own.
-			customPages: ["https://buzzyfly.com/jobs"],
+			// Video watch pages render on request (/videos/[slug]), so the sitemap
+			// can't find them on its own. /jobs/ it already finds.
+			customPages: EXPLAINER_VIDEOS.map((v) => `https://buzzyfly.com/videos/${v.slug}/`),
 			filter: (page) => !/^https:\/\/buzzyfly\.com\/(admin|agent|app|demo|success|thank-you|unsubscribe)(\/|$)/.test(page),
 		}),
 	],
