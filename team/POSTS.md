@@ -74,7 +74,7 @@ Here's the real Buzzyfly app with sample clients. It shows who needs a follow-up
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-1
 $49 once, no subscription.
 
-### demo-video-1-fb | ready | facebook: professional portfolio
+### demo-video-1-fb | posted 2026-11-04, facebook id 1881626059866295 | facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo.mp4
 Proposal sent. No reply. Now what?
 
@@ -83,7 +83,7 @@ Here's the real Buzzyfly app with sample clients. It shows who needs a follow-up
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=demo-video-1
 $49 once, no subscription.
 
-### demo-video-invoice | posted 2026-11-03, youtube id vVbRrGDkiaM (https://www.youtube.com/watch?v=vVbRrGDkiaM); ready for instagram, facebook | instagram: SAMS Service, facebook: professional portfolio
+### demo-video-invoice | posted 2026-11-03, youtube id vVbRrGDkiaM (https://www.youtube.com/watch?v=vVbRrGDkiaM); posted 2026-11-04, instagram id 18132962887840294; ready for facebook | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-invoice.mp4
 Title: Invoice a week late? The reminder is already written
 Invoice a week late and you don't want to write the awkward email? This is the real Buzzyfly app with sample clients. It shows which invoice is overdue and by how long, and the reminder is already written with their name, project and amount. Copy it, send it, mark it sent. The 2-week reminder comes next.
@@ -99,7 +99,7 @@ Client asks "can you just add this?" and it isn't in the project. This is the re
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-scope
 $49 once, no subscription.
 
-### demo-video-onboarding | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+### demo-video-onboarding | posted 2026-11-04, youtube id VPX63WUhQtc (https://www.youtube.com/watch?v=VPX63WUhQtc); ready for instagram, facebook | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-onboarding.mp4
 Title: New client just paid? Your welcome email is already written
 New client just paid and you're rewriting the same welcome email again? This is the real Buzzyfly app with sample clients. On day 1 it lists the welcome email and the intake questions, already written with their name and project. Copy, send, tick it off. The next onboarding steps come up on schedule.
