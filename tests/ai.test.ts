@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { POST } from "../src/pages/api/ai";
+import { POST, REFUND_RULE } from "../src/pages/api/ai";
 
 type Handler = (ctx: { request: Request; locals: { runtime: { env: Record<string, unknown> } } }) => Promise<Response>;
 const post = POST as unknown as Handler;
@@ -45,7 +45,7 @@ test("followup parses subject and body, and prompt carries inputs", async () => 
 test("falls back to Gemini when Groq fails", async () => {
 	const urls: string[] = [];
 	mockFetch((u) => { urls.push(u); return u.includes("groq") ? new Response("no", { status: 429 }) : ok("fallback answer"); });
-	const r = await call({ kind: "support", messages: [{ role: "user", content: "refunds?" }] }, { GROQ_API_KEY: "x", GEMINI_API_KEY: "y" }, {}, "2.0.0.4");
+	const r = await call({ kind: "support", messages: [{ role: "user", content: "prices?" }] }, { GROQ_API_KEY: "x", GEMINI_API_KEY: "y" }, {}, "2.0.0.4");
 	assert.equal(((await r.json()) as { reply: string }).reply, "fallback answer");
 	assert.equal(urls.length, 2);
 });
@@ -115,6 +115,26 @@ test("Grok is not called when Workers AI answers", async () => {
 	const r = await call({ kind: "support", messages: [{ role: "user", content: "hi" }] }, { XAI_API_KEY: "z", AI }, {}, "2.0.1.1");
 	assert.equal(((await r.json()) as { reply: string }).reply, "free answer");
 	assert.equal(urls.length, 0);
+});
+
+test("refund answers always carry the exact refund rule", async () => {
+	const AI = { run: async () => ({ response: "You can get a 30-day refund if it isn't as described." }) };
+	const r = await call({ kind: "support", messages: [{ role: "user", content: "Can I get a refund?" }] }, { AI }, {}, "2.0.1.2");
+	const reply = ((await r.json()) as { reply: string }).reply;
+	assert.ok(reply.includes(REFUND_RULE));
+});
+
+test("non-refund answers are left alone", async () => {
+	const AI = { run: async () => ({ response: "The Digital System is $49." }) };
+	const r = await call({ kind: "support", messages: [{ role: "user", content: "How much is the system?" }] }, { AI }, {}, "2.0.1.3");
+	assert.equal(((await r.json()) as { reply: string }).reply, "The Digital System is $49.");
+});
+
+test("follow-up body always opens with a greeting", async () => {
+	const AI = { run: async () => ({ response: "Subject: Checking in\n\nI wanted to check in on the proposal.\n\nBest," }) };
+	const r = await call({ kind: "followup", situation: "proposal", name: "Sam", thing: "the site" }, { AI }, {}, "2.0.1.4");
+	const d = (await r.json()) as { body: string };
+	assert.ok(d.body.startsWith("Hi Sam,"));
 });
 
 test("rate limit kicks in per IP", async () => {

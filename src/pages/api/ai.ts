@@ -16,11 +16,29 @@ const SITUATIONS: Record<string, string> = {
 	wrap: "wrapping up a finished project and handing everything over",
 };
 
+// The one refund rule from CLAUDE.md. Kept as code so the bot can't paraphrase it away.
+export const REFUND_RULE =
+	"30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.";
+
+/** If a support exchange touches refunds, make sure the exact rule is in the reply. */
+export function withRefundRule(question: string, answer: string): string {
+	if (!/refund|money back|chargeback/i.test(question + " " + answer)) return answer;
+	if (answer.includes(REFUND_RULE)) return answer;
+	return `${answer.trim()}\n\nOur refund rule: ${REFUND_RULE}`;
+}
+
+/** Make sure the follow-up body opens with a greeting to the named person. */
+export function withGreeting(body: string, name: string): string {
+	const trimmed = body.trim();
+	if (/^(hi|hello|hey|dear)\b/i.test(trimmed)) return trimmed;
+	return `Hi ${name},\n\n${trimmed}`;
+}
+
 const FOLLOWUP_SYSTEM = [
 	"You write short follow-up emails for freelancers and small-business owners to send to their own clients.",
 	"Rules: plain, warm, specific. Under 120 words in the body. No guilt-tripping, no fake urgency, no income or results promises.",
 	"Use [square brackets] for any detail you were not given, never invent facts, dates, prices or names.",
-	"Output exactly: a first line starting with 'Subject: ', a blank line, then the email body ending with 'Best,'.",
+	"Output exactly: a first line starting with 'Subject: ', a blank line, then the email body. The body starts with 'Hi <first name>,' on its own line and ends with 'Best,'.",
 	"Output nothing else.",
 ].join(" ");
 
@@ -31,7 +49,7 @@ const SUPPORT_SYSTEM = [
 	"Weekly Reset App $15, Follow-Ups App $19, Onboarding App $29, Digital System $49 (includes every app). Details are on buzzyfly.com/store.",
 	"After checkout the buyer unlocks the app on the page they land on, which also shows a personal access link. The same link is emailed as a backup.",
 	"There are no subscriptions, except the $5/month Buzzyfly Jobs membership at buzzyfly.com/jobs.",
-	"Refund policy, word for word: '30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.' To ask, email support@buzzyfly.com within 30 days.",
+	`Refund policy: quote it word for word, never reword or shorten it: '${REFUND_RULE}' To ask, email support@buzzyfly.com within 30 days.`,
 	"Free tools are at buzzyfly.com/tools.",
 	"Never promise results, income, or delivery speed. Never say 'instant'. Never invent features, prices, testimonials or stats.",
 	"You cannot see orders, payments or accounts and cannot issue refunds. For anything about a specific order, a lost link, a refund, or anything you are unsure of, tell them to email support@buzzyfly.com from their checkout address.",
@@ -106,7 +124,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 				350,
 			);
 			const match = text.match(/^\s*Subject:\s*(.+?)\s*\n+([\s\S]+)$/i);
-			return reply(200, match ? { subject: match[1], body: match[2].trim() } : { subject: "", body: text });
+			return reply(200, match ? { subject: match[1], body: withGreeting(match[2], name) } : { subject: "", body: withGreeting(text, name) });
 		}
 
 		if (body.kind === "support") {
@@ -119,7 +137,7 @@ export const POST: APIRoute = async ({ request, locals }) => {
 			}
 			if (turns.length === 0 || turns[turns.length - 1].role !== "user") return reply(400, { error: "Ask a question." });
 			const text = await freeChat(env, [{ role: "system", content: SUPPORT_SYSTEM }, ...turns], 220);
-			return reply(200, { reply: text });
+			return reply(200, { reply: withRefundRule(turns[turns.length - 1].content, text) });
 		}
 
 		return reply(400, { error: "Unknown request." });
