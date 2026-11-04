@@ -1,5 +1,5 @@
 import type { APIRoute } from "astro";
-import { freeChat, hasFreeLlm, type ChatMessage } from "../../lib/freeLlm";
+import { freeChat, hasFreeLlm, type ChatMessage, type FreeLlmEnv } from "../../lib/freeLlm";
 
 export const prerender = false;
 
@@ -76,7 +76,7 @@ function clean(value: unknown, max: number): string {
 }
 
 export const POST: APIRoute = async ({ request, locals }) => {
-	const env = locals.runtime.env as unknown as Record<string, string | undefined>;
+	const env = locals.runtime.env as unknown as FreeLlmEnv;
 
 	const origin = request.headers.get("origin");
 	if (origin && !SITE_ORIGINS.has(origin) && !/^http:\/\/localhost(:\d+)?$/.test(origin)) {
