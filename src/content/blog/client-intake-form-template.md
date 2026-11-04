@@ -78,7 +78,7 @@ This question also creates a natural milestone: six months from now, you can ask
 
 Why it's there: Clients sometimes have context they want you to have but weren't sure was relevant to the other questions. A health situation that affects their schedule. A recent business decision that changes the priorities. A concern about the engagement they haven't voiced.
 
-This question signals that there's space to share that kind of context. About 30% of clients will use it, and of those, most of the answers are useful.
+This question signals that there's space to share that kind of context. Many clients leave it blank. When they do use it, the answer is often the most useful one on the form.
 
 ## How to send the intake form
 

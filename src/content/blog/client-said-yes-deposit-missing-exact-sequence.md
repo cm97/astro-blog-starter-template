@@ -82,12 +82,12 @@ After send: set status to closed or parked. Delete the remaining calendar blocks
 
 Keep the Re: even if it is a new thread. It reads as continuation of the yes.
 
-## Exact timing windows that raise reply rate
+## Exact timing windows
 
 - Day 2: Tuesday or Wednesday morning, before 11am.
 - Day 5: same, mid-week only.
 - Day 8: any weekday before 11am.
-- Never Friday. Never after 3pm. The reply rate drops and the thread dies over the weekend.
+- Never Friday. Never after 3pm. A late-Friday email tends to sit unread over the weekend.
 - If day 2 falls on a Friday, send Thursday instead. Do not slide it to Monday and lose the window.
 - If you miss the window, send the next morning before 11am. Do not wait for a “better” day.
 
