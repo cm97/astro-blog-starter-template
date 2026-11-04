@@ -4,6 +4,7 @@
 // checks access with resolveAppAccess() before rendering this.
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../data/monetization";
 import PayPalLink from "./PayPalLink.astro";
+import TrafficSource from "./TrafficSource.astro";
 
 interface Props {
 	itemId: string;
@@ -29,6 +30,7 @@ const product = ALL_PRODUCTS.find((p) => p.id === itemId)!;
 		<meta name="theme-color" content="#1f4d3a" />
 		<title>{unlocked ? `Buzzyfly ${appName}` : `${product.title} — ${BUZZYFLY_CONFIG.brandName}`}</title>
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		{demo && <TrafficSource />}
 	</head>
 	<body data-edition={edition} data-demo={demo ? "1" : undefined}>
 		{unlocked ? (
@@ -40,7 +42,7 @@ const product = ALL_PRODUCTS.find((p) => p.id === itemId)!;
 				{demo && (
 					<div class="demo-bar" role="note">
 						<span><strong>Demo with sample clients.</strong> Nothing you type is saved.</span>
-						<a class="btn" href="/store?utm_source=demo&utm_medium=site&utm_campaign=demo-bar">Get it for {product.price}, one time</a>
+						<a class="btn" href="/store">Get it for {product.price}, one time</a>
 					</div>
 				)}
 				<main id="app-root" class="wrap" tabindex="-1">
