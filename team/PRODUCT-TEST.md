@@ -3,6 +3,39 @@
 Proof the product works as the listing says. Rerun this before any ad or big
 push, and after any change to `/app`. Add the newest run at the top.
 
+## 2026-11-04, Test team: 20 daily checks
+
+How: same as 2026-11-03 (local D1 with every migration, test keys in the LOCAL
+`download_tokens` only, Playwright at 375px and 1280px). New since yesterday:
+`wrangler dev` won't start without a Cloudflare token, because the Workers AI
+binding (#191) needs a remote session. I ran it from an uncommitted copy of
+`wrangler.json` without the `ai` binding. The AI helpers weren't tested, and
+they aren't among the 20 checks. The Stripe connector needs signing in again,
+so check 16 read the links in `src/`.
+
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 1 | Lock | PASS | `/app` with no key or a bad key: 402. The system key redirects to `/app` and the app opens. A $15 Weekly Reset key opens only `/app/reset`. `/app`, `/app/follow-ups` and `/app/onboarding` stay at 402. |
+| 2 | Today list | PASS | Proposal 5 days ago: "First proposal follow-up". Invoice due 9 days ago: "a week overdue". New client today: welcome and intake only. |
+| 3 | Email writer | PASS | All 21 built-in emails fill in name, project, date and sign-off. No raw `{placeholders}`. Only the deliberate [bracket] blanks are left. |
+| 4 | Copy / open in email app | PASS | Clipboard: "Subject: Re: proposal for Website refresh" plus the body. The `mailto:jane@example.com` link has the same subject and body. |
+| 5 | Mark sent | PASS | Jane's item clears. "Second proposal follow-up" comes up next. |
+| 6 | Weekly reset counts | PASS | 1 open invoice ($800), 1 follow-up due, 2 onboarding steps due. This matches the 3 test clients. |
+| 7 | Scope and proposal replies | PASS | All 6 open and fill: proposal-cover, discount, retainer, scope, change-order, revision-limit. |
+| 8 | Pricing maths | PASS | Defaults: $72/h, $1,300 project, $750 retainer. Income 80k: $94, $1,700, $950. Both match the formula. |
+| 9 | Data, backup, restore | PASS | Clients survive reload. The backup has 3 clients and the sign-off. Restore after clearing storage brings them back. |
+| 10 | Smaller apps | PASS | The system key opens all 3 smaller apps (200), with the same clients. Follow-Ups offers 9 emails, Onboarding 6, and Reset shows Monday, This week and Log, which matches each listing. |
+| 11 | Phone 375px | PASS | No sideways scroll and 0 tap targets under 44px on `/`, `/store`, a post and `/app`. |
+| 12 | Desktop 1280px | PASS | No sideways scroll and no JS errors on the same 4 pages. |
+| 13 | Accessibility | PASS | One H1 per page, no heading skips, no image without alt text, no low-contrast text found, and focus rings show. |
+| 14 | Speed | PASS | `/` is 58 KB over 9 requests and `/store` 37 KB over 10. Both are DOM-ready in about 1.4–1.6 s on a simulated slow line (400 kbps, 400 ms). |
+| 15 | Links | PASS | 108 internal links from `/`, `/store`, `/blog/` and 63 posts: 0 broken. `/kids` gives 503 locally only, because it is the separate KIDS worker. Every post ends on a buy link or `/store`. |
+| 16 | Buy path | PASS (src only) | `src/` has exactly the 4 Payment Links CLAUDE.md rule 5 allows (`bJebJ3…` ×64, `5kQ7sN…`, `fZubJ3…`, `3cI8wR…`). Each `/buy/<id>` redirects to its own link. Stripe settings weren't read because the connector needs signing in again. |
+| 17 | Thank-you page | PASS | Paid test session: "Your app is ready." with the key, and `/app` then opens (200). Unknown session: "Checking your payment…", then "We can't confirm this payment yet." No `s`, or a garbage one: "Already bought a Buzzyfly app?". |
+| 18 | Copy check | PASS (fixed) | FAIL before the fix: `/videos/weekly-reset`, `/videos/onboarding-kit` and `/videos/follow-up-templates` narrated and showed "A $15/$29/$19 version is coming soon", but those apps have been on sale since #181. They now say "Or $15 (or $29, $19) on its own." The listings match the apps. |
+| 19 | Rules check | PASS | No "instant" claims and no `eVq4gB` link. The $19/mo Monthly Drop exists only in closed-subscriber code. No `coachmanager@` in rendered HTML. One refund wording everywhere. "Limits on our liability" is in `/terms`. No $97. |
+| 20 | Search check | PASS | 66 pages: one title, one description and one H1 each, with no duplicates. JSON-LD on 65 (the `/blog/` index has none). |
+
 ## 2026-11-03, Test team: 20 daily checks
 
 How: `npm ci`, `npm run build`, every migration applied to a LOCAL D1, one test
