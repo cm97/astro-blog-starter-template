@@ -3,7 +3,7 @@ title: "Monday Scan for Quiet Proposals (20 Minutes)"
 seoTitle: "Monday Scan for Quiet Proposals"
 description: "Exact 20-minute Monday process to catch every proposal that went quiet and send the follow-up that still works."
 pubDate: "Nov 02 2026"
-updatedDate: "Nov 03 2026"
+updatedDate: "Nov 04 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -91,6 +91,19 @@ Happy to hop on a short call this week if useful.
 [Your name]
 
 These four cover the silence that kills cash.
+
+## Extra concrete steps that stop the silence
+
+- Open the list first, before you open email. If the list is empty, write "none" and move to the weekly reset. Do not hunt.
+- Cap the scan at five proposals. A sixth means you are rewriting the week. Close or re-scope the oldest one.
+- Paste the day count into the private note the same minute you send: "sent day 7, next check day 10." Future-you will not remember the math.
+- If they reply with a question instead of a yes, answer in one line and re-paste the same follow-up. Do not open a new conversation.
+- Move any text or Slack ask into email within 15 minutes. The channel that got the silence is not the channel that records the next date.
+- At the end of the 20 minutes, screenshot or copy the three sent items into the same note the weekly reset opens. The Monday scan disappears if it only lives in sent mail.
+- If the proposal is older than 21 days and still silent after the break-up, mark it closed and do not reopen it without a fresh quote. Old silence is not a warm lead.
+- Set the next check as a calendar hold titled "[Client] proposal check" so the weekly reset finds it without searching.
+- If you only have time for one email, send the day-5/7 follow-up. The break-up can wait until the next Monday. The first bump cannot.
+- Log every send with the exact subject you used. Next week's scan will not re-send the same one by accident.
 
 ## What still breaks when templates live only in a doc
 
