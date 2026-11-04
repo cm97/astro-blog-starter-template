@@ -1,7 +1,7 @@
 ---
 title: "The Phone-Only Follow-Up System That Still Runs on a Slammed Week"
 seoTitle: "Phone-Only Client Follow-Up System"
-description: "Copy the email, send, log the next date — all from your phone so follow-ups still leave when you are not at a desk. Exact lines for proposals, intakes, and first-client day-2."
+description: "Copy the email, send, log the next date from your phone so follow-ups still leave when you are not at a desk. Exact lines included."
 pubDate: "Nov 03 2026"
 updatedDate: "Nov 04 2026"
 heroImage: "/blog-placeholder-1.jpg"
