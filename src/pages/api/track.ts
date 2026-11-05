@@ -1,6 +1,6 @@
 import type { APIRoute } from "astro";
 import { ensureFunnelSchema } from "../../lib/schema";
-import { cleanSourceTriple } from "../../lib/trafficSource";
+import { cleanSourceTriple, isInternalSource } from "../../lib/trafficSource";
 
 export const prerender = false;
 
@@ -35,6 +35,8 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	const path = cleanPath(body.path);
 	if (!event || !path) return done;
 	const source = cleanSourceTriple(body.source) ?? "direct";
+	// Team and owner visits (?utm_source=internal) are not visitors.
+	if (isInternalSource(source)) return done;
 	const day = new Date().toISOString().slice(0, 10);
 
 	try {
