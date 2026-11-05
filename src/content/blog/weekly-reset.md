@@ -3,7 +3,7 @@ title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
 description: "A 20-minute weekly reset for solo operators. A Monday sheet, a Wednesday check and a 12-minute Thursday cash salvage that keep follow-ups alive."
 category: "planning"
 pubDate: "Sep 01 2026"
-updatedDate: "Oct 30 2026"
+updatedDate: "Nov 05 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -183,6 +183,13 @@ If the first client is not on the Monday sheet, the reset is still a personal pr
 - Cap follow-ups at two per reset. Five becomes a blast and the habit dies.
 - Log the invoice amount on the same note the day it leaves. Missing numbers become missing cash.
 - If three clients reply at once, park the non-cash ones. The reset only protects money and the next delivery date.
+- Phone-only version: open the same three lines in Notes app. Dictate the follow-up sentences. Send from the phone. Close the note. The calendar block still has to exist.
+- When the week is already late, run only Block 2 and Block 3. Three priorities and two follow-ups. Skip the full board clear.
+- After the two follow-ups leave, close email for 30 minutes. The reset is done; delivery starts.
+- At Friday close, write one number: open invoices older than 7 days. If it is not zero, that number becomes next Monday priority 3.
+- Screenshot the filled Monday sheet or keep it in the same note as last Friday's close so Monday never starts from a blank page.
+- Cap open proposal rows at five. Anything past Day 14 is closed or parked before you write the three.
+- If a client texts a new ask during the reset, log it as a scope line and finish the three first. Do not answer it inside the 20 minutes.
 
 ## Phrases so you do not draft from a blank screen
 
