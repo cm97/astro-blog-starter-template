@@ -89,6 +89,6 @@ Leaving it open trains you that silence is normal and trains the client that you
 
 You can paste it today. It works until a slammed Thursday. Then the second follow-up sits unanswered, the date is gone, and by next week you have already sent a third soft email because closing felt like quitting.
 
-The same close email, the silence log, the 20-minute Monday reset, and the exact follow-up templates live inside the Buzzyfly Digital System so the chase ends when it should even when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+A close-the-loop email (due on day 14), the 20-minute Monday reset and the other follow-up emails live inside the Buzzyfly Digital System so the chase ends when it should even when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
