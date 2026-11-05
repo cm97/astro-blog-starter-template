@@ -154,3 +154,11 @@ Scope creep rarely arrives as one big ask. It's ten small "quick tweaks". Three 
 
 The Buzzyfly Digital System keeps that reply and the follow-ups for every client in one browser app, ready to copy. $49 once, no subscription.
 https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=scope-change-log
+
+### free-demo-try | ready | facebook: professional portfolio
+Image: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/launch/ph-gallery-1.jpg
+Not sure a $49 app is worth it? Try it first, free.
+
+The Buzzyfly demo is the real app with three sample clients: a proposal that went quiet, an invoice a week late, and a new client. Tap "Write the email" and see the follow-up it writes, with the name, project and date filled in. No sign-up, nothing saved.
+
+Try the free demo: https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=free-demo-try
