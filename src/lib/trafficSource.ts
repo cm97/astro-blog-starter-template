@@ -94,3 +94,13 @@ export function referrerSource(referrer: unknown): string | null {
 	}
 	return cleanSourceTriple(`${cleanSource(host) ?? ""}__referral`);
 }
+
+/**
+ * Team and owner visits: open any page once with ?utm_source=internal and the
+ * browser is tagged "internal" for 30 days. /api/track then leaves those views
+ * and buy clicks out of the funnel counts. Our own site checks (Firecrawl,
+ * Playwright) look like Chrome visitors from Google otherwise.
+ */
+export function isInternalSource(source: string | null | undefined): boolean {
+	return typeof source === "string" && source.split("__")[0] === "internal";
+}
