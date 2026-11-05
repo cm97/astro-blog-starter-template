@@ -23,9 +23,9 @@ It asks one easy question, so it's easy to answer. If there's still nothing afte
 The Buzzyfly Digital System tracks every proposal and tells you which follow-up is due today, with the email already written. $49, one payment, no subscription.
 https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=proposal-quiet-day-6
 
-### scope-creep-reply | ready | facebook: professional portfolio
+### scope-creep-reply | posted 2026-11-05, id 1115192551682116_122145159117356277 | facebook: professional portfolio
 Image: none
-A client asks "can you just add this?" and it isn't in the project. Here's a reply that keeps the client and protects the scope:
+A client asks "can you just add this?" and it isn't in the project. Here's a friendly reply that protects the scope:
 
 "Happy to. That's outside what we agreed for [project], so I'll send a quick quote for it. Or we can swap it for something already on the list. Which would you prefer?"
 
