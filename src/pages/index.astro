@@ -8,6 +8,7 @@ import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { BUZZYFLY_CONFIG, ALL_PRODUCTS, getOrderAction } from "../data/monetization";
 import PayPalLink from "../components/PayPalLink.astro";
 import { getSettings } from "../lib/settings";
+import { HOME_ALTERNATES } from "../data/i18n";
 
 const settings = await getSettings(Astro.locals.runtime?.env);
 
@@ -45,9 +46,12 @@ const homeLd = JSON.stringify({
 		<BaseHead
 			title={`${brand}: Client Follow-Up and Onboarding App`}
 			description="Stop rebuilding your client process every week. A browser app that shows who to follow up with today, drafts the email and onboards new clients. $49."
+			alternates={HOME_ALTERNATES}
 		/>
 		<script type="application/ld+json" set:html={homeLd} />
 		<style>
+			.lang-link { display: flex; justify-content: flex-end; margin: 0; font-size: 0.85em; }
+			.lang-link a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.4em; }
 			.hero { padding: 1.6em 0 2em; border-bottom: 1px solid rgb(var(--gray-light)); }
 			.hero__copy { text-align: center; margin: 0 auto 1.2em; max-width: 40em; }
 			@media (min-width: 700px) { .hero { padding: 1.4em 0 2.5em; } .hero__copy { margin-bottom: 1.6em; } }
@@ -108,6 +112,7 @@ const homeLd = JSON.stringify({
 	<body>
 		<Header />
 		<main>
+			<p class="lang-link"><a href="/es/" hreflang="es" lang="es">Español</a></p>
 			<section class="hero">
 				<div class="hero__copy">
 					<span class="hero__eyebrow">For coaches and solo service providers</span>
