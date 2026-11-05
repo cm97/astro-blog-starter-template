@@ -3,6 +3,36 @@
 Proof the product works as the listing says. Rerun this before any ad or big
 push, and after any change to `/app`. Add the newest run at the top.
 
+## 2026-11-05, Test team: 20 daily checks
+
+How: same as 2026-11-04 (local D1 with every migration, test keys in the LOCAL
+`download_tokens` only, Playwright at 375px and 1280px, an uncommitted config
+copy without the `ai` binding). The Stripe connector still needs signing in
+again, so check 16 read `src/`.
+
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 1 | Lock | PASS | `/app` with no key or a bad key: 402. The system key opens `/app`. A $15 key opens only `/app/reset`, and the other three apps stay at 402. |
+| 2 | Today list | PASS | Proposal 5 days ago: "First proposal follow-up". Invoice due 9 days ago: "a week overdue". New client today: welcome and intake only. |
+| 3 | Email writer | PASS | All 21 emails fill in name, project, date and sign-off. No raw `{placeholders}`. Only the deliberate [bracket] blanks are left. |
+| 4 | Copy / open in email app | PASS | The clipboard and the `mailto:jane@example.com` link carry the same filled subject and body. |
+| 5 | Mark sent | PASS | The item clears. "Second proposal follow-up" comes up next. |
+| 6 | Weekly reset counts | PASS | 1 open invoice ($800), 1 follow-up due, 2 onboarding steps, matching the 3 test clients. |
+| 7 | Scope and proposal replies | PASS | All 6 open and fill. |
+| 8 | Pricing maths | PASS | $72/h, $1,300 and $750 by default. Income 80k gives $94, $1,700 and $950. |
+| 9 | Data, backup, restore | PASS | Clients survive reload. The backup has 3 clients and the sign-off. Restore after clearing storage works. |
+| 10 | Smaller apps | PASS | The system key opens all 3 (200) with shared clients. Follow-Ups has 9 emails, Onboarding 6, and Reset shows Monday, This week and Log. |
+| 11 | Phone 375px | PASS | No sideways scroll and 0 targets under 44px on `/`, `/store`, a post and `/app`. |
+| 12 | Desktop 1280px | PASS | No sideways scroll and no JS errors on the same pages. |
+| 13 | Accessibility | PASS | One H1, no heading skips, no missing alt text, no low contrast found, and focus rings show. |
+| 14 | Speed | PASS | `/` is 58 KB over 9 requests and `/store` 37 KB over 10. Both are DOM-ready in 1.4–1.6 s on a simulated slow line (400 kbps, 400 ms). |
+| 15 | Links | PASS | 116 internal links from `/`, `/store`, `/blog/` and 67 posts: 0 broken (`/kids` gives 503 locally only, because it is the KIDS worker). Every post ends on a buy link or `/store`. |
+| 16 | Buy path | PASS (src only) | `src/` has only the 4 links rule 5 allows (`bJebJ3…` ×72, `5kQ7sN…`, `fZubJ3…`, `3cI8wR…`). Each `/buy/<id>` redirects to its own link. |
+| 17 | Thank-you page | PASS | Paid test session: "Your app is ready." and `/app` opens. Unknown session: "Checking your payment…", then "We can't confirm this payment yet." Missing session: "Already bought a Buzzyfly app?". |
+| 18 | Copy check | PASS (fixed) | FAIL before the fix: 3 posts said the app has a "wrap-up checklist", a "close-out" checklist and the day-1 and day-7 referral emails. It doesn't. It has the 30-day check-in (with a referral line), the retainer offer and saved custom emails. The posts now say exactly that. |
+| 19 | Rules check | PASS | No "instant" claims, no `eVq4gB` link and no `coachmanager@` in rendered HTML. One refund wording everywhere (the direct push b800d59 with "files not delivered" wording was already reverted on main). Liability section present. No $97. |
+| 20 | Search check | PASS | 70 pages: one title, one description and one H1 each, with no duplicates. JSON-LD on 69 (not on the `/blog/` index). |
+
 ## 2026-11-04, Test team: 20 daily checks
 
 How: same as 2026-11-03 (local D1 with every migration, test keys in the LOCAL

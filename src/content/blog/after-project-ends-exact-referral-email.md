@@ -146,6 +146,6 @@ Onboarding started for next piece: yes / no
 
 You can paste them today. They work until a slammed Thursday. Then the day-7 window passes, the log is empty, and the finished project sits in your sent folder until you notice it two months later with no referral and no next engagement.
 
-The same three emails, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The Buzzyfly Digital System already has the day-30 check-in (with a referral line) and a retainer offer, and it shows the check-in when it's due. Save the day-1 wrap-up and the day-7 referral ask as your own emails in the app, next to the onboarding checklist and the 20-minute Monday reset, so the cadence still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
