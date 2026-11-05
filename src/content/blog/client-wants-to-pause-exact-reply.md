@@ -101,7 +101,7 @@ Client history lives in old threads you will not reopen. The restart dies becaus
 
 The same pause reply, plus the onboarding checklist, the weekly reset, and the follow-up lines, live inside the Digital System so a slammed week still has the list to open.
 
-The Digital System ($49) is the full set of checklists — onboarding, weekly planning, follow-ups, and close-out — so a slammed week still has the list.
+The Digital System ($49) puts onboarding, the weekly reset, follow-ups and the 30-day check-in in one browser app, so a slammed week still has the list.
 
 One-time payment. Yours to keep. Not a subscription. Not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 

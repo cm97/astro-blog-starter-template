@@ -84,9 +84,9 @@ You can paste the emails above into a note right now. It works until the next pr
 
 Client history lives in old threads you will not reopen. The next offer dies because you do not have a written next step. Referrals happen only when the client happens to think of you.
 
-The words have to sit next to the weekly reset and the follow-up lines, in the same place, so a slammed week still has a list to open. That is the wrap-up checklist inside the Digital System, with the onboarding steps, the weekly reset, and the follow-up templates in the same app.
+The words have to sit next to the weekly reset and the follow-up lines, in the same place, so a slammed week still has a list to open. In the Digital System you move the client to Finished, and the 30-day check-in email (with a referral line) comes due on its own. The retainer offer is ready to send. Save the wrap-up and referral emails above as your own emails in the app, next to the onboarding steps and the weekly reset.
 
-The Digital System ($49) is the full set of checklists — onboarding, weekly planning, follow-ups, and close-out — so a slammed week still has the list.
+The Digital System ($49) puts onboarding, the weekly reset, follow-ups and the 30-day check-in in one browser app, so a slammed week still has the list.
 
 One-time payment. Yours to keep. Not a subscription. Not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
