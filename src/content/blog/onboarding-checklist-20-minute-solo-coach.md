@@ -3,6 +3,7 @@ title: "Client Onboarding Checklist You Can Finish in 20 Minutes"
 seoTitle: "20-Minute Client Onboarding Checklist for Solo Coaches"
 description: "Exact 20-minute onboarding sequence after a client pays: welcome, intake, kickoff, and day-7 hold so week two does not go quiet."
 pubDate: 2026-11-02
+updatedDate: 2026-11-05
 category: onboarding
 featuredProductTitle: Buzzyfly Digital System
 featuredProductPrice: $49
@@ -94,6 +95,19 @@ Calendar title that survives a scan: "[Client] day-7 check"
 - Cap the intake at five questions. A sixth question is the reason the form never comes back.
 - If they book the kickoff outside the three-day window, keep the day-7 hold. Do not move both.
 - Log the next action date in the same note you will open on Monday. The weekly reset finds it there or it disappears.
+
+## More concrete steps that keep week two from going quiet
+
+- Send the welcome from the same email address that will handle the rest of the project. Switching accounts mid-sequence creates a second thread the client ignores.
+- If the intake form is a Google Form or Typeform, set the confirmation message to repeat the kickoff time so they see it twice.
+- After the kickoff calendar invite leaves, reply to the welcome thread with one line: "Invite is on the calendar. Intake link is above." That keeps the whole start in one place.
+- If the client pays by invoice instead of instant Stripe, start the 20-minute clock the minute the payment notification hits. Do not wait for the bank.
+- Write the first-week goal in the private note as a single sentence the client already used. Do not invent a new goal.
+- Set the day-7 hold for the same weekday and time as the kickoff so the pattern is visible on the calendar.
+- If the intake comes back incomplete, reply with the missing field only. Do not re-send the whole form.
+- At the 20-minute mark, if step 6 is unfinished, still close the tab. The incomplete log is better than a perfect one that never gets started.
+- Paste the scope line into the kickoff invite description so it is visible without opening the original proposal.
+- On the day-7 email, include the exact next deliverable date from the private note. A vague "how is it going" gets ignored.
 
 ## What still breaks when this lives only in your head
 
