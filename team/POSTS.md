@@ -162,3 +162,13 @@ Not sure a $49 app is worth it? Try it first, free.
 The Buzzyfly demo is the real app with three sample clients: a proposal that went quiet, an invoice a week late, and a new client. Tap "Write the email" and see the follow-up it writes, with the name, project and date filled in. No sign-up, nothing saved.
 
 Try the free demo: https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=free-demo-try
+
+### cartoon-close-the-loop | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-close-the-loop.mp4
+Title: Client ghosted your proposal? Send this on day 14
+Proposal sent. Then silence. Two weeks of checking your inbox and wondering if one more chase is too pushy.
+
+The Buzzyfly Digital System puts "close the loop" on your Today list on day 14, with the polite last email already written: the client's name and project filled in. Copy it, send it from your own inbox, and stop holding the spot.
+
+$49 once. Browser app. No subscription.
+https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-close-the-loop
