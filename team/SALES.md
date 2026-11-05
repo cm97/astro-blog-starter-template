@@ -200,7 +200,28 @@ No sign-up." Link: https://buzzyfly.com/overdue-invoice-email
 | Platform | Kit ready? | Date | Result |
 |---|---|---|---|
 | Product Hunt | yes (below) | owner picks; schedule up to 1 month ahead | - |
-| Show HN | **not yet**: HN rules say people must be able to try it without signups, and the $49 app is behind payment. Launch once `/demo` exists (MARKETING.md tactic 1). | - | - |
+| Show HN | yes (below, 2026-11-05): `/demo` is live with no sign-up, which is what HN's rules ask for | owner picks a weekday morning US time | - |
+
+### Show HN launch kit (role 15, 2026-11-05)
+
+Rules checked on news.ycombinator.com/showhn.html (2026-11-03): it must be something people
+can try without signups (now true: https://buzzyfly.com/demo), made by the poster, who stays
+around to answer; no landing pages or fundraisers; never ask friends to upvote or comment.
+HN readers are mostly developers, not freelancers, so expect feedback and some traffic, not
+many sales. Post it from the owner's own HN account (an old account with some history helps).
+
+- **Title (HN cuts at 80 chars):** "Show HN: Buzzyfly - a no-signup browser app for freelancer client follow-ups"
+- **URL:** https://buzzyfly.com/demo?utm_source=hackernews&utm_medium=launch&utm_campaign=show-hn
+- **First comment (owner posts right after submitting):**
+  "I'm a solo operator and kept losing track of which client I owed a follow-up: proposals that went quiet, invoices a week late, new clients waiting on a welcome email. Buzzyfly is a small browser app for that. You add a client and their stage, and the Today list shows who needs you and the email to send, with name, project and date filled in. You copy it and send it from your own inbox.
+  Some details that might interest HN: it's plain DOM code with no framework, built with Astro on Cloudflare Workers. All client data stays in the browser's localStorage, with a JSON backup and restore, so there's no account and no server copy of anyone's client list. The demo is the real app script with three sample clients, and it saves nothing.
+  The full app is $49 once (no subscription), or $15 to $29 for a single part. I'd like feedback on the follow-up timing (day 3, 7, 14 for proposals; 1, 7, 14 days for overdue invoices) and on the email wording."
+- **Checklist:**
+  1. Owner: log in to news.ycombinator.com with your own account (create one a few days ahead and use it normally first if you don't have one).
+  2. Open https://buzzyfly.com/demo on a phone and a laptop that morning and check it loads with no "Just a moment..." screen.
+  3. Submit at news.ycombinator.com/submit with the title and URL above, then post the first comment.
+  4. Reply to every comment for the first 3 to 4 hours, plainly and without selling. Never ask anyone to upvote.
+  5. Next day: log visits, buy clicks and sales for `show-hn` on the scoreboard.
 
 ### Product Hunt launch kit (role 15, 2026-11-03)
 
