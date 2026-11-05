@@ -2,12 +2,13 @@
 title: 'The 7-Day Sprint to Land Your First Paying Client'
 description: 'No audience required. A day-by-day sprint to get one paying client, then run the same-day start line so week one does not die in your head.'
 pubDate: '2026-09-01'
-updatedDate: 'Nov 02 2026'
+updatedDate: 'Nov 05 2026'
 category: 'sales'
 heroImage: '/blog-placeholder-2.jpg'
 featuredProductTitle: 'Buzzyfly Digital System'
 featuredProductPrice: '$49'
-featuredProductDescription: 'Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. Includes the same-day start line after the first yes.'
+featuredProductDescription: 'Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. Includes the same-day start line after the first yes. One-time. Opens in your browser.'
+featuredProductUrl: 'https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00'
 ---
 
 You do not need a brand, a following, or a funnel to get paid. You need one person with the problem, one short message, and a same-day start line the hour they say yes. If the first week after they pay is rebuilt from memory, they go quiet and you are back at zero.
@@ -214,6 +215,28 @@ If a line is late, send the late version the same day. Never skip because you ar
 3. Pre-written day-2 nudge on calendar:
 
 > Hi [Name] — still need the intake so kickoff is useful. Link again: [link]. Deadline stays [date]. Reply if something is blocking it.
+
+## Phone-only first-client sprint (from your phone, 15 minutes)
+
+When you are not at a desk. Same process. Smaller screen.
+
+1. Open notes. Paste the offer sentence from Day 1. Say the price out loud once.
+2. Open messages, LinkedIn or Instagram. Send the Day 3 message to 5 names (cap at 5 if time is short). Log the time next to the name.
+3. Set a phone reminder for the Day 4 bump at the same time tomorrow.
+4. If they reply yes, open your invoice or Stripe link, send the invoice immediately, then paste the welcome from notes.
+
+Exact phone welcome (paste from notes):
+
+> Hi [Name] — payment received. We start [date]. I need [access] by [date]. I reply [window]. First thing you get is [deliverable] on [date]. Kickoff is [time]. Out of scope: [one line].
+
+Set the next reminder before you close the app.
+
+## Extra exact lines that close the first yes
+
+- When they ask “how long does this take?”: “Start date is [date]. First piece lands [date]. After that we run the same weekly check.”
+- When they ask for a call before paying: “The 15-minute audit is the call. After that the price is the same. Want the audit this week?”
+- When they say “send me more info”: “The audit is the info. Three fixes, you keep the notes. Reply with a time or I close this Friday.”
+- When they go quiet after the audit: “Still useful, or should I close the notes?”
 
 ## What still breaks if you only do the sprint
 
