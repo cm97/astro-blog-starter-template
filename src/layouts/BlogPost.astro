@@ -98,6 +98,12 @@ const articleLd = JSON.stringify({
 			@media (max-width: 720px) { .sticky-cta span:first-child { display: none; } }
 			body { padding-bottom: 72px; }
 			.store-link { text-align: center; font-size: 0.9em; color: rgb(var(--gray)); margin: -1.5em 0 2em; }
+			/* A quiet end-of-article mark: signals the essay is finished so the
+			   product offer below reads as a deliberate next step, not an ad
+			   bolted onto the last paragraph. */
+			.article-end { display: flex; justify-content: center; align-items: center; gap: 0.6em; margin: 2.75em 0 0.25em; }
+			.article-end span { width: 6px; height: 6px; border-radius: 50%; background: rgb(var(--gray-light)); }
+			.article-end span:nth-child(2) { background: var(--accent); }
 		</style>
 	</head>
 
@@ -125,6 +131,7 @@ const articleLd = JSON.stringify({
 						<hr />
 					</div>
 					<slot />
+					<div class="article-end" aria-hidden="true"><span></span><span></span><span></span></div>
 					<ProductCallout
 						productId={calloutProduct.id}
 						description={calloutProduct.title === featuredProductTitle ? featuredProductDescription : undefined}
