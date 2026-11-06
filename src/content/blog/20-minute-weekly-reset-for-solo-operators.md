@@ -3,10 +3,11 @@ title: "The 20-Minute Weekly Reset for Solo Operators That Survives a Slammed We
 seoTitle: "20-Minute Weekly Reset for Solo Operators"
 description: "A 20-minute weekly reset checklist for coaches and freelancers. Clear the board, pick three priorities, send follow-ups and set tomorrow's first move."
 pubDate: "Oct 16 2026"
-updatedDate: "Oct 22 2026"
+updatedDate: "Nov 06 2026"
 category: "planning"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
@@ -43,19 +44,29 @@ Follow-up 2 sent: ________
 Tomorrow first move: ________
 ```
 
-## Exact follow-up lines
+## Exact follow-up lines (copy these)
 
 - Proposal, no reply: "Still want me to hold the [date] start, or should I release it?"
 - Finished work, no check-in: "Checking in after [deliverable]. Anything to tighten, or book the next piece?"
 - Invoice that never left: "Invoice for [deliverable] is attached. Due [date]. Reply if the address is wrong."
 - Quiet lead after intake: "Intake is in. Kickoff is still [time]. Reply if anything changed."
 - Past client, no contact in 60 days: "Quick check — anything new I should know about, or is the last piece still working?"
+- Deposit paid, intake missing: "Deposit is in. Intake link is still open until [date]. Reply with the form or tell me the hold is over."
+- Mid-project quiet: "Quick status: [deliverable] is on track for [date]. Need anything from you before then, or are we good?"
 
 Send two. Do not perfect them. Copy, swap the bracket, send.
 
 ## Wednesday check (5 minutes)
 
 Look at the three. Still the right three? If a fire knocked one off, replace it. Do not add a fourth. Send any follow-up that is now overdue. One sentence. Update the fill-in sheet so Friday does not start from memory.
+
+Wednesday fill-in:
+
+```
+Three still correct: yes / swapped ________
+Overdue follow-up sent: ________
+Money still open: ________
+```
 
 ## Friday close (3 minutes)
 
@@ -113,12 +124,18 @@ Clients with no next date: ________ (set date or pause)
 
 If any line is blank, the money is still a feeling. Fill it before the timer ends.
 
+## Why the three priorities stop the scramble
+
+One delivery, one follow-up, one money-unblocker. That is the filter. Everything else is noise until those three move. When the week gets slammed the three still exist because they were written and blocked. The inbox does not get to invent a fourth priority after 9 a.m.
+
 ## What still breaks when this only lives in your head
 
 You can run the sheet on a calm Monday. It works until three clients reply at once. Then Wednesday never gets a calendar hold. Thursday becomes inbox, and the proposal follow-up waits for a good moment that is not on the clock. The Friday close never happens, so Monday starts with a blank page again.
 
-The Digital System is the same sequence written down so it still runs when you are busy: weekly reset, onboarding checklist, follow-ups. One browser app. One-time $49. No download. Not a subscription.
+The Digital System is the same sequence written down so it still runs when you are busy: weekly reset, onboarding checklist, follow-ups. One browser app. One-time $49. No download. Not a subscription. Opens after Stripe checkout.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+
+Want every checklist plus the onboarding kit and follow-up templates? The Complete Business Bundle is $97 one-time: https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
 
 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
