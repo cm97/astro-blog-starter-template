@@ -108,9 +108,9 @@ They work until the week is on fire.
 
 Then you skip the update because writing it feels heavier than the three days you already lost.
 
-The system that survives is the one that already has the template, the log, and the Monday reset so the slip gets named while it is still three days.
+The system that survives is the one you already open every Monday.
 
-That is what the $49 Digital System is.
+The $49 Digital System has the Monday reset and the weekly log, and you can save this update as one of your own emails. Then the slip gets named while it is still three days.
 
 The Today screen shows who is waiting.
 

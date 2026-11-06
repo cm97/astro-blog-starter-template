@@ -136,6 +136,5 @@ The Digital System is the same sequence written down so it still runs when you a
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-Want every checklist plus the onboarding kit and follow-up templates? The Complete Business Bundle is $97 one-time: https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
 
 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
