@@ -90,6 +90,6 @@ Waiting trains you that silence after a Friday promise is normal and trains the 
 
 You can paste it today. It works until a slammed Thursday. Then the Friday promise sits unanswered, the date is gone, and by next week you have already sent a soft "just checking in" because closing felt like quitting.
 
-The Monday reopen email (due the first weekday after the promise), the 20-minute Monday reset and the other follow-up emails live inside the Buzzyfly Digital System so the chase ends when it should even when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The Buzzyfly Digital System has the proposal follow-ups (day 3, day 7 and close the loop on day 14) and the 20-minute Monday reset, and you can save this Monday email as one of your own. Then the chase ends when it should, even when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
