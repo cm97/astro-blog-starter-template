@@ -3,7 +3,7 @@ title: The 5 Templates People Ask For After a Client Ghosts
 description: Exact day-3, day-6, and day-12 follow-up lines plus intake, scope, and Monday reset copy after a client goes quiet.
 category: sales
 pubDate: Oct 02 2026
-updatedDate: Oct 21 2026
+updatedDate: Nov 06 2026
 heroImage: '/blog-placeholder-1.jpg'
 featuredProductTitle: Buzzyfly Digital System
 featuredProductPrice: $49
@@ -139,3 +139,17 @@ The day-3 bump waits for a calm hour. The day-6 note gets rewritten until it is 
 The five emails, the intake, and the Monday reset live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One app. One-time $49. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+
+## 5 paste-ready phone snippets
+
+Copy these into texts, DMs, or posts. Each points at the templates and the $49 system.
+
+1. Client ghosted after the proposal? Day 3, day 6, day 12 lines that close the file instead of rewriting the pitch. https://buzzyfly.com/blog/templates-people-ask-for-after-a-client-ghosts $49 Digital System has them ready: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
+
+2. Silence is not a maybe. Three exact emails (bump, yes/later/no, close) plus intake and scope reply after a client goes quiet. Full write-up: https://buzzyfly.com/blog/templates-people-ask-for-after-a-client-ghosts Get the app for $49: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
+
+3. Stop rebuilding the follow-up from memory. Day-3 bump, day-6 binary, day-12 close, plus the Monday reset that keeps the list alive. https://buzzyfly.com/blog/templates-people-ask-for-after-a-client-ghosts The Digital System opens in your browser, $49 one-time: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
+
+4. Proposal went quiet? These five templates people actually ask for: day 3, day 6, day 12, intake after YES, scope when they add work. https://buzzyfly.com/blog/templates-people-ask-for-after-a-client-ghosts $49 checkout: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
+
+5. The ghosted client stays ghosted if the next date lives only in your head. Exact lines + calendar card here: https://buzzyfly.com/blog/templates-people-ask-for-after-a-client-ghosts Digital System $49 so the cadence runs when delivery is on fire: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
