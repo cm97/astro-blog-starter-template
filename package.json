@@ -42,6 +42,7 @@
 		"test:traffic": "esbuild tests/trafficSource.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/trafficSource.test.mjs && node --test .test-build/trafficSource.test.mjs",
 		"test:seo": "esbuild tests/canonical.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/canonical.test.mjs && node --test .test-build/canonical.test.mjs",
 		"test:email": "esbuild tests/email.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/email.test.mjs && node --test .test-build/email.test.mjs",
+		"test:telegram": "esbuild tests/telegram.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/telegram.test.mjs && node --test .test-build/telegram.test.mjs",
 		"test:ai": "esbuild tests/ai.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/ai.test.mjs && node --test .test-build/ai.test.mjs"
 	},
 	"type": "module"
