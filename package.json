@@ -30,7 +30,9 @@
 	"private": true,
 	"scripts": {
 		"astro": "astro",
+		"prebuild": "node scripts/check-live-rules.mjs",
 		"build": "astro build",
+		"test:rules": "node scripts/check-live-rules.mjs",
 		"cf-typegen": "wrangler types",
 		"check": "astro build && tsc && wrangler deploy --dry-run",
 		"deploy": "wrangler deploy",
