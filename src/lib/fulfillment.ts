@@ -32,6 +32,25 @@ export function parseLemonSqueezyOrder(payload: any): FulfillmentOrder | null {
 }
 
 /** Extracts the fields fulfillment needs from a verified Stripe webhook payload. */
+// Fallback when a Payment Link was created without metadata.item_id: each
+// one-time product has its own price, so a paid USD session at that exact
+// amount (before discounts) identifies the product. Without this a buyer on
+// an untagged link is charged and never gets the app.
+const ONE_TIME_ITEM_BY_CENTS: Record<number, string> = {
+	1500: "weekly-reset-checklist",
+	1900: "follow-up-email-templates",
+	2900: "client-onboarding-kit",
+	4900: "buzzyfly-digital-system",
+};
+
+export function itemIdFromAmount(session: any): string | undefined {
+	if (!session || session.mode !== "payment") return undefined;
+	if (session.payment_status && session.payment_status !== "paid") return undefined;
+	if (String(session.currency ?? "").toLowerCase() !== "usd") return undefined;
+	const cents = Number(session.amount_subtotal ?? session.amount_total);
+	return ONE_TIME_ITEM_BY_CENTS[cents];
+}
+
 export function parseStripeOrder(payload: any): FulfillmentOrder | null {
 	if (payload?.type !== "checkout.session.completed") return null;
 
@@ -49,7 +68,7 @@ export function parseStripeOrder(payload: any): FulfillmentOrder | null {
 	// the Checkout Session. If that's missing we log rather than return a bare
 	// null, because "no item_id" and "not a purchase event" are very different
 	// problems and only one of them means someone lost money.
-	const itemId = session?.metadata?.item_id;
+	const itemId = session?.metadata?.item_id ?? itemIdFromAmount(session);
 
 	if (!orderId) return null;
 	if (!itemId) {
