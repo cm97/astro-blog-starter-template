@@ -32,7 +32,7 @@ A client asks "can you just add this?" and it isn't in the project. Here's a fri
 You stay helpful, you don't work for free, and they choose. The Buzzyfly Digital System has this reply and others for discounts, retainers and revisions running out, ready to copy.
 https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=scope-creep-reply
 
-### overdue-invoice-free-tool | ready | facebook: professional portfolio
+### overdue-invoice-free-tool | posted 2026-11-06, id 1115192551682116_122145359445356277 | facebook: professional portfolio
 Image: none
 Invoice a week overdue and you're dreading the email? We made a free tool for it. Pick how late it is, and it writes a polite, firm reminder you can send in 30 seconds. No sign-up.
 https://buzzyfly.com/overdue-invoice-email?utm_source=facebook&utm_medium=social&utm_campaign=overdue-invoice-free-tool

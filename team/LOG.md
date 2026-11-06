@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-06 social-poster: posted overdue-invoice-free-tool to Facebook "professional portfolio" (1115192551682116_122145359445356277) | - | -
 2026-11-06 sales-a: (2) 5 new real leads (L15 to L19, past week: client not paying or responding, $28k refusal, fixed-price scope creep, out-of-scope ops before signing) with full draft replies; FAQ; scoreboard updated with the posts that went out 11-04..05 and the first buy click; ad set still parked; 2 new posts (before-you-sign-scope, yes-to-kickoff-24h) (PR #219) | still 0 of 19 community replies posted, so the cheapest channel is untested; post claims checked against PRODUCT-TEST.md (welcome + intake on Today) | owner: post R18 and R15 by hand
 SECURITY: 2 more direct pushes to main without a PR from the owner account, not logged before (c94c109, 58467e9, blog posts). Checked: only allowed Stripe links, refund wording correct. Owner: confirm they were yours or Grok's.
 2026-11-06 test-team (follow-up): the direct-pushed post 049f31e said the app has a "Monday reopen email due the first weekday after the promise". It doesn't, and the post now names the real proposal follow-ups and saved custom emails (PR #218) | third app-feature overclaim from direct-pushed posts this week | owner: send Grok's posts through PRs
