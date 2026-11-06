@@ -2,7 +2,7 @@
 title: "Client Onboarding Checklist Template (Copy and Use Today)"
 description: "A client onboarding checklist template for coaches and consultants. Every step from signed contract to kickoff call, ready to run without memory."
 pubDate: "Sep 13 2026"
-updatedDate: "Oct 14 2026"
+updatedDate: "Nov 06 2026"
 heroImage: "/blog-placeholder-2.jpg"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -41,6 +41,10 @@ A checklist that works has three layers:
 Fill-in welcome line you can paste the hour payment clears:
 
 > Hi [Name] — payment received. We start [date]. I need [access or file] by [date]. I reply [window, e.g. weekdays before 4pm]. First thing you get is [deliverable] on [date]. Kickoff is [time]. Out of scope for this start: [one line].
+
+Phone-paste under 160 chars:
+
+> Hi [Name], payment in. Start [date]. Need [file] by [date]. Kickoff [time]. Reply window: weekdays before 4. Out of scope: [one line].
 
 ### Before the kickoff call
 
@@ -125,6 +129,19 @@ Day 6 line:
 - [ ] Send a brief check-in: "How are things feeling so far? Anything you need from me?"
 - [ ] Review progress against what you agreed on the kickoff call
 - [ ] Note any scope questions that have come up — address them explicitly rather than letting them drift
+
+Extra concrete steps that keep onboarding from dying on a slammed week:
+
+- Cap the welcome email at 8 lines. Longer versions get rewritten every time.
+- Put the Day 2 intake nudge on the calendar the hour payment clears. Unscheduled nudges die.
+- Keep the client note in the same folder as the weekly reset sheet. One open, both available.
+- After kickoff, write the next check-in date on the Monday sheet before you close the laptop.
+- If three new clients land the same week, run only Day 0 and Day 2 for each. Park the rest until the weekly reset.
+- Phone-only: dictate the welcome and the Day 2 nudge into Notes, paste, send, mark done. The calendar hold still has to exist.
+- Log the deposit amount and start date in the client note the same hour. Missing numbers become missing cash later.
+- When a scope ask lands before Day 7, park it with: "Got it. I'll check what we locked and come back with two options." Do not price it inside the onboarding window.
+- At Friday close, list any Day 0–7 touches still open. Those become Monday priority 2.
+- Screenshot or copy the filled Day 0 block into the same note as last week's reset so Monday never starts from blank.
 
 ---
 
@@ -211,4 +228,3 @@ The Digital System ($49) is that kit plus the weekly reset and the follow-up ema
 One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
-
