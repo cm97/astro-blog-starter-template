@@ -143,14 +143,15 @@ const WAITLIST_SOURCE = "invoice-tool__waitlist__free-generator";
 
 			<section class="waitlist" aria-labelledby="wl-title">
 				<h2 id="wl-title">Chasing more than one invoice?</h2>
-				<p>We're building a simple app that keeps every unpaid invoice in one place, tells you who to chase today, and writes each reminder for you. Want early access when it opens?</p>
+				<p>The Buzzyfly Digital System shows which invoice is overdue on its Today list and has the reminder ready for 1 day, 1 week and 2 weeks late, with the client's name, project and amount filled in. $49 once, browser app, no subscription. <a href="/store">See the Digital System</a> or <a href="/demo">try the free demo</a>.</p>
+				<p>Or get Buzzyfly's weekly email for freelancers:</p>
 				<form id="wl-form">
 					<label class="sr-only" for="wl-email">Email address</label>
 					<input id="wl-email" type="email" placeholder="you@example.com" autocomplete="email" required />
-					<button class="btn" type="submit">Get early access</button>
+					<button class="btn" type="submit">Get the weekly email</button>
 				</form>
 				<p class="status" id="wl-status" role="status"></p>
-				<p class="fine">You'll also get Buzzyfly's weekly email for freelancers. Unsubscribe anytime.</p>
+				<p class="fine">Unsubscribe anytime.</p>
 			</section>
 		</main>
 		<Footer />
@@ -254,7 +255,7 @@ const WAITLIST_SOURCE = "invoice-tool__waitlist__free-generator";
 						body: JSON.stringify({ email: $("wl-email").value, source: WAITLIST_SOURCE }),
 					});
 					if (!res.ok) throw new Error();
-					status.textContent = "You're on the list. We'll email you when it opens.";
+					status.textContent = "You're in. Check your inbox.";
 					$("wl-form").reset();
 				} catch {
 					status.textContent = "Something went wrong. Please try again.";
