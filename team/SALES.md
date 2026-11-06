@@ -9,12 +9,18 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 | launch-post-1 | Facebook: professional portfolio | 2026-11-02 | 0 | 0 | 0 |
 | launch-ad-1 (paid, $15 spent by 2026-11-02 15:45 UTC) | Facebook ad | 2026-11-02 | 0 tracked visits through 2026-11-06 (whole site: 96 visits and the first buy click, direct to /, on 11-06) | 0 | 0 (0 fulfillments) |
 | proposal-quiet-day-6 | Facebook: professional portfolio | 2026-11-03 | ? | ? | ? |
+| scope-creep-reply | Facebook: professional portfolio | 2026-11-05 | ? | ? | ? |
+| demo-video-1-fb | Facebook: professional portfolio | 2026-11-04 | ? | ? | ? |
+| demo-video-invoice (Instagram), demo-video-onboarding (YouTube) | Instagram / YouTube | 2026-11-04 | ? | ? | ? |
+| demo-video-pricing | YouTube Shorts | 2026-11-05 | ? | ? | ? |
 | demo-video-1 | YouTube Shorts + Instagram | 2026-11-03 | ? | ? | ? |
 | demo-video-invoice, demo-video-scope | YouTube Shorts | 2026-11-03 | ? | ? | ? |
 | All YouTube Shorts together (sales-b, LOG 2026-11-04) | YouTube | 11-03..04 | 9 | 0 | 0 |
-| scope-creep-reply, overdue-invoice-free-tool, unpaid-invoice-steps, retainer-menu-scope, late-invoice-image | Facebook queue (POSTS.md) | not posted yet | - | - | - |
+| overdue-invoice-free-tool, unpaid-invoice-steps, retainer-menu-scope, late-invoice-image, free-demo-try | Facebook queue (POSTS.md) | not posted yet | - | - | - |
 | paid-late-partial-steps, scope-change-log | Facebook queue (POSTS.md, added 2026-11-04) | not posted yet | - | - | - |
-| Community replies R1 to R14 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
+| before-you-sign-scope, yes-to-kickoff-24h | Facebook queue (POSTS.md, added 2026-11-06) | not posted yet | - | - | - |
+| Community replies R1 to R19 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
+| Whole site, ad check 2026-11-06 (LOG #215) | mostly direct | to 11-06 | 96 | 1 (first, direct to /) | 0 |
 | Whole site 11-03..04 (sales-b, LOG 2026-11-04) | 9 YouTube, rest direct | - | 38 views | 0 | 0 |
 | Whole site since 2026-10-20 (LOG.md, 2026-11-02) | all direct | - | 163 views | 4 | 0 |
 
@@ -44,6 +50,11 @@ self-promotion rule in the sidebar, then post.** Reddit replies carry no link by
 | L12 | ~2026-11-01 ("3 days ago") | [r/stagehands](https://www.reddit.com/r/stagehands/comments/1xktn07/question_about_invoicing_as_a_freelancer/) | "I'm relatively green when it comes to invoicing my company/clients for my work" | warm | R12 | draft, owner posts |
 | L13 | ~2026-10-28 ("7 days ago") | [r/graphic_design](https://www.reddit.com/r/graphic_design/comments/1xi7z9f/freelancers_how_do_you_accept_payments_from_your/) | "Freelancers, how do you accept payments from your clients?" | warm | R13 | draft, owner posts |
 | L14 | ~2026-11-02 ("2 days ago") | [r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1xlwbes/my_best_month_nearly_broke_me_because_i_had_no/) | "my best month nearly broke me because i had no system to..." (title cut off in search) | hot | R14 | draft, owner posts |
+| L15 | ~2026-11-04 ("2 days ago") | [r/Contractor](https://www.reddit.com/r/Contractor/comments/1xnr6hz/client_not_paying_or_responding/) | "CLIENT NOT PAYING OR RESPONDING!" | hot | R15 | draft, owner posts |
+| L16 | ~2026-11-05 ("1 day ago") | [r/legaladvice](https://www.reddit.com/r/legaladvice/comments/1xokbfa/client_not_paying_or_responding/) | "CLIENT NOT PAYING OR RESPONDING" (likely the same person as L15; reply in one thread only) | hot | R15 | draft, owner posts |
+| L17 | ~2026-11-05 ("1 day ago") | [r/legaladvice](https://www.reddit.com/r/legaladvice/comments/1xoe74k/longtime_us_client_suddenly_refuses_to_pay_28k/) | "Long-time US client suddenly refuses to pay ~$28k ... billing hourly in my own name" | hot | R17 | draft, owner posts |
+| L18 | ~2026-11-02 ("4 days ago") | [r/Upwork](https://www.reddit.com/r/Upwork/comments/1xlynvw/how_do_you_handle_scope_creep_on_fixedprice/) | "How do you handle scope creep on fixed-price contracts?" | hot | R18 | draft, owner posts |
+| L19 | ~2026-11-04 ("2 days ago") | [r/freelancing](https://www.reddit.com/r/freelancing/comments/1xngsi5/is_this_normal_for_freelancing_or_am_i_being/) | "When I said the ops work was out of scope, she told me that's just how startups are ... before I sign, how hard can I push" | hot | R19 | draft, owner posts |
 
 ### Draft replies (team A, role 4, 2026-11-02)
 
@@ -122,6 +133,43 @@ Only if the sub allows tool mentions in comments (r/smallbusiness generally does
 
 Best two to post first this round: **R9** (exact question the app answers, fresh, big sub) and **R10** (urgent, high need for the exact wording).
 
+### Draft replies, round 3 (team A, role 4, 2026-11-06)
+
+Found 2026-11-06 by web search limited to the past week. Same limits as before: titles and
+snippets only, owner opens each thread and checks the sub rules first. No links: r/legaladvice
+and r/Contractor don't allow promotion, and r/Upwork and r/freelancing generally don't either.
+
+**R15 (L15/L16, client not paying or responding).**
+When they stop paying and stop answering, switch from asking to stating dates, in writing.
+1. Day 1, email (and text if that's how you usually talk): "Hi [name], invoice [#] for [job] for [amount] was due on [date] and I haven't heard back. Please pay by [date, 7 days out] or call me if something's wrong with the work or the invoice."
+2. Stop any further work or deliveries on the job until it's paid.
+3. Day 8, a final notice by email and by post or certified mail: "Invoice [#] for [amount] is now [X] days overdue. If it isn't paid by [date] I'll file a claim / a mechanic's lien for the amount." Only name steps you'll really take.
+4. If you're a contractor in the US, check your state's lien deadline today. It's often counted from your last day of work, and missing it loses the option.
+Keep copies of the contract, change orders, photos and every message.
+
+**R17 (L17, long-time client refuses to pay ~$28k).**
+Not a lawyer, but at that amount it's worth an hour with one where the client is based. Before that:
+- Freeze new work today.
+- Gather your evidence: the invoices, the hours you logged, emails where they approved or asked for the work, and their past payment history. 2.5 years of paid invoices on the same terms is strong evidence of the agreement.
+- Send one calm, written demand: "Invoices [#s] for [total] for work between [dates] remain unpaid. Please pay by [date, 14 days out]. If you dispute any item, tell me which one and why by [date] so we can resolve it." Asking them to name the dispute in writing often shows whether it's a real dispute or a cash problem.
+- Ask the lawyer about a demand letter on their letterhead. It often gets paid without going to court.
+
+**R18 (L18, scope creep on fixed-price contracts).**
+On fixed price, the contract has to do the work, because you can't bill hours later.
+1. List deliverables with numbers ("3 screens, 2 revision rounds each") and a line that says "anything not listed is quoted separately".
+2. Split it into milestones, so each one gets approved and paid before the next starts. Changes after approval are new work.
+3. When a new ask arrives, answer with the same sentence every time: "Happy to do that. It's not in this contract, so I'll send it as a new milestone for [price]. Or we can swap it for [item] that hasn't started yet. Which do you prefer?"
+On Upwork, adding it as a new milestone or a new offer keeps it protected, and the platform keeps the record for you.
+
+**R19 (L19, startup says out-of-scope ops work is "how startups are", not signed yet).**
+Push now. Before signing is when you have the most leverage, and a startup that won't agree to a written scope now won't agree later either. Reasonable asks:
+- A written list of what you do (and a line on what you don't, naming the ops work).
+- Either a rate for ops tasks if they want them ("ops support at [rate]/hour, billed separately, max [X] hours a month") or a clear no.
+- A short change clause: "Work outside this list is agreed in writing before it starts."
+Then say it plainly: "I'm happy to help with ops, but as a separate line so we both know what the fee covers." If they refuse any version of that, they're telling you how the job will go.
+
+Best two to post first this round: **R18** (exact question, big sub, likely to get read) and **R15** (urgent and specific, the lien deadline is useful).
+
 ### Lead research and outreach (roles 5 and 6)
 
 No businesses added this run. The searches found only vendor blogs and courses, not small
@@ -139,6 +187,10 @@ owner decides whether to send it, by hand, once).
 The other searches found VA agencies selling their own service and job boards (an Upwork
 "VA for coaches" job): contacting a client through an Upwork job post breaks Upwork's terms,
 so it's not listed.
+
+**2026-11-06:** 0 businesses added. This week's searches turned up only people asking for help
+(L15 to L19, answered in their threads) and other sellers' kits. No new small business with a
+public page stating the problem. No cold notes sent or drafted.
 
 ## Partners
 
@@ -282,6 +334,13 @@ Buyer doubts about Buzzyfly to answer on /store (for the Web builders): "Is it a
 - "How should clients pay me?" FAQ: deposit, one-click payment link, due date on the invoice.
 - "My best month nearly broke me." Post idea: one client list with next step + date, checked daily; cap active jobs.
 - Seen in the same searches: competitors launching small paid kits for late-invoice wording and scope templates on r/SideProject (PDF kits, Notion portals). Buyers can compare, so /store should keep saying what we are: a browser app with the emails filled in, one payment.
+
+### Added 2026-11-06 (from L15 to L19)
+- "Client stopped paying AND stopped answering." Post idea: switch from asking to stating dates, then the final notice (R15).
+- "A long-time client suddenly refuses to pay." FAQ: freeze new work, gather the paid-invoice history, ask them to name the dispute in writing.
+- "How do I handle scope creep on fixed price?" Post idea: milestones that get approved and paid one at a time.
+- "They say out-of-scope work is just how startups are. Do I push before signing?" Post idea: before-you-sign-scope (POSTS.md).
+- Seen again: more free and paid scope and invoice kits launching on r/SideProject and r/buildinpublic (Trelio, Scope Lock Kit). Buyers comparing will ask "why pay $49?". Answer on /store: it's an app that shows today's follow-ups with the emails already filled in, not a template pack, plus the free /demo to try first.
 
 ## Ready ad set (role 9, waiting for the owner's yes and daily budget)
 

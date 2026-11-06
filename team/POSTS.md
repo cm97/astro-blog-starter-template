@@ -172,3 +172,28 @@ The Buzzyfly Digital System puts "close the loop" on your Today list on day 14, 
 
 $49 once. Browser app. No subscription.
 https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-close-the-loop
+
+### before-you-sign-scope | ready | facebook: professional portfolio
+Image: none
+About to sign with a client who says extra work is "just how it is"? Push now, before you sign. It's when you have the most say. Add three lines:
+
+1. What you do, as a list, and one line naming what you don't.
+2. A rate for the extras if they want them: "Ops support at [rate]/hour, billed separately."
+3. "Work outside this list is agreed in writing before it starts."
+
+If they won't agree to any version of that, they've told you how the job will go.
+
+The Buzzyfly Digital System keeps your scope replies, follow-ups and onboarding steps for every client in one browser app. Try the free demo first, or get it for $49 once, no subscription.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=before-you-sign-scope
+
+### yes-to-kickoff-24h | ready | facebook: professional portfolio
+Image: none
+A new client just said yes. The next 24 hours decide whether they feel looked after or forgotten. Send these, in this order:
+
+1. A thank-you and what happens next, with dates.
+2. The invoice or deposit link.
+3. A short intake form: goals, deadlines, logins, who approves.
+4. A kickoff call invite.
+
+Same steps for every client, so nothing gets missed in a busy week. Buzzyfly puts a new client's welcome and intake steps on your Today list, with the welcome email ready to copy. $49 once, works in your browser.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=yes-to-kickoff-24h
