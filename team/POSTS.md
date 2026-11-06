@@ -197,3 +197,9 @@ A new client just said yes. The next 24 hours decide whether they feel looked af
 
 Same steps for every client, so nothing gets missed in a busy week. Buzzyfly puts a new client's welcome and intake steps on your Today list, with the welcome email ready to copy. $49 once, works in your browser.
 https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=yes-to-kickoff-24h
+
+### monday-reset-image | ready | facebook: professional portfolio
+Image: https://buzzyfly.com/social/buzzyfly-monday-reset.jpg
+A 20-minute Monday reset for people who run client work on their own. Check the money, send this week's follow-ups, move new clients forward, pick your #1 and block the time, then drop one thing that can wait. The Buzzyfly Digital System walks you through each step and counts what's waiting: open invoices, follow-ups due, onboarding steps due. $49 once, works in your browser, no subscription.
+
+https://www.buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=monday-reset-image
