@@ -30,6 +30,8 @@ jobs:
         run: npm run test:email
       - name: Jobs tests
         run: npm run test:jobs
+      - name: Telegram tests
+        run: npm run test:telegram
       # Validates wrangler.json and bindings against the built worker.
       # Needs no Cloudflare credentials, so it runs on fork PRs too.
       - name: Wrangler dry run

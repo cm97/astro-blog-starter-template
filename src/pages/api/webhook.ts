@@ -13,6 +13,7 @@ import {
 import { ALL_PRODUCTS, BUZZYFLY_CONFIG } from "../../data/monetization";
 import { sendDeliveryEmail, sendDropWelcomeEmail, sendJobsWelcomeEmail } from "../../lib/email";
 import { isJobsItem, jobsTokenForOrder } from "../../lib/jobsAccess";
+import { notifySale } from "../../lib/telegram";
 import {
 	ensureDropSchema,
 	isDropItem,
@@ -192,6 +193,17 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		`Buzzyfly webhook: fulfilled order ${order.orderId} (${order.itemId}) for ${order.customerEmail ?? "unknown email"} -> delivered=${delivery.sent}`,
 	);
 
+	const product = ALL_PRODUCTS.find((p) => p.id === order.itemId);
+	await notifySale(env, {
+		productTitle: product?.title ?? order.itemId,
+		price: product?.price,
+		provider: order.provider,
+		orderId: order.orderId,
+		customerEmail: order.customerEmail,
+		source: order.source,
+		delivered: delivery.sent,
+	});
+
 	return new Response(
 		JSON.stringify({ received: true, fulfilled: true, delivered: delivery.sent }),
 		{ status: 200, headers: { "content-type": "application/json" } },
@@ -325,5 +337,13 @@ async function fulfillSubscriptionOrder(
 		);
 	}
 	console.log(`Buzzyfly webhook: fulfilled ${label} order ${order.orderId} -> delivered=${delivery.sent}`);
+	await notifySale(env, {
+		productTitle: label,
+		provider: order.provider,
+		orderId: order.orderId,
+		customerEmail: order.customerEmail,
+		source: order.source,
+		delivered: delivery.sent,
+	});
 	return json({ received: true, fulfilled: true, delivered: delivery.sent });
 }

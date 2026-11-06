@@ -17,5 +17,9 @@ declare namespace Cloudflare {
 		GROQ_API_KEY?: string;
 		GEMINI_API_KEY?: string;
 		XAI_API_KEY?: string;
+		// Telegram bot (src/lib/telegram.ts). Secrets; all unset = bot off.
+		TELEGRAM_BOT_TOKEN?: string;
+		TELEGRAM_OWNER_CHAT_ID?: string;
+		TELEGRAM_CHANNEL_ID?: string;
 	}
 }
