@@ -16,9 +16,10 @@ import { escapeHtml, resolveFrom, sendFollowUpEmail } from "./lib/email";
 import { sendDueSequenceEmails } from "./lib/emailSequence";
 import { receiveEmail } from "./lib/inbox";
 import { isIndexNowRun, submitSitemapToIndexNow } from "./lib/indexNow";
+import { postNewArticleToChannel, type TelegramEnv } from "./lib/telegram";
 import { ensureDownloadSchema, ensureEmailSequenceSchema, ensureFunnelSchema } from "./lib/schema";
 
-interface Env {
+interface Env extends TelegramEnv {
 	DB?: D1Database;
 	EMAIL?: { send(msg: { from: string; to: string; subject: string; html?: string; text?: string }): Promise<{ messageId: string }> };
 	EMAIL_FROM?: string;
@@ -218,6 +219,13 @@ async function scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext)
 			await runJob("funnel schema", () => ensureFunnelSchema(db));
 			await runJob("owner alert", () => alertNewOrders(db, env));
 			await runJob("buyer follow-up", () => followUpRecentBuyers(db, env));
+			// New blog articles to the Buzzyfly Telegram channel, one per hour at most.
+			if (assets) {
+				await runJob("telegram channel", async () => {
+					const link = await postNewArticleToChannel(env, assets);
+					if (link) console.log(`Buzzyfly Telegram: posted ${link} to the channel`);
+				});
+			}
 			// 3. Weekly email sequence for free-checklist subscribers.
 			await runJob("email sequence", async () => {
 				const { sent, failed } = await sendDueSequenceEmails(env);
