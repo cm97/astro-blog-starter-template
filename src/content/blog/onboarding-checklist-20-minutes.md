@@ -3,7 +3,7 @@ title: "The 20-Minute Onboarding Checklist That Survives a Slammed Week"
 seoTitle: "20-Minute Client Onboarding Checklist for Busy Weeks"
 description: "A 20-minute client onboarding checklist for coaches and solo operators. Welcome, intake, kickoff and a day-7 check so it still runs on busy weeks."
 pubDate: "Oct 16 2026"
-updatedDate: "Oct 28 2026"
+updatedDate: "Nov 09 2026"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -113,6 +113,19 @@ If they have not returned the intake, the same block becomes:
 - Keep the welcome, intake, and kickoff templates in the same folder as the weekly reset and the scope reply. One open, all available.
 - Cap the first-week touches at four. More becomes a blast and the habit dies.
 - If any day is missed, send the missed touch the same day you notice it. Do not restart the whole list.
+- Log the exact dollar amount and “paid in full / deposit only” in the private note the hour payment lands. Missing numbers become missing cash later.
+- Put a 48-hour intake reminder on the calendar the same minute the welcome leaves. Unscheduled nudges die.
+- After the day-7 check, write the next client date on the Monday sheet before you close the laptop.
+- If three new clients land the same week, run only Day 0 and Day 2 for each. Park the rest until the weekly reset.
+- Phone-only: dictate the welcome and the Day 2 nudge into Notes, paste, send, mark done. The calendar hold still has to exist.
+- When a scope ask lands before Day 7, park it with: “Got it. I’ll check what we locked and come back with two options.” Do not price it inside the onboarding window.
+- At Friday close, list any Day 0–7 touches still open. Those become Monday priority 2.
+- Screenshot or copy the filled Day 0 block into the same note as last week’s reset so Monday never starts from blank.
+- Cap open onboarding rows at five. Anything past Day 14 without a next date is closed or parked.
+- After any paid yes from a proposal follow-up, open this checklist the same day. The follow-up sequence ends when money lands; this sequence starts.
+- Keep the five intake questions in the same note as the welcome so you never invent a new form under pressure.
+- On Day 0, before you send, open the original proposal or signed note and copy the exact deliverable into the welcome. Do not guess it from memory.
+- If the kickoff slot is already full, send the welcome and intake first, then offer two new times in the same thread. Do not delay the whole sequence.
 
 ## Day-by-day first week (run the list, do not invent)
 
