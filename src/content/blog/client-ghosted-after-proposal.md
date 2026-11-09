@@ -3,7 +3,7 @@ title: "Client Went Quiet After the Proposal? Send This Exact Follow-Up"
 seoTitle: "Client Quiet After the Proposal? Send This Follow-Up"
 description: "Paste-ready day 3, 7 and 14 emails for when a proposal goes silent so the deal does not die in your inbox."
 pubDate: 2026-10-19
-updatedDate: 2026-11-02
+updatedDate: 2026-11-09
 category: sales
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -171,6 +171,15 @@ Next action: wait / invoice / reduced scope / closed
 14. After any paid yes, open the onboarding checklist the same day. The follow-up sequence ends when money lands; the onboarding sequence starts.
 15. When they reply with any of the five objections above, send the matching script within 60 minutes. Delayed answers lose the urgency the date created.
 16. Keep the five objection scripts in the same note as the three cadence lines so you never search for them under pressure.
+17. On day 3, before you send, open the original proposal and copy the exact start date into the email. Do not guess it from memory.
+18. If the day-7 email is due on a holiday or travel day, move it to the previous weekday morning. Do not skip the touch.
+19. After day 14 close, move the row to a “parked past clients” note. One monthly scan of that note is enough.
+20. When a new proposal goes out, duplicate the log template immediately. Do not reuse the previous row.
+21. At Friday close, count open proposals still inside the 14-day window. That number goes on Monday’s Still open line.
+22. If they reply “yes” via text, move the confirmation and invoice to email the same hour. Text is not the record.
+23. Pre-write the day-3 line in the calendar note the day the proposal leaves. The 8-minute block only needs a paste and send.
+24. After any parked “later”, set one calendar reminder for the first day of the named month. One note only.
+25. If three proposals hit day 7 the same morning, send all three before 11am. Do not spread them across the day.
 
 ## Fill-in after every send or reply
 
