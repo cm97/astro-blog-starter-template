@@ -315,7 +315,7 @@ const perSlide = Math.round((featured.seconds / featured.slides.length) * 1000);
 				<div class="ch-info">
 					<h1>Buzzyfly</h1>
 					<p class="ch-meta">{EXPLAINER_VIDEOS.length} videos · Official explainers</p>
-					<p class="ch-desc">Short explainers. Digital System $49 (zip: checklists/templates/scripts), Weekly Reset $15, Onboarding Kit $29, Follow-Up Templates $19. One-time. Opens in your browser.</p>
+					<p class="ch-desc">Short explainers for the Buzzyfly Digital System, a $49 browser app for coaches and solo service providers. No download. No subscription.</p>
 				</div>
 			</div>
 
@@ -351,7 +351,7 @@ const perSlide = Math.round((featured.seconds / featured.slides.length) * 1000);
 						</div>
 					</div>
 					<h2 class="video-title">{featured.title}</h2>
-					<p class="video-stats">Buzzyfly · {featured.views} views · {featured.published} · {fmtTime(featured.seconds)}</p>
+					<p class="video-stats">Buzzyfly · {fmtTime(featured.seconds)}</p>
 				</div>
 
 				<aside class="sidebar">
@@ -365,7 +365,7 @@ const perSlide = Math.round((featured.seconds / featured.slides.length) * 1000);
 								</div>
 								<div>
 									<p class="qtitle">{v.title}</p>
-									<p class="qmeta">Buzzyfly · {v.views} views · {v.published}</p>
+									<p class="qmeta">Buzzyfly · {fmtTime(v.seconds)}</p>
 								</div>
 							</a>
 						))}
@@ -387,7 +387,7 @@ const perSlide = Math.round((featured.seconds / featured.slides.length) * 1000);
 							</div>
 						</div>
 						<p class="vtitle">{v.title}</p>
-						<p class="vmeta">Buzzyfly · {v.views} views · {v.published}</p>
+						<p class="vmeta">Buzzyfly · {fmtTime(v.seconds)}</p>
 					</a>
 				))}
 			</div>

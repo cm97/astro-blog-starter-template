@@ -144,7 +144,7 @@ The five emails, the intake, and the Monday reset live inside the Buzzyfly Digit
 
 Copy these into texts, DMs, or posts. Each points at the templates and the $49 system.
 
-1. Client ghosted after the proposal? Day 3, day 6, day 12 lines that close the file instead of rewriting the pitch. https://buzzyfly.com/blog/templates-people-ask-for-after-a-client-ghosts $49 Digital System has them ready: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
+1. Client ghosted after the proposal? Day 3, day 6, day 12 lines that close the file instead of rewriting the pitch. https://buzzyfly.com/blog/templates-people-ask-for-after-a-client-ghosts $49 Digital System has proposal follow-ups ready for day 3, 7 and 14: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
 
 2. Silence is not a maybe. Three exact emails (bump, yes/later/no, close) plus intake and scope reply after a client goes quiet. Full write-up: https://buzzyfly.com/blog/templates-people-ask-for-after-a-client-ghosts Get the app for $49: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
 
