@@ -2,7 +2,7 @@
 title: 'The 7-Day Sprint to Land Your First Paying Client'
 description: 'No audience required. A day-by-day sprint to get one paying client, then run the same-day start line so week one does not die in your head.'
 pubDate: '2026-09-01'
-updatedDate: 'Nov 05 2026'
+updatedDate: 'Nov 10 2026'
 category: 'sales'
 heroImage: '/blog-placeholder-2.jpg'
 featuredProductTitle: 'Buzzyfly Digital System'
@@ -207,6 +207,8 @@ If a line is late, send the late version the same day. Never skip because you ar
 - If they ask for a discount on day 6, restate the scope and the start date. Do not cut the number to "land the first one." Cheap clients train you to undercharge forever.
 - Write the out-of-scope line in the welcome before you send it. Blank scope becomes free work by day 4.
 - Pre-schedule the 48-hour nudge the same minute the welcome goes out. If it is not on the calendar, it dies when the next message arrives.
+- Log the exact dollar amount and “paid in full / deposit only” in the private note the hour payment lands. Missing numbers become missing cash later.
+- When three new names reply the same day, run only the audit for the first two. Park the third until Monday.
 
 ## Day-0 cash lock (add these three before you close the laptop)
 
@@ -237,6 +239,7 @@ Set the next reminder before you close the app.
 - When they ask for a call before paying: “The 15-minute audit is the call. After that the price is the same. Want the audit this week?”
 - When they say “send me more info”: “The audit is the info. Three fixes, you keep the notes. Reply with a time or I close this Friday.”
 - When they go quiet after the audit: “Still useful, or should I close the notes?”
+- When they ask for a discount: “Scope and start date stay the same. Price is [number]. Reply yes and the welcome goes out today.”
 
 ## What still breaks if you only do the sprint
 
