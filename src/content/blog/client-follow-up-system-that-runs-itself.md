@@ -3,12 +3,12 @@ title: "The Client Follow-Up System That Runs Itself (Even on a Slammed Week)"
 seoTitle: "Client Follow-Up System That Runs Itself"
 description: "A 20-minute weekly process plus ready emails so follow-ups still happen when you are buried in delivery. Exact templates included."
 pubDate: "Nov 02 2026"
-updatedDate: "Nov 09 2026"
+updatedDate: "Nov 10 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. One-time. Opens in your browser."
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 ---
 
@@ -107,6 +107,28 @@ If timing changes later, reply and I will reopen it.
 
 [Your name]
 
+## Day-14 exact close (when day-5 still sits quiet)
+
+After the first bump sits for another week, free the calendar. Do not write a third novel.
+
+Subject: Closing the loop on [Project]
+
+Hi [Name],
+
+Still have not heard back on the proposal from [date]. I am releasing the [start date] so the calendar stays clear.
+
+Reply if timing changes and I will reopen it.
+
+[Your name]
+
+Log it the same minute:
+
+```
+Day-14 close sent to: ________ at ________
+Calendar slot released: yes
+Next open date available: ________
+```
+
 ## Timing rules that keep replies coming
 
 - Send all follow-ups before 11am, Tuesday–Thursday only.
@@ -140,6 +162,18 @@ Next reminder set: yes
 - Mid-project quiet more than 10 days: "Flagging [project] is quiet. Next piece is due [date]. Anything blocked on your side?"
 - Past client re-engage when they said "later": "You mentioned [thing] last time. Still on the radar, or should I close the note?"
 - Break-up when they asked for a call that never happened: "Still want the short call, or should I close this so the calendar stays clear?"
+- Unpaid invoice sitting past 7 days: "Invoice for [deliverable] from [date] is still open. Due [date]. Reply if the address is wrong."
+- Scope ask that landed in the quiet thread: "Got it. I'll check what we locked and come back with two options." Do not price it inside the follow-up.
+
+## Cash lock lines that belong on the same note
+
+Write these on the client or proposal note the same minute you send the follow-up:
+
+- Amount still open: $[number]
+- Next date that makes cash move: ________
+- If no reply by ________, close or release the slot.
+
+If the number is not written, the follow-up is activity, not cash.
 
 ## What still breaks when templates live only in a doc
 
@@ -147,7 +181,7 @@ Templates in a doc work until the week is on fire. Then you skip the scan becaus
 
 The system that survives is the one that already knows who is due, what the email says, and which date is next. You open it, copy, send, done.
 
-That is what the $49 Digital System is. The Today screen shows who needs a follow-up. The email writer fills the name. The weekly reset forces the 20-minute scan. One-time payment. Opens in the browser. No subscription.
+That is what the $49 Digital System is. The Today screen shows who needs a follow-up. The email writer fills the name. The weekly reset forces the 20-minute scan. One-time payment. Opens in the browser. No subscription. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
