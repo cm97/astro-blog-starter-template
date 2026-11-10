@@ -22,6 +22,7 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 | Community replies R1 to R19 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
 | Whole site, ad check 2026-11-06 (LOG #215) | mostly direct | to 11-06 | 96 | 1 (first, direct to /) | 0 |
 | Whole site 11-03..04 (sales-b, LOG 2026-11-04) | 9 YouTube, rest direct | - | 38 views | 0 | 0 |
+| Demo videos (weekly check 2026-11-10) | YouTube Shorts, Instagram Reels, Facebook video | 2026-11-03 to 11-10 | site views 11-03..11-10: youtube 27, facebook 6, google 23, direct 61, other 9. YouTube views: proposal 3, invoice 0, scope 18, onboarding 4, pricing 7. Instagram insights: not available (permission) | 1 (direct) | 0 |
 | Whole site since 2026-10-20 (LOG.md, 2026-11-02) | all direct | - | 163 views | 4 | 0 |
 
 Per-post numbers: "?" until the CEO or sales-b report breaks visits down by utm_campaign. Stripe: 0 charges ever as of 2026-11-02; the Stripe connector needed re-auth on 2026-11-04, so later sales are "?".

@@ -83,7 +83,7 @@ Here's the real Buzzyfly app with sample clients. It shows who needs a follow-up
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=demo-video-1
 $49 once, no subscription.
 
-### demo-video-invoice | posted 2026-11-03, youtube id vVbRrGDkiaM (https://www.youtube.com/watch?v=vVbRrGDkiaM); posted 2026-11-04, instagram id 18132962887840294; ready for facebook | instagram: SAMS Service, facebook: professional portfolio
+### demo-video-invoice | posted 2026-11-03, youtube id vVbRrGDkiaM (https://www.youtube.com/watch?v=vVbRrGDkiaM); posted 2026-11-04, instagram id 18132962887840294; posted 2026-11-10, facebook id 1655968142680096 | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-invoice.mp4
 Title: Invoice a week late? The reminder is already written
 Invoice a week late and you don't want to write the awkward email? This is the real Buzzyfly app with sample clients. It shows which invoice is overdue and by how long, and the reminder is already written with their name, project and amount. Copy it, send it, mark it sent. The 2-week reminder comes next.
@@ -91,7 +91,7 @@ Invoice a week late and you don't want to write the awkward email? This is the r
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-invoice
 $49 once, no subscription.
 
-### demo-video-scope | posted 2026-11-03, youtube id dq1INZCsWio (https://www.youtube.com/watch?v=dq1INZCsWio); ready for instagram, facebook | instagram: SAMS Service, facebook: professional portfolio
+### demo-video-scope | posted 2026-11-03, youtube id dq1INZCsWio (https://www.youtube.com/watch?v=dq1INZCsWio); posted 2026-11-10, instagram id 17915487234545002; ready for facebook | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-scope.mp4
 Title: Client asks "can you just add this?" Send this reply
 Client asks "can you just add this?" and it isn't in the project. This is the real Buzzyfly app with sample clients: pick the client, pick the scope reply, and it's written. Stay helpful, quote the extra work separately, and let them choose.
@@ -115,7 +115,7 @@ Not sure what to charge? Put in what you want to take home, what the business co
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-pricing
 $49 once, no subscription.
 
-### demo-video-reset | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+### demo-video-reset | posted 2026-11-10, youtube id JKZnDwCVd4U (https://www.youtube.com/watch?v=JKZnDwCVd4U); ready for instagram, facebook | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-reset.mp4
 Title: Monday chaos? Do this 20-minute reset instead
 Monday starts with a scramble? The Buzzyfly app has a 20-minute Monday reset: open invoices, follow-ups due and onboarding steps on one screen, then six short steps, money first. This is the real app with sample clients.
