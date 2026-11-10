@@ -203,3 +203,13 @@ Image: https://buzzyfly.com/social/buzzyfly-monday-reset.jpg
 A 20-minute Monday reset for people who run client work on their own. Check the money, send this week's follow-ups, move new clients forward, pick your #1 and block the time, then drop one thing that can wait. The Buzzyfly Digital System walks you through each step and counts what's waiting: open invoices, follow-ups due, onboarding steps due. $49 once, works in your browser, no subscription.
 
 https://www.buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=monday-reset-image
+
+### cartoon-messy-onboarding | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-messy-onboarding.mp4
+Title: New client said yes? Don't let onboarding get messy
+A new client said yes. Then the first week gets messy: no kickoff booked, no logins, no files, and you can't remember if the welcome email went out.
+
+The Buzzyfly Digital System gives every new client a 10-step onboarding plan, each step with its day. The welcome, intake and kickoff emails are already written with their name and project filled in. You copy them and send them yourself.
+
+$49 once. Browser app. No subscription.
+https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-messy-onboarding
