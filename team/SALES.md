@@ -7,7 +7,7 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 | Campaign | Where | Date | Visits | Buy clicks | Sales |
 |---|---|---|---|---|---|
 | launch-post-1 | Facebook: professional portfolio | 2026-11-02 | 0 | 0 | 0 |
-| launch-ad-1 (paid, $15 spent by 2026-11-02 15:45 UTC) | Facebook ad | 2026-11-02 | 0 tracked visits through 2026-11-06 (whole site: 96 visits and the first buy click, direct to /, on 11-06) | 0 | 0 (0 fulfillments) |
+| launch-ad-1 (paid, $15 spent by 2026-11-02 15:45 UTC) | Facebook ad | 2026-11-02 | FINAL (11-10): 0 tracked visits in the 5-day test, verdict STOP (whole site 11-02..11-10: 142 visits, 1 buy click, 0 sales) | 0 | 0 (0 fulfillments) |
 | proposal-quiet-day-6 | Facebook: professional portfolio | 2026-11-03 | ? | ? | ? |
 | scope-creep-reply | Facebook: professional portfolio | 2026-11-05 | ? | ? | ? |
 | demo-video-1-fb | Facebook: professional portfolio | 2026-11-04 | ? | ? | ? |
