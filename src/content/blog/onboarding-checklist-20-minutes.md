@@ -3,11 +3,12 @@ title: "The 20-Minute Onboarding Checklist That Survives a Slammed Week"
 seoTitle: "20-Minute Client Onboarding Checklist for Busy Weeks"
 description: "A 20-minute client onboarding checklist for coaches and solo operators. Welcome, intake, kickoff and a day-7 check so it still runs on busy weeks."
 pubDate: "Oct 16 2026"
-updatedDate: "Nov 09 2026"
+updatedDate: "Nov 10 2026"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 ---
 
 A new client pays. Then you spend two hours digging through old threads for the welcome email, inventing an intake form, and hoping you remember the kickoff agenda before the week collapses.
@@ -196,6 +197,25 @@ Add these three before you close the laptop on day 0:
 > Next piece is due [date]. Reply with one line if anything changed.
 
 These three sit next to the welcome so you never open a blank email on a slammed Thursday.
+
+## Cash lock lines (write these the same minute payment lands)
+
+- Amount received: $________
+- Remaining if deposit: $________ due ________
+- First deliverable date that moves cash forward: ________
+- If intake not back by ________, release or rebook the kickoff slot
+
+If the number is not on the note, the onboarding is activity, not cash.
+
+## Phone-only version (12 minutes from your phone)
+
+1. Open Notes. Paste the Day 0 log template. Fill Client + Paid amount.
+2. Copy the welcome email. Fill name + deliverable. Send.
+3. Send the intake link with the 3-day deadline.
+4. Create the kickoff calendar hold and the Day-7 hold.
+5. Mark the log. Set a phone reminder for Day 2 titled "Intake nudge — 2 min".
+
+Do not open other apps until the five are done.
 
 ## What still breaks when this only lives in your head
 
