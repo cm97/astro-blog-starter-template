@@ -1,6 +1,6 @@
 # Funding options
 
-Kept by Sales team B (Funding and partnerships). Checked on 2026-11-02. Amounts
+Kept by Sales team B (Funding and partnerships). Checked on 2026-11-10. Amounts
 and deadlines change, so confirm on each program's own site before applying.
 This is research, not financial or legal advice. Only the owner applies, signs
 or pays a fee.
@@ -25,12 +25,16 @@ or pays a fee.
 
 | Program | Who runs it | Typical amount | Fit and catch |
 |---|---|---|---|
-| Amber Grant | WomensNet (private) | $10k to $15k monthly, larger year-end grants | Only if the business is at least 50% women-owned. $15 application fee. Next cutoff Nov 30, 2026 (per its site). |
-| Hello Alice grants | Hello Alice with corporate partners | $5k to $25k | Free account. Many grants favour under-represented founders. Rolling programs. |
-| NASE Growth Grant | National Association for the Self-Employed | Up to $4,000 | Must be a paid NASE member for 90 days first. |
-| Secretsos Small Business Grant | Private | $2,500 quarterly | US, 21 or older. Current quarter due Dec 31, 2026 (per US Chamber listing). |
-| Hustler's MicroGrant | HerSuiteSpot | $1,000 monthly | Small but quick. |
-| FedEx and Venmo small-business grants | Public companies | Varies; seasonal | Watch for their next round. |
+| Amber Grant | WomensNet (private) | Monthly grants up to $15k, $75k year-end grants | Only if the business is at least 50% women-owned. Fee not shown on its page (was $15). **Next cutoff Nov 30, 2026.** |
+| Verizon Digital Ready grants (via Hello Alice) | Verizon with Hello Alice | $10k | Free Hello Alice account. Listed as "Ongoing" on helloalice.com/opportunities. |
+| NASE Growth Grant | National Association for the Self-Employed | Up to $4,000 | Annual, Veteran and Gold members can apply right away. Monthly members wait 90 days. Oct to Dec applications are reviewed in January. |
+| Secretsos Small Business Grant | Private | $2,500 quarterly | $15 fee. US-registered active business, owner 21+. Q4 window Oct 1 to Dec 31, 2026. |
+| Hustler's MicroGrant | HerSuiteSpot | $1,000 monthly | Small but quick. Fee about $10 (third-party sites; confirm on its page). |
+| FedEx Cares grant (Hiring Our Heroes) | FedEx with Hiring Our Heroes | Up to $25,000 | Only for veteran or military-spouse owners. Deadline Dec 15 (per fedexcares.com). The old FedEx Small Business Grants Program is retired. |
+
+Removed on 2026-11-10: Venmo small-business grant (no current page from Venmo itself).
+
+**Deadline in the next 30 days:** Amber Grant Nov 30 (women-owned only). Next after that: FedEx Cares Dec 15 (veteran or military spouse only), Secretsos Dec 31.
 
 ## Low-cost loans (only if the owner wants debt)
 

@@ -214,6 +214,14 @@ unlock key for the $49 Digital System that you create for them.
 All four use the same offer, so the owner only has to decide the terms once:
 a free copy to review, no obligation, and a referral share on terms the owner sets.
 
+Update 2026-11-10: each pitch now ends with the free demo, so a partner can look before
+asking for a copy and the owner doesn't have to make an unlock key up front. Add this line
+before the signature: "You can try it first with sample clients, no sign-up:
+https://buzzyfly.com/demo?utm_source=<partner>&utm_medium=partner&utm_campaign=partner-<partner>"
+(use the same utm_source as the pitch's store link). The $15, $19 and $29 single apps are now
+buyable too, so a partner whose audience needs only one job (P3: late invoices) can point to
+the $19 Follow-Ups App on /store.
+
 **PP1 (Melissa Smith, AVA).**
 Subject: A free tool for your VAs to review
 Hi Melissa, I run Buzzyfly, a small browser app for solo service businesses. It shows which client to follow up with today and has the email ready: proposal follow-ups, late-invoice reminders, onboarding emails and scope-creep replies. The VA copies it and sends it from their own inbox. I'd like to give you a free copy to try, no strings. If you think it's useful for AVA members, I'd also be glad to set up a referral share for anyone who buys through you, on terms we agree. Either way I'd value your honest view. [Owner name], support@buzzyfly.com, https://buzzyfly.com/store?utm_source=ava&utm_medium=partner&utm_campaign=partner-ava
@@ -234,6 +242,7 @@ Hi, I make Buzzyfly, a browser app for solo coaches and freelancers. It doesn't 
 
 Checked on each newsletter's own booking page on 2026-11-03. Numbers are what the publisher
 states, not ours. **Every one is paid placement: it needs the owner's yes and budget first.**
+**Parked 2026-11-10:** the owner said no paid advertising. Kept for reference only. Not booked.
 
 | # | Newsletter | Audience (publisher's own figure) | Cheapest option | Bigger option | How to book |
 |---|---|---|---|---|---|
