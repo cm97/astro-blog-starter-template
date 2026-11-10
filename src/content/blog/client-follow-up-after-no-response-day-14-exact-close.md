@@ -87,6 +87,6 @@ Next action: onboarding opened / closed for good
 
 You can paste it today. It works until a slammed Thursday. Then the day-14 file sits, the start date stays blocked, and by Friday you have already started work for someone else because the silence felt safer than sending the close.
 
-The same close, the earlier bumps, the log, and the 20-minute Monday reset live inside the Buzzyfly Digital System so the quiet proposal still gets closed when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+A day-14 close-the-loop email, the day-3 and day-7 follow-ups and the 20-minute Monday reset live inside the Buzzyfly Digital System so the quiet proposal still gets closed when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

@@ -90,6 +90,6 @@ Saying yes to early work trains the client that the deposit is optional and trai
 
 You can paste it today. It works until a slammed Thursday. Then the "can we just start" message sits unanswered, the deposit amount is gone, and by next week you have already opened the file because waiting felt like quitting.
 
-The Buzzyfly Digital System has the deposit follow-ups, the onboarding sequence, and the 20-minute Monday reset, and you can save this reply as one of your own. Then the start date stays locked even when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The Buzzyfly Digital System has the onboarding sequence (with a "Confirm the deposit is paid" step) and the 20-minute Monday reset, and you can save this reply as one of your own. Then the start date stays locked even when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
