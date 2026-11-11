@@ -2,7 +2,7 @@
 title: "How to Stop Scope Creep Without Losing the Client"
 description: "The exact reply when a client asks for one more thing — pause, price, two options, written yes — so the extra work is a line item, not a free favor."
 pubDate: "2026-09-01"
-updatedDate: "Nov 10 2026"
+updatedDate: "Nov 11 2026"
 category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -30,57 +30,22 @@ Do these in order. Do not answer yes in the same message the ask arrived.
 4. **Put a price on those minutes.** Use the rate you already charge for a similar add-on. If you do not have one, use the number on the original proposal divided by the hours you quoted. Write it down. Do not invent a discount because the ask sounded small.
 5. **Send two options only.** Add it now at that price, or park it. No "I will just squeeze it in."
 6. **Wait for a written yes.** A thumbs-up in a voice note is not a yes. One line back: "Reply YES and I add the line item."
-7. **Log the decision the same day.** Same place you log weekly work. If it only lives in the thread, Thursday will forget you already billed it or already said no.
+7. **Log the decision the same day.** Save the date on the same card.
 
-If the loop takes longer than 20 minutes, you are rewriting the project. Price the add-on and stop.
-
-Fill this before you send the reply:
+Fill this card before you send the two options:
 
 ```
 Client: ________
-Ask, in their words: ________
-In original scope? yes / no — line: ________
-Minutes: ________
-Price: ________
-Park-until date: ________
-Waiting on: written YES / parked / declined
+Original scope line: ________
+Ask received: ________ (date/time/channel)
+Minutes for ask: ________
+Line-item price: $________
+Two-option sent: ________
+Status: waiting / yes / parked / declined
+Original delivery still: ________
 ```
 
-Price line, so you do not round it down in the reply:
-
-```
-Quoted fee: ________
-Quoted hours: ________
-Hourly used for add-ons: fee ÷ hours = ________
-This ask, minutes: ________
-Line item: (minutes ÷ 60) × hourly = ________
-Round up to the nearest $25. Do not round down.
-```
-
-## Extra concrete steps that stop the leak
-
-- Paste the original scope line into the reply thread before you price. Clients forget what they signed.
-- If the ask is under 30 minutes, still price it. Free under-30s become the new baseline.
-- Book the pause reply as a calendar hold if you cannot do it in the next hour. Unscheduled pauses get forgotten.
-- After they say yes, add the line item to the invoice before you open the file. Work that is not invoiced is still free.
-- At the next weekly reset, add a row: "Open scope asks waiting on yes." If none, write none.
-- Screenshot or copy the original scope into the project note the day the ask arrives. Do not rely on searching email later.
-- If the ask is a third or fourth extra, send the full script again. Do not soften the second one.
-- Set a 24-hour timer on the two-option email. If no reply by then, send the day-3 bump without starting the work.
-- Log the ask on the same card as the original onboarding note so the weekly reset can see it.
-- If the client texts the ask during a call, pause the call: "Let me note that and reply with two options after we hang up."
-- Cap open scope asks at three. A fourth means you are rewriting the engagement. Close or re-scope the whole job.
-- After any yes, write the invoice line the same hour. The file does not open until the line is on the invoice.
-- At Friday close, mark every parked ask with a date or mark it declined. Unmarked parks become free work next month.
-- If the client sends the ask in Slack or text, move the two-option reply to email within 15 minutes. The channel that got the ask is not the channel that records the yes.
-- Add a line to the next Monday reset: "Scope asks waiting on written yes: [count]." Zero is the goal.
-- Phone-only: dictate the pause line into Notes, paste, send, set a 60-minute reminder. Price calculation stays on paper or the same note.
-- When the ask arrives during delivery, finish the current block first. Do not price inside the delivery hour.
-- After the written yes, add one line to next Monday's Still open: "Scope add-on [ask] due [date]."
-- If they push back on the number, restate the two options once. Do not negotiate inside the thread.
-- At the end of the week, count unpaid scope lines. That number becomes priority 2 on the next reset if it is not zero.
-
-## The script
+## Exact phrases for common pushes
 
 When they ask for something outside scope:
 
@@ -115,6 +80,10 @@ Do not price it in the text thread. Texts get a yes by accident.
 Text you can send as-is:
 
 > Got the note on [ask]. Checking it against what we locked. Two options by [time] — add it as a line item, or park it. Not starting it in this thread.
+
+Phone version under 160 characters:
+
+> Got [ask]. Checking locked list. Two options by [time]: add at price or park. Not starting in this thread.
 
 ## What to do after they pick
 
@@ -154,7 +123,7 @@ Example 1: "Can you also add a short email sequence?"
 
 - Minutes: 90
 - Hourly: $150
-- Line item: $225 → round to $225
+- Line item: $225
 - Reply: "I can do that. It is outside what we agreed on, so it is a separate line item at $225. Want me to add it, or park it?"
 
 Example 2: "Just tweak the landing page copy one more time."
@@ -162,6 +131,12 @@ Example 2: "Just tweak the landing page copy one more time."
 - Minutes: 45
 - Line item: $125
 - Reply same shape. Do not call it "just."
+
+Example 3: "Can you hop on a quick call with our partner?"
+
+- Minutes: 30 prep + 30 call = 60
+- Line item: $150
+- Reply: "Happy to. Outside the current fee, so $150 for the call and notes. Add it now or park until after delivery?"
 
 Fill your own before sending:
 
@@ -171,6 +146,19 @@ Minutes logged: ________
 Line item calculated: ________
 Two-option sent: yes / no
 ```
+
+## Weekly reset hook so Thursday cannot erase it
+
+On the Monday reset, add one row: "Open scope asks waiting on yes." If none, write none.
+
+- Screenshot or copy the original scope into the project note the day the ask arrives. Do not rely on searching email later.
+- If the ask is a third or fourth extra, send the full script again. Do not soften the second one.
+- Set a 24-hour timer on the two-option email. If no reply by then, send the day-3 bump without starting the work.
+- Log the ask on the same card as the original onboarding note so the weekly reset can see it.
+- Cap open scope asks at three. A fourth means you are rewriting the engagement. Close or re-scope the whole job.
+- After any yes, write the invoice line the same hour. The file does not open until the line is on the invoice.
+- At Friday close, mark every parked ask with a date or mark it declined. Unmarked parks become free work next month.
+- Add a line to the next Monday reset: "Scope asks waiting on written yes: [count]." Zero is the goal.
 
 ## What still breaks when the script lives in your head
 
