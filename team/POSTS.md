@@ -99,7 +99,7 @@ Client asks "can you just add this?" and it isn't in the project. This is the re
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-scope
 $49 once, no subscription.
 
-### demo-video-onboarding | posted 2026-11-04, youtube id VPX63WUhQtc (https://www.youtube.com/watch?v=VPX63WUhQtc); ready for instagram, facebook | instagram: SAMS Service, facebook: professional portfolio
+### demo-video-onboarding | posted 2026-11-04, youtube id VPX63WUhQtc (https://www.youtube.com/watch?v=VPX63WUhQtc); instagram tried 2026-11-11 twice, "still processing" (check recent Instagram media for this caption before any retry); ready for facebook | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-onboarding.mp4
 Title: New client just paid? Your welcome email is already written
 New client just paid and you're rewriting the same welcome email again? This is the real Buzzyfly app with sample clients. On day 1 it lists the welcome email and the intake questions, already written with their name and project. Copy, send, tick it off. The next onboarding steps come up on schedule.
@@ -123,7 +123,7 @@ Monday starts with a scramble? The Buzzyfly app has a 20-minute Monday reset: op
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-reset
 $49 once, no subscription.
 
-### cartoon-forgot-recap | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-forgot-recap | posted 2026-11-11, youtube id 1QT3k0RDYRQ (https://www.youtube.com/watch?v=1QT3k0RDYRQ); ready for instagram, facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-forgot-recap.mp4
 Title: Promised a recap after the call? It's already written
 Great first call. You promise a recap tomorrow. Then the week happens, and by Friday it feels too awkward to send.
