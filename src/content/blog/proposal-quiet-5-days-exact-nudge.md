@@ -1,7 +1,7 @@
 ---
 title: "Proposal Quiet for 5 Days? Send This Exact Nudge"
 seoTitle: "Proposal Quiet 5 Days: Exact Nudge Email"
-description: "Paste-ready day-5 nudge when a proposal sits silent so you get a reply or free the calendar without guessing."
+description: "Paste-ready day-5 nudge when a proposal sits silent so you can ask clearly, then move on or free the calendar without guessing."
 pubDate: 2026-11-11
 category: "sales"
 featuredProductTitle: "Buzzyfly Digital System"
