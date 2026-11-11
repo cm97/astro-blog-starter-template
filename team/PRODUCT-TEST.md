@@ -3,6 +3,36 @@
 Proof the product works as the listing says. Rerun this before any ad or big
 push, and after any change to `/app`. Add the newest run at the top.
 
+## 2026-11-11, Test team: 20 daily checks
+
+How: same as 2026-11-10 (local D1 with every migration, test keys in the LOCAL
+`download_tokens` only, Playwright at 375px and 1280px, an uncommitted config
+copy without the `ai` binding). The Stripe connector still needs signing in
+again, so check 16 read `src/`. Also tested: the new free `/hourly-rate-calculator` (#230).
+
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 1 | Lock | PASS | `/app` with no key or a bad key: 402. The system key opens `/app`. A $15 key opens only `/app/reset`, and the other three stay at 402. |
+| 2 | Today list | PASS | Proposal 5 days ago: "First proposal follow-up". Invoice due 9 days ago: "a week overdue". New client today: welcome and intake only. |
+| 3 | Email writer | PASS | All 21 emails fill in name, project, date and sign-off, with no raw `{placeholders}`. |
+| 4 | Copy / open in email app | PASS | The clipboard and the `mailto:` link carry the same filled subject and body. |
+| 5 | Mark sent | PASS | The item clears. "Second proposal follow-up" comes up next. |
+| 6 | Weekly reset counts | PASS | 1 open invoice ($800), 1 follow-up due, 2 onboarding steps, matching the test clients. |
+| 7 | Scope and proposal replies | PASS | All 6 open and fill. |
+| 8 | Pricing maths | PASS | App: $72/h, $1,300 and $750, then $94 at 80k. The new `/hourly-rate-calculator` gives the same floor ($72, then $94), $1,435 a week, a $288 half-day, and "$30,800 a year short" at $60/h. All checked by hand. |
+| 9 | Data, backup, restore | PASS | Clients survive reload. The backup has 3 clients and the sign-off. Restore works. |
+| 10 | Smaller apps | PASS | The system key opens all 3 (200) with shared clients. Follow-Ups has 9 emails, Onboarding 6, and Reset shows Monday, This week and Log. |
+| 11 | Phone 375px | PASS | No sideways scroll and 0 targets under 44px on `/`, `/store`, a post, `/app` and `/hourly-rate-calculator`. |
+| 12 | Desktop 1280px | PASS | No sideways scroll and no JS errors on the same pages. |
+| 13 | Accessibility | PASS | One H1, no heading skips, no missing alt text, no low contrast found, and focus rings show. |
+| 14 | Speed | PASS | `/` is 58 KB over 9 requests and `/store` 37 KB over 10. DOM-ready in 1.4–1.6 s on a simulated slow line. |
+| 15 | Links | PASS | 127 internal links from `/`, `/store`, `/blog/` and 76 posts: 0 broken (`/kids` gives 503 locally only, because it is the KIDS worker). Every post ends on a buy link or `/store`. |
+| 16 | Buy path | PASS (src only) | `src/` has only the 4 links rule 5 allows (`bJebJ3…` ×98, `5kQ7sN…`, `fZubJ3…`, `3cI8wR…`). Each `/buy/<id>` goes to its own link. |
+| 17 | Thank-you page | PASS | Paid test session: "Your app is ready." and `/app` opens. Unknown session: "Checking your payment…", then "We can't confirm this payment yet." Missing session: "Already bought a Buzzyfly app?". |
+| 18 | Copy check | PASS (fixed) | FAIL before the fix: the direct-pushed `friday-4-minute-pipeline-close` said its "four rows and the exact lines" live inside the app. The app's Friday close has different fields. The post now names the real 10-minute Friday close (money in, what slipped, the first task for Monday), the Today list and saved custom emails. The homepage trust row (#228) matches the store. |
+| 19 | Rules check | PASS | No "instant" claims, no `eVq4gB` link, no $97 bundle, no invented views or dates, no "zip", no `coachmanager@` in rendered HTML, one refund wording, and the liability section is present. |
+| 20 | Search check | PASS | 79 pages: one title, one description and one H1 each, with no duplicates. JSON-LD on 78 (not on the `/blog/` index). |
+
 ## 2026-11-10, Test team: 20 daily checks
 
 How: same as 2026-11-06 (local D1 with every migration, test keys in the
