@@ -15,7 +15,7 @@ const settings = await getSettings(Astro.locals.runtime?.env);
 const digitalSystem = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
 const order = getOrderAction(digitalSystem.id);
 const guarantee = BUZZYFLY_CONFIG.guarantee;
-const guaranteeShort = "30-day refund if the app is not delivered or not as listed.";
+const guaranteeShort = BUZZYFLY_CONFIG.guaranteeShort;
 
 // Same trust signals as /store, shown by the hero offer card so a first-time
 // visitor sees the low-risk reasons to buy right next to the price and button.
