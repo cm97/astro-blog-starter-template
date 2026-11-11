@@ -37,7 +37,7 @@ Image: none
 Invoice a week overdue and you're dreading the email? We made a free tool for it. Pick how late it is, and it writes a polite, firm reminder you can send in 30 seconds. No sign-up.
 https://buzzyfly.com/overdue-invoice-email?utm_source=facebook&utm_medium=social&utm_campaign=overdue-invoice-free-tool
 
-### unpaid-invoice-steps | ready | facebook: professional portfolio
+### unpaid-invoice-steps | posted 2026-11-11, id 1115192551682116_122146342161356277 | facebook: professional portfolio
 Image: none
 Client paid part of the invoice and went quiet? Before you think about court, send one clear written note:
 
