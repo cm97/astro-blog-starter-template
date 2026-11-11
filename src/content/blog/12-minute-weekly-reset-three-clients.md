@@ -3,11 +3,12 @@ title: "The 12-Minute Weekly Reset When You Have Three Clients and No Time"
 seoTitle: "12-Minute Weekly Reset for Three Clients and No Time"
 description: "Exact 12-minute Monday reset for solo operators with multiple clients — three cash moves, two follow-ups, one open date list so the week cannot erase them."
 pubDate: 2026-10-28
-updatedDate: 2026-10-30
+updatedDate: 2026-11-11
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 ---
 
 You open the laptop Monday with three clients, two quiet threads, and one invoice that never left. The week is already late. You start rebuilding the list from memory. That is the leak.
@@ -118,6 +119,31 @@ When the invoice is ready but you keep delaying the send:
 
 > Invoice [number] for [deliverable] attached. Due [date]. Reply if the billing address changed.
 
+## Phone-only version (from your phone, under 12 minutes)
+
+Open notes. Paste the three-cash-moves block. Fill it. Send the two follow-ups from Messages or email. Set one reminder for Wednesday. Close the app. Done.
+
+Exact phone follow-up for quiet proposal:
+
+> Still holding [date] start for [project]? One line is enough or I release the slot.
+
+Exact phone invoice nudge:
+
+> Invoice for [deliverable] due [date]. Reply if the address changed.
+
+## When Monday is already 2pm and you are behind
+
+Skip the full scan. Do only the cash moves and one follow-up. Write the missing dates in one line and park the rest for Wednesday. The week still has a list.
+
+Fill-in for late Monday:
+
+```
+Late start. Cash moves only:
+1) ________
+2) ________
+Wednesday catch-up: ________
+```
+
 ## Extra moves when three clients already feel like six
 
 - If any open invoice is older than 7 days, it becomes priority 3 before new delivery.
@@ -125,6 +151,9 @@ When the invoice is ready but you keep delaying the send:
 - Cap the open-client scan at paid plus open proposals. Everything else is a closed or paused row.
 - If the three priorities do not include one money move, swap one in before you leave the 3-minute block.
 - Keep the fill-in blocks in the same place as the onboarding checklist and the proposal follow-up lines. One open, all available.
+- If a client texts during the reset, answer in one line and re-paste the next date. Do not open a new thread.
+- Screenshot the filled blocks and drop them into the same note the onboarding checklist lives in. Future Monday finds them without searching.
+- If all three clients are quiet, the first cash move becomes the oldest unpaid invoice or the oldest open proposal.
 
 ## What still breaks when this only lives in your head
 
