@@ -19,7 +19,10 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 | overdue-invoice-free-tool, unpaid-invoice-steps, retainer-menu-scope, late-invoice-image, free-demo-try | Facebook queue (POSTS.md) | not posted yet | - | - | - |
 | paid-late-partial-steps, scope-change-log | Facebook queue (POSTS.md, added 2026-11-04) | not posted yet | - | - | - |
 | before-you-sign-scope, yes-to-kickoff-24h | Facebook queue (POSTS.md, added 2026-11-06) | not posted yet | - | - | - |
-| Community replies R1 to R19 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
+| demo-video-reset | YouTube Shorts | 2026-11-10 | ? | ? | ? |
+| monday-reset-image, cartoon-messy-onboarding | Facebook / Instagram / YouTube queue | not posted yet | - | - | - |
+| revision-limit-reply, rate-floor-free-tool | Facebook queue (POSTS.md, added 2026-11-11) | not posted yet | - | - | - |
+| Community replies R1 to R25 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
 | Whole site, ad check 2026-11-06 (LOG #215) | mostly direct | to 11-06 | 96 | 1 (first, direct to /) | 0 |
 | Whole site 11-03..04 (sales-b, LOG 2026-11-04) | 9 YouTube, rest direct | - | 38 views | 0 | 0 |
 | Demo videos (weekly check 2026-11-10) | YouTube Shorts, Instagram Reels, Facebook video | 2026-11-03 to 11-10 | site views 11-03..11-10: youtube 27, facebook 6, google 23, direct 61, other 9. YouTube views: proposal 3, invoice 0, scope 18, onboarding 4, pricing 7. Instagram insights: not available (permission) | 1 (direct) | 0 |
@@ -56,6 +59,12 @@ self-promotion rule in the sidebar, then post.** Reddit replies carry no link by
 | L17 | ~2026-11-05 ("1 day ago") | [r/legaladvice](https://www.reddit.com/r/legaladvice/comments/1xoe74k/longtime_us_client_suddenly_refuses_to_pay_28k/) | "Long-time US client suddenly refuses to pay ~$28k ... billing hourly in my own name" | hot | R17 | draft, owner posts |
 | L18 | ~2026-11-02 ("4 days ago") | [r/Upwork](https://www.reddit.com/r/Upwork/comments/1xlynvw/how_do_you_handle_scope_creep_on_fixedprice/) | "How do you handle scope creep on fixed-price contracts?" | hot | R18 | draft, owner posts |
 | L19 | ~2026-11-04 ("2 days ago") | [r/freelancing](https://www.reddit.com/r/freelancing/comments/1xngsi5/is_this_normal_for_freelancing_or_am_i_being/) | "When I said the ops work was out of scope, she told me that's just how startups are ... before I sign, how hard can I push" | hot | R19 | draft, owner posts |
+| L20 | 2026-11-04..11 (past week, exact day not shown) | [r/ContractorUK](https://www.reddit.com/r/ContractorUK/comments/1xrvy89/dealing_with_agenciesclients_delaying_contract/) | "Dealing with agencies/clients delaying contract invoices" | hot | R20 | draft, owner posts |
+| L21 | 2026-11-04..11 (past week) | [r/LegalAdviceIndia](https://www.reddit.com/r/LegalAdviceIndia/comments/1xrkiww/hyderabad_freelancer_client_delaying_payment_for/) | "freelancer colorist ... did work for a Agency ... delivered the final files", client delaying payment 3+ months | hot | R21 | draft, owner posts |
+| L22 | 2026-11-04..11 (past week) | [r/freelancing](https://www.reddit.com/r/freelancing/comments/1xsi9he/how_do_you_handle_outofscope_work_in_a_proposal/) | "We write SOWs constantly and still end up with clients who come back after signing wanting..." | hot | R22 | draft, owner posts |
+| L23 | ~2026-11-05 (past week) | [r/StructuralEngineering](https://www.reddit.com/r/StructuralEngineering/comments/1xohzw5/freelance_structural_engineerscope_expanded_far/) | "Freelance structural engineer, scope expanded far ... could use some perspective from others who have dealt with scope creep, unpaid..." | hot | R23 | draft, owner posts |
+| L24 | ~2026-11-05 (past week) | [r/agency](https://www.reddit.com/r/agency/comments/1xohc2a/client_wants_another_revision_after_weve_used_up/) | "Client wants another revision after we've used up the..." (title cut off in search) | hot | R24 | draft, owner posts |
+| L25 | 2026-11-04..11 (past week) | [r/GraphicDesigning](https://www.reddit.com/r/GraphicDesigning/comments/1xsq0qq/need_help_with_pricing/) | "Need help with pricing" | warm | R25 | draft, owner posts |
 
 ### Draft replies (team A, role 4, 2026-11-02)
 
@@ -171,6 +180,49 @@ Then say it plainly: "I'm happy to help with ops, but as a separate line so we b
 
 Best two to post first this round: **R18** (exact question, big sub, likely to get read) and **R15** (urgent and specific, the lien deadline is useful).
 
+### Draft replies, round 4 (team A, role 4, 2026-11-11)
+
+Found 2026-11-11 by web search limited to the past week (the 11-09 run was delivered late
+and is folded into this one). Same limits: titles and snippets only, the owner opens each
+thread and checks the sub's rules first. No links on Reddit, except R25 if the sub allows
+free tools (the calculator is free and has no sign-up).
+
+**R20 (L20, agencies/clients delaying contract invoices).**
+Three things usually move it:
+1. Check your contract for the payment term and any "pay when paid" clause. If there isn't one, the agency owes you on your terms whatever their client does.
+2. Write once, with dates: "Invoice [#] for [amount] was due on [date]. Please confirm the payment date by [day]. Under the Late Payment of Commercial Debts Act I can add statutory interest and a fixed fee from [date], and I'd rather not need to."
+3. Ask who in accounts runs the payment cycle, and send the invoice there directly, every time. Most delays are an invoice sitting in the wrong inbox.
+For the next contract: 14-day terms, the late-payment line written in, and no new timesheets until the last one is paid.
+
+**R21 (L21, colorist, agency delaying payment 3+ months).**
+Not a lawyer. A common order that works for freelancers in India:
+1. A written reminder by email that lists each invoice, the delivery date of the final files, and the amount, and asks for a payment date by a set day.
+2. If nothing comes, a legal notice from an advocate. It costs a little and very often gets paid at that stage.
+3. If you're registered under MSME (Udyam), the MSME Samadhaan portal lets you file a delayed-payment case against the buyer, and interest runs on late payments past 45 days. Worth checking whether you can still register.
+Keep the WhatsApp and email trail where they approved the work. It's evidence even without a signed contract.
+
+**R22 (L22, out-of-scope work before and after signing an SOW).**
+What helps most is making "out of scope" a process, not a debate:
+- In the SOW, list deliverables with quantities, and add one line: "Requests outside this list are quoted as a change order before work starts."
+- Name the change-order steps: client asks, you reply with price and timeline within 2 working days, client approves in writing, then it's scheduled.
+- When it happens, use the same reply every time: "Happy to. That's outside the SOW, so I'll send a change order with the cost and the date impact. Or we can swap it for [item] that hasn't started."
+Clients push less when the answer is predictable and fast, and you never have to argue it from scratch.
+
+**R23 (L23, freelance engineer whose scope expanded and isn't paid).**
+Two separate problems, so handle them separately.
+Money first: invoice what's been done so far, including the extra work, with a short breakdown ("original scope: [amount]; additional items requested on [dates]: [amount]"). Ask for a payment date.
+Then scope: before doing anything more, send a written list: "Here's what's in the original agreement, and here's what's been added. I can continue with the additions at [rate/fee], or we stop at the original scope. Which do you want?" Don't do further work until they answer in writing.
+For next time: a fee proposal with a numbered scope, a line that anything else is a variation priced in advance, and staged invoices so you're never far ahead of payment.
+
+**R24 (L24, client wants another revision after the included rounds are used).**
+Answer the same way every time, kindly and quickly: "Happy to make that change. We've used the [2] revision rounds included in the project, so this round is [price] and we can have it back by [date]. Shall I go ahead?" Two things make it land. Count the rounds out loud as you go ("this was round 2 of 2"), so it's no surprise. And offer a bundle if they're likely to keep going ("or 3 more rounds for [price]"). Most clients just say yes once the price is clear and quick.
+
+**R25 (L25, help with pricing).**
+Work it out from what you need, not from what others charge. Take the yearly take-home you want, add your yearly costs (software, equipment, tax set-aside), and divide by the hours you can really bill. That's usually 20 to 25 a week, not 40, once admin and finding clients come out. That's your floor hourly rate. Then price each project as estimated hours x that rate, plus about 20% for revisions and back-and-forth. Quote the project, not the hourly rate.
+If the sub allows free tools: "There's a free calculator for exactly this (no sign-up): https://buzzyfly.com/hourly-rate-calculator?utm_source=reddit&utm_medium=community&utm_campaign=reddit-graphicdesigning-pricing". Otherwise post without it.
+
+Best two to post first this round: **R24** (exact moment the app's revision-limit reply covers; agency owners are buyers) and **R22** (agency side, a process they can copy).
+
 ### Lead research and outreach (roles 5 and 6)
 
 No businesses added this run. The searches found only vendor blogs and courses, not small
@@ -192,6 +244,11 @@ so it's not listed.
 **2026-11-06:** 0 businesses added. This week's searches turned up only people asking for help
 (L15 to L19, answered in their threads) and other sellers' kits. No new small business with a
 public page stating the problem. No cold notes sent or drafted.
+
+**2026-11-11:** 0 businesses added. The searches found people asking for help (L20 to L25,
+answered in their threads) and more competing free and paid tools (Freelance Guardian, a
+scope-creep Google Sheet, a salary calculator in Excel). No small business with a public page
+stating the problem. No cold notes drafted.
 
 ## Partners
 
@@ -352,9 +409,17 @@ Buyer doubts about Buzzyfly to answer on /store (for the Web builders): "Is it a
 - "They say out-of-scope work is just how startups are. Do I push before signing?" Post idea: before-you-sign-scope (POSTS.md).
 - Seen again: more free and paid scope and invoice kits launching on r/SideProject and r/buildinpublic (Trelio, Scope Lock Kit). Buyers comparing will ask "why pay $49?". Answer on /store: it's an app that shows today's follow-ups with the emails already filled in, not a template pack, plus the free /demo to try first.
 
+### Added 2026-11-11 (from L20 to L25)
+- "The agency says they can't pay me until their client pays them." FAQ: check for a "pay when paid" clause; without one they owe on your terms.
+- "A client in another country (or a big agency) has delayed payment for months." Post idea: reminder, then a legal notice, then the local small-business route.
+- "We write SOWs and clients still come back wanting more." Post idea: make out-of-scope a fixed change-order process with one reply.
+- "Revisions are used up and they want another." Post idea: revision-limit-reply (POSTS.md); count rounds out loud.
+- "How do I price?" Post idea: rate-floor-free-tool (POSTS.md) to the free /hourly-rate-calculator.
+- Competition seen this week on r/SideProject: Freelance Guardian (invoices + scope), a scope-creep Google Sheet, a free Excel salary calculator. Our honest difference: one app with the follow-ups, onboarding, scope replies and pricing, the emails already filled in, a free demo, $49 once.
+
 ## Ready ad set (role 9, waiting for the owner's yes and daily budget)
 
-Parked: the owner said no paid ads on 2026-11-03 (LOG). Kept ready in case that changes; it needs the owner's yes and a daily budget. `launch-ad-1` ($15) showed 0 tracked visits.
+Parked: the owner said no paid ads on 2026-11-03, and the 5-day launch-ad-1 test ended 11-10 with 0 tracked visits, verdict stop. Kept ready only in case the owner changes that; it needs their yes and a daily budget. If it's ever used, send it to /demo, not /store: cold ad visitors need to see the app first.
 - Platform: Facebook and Instagram (Meta), objective "Traffic" to /store.
 - Audience: US, UK, CA, AU; ages 25 to 55; interests freelancing, Upwork, Fiverr, life coaching, small business owners, self-employment.
 - Image: https://buzzyfly.com/social/buzzyfly-digital-system-1.jpg

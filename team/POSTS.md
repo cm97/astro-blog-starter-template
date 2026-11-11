@@ -213,3 +213,23 @@ The Buzzyfly Digital System gives every new client a 10-step onboarding plan, ea
 
 $49 once. Browser app. No subscription.
 https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-messy-onboarding
+
+### revision-limit-reply | ready | facebook: professional portfolio
+Image: none
+Revisions are used up and the client wants "just one more round"? Reply kindly, quickly, and with a price:
+
+"Happy to make that change. We've used the 2 revision rounds included in the project, so this round is [price] and we can have it back by [date]. Shall I go ahead?"
+
+It helps to count the rounds as you go ("this was round 2 of 2"), so the price is never a surprise.
+
+The Buzzyfly Digital System has this revision-limit reply ready to copy, next to the scope, discount and change-order replies for every client. $49 once, works in your browser, no subscription.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=revision-limit-reply
+
+### rate-floor-free-tool | ready | facebook: professional portfolio
+Image: none
+Not sure what to charge? Start from your floor, not from what others charge:
+
+(take-home you want + yearly costs) ÷ hours you can really bill.
+
+For most freelancers that's 20 to 25 billable hours a week, not 40. We made a free calculator that does the maths in a minute, no sign-up, nothing saved.
+https://buzzyfly.com/hourly-rate-calculator?utm_source=facebook&utm_medium=social&utm_campaign=rate-floor-free-tool
