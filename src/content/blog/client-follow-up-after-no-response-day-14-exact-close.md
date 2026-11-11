@@ -3,6 +3,7 @@ title: "Client Follow-Up After No Response: Exact Day 14 Close"
 seoTitle: "Client Follow-Up After No Response Day 14 Close"
 description: "Paste-ready day-14 close email when the proposal or lead stays silent after earlier bumps. Free the calendar and stop guessing."
 pubDate: 2026-11-09
+updatedDate: 2026-11-11
 category: "sales"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -68,6 +69,20 @@ Phone-paste version (under 160 chars):
 - If they reply “still thinking,” send one line: “Understood. The file is closed. Reply by [specific day] if you want it reopened as a new proposal.” Do not leave it open.
 - Never discount in the close. The original price stays the record.
 - On the next weekly reset, move every closed proposal older than 14 days out of the active list. The list is for cash still open, not for ghosts.
+- Write the exact start date you offered into the close email before you send. Guessing it from memory creates a soft close that does not free the calendar.
+- Put a 5-minute calendar block titled “Day 14 close: [Name]” the night before. The block is the trigger. Without it the email never leaves.
+- After the send, screenshot or copy the sent time into the log. “I think I sent it” is not a closed file.
+- If three day-14 closes land the same morning, send all three before 11am. Do not spread them. One sitting, three files closed.
+- Keep a “parked past day 14” note separate from the active list. One monthly scan of that note is enough. Do not let them re-enter the Monday reset.
+- When a reply arrives after the close, treat it as a brand-new proposal. Restart the day-3 clock. Do not reopen the old row.
+- If they ask for a call after the close, answer: “Happy to talk. First step is a short written yes on the original scope and price so we both know what we are discussing.” Do not jump on a call with an open maybe.
+- At Friday close, count how many day-14 closes you sent that week. Write the number on the Monday still-open line. Zero is the goal for open ghosts.
+- Pre-write the day-14 subject and body in the calendar note the day the proposal first goes out. The 5-minute block only needs a paste and send.
+- Never send the close from your phone while standing in a line. Sit, open the log, fill the three-minute block, then send. The log is the gate.
+- After any paid yes that arrives post-close, open the onboarding checklist the same hour. The follow-up sequence ends when money lands.
+- Cap the reopen window at 30 days. After that the original price and start date are no longer valid. A new proposal is required.
+- If the original start date has already passed by more than 7 days, do not offer to hold it again. The close simply releases the file.
+- Keep the five most common objection replies in the same note so you never search under pressure after a late reply.
 
 ## Fill-in after every day-14 close
 
