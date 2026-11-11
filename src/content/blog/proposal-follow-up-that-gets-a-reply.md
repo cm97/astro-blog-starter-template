@@ -15,7 +15,7 @@ The deal did not die. You stopped chasing it.
 
 Most freelancers and solo operators send one proposal, wait, then either ghost or send a long “just checking in” that sounds desperate. Neither works. The ones who close more send short, specific follow-ups on a fixed cadence.
 
-Here is the exact sequence that gets a reply without the awkwardness.
+Here is the exact sequence to send, without the awkwardness.
 
 ## The 4-minute log the minute you hit send
 

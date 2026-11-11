@@ -139,6 +139,6 @@ It also holds the onboarding checklist and the Monday reset so the status email 
 Get the Digital System — $49  
 https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
 
-One-time payment. Opens in your browser. 30-day refund if you cannot access the app or it is not as described. No change-of-mind refunds once you have had access.
+One-time payment. Opens in your browser. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 The free weekly-reset checklist is also on the homepage if you want the Monday version first.
