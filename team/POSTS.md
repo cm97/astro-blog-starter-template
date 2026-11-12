@@ -99,7 +99,7 @@ Client asks "can you just add this?" and it isn't in the project. This is the re
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-scope
 $49 once, no subscription.
 
-### demo-video-onboarding | posted 2026-11-04, youtube id VPX63WUhQtc (https://www.youtube.com/watch?v=VPX63WUhQtc); instagram tried 2026-11-11 twice, "still processing" (check recent Instagram media for this caption before any retry); ready for facebook | instagram: SAMS Service, facebook: professional portfolio
+### demo-video-onboarding | posted 2026-11-04, youtube id VPX63WUhQtc (https://www.youtube.com/watch?v=VPX63WUhQtc); blocked for instagram: 4 tries on 2026-11-11 and 11-12 all stuck at "still processing", never went live (checked media each time), so skip it and use the next video; ready for facebook | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-onboarding.mp4
 Title: New client just paid? Your welcome email is already written
 New client just paid and you're rewriting the same welcome email again? This is the real Buzzyfly app with sample clients. On day 1 it lists the welcome email and the intake questions, already written with their name and project. Copy, send, tick it off. The next onboarding steps come up on schedule.
@@ -163,7 +163,7 @@ The Buzzyfly demo is the real app with three sample clients: a proposal that wen
 
 Try the free demo: https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=free-demo-try
 
-### cartoon-close-the-loop | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-close-the-loop | posted 2026-11-12, youtube id _TU1x57QMnw (https://www.youtube.com/watch?v=_TU1x57QMnw); ready for instagram, facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-close-the-loop.mp4
 Title: Client ghosted your proposal? Send this on day 14
 Proposal sent. Then silence. Two weeks of checking your inbox and wondering if one more chase is too pushy.
