@@ -265,6 +265,9 @@ unlock key for the $49 Digital System that you create for them.
 | P2 | Lyn Prowse-Bishop, host of [The Virtual Business Show](https://podcasts.apple.com/us/podcast/the-virtual-business-show/id381061982) (VA podcast since 2010), runs [Executive Stress Office Support](https://www.execstress.com/about-australian-virtual-assistant/) | VAs and small business owners, mostly Australia | Long-running VA show that covers tools and systems for small practices. | Contact form on execstress.com, or [LinkedIn](https://au.linkedin.com/in/lynprowsebishop) | PP2 | draft, owner sends |
 | P3 | Hannah Cole, [Sunlight Tax](https://www.sunlighttax.com/podcast) (podcast still publishing, latest episode 2026-11-03) | Self-employed creatives: designers, artists, therapists, consultants | Her topic is getting money and business systems in order. Late-invoice reminders and a Monday money check fit that. | Contact page on sunlighttax.com (not linked from the podcast page; check the site menu) | PP3 | draft, owner sends |
 | P4 | [The Coaching Tools Company](https://www.thecoachingtoolscompany.com/) (coaching templates and a coach community; founder Emma-Louise Elsey has since moved to [Fierce Kindness](https://fiercekindness.com/big-news-from-emma-louise-october-2024/)) | Life and business coaches | They sell coaching tools, not client admin. Buzzyfly covers the business side (follow-ups, onboarding emails, invoices) without competing. | Contact page or FAQ on thecoachingtoolscompany.com | PP4 | draft, owner sends |
+| P5 | Emma Cossey, [The Freelance Lifestyle](https://freelancelifestyle.co.uk/), host of [The Freelancer's Teabreak](https://freelancelifestyle.libsyn.com/freelancersteabreak) podcast, runs a free Discord community (linked from the podcast page) | UK freelancers, many parents working around family time | Short, practical episodes on freelance admin. A ready email for the follow-up you keep putting off fits her "short and sweet" style. | Contact page on freelancelifestyle.co.uk | PP5 | draft, owner sends (added 2026-11-12) |
+| P6 | Preston Lee (founder) and Clay Mosley (co-host), [Millo](https://millo.co/about) and the [Freelance to Founder](https://www.podchaser.com/podcasts/freelance-to-founder-420380) call-in podcast | Freelancers stuck in feast or famine | Their callers ask how to stop clients going quiet and how to handle scope. The app's follow-up and scope replies are exactly that. | Contact page on millo.co | PP6 | draft, owner sends (added 2026-11-12) |
+| P7 | Latasha James, [The Freelance Friday Podcast](https://www.latashajames.com/podcast) (page has a "Sponsor the show" link) | Freelance social media marketers and creatives | Her audience runs small client rosters with monthly retainers: proposals, invoices, onboarding. | [latashajames.com/contact](https://www.latashajames.com/contact), or hey@latashajames.com (listed on her YouTube) | PP7 | draft, owner sends; a sponsor slot would be paid, so only the free review offer (added 2026-11-12) |
 
 ### Partner pitches (role 12)
 
@@ -295,6 +298,18 @@ Hi Hannah, your listeners are freelancers getting their money systems in order. 
 Subject: A business-side tool for your coaches
 Hi, I make Buzzyfly, a browser app for solo coaches and freelancers. It doesn't overlap with your coaching tools. It covers the admin side: which prospect to follow up with today, welcome and intake emails for new clients, invoice reminders and replies to scope creep, all written and ready to copy. I'd like to give your team a free copy to review. If it fits your community, I'd be glad to talk about a referral share on terms we agree. [Owner name], support@buzzyfly.com, https://buzzyfly.com/store?utm_source=coachingtoolscompany&utm_medium=partner&utm_campaign=partner-ctc
 
+**PP5 (Emma Cossey, The Freelance Lifestyle).**
+Subject: A small tool for the follow-up you keep putting off
+Hi Emma, I've been listening to The Freelancer's Teabreak. I make Buzzyfly, a small browser app for solo freelancers. It shows which client needs a nudge today and has the email ready: proposal follow-ups, late-invoice reminders, onboarding emails. You copy it and send it from your own inbox. I'd like to give you a free copy, no strings. You can try it first with sample clients, no sign-up: https://buzzyfly.com/demo?utm_source=freelancelifestyle&utm_medium=partner&utm_campaign=partner-freelancelifestyle. If you think it would help your community, I'd be glad to set up a referral share on terms we agree. [Owner name], support@buzzyfly.com
+
+**PP6 (Preston Lee and Clay Mosley, Freelance to Founder).**
+Subject: For callers whose clients go quiet
+Hi Preston and Clay, a lot of Freelance to Founder callers ask what to send when a proposal goes quiet or a client keeps adding work. I make Buzzyfly, a browser app that lists who needs a follow-up today and has that email written: day 3, 7 and 14 proposal follow-ups, invoice reminders and scope replies, with the client's name and project filled in. $49 once, no subscription. I'd like to give you both a free copy. There's a no-sign-up demo here: https://buzzyfly.com/demo?utm_source=millo&utm_medium=partner&utm_campaign=partner-millo. If it's useful for your listeners, I'm happy to agree a referral share. [Owner name], support@buzzyfly.com
+
+**PP7 (Latasha James, Freelance Friday).**
+Subject: Free review copy: client follow-ups, already written
+Hi Latasha, I make Buzzyfly, a small browser app for freelancers who run their own client list. Each day it shows who needs a follow-up, an invoice reminder or an onboarding step, and the email is already written with their name and project. I'd like to give you a free copy to try, no obligation. Demo with sample clients, no sign-up: https://buzzyfly.com/demo?utm_source=latashajames&utm_medium=partner&utm_campaign=partner-latashajames. If you'd ever mention it, I can set up a referral share on terms we agree. [Owner name], support@buzzyfly.com
+
 ## Newsletters (role 13)
 
 Checked on each newsletter's own booking page on 2026-11-03. Numbers are what the publisher
@@ -318,8 +333,28 @@ No sign-up." Link: https://buzzyfly.com/overdue-invoice-email
 
 | Platform | Kit ready? | Date | Result |
 |---|---|---|---|
+| Indie Hackers | yes (below, 2026-11-12) | owner posts any weekday; free | - |
 | Product Hunt | yes (below) | owner picks; schedule up to 1 month ahead | - |
 | Show HN | yes (below, 2026-11-05): `/demo` is live with no sign-up, which is what HN's rules ask for | owner picks a weekday morning US time | - |
+
+### Indie Hackers launch kit (role 15, 2026-11-12)
+
+Free. Two parts: a product page, and one honest post in the community. The owner posts both
+from their own Indie Hackers account. No paid placement.
+
+- **Product page** (indiehackers.com, "Add your product"): name Buzzyfly; one-liner "A browser app that shows which client to follow up with today, with the email already written."; website https://buzzyfly.com/?utm_source=indiehackers&utm_medium=launch&utm_campaign=ih-product; revenue: enter the real number from Stripe, even if it's $0.
+- **Post title:** "I built a $49 one-time app for freelancers who forget follow-ups. 0 sales so far. Roast the page?" (Only use "0 sales" if Stripe still shows 0 on the day.)
+- **Post body (owner's voice):**
+  I run a small solo business, and the thing I kept dropping wasn't the work. It was the follow-up after it: the proposal that went quiet, the invoice a week late, the welcome email for a new client. So I built Buzzyfly. It's a browser app. Each day it lists who needs something, and the email is already written with their name, project and date. You copy it and send it from your own inbox.
+  Some details: plain DOM code on Astro and Cloudflare Workers. Client data stays in the browser (localStorage, with JSON backup and restore). No account, no server copy. $49 once, or $15 to $29 for a single tool. No subscription.
+  Try it with sample clients, no sign-up: https://buzzyfly.com/demo?utm_source=indiehackers&utm_medium=launch&utm_campaign=ih-post
+  Honest question: what would make you trust a $49 app from a solo maker enough to try it?
+- **Image:** https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/launch/ph-gallery-1.jpg
+- **Checklist:**
+  1. Open /demo on a phone that morning and check that it loads with no "Just a moment..." screen.
+  2. Post between 9 and 11am US Eastern on a weekday.
+  3. Reply to every comment that day, yourself. No vote asks, no sock-puppet accounts.
+  4. Log the date and result in the Launches table, and the utm_campaign in the scoreboard.
 
 ### Show HN launch kit (role 15, 2026-11-05)
 
