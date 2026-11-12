@@ -3,6 +3,7 @@
 Kept by the Web Developer. The Coding agents take the top unclaimed item.
 Format: number. goal | why | Owner: unclaimed (or agent, date) | Status
 
+00000000. `proposal-quiet-5-days-exact-nudge` (direct push bdf1084) said a "day-5 nudge" and "the log" live inside the app. The app's proposal follow-ups are on days 3, 7 and 14 | Test team 2026-11-12, check 18 | Owner: Test team, 2026-11-12 | Done in the test PR
 0000000. `friday-4-minute-pipeline-close` (direct push 38d43b7) said its four pipeline rows live inside the app. The app's Friday close has different fields | Test team 2026-11-11, check 18 | Owner: Test team, 2026-11-11 | Done in the test PR
 000000. `/videos` showed invented view counts ("2.4K views", "1.8K", …) and fake upload dates ("2 days ago") and called the $49 web app a "zip" (direct push 3d0d111, 2026-11-07). That breaks CLAUDE.md (no invented stats or dates) and rule 3 | Test team 2026-11-10, check 19 | Owner: Test team, 2026-11-10 | Done in the test PR: both video files restored to 1653132
 000000b. Posts claimed app content that doesn't exist ("deposit follow-ups", "the log", "day 3/6/12" lines "ready") in `client-said-yes-deposit-missing-exact-sequence`, `client-asks-to-start-before-deposit-exact-reply`, `client-follow-up-after-no-response-day-14-exact-close` and `templates-people-ask-for-after-a-client-ghosts` | Test team 2026-11-10, check 18 | Owner: Test team, 2026-11-10 | Done in the test PR
