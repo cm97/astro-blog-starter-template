@@ -3,7 +3,7 @@ title: "Stop Rebuilding Client Onboarding From Scratch (20-Minute System)"
 seoTitle: "Stop Rebuilding Client Onboarding From Scratch"
 description: "Exact 20-minute onboarding sequence so new clients get welcome, intake, and kickoff without you rebuilding it from memory every time."
 pubDate: "Nov 11 2026"
-updatedDate: "Nov 11 2026"
+updatedDate: "Nov 12 2026"
 heroImage: "/blog-placeholder-1.jpg"
 category: "systems"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -98,6 +98,31 @@ These three cover the first 48 hours. Nothing is rebuilt from memory.
 - If they have not filled the intake by day 3, send the day-2 nudge once and then wait for the kickoff. Do not chase three times.
 - Log the exact subject lines you used. Next client will not require a rewrite.
 - End the 20 minutes by confirming the client now appears on the weekly list. If they do not, the Monday scan will miss them.
+
+## Phone-only version (15 minutes from your phone)
+
+When you are not at a desk. Same sequence. Notes app open.
+
+1. Paste this welcome into a new text or email and send it:
+
+> Hi [Name] — payment received for [project]. Intake link: [link]. Kickoff [day/time] or calendar: [link]. Reply if the slot does not work. First deliverable after the form lands.
+
+2. Create a note titled "[Client] onboarding" and paste the intake link plus kickoff time.
+3. Set a phone reminder for day 2 titled "Intake nudge [Client]".
+4. Add one line to your Monday list: "[Client] on weekly reset."
+5. Close the apps. Timer done.
+
+Exact day-2 phone nudge:
+
+> Still need the intake for [project] so kickoff is useful. Link again: [link].
+
+## Cash locks most people skip
+
+- Put the exact amount paid and "paid in full / deposit only" on the client note the same minute payment clears. Missing numbers become missing cash later.
+- Copy the original scope sentence into the welcome and the private note before you send. Blank scope becomes free work by day 4.
+- Pre-schedule the day-2 nudge the moment the welcome leaves. If it is not on the calendar or reminder, it dies when the next message arrives.
+- If they pay on a Friday, still send the welcome the same day. Monday silence is the failure mode this checklist exists to kill.
+- Cap free extra questions in the welcome thread to one reply. Then re-paste the intake link and stop.
 
 ## What still breaks when the sequence lives only in a doc
 
