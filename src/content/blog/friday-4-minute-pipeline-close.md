@@ -84,6 +84,6 @@ Monday action if silent: park / close / one more line
 
 You will run it on a calm Friday. You will skip it on a slammed one when a client texts during delivery. The proposals stay open, the deposits sit, and Monday starts with the same scramble you already had.
 
-The same four rows and the exact lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the close still happens when the week is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The Buzzyfly Digital System has a 10-minute Friday close (money that came in, what slipped and the first task for Monday), the Today list of who is due a follow-up, the onboarding checklist and the 20-minute Monday reset. Save the exact note above as one of your own emails, so the close still happens when the week is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
