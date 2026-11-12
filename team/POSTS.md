@@ -241,3 +241,12 @@ Client asks for "one small extra" that isn't in the project? You have three poli
 We made a free reply writer for that moment. Pick the situation, and it gives you a short, friendly reply you can copy. No sign-up. Nothing leaves your browser.
 https://buzzyfly.com/scope-creep-reply?utm_source=facebook&utm_medium=social&utm_campaign=scope-reply-free-tool
 
+### cartoon-chaotic-week | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-chaotic-week.mp4
+Title: Chaotic week? Try this 20-minute Monday reset
+Monday starts with everything at once. By Wednesday you've been busy all week and the one big thing still isn't started.
+
+The Buzzyfly Digital System walks you through a 20-minute Monday reset: check the money, send this week's follow-ups, move new clients forward, score the week's tasks, block time for your #1, and drop one thing.
+
+$49 once. Browser app. No subscription.
+https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-chaotic-week
