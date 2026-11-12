@@ -32,6 +32,12 @@ const posts = activeCategory
 const featured = posts[0];
 const rest = posts.slice(1);
 
+// Almost every post has no unique hero image, so cardImage() falls back to the
+// one brand banner. Rendering that same graphic on 80 cards reads as one ad
+// repeated and buries the titles. So only show an image when a post has a real,
+// distinct one; otherwise the card leads with its category and title.
+const hasRealImage = (src?: string) => cardImage(src) !== brandHero;
+
 const categoryCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
 	const c = p.data.category;
 	if (c) acc[c] = (acc[c] ?? 0) + 1;
@@ -69,6 +75,12 @@ const categoryCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
 			.card p { margin: 0 0 0.8em; color: rgb(var(--gray-dark)); font-size: 0.92em; flex: 1; }
 			.card .meta { font-size: 0.8em; color: rgb(var(--gray)); }
 			.card .read { margin-top: 0.6em; font-weight: 700; font-size: 0.85em; color: var(--accent); }
+			/* Posts with no unique image: a thin brand strip stands in for the
+			   repeated banner, and the title leads. */
+			.card-strip { height: 4px; background: var(--accent); }
+			.card--text .card-body { padding-top: 1.1em; }
+			.featured--text { grid-template-columns: 1fr; border-left: 4px solid var(--accent); }
+			.featured--text h2 { font-size: 2em; }
 			.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid rgb(var(--gray-light)); box-shadow: 0 -4px 16px rgba(0,0,0,0.08); padding: 0.7em 1em; display: flex; align-items: center; justify-content: space-between; gap: 1em; z-index: 50; }
 			.sticky-cta .price { font-weight: 700; font-size: 1.1em; }
 			.sticky-cta a { padding: 0.6em 1.4em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; }
@@ -100,8 +112,10 @@ const categoryCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
 
 			{
 				featured && (
-					<article class="featured">
-						<img src={cardImage(featured.data.heroImage)} alt="" width={640} height={360} />
+					<article class:list={["featured", { "featured--text": !hasRealImage(featured.data.heroImage) }]}>
+						{hasRealImage(featured.data.heroImage) && (
+							<img src={cardImage(featured.data.heroImage)} alt="" width={640} height={360} />
+						)}
 						<div>
 							{featured.data.category && <span class="tag">{featured.data.category}</span>}
 							<h2><a href={`/blog/${featured.id}/`}>{featured.data.title}</a></h2>
@@ -116,8 +130,12 @@ const categoryCounts = allPosts.reduce<Record<string, number>>((acc, p) => {
 			<section class="grid">
 				{
 					rest.map((post) => (
-						<article class="card">
-							<img src={cardImage(post.data.heroImage)} alt="" width={400} height={200} />
+						<article class:list={["card", { "card--text": !hasRealImage(post.data.heroImage) }]}>
+							{hasRealImage(post.data.heroImage) ? (
+								<img src={cardImage(post.data.heroImage)} alt="" width={400} height={200} />
+							) : (
+								<div class="card-strip" aria-hidden="true" />
+							)}
 							<div class="card-body">
 								{post.data.category && <span class="tag">{post.data.category}</span>}
 								<h3><a href={`/blog/${post.id}/`}>{post.data.title}</a></h3>
