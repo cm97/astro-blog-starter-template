@@ -46,7 +46,7 @@ Client paid part of the invoice and went quiet? Before you think about court, se
 Attach the invoice and the message where they agreed the price. It's short, it's polite, and it puts a date on it. If you'd rather not write it from scratch, our free tool writes the reminder for you, no sign-up.
 https://buzzyfly.com/overdue-invoice-email?utm_source=facebook&utm_medium=social&utm_campaign=unpaid-invoice-steps
 
-### retainer-menu-scope | ready | facebook: professional portfolio
+### retainer-menu-scope | posted 2026-11-12, id 1115192551682116_122146596027356277 | facebook: professional portfolio
 Image: none
 Monthly retainer keeps growing but the price doesn't? Write it as a menu, not a task list:
 
