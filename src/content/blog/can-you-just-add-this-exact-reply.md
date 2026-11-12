@@ -1,12 +1,14 @@
 ---
 title: "Client Says \"Can You Just Add This?\" — Send This Exact Reply"
-seoTitle: "Client Says \"Can You Just Add This?\" Send This Reply"
+seoTitle: "Client Says Can You Just Add This? Exact Reply"
 description: "Paste-ready reply that protects the scope you already sold without sounding defensive or killing the relationship."
 pubDate: 2026-10-31
+updatedDate: 2026-11-12
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
+featuredProductDescription: "Browser app that shows who to follow up with today and drafts the email. Onboarding, weekly reset, and the exact scope reply so the process still exists on the weeks you are slammed. One-time."
 ---
 
 They already paid. The work is underway. Then the message lands: “Can you just add this one thing?”
@@ -40,6 +42,10 @@ Send this before noon on a weekday. Subject: Re: [Project name]
 One paragraph. Binary. The date and the price make the decision concrete. “Want me to send the one-pager” gives them an easy yes instead of an argument.
 
 Do not explain why it is extra. Do not apologize. Do not offer a free sample.
+
+Phone-paste version (under 160 chars):
+
+> That sits outside the original scope. Change order for [price] by [date], or keep original plan?
 
 ## What you do when they reply
 
@@ -80,6 +86,8 @@ Attach nothing. The four lines are the document. After payment lands, update the
 6. At the end of the project, the wrap-up email restates the original scope plus any paid change orders. No surprises in the final invoice.
 7. If you cannot name a price for the add in under 60 seconds, the request is bigger than “just this.” Say so and book a 15-minute call instead of guessing in email.
 8. Screenshot the original proposal or contract into the project note the day you start. Memory of what you sold is not a boundary.
+9. Log every scope ask the same hour it arrives. Blank log means the boundary dies on a slammed day.
+10. On the next weekly reset, move every closed change-order request older than 7 days out of the active list. The list is for cash still open, not for ghosts.
 
 ## Fill-in after every send or reply
 
