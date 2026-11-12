@@ -37,7 +37,7 @@ Image: none
 Invoice a week overdue and you're dreading the email? We made a free tool for it. Pick how late it is, and it writes a polite, firm reminder you can send in 30 seconds. No sign-up.
 https://buzzyfly.com/overdue-invoice-email?utm_source=facebook&utm_medium=social&utm_campaign=overdue-invoice-free-tool
 
-### unpaid-invoice-steps | ready | facebook: professional portfolio
+### unpaid-invoice-steps | posted 2026-11-11, id 1115192551682116_122146342161356277 | facebook: professional portfolio
 Image: none
 Client paid part of the invoice and went quiet? Before you think about court, send one clear written note:
 
@@ -99,7 +99,7 @@ Client asks "can you just add this?" and it isn't in the project. This is the re
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-scope
 $49 once, no subscription.
 
-### demo-video-onboarding | posted 2026-11-04, youtube id VPX63WUhQtc (https://www.youtube.com/watch?v=VPX63WUhQtc); ready for instagram, facebook | instagram: SAMS Service, facebook: professional portfolio
+### demo-video-onboarding | posted 2026-11-04, youtube id VPX63WUhQtc (https://www.youtube.com/watch?v=VPX63WUhQtc); instagram tried 2026-11-11 twice, "still processing" (check recent Instagram media for this caption before any retry); ready for facebook | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-onboarding.mp4
 Title: New client just paid? Your welcome email is already written
 New client just paid and you're rewriting the same welcome email again? This is the real Buzzyfly app with sample clients. On day 1 it lists the welcome email and the intake questions, already written with their name and project. Copy, send, tick it off. The next onboarding steps come up on schedule.
@@ -123,7 +123,7 @@ Monday starts with a scramble? The Buzzyfly app has a 20-minute Monday reset: op
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-reset
 $49 once, no subscription.
 
-### cartoon-forgot-recap | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-forgot-recap | posted 2026-11-11, youtube id 1QT3k0RDYRQ (https://www.youtube.com/watch?v=1QT3k0RDYRQ); ready for instagram, facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-forgot-recap.mp4
 Title: Promised a recap after the call? It's already written
 Great first call. You promise a recap tomorrow. Then the week happens, and by Friday it feels too awkward to send.
@@ -213,3 +213,23 @@ The Buzzyfly Digital System gives every new client a 10-step onboarding plan, ea
 
 $49 once. Browser app. No subscription.
 https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-messy-onboarding
+
+### revision-limit-reply | ready | facebook: professional portfolio
+Image: none
+Revisions are used up and the client wants "just one more round"? Reply kindly, quickly, and with a price:
+
+"Happy to make that change. We've used the 2 revision rounds included in the project, so this round is [price] and we can have it back by [date]. Shall I go ahead?"
+
+It helps to count the rounds as you go ("this was round 2 of 2"), so the price is never a surprise.
+
+The Buzzyfly Digital System has this revision-limit reply ready to copy, next to the scope, discount and change-order replies for every client. $49 once, works in your browser, no subscription.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=revision-limit-reply
+
+### rate-floor-free-tool | ready | facebook: professional portfolio
+Image: none
+Not sure what to charge? Start from your floor, not from what others charge:
+
+(take-home you want + yearly costs) ÷ hours you can really bill.
+
+For most freelancers that's 20 to 25 billable hours a week, not 40. We made a free calculator that does the maths in a minute, no sign-up, nothing saved.
+https://buzzyfly.com/hourly-rate-calculator?utm_source=facebook&utm_medium=social&utm_campaign=rate-floor-free-tool

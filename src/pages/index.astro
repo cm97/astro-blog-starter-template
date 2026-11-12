@@ -70,7 +70,7 @@ const homeLd = JSON.stringify({
 			.hero__sub { font-size: 1em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.55; }
 			@media (min-width: 700px) { .hero__sub { font-size: 1.1em; } }
 			.hero-offer { background: #fff; border: 2px solid var(--accent); border-radius: 16px; padding: 1em 1.1em 1.1em; box-shadow: 0 10px 30px rgba(35, 55, 255, 0.12); text-align: center; }
-			@media (min-width: 700px) { .hero-offer { display: grid; grid-template-columns: 1.1fr 1fr; gap: 1.4em; align-items: center; text-align: left; padding: 1.4em 1.5em; } .hero-offer__top { justify-content: flex-start; } .hero-offer__buy { text-align: center; } .hero-offer__buy .btn-primary { font-size: 1.35em; padding: 0.9em 1.1em; } }
+			@media (min-width: 700px) { .hero-offer { display: grid; grid-template-columns: 1.1fr 1fr; gap: 1.4em; align-items: center; text-align: left; padding: 1.4em 1.5em; } .hero-offer__top { justify-content: flex-start; } .hero-offer__buy { text-align: center; } .hero-offer__buy .btn-primary { font-size: 1.5em; padding: 1em 1.2em; } }
 			.hero-offer__top { display: flex; align-items: baseline; justify-content: center; gap: 0.5em; flex-wrap: wrap; margin: 0 0 0.6em; }
 			.hero-offer__price { font-size: 2em; font-weight: 800; color: rgb(var(--black)); line-height: 1; }
 			.hero-offer__price-note { font-size: 0.85em; font-weight: 700; color: rgb(var(--gray-dark)); }
@@ -78,7 +78,7 @@ const homeLd = JSON.stringify({
 			@media (min-width: 700px) { .hero-offer__list { display: block; margin: 0; } }
 			.hero-offer__list li { padding-left: 1.4em; position: relative; margin: 0 0 0.35em; }
 			.hero-offer__list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
-			.btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 64px; width: 100%; max-width: 100%; white-space: normal; text-align: center; padding: 1em 1.4em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 800; font-size: 1.3em; text-decoration: none; box-sizing: border-box; box-shadow: 0 6px 18px rgba(35, 55, 255, 0.35); }
+			.btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 72px; width: 100%; max-width: 100%; white-space: normal; text-align: center; padding: 1.1em 1.6em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 800; font-size: 1.45em; text-decoration: none; box-sizing: border-box; box-shadow: 0 6px 18px rgba(35, 55, 255, 0.35); }
 			.btn-primary:hover { background: var(--accent-dark); }
 			.btn-primary:focus-visible { outline: 3px solid rgb(var(--black)); outline-offset: 3px; }
 			.hero-offer__paypal { margin-top: 0.5em; }
@@ -145,8 +145,8 @@ const homeLd = JSON.stringify({
 						</ul>
 					</div>
 					<div class="hero-offer__buy">
-						<a class="btn-primary" href={order.href}>Get the Digital System</a>
-						<p class="hero-offer__refund">{BUZZYFLY_CONFIG.guaranteeShort} You unlock the app on the thank-you page after checkout.</p>
+						<a class="btn-primary" href={order.href}>Get the Digital System — {digitalSystem.price}</a>
+						<p class="hero-offer__refund">{guaranteeShort} You unlock the app on the thank-you page after checkout.</p>
 						{order.live && <div class="hero-offer__paypal"><PayPalLink href={order.paypalHref} /></div>}
 						<p class="hero-offer__more"><a href="/demo">Try the free demo</a> · <a href="/store">See what's inside</a></p>
 					</div>
