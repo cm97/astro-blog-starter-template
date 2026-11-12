@@ -233,3 +233,11 @@ Not sure what to charge? Start from your floor, not from what others charge:
 
 For most freelancers that's 20 to 25 billable hours a week, not 40. We made a free calculator that does the maths in a minute, no sign-up, nothing saved.
 https://buzzyfly.com/hourly-rate-calculator?utm_source=facebook&utm_medium=social&utm_campaign=rate-floor-free-tool
+
+### scope-reply-free-tool | ready | facebook: professional portfolio
+Image: none
+Client asks for "one small extra" that isn't in the project? You have three polite options: quote it, swap it for something already planned, or park it for phase two.
+
+We made a free reply writer for that moment. Pick the situation, and it gives you a short, friendly reply you can copy. No sign-up. Nothing leaves your browser.
+https://buzzyfly.com/scope-creep-reply?utm_source=facebook&utm_medium=social&utm_campaign=scope-reply-free-tool
+
