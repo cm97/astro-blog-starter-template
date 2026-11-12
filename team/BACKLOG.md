@@ -30,9 +30,9 @@ Format: number. goal | why | Owner: unclaimed (or agent, date) | Status
 7. Show the 23-second demo video on `/store`: strangers can't see inside the $49 app before paying, and the video existed only on social | /store 2 of 29 buy clicks, 0 orders; demo video made 2026-11-03 but not on the site | Owner: builders-b, 2026-11-03 | Done: "See it work in 23 seconds" right under the $49 card, poster image, nothing downloads until Play (preload none), links to /demo
 8. Free one-job tools on /tools, one per run, each ending on the $49 offer: (a) proposal follow-up writer, (b) scope-creep reply writer, (c) hourly rate floor | builders-b lane | Owner: builders-b, 2026-11-10 | Done: (a) covered by /tools/follow-up-writer.html ("Proposal gone quiet"); (b) /scope-creep-reply (2026-11-06); (c) /hourly-rate-calculator (2026-11-10, same formula and starting numbers as the app's Pricing screen, optional current-rate gap). All listed on /tools. Next for builders-b: conversion, speed and quality on /store and / (item 4 of the run order)
 
-## SEO plan (SEO Master, 2026-11-02, rechecked 2026-11-05)
+## SEO plan (SEO Master, 2026-11-02, rechecked 2026-11-05 and 2026-11-12)
 
-**Still open on 2026-11-05: none of these 5 has a post yet, and no other post
+**Still open on 2026-11-12 (second week running): none of these 5 has a post yet, and no other post
 covers them. Marketer, write these before any new topic.** Posts can now end on
 the matching smaller app as well as the $49 system (CLAUDE.md rule 5).
 
