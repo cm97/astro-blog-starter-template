@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-13 builders-b: /store FAQ now answers the three buyer doubts Sales logged 4 times (spreadsheet, "scripts are free, why $49", try first -> /demo), placed first in "Questions before you buy"; BACKLOG 9 (PR pending) | free tools are all done, so builders-b moves to item 4 (conversion, speed, quality) from here | -
 2026-11-13 marketer: social image public/social/buzzyfly-new-client-onboarding.jpg (new client said yes, the 10-step onboarding plan; render script scripts/make-social-new-client-onboarding.cjs) + IG/FB captions + 1 community post below; image post queued in POSTS.md (PR #257) | steps and days copied from ONBOARDING_STEPS in src/data/appContent.ts (day 0 to day 10), so the image matches the app | owner: post the community post by hand
   Image: https://buzzyfly.com/social/buzzyfly-new-client-onboarding.jpg
   Instagram caption: They said yes. Great. Now the deposit invoice, the welcome email, the intake questions, the kickoff call, the logins you still need... and you're rebuilding all of it from memory again. The Buzzyfly Digital System gives every new client the same 10-step plan, from day 0 to day 10. Welcome email and intake questions on day 0. Deposit confirmed and kickoff booked on day 1. Kickoff summary and timeline on day 3. The emails are written with the client's name filled in. You copy, send, and tick it off. $49 once. Browser app. No subscription. buzzyfly.com/store (link in bio)
