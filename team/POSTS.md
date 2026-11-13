@@ -268,3 +268,9 @@ The safest way to get paid is to be paid before you start. Take a deposit of 30 
 
 Buzzyfly's onboarding plan puts "Confirm the deposit is paid" on day 1 for every new client, right after the welcome and intake emails, so it doesn't get skipped in a busy week. $49 once, works in your browser, no subscription.
 https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=deposit-before-start
+
+### new-client-onboarding-image | ready | facebook: professional portfolio
+Image: https://buzzyfly.com/social/buzzyfly-new-client-onboarding.jpg
+New client said yes. Now what? The Buzzyfly Digital System gives every new client the same 10-step onboarding plan, from day 0 to day 10: welcome email and intake questions, deposit confirmed, kickoff booked, kickoff summary and timeline, first delivery date in writing. The emails are written with the client's name filled in, and you send them yourself. $49 once, works in your browser, no subscription.
+
+https://www.buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=new-client-onboarding-image
