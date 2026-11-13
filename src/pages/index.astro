@@ -69,6 +69,9 @@ const homeLd = JSON.stringify({
 			.hero h1 { font-size: clamp(1.55em, 4.6vw, 2.4em); line-height: 1.12; margin: 0 auto 0.45em; max-width: 17em; color: rgb(var(--black)); }
 			.hero__sub { font-size: 1em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.55; }
 			@media (min-width: 700px) { .hero__sub { font-size: 1.1em; } }
+			.hero-shot { margin: 0 auto 1em; max-width: 300px; }
+			.hero-shot img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 750; border-radius: 12px; border: 1px solid rgb(var(--gray-light)); box-shadow: 0 8px 24px rgba(15, 18, 40, 0.08); }
+			@media (min-width: 700px) { .hero-shot { max-width: 420px; margin-bottom: 1.2em; } }
 			.hero-offer { background: #fff; border: 2px solid var(--accent); border-radius: 16px; padding: 1em 1.1em 1.1em; box-shadow: 0 10px 30px rgba(35, 55, 255, 0.12); text-align: center; }
 			@media (min-width: 700px) { .hero-offer { display: grid; grid-template-columns: 1.1fr 1fr; gap: 1.4em; align-items: center; text-align: left; padding: 1.4em 1.5em; } .hero-offer__top { justify-content: flex-start; } .hero-offer__buy { text-align: center; } .hero-offer__buy .btn-primary { font-size: 1.5em; padding: 1em 1.2em; } }
 			.hero-offer__top { display: flex; align-items: baseline; justify-content: center; gap: 0.5em; flex-wrap: wrap; margin: 0 0 0.6em; }
@@ -132,6 +135,9 @@ const homeLd = JSON.stringify({
 					<h1>Stop rebuilding your client process from scratch every week.</h1>
 					<p class="hero__sub">A browser app that shows who to follow up with today and drafts the email. New clients get onboarded the same way every time.</p>
 				</div>
+				<figure class="hero-shot">
+					<img src="/images/today-dashboard.svg" width="1200" height="750" alt="Buzzyfly Today dashboard showing who is due for a follow-up with the email drafted." decoding="async" fetchpriority="high" />
+				</figure>
 				<div class="hero-offer" aria-label="Buzzyfly Digital System offer">
 					<div class="hero-offer__what">
 						<p class="hero-offer__top">
@@ -195,7 +201,7 @@ const homeLd = JSON.stringify({
 				<div class="faq__list">
 					<div class="faq__item">
 						<h3>Is this for me?</h3>
-						<p>If you're a coach, consultant, freelancer, or solo service provider and your client process lives in your head — onboarding means rebuilding from memory, follow-ups only happen when you remember — yes. Already run a documented system? Then skip it.</p>
+						<p>If you're a coach, consultant, freelancer, or solo service provider and your client process lives in your head — onboarding means rebuilding from memory, follow-ups only happen when you remember — yes. If your process already survives a slammed week, you're fine. If it lives in your head, this is for you.</p>
 					</div>
 					<div class="faq__item">
 						<h3>What's actually in the app?</h3>
