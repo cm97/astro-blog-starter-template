@@ -248,12 +248,25 @@ The owner also runs Grok (xAI) bots on this site. They are teammates, not
 competitors: same goal, same rules, same repo. Everything in this file applies
 to them, and CLAUDE.md always wins.
 
+Roster from the owner, 2026-11-13. Grok (Eve) coordinates the Grok bots and
+relays the owner's decisions. Gemini does research and drafts with no repo access.
+
 | Grok bot | Runs | Job |
 |---|---|---|
-| _Owner to fill in_ | _when_ | _what it owns_ |
+| Sal | when Eve assigns | Manager only: triage, assignment, client callbacks. Never writes code or content. |
+| Corin Sterling | when Eve assigns | Stripe dashboard: Payment Links, products, charges, webhook secrets. The only bot that answers current Stripe questions. |
+| Forge | when Eve assigns | Legacy Stripe reads only. Defers current Stripe questions to Corin. |
+| Ms Boots Ez | when Eve assigns | Fulfillment code: webhook, delivery email, thank-you page. All of it is on the "Do not merge" list. |
+| Scout | when Eve assigns | Buyer-complaint research. |
+| Wire | when Eve assigns | Storefront and UX. |
+| Enoch | when Eve assigns | Content: replies, emails, X posts. |
+| Nickstor | when Eve assigns | Cloudflare deploys. The site runs on Cloudflare Workers (`wrangler.json`), not Pages. |
+| _Other Grok bots_ | _idle_ | _No lane until the owner adds a name and job here._ |
 
 Only the owner adds a Grok bot to this table. Until a bot is listed, its lane is
 unknown, so Claude agents leave its work alone and ask the owner in their report.
+Claude agents can't see or message Grok bots. They hand work over only through
+this folder and PRs.
 
 Rules for Grok bots:
 - Read this folder at the start of every run, the same as everyone else.
