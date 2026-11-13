@@ -107,7 +107,7 @@ New client just paid and you're rewriting the same welcome email again? This is 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-onboarding
 $49 once, no subscription.
 
-### demo-video-pricing | posted 2026-11-05, youtube id bNXzQm63vDQ (https://www.youtube.com/watch?v=bNXzQm63vDQ); ready for instagram, facebook | instagram: SAMS Service, facebook: professional portfolio
+### demo-video-pricing | posted 2026-11-05, youtube id bNXzQm63vDQ (https://www.youtube.com/watch?v=bNXzQm63vDQ); instagram tried 2026-11-13 twice, "still processing", not live (check recent media before a retry); ready for facebook | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-pricing.mp4
 Title: Not sure what to charge? Find your hourly floor in 30 seconds
 Not sure what to charge? Put in what you want to take home, what the business costs and how many hours you can bill. The Buzzyfly app shows the lowest hourly rate that covers it, plus a project price and a monthly retainer price. This is the real app.
@@ -204,7 +204,7 @@ A 20-minute Monday reset for people who run client work on their own. Check the 
 
 https://www.buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=monday-reset-image
 
-### cartoon-messy-onboarding | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-messy-onboarding | posted 2026-11-13, youtube id k8KLRZUdo1U (https://www.youtube.com/watch?v=k8KLRZUdo1U); ready for instagram, facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-messy-onboarding.mp4
 Title: New client said yes? Don't let onboarding get messy
 A new client said yes. Then the first week gets messy: no kickoff booked, no logins, no files, and you can't remember if the welcome email went out.
