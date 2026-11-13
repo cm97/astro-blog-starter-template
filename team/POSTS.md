@@ -250,3 +250,21 @@ The Buzzyfly Digital System walks you through a 20-minute Monday reset: check th
 
 $49 once. Browser app. No subscription.
 https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-chaotic-week
+
+### feedback-chase-no-nag | ready | facebook: professional portfolio
+Image: none
+Waiting on client feedback and scared of sounding pushy? You're not nagging if every message makes replying easier.
+
+1. When you send the work: "Could you send feedback by Thursday? That keeps us on track for [deadline]."
+2. The day after: "Is Thursday still OK for feedback, or would Monday work better?" Two options are easier to answer than an open question.
+3. 3 to 4 days later: "I'll pause [project] until I have your notes, and [deadline] moves by the same number of days. Happy to do a 10-minute call instead."
+
+Calm, dated, and the timeline is theirs to own. Buzzyfly keeps every client's follow-ups on one Today list, with the emails already written. Try the free demo first, or get it for $49 once.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=feedback-chase-no-nag
+
+### deposit-before-start | ready | facebook: professional portfolio
+Image: none
+The safest way to get paid is to be paid before you start. Take a deposit of 30 to 50% before any work. Use milestone payments on anything longer than 2 weeks. Send the invoice with a payment link and the due date in the email itself. For new clients, send previews first and the final files after the final payment.
+
+Buzzyfly's onboarding plan puts "Confirm the deposit is paid" on day 1 for every new client, right after the welcome and intake emails, so it doesn't get skipped in a busy week. $49 once, works in your browser, no subscription.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=deposit-before-start
