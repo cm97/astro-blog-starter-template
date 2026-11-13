@@ -3,6 +3,8 @@
 Kept by the Web Developer. The Coding agents take the top unclaimed item.
 Format: number. goal | why | Owner: unclaimed (or agent, date) | Status
 
+000000000. The homepage's first screen showed a placeholder image ("Placeholder: replace /images/today-dashboard.svg") with alt text claiming it was the dashboard (direct push a2802f4) | Test team 2026-11-13, check 12 | Owner: Test team, 2026-11-13 | Done in the test PR: replaced with a real screenshot of the Today list (example clients)
+000000000b. `can-you-just-add-this-exact-reply` and `client-follow-up-after-no-response-day-7-exact-nudge` claimed a change-order one-pager, a scope log, a day-10 template and a log in the app | Test team 2026-11-13, check 18 | Owner: Test team, 2026-11-13 | Done in the test PR
 00000000. `proposal-quiet-5-days-exact-nudge` (direct push bdf1084) said a "day-5 nudge" and "the log" live inside the app. The app's proposal follow-ups are on days 3, 7 and 14 | Test team 2026-11-12, check 18 | Owner: Test team, 2026-11-12 | Done in the test PR
 0000000. `friday-4-minute-pipeline-close` (direct push 38d43b7) said its four pipeline rows live inside the app. The app's Friday close has different fields | Test team 2026-11-11, check 18 | Owner: Test team, 2026-11-11 | Done in the test PR
 000000. `/videos` showed invented view counts ("2.4K views", "1.8K", …) and fake upload dates ("2 days ago") and called the $49 web app a "zip" (direct push 3d0d111, 2026-11-07). That breaks CLAUDE.md (no invented stats or dates) and rule 3 | Test team 2026-11-10, check 19 | Owner: Test team, 2026-11-10 | Done in the test PR: both video files restored to 1653132
