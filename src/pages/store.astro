@@ -63,7 +63,22 @@ const CONTENTS = [
 	{ folder: "Scope guard", items: "The exact words when a client asks for more than they paid for" },
 ];
 
-const FAQ = [
+// The first three answer the buyer doubts the Sales team keeps seeing in real
+// posts (team/SALES.md, 2026-11-04 to 2026-11-13).
+const FAQ: { q: string; a: string; link?: { href: string; label: string } }[] = [
+	{
+		q: "I already track clients in a spreadsheet. Why switch?",
+		a: "A spreadsheet holds the list. You still have to check every row, work out who is due today and write each email from scratch. The app keeps the same list, puts what's due today at the top, and has the email ready with the client's name and project filled in. You copy it, send it from your own inbox and mark it done.",
+	},
+	{
+		q: "Follow-up scripts are free online. Why pay $49?",
+		a: "The words aren't the hard part. Remembering to send them on the right day is. The app is not a template pack. It tracks each client and shows the proposal follow-ups on days 3, 7 and 14, the invoice reminders, the onboarding steps and the scope replies when they're due. One payment of $49. No subscription.",
+	},
+	{
+		q: "Can I try it before I pay?",
+		a: "Yes. The free demo is the real app with three sample clients. No sign-up, and nothing you do in it is saved.",
+		link: { href: "/demo", label: "Open the free demo" },
+	},
 	{
 		q: "Which one should I buy?",
 		a: "The $49 Digital System. It is the browser web app: follow-ups, onboarding, weekly reset, proposals and pricing. Everything runs in the browser. No download.",
@@ -209,7 +224,7 @@ const FAQ = [
 				{FAQ.map((item) => (
 					<details>
 						<summary>{item.q}</summary>
-						<p>{item.a}</p>
+						<p>{item.a}{item.link && <> <a href={item.link.href}>{item.link.label} →</a></>}</p>
 					</details>
 				))}
 			</section>
