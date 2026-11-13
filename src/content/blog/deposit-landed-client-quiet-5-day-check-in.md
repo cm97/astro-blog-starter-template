@@ -3,6 +3,7 @@ title: "Deposit Landed. Client Went Quiet. The Exact 5-Day Check-In."
 seoTitle: "Deposit Landed Client Quiet 5-Day Check-In"
 description: "Paste-ready 5-day check-in after a deposit lands and the client goes silent. Keeps the project moving without chasing."
 pubDate: 2026-11-04
+updatedDate: 2026-11-13
 category: follow-up
 heroImage: "/blog-placeholder-2.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -29,9 +30,31 @@ Kickoff date offered: ________
 5-day due: ________
 Status: waiting / replied / started
 Next action if quiet: send 5-day / nudge intake / start without
+Files expected: ________
+Scope line locked: yes / no
 ```
 
 Put a 4-minute block on the calendar labeled "5d: [name]". If it falls after 3pm or on Friday, move it to the next weekday morning. Do not skip.
+
+## Day-by-day so the stall cannot hide
+
+**Day 0 (deposit clears)**
+- Fill the log above.
+- Send welcome + intake in the same hour.
+- Block the day-5 send.
+- Add one line to next Monday’s reset: "[Name] — 5-day check due [date]."
+
+**Day 1–2**
+- Do not send anything new. The welcome is still warm.
+- If they reply with files, confirm the kickoff in one sentence and stop.
+
+**Day 5 (the check-in)**
+- Send the exact note below before 11am.
+- Log the send time the same minute.
+
+**Day 7 if still quiet**
+- One intake nudge only: "Still need the form and files to keep [kickoff date]. Link: [link]. Deadline is [date + 2]."
+- Do not rewrite the 5-day note.
 
 ## The 5-day check-in
 
@@ -70,6 +93,8 @@ If you cannot name the next date after a reply, the process still lives in your 
 6. Cap open deposit rows at three. Anything past five days is started or parked before you write the three weekly priorities.
 7. Never send after 3pm. Move those windows to the next morning.
 8. Screenshot the log or copy it into the same note as the weekly reset the same hour the deposit lands. Blank next action means the thread dies again.
+9. If three deposits land the same week, run only Day 0 and the 5-day for each. Park extra intake reviews until the Monday reset.
+10. Phone-only: dictate the 5-day note into Notes, paste, send, mark the calendar block done. The log still has to exist in the same note as the reset.
 
 ## What still breaks when the email only lives in your head
 
