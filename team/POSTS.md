@@ -133,13 +133,13 @@ The Buzzyfly Digital System shows who needs a follow-up today, with the recap em
 $49 once. Browser app. No subscription.
 https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-forgot-recap
 
-### paid-late-partial-steps | ready | facebook: professional portfolio
+### paid-late-partial-steps | posted 2026-11-14, id 1115192551682116_122147039883356277 | facebook: professional portfolio
 Image: https://buzzyfly.com/social/buzzyfly-late-invoice.jpg
 A month of work, no signed contract, and the client hasn't paid? Your emails and messages where they asked for the work and promised to pay still count. Start with one clear, dated note:
 
 "Hi [name], I completed [work] between [dates] at your request. The agreed fee was [amount]. Please pay it by [date, 7 to 14 days out] to [details]. If there's a problem with the invoice, tell me this week."
 
-Save the messages now. Pause new work until it's paid. Most late payers move once there's a date in writing.
+Save the messages now. Pause new work until it's paid.
 
 Our free reminder writer drafts the polite version for you in 30 seconds, no sign-up.
 https://buzzyfly.com/overdue-invoice-email?utm_source=facebook&utm_medium=social&utm_campaign=paid-late-partial-steps
