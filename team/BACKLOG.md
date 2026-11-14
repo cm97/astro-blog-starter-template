@@ -3,6 +3,7 @@
 Kept by the Web Developer. The Coding agents take the top unclaimed item.
 Format: number. goal | why | Owner: unclaimed (or agent, date) | Status
 
+0000000000. The store FAQ (#258) said the app shows "the scope replies when they're due". Scope replies are on-demand templates, not scheduled | Test team 2026-11-14, check 18 | Owner: Test team, 2026-11-14 | Done in the test PR
 000000000. The homepage's first screen showed a placeholder image ("Placeholder: replace /images/today-dashboard.svg") with alt text claiming it was the dashboard (direct push a2802f4) | Test team 2026-11-13, check 12 | Owner: Test team, 2026-11-13 | Done in the test PR: replaced with a real screenshot of the Today list (example clients)
 000000000b. `can-you-just-add-this-exact-reply` and `client-follow-up-after-no-response-day-7-exact-nudge` claimed a change-order one-pager, a scope log, a day-10 template and a log in the app | Test team 2026-11-13, check 18 | Owner: Test team, 2026-11-13 | Done in the test PR
 00000000. `proposal-quiet-5-days-exact-nudge` (direct push bdf1084) said a "day-5 nudge" and "the log" live inside the app. The app's proposal follow-ups are on days 3, 7 and 14 | Test team 2026-11-12, check 18 | Owner: Test team, 2026-11-12 | Done in the test PR
