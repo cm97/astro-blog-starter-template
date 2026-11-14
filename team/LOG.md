@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-14 social-poster: posted paid-late-partial-steps (photo) to Facebook "professional portfolio" (1115192551682116_122147039883356277); cut "Most late payers move once there's a date in writing" (unsupported claim) | - | -
 2026-11-14 design-mobile: (3) /blog category filter pills were 42px tall (under the 44px tap-target minimum); gave `.cat-pill` min-height 44px with inline-flex centering and border-box, so they're now 44px on phone / 47px desktop with the same look (PR #263) | the pills are the one standalone control that missed 44px across /, /store, /blog, a post and /app at 375px; no horizontal scroll and focus rings are fine everywhere | -
 2026-11-14 test-team: 20 of 20 pass after one copy fix. The store FAQ now says the app keeps scope replies ready to copy, not that it schedules them. Checked as true: the new FAQ's day 3/7/14 follow-ups and the free /demo (3 sample clients, nothing saved) (PR #262) | first day with only 1 direct-pushed post, and that post was accurate | owner: sign the Stripe connector in again
 SECURITY: direct push to main without a PR from the owner account since 2026-11-13: 5478a19 (a blog post, accurate). Owner: confirm it was yours or Grok's.
