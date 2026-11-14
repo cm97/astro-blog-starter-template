@@ -3,6 +3,7 @@ title: "Proposal Quiet for 5 Days? Send This Exact Nudge"
 seoTitle: "Proposal Quiet 5 Days: Exact Nudge Email"
 description: "Paste-ready day-5 nudge when a proposal sits silent so you get a reply or free the calendar without guessing."
 pubDate: 2026-11-11
+updatedDate: "Nov 12 2026"
 category: "sales"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -66,6 +67,14 @@ Phone-paste version (under 160 chars):
 - If they reply “still thinking,” send one line: “Understood. Reply by [specific day] if you want the [start date], or I release it.” Do not leave it open.
 - Never discount in the nudge. The original price stays the record.
 - On the next weekly reset, move every proposal older than 10 days with no reply out of the active list. The list is for cash still open, not for ghosts.
+- Write the reply-by date on the calendar the same minute the nudge leaves. An unscheduled release date is how the file stays open forever.
+- If two proposals are both on day 5, send both nudges in the same 10-minute block. Do not pick a favorite.
+- Paste the exact subject line into the private note so the next Monday scan does not invent a new one.
+- If the client is in a different time zone, state the reply-by time in both zones in the nudge.
+- Screenshot the sent nudge and drop it into the same note the weekly reset opens. Sent mail is not a system.
+- Cap the nudge at four sentences. Longer versions get rewritten under pressure and never ship.
+- If they reply with a question instead of a yes, answer in one line and re-paste the hold date. Do not open a new conversation.
+- At Friday close, mark every day-5 nudge older than the reply-by date as released or closed. Unmarked holds become blocked calendar next month.
 
 ## Fill-in after every day-5 nudge
 
@@ -85,6 +94,6 @@ Next action: onboarding opened / day-7 close / released
 
 You can paste it today. It works until a slammed Thursday. Then the day-5 file sits, the start date stays blocked, and by Friday you have already started work for someone else because the silence felt safer than sending the nudge.
 
-The same day-5 nudge, the day-3 and day-7 templates, the log, and the 20-minute Monday reset live inside the Buzzyfly Digital System so the quiet proposal still gets a next date when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The day-3, day-7 and day-14 proposal follow-ups and the 20-minute Monday reset live inside the Buzzyfly Digital System, and you can save this day-5 nudge as one of your own emails, so the quiet proposal still gets a next date when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

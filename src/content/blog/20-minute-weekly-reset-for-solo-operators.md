@@ -3,7 +3,7 @@ title: "The 20-Minute Weekly Reset for Solo Operators That Survives a Slammed We
 seoTitle: "20-Minute Weekly Reset for Solo Operators"
 description: "A 20-minute weekly reset checklist for coaches and freelancers. Clear the board, pick three priorities, send follow-ups and set tomorrow's first move."
 pubDate: "Oct 16 2026"
-updatedDate: "Nov 06 2026"
+updatedDate: "Nov 13 2026"
 category: "planning"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -124,6 +124,40 @@ Clients with no next date: ________ (set date or pause)
 
 If any line is blank, the money is still a feeling. Fill it before the timer ends.
 
+## Phone-only reset (15 minutes from your phone)
+
+When you are not at a desk. Same steps. Smaller screen.
+
+1. Open notes. Paste the fill-in sheet. Write the three lines for what shipped and what is open.
+2. Write the three priorities. Set phone reminders for each block time.
+3. Open messages. Send the two follow-up lines. Log the time in notes.
+4. Write tomorrow’s first move. Set a reminder for that block.
+5. Close the app. The reset is done.
+
+Phone fill-in you can keep in notes:
+
+```
+Week of: ________
+Shipped: ________
+Open: ________
+Three:
+1) ________ — reminder set
+2) ________ — reminder set
+3) ________ — reminder set
+Follow-ups sent: ________ / ________
+Tomorrow first: ________
+```
+
+## Cash lock lines before you close
+
+Add these three before the timer ends:
+
+1. Oldest unpaid: "Invoice [amount] for [item] is still open. Due [date]. Reply if the address is wrong."
+2. Quiet proposal: "Still holding [date] start for [project], or should I release it?"
+3. Next date on every open client: write it or mark pause.
+
+If the next date is blank, the client is already going quiet.
+
 ## Why the three priorities stop the scramble
 
 One delivery, one follow-up, one money-unblocker. That is the filter. Everything else is noise until those three move. When the week gets slammed the three still exist because they were written and blocked. The inbox does not get to invent a fourth priority after 9 a.m.
@@ -135,6 +169,5 @@ You can run the sheet on a calm Monday. It works until three clients reply at on
 The Digital System is the same sequence written down so it still runs when you are busy: weekly reset, onboarding checklist, follow-ups. One browser app. One-time $49. No download. Not a subscription. Opens after Stripe checkout.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
-
 
 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.

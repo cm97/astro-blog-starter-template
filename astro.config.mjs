@@ -55,7 +55,14 @@ export default defineConfig({
 		sitemap({
 			// Video watch pages render on request (/videos/[slug]), so the sitemap
 			// can't find them on its own. /jobs/ it already finds.
-			customPages: EXPLAINER_VIDEOS.map((v) => `https://buzzyfly.com/videos/${v.slug}/`),
+			// The free tools are static files in public/, which the sitemap can't see
+			// either, and they're our best search bait.
+			customPages: [
+				...EXPLAINER_VIDEOS.map((v) => `https://buzzyfly.com/videos/${v.slug}/`),
+				"https://buzzyfly.com/tools/client-onboarding.html",
+				"https://buzzyfly.com/tools/follow-up-writer.html",
+				"https://buzzyfly.com/tools/weekly-reset.html",
+			],
 			filter: (page) => !/^https:\/\/buzzyfly\.com\/(admin|agent|app|demo|success|thank-you|unsubscribe)(\/|$)/.test(page),
 		}),
 	],

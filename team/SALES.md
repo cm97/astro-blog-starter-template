@@ -22,7 +22,10 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 | demo-video-reset | YouTube Shorts | 2026-11-10 | ? | ? | ? |
 | monday-reset-image, cartoon-messy-onboarding | Facebook / Instagram / YouTube queue | not posted yet | - | - | - |
 | revision-limit-reply, rate-floor-free-tool | Facebook queue (POSTS.md, added 2026-11-11) | not posted yet | - | - | - |
-| Community replies R1 to R25 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
+| retainer-menu-scope | Facebook: professional portfolio (social poster #246) | 2026-11-12 | ? | ? | ? |
+| cartoon-close-the-loop | YouTube Shorts (video poster #252) | 2026-11-12 | ? | ? | ? |
+| feedback-chase-no-nag, deposit-before-start | Facebook queue (POSTS.md, added 2026-11-13) | not posted yet | - | - | - |
+| Community replies R1 to R30 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
 | Whole site, ad check 2026-11-06 (LOG #215) | mostly direct | to 11-06 | 96 | 1 (first, direct to /) | 0 |
 | Whole site 11-03..04 (sales-b, LOG 2026-11-04) | 9 YouTube, rest direct | - | 38 views | 0 | 0 |
 | Demo videos (weekly check 2026-11-10) | YouTube Shorts, Instagram Reels, Facebook video | 2026-11-03 to 11-10 | site views 11-03..11-10: youtube 27, facebook 6, google 23, direct 61, other 9. YouTube views: proposal 3, invoice 0, scope 18, onboarding 4, pricing 7. Instagram insights: not available (permission) | 1 (direct) | 0 |
@@ -65,6 +68,11 @@ self-promotion rule in the sidebar, then post.** Reddit replies carry no link by
 | L23 | ~2026-11-05 (past week) | [r/StructuralEngineering](https://www.reddit.com/r/StructuralEngineering/comments/1xohzw5/freelance_structural_engineerscope_expanded_far/) | "Freelance structural engineer, scope expanded far ... could use some perspective from others who have dealt with scope creep, unpaid..." | hot | R23 | draft, owner posts |
 | L24 | ~2026-11-05 (past week) | [r/agency](https://www.reddit.com/r/agency/comments/1xohc2a/client_wants_another_revision_after_weve_used_up/) | "Client wants another revision after we've used up the..." (title cut off in search) | hot | R24 | draft, owner posts |
 | L25 | 2026-11-04..11 (past week) | [r/GraphicDesigning](https://www.reddit.com/r/GraphicDesigning/comments/1xsq0qq/need_help_with_pricing/) | "Need help with pricing" | warm | R25 | draft, owner posts |
+| L26 | ~2026-11-11 (past week) | [r/freelanceuk](https://www.reddit.com/r/freelanceuk/comments/1xu9rmz/how_do_you_chase_a_client_without_feeling_like/) | "How do you chase a client without feeling like you're ... When you need feedback before you can carry on, how long do you leave it before following up? And what do you say after the first reminder" | hot | R26 | draft, owner posts |
+| L27 | ~2026-11-08 (past week) | [r/AusLegal](https://www.reddit.com/r/AusLegal/comments/1xrpof5/aus_client_threatening_to_withhold_freelance/) | "AUS client threatening to withhold freelance payment ... I'm an overseas freelancer ... Social Media Growth Strategist" | hot | R27 | draft, owner posts |
+| L28 | ~2026-11-07 (past week) | [r/Upwork](https://www.reddit.com/r/Upwork/comments/1xq1r3k/is_it_normal_to_get_ghosted_by_clients_early_on/) | "Is it normal to get ghosted by clients early on? ... I've had 5 clients contact me" | warm | R28 | draft, owner posts |
+| L29 | ~2026-11-10 (past week) | [r/Freelancers](https://www.reddit.com/r/Freelancers/comments/1xu0dsz/safest_method_to_receive_payment_from_clients/) | "Safest method to receive payment from clients" | warm | R29 | draft, owner posts |
+| L30 | ~2026-11-07 (past week) | [r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1xquze4/small_business_teams_running_on_spreadsheets_how/) | "How do you handle overdue alerts before things slip?" (small teams running on spreadsheets) | warm | R30 | draft, owner posts |
 
 ### Draft replies (team A, role 4, 2026-11-02)
 
@@ -223,6 +231,49 @@ If the sub allows free tools: "There's a free calculator for exactly this (no si
 
 Best two to post first this round: **R24** (exact moment the app's revision-limit reply covers; agency owners are buyers) and **R22** (agency side, a process they can copy).
 
+### Draft replies, round 5 (team A, role 4, 2026-11-13)
+
+Found 2026-11-13 by web search limited to the past week. Same limits: titles and snippets
+only, the owner opens each thread and checks the sub's rules first. No links on Reddit.
+
+**R26 (L26, chasing feedback without feeling like a nag).**
+You're not nagging if every message makes it easier for them to reply. What works for me:
+- Before you send the work, put a date on it: "Could you send feedback by Thursday? That keeps us on track for [deadline]."
+- Day after that date: "Hi [name], just checking you got [the draft]. Is Thursday still OK for feedback, or would Monday work better?" Give two options. A choice is easier to answer than an open question.
+- 3 to 4 working days later: "To keep [project] moving, I'll pause on it until I have your notes, and the [deadline] will move by the same number of days. Happy to jump on a 10-minute call instead if that's quicker." Calm and factual, not annoyed.
+After that you've done your part. The timeline moving is theirs to own, and you've said so in writing.
+
+**R27 (L27, Australian client threatening to withhold payment).**
+Not a lawyer. Withholding payment for work that was delivered as agreed is usually a breach on their side, even if you're overseas. Things that help:
+- Pull together the agreement (emails or messages count), what you delivered and when, and any sign-off or praise they gave.
+- Reply in writing, calmly: "The work for [period] was delivered as agreed on [dates] (attached). The invoice for [amount] is due on [date]. If there's a specific issue with the work, please list it by [date] so I can look at it." Asking them to name the problem in writing often shows whether there is one.
+- If they don't pay, a client in Sydney can be taken to the NSW Local Court's small claims division (for debts up to $20,000), and a lawyer's letter of demand is often enough before that.
+Don't do more work until this is settled.
+
+**R28 (L28, ghosted by clients early on Upwork).**
+Yes, it's very normal, and it's not about you. Many clients message several freelancers at once and pick one within hours, or they're still deciding whether to hire at all. What helps:
+- Reply fast, with one specific question about their project, so you're the easy conversation.
+- Suggest a next step with a time: "Want to do a 15-minute call tomorrow at 2 or 4?"
+- Follow up once, 2 days later: "Still happy to help with [project]. Is it going ahead?" Then move on.
+- Don't do free samples. Point them to a past project instead.
+Track who you've followed up with, so nobody gets three messages and somebody else none.
+
+**R29 (L29, safest way to get paid).**
+Safest setup for most freelancers:
+- A deposit before you start (30 to 50%). That's the single biggest protection.
+- Milestone payments on anything longer than 2 weeks, so you're never far ahead.
+- Invoice with a payment link (card or bank transfer through Stripe, PayPal or Wise) plus the due date in the email itself.
+- For new or overseas clients, final files after the final payment, with previews before.
+- Avoid methods that can be reversed weeks later without a dispute process (some peer-to-peer apps), and never "overpayment" refunds.
+
+**R30 (L30, overdue alerts before things slip, teams on spreadsheets).**
+The spreadsheet isn't the problem. Nobody looks at it at the right moment. Two habits fix most of it:
+1. Add a "next action date" column next to every unpaid invoice and open job, and sort by it, so the top rows are always what's due today.
+2. Make looking at it a fixed 10 minutes: first thing Monday, plus a quick daily check of anything dated today. One named person owns it.
+For invoices, set the reminder dates the moment you send them: due date +1, +7, +14. Then the sheet tells you who to chase, and you don't have to remember.
+
+Best two to post first this round: **R26** (exact follow-up wording, the app's core job, UK freelance sub) and **R30** (small-business owners on spreadsheets are the buyer).
+
 ### Lead research and outreach (roles 5 and 6)
 
 No businesses added this run. The searches found only vendor blogs and courses, not small
@@ -250,6 +301,10 @@ answered in their threads) and more competing free and paid tools (Freelance Gua
 scope-creep Google Sheet, a salary calculator in Excel). No small business with a public page
 stating the problem. No cold notes drafted.
 
+**2026-11-13:** 0 businesses added. Same as before: the searches found people asking for help
+(answered above) and more tool launches (a contract-locking tool, invoice dashboards, "3 short
+emails" posts). No new business page stating the problem. No cold notes drafted.
+
 ## Partners
 
 Found by Sales team B on 2026-11-03 (roles 11 and 12). Every name was confirmed on its own
@@ -265,6 +320,9 @@ unlock key for the $49 Digital System that you create for them.
 | P2 | Lyn Prowse-Bishop, host of [The Virtual Business Show](https://podcasts.apple.com/us/podcast/the-virtual-business-show/id381061982) (VA podcast since 2010), runs [Executive Stress Office Support](https://www.execstress.com/about-australian-virtual-assistant/) | VAs and small business owners, mostly Australia | Long-running VA show that covers tools and systems for small practices. | Contact form on execstress.com, or [LinkedIn](https://au.linkedin.com/in/lynprowsebishop) | PP2 | draft, owner sends |
 | P3 | Hannah Cole, [Sunlight Tax](https://www.sunlighttax.com/podcast) (podcast still publishing, latest episode 2026-11-03) | Self-employed creatives: designers, artists, therapists, consultants | Her topic is getting money and business systems in order. Late-invoice reminders and a Monday money check fit that. | Contact page on sunlighttax.com (not linked from the podcast page; check the site menu) | PP3 | draft, owner sends |
 | P4 | [The Coaching Tools Company](https://www.thecoachingtoolscompany.com/) (coaching templates and a coach community; founder Emma-Louise Elsey has since moved to [Fierce Kindness](https://fiercekindness.com/big-news-from-emma-louise-october-2024/)) | Life and business coaches | They sell coaching tools, not client admin. Buzzyfly covers the business side (follow-ups, onboarding emails, invoices) without competing. | Contact page or FAQ on thecoachingtoolscompany.com | PP4 | draft, owner sends |
+| P5 | Emma Cossey, [The Freelance Lifestyle](https://freelancelifestyle.co.uk/), host of [The Freelancer's Teabreak](https://freelancelifestyle.libsyn.com/freelancersteabreak) podcast, runs a free Discord community (linked from the podcast page) | UK freelancers, many parents working around family time | Short, practical episodes on freelance admin. A ready email for the follow-up you keep putting off fits her "short and sweet" style. | Contact page on freelancelifestyle.co.uk | PP5 | draft, owner sends (added 2026-11-12) |
+| P6 | Preston Lee (founder) and Clay Mosley (co-host), [Millo](https://millo.co/about) and the [Freelance to Founder](https://www.podchaser.com/podcasts/freelance-to-founder-420380) call-in podcast | Freelancers stuck in feast or famine | Their callers ask how to stop clients going quiet and how to handle scope. The app's follow-up and scope replies are exactly that. | Contact page on millo.co | PP6 | draft, owner sends (added 2026-11-12) |
+| P7 | Latasha James, [The Freelance Friday Podcast](https://www.latashajames.com/podcast) (page has a "Sponsor the show" link) | Freelance social media marketers and creatives | Her audience runs small client rosters with monthly retainers: proposals, invoices, onboarding. | [latashajames.com/contact](https://www.latashajames.com/contact), or hey@latashajames.com (listed on her YouTube) | PP7 | draft, owner sends; a sponsor slot would be paid, so only the free review offer (added 2026-11-12) |
 
 ### Partner pitches (role 12)
 
@@ -295,6 +353,18 @@ Hi Hannah, your listeners are freelancers getting their money systems in order. 
 Subject: A business-side tool for your coaches
 Hi, I make Buzzyfly, a browser app for solo coaches and freelancers. It doesn't overlap with your coaching tools. It covers the admin side: which prospect to follow up with today, welcome and intake emails for new clients, invoice reminders and replies to scope creep, all written and ready to copy. I'd like to give your team a free copy to review. If it fits your community, I'd be glad to talk about a referral share on terms we agree. [Owner name], support@buzzyfly.com, https://buzzyfly.com/store?utm_source=coachingtoolscompany&utm_medium=partner&utm_campaign=partner-ctc
 
+**PP5 (Emma Cossey, The Freelance Lifestyle).**
+Subject: A small tool for the follow-up you keep putting off
+Hi Emma, I've been listening to The Freelancer's Teabreak. I make Buzzyfly, a small browser app for solo freelancers. It shows which client needs a nudge today and has the email ready: proposal follow-ups, late-invoice reminders, onboarding emails. You copy it and send it from your own inbox. I'd like to give you a free copy, no strings. You can try it first with sample clients, no sign-up: https://buzzyfly.com/demo?utm_source=freelancelifestyle&utm_medium=partner&utm_campaign=partner-freelancelifestyle. If you think it would help your community, I'd be glad to set up a referral share on terms we agree. [Owner name], support@buzzyfly.com
+
+**PP6 (Preston Lee and Clay Mosley, Freelance to Founder).**
+Subject: For callers whose clients go quiet
+Hi Preston and Clay, a lot of Freelance to Founder callers ask what to send when a proposal goes quiet or a client keeps adding work. I make Buzzyfly, a browser app that lists who needs a follow-up today and has that email written: day 3, 7 and 14 proposal follow-ups, invoice reminders and scope replies, with the client's name and project filled in. $49 once, no subscription. I'd like to give you both a free copy. There's a no-sign-up demo here: https://buzzyfly.com/demo?utm_source=millo&utm_medium=partner&utm_campaign=partner-millo. If it's useful for your listeners, I'm happy to agree a referral share. [Owner name], support@buzzyfly.com
+
+**PP7 (Latasha James, Freelance Friday).**
+Subject: Free review copy: client follow-ups, already written
+Hi Latasha, I make Buzzyfly, a small browser app for freelancers who run their own client list. Each day it shows who needs a follow-up, an invoice reminder or an onboarding step, and the email is already written with their name and project. I'd like to give you a free copy to try, no obligation. Demo with sample clients, no sign-up: https://buzzyfly.com/demo?utm_source=latashajames&utm_medium=partner&utm_campaign=partner-latashajames. If you'd ever mention it, I can set up a referral share on terms we agree. [Owner name], support@buzzyfly.com
+
 ## Newsletters (role 13)
 
 Checked on each newsletter's own booking page on 2026-11-03. Numbers are what the publisher
@@ -318,8 +388,28 @@ No sign-up." Link: https://buzzyfly.com/overdue-invoice-email
 
 | Platform | Kit ready? | Date | Result |
 |---|---|---|---|
+| Indie Hackers | yes (below, 2026-11-12) | owner posts any weekday; free | - |
 | Product Hunt | yes (below) | owner picks; schedule up to 1 month ahead | - |
 | Show HN | yes (below, 2026-11-05): `/demo` is live with no sign-up, which is what HN's rules ask for | owner picks a weekday morning US time | - |
+
+### Indie Hackers launch kit (role 15, 2026-11-12)
+
+Free. Two parts: a product page, and one honest post in the community. The owner posts both
+from their own Indie Hackers account. No paid placement.
+
+- **Product page** (indiehackers.com, "Add your product"): name Buzzyfly; one-liner "A browser app that shows which client to follow up with today, with the email already written."; website https://buzzyfly.com/?utm_source=indiehackers&utm_medium=launch&utm_campaign=ih-product; revenue: enter the real number from Stripe, even if it's $0.
+- **Post title:** "I built a $49 one-time app for freelancers who forget follow-ups. 0 sales so far. Roast the page?" (Only use "0 sales" if Stripe still shows 0 on the day.)
+- **Post body (owner's voice):**
+  I run a small solo business, and the thing I kept dropping wasn't the work. It was the follow-up after it: the proposal that went quiet, the invoice a week late, the welcome email for a new client. So I built Buzzyfly. It's a browser app. Each day it lists who needs something, and the email is already written with their name, project and date. You copy it and send it from your own inbox.
+  Some details: plain DOM code on Astro and Cloudflare Workers. Client data stays in the browser (localStorage, with JSON backup and restore). No account, no server copy. $49 once, or $15 to $29 for a single tool. No subscription.
+  Try it with sample clients, no sign-up: https://buzzyfly.com/demo?utm_source=indiehackers&utm_medium=launch&utm_campaign=ih-post
+  Honest question: what would make you trust a $49 app from a solo maker enough to try it?
+- **Image:** https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/launch/ph-gallery-1.jpg
+- **Checklist:**
+  1. Open /demo on a phone that morning and check that it loads with no "Just a moment..." screen.
+  2. Post between 9 and 11am US Eastern on a weekday.
+  3. Reply to every comment that day, yourself. No vote asks, no sock-puppet accounts.
+  4. Log the date and result in the Launches table, and the utm_campaign in the scoreboard.
 
 ### Show HN launch kit (role 15, 2026-11-05)
 
@@ -416,6 +506,14 @@ Buyer doubts about Buzzyfly to answer on /store (for the Web builders): "Is it a
 - "Revisions are used up and they want another." Post idea: revision-limit-reply (POSTS.md); count rounds out loud.
 - "How do I price?" Post idea: rate-floor-free-tool (POSTS.md) to the free /hourly-rate-calculator.
 - Competition seen this week on r/SideProject: Freelance Guardian (invoices + scope), a scope-creep Google Sheet, a free Excel salary calculator. Our honest difference: one app with the follow-ups, onboarding, scope replies and pricing, the emails already filled in, a free demo, $49 once.
+
+### Added 2026-11-13 (from L26 to L30)
+- "How do I chase feedback without being annoying?" Post idea: feedback-chase-no-nag (POSTS.md): a date before you send, two options, then the calm pause note.
+- "Client threatening to withhold payment." FAQ: ask them to list the issue in writing by a date.
+- "Is getting ghosted early normal?" Post idea: reply fast, one question, one dated next step, one follow-up, then move on.
+- "Safest way to get paid?" Post idea: deposit-before-start (POSTS.md).
+- "Spreadsheet, but things still slip." FAQ for /store: the app is the same list, sorted by what's due today, with the email written. That's the honest answer to "I already use a spreadsheet".
+- Seen again: other sellers posting "the 3 short emails I use" and scope/late-payment tools on r/Upwork and r/freelance. The scripts are common knowledge. What we sell is having them in one place, filled in, on the day they're due.
 
 ## Ready ad set (role 9, waiting for the owner's yes and daily budget)
 

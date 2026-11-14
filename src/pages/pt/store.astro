@@ -1,0 +1,211 @@
+---
+// Portuguese (Brazil) version of /store. Same product, same $49 USD price, same
+// Stripe Payment Link from getOrderAction(), and the refund rule with the same meaning.
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ProductCallout from "../../components/ProductCallout.astro";
+import PayPalLink from "../../components/PayPalLink.astro";
+import { ALL_PRODUCTS, BUZZYFLY_CONFIG, getOrderAction } from "../../data/monetization";
+import { GUARANTEE_PT, STORE_ALTERNATES } from "../../data/i18n";
+
+export const prerender = false;
+
+const system = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
+const systemOrder = getOrderAction(system.id);
+const guarantee = GUARANTEE_PT;
+
+const DESCRIPTION =
+	"App web que abre no navegador. Abra e veja com quem fazer follow-up hoje, o e-mail a enviar, o onboarding dos clientes novos e a sua revisão de segunda-feira. Sem downloads. Sem Excel.";
+const FEATURES = [
+	"Painel «Hoje»: quem precisa de você e o que enviar",
+	"Follow-ups, onboarding e revisão semanal no navegador",
+	"Respostas para propostas e escopo, prontas para copiar",
+	"Funciona no celular. Sem arquivos.",
+];
+
+const productLd = JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "Product",
+	name: system.title,
+	description: DESCRIPTION,
+	image: `${BUZZYFLY_CONFIG.siteUrl}/og-default.jpg`,
+	url: `${BUZZYFLY_CONFIG.siteUrl}/pt/store/`,
+	inLanguage: "pt-BR",
+	brand: { "@type": "Brand", name: BUZZYFLY_CONFIG.brandName },
+	offers: {
+		"@type": "Offer",
+		price: system.price.replace(/[^0-9.]/g, ""),
+		priceCurrency: "USD",
+		availability: "https://schema.org/InStock",
+		url: `${BUZZYFLY_CONFIG.siteUrl}/pt/store/`,
+		seller: { "@type": "Organization", name: BUZZYFLY_CONFIG.brandName, url: BUZZYFLY_CONFIG.siteUrl },
+	},
+}).replace(/</g, "\\u003c");
+
+const TRUST = [
+	{ icon: "⚡", label: "Abre no seu navegador depois da compra" },
+	{ icon: "🔁", label: "Sem assinatura" },
+	{ icon: "🛡️", label: "Reembolso em 30 dias se você não conseguir acessar o app ou ele não for como descrito" },
+	{ icon: "🐝", label: "Feito por um criador independente" },
+];
+
+const CONTENTS = [
+	{ screen: "Hoje (Today)", items: "Quem precisa de um follow-up hoje, as etapas de onboarding pendentes e a prioridade nº 1 da semana" },
+	{ screen: "Follow-ups", items: "Cada contato, proposta e cliente, com a data do próximo follow-up já calculada" },
+	{ screen: "Redator de e-mails", items: "E-mails que preenchem o nome do cliente, o projeto e a sua assinatura. É só copiar e colar." },
+	{ screen: "Onboarding", items: "Um plano de 10 etapas para cada cliente novo, com prazos e anotações do cliente" },
+	{ screen: "Revisão semanal", items: "Um plano guiado de 20 minutos para a segunda-feira e um pontuador de prioridades" },
+	{ screen: "Propostas e preços", items: "O seu valor mínimo por hora e os seus preços por projeto e por mensalidade (retainer)" },
+	{ screen: "Controle de escopo", items: "As palavras exatas quando um cliente pede mais do que pagou" },
+];
+
+const FAQ = [
+	{
+		q: "O app está em português?",
+		a: "Não. O app e os modelos de e-mail estão em inglês. Esta página está em português para você saber exatamente o que está comprando.",
+	},
+	{
+		q: "É um curso ou uma planilha?",
+		a: "Não. É um app web. Abra no navegador do celular ou do computador. Sem Excel, sem arquivos, sem macros.",
+	},
+	{
+		q: "Como eu recebo?",
+		a: "Você paga uma única vez pelo Stripe. Depois da compra, você entra direto no app. Sem downloads.",
+	},
+	{
+		q: "O preço é em dólar?",
+		a: "Sim, 49 USD em um único pagamento. O seu banco ou cartão faz a conversão para a sua moeda.",
+	},
+	{
+		q: "Preciso criar uma conta?",
+		a: "Não precisa de conta nem senha. A sua compra vem com um link de acesso privado que libera o app. A sua lista de clientes fica salva no seu próprio dispositivo, e você pode fazer um backup para passá-la para outro. Sem assinatura.",
+	},
+	{
+		q: "Qual é a política de reembolso?",
+		a: guarantee,
+	},
+	{
+		q: "Para quem não é?",
+		a: "Se você já tem um sistema documentado que funciona, não precisa dele.",
+	},
+];
+
+const LABELS = {
+	buy: "Comprar agora",
+	paypalLead: "Ou pague com",
+	checkoutNote: `Pagamento seguro com Stripe ou PayPal. Pagamento único. O seu app é liberado na página seguinte depois do pagamento. ${guarantee}`,
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<BaseHead
+			title={`Loja: app de follow-up de clientes | ${BUZZYFLY_CONFIG.brandName}`}
+			description="Gerencie seus clientes com um app web, não de memória. Follow-ups, onboarding e revisão semanal em um só lugar. 49 USD, pagamento único."
+			alternates={STORE_ALTERNATES}
+		/>
+		<script type="application/ld+json" set:html={productLd} />
+		<style>
+			main { width: 1000px; }
+			.lang-link { display: flex; justify-content: flex-end; margin: 0 0 0.4em; font-size: 0.85em; }
+			.lang-link a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.4em; }
+			.store-hero { text-align: center; padding: 1em 0 1.5em; }
+			.store-eyebrow { margin: 0 0 0.8em; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+			.store-hero h1 { font-size: clamp(1.8em, 6vw, 2.8em); line-height: 1.12; max-width: 15em; margin: 0 auto 0.5em; }
+			.store-lede { max-width: 32em; margin: 0 auto 1.6em; color: rgb(var(--gray-dark)); font-size: 1.05em; }
+			.store-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 72px; max-width: 100%; white-space: normal; text-align: center; padding: 1.2em 3.2em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.65em; text-decoration: none; box-shadow: 0 6px 18px rgba(35, 55, 255, 0.35); transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+			.store-cta:hover { background: var(--accent-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 13, 138, 0.4); }
+			.store-cta:active { transform: translateY(0); box-shadow: 0 3px 10px rgba(35, 55, 255, 0.35); }
+			.store-cta:focus-visible { outline: 3px solid rgb(var(--black)); outline-offset: 3px; }
+			@media (max-width: 720px) { .store-cta { padding: 1em 1.8em; font-size: 1.35em; } }
+			@media (prefers-reduced-motion: reduce) { .store-cta { transition: none; } .store-cta:hover { transform: none; } }
+			.store-secondary { display: inline-block; margin-top: 0.9em; font-size: 0.9em; padding: 0.6em 0.4em; }
+			.trust-row { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6em; padding: 0; margin: 1.5em 0 0; }
+			@media (max-width: 720px) { .trust-row { grid-template-columns: 1fr 1fr; } }
+			.trust-row li { display: flex; align-items: center; justify-content: center; gap: 0.45em; padding: 0.7em 0.5em; border-radius: 10px; background: rgba(var(--gray-light), 55%); font-size: 0.82em; font-weight: 700; color: rgb(var(--gray-dark)); text-align: center; line-height: 1.3; }
+			.featured-wrap { max-width: 640px; margin: 0 auto; scroll-margin-top: 1em; }
+			.featured-wrap :global(.product-callout) { margin-top: 1.5em; }
+			.note { max-width: 640px; margin: 1em auto 0; text-align: center; font-size: 0.9em; color: rgb(var(--gray-dark)); }
+			.store-section { max-width: 720px; margin: 3em auto 0; }
+			.store-section h2 { font-size: 1.6em; }
+			.contents-table { width: 100%; border-collapse: collapse; margin-top: 1em; }
+			.contents-table th, .contents-table td { text-align: left; padding: 0.6em 0.8em; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.92em; vertical-align: top; }
+			.contents-table th { color: rgb(var(--gray)); font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.05em; }
+			.faq details { border-bottom: 1px solid rgb(var(--gray-light)); }
+			.faq summary { cursor: pointer; padding: 0.7em 0; min-height: 44px; box-sizing: border-box; font-weight: 700; color: rgb(var(--black)); list-style-position: inside; }
+			.faq details p { margin: 0 0 1em; color: rgb(var(--gray-dark)); font-size: 0.95em; }
+			.final-cta { text-align: center; margin: 3em auto 0; max-width: 720px; padding: 2em 1em; border-radius: 16px; background: rgba(35, 55, 255, 0.05); border: 1px solid rgba(35, 55, 255, 0.15); }
+			.final-cta h2 { font-size: clamp(1.3em, 4.5vw, 1.7em); }
+			.final-cta p { margin: 0.8em 0 0; font-size: 0.85em; color: rgb(var(--gray-dark)); }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<p class="lang-link"><a href="/store" hreflang="en" lang="en">English</a></p>
+			<section class="store-hero">
+				<p class="store-eyebrow">Para coaches, consultores e profissionais autônomos</p>
+				<h1>Gerencie seus clientes com um app, não de memória.</h1>
+				<p class="store-lede">
+					Você perde horas reescrevendo e-mails de boas-vindas. As propostas ficam sem resposta e você nunca faz o follow-up.
+					A segunda-feira começa na correria. Abra o app. Veja quem precisa de você hoje e qual e-mail enviar.
+				</p>
+				<a class="store-cta" href={systemOrder.href}>Comprar o Digital System — {system.price} USD</a>
+				<br />
+				{systemOrder.live && <PayPalLink href={systemOrder.paypalHref} lead="Ou pague com" />}
+				<br />
+				<a class="store-secondary" href="#digital-system">Veja o que está incluído ↓</a>
+				<ul class="trust-row" aria-label="Por que comprar aqui tem baixo risco">
+					{TRUST.map((t) => <li><span aria-hidden="true">{t.icon}</span>{t.label}</li>)}
+				</ul>
+			</section>
+
+			<div class="featured-wrap" id="digital-system">
+				<ProductCallout
+					productId={system.id}
+					description={DESCRIPTION}
+					features={FEATURES}
+					badge="O mais popular"
+					featured
+					headingLevel="h2"
+					labels={LABELS}
+				/>
+			</div>
+			<p class="note">O app e os modelos de e-mail estão em inglês.</p>
+
+			<section class="store-section">
+				<h2>O que vem no app Digital System</h2>
+				<table class="contents-table">
+					<thead><tr><th>Tela</th><th>O que faz</th></tr></thead>
+					<tbody>
+						{CONTENTS.map((c) => (
+							<tr><td><strong>{c.screen}</strong></td><td>{c.items}</td></tr>
+						))}
+					</tbody>
+				</table>
+				<p>Funciona em qualquer navegador moderno, no celular ou no computador. Sem downloads. Sem Excel.</p>
+			</section>
+
+			<section class="store-section faq" aria-labelledby="faq-heading">
+				<h2 id="faq-heading">Perguntas antes de comprar</h2>
+				{FAQ.map((item) => (
+					<details>
+						<summary>{item.q}</summary>
+						<p>{item.a}</p>
+					</details>
+				))}
+			</section>
+
+			<section class="final-cta">
+				<h2>Pare de reconstruir o seu processo de memória.</h2>
+				<a class="store-cta" href={systemOrder.href}>Comprar o Digital System — {system.price} USD</a>
+				<br />
+				{systemOrder.live && <PayPalLink href={systemOrder.paypalHref} lead="Ou pague com" />}
+				<p>Pagamento único. Sem assinatura. {guarantee}</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
