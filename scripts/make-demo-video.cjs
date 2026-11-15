@@ -2,7 +2,7 @@
 // Needs the built site served locally: `npm run build`, then serve dist/ on DEMO_URL
 // (default http://localhost:8765/demo/), then: node scripts/make-demo-video.cjs
 // Writes public/social/video/buzzyfly-demo.mp4. Every screen is the real app with sample clients.
-// Other scenes: `node scripts/make-demo-video.cjs invoice` or `... scope` write buzzyfly-demo-<scene>.mp4.
+// Other scenes: `node scripts/make-demo-video.cjs invoice`, `... scope`, `... discount` write buzzyfly-demo-<scene>.mp4.
 const { chromium } = require('playwright');
 const { execFileSync } = require('child_process');
 const fs = require('fs');
@@ -68,6 +68,18 @@ const caption = async (page, text) => page.evaluate((t) => {
 		await caption(page, 'Pick the client. Pick the scope reply.'); await shot(4);
 		await page.evaluate(() => window.scrollTo(0, 120));
 		await caption(page, 'Stay helpful. Quote it separately. They choose.'); await shot(4.5);
+		await scrollToButton('Copy email');
+		await caption(page, 'Copy it and send it from your own inbox.'); await shot(3.5);
+		await endCard();
+	} else if (scene === 'discount') {
+		await page.setContent(card('"Can you do it cheaper?"', 'Keep your price. Offer a smaller scope instead. Real app, sample clients.'));
+		await page.evaluate(() => document.fonts.ready); await shot(3);
+		await page.goto(URL + '#emails'); await page.waitForTimeout(600); await hide();
+		await page.selectOption('select[data-action="email-client"]', 'demo-1'); await page.waitForTimeout(200);
+		await page.selectOption('select[data-action="email-template"]', 'discount-reply'); await page.waitForTimeout(300);
+		await caption(page, 'Client asks for a discount? Pick the client and the discount reply.'); await shot(4);
+		await page.evaluate(() => window.scrollTo(0, 120));
+		await caption(page, 'Same price for the same work. Less work if the budget is tight.'); await shot(4.5);
 		await scrollToButton('Copy email');
 		await caption(page, 'Copy it and send it from your own inbox.'); await shot(3.5);
 		await endCard();

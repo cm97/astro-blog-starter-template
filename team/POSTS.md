@@ -274,3 +274,11 @@ Image: https://buzzyfly.com/social/buzzyfly-new-client-onboarding.jpg
 New client said yes. Now what? The Buzzyfly Digital System gives every new client the same 10-step onboarding plan, from day 0 to day 10: welcome email and intake questions, deposit confirmed, kickoff booked, kickoff summary and timeline, first delivery date in writing. The emails are written with the client's name filled in, and you send them yourself. $49 once, works in your browser, no subscription.
 
 https://www.buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=new-client-onboarding-image
+
+### demo-video-discount | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-discount.mp4
+Title: Client asks for a discount? Keep your price, cut the scope
+Client asks "can you do it cheaper?" You don't have to drop your rate. Keep the price for the work you quoted, and offer a smaller scope if the budget is tight. This is the real Buzzyfly app with sample clients: pick the client, pick the discount reply, and it's written with their name, project and price. Copy it and send it from your own inbox.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-discount
+$49 once, no subscription.
