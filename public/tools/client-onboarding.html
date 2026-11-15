@@ -44,6 +44,10 @@ button:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
 .next-step h2{font-family:var(--display);font-weight:700;font-size:20px;margin:0}
 .next-step p{margin:0;color:var(--muted);font-size:16px}
 a.cta{font-family:var(--display);font-weight:700;font-size:15px;color:var(--paper);background:var(--accent);border-radius:3px;padding:12px 20px;text-decoration:none;align-self:flex-start;margin-top:6px}
+a.cta.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.cta-row{display:flex;flex-wrap:wrap;gap:10px}
+.cta-row a.cta{margin-top:0;min-height:44px;box-sizing:border-box;display:inline-flex;align-items:center}
+.fine{font-size:14px;color:var(--muted);margin:0}
 footer{color:var(--muted);font-size:14px}
 footer a{color:inherit}
 </style>
@@ -98,9 +102,13 @@ footer a{color:inherit}
 </section>
 
 <section class="next-step">
-<h2>The full kit</h2>
-<p>This is the sequence. The paid kit has the full templates with variants, the complete intake set, and the timeline for running it in twenty minutes flat.</p>
-<a class="cta" href="/products">See the Buzzyfly products</a>
+<h2>Every new client, the same 10 steps</h2>
+<p>This page writes the sequence once. The Buzzyfly Digital System is a browser app that gives each new client a 10-step onboarding plan with a day for every step, shows what's due today, and fills in the welcome, intake and kickoff emails with their details. $49 once, no subscription.</p>
+<div class="cta-row">
+<a class="cta" href="https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00?client_reference_id=free-tool__site__client-onboarding&amp;utm_source=free-tool&amp;utm_medium=site&amp;utm_campaign=client-onboarding">Get it for $49, one time</a>
+<a class="cta secondary" href="/demo?utm_source=free-tool&amp;utm_medium=site&amp;utm_campaign=client-onboarding">Try the free demo first</a>
+</div>
+<p class="fine">30-day refund if you can't access the app or it isn't as described. <a href="/store">What's included</a></p>
 </section>
 <footer><p>Free to use and share &mdash; no sign-up. <a href="/">buzzyfly.com</a></p></footer>
 </div>
