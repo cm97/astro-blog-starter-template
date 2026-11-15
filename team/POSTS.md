@@ -107,7 +107,7 @@ New client just paid and you're rewriting the same welcome email again? This is 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-onboarding
 $49 once, no subscription.
 
-### demo-video-pricing | posted 2026-11-05, youtube id bNXzQm63vDQ (https://www.youtube.com/watch?v=bNXzQm63vDQ); instagram tried 2026-11-13 and 11-14, twice each, "still processing", not live (check recent media before a retry); ready for facebook | instagram: SAMS Service, facebook: professional portfolio
+### demo-video-pricing | posted 2026-11-05, youtube id bNXzQm63vDQ (https://www.youtube.com/watch?v=bNXzQm63vDQ); blocked for instagram: 4 tries on 2026-11-13 and 11-14 all stuck at "still processing", never went live; ready for facebook | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-pricing.mp4
 Title: Not sure what to charge? Find your hourly floor in 30 seconds
 Not sure what to charge? Put in what you want to take home, what the business costs and how many hours you can bill. The Buzzyfly app shows the lowest hourly rate that covers it, plus a project price and a monthly retainer price. This is the real app.
@@ -115,7 +115,7 @@ Not sure what to charge? Put in what you want to take home, what the business co
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-pricing
 $49 once, no subscription.
 
-### demo-video-reset | posted 2026-11-10, youtube id JKZnDwCVd4U (https://www.youtube.com/watch?v=JKZnDwCVd4U); ready for instagram, facebook | instagram: SAMS Service, facebook: professional portfolio
+### demo-video-reset | posted 2026-11-10, youtube id JKZnDwCVd4U (https://www.youtube.com/watch?v=JKZnDwCVd4U); instagram tried 2026-11-15 twice, "still processing", not live (check recent media before a retry); ready for facebook | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-reset.mp4
 Title: Monday chaos? Do this 20-minute reset instead
 Monday starts with a scramble? The Buzzyfly app has a 20-minute Monday reset: open invoices, follow-ups due and onboarding steps on one screen, then six short steps, money first. This is the real app with sample clients.
@@ -275,7 +275,7 @@ New client said yes. Now what? The Buzzyfly Digital System gives every new clien
 
 https://www.buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=new-client-onboarding-image
 
-### demo-video-discount | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+### demo-video-discount | posted 2026-11-15, youtube id Jn-cW92ib-4 (https://www.youtube.com/watch?v=Jn-cW92ib-4); ready for instagram, facebook | youtube, instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-discount.mp4
 Title: Client asks for a discount? Keep your price, cut the scope
 Client asks "can you do it cheaper?" You don't have to drop your rate. Keep the price for the work you quoted, and offer a smaller scope if the budget is tight. This is the real Buzzyfly app with sample clients: pick the client, pick the discount reply, and it's written with their name, project and price. Copy it and send it from your own inbox.
