@@ -144,7 +144,7 @@ Save the messages now. Pause new work until it's paid.
 Our free reminder writer drafts the polite version for you in 30 seconds, no sign-up.
 https://buzzyfly.com/overdue-invoice-email?utm_source=facebook&utm_medium=social&utm_campaign=paid-late-partial-steps
 
-### scope-change-log | ready | facebook: professional portfolio
+### scope-change-log | posted 2026-11-15, id 1115192551682116_122147220543356277 | facebook: professional portfolio
 Image: none
 Scope creep rarely arrives as one big ask. It's ten small "quick tweaks". Three things stop it:
 
