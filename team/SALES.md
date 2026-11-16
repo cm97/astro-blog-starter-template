@@ -25,7 +25,12 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 | retainer-menu-scope | Facebook: professional portfolio (social poster #246) | 2026-11-12 | ? | ? | ? |
 | cartoon-close-the-loop | YouTube Shorts (video poster #252) | 2026-11-12 | ? | ? | ? |
 | feedback-chase-no-nag, deposit-before-start | Facebook queue (POSTS.md, added 2026-11-13) | not posted yet | - | - | - |
-| Community replies R1 to R30 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
+| late-invoice-image | Facebook: professional portfolio | 2026-11-13 | ? | ? | ? |
+| paid-late-partial-steps | Facebook: professional portfolio (#264) | 2026-11-14 | ? | ? | ? |
+| scope-change-log | Facebook: professional portfolio (#268) | 2026-11-15 | ? | ? | ? |
+| cartoon-messy-onboarding, cartoon-chaotic-week, demo-video-discount | YouTube Shorts (#261, #266, #271) | 2026-11-13..15 | ? | ? | ? |
+| after-project-30-day, unhappy-but-wont-say | Facebook queue (POSTS.md, added 2026-11-16) | not posted yet | - | - | - |
+| Community replies R1 to R36 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
 | Whole site, ad check 2026-11-06 (LOG #215) | mostly direct | to 11-06 | 96 | 1 (first, direct to /) | 0 |
 | Whole site 11-03..04 (sales-b, LOG 2026-11-04) | 9 YouTube, rest direct | - | 38 views | 0 | 0 |
 | Demo videos (weekly check 2026-11-10) | YouTube Shorts, Instagram Reels, Facebook video | 2026-11-03 to 11-10 | site views 11-03..11-10: youtube 27, facebook 6, google 23, direct 61, other 9. YouTube views: proposal 3, invoice 0, scope 18, onboarding 4, pricing 7. Instagram insights: not available (permission) | 1 (direct) | 0 |
@@ -73,6 +78,12 @@ self-promotion rule in the sidebar, then post.** Reddit replies carry no link by
 | L28 | ~2026-11-07 (past week) | [r/Upwork](https://www.reddit.com/r/Upwork/comments/1xq1r3k/is_it_normal_to_get_ghosted_by_clients_early_on/) | "Is it normal to get ghosted by clients early on? ... I've had 5 clients contact me" | warm | R28 | draft, owner posts |
 | L29 | ~2026-11-10 (past week) | [r/Freelancers](https://www.reddit.com/r/Freelancers/comments/1xu0dsz/safest_method_to_receive_payment_from_clients/) | "Safest method to receive payment from clients" | warm | R29 | draft, owner posts |
 | L30 | ~2026-11-07 (past week) | [r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1xquze4/small_business_teams_running_on_spreadsheets_how/) | "How do you handle overdue alerts before things slip?" (small teams running on spreadsheets) | warm | R30 | draft, owner posts |
+| L31 | ~2026-11-10 (past week) | [r/FreelanceIndia](https://www.reddit.com/r/FreelanceIndia/comments/1xu3emk/im_providing_30000_worth_of_services_for_12000/) | "I'm providing ₹30000+ worth of services for ₹12000 ... I know I should've been stricter about scope creep from the beginning" | hot | R31 | draft, owner posts |
+| L32 | ~2026-11-09 (past week) | [r/videography](https://www.reddit.com/r/videography/comments/1xst112/client_isnt_happy_but_doesnt_tell_me_why_clearly/) | "Client isn't happy but doesn't tell me why clearly" | warm | R32 | draft, owner posts |
+| L33 | ~2026-11-09 (past week) | [r/automation](https://www.reddit.com/r/automation/comments/1xt0b9m/whats_the_hardest_part_of_managing_multiple/) | "What's the hardest part of managing multiple clients that no [tool fixes]? ... having all those tools doesn't necessarily..." | warm | R33 | draft, owner posts |
+| L34 | ~2026-11-08 (past week) | [r/smallbusinessuk](https://www.reddit.com/r/smallbusinessuk/comments/1xs0va2/how_quickly_should_i_chase_unpaid_invoices/) | "How Quickly Should I Chase Unpaid Invoices? ... just had my first non-paying B2B customer" | hot | R34 | draft, owner posts |
+| L35 | ~2026-11-09 (past week) | [r/Upwork](https://www.reddit.com/r/Upwork/comments/1xtd4ag/how_do_you_keep_branding_clients_coming_back/) | "How Do You Keep Branding Clients Coming Back? ... once the identity and guidelines are delivered, the follow-up..." | warm | R35 | draft, owner posts |
+| L36 | ~2026-11-12 (past week) | [r/Upwork](https://www.reddit.com/r/Upwork/comments/1xvodes/client_is_disputing_for_an_illegitimate_reason/) | "Client is disputing for an illegitimate reason. What do I do?" | hot | R36 | draft, owner posts |
 
 ### Draft replies (team A, role 4, 2026-11-02)
 
@@ -274,6 +285,53 @@ For invoices, set the reminder dates the moment you send them: due date +1, +7, 
 
 Best two to post first this round: **R26** (exact follow-up wording, the app's core job, UK freelance sub) and **R30** (small-business owners on spreadsheets are the buyer).
 
+### Draft replies, round 6 (team A, role 4, 2026-11-16)
+
+Found 2026-11-16 by web search limited to the past week. Same limits: titles and snippets
+only, the owner opens each thread and checks the sub's rules first. No links on Reddit.
+Skipped on purpose: an r/UnethicalLifeProTips "client won't pay" thread (we don't answer there).
+
+**R31 (L31, giving ₹30k of work for ₹12k, scope crept).**
+You can fix this without blowing up the relationship. Reset it, don't punish it.
+1. List what the ₹12k originally covered, then everything that's been added since.
+2. Send it with two options: "Looking back, the work has grown well past what we agreed for ₹12,000. From next month I can either keep to the original list at ₹12,000, or cover everything we're doing now at ₹[X]. Which works better for you?"
+3. Hold the line from the next billing cycle. Don't ask for back pay, it's rarely worth the fight.
+4. From now on, any new ask gets the same reply: "Happy to. That's outside what we agreed, so it's ₹[price], or we can swap it for [item]."
+If they say no to both options, that tells you whether this client is worth keeping at that rate.
+
+**R32 (L32, client unhappy but won't say why).**
+Vague unhappiness usually means they can't name it, not that they won't. Make it easy to answer with specific questions instead of "what do you think?":
+"Thanks for being honest that it's not quite there. To get it right, could you tell me:
+1. Which part is closest to what you pictured?
+2. Which part feels most off: the pace, the music, the colour, or the story order?
+3. Is there a video you've seen (anyone's) that feels like what you want?"
+Then offer a 15-minute call where they react while you scrub through the cut. People can point at what's wrong much more easily than they can describe it. Next time, ask for 2 to 3 reference videos at kickoff.
+
+**R33 (L33, the hardest part of managing multiple clients that tools don't fix).**
+For me it's not storing the information. It's knowing what's due today across everyone. Tools hold the data, but somebody still has to look at every client and decide "this one needs a follow-up, that invoice is a week late, this new client hasn't sent files". What helped most was one list with a next step and a date for every client, sorted by date, checked first thing each day, and the emails I send over and over written once so the follow-up takes a minute, not twenty.
+
+**R34 (L34, how quickly to chase an unpaid B2B invoice in the UK).**
+Start the day after it's due. Most late B2B invoices are forgotten, not refused. A schedule that works:
+- Day 1 overdue: a friendly email with the invoice attached again: "Hi [name], invoice [#] for [amount] was due yesterday. Could you check it's in your payment run?"
+- Day 7: firmer, and ask for a date: "Could you confirm when this will be paid?" Call accounts if you can.
+- Day 14 to 30: a final notice that you'll add statutory interest and the fixed fee under the Late Payment of Commercial Debts (Interest) Act, then a letter before action, then Money Claim Online.
+And for new B2B customers, take payment up front or on delivery until they've paid you once on time.
+
+**R35 (L35, keeping branding clients coming back).**
+Branding feels one-off, so the follow-up has to give them a reason to come back. Two that work:
+- About 30 days after delivery: "It's been about a month since we wrapped [project]. How is it working for you? If anything needs a tweak, tell me. And if you know someone who needs similar help, I'd be glad to talk to them."
+- Offer the next piece by name, not "let me know if you need anything": templates for social, a pitch deck, packaging, or a small monthly "brand care" retainer for new assets.
+Put the 30-day date in your calendar the day you deliver. That's the part people forget.
+
+**R36 (L36, client disputing on Upwork for an illegitimate reason).**
+Keep everything on Upwork and in writing from now on, because the dispute team looks at the messages and the contract. Then:
+1. Reply once, calmly, pointing to the milestone description and what you delivered: "The milestone was [description]. I delivered [items] on [date] (attached). If something specific is missing from that description, tell me what and I'll look at it."
+2. Upload your work and any approvals ("looks great", revision requests you completed) as files in the message thread.
+3. If it goes to Upwork's dispute assistance, stay factual and short.
+For the next contract, write milestone descriptions as a list of deliverables. Disputes are much easier to win when the description is specific.
+
+Best two to post first this round: **R34** (direct, the exact schedule question, UK small-business sub) and **R31** (scope creep, a reset script they can send today).
+
 ### Lead research and outreach (roles 5 and 6)
 
 No businesses added this run. The searches found only vendor blogs and courses, not small
@@ -304,6 +362,10 @@ stating the problem. No cold notes drafted.
 **2026-11-13:** 0 businesses added. Same as before: the searches found people asking for help
 (answered above) and more tool launches (a contract-locking tool, invoice dashboards, "3 short
 emails" posts). No new business page stating the problem. No cold notes drafted.
+
+**2026-11-16:** 0 businesses added. The searches found people asking for help (answered above),
+creators posting scope-creep videos, and more invoice and scope tool launches (Paylark, a
+project-control toolkit, ScopeDue). No new business page stating the problem. No cold notes drafted.
 
 ## Partners
 
@@ -514,6 +576,14 @@ Buyer doubts about Buzzyfly to answer on /store (for the Web builders): "Is it a
 - "Safest way to get paid?" Post idea: deposit-before-start (POSTS.md).
 - "Spreadsheet, but things still slip." FAQ for /store: the app is the same list, sorted by what's due today, with the email written. That's the honest answer to "I already use a spreadsheet".
 - Seen again: other sellers posting "the 3 short emails I use" and scope/late-payment tools on r/Upwork and r/freelance. The scripts are common knowledge. What we sell is having them in one place, filled in, on the day they're due.
+
+### Added 2026-11-16 (from L31 to L36)
+- "I'm doing far more than I'm paid for. How do I fix it without losing the client?" Post idea: the reset message with two options, applied from the next billing cycle.
+- "Client is unhappy but won't say why." Post idea: unhappy-but-wont-say (POSTS.md): three specific questions plus references.
+- "Tools hold the data, but who decides what's due today?" FAQ for /store: that's exactly what the Today list does. It's the honest answer to "I already have a CRM/Notion".
+- "How quickly should I chase an unpaid invoice?" Already well covered in the queue (free reminder tool, invoice posts).
+- "How do I get one-off clients to come back?" Post idea: after-project-30-day (POSTS.md), using the app's real 30-day check-in and retainer emails.
+- "Client opened a dispute on Upwork." FAQ: stay on-platform, point to the milestone description, upload the proof.
 
 ## Ready ad set (role 9, waiting for the owner's yes and daily budget)
 

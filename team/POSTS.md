@@ -282,3 +282,27 @@ Client asks "can you do it cheaper?" You don't have to drop your rate. Keep the 
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-discount
 $49 once, no subscription.
+
+### after-project-30-day | ready | facebook: professional portfolio
+Image: none
+The project is delivered and the client is happy. Then you never hear from them again. One email 30 days later fixes most of that:
+
+"Hi [name], it's been about a month since we wrapped [project]. How is it working for you? If anything needs a tweak, tell me. And if you know someone who needs similar help, I'd be glad to talk to them."
+
+Then offer the next thing by name, not "let me know if you need anything".
+
+Buzzyfly has this 30-day check-in and a retainer offer email ready to copy, with the client's name and project filled in. $49 once, works in your browser, no subscription.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=after-project-30-day
+
+### unhappy-but-wont-say | ready | facebook: professional portfolio
+Image: none
+Client says it's "not quite right" but can't say why? Don't ask "what do you think?" Ask three specific questions:
+
+1. Which part is closest to what you pictured?
+2. Which part feels most off: the colours, the wording, the layout, or the pace?
+3. Is there an example (anyone's) that feels like what you want?
+
+Then offer a 15-minute call where they react while you scroll through it. People can point at what's wrong far more easily than they can describe it.
+
+Buzzyfly keeps every client's next step and follow-up emails on one Today list. Try the free demo, no sign-up.
+https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=unhappy-but-wont-say
