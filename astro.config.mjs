@@ -2,6 +2,7 @@
 import { defineConfig } from "astro/config";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import { EXPLAINER_VIDEOS } from "./src/data/videos.ts";
 
 import cloudflare from "@astrojs/cloudflare";
 
@@ -48,13 +49,21 @@ export default defineConfig({
 		"/videos/complete-bundle": { status: 301, destination: "/store/" },
 	},
 	// Keep private and post-checkout pages out of the sitemap: the admin
-	// console, the paid apps, and the order/unsubscribe screens.
+	// console, the paid apps, the demo, and the order/unsubscribe screens.
 	integrations: [
 		mdx(),
 		sitemap({
-			// /jobs renders on each request, so the sitemap can't find it on its own.
-			customPages: ["https://buzzyfly.com/jobs"],
-			filter: (page) => !/^https:\/\/buzzyfly\.com\/(admin|agent|app|success|thank-you|unsubscribe)(\/|$)/.test(page),
+			// Video watch pages render on request (/videos/[slug]), so the sitemap
+			// can't find them on its own. /jobs/ it already finds.
+			// The free tools are static files in public/, which the sitemap can't see
+			// either, and they're our best search bait.
+			customPages: [
+				...EXPLAINER_VIDEOS.map((v) => `https://buzzyfly.com/videos/${v.slug}/`),
+				"https://buzzyfly.com/tools/client-onboarding.html",
+				"https://buzzyfly.com/tools/follow-up-writer.html",
+				"https://buzzyfly.com/tools/weekly-reset.html",
+			],
+			filter: (page) => !/^https:\/\/buzzyfly\.com\/(admin|agent|app|demo|success|thank-you|unsubscribe)(\/|$)/.test(page),
 		}),
 	],
 	devToolbar: { enabled: false },

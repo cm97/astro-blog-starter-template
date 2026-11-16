@@ -7,6 +7,11 @@ const CHECKLIST_URL = `${BUZZYFLY_CONFIG.siteUrl}/blog/weekly-reset/`;
 const STORE_URL = `${BUZZYFLY_CONFIG.siteUrl}/store`;
 const BATCH_SIZE = 50;
 
+/** The free /demo (the real app with sample clients), tagged so sign-ups from each email can be counted. */
+export function demoUrl(campaign: string): string {
+	return `${BUZZYFLY_CONFIG.siteUrl}/demo?utm_source=email&utm_medium=email&utm_campaign=${encodeURIComponent(campaign)}`;
+}
+
 export function unsubscribeUrl(token: string): string {
 	return `${BUZZYFLY_CONFIG.siteUrl}/unsubscribe?token=${encodeURIComponent(token)}`;
 }
@@ -15,13 +20,14 @@ function fillVars(value: string): string {
 	return value
 		.replace(/\{checklist\}/g, CHECKLIST_URL)
 		.replace(/\{store\}/g, STORE_URL)
+		.replace(/\{demo:([a-z0-9-]+)\}/g, (_m, slug) => demoUrl(slug))
 		.replace(/\{supportEmail\}/g, BUZZYFLY_CONFIG.supportEmail);
 }
 
 // Escape, then turn bare URLs and email addresses into links.
 function inlineHtml(value: string): string {
 	return escapeHtml(value)
-		.replace(/https?:\/\/[^\s<]+[^\s<.,)]/g, (url) => `<a href="${url}" style="color:#1f4d3a">${url}</a>`)
+		.replace(/https?:\/\/[^\s<]+[^\s<.,)]/g, (url) => `<a href="${url}" style="color:#1f4d3a;word-break:break-all">${url}</a>`)
 		.replace(
 			/(^|[\s(])([\w.+-]+@[\w-]+\.[\w.]+[\w])/g,
 			(_m, pre, addr) => `${pre}<a href="mailto:${addr}" style="color:#1f4d3a">${addr}</a>`,

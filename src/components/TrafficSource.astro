@@ -4,15 +4,26 @@
 ---
 
 <script>
-	import { SOURCE_STORAGE_KEY, SOURCE_TTL_MS, cleanSource } from "../lib/trafficSource";
+	import { SOURCE_STORAGE_KEY, SOURCE_TTL_MS, cleanSource, referrerSource } from "../lib/trafficSource";
 
 	try {
 		const params = new URLSearchParams(location.search);
-		const utmSource = cleanSource(params.get("utm_source"));
+		// ?internal=1 marks team and owner browsers (see isInternalSource). It is a
+		// plain parameter because Firecrawl, which runs our site checks, strips
+		// every utm_* parameter before loading the page.
+		const utmSource = params.has("internal") ? "internal" : cleanSource(params.get("utm_source"));
 		if (utmSource) {
 			const parts = [utmSource, cleanSource(params.get("utm_medium")), cleanSource(params.get("utm_campaign"))];
 			const source = parts.map((p) => p ?? "").join("__").replace(/(__)+$/, "");
 			localStorage.setItem(SOURCE_STORAGE_KEY, JSON.stringify({ source, ts: Date.now() }));
+		} else {
+			// No utm tags: fall back to the site that linked here (Google, Reddit...),
+			// but never replace a source we already know.
+			const known = JSON.parse(localStorage.getItem(SOURCE_STORAGE_KEY) ?? "null") as { ts: number } | null;
+			const fromReferrer = referrerSource(document.referrer);
+			if (fromReferrer && !(known && Date.now() - known.ts < SOURCE_TTL_MS)) {
+				localStorage.setItem(SOURCE_STORAGE_KEY, JSON.stringify({ source: fromReferrer, ts: Date.now() }));
+			}
 		}
 
 		const saved = JSON.parse(localStorage.getItem(SOURCE_STORAGE_KEY) ?? "null") as

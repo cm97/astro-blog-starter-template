@@ -185,8 +185,17 @@ test("every sequence email (0-6) renders and sends with unsubscribe link and add
 		for (const body of [msg.html!, msg.text!]) {
 			assert.ok(body.includes("https://buzzyfly.com/unsubscribe?token=tok-123"), `step ${step} unsubscribe`);
 			assert.ok(body.includes("PO Box 1, Testville"), `step ${step} address`);
-			assert.doesNotMatch(body, /\{(checklist|store|orderEmail)\}/);
+			assert.doesNotMatch(body, /\{(checklist|store|orderEmail|demo:[^}]*)\}/);
 		}
+	}
+});
+
+test("the sequence emails that pitch the $49 system link the free demo, tagged per email", () => {
+	for (const [step, slug] of [[3, "build-your-own"], [4, "refund-question"], [5, "pricing-math"], [6, "final-pitch"]] as const) {
+		const { html, text } = renderSequenceEmail(EMAIL_SEQUENCE[step], "t", "addr");
+		const url = `https://buzzyfly.com/demo?utm_source=email&utm_medium=email&utm_campaign=${slug}`;
+		assert.ok(text.includes(url), `step ${step} text has demo link`);
+		assert.ok(html.includes(`href="${url.replace(/&/g, "&amp;")}"`), `step ${step} html links the demo`);
 	}
 });
 

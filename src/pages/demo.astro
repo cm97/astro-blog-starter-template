@@ -1,0 +1,18 @@
+---
+// Free demo of the Digital System: the real app (same AppShell and script)
+// with three made-up sample clients. Nothing is saved. No access check, because
+// nothing here is the buyer's data and nothing persists.
+import AppShell from "../components/AppShell.astro";
+
+export const prerender = true;
+
+const NAV = [
+	{ id: "today", label: "Today", icon: "☀️" },
+	{ id: "clients", label: "Clients", icon: "👥" },
+	{ id: "emails", label: "Emails", icon: "✉️" },
+	{ id: "reset", label: "Reset", icon: "🔁" },
+	{ id: "pricing", label: "Pricing", icon: "💲" },
+	{ id: "settings", label: "More", icon: "⚙️" },
+];
+---
+<AppShell itemId="buzzyfly-digital-system" unlocked={true} badLink={false} edition="system" nav={NAV} appName="Demo" demo={true} />

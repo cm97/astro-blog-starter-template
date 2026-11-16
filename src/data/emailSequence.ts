@@ -17,6 +17,7 @@
 //   - "1. item"           -> numbered list
 //   - "> text"            -> quoted text (for copy-paste templates)
 //   - {checklist} {store} {supportEmail} -> replaced with real values
+//   - {demo:<slug>}       -> the free /demo link, tagged utm_campaign=<slug>
 //   - bare https:// URLs  -> links
 // The signature and unsubscribe footer are added automatically.
 
@@ -116,7 +117,9 @@ That's the outline. Turning it into emails you can actually send takes a few eve
 
 If you enjoy that work, do it. The outlines in these emails are yours to keep.
 
-If you'd rather open one workbook and run it tonight, that's what the Digital System is. Every piece, already written: {store}`,
+If you'd rather open one app and run it tonight, that's what the Digital System is. Every piece, already written: {store}
+
+Want to see it first? Try the free demo with sample clients. No sign-up, nothing to buy: {demo:build-your-own}`,
 	},
 	{
 		subject: "What if it doesn't work for you?",
@@ -125,7 +128,9 @@ If you'd rather open one workbook and run it tonight, that's what the Digital Sy
 
 The biggest worry with any digital product is simple. What if it's not what I need?
 
-So here's how to judge it before you buy. Read the sample below. If this is useful, the rest will be too.
+So here's how to judge it before you buy. Click around the free demo. It's the real app with three sample clients, and nothing you type is saved: {demo:refund-question}
+
+Then read the sample below. If this is useful, the rest will be too.
 
 The refund rule is simple: 30-day refund if you can't get into the app or it isn't what the listing described. Email {supportEmail}. No change-of-mind refunds once you've had access.
 
@@ -159,7 +164,9 @@ Your floor isn't your price. It's the number you never go under.
 
 Try it on the next thing you quote. See if the number surprises you.
 
-The Digital System does this math for you on the pricing tab. Then it writes the proposal from it. When you're ready: {store}`,
+The Digital System does this math for you on the pricing tab. Then it writes the proposal from it. You can try the pricing tab in the free demo: {demo:pricing-math}
+
+When you're ready: {store}`,
 	},
 	{
 		subject: "Stop rebuilding it from memory",
@@ -184,6 +191,8 @@ Who it's for: one- or few-person businesses where the process lives in your head
 Who it's not for: anyone who already has a documented system that works. You'd be buying what you already have.
 
 $49 once. No subscription. 30-day refund if you can't access the app or it isn't as described.
+
+Not sure yet? The free demo is the real app with sample clients. Nothing to sign up for: {demo:final-pitch}
 
 There's no deadline and no countdown. The price isn't going up on Friday. When you're ready, it's here: {store}
 

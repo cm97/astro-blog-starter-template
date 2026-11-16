@@ -1,6 +1,7 @@
 import type { APIRoute } from "astro";
 import { paypalConfigured } from "../../lib/paypal";
 import { getJobsOffer } from "../../lib/jobsAccess";
+import { hasFreeLlm, type FreeLlmEnv } from "../../lib/freeLlm";
 
 export const prerender = false;
 
@@ -21,6 +22,10 @@ export const GET: APIRoute = ({ locals }) => {
 		jobsMembership: Boolean(getJobsOffer(env)),
 		// Names only, so a key saved under an unexpected name can be spotted without exposing it.
 		paypalNamesFound: Object.keys(env).filter((name) => /paypal/i.test(name) && Boolean(env[name])).sort(),
+		// Free AI helpers (/api/ai): Groq/Gemini keys if set, otherwise the Workers AI binding.
+		ai: hasFreeLlm(env as unknown as FreeLlmEnv),
+		workersAi: typeof (env as { AI?: { run?: unknown } }).AI?.run === "function",
+		aiNamesFound: Object.keys(env).filter((name) => /groq|gemini|xai/i.test(name) && Boolean(env[name])).sort(),
 	};
 	return Response.json(status, { headers: { "cache-control": "no-store" } });
 };

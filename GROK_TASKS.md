@@ -17,8 +17,8 @@
 
 ## Claude Code Task
 - Verify /store page renders all 5 products if Wire confirms checkouts work
-- If checkouts work: add $15 Weekly Reset, $19 Follow-Up Emails, $29 Onboarding Kit, $97 Bundle to /store with Stripe links
-- Stripe links for secondary SKUs (from owner): $15 https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05 | $19 https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06 | $29 https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07 | $97 https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
+- Done (#181): $15 Weekly Reset, $19 Follow-Ups and $29 Onboarding apps are on /store with their Stripe links. NO $97 bundle anywhere (CLAUDE.md rule 5, owner 2026-11-03: "There is no $97 bundle")
+- Stripe links for secondary SKUs (from owner): $15 https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05 | $19 https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06 | $29 https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07 | ($97 bundle link removed: not allowed in src/ or posts by CLAUDE.md rule 5)
 - Do NOT deploy until Wire confirms each link opens a real checkout
 
 ## Contact

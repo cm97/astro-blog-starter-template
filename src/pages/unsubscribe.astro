@@ -46,7 +46,7 @@ if (Astro.request.method === "POST") {
 		<BaseHead title={`Unsubscribe — ${BUZZYFLY_CONFIG.brandName}`} description="Stop the Buzzyfly weekly emails." />
 		<meta name="robots" content="noindex, nofollow" />
 		<style>
-			.unsub { max-width: 520px; margin: 3em auto; text-align: center; }
+			.unsub { max-width: min(520px, calc(100% - 2em)); margin: 3em auto; text-align: center; }
 			.unsub button {
 				background: var(--accent); color: #fff; border: none; border-radius: 6px;
 				padding: 0.8em 1.6em; font-size: 1em; font-weight: 600; cursor: pointer;

@@ -7,6 +7,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import ProductCallout from '../components/ProductCallout.astro';
 import EmailOptin from '../components/EmailOptin.astro';
 import { BUZZYFLY_CONFIG, getProduct } from '../data/monetization';
+import { canonicalPath } from '../lib/canonical';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	prev?: CollectionEntry<'blog'> | null;
@@ -46,7 +47,7 @@ const displayHero =
 
 // Article structured data so search engines show the post as an article.
 // `<` is escaped so a title can't close the script tag.
-const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const pageUrl = new URL(canonicalPath(Astro.url.pathname), Astro.site).href;
 const articleLd = JSON.stringify({
 	'@context': 'https://schema.org',
 	'@type': 'BlogPosting',
@@ -88,7 +89,8 @@ const articleLd = JSON.stringify({
 			.related { margin: 2em 0; }
 			.related h3 { font-size: 1.2em; margin-bottom: 0.8em; }
 			.related ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6em; }
-			.related a { color: rgb(var(--black)); text-decoration: none; font-weight: 600; }
+			.related a { color: rgb(var(--black)); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; min-height: 44px; }
+			.prose :global(p > a:only-child) { display: inline-flex; align-items: center; min-height: 44px; }
 			.related a:hover { color: var(--accent); }
 			.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid rgb(var(--gray-light)); box-shadow: 0 -4px 16px rgba(0,0,0,0.08); padding: 0.7em 1em; display: flex; align-items: center; justify-content: space-between; gap: 1em; z-index: 50; }
 			.sticky-cta .price { font-weight: 700; }
@@ -97,6 +99,12 @@ const articleLd = JSON.stringify({
 			@media (max-width: 720px) { .sticky-cta span:first-child { display: none; } }
 			body { padding-bottom: 72px; }
 			.store-link { text-align: center; font-size: 0.9em; color: rgb(var(--gray)); margin: -1.5em 0 2em; }
+			/* A quiet end-of-article mark: signals the essay is finished so the
+			   product offer below reads as a deliberate next step, not an ad
+			   bolted onto the last paragraph. */
+			.article-end { display: flex; justify-content: center; align-items: center; gap: 0.6em; margin: 2.75em 0 0.25em; }
+			.article-end span { width: 6px; height: 6px; border-radius: 50%; background: rgb(var(--gray-light)); }
+			.article-end span:nth-child(2) { background: var(--accent); }
 		</style>
 	</head>
 
@@ -124,6 +132,7 @@ const articleLd = JSON.stringify({
 						<hr />
 					</div>
 					<slot />
+					<div class="article-end" aria-hidden="true"><span></span><span></span><span></span></div>
 					<ProductCallout
 						productId={calloutProduct.id}
 						description={calloutProduct.title === featuredProductTitle ? featuredProductDescription : undefined}

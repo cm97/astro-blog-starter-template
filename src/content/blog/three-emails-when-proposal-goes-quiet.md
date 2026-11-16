@@ -128,7 +128,7 @@ Onboarding note started: yes / no
 - Day 3: Tuesday or Wednesday morning, before 11am.
 - Day 7: same, mid-week only.
 - Day 14: any weekday before 11am.
-- Never Friday. Never after 3pm. The reply rate drops and the thread dies over the weekend.
+- Never Friday. Never after 3pm. A late-Friday email tends to sit unread over the weekend.
 
 If a due date lands on Friday or Monday, move it to the nearest Tuesday or Wednesday morning. Do not skip the touch.
 

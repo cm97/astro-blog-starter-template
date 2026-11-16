@@ -3,13 +3,15 @@
 interface Props {
 	href: string | null | undefined;
 	price?: string;
+	/** Text before "PayPal", for language versions of a page. */
+	lead?: string;
 }
-const { href, price } = Astro.props;
+const { href, price, lead = "Or pay with" } = Astro.props;
 ---
 
 {href && (
 	<a class="paypal-link" href={href}>
-		<span>Or pay with <strong>PayPal</strong>{price ? ` · ${price}` : ""}</span>
+		<span>{`${lead} `}<strong>PayPal</strong>{price ? ` · ${price}` : ""}</span>
 	</a>
 )}
 
