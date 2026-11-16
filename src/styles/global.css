@@ -109,7 +109,7 @@ a {
 	color: var(--accent);
 }
 a:hover {
-	color: var(--accent);
+	color: var(--accent-dark);
 }
 p {
 	margin-bottom: 1em;
@@ -230,4 +230,29 @@ summary:focus-visible {
 /* The first block in the article hugs the title; don't push it down. */
 .prose > :first-child {
 	margin-top: 0;
+}
+/*
+  Inline links in article running text carry an underline, so a link is never
+  signalled by color alone (WCAG 1.4.1), and it thickens on hover/focus for a
+  clear affordance. Scoped to the markdown block children (paragraphs, lists,
+  blockquotes) so buttons and cards that also live inside .prose — the product
+  callout, the related-reads list — keep their own styling untouched.
+*/
+.prose > p a,
+.prose > ul a,
+.prose > ol a,
+.prose > blockquote a {
+	text-decoration: underline;
+	text-decoration-thickness: 1px;
+	text-underline-offset: 0.15em;
+}
+.prose > p a:hover,
+.prose > ul a:hover,
+.prose > ol a:hover,
+.prose > blockquote a:hover,
+.prose > p a:focus-visible,
+.prose > ul a:focus-visible,
+.prose > ol a:focus-visible,
+.prose > blockquote a:focus-visible {
+	text-decoration-thickness: 2px;
 }

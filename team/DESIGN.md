@@ -43,6 +43,17 @@ match or update this file in the same PR — never let them drift.
   those files) and are **not** affected by the global or `.prose` scale. Those
   pages belong to the Home & Store designer.
 
+## Links
+- Every link has a real hover state: `a:hover` darkens to `--accent-dark`
+  (`#000d8a`). Header and footer links set their own hover and are unchanged;
+  pill CTAs keep white text. (Fixed 2026-11-16 — the old `a:hover` repeated the
+  resting color, so no link gave hover feedback.)
+- **Inline links in article running text** (`.prose > p/ul/ol/blockquote a`) are
+  underlined, so a link is never signalled by color alone (WCAG 1.4.1), and the
+  underline thickens to 2px on hover/focus. Scoped to markdown block children,
+  so buttons and cards that also sit inside `.prose` (the product callout, the
+  related-reads list, the prev/next nav) keep their own styling. (Shipped 2026-11-16.)
+
 ## CTA / buttons (current, for reference)
 - Primary CTA on `/` and `/store`: pill (`border-radius: 999px`), `--accent`
   background, white text, `font-weight: 800`, `min-height: 72px` (56px on small
@@ -62,3 +73,6 @@ Reviews:
 - 2026-11-02 (Design Lead): reconciled DESIGN.md to the real shipped tokens
   (Atkinson font, `#2337ff` accent) and added the `.prose` type-rhythm spec with
   the shipped change.
+- 2026-11-16 (Design Lead): fixed the site-wide `a:hover` no-op and gave inline
+  article links an underline affordance (see "Links"). Shared `.btn-primary`
+  token still open for a future run.
