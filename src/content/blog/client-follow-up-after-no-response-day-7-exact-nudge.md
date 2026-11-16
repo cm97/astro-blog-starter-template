@@ -3,6 +3,7 @@ title: "Client Follow-Up After No Response: Exact Day 7 Nudge"
 seoTitle: "Client Follow-Up After No Response Day 7 Exact Nudge"
 description: "Paste-ready day-7 follow-up email when a proposal or lead stays silent. One paragraph. No chasing. Keeps the start date real."
 pubDate: 2026-11-13
+updatedDate: 2026-11-16
 category: "sales"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -82,6 +83,28 @@ Phone-paste version (under 160 chars):
 - Cap the hold window at the named Friday. After that the original start date is no longer valid without a new proposal.
 - If the original start date has already passed, do not offer to hold it again. Move straight to the day-10 close.
 - Keep the five most common objection replies in the same note so you never search under pressure after a late reply.
+
+## Exact replies for the day-7 replies you actually get
+
+When they finally answer, do not invent a new email. Paste one of these.
+
+**Still thinking / need more time:**
+> Understood. The [start date] releases end of day Friday. Reply by then if you want it held. Otherwise the file closes.
+
+**Can we hop on a call?**
+> Happy to. First send a one-line yes on the original scope and price so we know what the call is about. Then pick a time.
+
+**Price is high / can you do less?**
+> Scope and start date stay the same. Price is [original]. Reply yes if you want the hold through Friday.
+
+**I need to check with [partner/boss]:**
+> Got it. The hold stays through Friday. Reply by then with yes or release so the calendar stays clean.
+
+**Send more info:**
+> The proposal is the info. One line is enough: want the [start date] held through Friday or released?
+
+**They pay:**
+Open the onboarding checklist the same hour. Welcome, intake, kickoff hold. Do not celebrate first.
 
 ## Fill-in after every day-7 nudge
 
