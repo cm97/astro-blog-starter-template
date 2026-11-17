@@ -3,7 +3,7 @@ title: "Follow-Up Email After No Response: 5 Templates to Copy"
 seoTitle: "Follow-Up Email After No Response: 5 Templates"
 description: "Five ready-to-send follow-up emails for when a prospect or client goes quiet: proposals, check-ins, re-engagement, referral asks and project wrap-ups."
 pubDate: "Sep 13 2026"
-updatedDate: "Oct 16 2026"
+updatedDate: "Nov 17 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -230,6 +230,36 @@ Job: create a deadline without a fake countdown. This is the email people actual
 
 If you cannot name the next date after a yes, you do not have a running client yet. You have a payment waiting on a process that still lives in your head. That is the onboarding checklist, not another follow-up.
 
+## Extra concrete steps that keep follow-ups alive
+
+- Log the exact dollar amount of the proposal on the same note the hour it leaves. Missing numbers become missing cash.
+- Cap open proposal rows at five. Anything past day 14 is closed or parked before you write the next three.
+- After any yes, open the onboarding checklist the same hour and put the new client on next Monday’s Still open.
+- Phone-only: dictate the template into Notes, fill the two blanks, paste, send, mark the log. The calendar hold still has to exist.
+- If three proposals go out the same day, run only the day-5 nudge for the first two. Park the third until the weekly reset.
+- Put a 48-hour reminder on the calendar the same minute the first nudge leaves. Unscheduled bumps die.
+- When a scope ask lands before they reply, park it with: “Got it. I’ll check what we locked and come back with two options.” Do not price it inside the follow-up window.
+- At Friday close, list any day 5–14 touches still open. Those become Monday priority 2.
+- Screenshot or copy the filled send log into the same note as last week’s reset so Monday never starts from blank.
+- Keep the five templates in the same folder as the onboarding checklist and the weekly reset. One open, all available.
+
+## Phone-only follow-up (8 minutes from your phone)
+
+1. Open Notes. Paste the fill-in block. Fill Name + Sent date + Day 5–7 due.
+2. Copy Template 1. Fill name + project + day. Send.
+3. Set a phone reminder for the bump date titled “Bump — 2 min”.
+4. Mark the log. Close the note.
+
+Do not open other apps until the three are done.
+
+## Day-0 cash lock (add these three before you close the laptop)
+
+1. Amount on the log: "$[number] proposal sent [date]".
+2. Holding date written: "Holding [start] until [break-up date]".
+3. Pre-written bump on calendar:
+
+> Hi [Name] — wanted to make sure the [project] proposal did not get buried. Still want to move forward, or should I take it off my list?
+
 ## What still breaks when the templates only live in your notes app
 
 You can copy the five emails above into a Google Doc right now and they will work. Until Thursday hits and you are slammed. Then the process collapses because there is no single place that also holds the onboarding checklist, the weekly reset, and the exact sequence for quiet leads.
@@ -243,4 +273,3 @@ The Digital System ($49) is those emails plus the onboarding checklist and the w
 One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
-
