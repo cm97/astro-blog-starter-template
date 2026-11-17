@@ -313,3 +313,13 @@ Sent a proposal and heard nothing? The hard part isn't the follow-up. It's knowi
 
 We made a free follow-up email writer for that. Pick the situation (a proposal gone quiet, a check-in, a referral ask or a project wrap-up), fill in two fields, and copy the email. No sign-up.
 https://buzzyfly.com/tools/follow-up-writer.html?utm_source=facebook&utm_medium=social&utm_campaign=follow-up-writer-free-tool
+
+### cartoon-late-invoice | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-late-invoice.mp4
+Title: Invoice a week late? The polite reminder is already written
+Invoice sent. Due Friday. A week later you still haven't asked, because chasing money feels awkward.
+
+The Buzzyfly Digital System puts the overdue invoice on your Today list at 1 day, 1 week and 2 weeks late, with a polite reminder already written: name, project and amount filled in. You copy it and send it from your own inbox.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=cartoon-late-invoice
+$49 once. Browser app. No subscription.
