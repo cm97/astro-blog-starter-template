@@ -115,7 +115,7 @@ Not sure what to charge? Put in what you want to take home, what the business co
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-pricing
 $49 once, no subscription.
 
-### demo-video-reset | posted 2026-11-10, youtube id JKZnDwCVd4U (https://www.youtube.com/watch?v=JKZnDwCVd4U); instagram tried 2026-11-15 twice, "still processing", not live (check recent media before a retry); ready for facebook | instagram: SAMS Service, facebook: professional portfolio
+### demo-video-reset | posted 2026-11-10, youtube id JKZnDwCVd4U (https://www.youtube.com/watch?v=JKZnDwCVd4U); blocked for instagram: 4 tries on 2026-11-15 and 11-17 all stuck at "still processing", never went live; ready for facebook | instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-reset.mp4
 Title: Monday chaos? Do this 20-minute reset instead
 Monday starts with a scramble? The Buzzyfly app has a 20-minute Monday reset: open invoices, follow-ups due and onboarding steps on one screen, then six short steps, money first. This is the real app with sample clients.
@@ -314,7 +314,7 @@ Sent a proposal and heard nothing? The hard part isn't the follow-up. It's knowi
 We made a free follow-up email writer for that. Pick the situation (a proposal gone quiet, a check-in, a referral ask or a project wrap-up), fill in two fields, and copy the email. No sign-up.
 https://buzzyfly.com/tools/follow-up-writer.html?utm_source=facebook&utm_medium=social&utm_campaign=follow-up-writer-free-tool
 
-### cartoon-late-invoice | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-late-invoice | posted 2026-11-17, youtube id 6drW5JjShVI (https://www.youtube.com/watch?v=6drW5JjShVI); ready for instagram, facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-late-invoice.mp4
 Title: Invoice a week late? The polite reminder is already written
 Invoice sent. Due Friday. A week later you still haven't asked, because chasing money feels awkward.
