@@ -173,7 +173,7 @@ The Buzzyfly Digital System puts "close the loop" on your Today list on day 14, 
 $49 once. Browser app. No subscription.
 https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-close-the-loop
 
-### before-you-sign-scope | ready | facebook: professional portfolio
+### before-you-sign-scope | posted 2026-11-17, id 1115192551682116_122147604885356277 | facebook: professional portfolio
 Image: none
 About to sign with a client who says extra work is "just how it is"? Push now, before you sign. It's when you have the most say. Add three lines:
 
