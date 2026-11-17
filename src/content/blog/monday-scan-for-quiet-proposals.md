@@ -3,12 +3,11 @@ title: "Monday Scan for Quiet Proposals (20 Minutes)"
 seoTitle: "Monday Scan for Quiet Proposals"
 description: "Exact 20-minute Monday process to catch every proposal that went quiet and send the follow-up that still works."
 pubDate: "Nov 02 2026"
-updatedDate: "Nov 04 2026"
+updatedDate: "Nov 17 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
 ---
 
@@ -26,7 +25,7 @@ The problem is not the proposal. The problem is that the next action lives only 
 
 Do this every Monday (or the first 20 minutes of your week). Same order every time. Stop when the timer hits 20.
 
-1. Open the list of every proposal sent more than 5 days ago with no reply.
+1. Open the list of every proposal sent more than 5 days ago with no reply. If the list is empty, write "none" and move to the weekly reset.
 2. For each one, send the day-5/7 follow-up if none exists yet.
 3. Log the send date next to the name. Set the next check for 3 days later.
 4. If still silent after the bump, send the break-up on day 14 and close the file.
@@ -42,6 +41,7 @@ Proposals older than 5 days: ________
 Sent today: ________
 Next check dates set: ________
 Break-ups sent: ________
+Past client re-engagement: yes / no
 ```
 
 ## Exact emails that do the work
@@ -104,6 +104,24 @@ These four cover the silence that kills cash.
 - Set the next check as a calendar hold titled "[Client] proposal check" so the weekly reset finds it without searching.
 - If you only have time for one email, send the day-5/7 follow-up. The break-up can wait until the next Monday. The first bump cannot.
 - Log every send with the exact subject you used. Next week's scan will not re-send the same one by accident.
+- Write the original price and start date in the log the day you send the proposal. Blank fields mean the follow-up has nothing to point at.
+- If day 5 falls on a Friday, send the follow-up Thursday morning. Do not slide it to Monday and lose the window.
+- Never discount in the follow-up. The original number stays the record.
+- After any yes, open the onboarding checklist the same hour. The follow-up sequence ends when money lands.
+- Cap open proposals at five total. Anything past day 14 without a reply is closed or parked.
+- On the next weekly reset, move every closed proposal older than 14 days out of the active list. The list is for cash still open, not for ghosts.
+- If they reply "still thinking," send one line: "Understood. The [start date] is released. Reply by [specific day] if you want it reopened." Do not leave it open.
+- Keep the three templates in the same note as the Monday scan. One open, all available.
+
+## Fill-in after every send
+
+```
+Touch sent: ________ (date/time)
+Which email: day-5/7 / day-10 / day-14 close / re-engage
+Next check date: ________
+Status: waiting / replied / closed
+Calendar hold set: yes / no
+```
 
 ## What still breaks when templates live only in a doc
 
@@ -111,7 +129,7 @@ Templates in a doc work until the week is on fire. Then you skip the scan becaus
 
 The system that survives is the one that already knows who is due, what the email says, and which date is next. You open it, copy, send, done.
 
-That is what the $49 Digital System is. The Today screen shows who needs a follow-up. The email writer fills the name. The weekly reset forces the 20-minute scan. One-time payment. Opens in the browser. No subscription.
+That is what the $49 Digital System is. The Today screen shows who needs a follow-up. The email writer fills the name. The weekly reset forces the 20-minute scan. One-time payment. Opens in the browser. No subscription. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
