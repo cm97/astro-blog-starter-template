@@ -306,3 +306,10 @@ Then offer a 15-minute call where they react while you scroll through it. People
 
 Buzzyfly keeps every client's next step and follow-up emails on one Today list. Try the free demo, no sign-up.
 https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=unhappy-but-wont-say
+
+### follow-up-writer-free-tool | ready | facebook: professional portfolio
+Image: none
+Sent a proposal and heard nothing? The hard part isn't the follow-up. It's knowing what to write without sounding pushy.
+
+We made a free follow-up email writer for that. Pick the situation (a proposal gone quiet, a check-in, a referral ask or a project wrap-up), fill in two fields, and copy the email. No sign-up.
+https://buzzyfly.com/tools/follow-up-writer.html?utm_source=facebook&utm_medium=social&utm_campaign=follow-up-writer-free-tool
