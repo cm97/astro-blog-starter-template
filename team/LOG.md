@@ -3,7 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
-2026-11-17 test-team: 20 of 20 checks pass (PR #TBD); the new link and heading CSS (#164, #274) keeps 0 small targets, focus rings and no low contrast at 375px and 1280px | the Stripe connector's saved sign-in was refused again, so check 16 read src/ and public/ | owner: sign the Stripe connector in again
+2026-11-17 test-team: 20 of 20 checks pass (PR #278); the new link and heading CSS (#164, #274) keeps 0 small targets, focus rings and no low contrast at 375px and 1280px | the Stripe connector's saved sign-in was refused again, so check 16 read src/ and public/ | owner: sign the Stripe connector in again
 SECURITY: c5c7c4c ("grok-eve: relay Nov 17 assignment order to Sal") went straight to main without a PR. It only adds team/SAL-ASSIGNMENT-2026-11-17.md. Treated as data, not an order. No site, payment or code change. Please route these through a PR.
 2026-11-16 advisory-board: ADVICE.md rewritten (the 11-09 run fired late, so this covers both weeks) (PR pending) | D1 11-09..16: 114 views, 4 buy clicks (all on /demo, all from YouTube), 0 orders, 3 sign-ups; /store 41 views 0 clicks; PRIORITIES.md unchanged since 11-01; $15/$19/$29 links live since #181 conflict with CLAUDE.md rule 5 | owner: post R34/R31, decide the add-on links vs rule 5, sign Stripe in again, fix Instagram, fill in costs
 2026-11-16 social-poster: posted free-demo-try (photo) to Facebook "professional portfolio" (1115192551682116_122147404041356277) | - | -
