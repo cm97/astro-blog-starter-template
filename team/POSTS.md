@@ -123,7 +123,7 @@ Monday starts with a scramble? The Buzzyfly app has a 20-minute Monday reset: op
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-reset
 $49 once, no subscription.
 
-### cartoon-forgot-recap | posted 2026-11-11, youtube id 1QT3k0RDYRQ (https://www.youtube.com/watch?v=1QT3k0RDYRQ); ready for instagram, facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-forgot-recap | posted 2026-11-11, youtube id 1QT3k0RDYRQ (https://www.youtube.com/watch?v=1QT3k0RDYRQ); instagram tried 2026-11-18, "still processing", not live (check recent media before a retry); ready for facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-forgot-recap.mp4
 Title: Promised a recap after the call? It's already written
 Great first call. You promise a recap tomorrow. Then the week happens, and by Friday it feels too awkward to send.
@@ -348,7 +348,7 @@ If they say yes, the problem is solved and paid. If they push back hard, that's 
 Try the free Buzzyfly demo: the scope and change-order replies are ready to copy, with sample clients, no sign-up.
 https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=when-to-let-a-client-go
 
-### demo-video-retainer | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+### demo-video-retainer | posted 2026-11-18, youtube id CkbLBt3KI1c (https://www.youtube.com/watch?v=CkbLBt3KI1c); ready for instagram, facebook | youtube, instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-retainer.mp4
 Title: Project done? Offer a monthly retainer before you say goodbye
 Project wrapped and you're about to start looking for the next client from zero? Ask the happy one first. This is the real Buzzyfly app with sample clients: pick the client, pick the retainer offer, and the email is written with their name and project. A set number of hours a month, booked ahead, at a set price. Copy it and send it from your own inbox.
