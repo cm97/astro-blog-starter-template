@@ -2,59 +2,133 @@
 
 Kept by the Media associate. Ready to use; nothing here has been sent, posted or uploaded.
 
-## YouTube channel: week of 2026-11-11
+## YouTube channel: week of 2026-11-18
 
 Channel: Fund Monetization (@fundmonetization).
 
-Already on the channel as Shorts (from `team/POSTS.md`): demo (qfNEhxYFFTg),
-invoice (vVbRrGDkiaM), scope (dq1INZCsWio), onboarding (VPX63WUhQtc), pricing
-(bNXzQm63vDQ), Monday reset (JKZnDwCVd4U). Don't upload these again.
+**Nothing new to upload this week.** All 12 team videos in
+`public/social/video/` are already Shorts (from `team/POSTS.md`): demo
+qfNEhxYFFTg, invoice vVbRrGDkiaM, scope dq1INZCsWio, onboarding VPX63WUhQtc,
+pricing bNXzQm63vDQ, reset JKZnDwCVd4U, forgot-recap 1QT3k0RDYRQ,
+close-the-loop _TU1x57QMnw, messy-onboarding k8KLRZUdo1U, chaotic-week
+ICKQ9a4AcjY, discount Jn-cW92ib-4, late-invoice 6drW5JjShVI. Don't upload
+any of these again. The Content Creator's next video goes up through the video
+poster as usual.
 
-This week: the 3 cartoon videos, none of which is on YouTube yet. All three are
-`ready` in `team/POSTS.md`, so the Social poster uploads them. If the owner
-uploads one by hand, mark it `posted` in POSTS.md so it doesn't go up twice.
-Upload as public, 9:16.
+**Why this week is about the existing Shorts:** ADVICE.md (11-16) shows all 4
+buy clicks of 11-09 to 11-16 came from `/demo`, each from a different YouTube
+video. YouTube to the free demo is the only path that has made clicks. So the
+job this week is to make every Short point at `/demo` first.
 
-### 1. Thu 11-12: `public/social/video/cartoon-forgot-recap.mp4`
-- **Title (53):** Promised a recap after the call? It's already written
-- **Description:** Great first call. You promise a recap tomorrow. Then the week happens, and by Friday it feels too awkward to send. The Buzzyfly Digital System shows who needs a follow-up today, with the recap email already written: their name, the project, what you heard. You copy it, send it from your own inbox and mark it sent. $49 once, browser app, no subscription: https://www.buzzyfly.com/store?utm_source=youtube&utm_medium=social&utm_campaign=cartoon-forgot-recap
-- **Tags:** follow up email, freelance client, sales follow up, freelancer tips, client communication
-- **Pinned comment:** How long after a call do you send the recap? Same day, next day, or "I'll get to it"? See the app with sample clients, no sign-up: buzzyfly.com/demo
+### Owner, 15 minutes in YouTube Studio
+1. On each of the 12 Shorts, **pin this comment**:
 
-### 2. Sat 11-14: `public/social/video/cartoon-close-the-loop.mp4`
-- **Title (49):** Client ghosted your proposal? Send this on day 14
-- **Description:** Proposal sent. Then two weeks of silence, and you wonder if one more chase is too pushy. Buzzyfly's Today list shows the day-14 "close the loop" follow-up with the polite last email already written, the client's name and project filled in. You copy it and send it yourself. Digital System: $49 once, browser app, no subscription: https://www.buzzyfly.com/store?utm_source=youtube&utm_medium=social&utm_campaign=cartoon-close-the-loop
-- **Tags:** client ghosting, proposal follow up, freelance proposal, freelancer tips, follow up email
-- **Pinned comment:** Do you send a last "closing the loop" email, or just let it go quiet? Free demo with sample clients: buzzyfly.com/demo
+   > Want to see it with real sample clients first? Free demo, no sign-up, nothing saved: https://buzzyfly.com/demo?utm_source=youtube&utm_medium=comment
+   > If it fits, it's $49 once at https://www.buzzyfly.com/store. No subscription. 30-day refund if you can't access the app or it isn't as described.
 
-### 3. Mon 11-16: `public/social/video/cartoon-messy-onboarding.mp4`
-- **Title (51):** New client said yes? Don't let onboarding get messy
-- **Description:** A new client said yes. Then the first week gets messy: no kickoff booked, no logins, no files, and you can't remember if the welcome email went out. The Buzzyfly Digital System gives every new client a 10-step onboarding plan, each step with its day. The welcome, intake and kickoff emails are already written with their name and project. You copy them and send them yourself. $49 once, browser app, no subscription: https://www.buzzyfly.com/store?utm_source=youtube&utm_medium=social&utm_campaign=cartoon-messy-onboarding
-- **Tags:** client onboarding, new client checklist, freelance onboarding, small business, freelancer tips
-- **Pinned comment:** What do you send first after a client says yes: the invoice or the welcome email? buzzyfly.com/store. 30-day refund if you can't access the app or it isn't as described.
+2. **Description first line.** On the 3 newest Shorts, replace the first line of
+   the description with the demo link, and keep the store link lower down:
+   - **chaotic-week (ICKQ9a4AcjY):** "Try the free demo first, no sign-up: https://buzzyfly.com/demo?utm_source=youtube&utm_medium=social&utm_campaign=cartoon-chaotic-week. Full app: https://www.buzzyfly.com/store". Tags: weekly reset, freelancer productivity, monday routine, small business, plan your week
+   - **discount (Jn-cW92ib-4):** "Try the free demo first, no sign-up: https://buzzyfly.com/demo?utm_source=youtube&utm_medium=social&utm_campaign=demo-video-discount. Full app: https://www.buzzyfly.com/store". Tags: client discount, freelance pricing, keep your rate, scope, freelancer tips
+   - **late-invoice (6drW5JjShVI):** "Try the free demo first, no sign-up: https://buzzyfly.com/demo?utm_source=youtube&utm_medium=social&utm_campaign=cartoon-late-invoice. Full app: https://www.buzzyfly.com/store". Tags: late invoice, invoice reminder, getting paid, freelancer tips, small business
+   Keep the current titles. They are already under 70 characters.
+3. **One playlist:** "Freelance admin in 20 seconds", with all 12 Shorts, newest first. A
+   playlist gives a viewer who finishes one Short the next one, and it shows
+   on the channel page.
+4. **Channel link:** `https://buzzyfly.com/demo?utm_source=youtube&utm_medium=channel`
+   (it was `/store` in the 11-04 plan; switch to `/demo` per ADVICE.md).
 
-### Next week
-No new team video is queued yet beyond these three. When the Content Creator
-ships the next one, it goes first.
+### Decision for the owner: channel name (still open since 11-04)
+All 12 Shorts on "Fund Monetization" are Buzzyfly videos, but the name reads like
+a finance channel and doesn't say Buzzyfly. A viewer who likes a Short can't
+find buzzyfly.com from the channel name.
+**Suggestion:** rename to **Buzzyfly** (handle like @buzzyflyapp if free).
+YouTube keeps the videos and subscribers when you rename. Handle changes are
+limited, so change it only once. Owner's call.
 
-### Channel housekeeping (10 minutes, owner, still open from 11-04)
-- Channel description: "Short, real demos for freelancers and small business owners: follow-ups, invoices, onboarding and pricing, done from one browser app. Made by Buzzyfly. https://www.buzzyfly.com/store"
-- Channel link: `https://www.buzzyfly.com/store?utm_source=youtube&utm_medium=channel`, so channel-page visits are tracked.
-
-### Decision for the owner: channel name (still open)
-"Fund Monetization" doesn't say Buzzyfly and reads like a finance channel. With
-6 Buzzyfly Shorts up and 3 more this week, nearly the whole channel is about
-Buzzyfly, but a viewer can't connect it to buzzyfly.com.
-**Suggestion:** rename the channel to **Buzzyfly** and pick a matching handle if
-one is free (for example @buzzyflyapp). YouTube keeps the videos and
-subscribers when you rename. Handle changes are limited, so change it only
-once. If the channel has other uses, keep the name and add "by Buzzyfly" to each
-title instead. Owner's call.
-
-## Pitches: ready to send, week of 2026-11-11
+## Pitches: ready to send, week of 2026-11-18
 
 Both are free to pitch. Send from support@buzzyfly.com (or your own address),
-never from a bot.
+never from a bot. Each email links the free demo, not the store.
+
+### P5. Doing It For The Kids (DIFTK), run by Frankie Tortora
+- **Why it fits:** A community and podcast for freelance parents "trying to make
+  flexible working work", run by freelance graphic designer Frankie Tortora.
+  Their blog covers practical problems like surviving school holidays as a
+  freelancer. Admin that slips in a chaotic week is that audience's problem.
+- **Angle (a story, not an ad):** "When you only get 20 minutes, spend them on
+  the money and the follow-ups." A short Monday routine for parents whose work
+  hours get cut without warning: who owes you money, who needs a follow-up,
+  and which one task matters most. Exact email wording included.
+- **Where to find the contact:** doingitforthekids.net lists
+  community@doingitforthekids.net as its contact. Read the site and listen to
+  one episode before sending. The site says it is "Supported by With Jack" (a
+  sponsor). This pitch asks for no paid placement. If they reply with a
+  sponsorship offer, that needs the owner's yes and a budget.
+- **Email (under 150 words):**
+
+  Subject: An idea for DIFTK: the 20-minute admin reset for chaotic weeks
+
+  Hi Frankie,
+
+  Freelance parents often lose the admin first when a week falls apart. The
+  work gets done, but the invoice goes unchased and the follow-up promised
+  "tomorrow" slips to next week.
+
+  I'd love to share a short routine for that with the DIFTK community, as a
+  guest post, a podcast chat, or a tip for the newsletter. When you only get 20
+  minutes: check who owes you money, send the follow-ups that are due, then pick
+  the one task that matters. I'd include the exact email wording for a late
+  invoice and a quiet client, free to use.
+
+  I built a small browser app around this routine (Buzzyfly, there's a free demo
+  at buzzyfly.com/demo), but the piece doesn't need to mention it.
+
+  Would any of that be useful?
+
+  Thanks,
+  [Owner name]
+
+### P6. Leapers (founder Matthew Knight)
+- **Why it fits:** Leapers exists "to understand and improve the mental health
+  of freelancers". It runs a yearly Mental Health in Freelancing survey and
+  publishes resources and a Substack. The awkward, put-off admin (chasing a
+  late invoice, chasing a quiet client) is a stress freelancers know well.
+- **Angle (a story, not an ad):** "Why chasing money feels awful, and how a
+  ready-written email takes some of the dread out." Practical, not clinical:
+  put the dates in the calendar when you invoice, and keep the wording written
+  in advance so there's no decision each time. **No mental-health claims about
+  the app.** The piece is about habits and wording only.
+- **Where to find the contact:** leapers.co (use the site's contact route) or
+  reply via the Leapers Substack (leapers.substack.com). Read their latest
+  survey report page first so the email can name it accurately. Don't quote
+  their numbers unless you've read them on their site.
+- **Email (under 150 words):**
+
+  Subject: Idea for Leapers: taking the dread out of chasing money
+
+  Hi Matthew,
+
+  I've been reading Leapers' work on freelancer wellbeing. One small, daily
+  stress keeps coming up in conversations I have with freelancers: chasing.
+  The overdue invoice you mean to chase on Tuesday and still haven't by Friday.
+  The client who went quiet after a proposal.
+
+  I'd like to offer a short practical piece. It covers why putting reminder
+  dates in the calendar when you invoice helps, and it gives polite emails
+  written in advance for day 1, week 1 and week 2. That way chasing isn't a
+  fresh decision every time. It's habits and wording, nothing clinical, and no
+  product pitch.
+
+  I run Buzzyfly, a small browser app for client follow-ups (free demo at
+  buzzyfly.com/demo).
+
+  Would that be useful for Leapers?
+
+  Thanks,
+  [Owner name]
+
+## Earlier pitches (still ready, not sent)
 
 ### P3. Small Business Currents (contributed article), editor Rieva Lesonsky
 - **Why it fits:** An online publication from GrowBiz Media for small business
@@ -133,8 +207,6 @@ never from a bot.
   Thanks,
   [Owner name]
   buzzyfly.com
-
-## Earlier pitches (still ready, not sent)
 
 ### P1. Being Freelance (podcast), host Steve Folland
 - **Why it fits:** It's a long-running independent podcast and community for
@@ -216,5 +288,8 @@ never from a bot.
 | P2 | 2026-11-04 | Freelancers Union Blog | Contributed article | 3 invoice reminders, word for word | No | Not sent |
 | P3 | 2026-11-11 | Small Business Currents (Rieva Lesonsky) | Contributed article | 14-day follow-up plan for quiet proposals | No (sponsored posts exist, not pitched) | Not sent |
 | P4 | 2026-11-11 | Marketing Mentor podcast (Ilise Benun) | Podcast | Follow-up is marketing too | No | Not sent |
+| P5 | 2026-11-18 | Doing It For The Kids (Frankie Tortora) | Community, podcast, blog | 20-minute admin reset for chaotic weeks | No (has a sponsor, not pitched) | Not sent |
+| P6 | 2026-11-18 | Leapers (Matthew Knight) | Article / Substack | Taking the dread out of chasing money | No | Not sent |
 
 Owner: when you send one, change its status here (or tell the next run) with the date.
+Tip: in older pitches (P1 to P4), swap the "buzzyfly.com" sign-off for "free demo: buzzyfly.com/demo".
