@@ -48,6 +48,10 @@ One paragraph. No apology. No “let me know if you have questions.” The relea
 
 Send it before 11am on a Tuesday, Wednesday, or Thursday. Never Friday. Never after 3pm.
 
+Phone-paste version (under 160 chars):
+
+> Closing the loop on [project]. Releasing the [start date]. Reply if you want it reopened later.
+
 ## What you do the minute it leaves
 
 1. Mark the status closed in the log.
@@ -64,6 +68,42 @@ Send it before 11am on a Tuesday, Wednesday, or Thursday. Never Friday. Never af
 - If they reply “still thinking,” send one line: “Understood. The [start date] is released. Reply by [specific day] if you want it reopened.” Do not leave it open.
 - Never discount in the close-out. The original price stays the record.
 - On the next weekly reset, move every closed proposal older than 14 days out of the active list. The list is for cash still open, not for ghosts.
+- Write the exact start date you offered into the email before you send. Guessing it from memory creates a soft close that does not free the calendar.
+- Put a 4-minute calendar block titled “Day 10 close: [Name]” the night before. The block is the trigger. Without it the email never leaves.
+- After the send, screenshot or copy the sent time into the log. “I think I sent it” is not a closed loop.
+- If three day-10 closes land the same morning, send all three before 11am. Do not spread them. One sitting, three files moved.
+- Keep a “parked past day 10” note separate from the active list. One weekly scan of that note is enough.
+- When a reply arrives, update the start date or close the file the same hour. Do not let a yes sit overnight.
+- If they ask for a call after the close, answer: “Happy to talk. First step is a short written yes on the original scope and price so we both know what we are discussing.” Do not jump on a call with a reopened maybe.
+- At Friday close, count how many day-10 closes you sent that week. Write the number on the Monday still-open line. Zero open ghosts is the goal.
+- Pre-write the day-10 subject and body in the calendar note the day the proposal first goes out. The 4-minute block only needs a paste and send.
+- Never send the close from your phone while standing in a line. Sit, open the log, fill the four-minute block, then send. The log is the gate.
+- After any paid yes that arrives post-close, open the onboarding checklist the same hour. The follow-up sequence ends when money lands.
+- Cap the reopen window at seven days after the close. After that a reply starts a fresh proposal, not a continuation.
+- If the original start date has already passed, do not offer to hold it again. The close is final until they reply with a new date.
+- Keep the five most common objection replies in the same note so you never search under pressure after a late reply.
+
+## Exact replies for the day-10 replies you actually get
+
+When they finally answer, do not invent a new email. Paste one of these.
+
+**Still thinking / need more time:**
+> Understood. The [start date] is released. Reply by [next Friday] if you want a fresh hold. Otherwise the file stays closed.
+
+**Can we hop on a call?**
+> Happy to. First send a one-line yes on the original scope and price so we know what the call is about. Then pick a time.
+
+**Price is high / can you do less?**
+> Scope and start date stay the same. Price is [original]. Reply yes if you want a fresh proposal with a new date.
+
+**I need to check with [partner/boss]:**
+> Got it. The original hold is released. Reply by [next Friday] with yes or a new date so the calendar stays clean.
+
+**Send more info:**
+> The proposal is the info. One line is enough: want a fresh hold with a new start date or keep it closed?
+
+**They pay:**
+Open the onboarding checklist the same hour. Welcome, intake, kickoff hold. Do not celebrate first.
 
 ## Fill-in after every close-out
 
