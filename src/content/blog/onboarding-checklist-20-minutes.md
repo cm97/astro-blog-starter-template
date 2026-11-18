@@ -3,7 +3,7 @@ title: "The 20-Minute Onboarding Checklist That Survives a Slammed Week"
 seoTitle: "20-Minute Client Onboarding Checklist for Busy Weeks"
 description: "A 20-minute client onboarding checklist for coaches and solo operators. Welcome, intake, kickoff and a day-7 check so it still runs on busy weeks."
 pubDate: "Oct 16 2026"
-updatedDate: "Nov 10 2026"
+updatedDate: "Nov 18 2026"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -127,6 +127,8 @@ If they have not returned the intake, the same block becomes:
 - Keep the five intake questions in the same note as the welcome so you never invent a new form under pressure.
 - On Day 0, before you send, open the original proposal or signed note and copy the exact deliverable into the welcome. Do not guess it from memory.
 - If the kickoff slot is already full, send the welcome and intake first, then offer two new times in the same thread. Do not delay the whole sequence.
+- Write the invoice number or Stripe payment ID on the private note the same hour. Support and refunds need it.
+- If the client pays by bank transfer and the money is still pending, still send the welcome with “pending clearance” and set a 24-hour check on the calendar.
 
 ## Day-by-day first week (run the list, do not invent)
 
@@ -216,6 +218,10 @@ If the number is not on the note, the onboarding is activity, not cash.
 5. Mark the log. Set a phone reminder for Day 2 titled "Intake nudge — 2 min".
 
 Do not open other apps until the five are done.
+
+## When two clients pay the same afternoon
+
+Run only Day 0 for both. Do not start Day 2 until both Day 0 cards are written and both calendar holds exist. Park the rest until the weekly reset. Cap at two simultaneous onboardings if you are already delivering for three. The third waits.
 
 ## What still breaks when this only lives in your head
 
