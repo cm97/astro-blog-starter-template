@@ -3,11 +3,12 @@ title: 'Client Discovery Questions That Stop You From Guessing What They Need'
 seoTitle: "Client Discovery Questions That Stop the Guessing"
 description: 'Eight questions to ask before you quote, so the proposal matches the job and tire-kickers leave early.'
 pubDate: '2026-09-01'
-updatedDate: 'Oct 09 2026'
+updatedDate: 'Nov 18 2026'
 category: 'sales'
 heroImage: '/blog-placeholder-1.jpg'
 featuredProductTitle: Buzzyfly Digital System
 featuredProductPrice: $49
+featuredProductUrl: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
 featuredProductDescription: Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed.
 ---
 
@@ -32,6 +33,24 @@ Send them in the email that books the call, or ask them live. Same order every t
 
 If question 1 has no answer, end the call. Say you will wait until they know the win. Do not discount your way into a vague job.
 
+## Fill this log before you quote
+
+Open a note. Fill every blank. If three stay empty, do not send the proposal.
+
+```
+Name: ________
+30-day win: ________
+Already tried: ________
+Decision maker: ________
+Budget range: ________
+Cost of delay: ________
+90-day done: ________
+Hard deadline: ________
+Walk-away: ________
+Quote sent: yes / no
+Next touch if quiet: ________
+```
+
 ## Words you can paste
 
 Booking email, after they ask for a quote:
@@ -52,6 +71,20 @@ When they go quiet after the proposal, day 6, one note only:
 
 Then stop. A third chase costs more than the job.
 
+Day-3 soft check if they opened the proposal:
+
+> Quick note — the 30-day win we named is still the one. Start date still open on my side. Reply with a yes or a new date and I will lock it.
+
+## Extra cash locks most people skip
+
+- Write the budget range on the same note as the 30-day win before you open the proposal template. Missing range means the number is a guess.
+- If they name a tool instead of an outcome on question 1, send the booking email again instead of quoting.
+- Cap the discovery call at 25 minutes. Longer means you are already doing free consulting.
+- Put the decision-maker name in the proposal subject line if it is not the person on the call. Otherwise the email dies in their inbox.
+- After you send the proposal, add one line to next Monday’s reset: “Discovery [Name] — next touch ________.” Silence is how first clients never start.
+- If the hard deadline is less than 7 days and the budget is low, say no. The onboarding will eat the delivery.
+- Screenshot the filled log into the same folder as your weekly reset sheet. Monday never starts from blank.
+
 ## What still breaks if this lives in your head
 
 The questions work once. They die the next time you are slammed, because the script is not in a file you open. You skip the budget question. You send a 12-page proposal. You onboard from memory the week after they pay, which is when most clients go quiet.
@@ -61,3 +94,7 @@ The fix is the same list, in the same order, every new name. Discovery answers g
 The Buzzyfly Digital System is that set: discovery notes, intake, kickoff, weekly reset, and the follow-up you send when they go quiet. $49 once. Opens in your browser after checkout. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+
+One primary move. The system keeps the discovery questions and the onboarding happening when you do not feel like rebuilding them.
+
+Not ready? The free weekly-reset checklist is on the homepage. Run it once, then the full system keeps the rest of the week alive.
