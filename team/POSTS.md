@@ -323,3 +323,27 @@ The Buzzyfly Digital System puts the overdue invoice on your Today list at 1 day
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=cartoon-late-invoice
 $49 once. Browser app. No subscription.
+
+### interested-but-not-yet | ready | facebook: professional portfolio
+Image: none
+A prospect said "sounds interesting" and then nothing? Follow up on a schedule, not on a feeling:
+
+Day 3: "Any questions I can answer about [project]?"
+Day 7: one useful thing about their situation, in two lines.
+Day 14: "Shall I close this off for now? Happy to pick it up whenever suits you."
+
+The day-14 note gets the most replies, because it's the easiest one to answer.
+
+Buzzyfly shows which proposal follow-up is due today, with the email already written for that client. You copy it and send it yourself. $49 once, no subscription.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=interested-but-not-yet
+
+### when-to-let-a-client-go | ready | facebook: professional portfolio
+Image: none
+A client is eating hours you're not paid for. Before you cut them loose, bill it once:
+
+"We're well past what the original fee covered: [the extra meetings, revisions, changes]. From here I'll bill additional time at [rate], with an estimate before each piece of work. Happy to keep going on that basis."
+
+If they say yes, the problem is solved and paid. If they push back hard, that's your answer. Finish the current phase cleanly and decline the next one.
+
+Try the free Buzzyfly demo: the scope and change-order replies are ready to copy, with sample clients, no sign-up.
+https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=when-to-let-a-client-go
