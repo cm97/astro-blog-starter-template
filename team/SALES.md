@@ -30,7 +30,11 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 | scope-change-log | Facebook: professional portfolio (#268) | 2026-11-15 | ? | ? | ? |
 | cartoon-messy-onboarding, cartoon-chaotic-week, demo-video-discount | YouTube Shorts (#261, #266, #271) | 2026-11-13..15 | ? | ? | ? |
 | after-project-30-day, unhappy-but-wont-say | Facebook queue (POSTS.md, added 2026-11-16) | not posted yet | - | - | - |
-| Community replies R1 to R36 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
+| before-you-sign-scope | Facebook: professional portfolio (#281) | 2026-11-17 | ? | ? | ? |
+| cartoon-late-invoice | YouTube Shorts (#286) | 2026-11-17 | ? | ? | ? |
+| Buy clicks from /demo (Developer, LOG 2026-11-17) | /demo to $49 Stripe checkout | 11-12..11-17 | - | 4 | 0 (checkout page still describes an Excel download, BACKLOG 0i) |
+| interested-but-not-yet, when-to-let-a-client-go | Facebook queue (POSTS.md, added 2026-11-18) | not posted yet | - | - | - |
+| Community replies R1 to R42 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
 | Whole site, ad check 2026-11-06 (LOG #215) | mostly direct | to 11-06 | 96 | 1 (first, direct to /) | 0 |
 | Whole site 11-03..04 (sales-b, LOG 2026-11-04) | 9 YouTube, rest direct | - | 38 views | 0 | 0 |
 | Demo videos (weekly check 2026-11-10) | YouTube Shorts, Instagram Reels, Facebook video | 2026-11-03 to 11-10 | site views 11-03..11-10: youtube 27, facebook 6, google 23, direct 61, other 9. YouTube views: proposal 3, invoice 0, scope 18, onboarding 4, pricing 7. Instagram insights: not available (permission) | 1 (direct) | 0 |
@@ -84,6 +88,12 @@ self-promotion rule in the sidebar, then post.** Reddit replies carry no link by
 | L34 | ~2026-11-08 (past week) | [r/smallbusinessuk](https://www.reddit.com/r/smallbusinessuk/comments/1xs0va2/how_quickly_should_i_chase_unpaid_invoices/) | "How Quickly Should I Chase Unpaid Invoices? ... just had my first non-paying B2B customer" | hot | R34 | draft, owner posts |
 | L35 | ~2026-11-09 (past week) | [r/Upwork](https://www.reddit.com/r/Upwork/comments/1xtd4ag/how_do_you_keep_branding_clients_coming_back/) | "How Do You Keep Branding Clients Coming Back? ... once the identity and guidelines are delivered, the follow-up..." | warm | R35 | draft, owner posts |
 | L36 | ~2026-11-12 (past week) | [r/Upwork](https://www.reddit.com/r/Upwork/comments/1xvodes/client_is_disputing_for_an_illegitimate_reason/) | "Client is disputing for an illegitimate reason. What do I do?" | hot | R36 | draft, owner posts |
+| L37 | ~2026-11-17 (past week) | [r/indianstartups](https://www.reddit.com/r/indianstartups/comments/1xz78w6/service_founders_how_do_you_handle_scope_creep/) | "Service founders: how do you handle scope creep with your first few clients?" | hot | R37 | draft, owner posts |
+| L38 | ~2026-11-16 (past week) | [r/SaaS](https://www.reddit.com/r/SaaS/comments/1xyeqlx/how_do_you_word_the_thats_outside_what_we_agreed/) | "How do you word the 'that's outside what we agreed' reply without ... The part of scope creep I find hardest isn't the contract, it's the actual message" | hot | R38 | draft, owner posts |
+| L39 | ~2026-11-10 (past week) | [r/Freelancers](https://www.reddit.com/r/Freelancers/comments/1xu4nmy/my_client_doesnt_want_to_pay/) | "My client doesnt want to pay" | hot | R39 | draft, owner posts |
+| L40 | ~2026-11-16 (past week) | [r/Architects](https://www.reddit.com/r/Architects/comments/1xye31u/when_to_cut_a_client_loose/) | "When to cut a client loose ... Sole proprietor ... clients are taking too much unpaid time" | hot | R40 | draft, owner posts |
+| L41 | ~2026-11-10 (past week) | [r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1xtkp30/title_two_prospects_showed_interest_in_switching/) | "Two prospects showed interest in switching hosting to me but won't ... I run a one-person web business" | hot | R41 | draft, owner posts |
+| L42 | ~2026-11-15 (past week) | [r/linuxmint](https://www.reddit.com/r/linuxmint/comments/1xxsuzb/best_way_to_handle_invoice_tracking_on_mint/) | "tracking which invoices are paid, overdue, or pending means I end up manually..." | warm | R42 | draft, owner posts |
 
 ### Draft replies (team A, role 4, 2026-11-02)
 
@@ -332,6 +342,42 @@ For the next contract, write milestone descriptions as a list of deliverables. D
 
 Best two to post first this round: **R34** (direct, the exact schedule question, UK small-business sub) and **R31** (scope creep, a reset script they can send today).
 
+### Draft replies, round 7 (team A, role 4, 2026-11-18)
+
+Found 2026-11-18 by web search limited to the past week. Same limits: titles and snippets
+only, the owner opens each thread and checks the sub's rules first. No links on Reddit.
+
+**R37 (L37, scope creep with the first few clients).**
+With your first clients it's tempting to say yes to everything to keep them. You can keep them and still hold the line:
+1. Write the scope as a short numbered list in the proposal, plus one line: "Anything not on this list is quoted before we start it."
+2. Log every extra request, even tiny ones, with the date.
+3. Answer them all the same way: "Happy to help with that. It's outside what we agreed, so it's [price] and adds [X days]. Or we can swap it for [item]. Which would you prefer?"
+4. If you decide to do a small one free, say so out loud: "I'll include this one at no charge." Then it's a gift, not the new normal.
+At month end, look at the log. It shows you which clients to re-price.
+
+**R38 (L38, wording "that's outside what we agreed" without sounding difficult).**
+The trick is to lead with yes and offer a choice, so it never reads as a no:
+"Happy to add that. It wasn't part of the original scope, so it would be [price] and push delivery to [date]. Or, if timing matters more, we can swap it for [item that hasn't started yet]. Which would you prefer?"
+Why it works: "happy to" signals you want to help. Naming the price and the date makes it concrete. And giving two options makes them choose instead of argue. For small things, a one-liner: "Sure. That's a small extra, about [£/$X]. Want me to add it to this week?"
+
+**R39 (L39, client doesn't want to pay).**
+First find out which "doesn't want to" it is: a cash problem, a complaint about the work, or just avoiding you. Ask directly, in writing: "Hi [name], invoice [#] for [amount] is still open. Is there a problem with the work, or with timing on your side? If it's timing, we can agree a date or split it into two payments." That one message often gets a real answer. If there's a complaint, ask them to list it specifically. If they still won't pay, send a dated final notice and then use small claims where they are. And hold the final files or rights until it's paid if your agreement allows it.
+
+**R40 (L40, when to cut a client loose: too much unpaid time).**
+Before cutting them loose, try billing for it once. It usually settles it either way. Send: "Looking at the project, we're well past what the original fee covered: [extra meetings, revisions, the permit issues]. From here I'll bill additional time at [rate], with an estimate before each piece of work. Happy to keep going on that basis." If they accept, the problem is solved and paid. If they push back hard, that's your answer, and you can finish the current phase cleanly and decline the next. Write down the hours you've already lost on this one. They're the number to price in next time a project has "unpermitted past work".
+
+**R41 (L41, interested prospects who won't commit).**
+"Interested" with no next step usually means you haven't made the next step small enough. Try:
+- Make it concrete: "I can move your site over on [date]. It takes about [X] minutes of your time and there's no downtime. Shall I pencil that in?"
+- Remove the risk: offer to do the move at a time they choose, and say what happens if something goes wrong.
+- Follow up on a schedule, not on a feeling: day 3 ("Any questions I can answer?"), day 7 (one useful fact about their current setup), day 14 ("Shall I close this off for now? Happy to pick it up whenever suits.").
+The day-14 message gets the most replies, because it's easy to answer.
+
+**R42 (L42, tracking invoices without a cloud tool).**
+A plain spreadsheet in LibreOffice Calc does this well if you add three columns next to each invoice: due date, status (sent / overdue / paid), and "next reminder" date. Then a formula like `=IF(AND(D2<>"paid",B2<TODAY()),"OVERDUE","")` flags overdue ones, and sorting by "next reminder" puts today's chases at the top. Keep your invoice files named by number (2026-014.odt) in one folder, and the sheet links to them. Check it once a week and the day after each due date.
+
+Best two to post first this round: **R38** (exact wording question, the app's scope reply is this) and **R41** (one-person business, follow-up schedule).
+
 ### Lead research and outreach (roles 5 and 6)
 
 No businesses added this run. The searches found only vendor blogs and courses, not small
@@ -366,6 +412,10 @@ emails" posts). No new business page stating the problem. No cold notes drafted.
 **2026-11-16:** 0 businesses added. The searches found people asking for help (answered above),
 creators posting scope-creep videos, and more invoice and scope tool launches (Paylark, a
 project-control toolkit, ScopeDue). No new business page stating the problem. No cold notes drafted.
+
+**2026-11-18:** 0 businesses added. Same pattern: questions (answered above) and more competing
+tools (an Excel overdue-invoice tracker, a payment follow-up workspace, AI invoice chasers).
+No business page stating the problem. No cold notes drafted.
 
 ## Partners
 
@@ -584,6 +634,13 @@ Buyer doubts about Buzzyfly to answer on /store (for the Web builders): "Is it a
 - "How quickly should I chase an unpaid invoice?" Already well covered in the queue (free reminder tool, invoice posts).
 - "How do I get one-off clients to come back?" Post idea: after-project-30-day (POSTS.md), using the app's real 30-day check-in and retainer emails.
 - "Client opened a dispute on Upwork." FAQ: stay on-platform, point to the milestone description, upload the proof.
+
+### Added 2026-11-18 (from L37 to L42)
+- "How do I word 'outside what we agreed' without sounding difficult?" Post idea: lead with yes, offer two options (already in the queue as scope posts).
+- "When do I cut a client loose?" Post idea: when-to-let-a-client-go (POSTS.md): bill the extra time once, then decide.
+- "Interested prospects won't commit." Post idea: interested-but-not-yet (POSTS.md): day 3, 7, 14 follow-ups.
+- "I don't want a cloud tool for invoices." FAQ for /store: be honest. Buzzyfly is a browser app. Say where its data is kept, so privacy-minded buyers can decide (Web builders: check the app's storage and state it plainly on /store).
+- Biggest objection this week isn't from a buyer, it's ours: the $49 Stripe checkout page still says "Excel workbook ... Download right after you pay" (BACKLOG 0i). A buyer who gets that far sees a different product. Owner fix in Stripe.
 
 ## Ready ad set (role 9, waiting for the owner's yes and daily budget)
 
