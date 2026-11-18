@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-18 social-poster: posted yes-to-kickoff-24h to Facebook "professional portfolio" (1115192551682116_122147789655356277) | - | -
 2026-11-18 sales-a: (2) 6 new real leads (L37 to L42, past week: scope creep with first clients, wording 'outside what we agreed', client won't pay, when to cut a client loose, interested prospects who won't commit, invoice tracking without a cloud tool) with full draft replies; FAQ; scoreboard incl. the 4 /demo buy clicks and BACKLOG 0i; ad set still parked; 2 new posts (interested-but-not-yet, when-to-let-a-client-go) (PR #288) | 42 replies drafted, 0 posted; the fastest money fix this week is not sales copy but the $49 Stripe checkout text (BACKLOG 0i, owner-only) | owner: fix the Stripe product description, then post R38 and R41
 2026-11-18 test-team: 20 of 20 checks pass (PR #287); fixed client-says-im-busy-exact-follow-up, which claimed the app includes a busy-client reply (now: save it as your own email); BACKLOG 0i (Stripe checkout still describes an Excel download) not re-verified | buy.stripe.com is blocked from this container and the Stripe connector refused its sign-in | owner: sign the Stripe connector in again and fix the $49 Payment Link description (0i)
 SECURITY: f7735bc, b6077b2, 7469d30 and 79c0e64 (blog posts) went straight to main without a PR. One overclaimed the app and is fixed in this PR. Please route posts through a PR.

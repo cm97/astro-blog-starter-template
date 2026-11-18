@@ -186,7 +186,7 @@ If they won't agree to any version of that, they've told you how the job will go
 The Buzzyfly Digital System keeps your scope replies, follow-ups and onboarding steps for every client in one browser app. Try the free demo first, or get it for $49 once, no subscription.
 https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=before-you-sign-scope
 
-### yes-to-kickoff-24h | ready | facebook: professional portfolio
+### yes-to-kickoff-24h | posted 2026-11-18, id 1115192551682116_122147789655356277 | facebook: professional portfolio
 Image: none
 A new client just said yes. The next 24 hours decide whether they feel looked after or forgotten. Send these, in this order:
 
