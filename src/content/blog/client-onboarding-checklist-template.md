@@ -8,7 +8,7 @@ category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
-featuredProductDescription: "Browser app that runs the full onboarding checklist, Today dashboard for due follow-ups, and Monday reset so week one never dies when you are slammed. One-time."
+featuredProductDescription: "Browser app with a 10-step onboarding plan (a day for every step), a Today list for due follow-ups, and the Monday reset so week one never dies when you are slammed. One-time."
 ---
 
 A new client signs. You feel good. Then thirty minutes later you're staring at a blank email wondering exactly what you're supposed to send first.
@@ -164,7 +164,7 @@ Mark each one sent in the client note the same hour. The Digital System app puts
 
 The welcome gets rewritten. The Day 2 nudge never gets scheduled. The kickoff summary sits unsent because the next call started. By Friday the Day 7 retention add is forgotten and week two is silence.
 
-A static checklist still lives in a folder you forget to open. The $49 Digital System is the same checklist running inside a browser app that shows what is due today, fills the client name and project, and keeps the Monday reset next to it. You open Today, copy the draft, send from your own inbox, mark done.
+A static checklist still lives in a folder you forget to open. The $49 Digital System gives each new client a 10-step onboarding plan in a browser app, with a day for every step. It shows what is due today, fills the client name and project, and keeps the Monday reset next to it. You open Today, copy the draft, send from your own inbox, mark done.
 
 One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
