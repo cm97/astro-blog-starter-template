@@ -2,12 +2,13 @@
 title: "Client Onboarding Checklist Template (Copy and Use Today)"
 description: "A client onboarding checklist template for coaches and consultants. Every step from signed contract to kickoff call, ready to run without memory."
 pubDate: "Sep 13 2026"
-updatedDate: "Nov 06 2026"
+updatedDate: "Nov 19 2026"
 heroImage: "/blog-placeholder-2.jpg"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
+featuredProductDescription: "Browser app that runs the full onboarding checklist, Today dashboard for due follow-ups, and Monday reset so week one never dies when you are slammed. One-time."
 ---
 
 A new client signs. You feel good. Then thirty minutes later you're staring at a blank email wondering exactly what you're supposed to send first.
@@ -142,6 +143,32 @@ Extra concrete steps that keep onboarding from dying on a slammed week:
 - When a scope ask lands before Day 7, park it with: "Got it. I'll check what we locked and come back with two options." Do not price it inside the onboarding window.
 - At Friday close, list any Day 0–7 touches still open. Those become Monday priority 2.
 - Screenshot or copy the filled Day 0 block into the same note as last week's reset so Monday never starts from blank.
+
+## Phone-only Day 0 to Day 7 sequence (copy from Notes)
+
+When you are on the phone and cannot open a doc, run this exact order. Each line is under 160 characters so it pastes clean.
+
+Day 0: Hi [Name], payment in. Start [date]. Need [file] by [date]. Kickoff [time]. Reply window: weekdays before 4. Out of scope: [one line].
+
+Day 2: Still need the intake before kickoff. Link: [link]. Deadline stays [date].
+
+Day 4: Kickoff done. Goal: [outcome]. You own [item]. I own [item]. Next check-in [date]. Anything not listed is out of scope.
+
+Day 5: Quick status: [what moved]. Next piece due [date]. Anything blocked on your side?
+
+Day 7: Added you to the weekly check. Same day next week we confirm [deliverable] is on track.
+
+Mark each one sent in the client note the same hour. The Digital System app puts the due ones on Today so you do not hunt the note.
+
+## Why the first week still dies even with this list
+
+The welcome gets rewritten. The Day 2 nudge never gets scheduled. The kickoff summary sits unsent because the next call started. By Friday the Day 7 retention add is forgotten and week two is silence.
+
+A static checklist still lives in a folder you forget to open. The $49 Digital System is the same checklist running inside a browser app that shows what is due today, fills the client name and project, and keeps the Monday reset next to it. You open Today, copy the draft, send from your own inbox, mark done.
+
+One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
 ---
 
