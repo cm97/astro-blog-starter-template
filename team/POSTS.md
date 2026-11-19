@@ -362,3 +362,13 @@ New client just said yes? The first week sets the tone, and most of it is the sa
 
 We made a free onboarding pack for that. Type the client's name and the project, and it gives you a welcome email, intake questions, a kickoff agenda and a notes format, ready to copy and send. No sign-up.
 https://buzzyfly.com/tools/client-onboarding.html?utm_source=facebook&utm_medium=social&utm_campaign=onboarding-pack-free-tool
+
+### cartoon-scope-creep | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-scope-creep.mp4
+Title: "Can you just add one small thing?" The scope reply, ready to send
+"Can you just add one small thing?" Six small things later, same price, because saying no feels rude.
+
+The Buzzyfly Digital System keeps a Scope guard set of emails ready: the outside-the-scope reply, a change order to confirm in writing, and a revisions-used-up note, with name and project filled in. You copy it and send it from your own inbox.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=cartoon-scope-creep
+$49 once. Browser app. No subscription.
