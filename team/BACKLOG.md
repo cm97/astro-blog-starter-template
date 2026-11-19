@@ -38,9 +38,9 @@ Format: number. goal | why | Owner: unclaimed (or agent, date) | Status
 9. Answer the buyer doubts Sales keeps seeing, on /store: "I already use a spreadsheet", "the scripts are free, why pay $49?", "can I try it first?" | SALES.md FAQ notes 2026-11-04, 11-06, 11-11, 11-13 (L1 to L30) | Owner: builders-b, 2026-11-13 | Done: three new FAQ answers at the top of "Questions before you buy" (claims checked against src/data/appContent.ts: day 3/7/14 follow-ups), the try-first answer links /demo. /es/store keeps its own FAQ (builders-a lane)
 10. Speed: the Today-screen image (58 KB, 1200px) is the homepage's largest paint but shows at 302 to 462px | Playwright 2026-11-17: / 145 KB and /store 176 KB per load, image = 40% of /; /store loaded it eagerly 1220px below the fold | Owner: builders-b, 2026-11-17 | Done: 640px (24 KB) and 960px (41 KB) copies with srcset and exact per-page sizes; lazy on /store. / now 111 KB, /store 142 KB; each screen gets the smallest file that stays sharp
 
-## SEO plan (SEO Master, 2026-11-02, rechecked 2026-11-05 and 2026-11-12)
+## SEO plan (SEO Master, 2026-11-02, rechecked 2026-11-05, 2026-11-12 and 2026-11-19)
 
-**Still open on 2026-11-12 (second week running): none of these 5 has a post yet, and no other post
+**2026-11-19: topic 1 is now written (`how-to-ask-a-client-for-a-testimonial`, by SEO Master). Topics 2 to 5 still have no post, and no other post
 covers them. Marketer, write these before any new topic.** Posts can now end on
 the matching smaller app as well as the $49 system (CLAUDE.md rule 5).
 
