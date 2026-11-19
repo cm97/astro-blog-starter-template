@@ -1,9 +1,11 @@
-const OFFERS = [
-  { id: "weekly-reset-checklist", name: "Weekly Reset Checklist", price: "$15", url: "https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05" },
-  { id: "follow-up-email-templates", name: "Follow-Up Email Templates", price: "$19", url: "https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06" },
-  { id: "client-onboarding-kit", name: "Client Onboarding Kit", price: "$29", url: "https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07" },
+// Keep in step with ALL_PRODUCTS in src/data/monetization.ts (tests/agent.test.ts checks it).
+// Every product is a browser web app, unlocked after Stripe checkout. There is no
+// $97 bundle: the $49 Digital System already includes every app (CLAUDE.md rule 5).
+export const OFFERS = [
+  { id: "weekly-reset-checklist", name: "Weekly Reset App", price: "$15", url: "https://buy.stripe.com/5kQ7sNdxub3o0sk1lcaVa05" },
+  { id: "follow-up-email-templates", name: "Follow-Ups App", price: "$19", url: "https://buy.stripe.com/fZubJ3eByc7s1wo0h8aVa06" },
+  { id: "client-onboarding-kit", name: "Onboarding App", price: "$29", url: "https://buy.stripe.com/3cI8wR50Y8Vg3EwaVMaVa07" },
   { id: "buzzyfly-digital-system", name: "Buzzyfly Digital System", price: "$49", url: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00" },
-  { id: "complete-business-bundle", name: "Complete Business Bundle", price: "$97", url: "https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08" },
 ];
 
 const ALLOWED = ["https://buzzyfly.com/", "https://buy.stripe.com/", "https://github.com/cm97/"];
@@ -59,13 +61,13 @@ export default {
     if (path === "/draft" && request.method === "POST") {
       const input = await request.json().catch(() => ({}));
       const pain = String(input.pain || "onboarding still lives in your head");
-      const offer = OFFERS.find((item) => item.id === input.offer) || OFFERS[3];
+      const offer = OFFERS.find((item) => item.id === input.offer) || OFFERS.find((item) => item.id === "buzzyfly-digital-system");
       const text = await write(env, [
         "Write a Buzzyfly sales post and a 240-character version.",
-        `Product: ${offer.name}, ${offer.price}, one-time payment.`,
+        `Product: ${offer.name}, ${offer.price}, one-time payment. A browser web app, unlocked on the thank-you page after checkout. No download, no subscription.`,
         `Link: ${offer.url}`,
         `Pain: ${pain}`,
-        "Concrete checklist outcome. No fake numbers. End on the link.",
+        "Describe what the app does, not results. No fake numbers, no income or outcome promises, no urgency. Refund rule if mentioned: 30-day refund if you can't access the app or it isn't as described. End on the link.",
       ].join("\n"));
       const body = { offer, pain, text, createdAt: new Date().toISOString() };
       await save(env, "draft", body);
@@ -77,7 +79,7 @@ export default {
       const name = String(input.name || "there");
       const text = await write(env, [
         `Write one short follow-up email to ${name}.`,
-        "They went quiet after a proposal for the Buzzyfly Digital System, $49.",
+        "They went quiet after asking about the Buzzyfly Digital System, a $49 one-time browser web app.",
         "Link: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00",
         "One note only. No discount. No fake urgency.",
       ].join("\n"));
