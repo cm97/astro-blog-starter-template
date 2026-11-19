@@ -123,7 +123,7 @@ Monday starts with a scramble? The Buzzyfly app has a 20-minute Monday reset: op
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-reset
 $49 once, no subscription.
 
-### cartoon-forgot-recap | posted 2026-11-11, youtube id 1QT3k0RDYRQ (https://www.youtube.com/watch?v=1QT3k0RDYRQ); instagram tried 2026-11-18, "still processing", not live (check recent media before a retry); ready for facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-forgot-recap | posted 2026-11-11, youtube id 1QT3k0RDYRQ (https://www.youtube.com/watch?v=1QT3k0RDYRQ); instagram tried 2026-11-18 and 11-19, "still processing", not live (check recent media before a retry); ready for facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-forgot-recap.mp4
 Title: Promised a recap after the call? It's already written
 Great first call. You promise a recap tomorrow. Then the week happens, and by Friday it feels too awkward to send.
@@ -363,7 +363,7 @@ New client just said yes? The first week sets the tone, and most of it is the sa
 We made a free onboarding pack for that. Type the client's name and the project, and it gives you a welcome email, intake questions, a kickoff agenda and a notes format, ready to copy and send. No sign-up.
 https://buzzyfly.com/tools/client-onboarding.html?utm_source=facebook&utm_medium=social&utm_campaign=onboarding-pack-free-tool
 
-### cartoon-scope-creep | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-scope-creep | posted 2026-11-19, youtube id 9boyV4fUq8U (https://www.youtube.com/watch?v=9boyV4fUq8U); ready for instagram, facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-scope-creep.mp4
 Title: "Can you just add one small thing?" The scope reply, ready to send
 "Can you just add one small thing?" Six small things later, same price, because saying no feels rude.
