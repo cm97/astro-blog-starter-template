@@ -170,6 +170,6 @@ Run the cadence like a checklist, not a mood:
 2. One note per open proposal. Never two in the same day.
 3. No new proposal goes out until the tracker row exists.
 
-The same Day 3 / 7 / 12 lines, next to the onboarding checklist and the 20-minute weekly reset, sit inside the Buzzyfly Digital System so a slammed day still has the list to open. One-time $49. Opens in your browser. No download. No Excel. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+Proposal follow-ups on days 3, 7 and 14 sit inside the Buzzyfly Digital System, next to the onboarding checklist and the 20-minute weekly reset, so a slammed day still has the list to open. Save the Day 12 line above as your own email there. One-time $49. Opens in your browser. No download. No Excel. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
