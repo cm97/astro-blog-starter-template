@@ -355,3 +355,10 @@ Project wrapped and you're about to start looking for the next client from zero?
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-retainer
 $49 once, no subscription.
+
+### onboarding-pack-free-tool | ready | facebook: professional portfolio
+Image: none
+New client just said yes? The first week sets the tone, and most of it is the same four messages every time.
+
+We made a free onboarding pack for that. Type the client's name and the project, and it gives you a welcome email, intake questions, a kickoff agenda and a notes format, ready to copy and send. No sign-up.
+https://buzzyfly.com/tools/client-onboarding.html?utm_source=facebook&utm_medium=social&utm_campaign=onboarding-pack-free-tool
