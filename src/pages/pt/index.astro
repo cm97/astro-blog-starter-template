@@ -1,0 +1,220 @@
+---
+// Portuguese (Brazil) version of the homepage. Same product, same $49 USD price, same
+// Stripe Payment Link from getOrderAction(), refund rule with the same meaning.
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import EmailOptin from "../../components/EmailOptin.astro";
+import ProductCallout from "../../components/ProductCallout.astro";
+import PayPalLink from "../../components/PayPalLink.astro";
+import { BUZZYFLY_CONFIG, ALL_PRODUCTS, getOrderAction } from "../../data/monetization";
+import { GUARANTEE_PT, GUARANTEE_SHORT_PT, HOME_ALTERNATES } from "../../data/i18n";
+
+const digitalSystem = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
+const order = getOrderAction(digitalSystem.id);
+const guarantee = GUARANTEE_PT;
+
+const CARD_DESCRIPTION =
+	"App web que abre no navegador. Abra e veja com quem fazer follow-up hoje, o e-mail a enviar, o onboarding dos clientes novos e a sua revisão de segunda-feira. Sem downloads. Sem Excel.";
+const CARD_FEATURES = [
+	"Painel «Hoje»: quem precisa de você e o que enviar",
+	"Follow-ups, onboarding e revisão semanal no navegador",
+	"Respostas para propostas e escopo, prontas para copiar",
+	"Funciona no celular. Sem arquivos.",
+];
+const CARD_LABELS = {
+	buy: "Comprar agora",
+	paypalLead: "Ou pague com",
+	checkoutNote: `Pagamento seguro com Stripe ou PayPal. Pagamento único. O seu app é liberado na página seguinte depois do pagamento. ${guarantee}`,
+};
+---
+
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<BaseHead
+			title="Buzzyfly: app de follow-up e onboarding de clientes"
+			description="Pare de reconstruir seu processo com clientes toda semana. Um app web que mostra com quem fazer follow-up hoje e prepara o e-mail. 49 USD."
+			alternates={HOME_ALTERNATES}
+		/>
+		<style>
+			.lang-note { font-size: 0.8em; color: rgb(var(--gray-dark)); margin: 0.5em 0 0; }
+			.lang-link { display: flex; justify-content: flex-end; margin: 0; font-size: 0.85em; }
+			.lang-link a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.4em; }
+			.hero { padding: 1.6em 0 2em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.hero__copy { text-align: center; margin: 0 auto 1.2em; max-width: 40em; }
+			@media (min-width: 700px) { .hero { padding: 1.4em 0 2.5em; } .hero__copy { margin-bottom: 1.6em; } }
+			.hero__eyebrow { display: inline-block; font-size: 0.72em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.6em; }
+			.hero h1 { font-size: clamp(1.55em, 4.6vw, 2.4em); line-height: 1.12; margin: 0 auto 0.45em; max-width: 17em; color: rgb(var(--black)); }
+			.hero__sub { font-size: 1em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.55; }
+			@media (min-width: 700px) { .hero__sub { font-size: 1.1em; } }
+			.hero-offer { background: #fff; border: 2px solid var(--accent); border-radius: 16px; padding: 1em 1.1em 1.1em; box-shadow: 0 10px 30px rgba(35, 55, 255, 0.12); text-align: center; }
+			@media (min-width: 700px) { .hero-offer { display: grid; grid-template-columns: 1.1fr 1fr; gap: 1.4em; align-items: center; text-align: left; padding: 1.4em 1.5em; } .hero-offer__top { justify-content: flex-start; } .hero-offer__buy { text-align: center; } .hero-offer__buy .btn-primary { font-size: 1.35em; padding: 0.9em 1.1em; } }
+			.hero-offer__top { display: flex; align-items: baseline; justify-content: center; gap: 0.5em; flex-wrap: wrap; margin: 0 0 0.6em; }
+			.hero-offer__price { font-size: 2em; font-weight: 800; color: rgb(var(--black)); line-height: 1; }
+			.hero-offer__price-note { font-size: 0.85em; font-weight: 700; color: rgb(var(--gray-dark)); }
+			.hero-offer__list { list-style: none; padding: 0; margin: 0 0 0.9em; text-align: left; font-size: 0.88em; color: rgb(var(--gray-dark)); line-height: 1.45; display: none; }
+			@media (min-width: 700px) { .hero-offer__list { display: block; margin: 0; } }
+			.hero-offer__list li { padding-left: 1.4em; position: relative; margin: 0 0 0.35em; }
+			.hero-offer__list li::before { content: "✓"; position: absolute; left: 0; color: var(--accent); font-weight: 800; }
+			.btn-primary { display: inline-flex; align-items: center; justify-content: center; min-height: 64px; width: 100%; max-width: 100%; white-space: normal; text-align: center; padding: 1em 1.4em; border-radius: 999px; background: var(--accent); color: #fff !important; font-weight: 800; font-size: 1.3em; text-decoration: none; box-sizing: border-box; box-shadow: 0 6px 18px rgba(35, 55, 255, 0.35); }
+			.btn-primary:hover { background: var(--accent-dark); }
+			.btn-primary:focus-visible { outline: 3px solid rgb(var(--black)); outline-offset: 3px; }
+			.hero-offer__paypal { margin-top: 0.5em; }
+			.hero-offer__refund { font-size: 0.8em; color: rgb(var(--gray-dark)); margin: 0.6em 0 0; line-height: 1.45; }
+			.hero-offer__more { font-size: 0.85em; margin: 0.5em 0 0; }
+			.hero-offer__more a { display: inline-block; padding: 0.55em 0.3em; min-height: 44px; box-sizing: border-box; }
+			.pain { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.pain h2 { font-size: 1.4em; color: rgb(var(--gray)); font-weight: 400; margin: 0 0 1.5em; text-align: center; }
+			.pain__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75em; max-width: 820px; margin: 0 auto; }
+			@media (max-width: 520px) { .pain__grid { grid-template-columns: 1fr; } }
+			.pain__item { display: flex; gap: 0.7em; align-items: flex-start; padding: 1em 1.1em; background: rgba(var(--gray-light), 30%); border-radius: 10px; }
+			.pain__icon { font-size: 1.1em; line-height: 1.6; flex-shrink: 0; }
+			.pain__text { font-size: 0.95em; color: rgb(var(--gray-dark)); line-height: 1.5; margin: 0; }
+			.outcome { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); background: rgba(35, 55, 255, 0.03); }
+			.outcome h2 { font-size: 1.5em; color: rgb(var(--black)); margin: 0 0 0.4em; text-align: center; }
+			.outcome__sub { color: rgb(var(--gray)); font-size: 0.95em; margin: 0 0 1.8em; text-align: center; }
+			.outcome__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1em; max-width: 820px; margin: 0 auto; }
+			@media (max-width: 520px) { .outcome__grid { grid-template-columns: 1fr; } }
+			.outcome__card { padding: 1.4em; border: 1px solid rgb(var(--gray-light)); border-radius: 12px; background: #fff; }
+			.outcome__card-icon { font-size: 1.5em; margin-bottom: 0.4em; display: block; }
+			.outcome__card h3 { font-size: 1em; margin: 0 0 0.35em; color: rgb(var(--black)); }
+			.outcome__card p { font-size: 0.88em; color: rgb(var(--gray)); margin: 0; line-height: 1.55; }
+			.featured { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.faq { padding: 3.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.faq h2 { font-size: 1.4em; color: rgb(var(--black)); margin: 0 0 1.5em; text-align: center; }
+			.faq__list { max-width: 720px; margin: 0 auto; }
+			.faq__item { border-bottom: 1px solid rgb(var(--gray-light)); padding: 1.1em 0; }
+			.faq__item h3 { font-size: 1em; margin: 0 0 0.4em; color: rgb(var(--black)); }
+			.faq__item p { font-size: 0.9em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.6; }
+			.guarantee { padding: 2.5em 0 3em; border-bottom: 1px solid rgb(var(--gray-light)); }
+			.guarantee__box { display: flex; gap: 1.2em; align-items: flex-start; padding: 1.5em 1.6em; background: rgba(35, 55, 255, 0.04); border: 1px solid rgba(35, 55, 255, 0.15); border-radius: 14px; max-width: 820px; margin: 0 auto; }
+			.guarantee__icon { font-size: 2em; flex-shrink: 0; line-height: 1; }
+			.guarantee__copy h2 { font-size: 1.05em; margin: 0 0 0.3em; color: rgb(var(--black)); }
+			.guarantee__copy p { font-size: 0.88em; color: rgb(var(--gray-dark)); margin: 0; line-height: 1.55; }
+			.optin-wrap { padding: 0; }
+			.featured__wrap { max-width: 640px; margin: 0 auto; }
+			.final-cta { text-align: center; margin: 2em auto 0; max-width: 460px; }
+			.final-cta__alt { font-size: 0.88em; color: rgb(var(--gray)); margin: 0.9em 0 0; }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<p class="lang-link"><a href="/" hreflang="en" lang="en">English</a></p>
+			<section class="hero">
+				<div class="hero__copy">
+					<span class="hero__eyebrow">Para coaches e profissionais autônomos</span>
+					<h1>Pare de reconstruir seu processo com clientes do zero toda semana.</h1>
+					<p class="hero__sub">Um app web que mostra com quem fazer follow-up hoje e prepara o e-mail. Todo cliente novo passa pelo mesmo onboarding, sempre.</p>
+				</div>
+				<div class="hero-offer" aria-label="Oferta do Buzzyfly Digital System">
+					<div class="hero-offer__what">
+						<p class="hero-offer__top">
+							<span class="hero-offer__price">{digitalSystem.price}</span>
+							<span class="hero-offer__price-note">USD · pagamento único · sem assinatura</span>
+						</p>
+						<ul class="hero-offer__list">
+							<li>Painel «Hoje»: com quem fazer follow-up, com o e-mail já escrito</li>
+							<li>Onboarding, revisão semanal, propostas e respostas sobre escopo</li>
+							<li>Funciona no navegador e no celular. Sem downloads.</li>
+						</ul>
+					</div>
+					<div class="hero-offer__buy">
+						<a class="btn-primary" href={order.href}>Comprar o Digital System</a>
+						<p class="hero-offer__refund">{GUARANTEE_SHORT_PT} Você libera o app na página de agradecimento depois do pagamento.</p>
+						{order.live && <div class="hero-offer__paypal"><PayPalLink href={order.paypalHref} lead="Ou pague com" /></div>}
+						<p class="lang-note">O app e os modelos de e-mail estão em inglês.</p>
+						<p class="hero-offer__more"><a href="/demo">Teste a demo grátis (em inglês)</a> · <a href="/pt/store">Veja o que está incluído</a></p>
+					</div>
+				</div>
+			</section>
+
+			<div class="optin-wrap">
+				<EmailOptin
+					title="Ainda não quer comprar? Receba grátis a revisão semanal de 20 minutos."
+					description="A lista que transforma a segunda-feira de correria em plano. Grátis. Um e-mail por semana, em inglês. Cancele quando quiser."
+					buttonLabel="Quero a lista"
+				/>
+			</div>
+
+			<section class="pain">
+				<h2>Parece familiar?</h2>
+				<div class="pain__grid">
+					<div class="pain__item"><span class="pain__icon">😰</span><p class="pain__text">Você fecha com um cliente novo e passa duas horas montando o e-mail de boas-vindas a partir de mensagens antigas.</p></div>
+					<div class="pain__item"><span class="pain__icon">📭</span><p class="pain__text">Você enviou uma proposta há 12 dias. Ainda não fez o follow-up porque não sabe o que dizer.</p></div>
+					<div class="pain__item"><span class="pain__icon">🌀</span><p class="pain__text">Chega a segunda-feira e você passa a primeira hora tentando descobrir no que deveria estar trabalhando.</p></div>
+					<div class="pain__item"><span class="pain__icon">💸</span><p class="pain__text">Você terminou um projeto com um cliente há três meses. Queria mandar uma mensagem para saber como ele está, mas não mandou e agora fica sem graça.</p></div>
+				</div>
+			</section>
+
+			<section class="outcome">
+				<h2>O que muda quando você abre o app</h2>
+				<p class="outcome__sub">Não são mais modelos. É um processo que aguenta uma semana corrida.</p>
+				<div class="outcome__grid">
+					<div class="outcome__card"><span class="outcome__card-icon">📋</span><h3>Cliente novo fechou → tudo pronto em 20 minutos</h3><p>O e-mail de boas-vindas, o formulário inicial e a reunião de kickoff estão preparados. Você coloca o nome, copia e envia.</p></div>
+					<div class="outcome__card"><span class="outcome__card-icon">📨</span><h3>Contato que sumiu → um follow-up pronto para enviar</h3><p>A tela «Hoje» mostra de quem é a vez. O e-mail já está preenchido. Você copia e envia.</p></div>
+					<div class="outcome__card"><span class="outcome__card-icon">🛡️</span><h3>Pediram mais do que o combinado → as palavras exatas</h3><p>Respostas prontas para quando um cliente pede «só mais uma coisinha». Copie uma, coloque o seu preço e envie.</p></div>
+					<div class="outcome__card"><span class="outcome__card-icon">📅</span><h3>Segunda-feira → uma revisão de 20 minutos, não uma correria</h3><p>Limpe a lista, escolha uma prioridade e confira cada cliente. Do mesmo jeito toda semana.</p></div>
+				</div>
+			</section>
+
+			<section class="featured" id="digital-system">
+				<div class="featured__wrap">
+					<ProductCallout
+						productId={digitalSystem.id}
+						description={CARD_DESCRIPTION}
+						features={CARD_FEATURES}
+						badge="O mais popular"
+						featured
+						headingLevel="h2"
+						labels={CARD_LABELS}
+					/>
+				</div>
+			</section>
+
+			<section class="faq" id="faq">
+				<h2>Perguntas antes de comprar</h2>
+				<div class="faq__list">
+					<div class="faq__item">
+						<h3>É para mim?</h3>
+						<p>Se você é coach, consultor, freelancer ou trabalha por conta própria com clientes e o seu processo vive na sua cabeça (o onboarding é refeito de memória e os follow-ups só acontecem quando você lembra), sim. Já tem um sistema documentado? Então não precisa dele.</p>
+					</div>
+					<div class="faq__item">
+						<h3>O que vem no app?</h3>
+						<p>Painel «Hoje», follow-ups, redator de e-mails, onboarding, revisão semanal, propostas e preços, e respostas sobre escopo. Abre no navegador. Sem downloads. Sem Excel.</p>
+					</div>
+					<div class="faq__item">
+						<h3>Está em português?</h3>
+						<p>Não. O app e os modelos de e-mail estão em inglês. Esta página está em português para você saber exatamente o que está comprando.</p>
+					</div>
+					<div class="faq__item">
+						<h3>Como eu recebo?</h3>
+						<p>Você paga uma única vez pelo Stripe. O preço é 49 USD e o seu banco faz a conversão para a sua moeda. Depois da compra, você entra direto no app. Não há arquivos para baixar.</p>
+					</div>
+					<div class="faq__item">
+						<h3>E se não funcionar para mim?</h3>
+						<p>{guarantee}</p>
+					</div>
+				</div>
+			</section>
+
+			<section class="guarantee">
+				<div class="guarantee__box">
+					<span class="guarantee__icon" aria-hidden="true">🛡️</span>
+					<div class="guarantee__copy">
+						<h2>Política de reembolso de 30 dias</h2>
+						<p>{guarantee} Suporte: {BUZZYFLY_CONFIG.supportEmail}</p>
+					</div>
+				</div>
+				<div class="final-cta">
+					<a class="btn-primary" href={order.href}>Comprar o Digital System — {digitalSystem.price} USD</a>
+					<br />
+					{order.live && <PayPalLink href={order.paypalHref} lead="Ou pague com" />}
+					<p class="final-cta__alt">Prefere ver os detalhes antes? <a href="/pt/store">Veja o que está incluído</a>.</p>
+				</div>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
