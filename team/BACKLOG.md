@@ -3,6 +3,7 @@
 Kept by the Web Developer. The Coding agents take the top unclaimed item.
 Format: number. goal | why | Owner: unclaimed (or agent, date) | Status
 
+000000000000. Direct pushes e4f0364 and 572a067 claimed "the same reply" (scope-creep after-hours post) and "the same checklist" (client-onboarding-checklist-template) live in the app. The app's scope reply and its 10 onboarding steps differ from the posts | Test team 2026-11-19, check 18 | Owner: Test team, 2026-11-19 | Done in the test PR
 00000000000. `client-says-im-busy-exact-follow-up` (direct push 79c0e64) said the app "includes the busy-client reply". The app has 21 fixed emails, none for a busy client, though buyers can save their own | Test team 2026-11-18, check 18 | Owner: Test team, 2026-11-18 | Done in the test PR
 0000000000. The store FAQ (#258) said the app shows "the scope replies when they're due". Scope replies are on-demand templates, not scheduled | Test team 2026-11-14, check 18 | Owner: Test team, 2026-11-14 | Done in the test PR
 000000000. The homepage's first screen showed a placeholder image ("Placeholder: replace /images/today-dashboard.svg") with alt text claiming it was the dashboard (direct push a2802f4) | Test team 2026-11-13, check 12 | Owner: Test team, 2026-11-13 | Done in the test PR: replaced with a real screenshot of the Today list (example clients)

@@ -7,7 +7,7 @@ category: "systems"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
-featuredProductDescription: "Browser app with the exact scope reply, onboarding checklist, and weekly reset so the process still exists on the weeks you are slammed. One-time."
+featuredProductDescription: "Browser app with a scope reply that quotes the extra work, an onboarding checklist, and weekly reset so the process still exists on the weeks you are slammed. One-time."
 ---
 
 A client texts at 9:47pm: "Can you just add this one thing before tomorrow?" You are half-asleep. The yes leaves before the price does. By morning the extra work is free and the original deadline is already late.
@@ -107,6 +107,6 @@ Next action: open file / parked
 
 You can paste it today. It works until a slammed Thursday at 9:47pm. Then the yes leaves, the price never gets written, and by Friday the original deadline is already late because the silence felt safer than sending the pause.
 
-The same reply, the onboarding checklist, and the 20-minute Monday reset live inside the Buzzyfly Digital System so the after-hours text still gets the price when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+A scope reply that quotes the extra work and asks "go ahead or keep it for later," the onboarding checklist and the 20-minute Monday reset live inside the Buzzyfly Digital System, so the after-hours text still gets the price when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
