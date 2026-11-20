@@ -1,6 +1,6 @@
 ---
 title: "Proposal Quiet for 10 Days? Exact Close or Release Email"
-seoTitle: "Proposal Quiet Day 10: Close Email That Frees the Calendar"
+seoTitle: "Proposal Quiet Day 10: Exact Close Email"
 description: "Paste-ready day-10 close when a proposal is still silent after earlier nudges. One email. Releases the start date or gets the yes. No more open maybes."
 pubDate: 2026-11-20
 category: "sales"
