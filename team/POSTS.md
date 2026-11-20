@@ -398,3 +398,9 @@ Going freelance soon? You already know the work. Set up the parts your old emplo
 
 Buzzyfly is that last list, with the follow-up and onboarding emails already written. Try the free demo first, no sign-up.
 https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=first-freelance-setup
+
+### pricing-image | ready | facebook: professional portfolio
+Image: https://buzzyfly.com/social/buzzyfly-pricing.jpg
+Stop guessing what to charge. Put in your take-home goal, your business costs and your billable hours, and the Buzzyfly Digital System works out your hourly floor, a project price with a buffer for surprises, and a monthly retainer. When a client pushes back, the discount reply that trades scope for price is right there. $49 once, works in your browser, no subscription. Try the free demo first, no sign-up:
+
+https://www.buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=pricing-image
