@@ -404,3 +404,11 @@ Image: https://buzzyfly.com/social/buzzyfly-pricing.jpg
 Stop guessing what to charge. Put in your take-home goal, your business costs and your billable hours, and the Buzzyfly Digital System works out your hourly floor, a project price with a buffer for surprises, and a monthly retainer. When a client pushes back, the discount reply that trades scope for price is right there. $49 once, works in your browser, no subscription. Try the free demo first, no sign-up:
 
 https://www.buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=pricing-image
+
+### demo-video-checkin | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-checkin.mp4
+Title: Finished a project last month? Send this short check-in
+Wrapped a project a month ago and haven't spoken since? A short check-in keeps the door open. This is the real Buzzyfly app with sample clients: pick the client and the 30-day check-in, and it's written with their name and project. It asks how the work is holding up, offers a tweak, and asks if they know anyone else who needs help. Copy it and send it from your own inbox.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-checkin
+$49 once, no subscription.
