@@ -123,7 +123,7 @@ Monday starts with a scramble? The Buzzyfly app has a 20-minute Monday reset: op
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-reset
 $49 once, no subscription.
 
-### cartoon-forgot-recap | posted 2026-11-11, youtube id 1QT3k0RDYRQ (https://www.youtube.com/watch?v=1QT3k0RDYRQ); instagram tried 2026-11-18 and 11-19, "still processing", not live (check recent media before a retry); ready for facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-forgot-recap | posted 2026-11-11, youtube id 1QT3k0RDYRQ (https://www.youtube.com/watch?v=1QT3k0RDYRQ); instagram tried 2026-11-18, 11-19 and 11-20, "still processing", not live (check recent media before a retry); ready for facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-forgot-recap.mp4
 Title: Promised a recap after the call? It's already written
 Great first call. You promise a recap tomorrow. Then the week happens, and by Friday it feels too awkward to send.
@@ -405,7 +405,7 @@ Stop guessing what to charge. Put in your take-home goal, your business costs an
 
 https://www.buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=pricing-image
 
-### demo-video-checkin | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+### demo-video-checkin | posted 2026-11-20, youtube id FJNoDefCKxM (https://www.youtube.com/watch?v=FJNoDefCKxM); ready for instagram, facebook | youtube, instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-checkin.mp4
 Title: Finished a project last month? Send this short check-in
 Wrapped a project a month ago and haven't spoken since? A short check-in keeps the door open. This is the real Buzzyfly app with sample clients: pick the client and the 30-day check-in, and it's written with their name and project. It asks how the work is holding up, offers a tweak, and asks if they know anyone else who needs help. Copy it and send it from your own inbox.
