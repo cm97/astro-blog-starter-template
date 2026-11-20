@@ -7,7 +7,7 @@ category: "sales"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
-featuredProductDescription: "Browser app that shows who to follow up with today and drafts the email. Day-10 close, earlier nudges, onboarding and weekly reset so the process still exists on the weeks you are slammed. One-time."
+featuredProductDescription: "Browser app that shows who to follow up with today and fills in the email. Proposal follow-ups on days 3, 7 and 14, onboarding and weekly reset so the process still exists on the weeks you are slammed. One-time."
 ---
 
 You sent the proposal. Day 3 and day 5 or day 7 nudges already went out. Still nothing. Now it is day 10. The start date you offered is either here or already passed. The calendar block is still sitting there. Every morning the open thread steals five minutes while you decide whether to send one more soft check-in.
