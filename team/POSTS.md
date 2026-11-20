@@ -214,7 +214,7 @@ The Buzzyfly Digital System gives every new client a 10-step onboarding plan, ea
 $49 once. Browser app. No subscription.
 https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-messy-onboarding
 
-### revision-limit-reply | ready | facebook: professional portfolio
+### revision-limit-reply | posted 2026-11-20, id 1115192551682116_122148165753356277 | facebook: professional portfolio
 Image: none
 Revisions are used up and the client wants "just one more round"? Reply kindly, quickly, and with a price:
 
