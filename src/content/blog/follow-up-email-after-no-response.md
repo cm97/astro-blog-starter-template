@@ -3,7 +3,7 @@ title: "Follow-Up Email After No Response: 5 Templates to Copy"
 seoTitle: "Follow-Up Email After No Response: 5 Templates"
 description: "Five ready-to-send follow-up emails for when a prospect or client goes quiet: proposals, check-ins, re-engagement, referral asks and project wrap-ups."
 pubDate: "Sep 13 2026"
-updatedDate: "Nov 17 2026"
+updatedDate: "Nov 20 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -60,6 +60,7 @@ Day 5–7 nudge due: ________
 Bump due (3 days after the nudge): ________
 Break-up due (~day 14 from the proposal): ________
 Status: waiting / replied / closed
+Amount: $________
 ```
 
 Time box: 4 minutes after the proposal goes out. Do not wait for a calm afternoon. The calm afternoon is when delivery eats the follow-up.
@@ -220,6 +221,27 @@ Job: confirm they saw it. Not a novel. Not a second pitch.
 
 Job: create a deadline without a fake countdown. This is the email people actually answer.
 
+## Exact 3-line replies when they answer the follow-up (phone-ready)
+
+When they reply, do not invent a new email. Copy one of these. Time box: 90 seconds.
+
+**They say yes / still interested:**
+> Got it. Invoice is attached. $[number] due [date]. Reply once paid and the welcome note goes out today with the intake link.
+
+**They say not now:**
+> Understood. I'll close the active file. Reply any time in [month they named] and I'll reopen it. No weekly notes until then.
+
+**They ask for a discount:**
+> Scope and start date stay the same. Price is $[number]. Reply yes and the welcome goes out today.
+
+**They want a call first:**
+> The proposal already has the scope and price. If something is blocking the decision, reply with the one question and I'll answer it here. Otherwise the start date is [date].
+
+**They go quiet again after saying yes:**
+> Invoice is still open. Due [date]. Reply paid or tell me the hold is over.
+
+Log the reply type on the same note the same minute. Then open the onboarding checklist if money lands.
+
 ## What you do with the reply
 
 - **Yes:** send the invoice the same day. Welcome note with the start date, the one thing you need from them, and the day they will hear from you next.
@@ -245,7 +267,7 @@ If you cannot name the next date after a yes, you do not have a running client y
 
 ## Phone-only follow-up (8 minutes from your phone)
 
-1. Open Notes. Paste the fill-in block. Fill Name + Sent date + Day 5–7 due.
+1. Open Notes. Paste the fill-in block. Fill Name + Sent date + Day 5–7 due + Amount.
 2. Copy Template 1. Fill name + project + day. Send.
 3. Set a phone reminder for the bump date titled “Bump — 2 min”.
 4. Mark the log. Close the note.
@@ -273,3 +295,5 @@ The Digital System ($49) is those emails plus the onboarding checklist and the w
 One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+
+Want everything in one place including the onboarding kit and weekly checklist? The Complete Business Bundle is $97: https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
