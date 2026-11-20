@@ -372,3 +372,29 @@ The Buzzyfly Digital System keeps a Scope guard set of emails ready: the outside
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=cartoon-scope-creep
 $49 once. Browser app. No subscription.
+
+### milestone-payments | ready | facebook: professional portfolio
+Image: none
+A client paid the deposit, then nothing for weeks while you kept working? Tie payment to stages, not to the end:
+
+1. A deposit before you start.
+2. A payment when each stage is done, with a photo or link as proof.
+3. One line in the agreement: "Work pauses if a payment is more than 7 days late."
+
+Then if a payment slips, you send a fact, not a favour: "Stage 2 is complete as of [date]. [Amount] is due by [date]. I'll restart once it's received."
+
+Buzzyfly shows which invoice is overdue and has the reminder written with the client's name and amount. $49 once, works in your browser, no subscription.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=milestone-payments
+
+### first-freelance-setup | ready | facebook: professional portfolio
+Image: none
+Going freelance soon? You already know the work. Set up the parts your old employer handled:
+
+- A one-page agreement: scope as a numbered list, 2 revision rounds, payment terms.
+- A deposit before you start.
+- An invoice template and reminders on day 1, 7 and 14 after the due date.
+- The same onboarding steps for every new client: welcome email, intake questions, kickoff call.
+- One list of every client with their next step and a date, checked each morning.
+
+Buzzyfly is that last list, with the follow-up and onboarding emails already written. Try the free demo first, no sign-up.
+https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=first-freelance-setup

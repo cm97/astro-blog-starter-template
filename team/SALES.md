@@ -34,7 +34,12 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 | cartoon-late-invoice | YouTube Shorts (#286) | 2026-11-17 | ? | ? | ? |
 | Buy clicks from /demo (Developer, LOG 2026-11-17) | /demo to $49 Stripe checkout | 11-12..11-17 | - | 4 | 0 (checkout page still describes an Excel download, BACKLOG 0i) |
 | interested-but-not-yet, when-to-let-a-client-go | Facebook queue (POSTS.md, added 2026-11-18) | not posted yet | - | - | - |
-| Community replies R1 to R42 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
+| yes-to-kickoff-24h | Facebook: professional portfolio | 2026-11-18 | ? | ? | ? |
+| monday-reset-image | Facebook: professional portfolio | 2026-11-19 | ? | ? | ? |
+| demo-video-retainer | YouTube Shorts | 2026-11-18 | ? | ? | ? |
+| cartoon-scope-creep | YouTube Shorts (#307) | 2026-11-19 | ? | ? | ? |
+| milestone-payments, first-freelance-setup | Facebook queue (POSTS.md, added 2026-11-20) | not posted yet | - | - | - |
+| Community replies R1 to R45 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
 | Whole site, ad check 2026-11-06 (LOG #215) | mostly direct | to 11-06 | 96 | 1 (first, direct to /) | 0 |
 | Whole site 11-03..04 (sales-b, LOG 2026-11-04) | 9 YouTube, rest direct | - | 38 views | 0 | 0 |
 | Demo videos (weekly check 2026-11-10) | YouTube Shorts, Instagram Reels, Facebook video | 2026-11-03 to 11-10 | site views 11-03..11-10: youtube 27, facebook 6, google 23, direct 61, other 9. YouTube views: proposal 3, invoice 0, scope 18, onboarding 4, pricing 7. Instagram insights: not available (permission) | 1 (direct) | 0 |
@@ -94,6 +99,9 @@ self-promotion rule in the sidebar, then post.** Reddit replies carry no link by
 | L40 | ~2026-11-16 (past week) | [r/Architects](https://www.reddit.com/r/Architects/comments/1xye31u/when_to_cut_a_client_loose/) | "When to cut a client loose ... Sole proprietor ... clients are taking too much unpaid time" | hot | R40 | draft, owner posts |
 | L41 | ~2026-11-10 (past week) | [r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1xtkp30/title_two_prospects_showed_interest_in_switching/) | "Two prospects showed interest in switching hosting to me but won't ... I run a one-person web business" | hot | R41 | draft, owner posts |
 | L42 | ~2026-11-15 (past week) | [r/linuxmint](https://www.reddit.com/r/linuxmint/comments/1xxsuzb/best_way_to_handle_invoice_tracking_on_mint/) | "tracking which invoices are paid, overdue, or pending means I end up manually..." | warm | R42 | draft, owner posts |
+| L43 | ~2026-11-17 (past week) | [r/AskContractors](https://www.reddit.com/r/AskContractors/comments/1xzp0v5/homeowner_has_only_paid_me_35_of_the_contract/) | "Homeowner has only paid me 35% of the contract after ..." | hot | R43 | draft, owner posts |
+| L44 | ~2026-11-17 (past week) | [r/graphic_design](https://www.reddit.com/r/graphic_design/comments/1xz3z8o/im_soon_to_be_a_first_time_freelancer_what_are/) | "I'm soon to be a first time freelancer – What are the most ... roughly 9 years of experience under my belt in NYC advertising agencies" | warm | R44 | draft, owner posts |
+| L45 | ~2026-11-15 (past week) | [r/PersonalFinanceZA](https://www.reddit.com/r/PersonalFinanceZA/comments/1xxamap/recommendations_for_simple_free_business_admin/) | "Recommendations for simple, free business admin ... keep track of what's been received, sent, paid, and properly filed" | warm | R45 | draft, owner posts |
 
 ### Draft replies (team A, role 4, 2026-11-02)
 
@@ -378,6 +386,37 @@ A plain spreadsheet in LibreOffice Calc does this well if you add three columns 
 
 Best two to post first this round: **R38** (exact wording question, the app's scope reply is this) and **R41** (one-person business, follow-up schedule).
 
+### Draft replies, round 8 (team A, role 4, 2026-11-20)
+
+Found 2026-11-20 by web search limited to the past week. Only 3 usable this time: most hits
+were listing pages, redirect links, people on the client side, or tool launches. Same limits:
+titles and snippets only, the owner checks each thread and the sub's rules. No links on Reddit.
+
+**R43 (L43, homeowner paid only 35% of the contract).**
+Before anything else, stop work until the next draw is paid. Carrying the job on your own money is how a 65% gap becomes a loss. Then:
+1. Send a written payment request tied to the contract: "Per our contract, [stage] is complete as of [date] (photos attached), which brings the total due to [amount]. [Amount] has been paid, so [balance] is due by [date]. Work will resume once it's received."
+2. If they dispute the work, ask them to list the specific items in writing so you can address them.
+3. Check your state's lien rules today. In most US states there's a deadline from your last day of work, and some require a preliminary notice early in the job.
+For the next contract: payment draws tied to stages (deposit, rough-in, completion) with "work pauses if a draw is late" written in.
+
+**R44 (L44, first-time freelancer after 9 years in agencies).**
+You already know the work. What agencies handled for you is the business side, so set these up before your first client:
+- A one-page agreement: scope as a numbered list, 2 revision rounds, what's extra, payment terms, and who owns the files when.
+- A deposit (30 to 50%) before you start, and the final files after the final payment.
+- An invoice template plus a reminder schedule: due date +1, +7, +14.
+- A short onboarding sequence for every new client: welcome email, intake questions, kickoff call, logins and files by day 2, first delivery date confirmed in writing.
+- One list of every client with their next step and a date, checked every morning. The thing freelancers drop isn't design, it's the follow-ups.
+Pricing: work out your floor from what you need to take home ÷ realistic billable hours (20 to 25 a week, not 40), then quote projects, not hours.
+
+**R45 (L45, simple free admin for a small business).**
+Free and simple: one spreadsheet with three tabs.
+1. Invoices: number, client, amount, date sent, due date, date paid, status. Sort by due date, and anything past due without a paid date is your chase list.
+2. Received: date, from whom, amount, which invoice it pays. This makes reconciling with your bank statement a 10-minute monthly job.
+3. Filed: a link to each PDF (invoice, receipt, statement) in one cloud folder, named by date and number (2026-11-20_INV014.pdf).
+Do a 15-minute session every Monday: mark what's been paid, chase what's overdue, file the week's receipts. The routine matters more than the tool.
+
+Best two to post first this round: **R44** (a ready buyer: new freelancer setting up systems) and **R43** (urgent and specific).
+
 ### Lead research and outreach (roles 5 and 6)
 
 No businesses added this run. The searches found only vendor blogs and courses, not small
@@ -416,6 +455,9 @@ project-control toolkit, ScopeDue). No new business page stating the problem. No
 **2026-11-18:** 0 businesses added. Same pattern: questions (answered above) and more competing
 tools (an Excel overdue-invoice tracker, a payment follow-up workspace, AI invoice chasers).
 No business page stating the problem. No cold notes drafted.
+
+**2026-11-20:** 0 businesses added. Searches turned up questions (above) and tool launches only.
+No cold notes drafted.
 
 ## Partners
 
@@ -656,6 +698,12 @@ Buyer doubts about Buzzyfly to answer on /store (for the Web builders): "Is it a
 - "Interested prospects won't commit." Post idea: interested-but-not-yet (POSTS.md): day 3, 7, 14 follow-ups.
 - "I don't want a cloud tool for invoices." FAQ for /store: be honest. Buzzyfly is a browser app. Say where its data is kept, so privacy-minded buyers can decide (Web builders: check the app's storage and state it plainly on /store).
 - Biggest objection this week isn't from a buyer, it's ours: the $49 Stripe checkout page still says "Excel workbook ... Download right after you pay" (BACKLOG 0i). A buyer who gets that far sees a different product. Owner fix in Stripe.
+
+### Added 2026-11-20 (from L43 to L45)
+- "The client paid only part of the contract." Post idea: milestone-payments (POSTS.md): stage-based draws and "work pauses if a draw is late".
+- "I'm about to go freelance. What do I set up first?" Post idea: first-freelance-setup (POSTS.md). This is the most natural buyer moment we've seen: someone setting up their systems from scratch.
+- "I want something simple and free." FAQ: be honest that a spreadsheet works. Our pitch is for people who already have one and still forget to look at it, so the Today list does the looking.
+- Search note: fresh "help me" posts were scarce this week. Most matches were tool launches (Paylark again). Future runs: also try r/smallbusinessuk, r/sweatystartup, r/Contractor and r/AskContractors, where the questions are still real.
 
 ## Ready ad set (role 9, waiting for the owner's yes and daily budget)
 
