@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+2026-11-20 sales-a: (2) 3 new real leads (L43 to L45, past week: homeowner paid 35%, first-time freelancer setting up, free admin tracking) with full draft replies; FAQ incl. better subs to search; scoreboard updated; ad set still parked; 2 new posts (milestone-payments, first-freelance-setup) (PR #311) | fresh question posts are thinning (most hits are now tool launches), so I kept to 3 real ones instead of padding; 45 replies drafted, 0 posted | owner: fix the $49 Stripe description (BACKLOG 0i, still open), then post R44
 2026-11-20 test-team (fix 2): direct push 4d43ba7 (proposal-quiet-day-10 post) broke the build again (seoTitle 64 characters, the limit is 60; also fixed on main in ebac703) and its blurb said the app has a "Day-10 close" (the app's close is day 14); both fixed (PR #310). e6102da and 7d692f1 checked: accurate | 4 direct pushes today, 2 broke the deploy | owner: route posts through a PR
 2026-11-20 test-team: 20 of 20 checks pass (PR #309); fixed rule 5: direct push 1fea62a added the banned $97 bundle and link bJeeVf to follow-up-email-after-no-response, which broke Deploy run 650 (never live), removed in PR #308; new /pt/ pages pass at 375px and 1280px | check-live-rules caught it, so the live site stayed on a940501 | owner: sign the Stripe connector in again; fix 0i
 SECURITY: 1ef47e6 and 1fea62a (posts) went straight to main without a PR. 1fea62a broke rule 5 and failed the deploy. Please route posts through a PR.
