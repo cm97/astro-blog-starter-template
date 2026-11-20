@@ -3,7 +3,7 @@ title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
 description: "A 20-minute weekly reset for solo operators. A Monday sheet, a Wednesday check and a 12-minute Thursday cash salvage that keep follow-ups alive."
 category: "planning"
 pubDate: "Sep 01 2026"
-updatedDate: "Nov 13 2026"
+updatedDate: "Nov 20 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -200,6 +200,15 @@ If the first client is not on the Monday sheet, the reset is still a personal pr
 - If you miss the Monday window, run the 12-minute Thursday salvage the same day you notice. Do not wait for the next Monday.
 - After any yes from a follow-up, open the onboarding checklist the same hour and put the new client on next Monday's Still open.
 - Cap the parking line at three items. A fourth means you are running two businesses in your head. Kill or schedule one before the next reset.
+- Before Block 1, open the onboarding checklist for any client who paid in the last 7 days and confirm the day-7 hold still exists on the calendar. Missing holds become silence.
+- Write the exact Stripe or invoice ID next to any new payment on the Monday sheet. Support questions die without the number.
+- If a proposal follow-up is due inside the 20 minutes, send it before you write the three priorities. Cash first.
+- Cap the Still open list at eight lines. Anything past that gets parked or closed before you start Block 2.
+- After the reset, set a 90-minute delivery block on the calendar titled with the first priority. Unprotected delivery is how Thursday dies.
+- Phone-only extra: screenshot the filled sheet and text it to yourself with the label "Monday reset [date]". The photo is the backup when the note app dies.
+- When an invoice reminder is priority 3, paste the exact line from the follow-up templates before you leave the 20 minutes. Do not invent a new version.
+- If zero follow-ups are due, still send one past-client re-engagement line. Empty pipeline is how next month goes quiet.
+- Log one number at the bottom of the Monday sheet: proposals open longer than 10 days. If the number is higher than last week, that becomes the next reset's priority 2.
 
 ## Phrases so you do not draft from a blank screen
 
