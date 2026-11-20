@@ -296,4 +296,3 @@ One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund 
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-Want everything in one place including the onboarding kit and weekly checklist? The Complete Business Bundle is $97: https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
