@@ -2,7 +2,7 @@
 // Needs the built site served locally: `npm run build`, then serve dist/ on DEMO_URL
 // (default http://localhost:8765/demo/), then: node scripts/make-demo-video.cjs
 // Writes public/social/video/buzzyfly-demo.mp4. Every screen is the real app with sample clients.
-// Other scenes: `node scripts/make-demo-video.cjs invoice`, `... scope`, `... discount`, `... retainer` write buzzyfly-demo-<scene>.mp4.
+// Other scenes: `node scripts/make-demo-video.cjs invoice`, `... scope`, `... discount`, `... retainer`, `... checkin` write buzzyfly-demo-<scene>.mp4.
 const { chromium } = require('playwright');
 const { execFileSync } = require('child_process');
 const fs = require('fs');
@@ -92,6 +92,18 @@ const caption = async (page, text) => page.evaluate((t) => {
 		await caption(page, 'Project wrapped? Pick the client and the retainer offer.'); await shot(4);
 		await page.evaluate(() => window.scrollTo(0, 120));
 		await caption(page, 'Hours a month, booked ahead, at a set price. Already written.'); await shot(4.5);
+		await scrollToButton('Copy email');
+		await caption(page, 'Copy it and send it from your own inbox.'); await shot(3.5);
+		await endCard();
+	} else if (scene === 'checkin') {
+		await page.setContent(card('Finished the project a month ago?', 'A short check-in keeps the door open. Real app, sample clients.'));
+		await page.evaluate(() => document.fonts.ready); await shot(3);
+		await page.goto(URL + '#emails'); await page.waitForTimeout(600); await hide();
+		await page.selectOption('select[data-action="email-client"]', 'demo-1'); await page.waitForTimeout(200);
+		await page.selectOption('select[data-action="email-template"]', 'done-checkin'); await page.waitForTimeout(300);
+		await caption(page, 'A month after you wrap: pick the client and the 30-day check-in.'); await shot(4);
+		await page.evaluate(() => window.scrollTo(0, 120));
+		await caption(page, 'How is it working? Know anyone who needs help?'); await shot(4.5);
 		await scrollToButton('Copy email');
 		await caption(page, 'Copy it and send it from your own inbox.'); await shot(3.5);
 		await endCard();
