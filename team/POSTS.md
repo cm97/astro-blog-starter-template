@@ -123,7 +123,7 @@ Monday starts with a scramble? The Buzzyfly app has a 20-minute Monday reset: op
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-reset
 $49 once, no subscription.
 
-### cartoon-forgot-recap | posted 2026-11-11, youtube id 1QT3k0RDYRQ (https://www.youtube.com/watch?v=1QT3k0RDYRQ); instagram tried 2026-11-18, 11-19 and 11-20, "still processing", not live (check recent media before a retry); ready for facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-forgot-recap | posted 2026-11-11, youtube id 1QT3k0RDYRQ (https://www.youtube.com/watch?v=1QT3k0RDYRQ); blocked for instagram: tried 2026-11-18 to 11-21, all "still processing", never went live; ready for facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-forgot-recap.mp4
 Title: Promised a recap after the call? It's already written
 Great first call. You promise a recap tomorrow. Then the week happens, and by Friday it feels too awkward to send.
@@ -413,7 +413,7 @@ Wrapped a project a month ago and haven't spoken since? A short check-in keeps t
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-checkin
 $49 once, no subscription.
 
-### demo-video-kickoff | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+### demo-video-kickoff | posted 2026-11-21, youtube id fds9Eir5JgM (https://www.youtube.com/watch?v=fds9Eir5JgM); ready for instagram, facebook | youtube, instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-kickoff.mp4
 Title: Kickoff call done? Put what you agreed in writing today
 Kickoff call went well, and everyone left with a slightly different idea of the project? Write it down the same day. This is the real Buzzyfly app with sample clients: pick the client and the kickoff summary, and it's set out with their name and project: goal, in scope, not in scope, first delivery date and who approves. Fill the brackets, copy it and send it from your own inbox.
