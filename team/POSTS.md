@@ -225,13 +225,13 @@ It helps to count the rounds as you go ("this was round 2 of 2"), so the price i
 The Buzzyfly Digital System has this revision-limit reply ready to copy, next to the scope, discount and change-order replies for every client. $49 once, works in your browser, no subscription.
 https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=revision-limit-reply
 
-### rate-floor-free-tool | ready | facebook: professional portfolio
+### rate-floor-free-tool | posted 2026-11-21, id 1115192551682116_122148353679356277 | facebook: professional portfolio
 Image: none
 Not sure what to charge? Start from your floor, not from what others charge:
 
 (take-home you want + yearly costs) ÷ hours you can really bill.
 
-For most freelancers that's 20 to 25 billable hours a week, not 40. We made a free calculator that does the maths in a minute, no sign-up, nothing saved.
+Use the hours you can really bill in a week, not 40. We made a free calculator that does the maths in a minute, no sign-up, nothing saved.
 https://buzzyfly.com/hourly-rate-calculator?utm_source=facebook&utm_medium=social&utm_campaign=rate-floor-free-tool
 
 ### scope-reply-free-tool | ready | facebook: professional portfolio
