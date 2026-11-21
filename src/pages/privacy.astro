@@ -7,7 +7,7 @@ import Layout from '../layouts/BlogPost.astro';
 	description="How Buzzyfly collects, uses, and stores information when you buy a product or join the email list."
 	pubDate={new Date('September 16 2026')}
 >
-	<p>Last updated: October 22, 2026</p>
+	<p>Last updated: November 4, 2026</p>
 
 	<p>
 		Buzzyfly (buzzyfly.com) sells a web app and digital templates for running a client business. This page explains what we collect, why, and how to reach us. Contact: support@buzzyfly.com.
@@ -20,7 +20,10 @@ import Layout from '../layouts/BlogPost.astro';
 		<li>Order records needed to send your access link and handle refunds.</li>
 		<li>Basic site analytics and security logs from our host (Cloudflare).</li>
 		<li>Not your app data. The clients, notes and emails you enter in the web app are saved in your own browser. They are not sent to us.</li>
-		<li>If you arrive through a campaign link, the campaign it came from (for example "reddit"), kept in your browser for 30 days and saved with your signup or order so we know which posts and ads work.</li>
+		<li>Where your visit came from: the campaign tag on the link (for example "reddit") or, if there is none, the name of the site that linked to us (for example "google.com"). It is kept in your browser for 30 days and saved with your signup or order, and counted in daily page-view totals, so we know which posts and ads work.</li>
+		<li>Questions you type into the help chat on /support. They are sent to an AI service to write the answer (Cloudflare Workers AI, or another AI provider if that one is unavailable). Don't type payment details or private client information there.</li>
+		<li>Emails you send to support@buzzyfly.com, and the IP address used when an access or download link is opened, to help stop shared or stolen links.</li>
+		<li>If you join Buzzyfly Jobs, your email and membership status from Stripe, and a sign-in cookie that keeps the job listings unlocked on your device.</li>
 	</ul>
 
 	<h2>How we use it</h2>
@@ -33,7 +36,7 @@ import Layout from '../layouts/BlogPost.astro';
 
 	<h2>Who else sees it</h2>
 	<p>
-		Stripe and PayPal process payments. Cloudflare hosts the site and stores order records. Email is sent through our email provider when delivery and list emails go out. We do not sell your email or order data.
+		Stripe and PayPal process payments. Cloudflare hosts the site, stores order records and runs the help chat's AI. If Cloudflare's AI is unavailable, help chat questions may go to another AI provider (Groq, Google or xAI) to write the answer. Email is sent through our email provider when delivery and list emails go out. We do not sell your email or order data.
 	</p>
 
 	<h2>How long we keep it</h2>
