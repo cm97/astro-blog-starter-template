@@ -412,3 +412,11 @@ Wrapped a project a month ago and haven't spoken since? A short check-in keeps t
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-checkin
 $49 once, no subscription.
+
+### demo-video-kickoff | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-kickoff.mp4
+Title: Kickoff call done? Put what you agreed in writing today
+Kickoff call went well, and everyone left with a slightly different idea of the project? Write it down the same day. This is the real Buzzyfly app with sample clients: pick the client and the kickoff summary, and it's set out with their name and project: goal, in scope, not in scope, first delivery date and who approves. Fill the brackets, copy it and send it from your own inbox.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-kickoff
+$49 once, no subscription.
