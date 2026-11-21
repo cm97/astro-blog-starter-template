@@ -3,6 +3,7 @@
 Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
+SECURITY: direct push 45beb64 (retention-day-14-day-30-exact-check-ins post) went to main without a PR. It said "the same two check-ins" (Day 14 and Day 30) live inside the app. The app has a 30-day check-in, not a Day-14 one, so the line now says that and points to saving the Day-14 lines as your own email (fixed in this PR).
 2026-11-21 developer: nothing shipped to the site. Health: Deploy green, build, tsc and all 7 test suites pass | the $49 Stripe checkout still says "One Excel workbook... Download right after you pay" (re-read today, 5th day; BACKLOG 0i) | owner: fix the $49 product description in Stripe (BACKLOG 0i); review #200 and #184
 2026-11-21 coder3: nothing to ship. No open BACKLOG item for a coder (0d is in PR #184; 0b, 0e, 0h, 0i wait on the owner; the rest are owned). Checked: build, tsc, test:email, test:jobs, check:secrets green; crawl of 228 URLs found no broken internal links; 168 pages at 375px and 1280px show no sideways scroll or console errors (PR #322) | same result as 11-18; the coder lane has had no buildable backlog item since 11-11 | owner: 0i (the $49 Stripe checkout text still describes an Excel download)
 2026-11-21 social-poster: posted rate-floor-free-tool to Facebook "professional portfolio" (1115192551682116_122148353679356277); replaced the unsourced "20 to 25 billable hours a week" with "the hours you can really bill in a week, not 40" | - | -

@@ -91,6 +91,6 @@ If the project is already finished, swap the second line for:
 
 Day 14 arrives and you are slammed. The check-in never leaves. The client assumes the work is done or that you forgot them. Day 30 becomes a cold restart. The next invoice is harder to send because the thread is already dead.
 
-The same two check-ins, next to the onboarding sequence and the weekly reset, live inside the Buzzyfly Digital System so a slammed week still has the exact lines to paste. One-time $49. Opens in your browser. No download. No Excel. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+A 30-day check-in email, the onboarding sequence and the weekly reset live inside the Buzzyfly Digital System, and you can save the Day-14 lines above as one of your own emails, so a slammed week still has the exact lines to paste. One-time $49. Opens in your browser. No download. No Excel. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

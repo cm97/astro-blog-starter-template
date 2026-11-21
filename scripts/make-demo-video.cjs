@@ -2,7 +2,7 @@
 // Needs the built site served locally: `npm run build`, then serve dist/ on DEMO_URL
 // (default http://localhost:8765/demo/), then: node scripts/make-demo-video.cjs
 // Writes public/social/video/buzzyfly-demo.mp4. Every screen is the real app with sample clients.
-// Other scenes: `node scripts/make-demo-video.cjs invoice`, `... scope`, `... discount`, `... retainer`, `... checkin` write buzzyfly-demo-<scene>.mp4.
+// Other scenes: `node scripts/make-demo-video.cjs invoice`, `... scope`, `... discount`, `... retainer`, `... checkin`, `... kickoff` write buzzyfly-demo-<scene>.mp4.
 const { chromium } = require('playwright');
 const { execFileSync } = require('child_process');
 const fs = require('fs');
@@ -106,6 +106,18 @@ const caption = async (page, text) => page.evaluate((t) => {
 		await caption(page, 'How is it working? Know anyone who needs help?'); await shot(4.5);
 		await scrollToButton('Copy email');
 		await caption(page, 'Copy it and send it from your own inbox.'); await shot(3.5);
+		await endCard();
+	} else if (scene === 'kickoff') {
+		await page.setContent(card('Kickoff call done?', 'Put what you agreed in writing the same day. Real app, sample clients.'));
+		await page.evaluate(() => document.fonts.ready); await shot(3);
+		await page.goto(URL + '#emails'); await page.waitForTimeout(600); await hide();
+		await page.selectOption('select[data-action="email-client"]', 'demo-1'); await page.waitForTimeout(200);
+		await page.selectOption('select[data-action="email-template"]', 'kickoff-summary'); await page.waitForTimeout(300);
+		await caption(page, 'After the kickoff call: pick the client and the kickoff summary.'); await shot(4);
+		await page.evaluate(() => window.scrollTo(0, 120));
+		await caption(page, 'Goal, in scope, not in scope, first delivery, approvals.'); await shot(4.5);
+		await scrollToButton('Copy email');
+		await caption(page, 'Fill the brackets. Copy it. Send it from your inbox.'); await shot(3.5);
 		await endCard();
 	} else if (scene === 'onboarding') {
 		await page.setContent(card('New client just paid?', 'Welcome email, intake questions, kickoff. Real app, sample clients.'));
