@@ -234,7 +234,7 @@ Not sure what to charge? Start from your floor, not from what others charge:
 Use the hours you can really bill in a week, not 40. We made a free calculator that does the maths in a minute, no sign-up, nothing saved.
 https://buzzyfly.com/hourly-rate-calculator?utm_source=facebook&utm_medium=social&utm_campaign=rate-floor-free-tool
 
-### scope-reply-free-tool | ready | facebook: professional portfolio
+### scope-reply-free-tool | posted 2026-11-22, id 1115192551682116_122148542625356277 | facebook: professional portfolio
 Image: none
 Client asks for "one small extra" that isn't in the project? You have three polite options: quote it, swap it for something already planned, or park it for phase two.
 
