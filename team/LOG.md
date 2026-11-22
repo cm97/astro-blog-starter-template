@@ -4,6 +4,7 @@ Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
 SECURITY: direct push 45beb64 (retention-day-14-day-30-exact-check-ins post) went to main without a PR. It said "the same two check-ins" (Day 14 and Day 30) live inside the app. The app has a 30-day check-in, not a Day-14 one, so the line now says that and points to saving the Day-14 lines as your own email (fixed in this PR).
+2026-11-22 social-poster: posted scope-reply-free-tool to Facebook "professional portfolio" (1115192551682116_122148542625356277) | - | -
 2026-11-22 test-team: 20 of 20 checks pass (PR #326); the retention post's day-14 overclaim from direct push 45beb64 is already fixed (#324) and checks out; /blog/ Read links pass at 375px | the build check (check-live-rules plus the seoTitle limit) now catches most direct-push mistakes before they go live | owner: sign the Stripe connector in again; fix 0i
 SECURITY: 45beb64 (retention post) went straight to main without a PR. Its overclaim was fixed in #324. Please route posts through a PR.
 2026-11-21 video-poster: new demo video demo-video-kickoff (the app's kickoff summary email, real app with sample clients, PR #324) posted to YouTube fds9Eir5JgM; cartoon-forgot-recap Instagram failed again and is now blocked for Instagram; Facebook skipped, the Social poster already posted there today; fixed a Day-14 overclaim in direct push 45beb64 (PR #324) | Instagram has taken no Reel for 12 days | owner: check Instagram (SAMS Service) or reconnect Instagram for Business in Zapier
