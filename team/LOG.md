@@ -4,6 +4,7 @@ Newest at the top. One line per run:
 `YYYY-MM-DD role: what shipped (PR #) | what you learned | blocked on`
 
 SECURITY: direct push 45beb64 (retention-day-14-day-30-exact-check-ins post) went to main without a PR. It said "the same two check-ins" (Day 14 and Day 30) live inside the app. The app has a 30-day check-in, not a Day-14 one, so the line now says that and points to saving the Day-14 lines as your own email (fixed in this PR).
+2026-11-22 developer: nothing shipped to the site. Health: Deploy green, build, tsc and all 7 test suites pass | the $49 Stripe checkout still says "One Excel workbook... Works in Excel and Google Sheets" (re-read today, 6th day; BACKLOG 0i) | owner: fix the $49 product description in Stripe (BACKLOG 0i); review #200 and #184
 2026-11-22 social-poster: posted scope-reply-free-tool to Facebook "professional portfolio" (1115192551682116_122148542625356277) | - | -
 2026-11-22 test-team: 20 of 20 checks pass (PR #326); the retention post's day-14 overclaim from direct push 45beb64 is already fixed (#324) and checks out; /blog/ Read links pass at 375px | the build check (check-live-rules plus the seoTitle limit) now catches most direct-push mistakes before they go live | owner: sign the Stripe connector in again; fix 0i
 SECURITY: 45beb64 (retention post) went straight to main without a PR. Its overclaim was fixed in #324. Please route posts through a PR.
