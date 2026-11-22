@@ -420,3 +420,11 @@ Kickoff call went well, and everyone left with a slightly different idea of the 
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-kickoff
 $49 once, no subscription.
+
+### demo-video-proposal-send | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-proposal-send.mp4
+Title: Sending a proposal? Keep it to one short, clear email
+Writing a proposal email and it's turning into an essay? Keep it short. This is the real Buzzyfly app with sample clients: pick the client and "Send a proposal", and it sets out what they get, the timeline, the price with 50% to start, and what isn't included, with one clear next step. Fill the brackets, copy it and send it from your own inbox.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-proposal-send
+$49 once, no subscription.
