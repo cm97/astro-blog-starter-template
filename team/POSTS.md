@@ -163,7 +163,7 @@ The Buzzyfly demo is the real app with three sample clients: a proposal that wen
 
 Try the free demo: https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=free-demo-try
 
-### cartoon-close-the-loop | posted 2026-11-12, youtube id _TU1x57QMnw (https://www.youtube.com/watch?v=_TU1x57QMnw); ready for instagram, facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-close-the-loop | posted 2026-11-12, youtube id _TU1x57QMnw (https://www.youtube.com/watch?v=_TU1x57QMnw); instagram tried 2026-11-22, "still processing", not live; ready for facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-close-the-loop.mp4
 Title: Client ghosted your proposal? Send this on day 14
 Proposal sent. Then silence. Two weeks of checking your inbox and wondering if one more chase is too pushy.
@@ -421,7 +421,7 @@ Kickoff call went well, and everyone left with a slightly different idea of the 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-kickoff
 $49 once, no subscription.
 
-### demo-video-proposal-send | ready | youtube, instagram: SAMS Service, facebook: professional portfolio
+### demo-video-proposal-send | posted 2026-11-22, youtube id qzT5BM5AEvc (https://www.youtube.com/watch?v=qzT5BM5AEvc); ready for instagram, facebook | youtube, instagram: SAMS Service, facebook: professional portfolio
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/buzzyfly-demo-proposal-send.mp4
 Title: Sending a proposal? Keep it to one short, clear email
 Writing a proposal email and it's turning into an essay? Keep it short. This is the real Buzzyfly app with sample clients: pick the client and "Send a proposal", and it sets out what they get, the timeline, the price with 50% to start, and what isn't included, with one clear next step. Fill the brackets, copy it and send it from your own inbox.
