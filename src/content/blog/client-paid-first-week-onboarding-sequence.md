@@ -3,11 +3,12 @@ title: "Client Just Paid? Run This 15-Minute Onboarding Sequence So Week One Doe
 seoTitle: "Client Just Paid? 15-Minute Onboarding Sequence"
 description: "Exact 15-minute sequence after payment so the welcome email, intake, and first deliverable date exist before Thursday erases them."
 pubDate: 2026-10-26
-updatedDate: 2026-10-27
+updatedDate: 2026-11-23
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "Browser app with the 15-minute onboarding sequence, weekly reset, and exact follow-up lines so week one still runs when delivery is on fire. One-time."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 ---
 
 They paid. You feel the relief. Then Thursday arrives and you still haven't sent the welcome email or locked the first deliverable date.
@@ -33,6 +34,7 @@ Intake sent: ________
 Kickoff booked: ________
 Status: paid / onboarding / active
 Next action: ________
+Out of scope: ________
 ```
 
 Four minutes. Do it while the receipt is still open. If you wait until tomorrow the start date is already fuzzy.
@@ -49,6 +51,8 @@ Subject: Welcome + next step for [Project name]
 >
 > [Paste the five intake fields below]
 >
+> This start covers [exact deliverable]. Anything outside that is a separate quote.
+>
 > Reply with any hard constraints on the start date and I'll confirm the calendar hold.
 >
 > Talk soon,
@@ -57,6 +61,10 @@ Subject: Welcome + next step for [Project name]
 One email. Welcome + intake + the date. Do not wait for a separate kickoff call to exist before this leaves.
 
 After send: log the time. Set a 10-minute calendar block for 48 hours later labeled "Check intake: [Name]".
+
+Phone-paste under 160 chars:
+
+> Hi [Name], payment in for [project]. Intake link: [link]. Due [date]. First piece locked for [date]. Out of scope: [one line].
 
 ## Minutes 11–15 — Lock the first date and calendar
 
@@ -118,6 +126,40 @@ Late is better than rewritten. If any day is missed, send the same line the same
 - Invoice or deposit question: "The [amount] already received covers [package]. First deliverable is locked for [date]."
 - Quiet after welcome: use the day-2 hold-or-release line above. Do not write a new pitch.
 
+## Extra concrete steps that stop week one from dying
+
+- Cap the welcome at 8 lines. Longer versions get rewritten every time a new client lands.
+- Put the Day 2 intake nudge on the calendar the hour payment clears. Unscheduled nudges die.
+- Keep the client note in the same folder as the weekly reset sheet. One open, both available.
+- After the welcome leaves, write the next check-in date on the Monday sheet before you close the laptop.
+- If three new clients land the same week, run only Day 0 and Day 2 for each. Park the rest until the weekly reset.
+- Phone-only: dictate the welcome and the Day 2 nudge into Notes, paste, send, mark done. The calendar hold still has to exist.
+- Log the deposit amount and start date in the client note the same hour. Missing numbers become missing cash later.
+- When a scope ask lands before Day 7, park it with: "Got it. I'll check what we locked and come back with two options." Do not price it inside the onboarding window.
+- At Friday close, list any Day 0–7 touches still open. Those become Monday priority 2.
+- Screenshot or copy the filled Day 0 block into the same note as last week's reset so Monday never starts from blank.
+- Set the intake deadline to three business days, not "when you get to it." The calendar invite is the real deadline.
+- If they pay on a Friday, still send the welcome the same day. Monday silence is the failure mode this checklist exists to kill.
+- Put the kickoff invite on the calendar before you close the welcome email. Unsent invites become "let’s find a time" threads.
+- Write the day-7 hold while the payment screen is still open. Future-you will not remember the date.
+- If the client replies with a question in the welcome thread, answer it in one line and re-paste the intake link. Do not open a new conversation.
+
+## Phone-only Day 0 to Day 7 sequence (copy from Notes)
+
+When you are on the phone and cannot open a doc, run this exact order. Each line is under 160 characters so it pastes clean.
+
+Day 0: Hi [Name], payment in for [project]. Intake: [link]. Due [date]. First piece [date]. Out of scope: [one line].
+
+Day 2: Still holding [date] start. Intake or 'later'? Link: [link].
+
+Day 4: Holding until end of day. Reply or I release [date].
+
+Day 5: Quick status: [what moved]. Next due [date]. Blocked on your side?
+
+Day 7: Added you to weekly check. Same day next week we confirm [deliverable] is on track.
+
+Mark each one sent in the client note the same hour. The Digital System app puts the due ones on Today so you do not hunt the note.
+
 ## What still breaks when this only lives in your head
 
 You can do the steps today. They work until a slammed Thursday. Then the welcome is still in drafts, the start date is "next week sometime," the intake never left, and the client is waiting while you rebuild the sequence from memory.
@@ -129,5 +171,7 @@ The words have to sit next to the weekly reset and the follow-up lines, in the s
 The same 15-minute sequence, plus the follow-up cadence and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the process still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+
+Want the full set including the weekly reset and every follow-up line? The Complete Business Bundle is $97: https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
 
 The $49 Digital System already includes every Buzzyfly app. [See everything in the store](/store).
