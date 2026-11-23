@@ -172,6 +172,4 @@ The same 15-minute sequence, plus the follow-up cadence and the 20-minute Monday
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
-Want the full set including the weekly reset and every follow-up line? The Complete Business Bundle is $97: https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
-
 The $49 Digital System already includes every Buzzyfly app. [See everything in the store](/store).
