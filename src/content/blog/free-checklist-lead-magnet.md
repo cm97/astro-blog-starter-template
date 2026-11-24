@@ -51,6 +51,6 @@ Subject: Your 20-minute Monday reset
 
 You are not selling a product. You are selling relief from a specific Monday that went to shit. The free checklist proves you understand the pain. The paid system proves you have the fix that still works when delivery is on fire.
 
-The full sequence — all four emails, the checklist, and the store link — lives inside the Buzzyfly Digital System so you stop collecting emails like a creep with no plan. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The four emails above are yours to paste into your email tool. For your client work, the Buzzyfly Digital System keeps the proposal follow-ups, invoice reminders, onboarding emails and the 20-minute Monday reset in one place, and you can save these four as your own emails there too. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
