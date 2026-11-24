@@ -163,7 +163,7 @@ The Buzzyfly demo is the real app with three sample clients: a proposal that wen
 
 Try the free demo: https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=free-demo-try
 
-### cartoon-close-the-loop | posted 2026-11-12, youtube id _TU1x57QMnw (https://www.youtube.com/watch?v=_TU1x57QMnw); instagram tried 2026-11-22, "still processing", not live; ready for facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-close-the-loop | posted 2026-11-12, youtube id _TU1x57QMnw (https://www.youtube.com/watch?v=_TU1x57QMnw); instagram tried 2026-11-22 and 2026-11-24, both "still processing", not live (media checked before and after); ready for facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-close-the-loop.mp4
 Title: Client ghosted your proposal? Send this on day 14
 Proposal sent. Then silence. Two weeks of checking your inbox and wondering if one more chase is too pushy.
@@ -436,7 +436,7 @@ Monday already feels behind by 10am? A short reset first thing makes the week ea
 We made a free, working version of a 20-minute Monday reset: four timed passes that clear the decks, close last week, pick one priority and block the week. No sign-up.
 https://buzzyfly.com/tools/weekly-reset.html?utm_source=facebook&utm_medium=social&utm_campaign=weekly-reset-free-tool
 
-### cartoon-30-day-checkin | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-30-day-checkin | ready (youtube tried 2026-11-24, Zapier 429 Too Many Requests twice, not uploaded: checked the channel uploads list after each) | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-30-day-checkin.mp4
 Title: Project done? Don't forget the 30-day check-in
 Project delivered. On to the next one. A month later you never asked how it went, and now it feels too late.
