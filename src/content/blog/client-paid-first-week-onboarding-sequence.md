@@ -7,7 +7,7 @@ updatedDate: 2026-11-23
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Browser app with the 15-minute onboarding sequence, weekly reset, and exact follow-up lines so week one still runs when delivery is on fire. One-time."
+featuredProductDescription: "Browser app with a 10-step onboarding plan (a day for every step), the weekly reset and the follow-up emails so week one still runs when delivery is on fire. One-time."
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 ---
 
@@ -168,7 +168,7 @@ The private note is a feeling instead of a written card. The day-2 nudge never g
 
 The words have to sit next to the weekly reset and the follow-up lines, in the same place, so a slammed week still has a list to open.
 
-The same 15-minute sequence, plus the follow-up cadence and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the process still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+A 10-step onboarding plan with a day for every step, plus the follow-up cadence and the 20-minute Monday reset, live inside the Buzzyfly Digital System, so the process still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 

@@ -3,6 +3,36 @@
 Proof the product works as the listing says. Rerun this before any ad or big
 push, and after any change to `/app`. Add the newest run at the top.
 
+## 2026-11-24, Test team: 20 daily checks
+
+How: same as 2026-11-22. The 11-23 run reached this session a day late, so this run covers both days (local D1 with every migration, test keys in the
+LOCAL `download_tokens` only, Playwright at 375px and 1280px, an uncommitted
+config copy without the `ai` binding). The Stripe connector refused its saved sign-in
+again, so check 16 read `src/`.
+
+| # | Check | Result | Evidence |
+|---|---|---|---|
+| 1 | Lock | PASS | `/app` with no key or a bad key: 402. The system key opens `/app`. A $15 key opens only `/app/reset` (200), and `/app`, `/app/follow-ups` and `/app/onboarding` stay at 402. |
+| 2 | Today list | PASS | Proposal 5 days ago: "First proposal follow-up". Invoice due 9 days ago: "a week overdue". New client today: welcome and intake only. |
+| 3 | Email writer | PASS | All 21 emails fill in name, project, date and sign-off, with no raw `{placeholders}`. |
+| 4 | Copy / open in email app | PASS | The clipboard and the `mailto:` link carry the same filled subject and body. |
+| 5 | Mark sent | PASS | The item clears. "Second proposal follow-up" comes up next. |
+| 6 | Weekly reset counts | PASS | 1 open invoice ($800), 1 follow-up due, 2 onboarding steps, matching the test clients. |
+| 7 | Scope and proposal replies | PASS | All 6 open and fill. |
+| 8 | Pricing maths | PASS | App: $72/h, $1,300 and $750, then $94, $1,700 and $950 at 80k. `/hourly-rate-calculator` gives $72, then $94. |
+| 9 | Data, backup, restore | PASS | Clients survive reload. The backup has 3 clients and the sign-off. Restore works. |
+| 10 | Smaller apps | PASS | The system key opens all 3 (200) with shared clients. Follow-Ups has 9 emails, Onboarding 6, and Reset shows Monday, This week and Log. |
+| 11 | Phone 375px | PASS | No sideways scroll and 0 targets under 44px on `/`, `/store`, a post, `/app`, `/pt/`, `/pt/store` and `/blog/` (Read links, #320). The homepage screenshot loads (302px wide), and the buy button starts at 771px of 812. |
+| 12 | Desktop 1280px | PASS | No sideways scroll and no JS errors, including `/pt/` and `/pt/store` (`lang=pt-BR`, one H1 each). |
+| 13 | Accessibility | PASS | One H1, no heading skips, no missing alt text, no low contrast found, and focus rings show. |
+| 14 | Speed | PASS | `/` is 83 KB over 10 requests and `/store` 39 KB over 11. DOM-ready in about 1.5 s on a simulated slow line. |
+| 15 | Links | PASS | 155 internal links from `/`, `/store`, `/blog/` and 93 posts: 0 broken (`/kids` gives 503 locally only, because it is the KIDS worker). Every post ends on a buy link or `/store`. |
+| 16 | Buy path | PASS (links only) | `src/` and `public/` have only the 4 links rule 5 allows (`bJebJ3…` ×139, `5kQ7sN…`, `fZubJ3…`, `3cI8wR…`), and `check-live-rules` passes. Each `/buy/<id>` goes to its own link. The Stripe connector refused its sign-in, so BACKLOG 0i (the checkout still says Excel) was not re-checked. |
+| 17 | Thank-you page | PASS | Paid test session: "Your app is ready." and `/app` opens. Unknown session: "Checking your payment…", then "We can't confirm this payment yet." Missing session: "Already bought a Buzzyfly app?". |
+| 18 | Copy check | PASS (fixed) | `client-paid-first-week-onboarding-sequence` (direct push 9e854c9) said "the same 15-minute sequence" lives in the app. The app has a 10-step onboarding plan with a day for each step, and the post now says that. `new-client-first-10-minutes` (07dd26c) says the onboarding checklist, weekly reset and follow-ups are in the app, which matches. |
+| 19 | Rules check | PASS | Direct pushes 9e854c9 (11-23) and 07dd26c (11-24) each added "The Complete Business Bundle is $97" with banned link `bJeeVf…`. `check-live-rules` failed Deploys 680 and 682, so neither went live. Follow-up direct pushes (e738efc, bca809c) removed both. Now: no $97, no `bJeeVf`, no "instant", no "zip", no `coachmanager@` in rendered HTML, one refund wording, and the liability section is present. |
+| 20 | Search check | PASS | 96 pages: one title, one description and one H1 each, with no duplicates. JSON-LD on 95 (not on the `/blog/` index). |
+
 ## 2026-11-22, Test team: 20 daily checks
 
 How: same as 2026-11-21 (local D1 with every migration, test keys in the
@@ -180,36 +210,6 @@ again, so check 16 read `src/`.
 | 16 | Buy path | PASS (src only) | `src/` has only the 4 links rule 5 allows (`bJebJ3…` ×114 across `src/` and `public/`, `5kQ7sN…`, `fZubJ3…`, `3cI8wR…`). Each `/buy/<id>` goes to its own link. |
 | 17 | Thank-you page | PASS | Paid test session: "Your app is ready." and `/app` opens. Unknown session: "Checking your payment…", then "We can't confirm this payment yet." Missing session: "Already bought a Buzzyfly app?". |
 | 18 | Copy check | PASS | No public copy changed since 11-16. The only site change is CSS (#164, #274): inline article links are now underlined, so links no longer rely on colour alone, and the blog headings are restyled. The 3 free tools still have 2 buttons of at least 44px and no sideways scroll at 375px and 1280px. |
-| 19 | Rules check | PASS | No "instant" claims, no `eVq4gB` link, no $97, no invented views or dates, no "zip", no placeholders on public pages, no `coachmanager@` in rendered HTML, one refund wording, and the liability section is present. |
-| 20 | Search check | PASS | 85 pages: one title, one description and one H1 each, with no duplicates. JSON-LD on 84 (not on the `/blog/` index). |
-
-## 2026-11-16, Test team: 20 daily checks
-
-How: same as 2026-11-15 (local D1 with every migration, test keys in the
-LOCAL `download_tokens` only, Playwright at 375px and 1280px, an uncommitted
-config copy without the `ai` binding). The Stripe connector still needs signing
-in again, so check 16 read `src/`.
-
-| # | Check | Result | Evidence |
-|---|---|---|---|
-| 1 | Lock | PASS | `/app` with no key or a bad key: 402. The system key opens `/app`. A $15 key opens only `/app/reset` (200), and `/app`, `/app/follow-ups` and `/app/onboarding` stay at 402. |
-| 2 | Today list | PASS | Proposal 5 days ago: "First proposal follow-up". Invoice due 9 days ago: "a week overdue". New client today: welcome and intake only. |
-| 3 | Email writer | PASS | All 21 emails fill in name, project, date and sign-off, with no raw `{placeholders}`. |
-| 4 | Copy / open in email app | PASS | The clipboard and the `mailto:` link carry the same filled subject and body. |
-| 5 | Mark sent | PASS | The item clears. "Second proposal follow-up" comes up next. |
-| 6 | Weekly reset counts | PASS | 1 open invoice ($800), 1 follow-up due, 2 onboarding steps, matching the test clients. |
-| 7 | Scope and proposal replies | PASS | All 6 open and fill. |
-| 8 | Pricing maths | PASS | App: $72/h, $1,300 and $750, then $94, $1,700 and $950 at 80k. `/hourly-rate-calculator` gives $72, then $94. |
-| 9 | Data, backup, restore | PASS | Clients survive reload. The backup has 3 clients and the sign-off. Restore works. |
-| 10 | Smaller apps | PASS | The system key opens all 3 (200) with shared clients. Follow-Ups has 9 emails, Onboarding 6, and Reset shows Monday, This week and Log. |
-| 11 | Phone 375px | PASS | No sideways scroll and 0 targets under 44px on `/`, `/store`, a post and `/app`. The homepage screenshot loads (302px wide), and the buy button starts at 771px of 812. |
-| 12 | Desktop 1280px | PASS | No sideways scroll and no JS errors. |
-| 13 | Accessibility | PASS | One H1, no heading skips, no missing alt text, no low contrast found, and focus rings show. |
-| 14 | Speed | PASS | `/` is 117 KB over 10 requests and `/store` 38 KB over 10. DOM-ready in about 1.6 s on a simulated slow line. |
-| 15 | Links | PASS | 139 internal links from `/`, `/store`, `/blog/` and 82 posts: 0 broken (`/kids` gives 503 locally only, because it is the KIDS worker). Every post ends on a buy link or `/store`. |
-| 16 | Buy path | PASS (src only) | `src/` has only the 4 links rule 5 allows (`bJebJ3…` ×114 across `src/` and `public/`, `5kQ7sN…`, `fZubJ3…`, `3cI8wR…`). Each `/buy/<id>` goes to its own link. |
-| 17 | Thank-you page | PASS | Paid test session: "Your app is ready." and `/app` opens. Unknown session: "Checking your payment…", then "We can't confirm this payment yet." Missing session: "Already bought a Buzzyfly app?". |
-| 18 | Copy check | PASS | The new buy boxes on the 3 free tools in `public/tools/` (#269) check out: onboarding has 10 steps, each with a day, plus the welcome, intake and kickoff emails. Follow-ups get a date and show on Today, and the buyer sends them. The Monday reset is 20 minutes (3+5+2+5+3+2), and its scorer picks the #1. Each box links the allowed $49 link, uses the rule-4 refund line, and has 2 buttons of at least 44px with no sideways scroll at 375px or 1280px. |
 | 19 | Rules check | PASS | No "instant" claims, no `eVq4gB` link, no $97, no invented views or dates, no "zip", no placeholders on public pages, no `coachmanager@` in rendered HTML, one refund wording, and the liability section is present. |
 | 20 | Search check | PASS | 85 pages: one title, one description and one H1 each, with no duplicates. JSON-LD on 84 (not on the `/blog/` index). |
 
