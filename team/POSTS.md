@@ -428,3 +428,10 @@ Writing a proposal email and it's turning into an essay? Keep it short. This is 
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-proposal-send
 $49 once, no subscription.
+
+### weekly-reset-free-tool | ready | facebook: professional portfolio
+Image: none
+Monday already feels behind by 10am? A short reset first thing makes the week easier to steer.
+
+We made a free, working version of a 20-minute Monday reset: four timed passes that clear the decks, close last week, pick one priority and block the week. No sign-up.
+https://buzzyfly.com/tools/weekly-reset.html?utm_source=facebook&utm_medium=social&utm_campaign=weekly-reset-free-tool

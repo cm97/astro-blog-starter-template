@@ -1,6 +1,6 @@
 # Funding options
 
-Kept by Sales team B (Funding and partnerships). Checked on 2026-11-17. Amounts
+Kept by Sales team B (Funding and partnerships). Checked on 2026-11-24. Amounts
 and deadlines change, so confirm on each program's own site before applying.
 This is research, not financial or legal advice. Only the owner applies, signs
 or pays a fee.
@@ -28,13 +28,13 @@ or pays a fee.
 | Amber Grant | WomensNet (private) | Monthly grants up to $15k, $75k year-end grants | Only if the business is at least 50% women-owned. Fee not shown on its page (was $15). **Next cutoff Nov 30, 2026.** |
 | Verizon Digital Ready grants (via Hello Alice) | Verizon with Hello Alice | $10k | Free Hello Alice account. Listed as "Ongoing" on helloalice.com/opportunities. |
 | NASE Growth Grant | National Association for the Self-Employed | Up to $4,000 | Annual, Veteran and Gold members can apply right away. Monthly members wait 90 days. Oct to Dec applications are reviewed in January. |
-| Secretsos Small Business Grant | Private | $2,500 quarterly | $15 fee. US-registered active business, owner 21+. On 2026-11-17 its page still showed "September 30, 2026" as the current deadline, so the Q4 date is unclear. Confirm on the page before paying the fee. |
+| Secretsos Small Business Grant | Private | $2,500 quarterly | $15 fee. US-registered active business, owner 21+. Its page says applications close on the last day of each quarter, so the Q4 deadline is Dec 31, 2026. |
 | Hustler's MicroGrant | HerSuiteSpot | $1,000 monthly | Small but quick. Fee about $10 (third-party sites; confirm on its page). |
 | FedEx Cares grant (2027 Hiring Our Heroes Small Business Grant Program) | FedEx with Hiring Our Heroes | Up to $25,000 | Only for veteran or military-spouse owners. Deadline Dec 15 (per fedexcares.com). The old FedEx Small Business Grants Program is retired. |
 
 Removed on 2026-11-10: Venmo small-business grant (no current page from Venmo itself).
 
-**Deadlines in the next 30 days (from 2026-11-17):** Amber Grant Nov 30, 13 days away (women-owned only). FedEx Cares Dec 15, 28 days away (veteran or military-spouse owners only). Secretsos: deadline unclear on its page.
+**Deadlines in the next 30 days (from 2026-11-24):** Amber Grant Nov 30, 6 days away (women-owned only). FedEx Cares Dec 15 (veteran or military-spouse owners only). Secretsos Dec 31, just past 30 days.
 
 ## Low-cost loans (only if the owner wants debt)
 

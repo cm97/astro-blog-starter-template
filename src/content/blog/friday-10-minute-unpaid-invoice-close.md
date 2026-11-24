@@ -1,7 +1,7 @@
 ---
 title: "Exact Friday Close That Collects Unpaid Invoices Before the Weekend"
 seoTitle: "Friday Close for Unpaid Invoices: Exact Sequence"
-description: "Paste-ready Friday 10-minute sequence that surfaces every unpaid invoice and sends the exact reminder so cash lands before Monday instead of dying in the weekend."
+description: "A paste-ready 10-minute Friday routine: list every unpaid invoice and send a polite, dated reminder before the weekend."
 pubDate: 2026-11-24
 category: sales
 featuredProductTitle: Buzzyfly Digital System
