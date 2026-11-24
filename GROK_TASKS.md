@@ -3,7 +3,7 @@
 ## Status
 - Site: LIVE (buzzyfly.com, /store)
 - $49 Digital System Stripe: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00 — VERIFIED WORKING
-- Secondary SKUs ($15/$19/$29/$97): UNVERIFIED — Wire bot checking
+- Secondary SKUs ($15/$19/$29): live, links below. There is NO $97 bundle and link bJeeVf… is not allowed (CLAUDE.md rule 5). Never write a "Complete Business Bundle" line in a post.
 - Traffic: ZERO
 - Sales: ZERO
 - Deadline: 2 months from Nov 2 2026

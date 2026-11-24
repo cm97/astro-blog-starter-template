@@ -10,13 +10,12 @@ Read `src/data/monetization.ts` — this is the single source of truth. The line
 
 | Product | Price | What it is |
 |---|---|---|
-| Weekly Reset Checklist | $15 | 20-minute Monday routine: clear inbox, set priority, plan week |
-| Follow-Up Email Templates | $19 | 5 ready-to-send follow-up emails |
-| Client Onboarding Kit | $29 | Welcome email, intake form, kickoff agenda, notes format |
-| Buzzyfly Digital System | $49 (Most popular) | Complete onboarding + weekly planning + follow-up framework |
-| Complete Business Bundle | $97 (Best value) | Everything above in one download |
+| Weekly Reset App | $15 | Browser app: 20-minute Monday reset, priority scorer |
+| Follow-Ups App | $19 | Browser app: who to follow up with, emails filled in |
+| Onboarding App | $29 | Browser app: the same onboarding steps for every new client |
+| Buzzyfly Digital System | $49 (Most popular) | Browser app with all three apps above. There is no $97 bundle (CLAUDE.md rule 5) |
 
-The target buyer is a solo freelancer, coach, or consultant drowning in client chaos. The upsell ladder: checklist → onboarding kit → digital system → bundle.
+The target buyer is a solo freelancer, coach, or consultant drowning in client chaos. The upsell ladder: a single app → the $49 Digital System.
 
 ## Phase 1 — Audit the code (do this first, no external tools needed)
 
