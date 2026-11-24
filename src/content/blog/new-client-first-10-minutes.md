@@ -2,7 +2,7 @@
 title: "New Client Just Signed? Do This in the First 10 Minutes"
 description: "Exact sequence to run the moment a new client pays — welcome email, intake form, kickoff agenda, and calendar hold — so onboarding does not live in your head."
 pubDate: "Oct 16 2026"
-updatedDate: "Oct 22 2026"
+updatedDate: "Nov 24 2026"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -118,15 +118,35 @@ Most first-week chaos is unpaid work and missing dates. Add these three before y
 
 Send it even if you feel awkward. The form is the process.
 
-## If the intake is late
+## Phone-only version (no laptop open)
 
-Day 3 with no form: send the 48-hour nudge above. Do not rewrite it.
+Stripe pings your phone. You are between calls.
 
-Day 5: move the kickoff or cancel it. Message:
+1. Open the payment notification. Dictate the welcome into Notes or the email app. Paste the saved intake link. Send.
+2. Open calendar. Create the 30-minute hold for the next available slot within three days. Invite the client from the email address on the receipt.
+3. Dictate the private note into the same Notes app you use for Monday reset. Title it with the client name and date.
+4. Set a phone reminder for 48 hours later titled “Intake nudge [Name]” with the nudge text already in the note body.
+5. Stop. The rest waits for the Monday reset or the laptop.
 
-> Hi [Name] — moving the kickoff until the intake is back so the call is useful. Here is the link again. New slot options: [two times].
+Five actions. Under seven minutes if the links are already saved in Notes.
 
-Do not start the work. The form is the gate.
+## When three clients pay the same afternoon
+
+Cap it. Run only steps 1–3 for each (welcome, intake, calendar hold). Park the private note and day-7 until the next Monday reset. Write one line on the reset sheet:
+
+```
+Three new: [Name1] [Name2] [Name3] — notes and day-7 still open
+```
+
+Do not invent three custom sequences. The same welcome works for all three. The fourth payment that day waits until tomorrow morning.
+
+## Day-2 intake nudge (exact paste)
+
+If the form is not back by the end of day 2:
+
+> Hi [Name] — quick check on the intake so we use the kickoff time well. Link: [link]. Deadline stays [date]. Anything blocking it?
+
+Send from the same thread. Do not open a new conversation. Log it on the private note under “Next check-in.”
 
 ## What still breaks when this lives only in your head
 
@@ -141,3 +161,5 @@ The Digital System ($49) is the onboarding checklist plus weekly planning and fo
 One-time payment. Yours to keep. Not a subscription. Not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
+
+Want every checklist and template in one download? The Complete Business Bundle is $97: https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
