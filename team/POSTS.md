@@ -251,7 +251,7 @@ The Buzzyfly Digital System walks you through a 20-minute Monday reset: check th
 $49 once. Browser app. No subscription.
 https://buzzyfly.com/store?utm_source=social&utm_medium=social&utm_campaign=cartoon-chaotic-week
 
-### feedback-chase-no-nag | ready | facebook: professional portfolio
+### feedback-chase-no-nag | posted 2026-11-24, id 1115192551682116_122148899523356277 | facebook: professional portfolio
 Image: none
 Waiting on client feedback and scared of sounding pushy? You're not nagging if every message makes replying easier.
 
