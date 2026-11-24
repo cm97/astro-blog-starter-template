@@ -2,7 +2,7 @@
 title: "Client Onboarding Checklist Template (Copy and Use Today)"
 description: "A client onboarding checklist template for coaches and consultants. Every step from signed contract to kickoff call, ready to run without memory."
 pubDate: "Sep 13 2026"
-updatedDate: "Nov 19 2026"
+updatedDate: "Nov 24 2026"
 heroImage: "/blog-placeholder-2.jpg"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -159,6 +159,14 @@ Day 5: Quick status: [what moved]. Next piece due [date]. Anything blocked on yo
 Day 7: Added you to the weekly check. Same day next week we confirm [deliverable] is on track.
 
 Mark each one sent in the client note the same hour. The Digital System app puts the due ones on Today so you do not hunt the note.
+
+## Day-0 cash lock (add these three before you close the laptop)
+
+1. Scope sentence in the welcome: "This start covers [exact deliverable]. Anything outside that is a separate quote."
+2. Amount on the client note: "$[number] paid in full on [date]" or "deposit $[amount], balance due [date]".
+3. Pre-written day-2 nudge on calendar:
+
+> Hi [Name] — still need the intake so kickoff is useful. Link again: [link]. Deadline stays [date]. Reply if something is blocking it.
 
 ## Why the first week still dies even with this list
 
