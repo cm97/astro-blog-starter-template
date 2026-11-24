@@ -3,7 +3,7 @@ title: "Client Went Quiet After the Proposal? Send This Exact Follow-Up"
 seoTitle: "Client Quiet After the Proposal? Send This Follow-Up"
 description: "Paste-ready day 3, 7 and 14 emails for when a proposal goes silent so the deal does not die in your inbox."
 pubDate: 2026-10-19
-updatedDate: 2026-11-09
+updatedDate: 2026-11-24
 category: sales
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -180,6 +180,16 @@ Next action: wait / invoice / reduced scope / closed
 23. Pre-write the day-3 line in the calendar note the day the proposal leaves. The 8-minute block only needs a paste and send.
 24. After any parked “later”, set one calendar reminder for the first day of the named month. One note only.
 25. If three proposals hit day 7 the same morning, send all three before 11am. Do not spread them across the day.
+
+## Phone-only run: 5 minutes, no laptop
+
+Open the log note on your phone. Paste the next line. Fill the brackets. Send. Update the log. Close the note. That is the whole system when you are on the road or between clients.
+
+1. Night before: phone reminder at 8pm — “Tomorrow 9am: proposal [Name] day X. Line is ready in note.”
+2. Morning: open note, copy the exact line, open email, paste, fill [date] and [project], send, screenshot the sent time, paste the time into the log, set next reminder.
+3. If a reply lands: open the five objection scripts in the same note, copy the matching one, fill one blank, send within the hour, update log status.
+4. After any yes: open the invoice app or Stripe link on the phone, send the deposit request, mark log closed, add the name to Monday onboarding note.
+5. Cap: never rewrite the line on the phone. If you cannot send the exact line in under 90 seconds, the cadence is already broken.
 
 ## Fill-in after every send or reply
 

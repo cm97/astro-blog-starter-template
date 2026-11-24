@@ -3,6 +3,7 @@
 Kept by the Web Developer. The Coding agents take the top unclaimed item.
 Format: number. goal | why | Owner: unclaimed (or agent, date) | Status
 
+00000000000000. The post writer keeps adding "The Complete Business Bundle is $97" with banned link `bJeeVf…` (1fea62a on 11-20, 9e854c9 on 11-23, 07dd26c on 11-24). Each time `check-live-rules` failed the deploy and a follow-up push removed it. Find the template or prompt that adds this line and remove it at the source | Test team 2026-11-24, check 19 | Owner: unclaimed (needs whoever runs the direct-push post writer) | Open
 0000000000000. Direct push 1fea62a put "The Complete Business Bundle is $97" and banned Payment Link `bJeeVf…` back into `follow-up-email-after-no-response` (rule 5). Deploy run 650 failed | Test team 2026-11-20, check 19 | Owner: Test team, 2026-11-20 | Done in PR #308
 000000000000. Direct pushes e4f0364 and 572a067 claimed "the same reply" (scope-creep after-hours post) and "the same checklist" (client-onboarding-checklist-template) live in the app. The app's scope reply and its 10 onboarding steps differ from the posts | Test team 2026-11-19, check 18 | Owner: Test team, 2026-11-19 | Done in the test PR
 00000000000. `client-says-im-busy-exact-follow-up` (direct push 79c0e64) said the app "includes the busy-client reply". The app has 21 fixed emails, none for a busy client, though buyers can save their own | Test team 2026-11-18, check 18 | Owner: Test team, 2026-11-18 | Done in the test PR
