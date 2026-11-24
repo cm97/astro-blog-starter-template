@@ -161,5 +161,3 @@ The Digital System ($49) is the onboarding checklist plus weekly planning and fo
 One-time payment. Yours to keep. Not a subscription. Not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
-
-Want every checklist and template in one download? The Complete Business Bundle is $97: https://buy.stripe.com/bJeeVf3WU1sOgri5BsaVa08
