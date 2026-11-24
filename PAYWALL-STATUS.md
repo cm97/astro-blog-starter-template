@@ -33,7 +33,7 @@ The repo was created 2026-07-22 from the public Cloudflare `astro-blog-starter-t
 
 | Layer | Status | Notes |
 | --- | --- | --- |
-| Stripe Payment Links | Live | $49 Digital System, $29 Onboarding Kit, $15 Reset, $19 Templates, $97 Bundle |
+| Stripe Payment Links | Live | $49 Digital System, $15 Weekly Reset App, $19 Follow-Ups App, $29 Onboarding App (no $97 bundle: CLAUDE.md rule 5) |
 | R2 bucket `buzzyfly-products` | Private | No public access, no custom domains. Only `products/` prefix is served via signed tokens |
 | Download tokens | Wired | `/api/download` requires a valid token; bare GET returns "Missing download token" |
 | Webhook | Wired in code | `/api/webhook` verifies Stripe signature, records order in D1, mails delivery link |

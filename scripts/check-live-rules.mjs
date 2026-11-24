@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // Guards CLAUDE.md's live-site rules. Runs before every build (npm "prebuild"),
-// so CI and the Deploy workflow both stop if a banned item reaches src/,
+// so CI and the Deploy workflow both stop if a banned item reaches src/ or the
+// public/ files served as-is (posters, images with text, static pages),
 // including direct pushes to main that skip review.
 //
 // The allowed Stripe Payment Links are read from CLAUDE.md itself, so when the
@@ -14,7 +15,7 @@ const allowedLinks = new Set(readFileSync(join(root, "CLAUDE.md"), "utf8").match
 
 // Old products that still exist only for past buyers (no offer, not for sale).
 const SKIP = ["src/apps-private/", "src/lib/dropPages.ts"];
-const TEXT = /\.(astro|ts|tsx|js|mjs|md|mdx|html|json)$/;
+const TEXT = /\.(astro|ts|tsx|js|mjs|md|mdx|html|json|svg|txt|xml)$/;
 
 // [rule, pattern]: text that must never be on the site.
 const BANNED = [
@@ -24,6 +25,7 @@ const BANNED = [
 	["rule 4: refund wording (the product is an app, not files)", /files (are )?not delivered|not as listed/i],
 	["rule 5: there is no $97 bundle", /\$97\b|complete business bundle/i],
 	["no outcome promises", /reply-generating/i],
+	["products are web apps, not zip files", /\bin the zip\b/i],
 ];
 // Rule 3: the owner's inbox never appears on public pages.
 const PUBLIC = ["src/pages/", "src/components/", "src/layouts/", "src/content/"];
@@ -38,7 +40,7 @@ function* files(dir) {
 }
 
 const problems = [];
-for (const path of files(join(root, "src"))) {
+for (const path of [...files(join(root, "src")), ...files(join(root, "public"))]) {
 	const rel = relative(root, path);
 	if (SKIP.some((s) => rel.startsWith(s))) continue;
 	readFileSync(path, "utf8").split("\n").forEach((line, i) => {

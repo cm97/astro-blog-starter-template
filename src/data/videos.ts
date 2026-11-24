@@ -36,7 +36,7 @@ export const EXPLAINER_VIDEOS: ExplainerVideo[] = [
 		title: "Inside the $49 app — Today, clients, emails, reset, pricing",
 		description: "A tour of the Digital System's screens. Your data stays in your browser. No subscription.",
 		seconds: 28,
-		poster: "/videos/whats-in-the-zip.svg",
+		poster: "/videos/whats-inside-the-app.svg",
 		slides: [
 			["TODAY", "One screen", "Follow-ups and onboarding steps due."],
 			["EMAILS", "Filled in for you", "Copy it, send it yourself."],
