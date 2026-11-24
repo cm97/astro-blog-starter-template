@@ -435,3 +435,13 @@ Monday already feels behind by 10am? A short reset first thing makes the week ea
 
 We made a free, working version of a 20-minute Monday reset: four timed passes that clear the decks, close last week, pick one priority and block the week. No sign-up.
 https://buzzyfly.com/tools/weekly-reset.html?utm_source=facebook&utm_medium=social&utm_campaign=weekly-reset-free-tool
+
+### cartoon-30-day-checkin | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-30-day-checkin.mp4
+Title: Project done? Don't forget the 30-day check-in
+Project delivered. On to the next one. A month later you never asked how it went, and now it feels too late.
+
+The Buzzyfly Digital System puts a 30-day check-in on your Today list for every finished project, with the email already written: name and project filled in. You copy it and send it from your own inbox.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=cartoon-30-day-checkin
+$49 once. Browser app. No subscription.
