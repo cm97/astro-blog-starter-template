@@ -3,12 +3,13 @@ title: "Monday Scan for Quiet Proposals (20 Minutes)"
 seoTitle: "Monday Scan for Quiet Proposals"
 description: "Exact 20-minute Monday process to catch every proposal that went quiet and send the follow-up that still works."
 pubDate: "Nov 02 2026"
-updatedDate: "Nov 17 2026"
+updatedDate: "Nov 25 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 ---
 
 Proposals go quiet. You notice on Thursday when it is already awkward.
@@ -112,6 +113,10 @@ These four cover the silence that kills cash.
 - On the next weekly reset, move every closed proposal older than 14 days out of the active list. The list is for cash still open, not for ghosts.
 - If they reply "still thinking," send one line: "Understood. The [start date] is released. Reply by [specific day] if you want it reopened." Do not leave it open.
 - Keep the three templates in the same note as the Monday scan. One open, all available.
+- Phone version: open Notes, paste the day-5 template, fill name and project, send, log in under 4 minutes per lead.
+- After sending, mark the row "waiting" and set a 3-day reminder titled "[Name] proposal check".
+- If three proposals are past day 10, close the oldest first. Do not let the list grow past the 20-minute window.
+- Copy the original proposal amount into the follow-up log so the reply has a number to reference if they ask.
 
 ## Fill-in after every send
 
@@ -121,6 +126,7 @@ Which email: day-5/7 / day-10 / day-14 close / re-engage
 Next check date: ________
 Status: waiting / replied / closed
 Calendar hold set: yes / no
+Original price logged: yes / no
 ```
 
 ## What still breaks when templates live only in a doc
