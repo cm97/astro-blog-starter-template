@@ -2,7 +2,7 @@
 title: "Client Onboarding Checklist Template (Copy and Use Today)"
 description: "A client onboarding checklist template for coaches and consultants. Every step from signed contract to kickoff call, ready to run without memory."
 pubDate: "Sep 13 2026"
-updatedDate: "Nov 24 2026"
+updatedDate: "Nov 25 2026"
 heroImage: "/blog-placeholder-2.jpg"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -143,6 +143,34 @@ Extra concrete steps that keep onboarding from dying on a slammed week:
 - When a scope ask lands before Day 7, park it with: "Got it. I'll check what we locked and come back with two options." Do not price it inside the onboarding window.
 - At Friday close, list any Day 0–7 touches still open. Those become Monday priority 2.
 - Screenshot or copy the filled Day 0 block into the same note as last week's reset so Monday never starts from blank.
+
+## Slammed-week onboarding triage (when 2+ clients sign in 48 hours)
+
+Do not try to run the full Day 0–7 for every new client at once. That is how the whole list collapses.
+
+Run this triage instead:
+
+1. **Day 0 only for every new client** (15 minutes total).
+   - Welcome email sent
+   - Folder created
+   - Intake link + 3-day deadline
+   - Deposit amount + start date written in the note
+   - Scope sentence locked in the welcome
+
+2. **Calendar the Day 2 nudges** the same hour. One calendar event per client titled "Intake nudge — [Name]".
+
+3. **Park everything else** until the next Monday reset. At the reset, pick the one client who is closest to kickoff and run Days 1–4 for that one only. The others stay on Day 0 until their turn.
+
+4. **Phone triage note** (keep in Notes):
+
+```
+New clients this window:
+1) [Name] — Day 0 done — Day 2 calendar set — next action: ____
+2) [Name] — Day 0 done — Day 2 calendar set — next action: ____
+3) [Name] — Day 0 done — Day 2 calendar set — next action: ____
+```
+
+If a third client signs while you are still in triage, the answer is still Day 0 only. Full sequences resume on the next protected Monday reset.
 
 ## Phone-only Day 0 to Day 7 sequence (copy from Notes)
 
