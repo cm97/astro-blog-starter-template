@@ -1,0 +1,53 @@
+/* Start page theme. Light is the default; html[data-theme="dark"] is set before
+   first paint by ThemeInit.astro (localStorage "bf-theme", else the OS setting). */
+:root {
+	--sp-bg: #f3f5fb;
+	--sp-surface: #ffffff;
+	--sp-surface-2: #eef1fb;
+	--sp-fg: #0f1219;
+	--sp-muted: #4a5570;
+	--sp-border: #e1e6f0;
+	--sp-accent: #2337ff;
+	--sp-accent-ink: #2337ff;
+	--sp-accent-soft: rgba(35, 55, 255, 0.08);
+	--sp-shadow: 0 1px 2px rgba(15, 18, 40, 0.06), 0 6px 18px rgba(15, 18, 40, 0.06);
+	--sp-radius: 14px;
+	color-scheme: light;
+}
+html[data-theme="dark"] {
+	--sp-bg: #0d1020;
+	--sp-surface: #161a2e;
+	--sp-surface-2: #1e2340;
+	--sp-fg: #eef0f8;
+	--sp-muted: #a9b1c9;
+	--sp-border: #2a3050;
+	--sp-accent: #2f43ff;
+	--sp-accent-ink: #9aa6ff;
+	--sp-accent-soft: rgba(122, 138, 255, 0.14);
+	--sp-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 22px rgba(0, 0, 0, 0.35);
+	/* Site-wide variables used by the footer, opt-in and product card. */
+	--black: 238, 240, 248;
+	--gray: 160, 170, 198;
+	--gray-dark: 205, 210, 226;
+	--gray-light: 42, 48, 80;
+	--gray-gradient: #0d1020, #0d1020;
+	--accent-dark: #4b5cff;
+	color-scheme: dark;
+}
+html.sp body { background: var(--sp-bg); color: var(--sp-fg); }
+html.sp-ready body, html.sp-ready .sp-card, html.sp-ready .sp-chrome { transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease; }
+html.sp main { max-width: 1120px; width: 100%; padding: 0 14px 2em; box-sizing: border-box; }
+html.sp a { color: var(--sp-accent-ink); }
+html[data-theme="dark"] .email-optin, html[data-theme="dark"] .product-callout, html[data-theme="dark"] .outcome__card, html[data-theme="dark"] .hero-offer { background: var(--sp-surface) !important; color: var(--sp-fg); }
+html[data-theme="dark"] .email-optin input { background: var(--sp-surface-2); color: var(--sp-fg); border-color: var(--sp-border); }
+.sp-card { background: var(--sp-surface); border: 1px solid var(--sp-border); border-radius: var(--sp-radius); box-shadow: var(--sp-shadow); padding: 14px 16px; box-sizing: border-box; min-width: 0; }
+.sp-card h2, .sp-card h3 { margin: 0 0 0.35em; font-size: 1em; color: var(--sp-fg); line-height: 1.3; }
+.sp-label { font-size: 0.7em; font-weight: 700; letter-spacing: 0.09em; text-transform: uppercase; color: var(--sp-muted); margin: 0 0 0.45em; }
+.sp-small { font-size: 0.85em; color: var(--sp-muted); line-height: 1.45; margin: 0; }
+.sp-btn { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 0.45em 1.1em; border-radius: 999px; font-weight: 700; text-decoration: none; border: 0; cursor: pointer; font: inherit; font-weight: 700; box-sizing: border-box; }
+.sp-btn--primary { background: var(--sp-accent); color: #fff !important; }
+.sp-btn--primary:hover { background: #000d8a; }
+.sp-btn--ghost { background: transparent; color: var(--sp-accent-ink) !important; border: 2px solid var(--sp-accent-ink); }
+.sp-btn:focus-visible, .sp-card a:focus-visible, .sp-card button:focus-visible, .sp-card input:focus-visible { outline: 3px solid var(--sp-accent-ink); outline-offset: 2px; }
+.sp-sr { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+@media (prefers-reduced-motion: reduce) { html.sp-ready body, html.sp-ready .sp-card, .sp-tile { transition: none !important; } }

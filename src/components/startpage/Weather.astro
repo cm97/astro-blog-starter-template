@@ -1,0 +1,65 @@
+---
+/**
+ * Small weather card. Open-Meteo is free and needs no key. Starts on
+ * Millville, NJ; "Use my location" asks the browser once. Hidden if the
+ * forecast can't be loaded.
+ */
+import { getProduct } from "../../data/monetization";
+const reset = getProduct("weekly-reset-checklist")!;
+---
+<section class="sp-card sp-weather" data-weather hidden aria-label="Weather">
+	<p class="sp-label">Weather · <span data-weather-place>Millville, NJ</span></p>
+	<p class="sp-weather__now"><span data-weather-icon aria-hidden="true"></span> <span data-weather-temp></span> <span class="sp-small" data-weather-text></span></p>
+	<div class="sp-weather__row">
+		<button type="button" class="sp-weather__loc" data-weather-locate>Use my location</button>
+		<a class="sp-weather__link" href={reset.buyUrl ?? "/store"}>Plan the week with the {reset.title} · {reset.price}</a>
+	</div>
+</section>
+
+<script>
+	const card = document.querySelector<HTMLElement>("[data-weather]");
+	const CODES: [number, string, string][] = [
+		[0, "☀️", "Clear"], [2, "⛅", "Partly cloudy"], [3, "☁️", "Cloudy"], [48, "🌫️", "Fog"],
+		[57, "🌦️", "Drizzle"], [67, "🌧️", "Rain"], [77, "🌨️", "Snow"], [82, "🌧️", "Showers"],
+		[86, "🌨️", "Snow showers"], [99, "⛈️", "Thunderstorms"],
+	];
+	async function load(lat: number, lon: number, place: string) {
+		try {
+			const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat.toFixed(3)}&longitude=${lon.toFixed(3)}&current=temperature_2m,weather_code&temperature_unit=fahrenheit&timezone=auto`;
+			const ctrl = new AbortController();
+			const timer = setTimeout(() => ctrl.abort(), 5000);
+			const res = await fetch(url, { signal: ctrl.signal });
+			clearTimeout(timer);
+			if (!res.ok) throw new Error(String(res.status));
+			const data = await res.json();
+			const temp = data?.current?.temperature_2m;
+			const code = data?.current?.weather_code;
+			if (typeof temp !== "number" || !card) throw new Error("no data");
+			const [, icon, text] = CODES.find(([max]) => code <= max) ?? [0, "🌡️", ""];
+			card.querySelector("[data-weather-place]")!.textContent = place;
+			card.querySelector("[data-weather-icon]")!.textContent = icon;
+			card.querySelector("[data-weather-temp]")!.textContent = `${Math.round(temp)}°F`;
+			card.querySelector("[data-weather-text]")!.textContent = text;
+			card.hidden = false;
+		} catch {
+			if (card) card.hidden = true;
+		}
+	}
+	load(39.402, -75.039, "Millville, NJ");
+	card?.querySelector("[data-weather-locate]")?.addEventListener("click", (e) => {
+		const btn = e.currentTarget as HTMLButtonElement;
+		if (!navigator.geolocation) { btn.hidden = true; return; }
+		navigator.geolocation.getCurrentPosition(
+			(pos) => { btn.hidden = true; load(pos.coords.latitude, pos.coords.longitude, "Your location"); },
+			() => { btn.hidden = true; },
+			{ timeout: 8000, maximumAge: 3600000 },
+		);
+	});
+</script>
+
+<style>
+	.sp-weather__now { margin: 0 0 0.4em; font-size: 1.6em; font-weight: 800; color: var(--sp-fg); }
+	.sp-weather__row { display: flex; flex-wrap: wrap; gap: 4px 12px; align-items: center; }
+	.sp-weather__loc { min-height: 44px; background: none; border: 0; padding: 0; color: var(--sp-muted); text-decoration: underline; font: inherit; font-size: 0.85em; cursor: pointer; }
+	.sp-weather__link { font-size: 0.85em; font-weight: 700; display: inline-flex; min-height: 44px; align-items: center; }
+</style>
