@@ -72,3 +72,35 @@ export async function verifyStripeSignature(
 	const expected = await hmacSha256Hex(secret, `${timestamp}.${rawBody}`);
 	return signatures.some((signature) => timingSafeEqual(expected, signature));
 }
+
+/**
+ * Every Stripe signing secret the Worker should accept. Each Stripe webhook
+ * endpoint has its own whsec_, and Buzzyfly has two live endpoints pointing at
+ * this Worker (apex and www), so a single secret makes one of them fail
+ * (401) on every event. STRIPE_WEBHOOK_SECRET may hold several secrets
+ * separated by commas or whitespace; STRIPE_WEBHOOK_SECRET_WWW is also read.
+ */
+export function stripeWebhookSecrets(env: {
+	STRIPE_WEBHOOK_SECRET?: string;
+	STRIPE_WEBHOOK_SECRET_WWW?: string;
+}): string[] {
+	const all = [env.STRIPE_WEBHOOK_SECRET, env.STRIPE_WEBHOOK_SECRET_WWW]
+		.filter((value): value is string => typeof value === "string")
+		.flatMap((value) => value.split(/[\s,]+/))
+		.map((value) => value.trim())
+		.filter(Boolean);
+	return [...new Set(all)];
+}
+
+/** True when the Stripe-Signature header verifies against any of the secrets. */
+export async function verifyStripeSignatureAny(
+	rawBody: string,
+	signatureHeader: string | null,
+	secrets: string[],
+	toleranceSeconds = 300,
+): Promise<boolean> {
+	for (const secret of secrets) {
+		if (await verifyStripeSignature(rawBody, signatureHeader, secret, toleranceSeconds)) return true;
+	}
+	return false;
+}
