@@ -7,7 +7,7 @@ import Layout from '../layouts/BlogPost.astro';
 	description="How Buzzyfly collects, uses, and stores information when you buy a product or join the email list."
 	pubDate={new Date('September 16 2026')}
 >
-	<p>Last updated: November 4, 2026</p>
+	<p>Last updated: November 25, 2026</p>
 
 	<p>
 		Buzzyfly (buzzyfly.com) sells a web app and digital templates for running a client business. This page explains what we collect, why, and how to reach us. Contact: support@buzzyfly.com.
@@ -23,6 +23,7 @@ import Layout from '../layouts/BlogPost.astro';
 		<li>Where your visit came from: the campaign tag on the link (for example "reddit") or, if there is none, the name of the site that linked to us (for example "google.com"). It is kept in your browser for 30 days and saved with your signup or order, and counted in daily page-view totals, so we know which posts and ads work.</li>
 		<li>Questions you type into the help chat on /support. They are sent to an AI service to write the answer (Cloudflare Workers AI, or another AI provider if that one is unavailable). Don't type payment details or private client information there.</li>
 		<li>Emails you send to support@buzzyfly.com, and the IP address used when an access or download link is opened, to help stop shared or stolen links.</li>
+		<li>Your location, only if you press the weather button on the home page. Your browser asks first. The rounded coordinates go straight from your browser to Open-Meteo (open-meteo.com) to fetch the forecast. We don't receive or store them.</li>
 		<li>If you join Buzzyfly Jobs, your email and membership status from Stripe, and a sign-in cookie that keeps the job listings unlocked on your device.</li>
 	</ul>
 
@@ -51,6 +52,6 @@ import Layout from '../layouts/BlogPost.astro';
 
 	<h2>Cookies</h2>
 	<p>
-		The site uses cookies and similar tech for security, checkout, and basic analytics. You can block cookies in your browser; checkout may then fail.
+		The site uses cookies and similar tech for security, checkout, and basic analytics. The home page also keeps your light or dark theme choice and your to-do list in your browser's local storage. They stay on your device and are not sent to us. You can block cookies in your browser; checkout may then fail.
 	</p>
 </Layout>
