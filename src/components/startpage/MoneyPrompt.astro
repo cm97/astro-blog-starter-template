@@ -1,0 +1,50 @@
+---
+/**
+ * One money prompt a day. The list is fixed; the day (America/New_York) picks
+ * the entry, so everyone sees the same prompt on the same date. Each prompt
+ * points at the product that does that job.
+ */
+import { getProduct } from "../../data/monetization";
+
+const PROMPTS = [
+	{ text: "Who said \"maybe\" last week? Send one follow-up before lunch.", product: "follow-up-email-templates" },
+	{ text: "Is an invoice past due? Send a polite nudge today, not next week.", product: "follow-up-email-templates" },
+	{ text: "Pick one priority for this week and write it down before you open email.", product: "weekly-reset-checklist" },
+	{ text: "New client signed? Send the welcome email today, while they're excited.", product: "client-onboarding-kit" },
+	{ text: "A client asked for \"just one more thing\"? Reply with the scope and a price.", product: "buzzyfly-digital-system" },
+	{ text: "Check in with one client you finished work for last month.", product: "buzzyfly-digital-system" },
+	{ text: "Look at your rate. Does it still cover the hours you actually work?", product: "buzzyfly-digital-system" },
+].map((p) => {
+	const prod = getProduct(p.product)!;
+	return { text: p.text, title: prod.title, price: prod.price, href: prod.buyUrl ?? "/store" };
+});
+
+function dayIndex(d: Date) {
+	const ymd = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).format(d);
+	return Math.floor(Date.parse(`${ymd}T00:00:00Z`) / 86400000);
+}
+const today = PROMPTS[dayIndex(new Date()) % PROMPTS.length];
+---
+<section class="sp-card sp-prompt" aria-label="Today's money prompt">
+	<p class="sp-label">Today's money move</p>
+	<p class="sp-prompt__text" data-prompt-text>{today.text}</p>
+	<a class="sp-prompt__link" data-prompt-link href={today.href}>Do it faster with the {today.title} · {today.price} →</a>
+	<script type="application/json" data-prompt-list set:html={JSON.stringify(PROMPTS).replace(/</g, "\\u003c")} />
+</section>
+
+<script>
+	// Re-pick on the client so a cached page still shows today's prompt.
+	const list = JSON.parse(document.querySelector("[data-prompt-list]")?.textContent ?? "[]");
+	if (list.length) {
+		const ymd = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York", year: "numeric", month: "2-digit", day: "2-digit" }).format(new Date());
+		const p = list[Math.floor(Date.parse(`${ymd}T00:00:00Z`) / 86400000) % list.length];
+		const t = document.querySelector("[data-prompt-text]");
+		const a = document.querySelector<HTMLAnchorElement>("[data-prompt-link]");
+		if (t && a) { t.textContent = p.text; a.href = p.href; a.textContent = `Do it faster with the ${p.title} · ${p.price} →`; }
+	}
+</script>
+
+<style>
+	.sp-prompt__text { font-size: 1.05em; font-weight: 700; margin: 0 0 0.6em; line-height: 1.4; color: var(--sp-fg); }
+	.sp-prompt__link { font-weight: 700; font-size: 0.9em; display: inline-flex; min-height: 44px; align-items: center; }
+</style>

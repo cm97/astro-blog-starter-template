@@ -1,0 +1,65 @@
+---
+/** A to-do list saved in this browser only (localStorage). Nothing is sent anywhere. */
+import { getProduct } from "../../data/monetization";
+const reset = getProduct("weekly-reset-checklist")!;
+---
+<section class="sp-card sp-notes" id="notes" aria-labelledby="sp-notes-h">
+	<p class="sp-label">Scratchpad</p>
+	<h2 id="sp-notes-h">Today's checklist</h2>
+	<form class="sp-notes__add" data-notes-form>
+		<label class="sp-sr" for="sp-notes-in">Add a to-do</label>
+		<input id="sp-notes-in" type="text" maxlength="140" placeholder="Add a to-do, e.g. send Sam the proposal" autocomplete="off" />
+		<button type="submit" class="sp-btn sp-btn--primary">Add</button>
+	</form>
+	<ul class="sp-notes__list" data-notes-list></ul>
+	<p class="sp-small" data-notes-empty>Saved in this browser only. Nothing leaves your device.</p>
+	<p class="sp-small sp-notes__pitch">Want a list that rebuilds itself every Monday? <a href={reset.buyUrl ?? "/store"}>{reset.title} · {reset.price}</a>, or all apps in the <a href="#start-offer">Digital System</a>.</p>
+</section>
+
+<script>
+	const KEY = "bf-start-checklist";
+	type Item = { t: string; d: boolean };
+	const list = document.querySelector<HTMLUListElement>("[data-notes-list]")!;
+	const form = document.querySelector<HTMLFormElement>("[data-notes-form]")!;
+	const input = form.querySelector("input")!;
+	let items: Item[] = [];
+	try { items = JSON.parse(localStorage.getItem(KEY) ?? "[]").filter((i: Item) => typeof i?.t === "string").slice(0, 50); } catch {}
+	function save() { try { localStorage.setItem(KEY, JSON.stringify(items)); } catch {} }
+	function render() {
+		list.replaceChildren(...items.map((it, idx) => {
+			const li = document.createElement("li");
+			const label = document.createElement("label");
+			const box = document.createElement("input");
+			box.type = "checkbox"; box.checked = it.d;
+			box.addEventListener("change", () => { items[idx].d = box.checked; save(); render(); });
+			const span = document.createElement("span"); span.textContent = it.t;
+			label.append(box, span);
+			const del = document.createElement("button");
+			del.type = "button"; del.className = "sp-notes__del"; del.textContent = "×";
+			del.setAttribute("aria-label", `Remove ${it.t}`);
+			del.addEventListener("click", () => { items.splice(idx, 1); save(); render(); });
+			li.className = it.d ? "is-done" : "";
+			li.append(label, del);
+			return li;
+		}));
+	}
+	form.addEventListener("submit", (e) => {
+		e.preventDefault();
+		const t = input.value.trim();
+		if (!t || items.length >= 50) return;
+		items.push({ t, d: false }); input.value = ""; save(); render();
+	});
+	render();
+</script>
+
+<style>
+	.sp-notes__add { display: flex; gap: 8px; margin: 0.5em 0; }
+	.sp-notes__add input { flex: 1; min-width: 0; min-height: 44px; padding: 0 12px; border-radius: 10px; border: 1px solid var(--sp-border); background: var(--sp-surface-2); color: var(--sp-fg); font: inherit; font-size: 16px; }
+	.sp-notes__list { list-style: none; padding: 0; margin: 0 0 0.5em; }
+	.sp-notes__list :global(li) { display: flex; align-items: center; justify-content: space-between; gap: 8px; border-bottom: 1px solid var(--sp-border); }
+	.sp-notes__list :global(label) { display: flex; align-items: center; gap: 10px; min-height: 44px; flex: 1; min-width: 0; cursor: pointer; color: var(--sp-fg); overflow-wrap: anywhere; }
+	.sp-notes__list :global(input) { width: 20px; height: 20px; accent-color: var(--sp-accent); flex-shrink: 0; }
+	.sp-notes__list :global(li.is-done span) { text-decoration: line-through; color: var(--sp-muted); }
+	.sp-notes__list :global(.sp-notes__del) { width: 44px; height: 44px; border: 0; background: none; color: var(--sp-muted); font-size: 1.3em; cursor: pointer; }
+	.sp-notes__pitch { margin-top: 0.6em; }
+</style>
