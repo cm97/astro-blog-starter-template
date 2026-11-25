@@ -262,7 +262,7 @@ Waiting on client feedback and scared of sounding pushy? You're not nagging if e
 Calm, dated, and the timeline is theirs to own. Buzzyfly keeps every client's follow-ups on one Today list, with the emails already written. Try the free demo first, or get it for $49 once.
 https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=feedback-chase-no-nag
 
-### deposit-before-start | ready | facebook: professional portfolio
+### deposit-before-start | posted 2026-11-25, id 1115192551682116_122149095099356277 | facebook: professional portfolio
 Image: none
 The safest way to get paid is to be paid before you start. Take a deposit of 30 to 50% before any work. Use milestone payments on anything longer than 2 weeks. Send the invoice with a payment link and the due date in the email itself. For new clients, send previews first and the final files after the final payment.
 
