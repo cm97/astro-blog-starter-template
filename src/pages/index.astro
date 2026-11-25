@@ -55,7 +55,7 @@ const homeLd = JSON.stringify({
 	<head>
 		<BaseHead
 			title={`${brand}: Client Follow-Up and Onboarding App`}
-			description="Stop rebuilding your client process every week. A browser app that shows who to follow up with today, drafts the email and onboards new clients. $49."
+			description="A browser app that shows who to follow up with today and has the email ready. $49 one time, no subscription. Free demo, no sign-up."
 			alternates={HOME_ALTERNATES}
 		/>
 		<script type="application/ld+json" set:html={homeLd} />
@@ -101,6 +101,7 @@ const homeLd = JSON.stringify({
 			.sp-play { display: grid; gap: 12px; grid-template-columns: 1fr; margin: 18px 0; }
 			@media (min-width: 860px) { .sp-play { grid-template-columns: 1fr 1fr; align-items: start; } }
 			.sp-optin { margin: 18px 0; }
+			.sp-demo-line { font-size: 1.15em; font-weight: 800; margin: 0 0 0.7em; color: var(--sp-fg); line-height: 1.35; text-align: center; }
 			.sp-lang { display: flex; justify-content: center; gap: 0.6em; margin: 0; font-size: 0.85em; }
 			.sp-lang a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.4em; }
 			.pain h2, .outcome h2, .faq h2 { color: var(--sp-fg); }
@@ -126,9 +127,10 @@ const homeLd = JSON.stringify({
 			</div>
 
 			<div class="sp-optin">
+				<p class="sp-demo-line">Try the free demo: the real app with three sample clients. <a href="/demo/">Open it now, no sign-up</a>.</p>
 				<EmailOptin
-					title="Not ready to buy? Get the free 20-minute weekly reset."
-					description="The checklist that turns Monday from a scramble into a plan. Free. One email a week. Unsubscribe anytime."
+					title="Want the next free tool? Leave your email."
+					description="The 20-minute weekly reset checklist. Free. One email a week. Unsubscribe anytime."
 				/>
 			</div>
 
