@@ -1,0 +1,16 @@
+---
+/** Fixed bottom bar with exactly three buttons: Home, Store, Support. */
+---
+<nav class="sp-bottom" aria-label="Main" data-startpage-bottombar>
+	<a href="/" aria-current="page"><span aria-hidden="true">⌂</span>Home</a>
+	<a href="/store"><span aria-hidden="true">🛒</span>Store</a>
+	<a href="/support"><span aria-hidden="true">?</span>Support</a>
+</nav>
+<style>
+	.sp-bottom { position: fixed; left: 0; right: 0; bottom: 0; z-index: 50; display: grid; grid-template-columns: repeat(3, 1fr); background: var(--sp-surface); border-top: 1px solid var(--sp-border); padding-bottom: env(safe-area-inset-bottom); box-shadow: 0 -4px 16px rgba(15, 18, 40, 0.06); }
+	.sp-bottom a { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 56px; font-size: 0.78em; font-weight: 700; color: var(--sp-muted) !important; text-decoration: none; }
+	.sp-bottom a span { font-size: 1.25em; line-height: 1; }
+	.sp-bottom a[aria-current="page"] { color: var(--sp-accent-ink) !important; }
+	.sp-bottom a:focus-visible { outline: 3px solid var(--sp-accent-ink); outline-offset: -3px; }
+	@media (min-width: 900px) { .sp-bottom { left: 50%; right: auto; transform: translateX(-50%); width: 420px; bottom: 12px; border: 1px solid var(--sp-border); border-radius: 999px; overflow: hidden; } }
+</style>

@@ -1,0 +1,96 @@
+---
+/**
+ * App tiles. Top row: the three apps in the $49 Digital System, each with its
+ * own Payment Link from monetization.ts. Second row: the seven Apps Pro tools
+ * (src/apps-private), which sit behind the Apps Pro paywall, so each tile goes
+ * to /apps-pro where they are sold. Nothing here opens a paid app for free.
+ */
+import { getProduct } from "../../data/monetization";
+import { APPS_PRICE, APPS_BUY_URL } from "../../lib/appsAccess";
+
+interface Props { buyHref: string; price: string }
+const { buyHref, price } = Astro.props;
+
+const SYSTEM_APPS = [
+	{ id: "follow-up-email-templates", icon: "📨", blurb: "Who to follow up with today, with the email filled in." },
+	{ id: "client-onboarding-kit", icon: "🤝", blurb: "A 10-step plan for every new client, emails included." },
+	{ id: "weekly-reset-checklist", icon: "🗓️", blurb: "A guided 20-minute Monday reset and Friday close." },
+].map((a) => ({ ...a, p: getProduct(a.id)! }));
+
+const appsPrice = `$${APPS_PRICE.replace(/\.00$/, "")}`;
+const PRO_APPS = [
+	{ slug: "invoice-maker", icon: "🧾", name: "Invoice Maker", blurb: "Line items, tax and discount. Print or save as PDF." },
+	{ slug: "lead-followup-tracker", icon: "🎯", name: "Lead Follow-Up Tracker", blurb: "Every lead gets a next date. Overdue ones rise to the top." },
+	{ slug: "content-calendar", icon: "📅", name: "Content Calendar", blurb: "Plan posts across channels on one calendar." },
+	{ slug: "debt-payoff-planner", icon: "📉", name: "Debt Payoff Planner", blurb: "Payoff order, debt-free date and interest saved." },
+	{ slug: "hiring-scorecard", icon: "🧑‍💼", name: "Hiring Scorecard", blurb: "Score candidates on the same weighted criteria." },
+	{ slug: "csv-cleaner", icon: "🧹", name: "CSV Cleaner", blurb: "Trim, dedupe and fix casing in a spreadsheet export." },
+	{ slug: "compliance-deadline-tracker", icon: "⏰", name: "Compliance Deadline Tracker", blurb: "Tax, license and filing dates that roll forward." },
+];
+---
+<section class="sp-apps" id="apps" aria-labelledby="sp-apps-h">
+	<div class="sp-apps__head">
+		<h2 id="sp-apps-h">Apps</h2>
+		<p class="sp-small">Open in your browser. Works on phone. No download.</p>
+	</div>
+
+	<a class="sp-tile sp-tile--hero" href={buyHref}>
+		<span class="sp-tile__icon" aria-hidden="true">🐝</span>
+		<span class="sp-tile__body">
+			<span class="sp-tile__name">Buzzyfly Digital System</span>
+			<span class="sp-tile__blurb">All three apps below, plus the Today screen, proposals, pricing and scope replies.</span>
+		</span>
+		<span class="sp-tile__price">{price}</span>
+	</a>
+
+	<div class="sp-apps__grid">
+		{SYSTEM_APPS.map((a) => (
+			<a class="sp-tile" href={a.p.buyUrl ?? "/store"}>
+				<span class="sp-tile__icon" aria-hidden="true">{a.icon}</span>
+				<span class="sp-tile__body">
+					<span class="sp-tile__name">{a.p.title}</span>
+					<span class="sp-tile__blurb">{a.blurb}</span>
+				</span>
+				<span class="sp-tile__price">{a.p.price}</span>
+			</a>
+		))}
+	</div>
+
+	<div class="sp-apps__head sp-apps__head--pro">
+		<h3>Apps Pro · 7 small-business tools · {appsPrice} one-time</h3>
+		<p class="sp-small">Sold separately on the Apps Pro page. Your data stays in your own browser.</p>
+	</div>
+	<div class="sp-apps__grid sp-apps__grid--pro">
+		{PRO_APPS.map((a) => (
+			<a class="sp-tile sp-tile--pro" href={APPS_BUY_URL}>
+				<span class="sp-tile__icon" aria-hidden="true">{a.icon}</span>
+				<span class="sp-tile__body">
+					<span class="sp-tile__name">{a.name}</span>
+					<span class="sp-tile__blurb">{a.blurb}</span>
+				</span>
+			</a>
+		))}
+	</div>
+</section>
+
+<style>
+	.sp-apps { margin: 18px 0; }
+	.sp-apps__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 12px; margin: 0 0 10px; }
+	.sp-apps__head h2 { margin: 0; font-size: 1.3em; color: var(--sp-fg); }
+	.sp-apps__head h3 { margin: 0; font-size: 1em; color: var(--sp-fg); }
+	.sp-apps__head--pro { margin-top: 18px; }
+	.sp-apps__grid { display: grid; gap: 10px; grid-template-columns: 1fr; }
+	@media (min-width: 640px) { .sp-apps__grid { grid-template-columns: repeat(3, 1fr); } .sp-apps__grid--pro { grid-template-columns: repeat(2, 1fr); } }
+	@media (min-width: 960px) { .sp-apps__grid--pro { grid-template-columns: repeat(4, 1fr); } }
+	.sp-tile { display: flex; align-items: center; gap: 12px; min-height: 64px; padding: 12px 14px; border-radius: var(--sp-radius); background: var(--sp-surface); border: 1px solid var(--sp-border); box-shadow: var(--sp-shadow); color: var(--sp-fg) !important; text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; box-sizing: border-box; min-width: 0; }
+	.sp-tile:hover { transform: translateY(-2px); border-color: var(--sp-accent-ink); }
+	.sp-tile:active { transform: translateY(0); }
+	.sp-tile:focus-visible { outline: 3px solid var(--sp-accent-ink); outline-offset: 2px; }
+	.sp-tile--hero { margin-bottom: 10px; border: 2px solid var(--sp-accent); background: var(--sp-accent-soft); }
+	.sp-tile__icon { width: 42px; height: 42px; flex-shrink: 0; border-radius: 12px; background: var(--sp-surface-2); display: inline-flex; align-items: center; justify-content: center; font-size: 1.35em; }
+	.sp-tile__body { display: flex; flex-direction: column; min-width: 0; flex: 1; }
+	.sp-tile__name { font-weight: 800; font-size: 0.95em; line-height: 1.25; }
+	.sp-tile__blurb { font-size: 0.8em; color: var(--sp-muted); line-height: 1.35; }
+	.sp-tile__price { flex-shrink: 0; font-weight: 800; font-size: 0.85em; padding: 4px 10px; border-radius: 999px; background: var(--sp-accent); color: #fff; }
+	@media (prefers-reduced-motion: reduce) { .sp-tile { transition: none; } .sp-tile:hover { transform: none; } }
+</style>
