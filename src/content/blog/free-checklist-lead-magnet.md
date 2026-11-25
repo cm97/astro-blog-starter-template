@@ -33,7 +33,7 @@ Subject: Your 20-minute Monday reset
 > 4. Send the one email that has been sitting since last Thursday.
 > 5. Close the tab. The week is set.
 >
-> If the free checklist is useful, the full system that keeps the dates and the emails ready is here: https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00
+> If the free checklist is useful, the full version is here: [link to your paid offer]
 >
 > [Your name]
 
