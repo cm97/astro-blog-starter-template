@@ -7,13 +7,14 @@
 import { getProduct } from "../../data/monetization";
 
 const PROMPTS = [
-	{ text: "Who said \"maybe\" last week? Send one follow-up before lunch.", product: "follow-up-email-templates" },
-	{ text: "Is an invoice past due? Send a polite nudge today, not next week.", product: "follow-up-email-templates" },
-	{ text: "Pick one priority for this week and write it down before you open email.", product: "weekly-reset-checklist" },
-	{ text: "New client signed? Send the welcome email today, while they're excited.", product: "client-onboarding-kit" },
-	{ text: "A client asked for \"just one more thing\"? Reply with the scope and a price.", product: "buzzyfly-digital-system" },
-	{ text: "Check in with one client you finished work for last month.", product: "buzzyfly-digital-system" },
-	{ text: "Look at your rate. Does it still cover the hours you actually work?", product: "buzzyfly-digital-system" },
+	// Lines drawn from live /store, /overdue-invoice-email and /demo content (Enoch, Nov 25).
+	{ text: "Sent a proposal that went quiet? Day 3, 7 and 14 are the follow-up days. Send the next one today.", product: "follow-up-email-templates" },
+	{ text: "One lead hasn't heard from you in a while. Send a short follow-up today, before it gets awkward.", product: "follow-up-email-templates" },
+	{ text: "Take 20 minutes now: clear the list, pick one priority for the week, check on every client.", product: "weekly-reset-checklist" },
+	{ text: "Next client about to sign? Write out their first ten days now: welcome, intake, kickoff.", product: "client-onboarding-kit" },
+	{ text: "Unpaid invoice? A reminder at 1 day, 1 week and 2 weeks late keeps it polite. Send today's.", product: "follow-up-email-templates" },
+	{ text: "A client asking for \"just one more thing\" is coming. Decide your reply and your price before they ask.", product: "buzzyfly-digital-system" },
+	{ text: "Before you open your inbox, write down this week's #1 priority and the one email it needs.", product: "weekly-reset-checklist" },
 ].map((p) => {
 	const prod = getProduct(p.product)!;
 	return { text: p.text, title: prod.title, price: prod.price, href: prod.buyUrl ?? "/store" };

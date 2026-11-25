@@ -5,7 +5,7 @@ const reset = getProduct("weekly-reset-checklist")!;
 ---
 <section class="sp-card sp-notes" id="notes" aria-labelledby="sp-notes-h">
 	<p class="sp-label">Scratchpad</p>
-	<h2 id="sp-notes-h">Today's checklist</h2>
+	<h2 id="sp-notes-h">Scratchpad checklist</h2>
 	<form class="sp-notes__add" data-notes-form>
 		<label class="sp-sr" for="sp-notes-in">Add a to-do</label>
 		<input id="sp-notes-in" type="text" maxlength="140" placeholder="Add a to-do, e.g. send Sam the proposal" autocomplete="off" />
@@ -13,7 +13,7 @@ const reset = getProduct("weekly-reset-checklist")!;
 	</form>
 	<ul class="sp-notes__list" data-notes-list></ul>
 	<p class="sp-small" data-notes-empty>Saved in this browser only. Nothing leaves your device.</p>
-	<p class="sp-small sp-notes__pitch">Want a list that rebuilds itself every Monday? <a href={reset.buyUrl ?? "/store"}>{reset.title} · {reset.price}</a>, or all apps in the <a href="#start-offer">Digital System</a>.</p>
+	<p class="sp-small sp-notes__pitch">Want a weekly version? <a href={reset.buyUrl ?? "/store"}>{reset.title} — {reset.price}</a>, or all apps in the <a href="#start-offer">Digital System</a>.</p>
 </section>
 
 <script>

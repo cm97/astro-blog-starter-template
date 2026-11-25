@@ -19,13 +19,13 @@ const SYSTEM_APPS = [
 
 const appsPrice = `$${APPS_PRICE.replace(/\.00$/, "")}`;
 const PRO_APPS = [
-	{ slug: "invoice-maker", icon: "🧾", name: "Invoice Maker", blurb: "Line items, tax and discount. Print or save as PDF." },
-	{ slug: "lead-followup-tracker", icon: "🎯", name: "Lead Follow-Up Tracker", blurb: "Every lead gets a next date. Overdue ones rise to the top." },
-	{ slug: "content-calendar", icon: "📅", name: "Content Calendar", blurb: "Plan posts across channels on one calendar." },
-	{ slug: "debt-payoff-planner", icon: "📉", name: "Debt Payoff Planner", blurb: "Payoff order, debt-free date and interest saved." },
-	{ slug: "hiring-scorecard", icon: "🧑‍💼", name: "Hiring Scorecard", blurb: "Score candidates on the same weighted criteria." },
-	{ slug: "csv-cleaner", icon: "🧹", name: "CSV Cleaner", blurb: "Trim, dedupe and fix casing in a spreadsheet export." },
-	{ slug: "compliance-deadline-tracker", icon: "⏰", name: "Compliance Deadline Tracker", blurb: "Tax, license and filing dates that roll forward." },
+	{ slug: "invoice-maker", icon: "🧾", name: "Invoice Maker", blurb: "Preview: Line items, tax and discount, then print or save as PDF." },
+	{ slug: "lead-followup-tracker", icon: "🎯", name: "Lead Follow-Up Tracker", blurb: "Preview: Every lead gets a next follow-up date. Overdue ones rise to the top." },
+	{ slug: "content-calendar", icon: "📅", name: "Content Calendar", blurb: "Preview: Plan posts across channels on one calendar." },
+	{ slug: "debt-payoff-planner", icon: "📉", name: "Debt Payoff Planner", blurb: "Preview: See your payoff order, debt-free date and interest saved." },
+	{ slug: "hiring-scorecard", icon: "🧑‍💼", name: "Hiring Scorecard", blurb: "Preview: Score every candidate on the same weighted criteria." },
+	{ slug: "csv-cleaner", icon: "🧹", name: "CSV Cleaner", blurb: "Preview: Trim spaces, drop blank rows and duplicates, fix casing." },
+	{ slug: "compliance-deadline-tracker", icon: "⏰", name: "Compliance Deadline Tracker", blurb: "Preview: Track tax, license and filing deadlines. Recurring ones roll forward." },
 ];
 ---
 <section class="sp-apps" id="apps" aria-labelledby="sp-apps-h">
@@ -57,8 +57,8 @@ const PRO_APPS = [
 	</div>
 
 	<div class="sp-apps__head sp-apps__head--pro">
-		<h3>Apps Pro · 7 small-business tools · {appsPrice} one-time</h3>
-		<p class="sp-small">Sold separately on the Apps Pro page. Your data stays in your own browser.</p>
+		<h3>Apps Pro · {appsPrice} one-time</h3>
+		<p class="sp-small">Seven small-business apps, one {appsPrice} Apps Pro payment. Each opens in your browser after you pay.</p>
 	</div>
 	<div class="sp-apps__grid sp-apps__grid--pro">
 		{PRO_APPS.map((a) => (
