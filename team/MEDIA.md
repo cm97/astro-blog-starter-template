@@ -2,26 +2,29 @@
 
 Kept by the Media associate. Ready to use; nothing here has been sent, posted or uploaded.
 
-## YouTube channel: week of 2026-11-18
+## YouTube channel: week of 2026-11-25
 
 Channel: Fund Monetization (@fundmonetization).
 
-**Nothing new to upload this week.** All 12 team videos in
-`public/social/video/` are already Shorts (from `team/POSTS.md`): demo
-qfNEhxYFFTg, invoice vVbRrGDkiaM, scope dq1INZCsWio, onboarding VPX63WUhQtc,
-pricing bNXzQm63vDQ, reset JKZnDwCVd4U, forgot-recap 1QT3k0RDYRQ,
-close-the-loop _TU1x57QMnw, messy-onboarding k8KLRZUdo1U, chaotic-week
-ICKQ9a4AcjY, discount Jn-cW92ib-4, late-invoice 6drW5JjShVI. Don't upload
-any of these again. The Content Creator's next video goes up through the video
-poster as usual.
+17 team videos are already Shorts (see `team/POSTS.md` for IDs). New since
+11-18: retainer CkbLBt3KI1c, scope-creep 9boyV4fUq8U, check-in FJNoDefCKxM,
+kickoff fds9Eir5JgM, proposal-send qzT5BM5AEvc. Don't upload these again.
 
-**Why this week is about the existing Shorts:** ADVICE.md (11-16) shows all 4
-buy clicks of 11-09 to 11-16 came from `/demo`, each from a different YouTube
-video. YouTube to the free demo is the only path that has made clicks. So the
-job this week is to make every Short point at `/demo` first.
+### Upload this week: 1 Short
+`public/social/video/cartoon-30-day-checkin.mp4` is the only team video not on
+YouTube. The video poster tried on 11-24 and Zapier returned "429 Too Many
+Requests" twice, so nothing went up (it checked the uploads list after each).
+It stays `ready` in POSTS.md, so the next video-poster run retries. **If the
+owner uploads it by hand instead, mark it `posted` in POSTS.md the same day**
+so it doesn't go up twice.
 
-### Owner, 15 minutes in YouTube Studio
-1. On each of the 12 Shorts, **pin this comment**:
+- **Title (46):** Project done? Don't forget the 30-day check-in
+- **Description:** Project delivered, on to the next one. A month later you never asked how it went, and now it feels too late. The Buzzyfly Digital System puts a 30-day check-in on your Today list for every finished project, with the email already written: the client's name and project filled in. You copy it and send it from your own inbox. Try the free demo first, no sign-up: https://buzzyfly.com/demo?utm_source=youtube&utm_medium=social&utm_campaign=cartoon-30-day-checkin. Full app, $49 once, no subscription: https://www.buzzyfly.com/store
+- **Tags:** client check-in, freelance follow up, repeat clients, freelancer tips, client relationships
+- **Pinned comment:** Do you check in with clients after a project ends, or only when you need work? See the 30-day check-in in the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=youtube&utm_medium=comment
+
+### Still open from 11-18: owner, 15 minutes in YouTube Studio
+1. On each Short (17 now, 18 once the check-in video is up), **pin this comment**:
 
    > Want to see it with real sample clients first? Free demo, no sign-up, nothing saved: https://buzzyfly.com/demo?utm_source=youtube&utm_medium=comment
    > If it fits, it's $49 once at https://www.buzzyfly.com/store. No subscription. 30-day refund if you can't access the app or it isn't as described.
@@ -32,24 +35,100 @@ job this week is to make every Short point at `/demo` first.
    - **discount (Jn-cW92ib-4):** "Try the free demo first, no sign-up: https://buzzyfly.com/demo?utm_source=youtube&utm_medium=social&utm_campaign=demo-video-discount. Full app: https://www.buzzyfly.com/store". Tags: client discount, freelance pricing, keep your rate, scope, freelancer tips
    - **late-invoice (6drW5JjShVI):** "Try the free demo first, no sign-up: https://buzzyfly.com/demo?utm_source=youtube&utm_medium=social&utm_campaign=cartoon-late-invoice. Full app: https://www.buzzyfly.com/store". Tags: late invoice, invoice reminder, getting paid, freelancer tips, small business
    Keep the current titles. They are already under 70 characters.
-3. **One playlist:** "Freelance admin in 20 seconds", with all 12 Shorts, newest first. A
+3. **One playlist:** "Freelance admin in 20 seconds", with all the Shorts, newest first. A
    playlist gives a viewer who finishes one Short the next one, and it shows
    on the channel page.
 4. **Channel link:** `https://buzzyfly.com/demo?utm_source=youtube&utm_medium=channel`
    (it was `/store` in the 11-04 plan; switch to `/demo` per ADVICE.md).
 
-### Decision for the owner: channel name (still open since 11-04)
-All 12 Shorts on "Fund Monetization" are Buzzyfly videos, but the name reads like
-a finance channel and doesn't say Buzzyfly. A viewer who likes a Short can't
-find buzzyfly.com from the channel name.
+### Decision for the owner: channel name (open since 11-04)
+All 17 Shorts on "Fund Monetization" are Buzzyfly videos, but the name reads like
+a finance channel and doesn't say Buzzyfly.
 **Suggestion:** rename to **Buzzyfly** (handle like @buzzyflyapp if free).
 YouTube keeps the videos and subscribers when you rename. Handle changes are
 limited, so change it only once. Owner's call.
 
-## Pitches: ready to send, week of 2026-11-18
+## Pitches: ready to send, week of 2026-11-25
 
 Both are free to pitch. Send from support@buzzyfly.com (or your own address),
 never from a bot. Each email links the free demo, not the store.
+
+### P7. Creative Boom (opinion piece)
+- **Why it fits:** Creative Boom is an independent online magazine for the
+  creative industry, with a freelancing section of practical business advice.
+  Its "Get featured" page invites opinion pitches ("Pitch us your argument, not
+  your bio"). Designers, illustrators and copywriters are the freelancers who
+  lose track of follow-ups and late invoices.
+- **Angle (an argument, not an ad):** "Following up isn't pushy. Not following
+  up is how good leads go quiet." Why creatives avoid chasing, and a simple
+  rule: put the next follow-up date down the moment you send anything.
+- **Where to find the contact:** https://www.creativeboom.com/submit/ gives
+  insight@creativeboom.com for opinion pitches (and podcast@creativeboom.com
+  for podcast guests). They don't run press releases as written.
+  **Paid option exists:** the same page offers sponsored coverage, clearly
+  labelled as sponsored. This pitch doesn't use it. Any paid piece needs the
+  owner's yes and a budget.
+- **Email (under 150 words):**
+
+  Subject: Opinion pitch: following up isn't pushy
+
+  Hi,
+
+  My argument: most creatives don't lose work because the proposal was weak.
+  They lose it because they sent one follow-up, felt pushy, and stopped.
+
+  The piece would say that following up is part of the job. It would also say
+  that a good follow-up adds something new, so it reads as helpful rather than
+  needy. It ends with one habit readers can start today: write the next
+  follow-up date down the moment you send a proposal, an invoice or a recap.
+  It also gives three short follow-ups, word for word.
+
+  About 800 words, no product pitch in the body. I run Buzzyfly, a small
+  browser app for client follow-ups (free demo at buzzyfly.com/demo).
+
+  Would that work for Creative Boom?
+
+  Thanks,
+  [Owner name]
+
+### P8. The Small Business Radio Show (host Barry Moltz)
+- **Why it fits:** A long-running US small business show and podcast hosted by
+  Barry Moltz, who talks with guests about running and growing a small
+  business. Getting paid on time and keeping clients warm are everyday topics
+  for that audience.
+- **Angle (a story, not an ad):** "The follow-up gap." Small businesses do the
+  work, then lose money and repeat clients in the quiet after it: the invoice
+  nobody chases, the proposal nobody follows up, the finished client nobody
+  checks in with. A plain routine and the exact wording for each.
+- **Where to find the contact:** the show page is
+  https://barrymoltz.com/small-business-radio-show/. Use the contact route on
+  barrymoltz.com. Listen to one recent episode first so the email can name it.
+  Don't claim any audience size.
+- **Email (under 150 words):**
+
+  Subject: Guest idea: the follow-up gap that costs small businesses money
+
+  Hi Barry,
+
+  Many small businesses lose money after the work is done, not during it. The
+  invoice goes unchased for a week. The proposal goes quiet and nobody follows
+  up. The happy client never hears from them again.
+
+  I'd like to come on and talk through a simple routine for that gap. When to
+  chase a late invoice, and what to say on day 1, week 1 and week 2. How to
+  close the loop on a quiet proposal without sounding desperate. Why a 30-day
+  check-in after a project brings people back. Listeners get exact wording
+  they can use the same day.
+
+  I built a small browser app around this routine (Buzzyfly, free demo at
+  buzzyfly.com/demo), but the conversation doesn't need to be about it.
+
+  Would that fit the show?
+
+  Thanks,
+  [Owner name]
+
+## Earlier pitches (still ready, not sent)
 
 ### P5. Doing It For The Kids (DIFTK), run by Frankie Tortora
 - **Why it fits:** A community and podcast for freelance parents "trying to make
@@ -127,8 +206,6 @@ never from a bot. Each email links the free demo, not the store.
 
   Thanks,
   [Owner name]
-
-## Earlier pitches (still ready, not sent)
 
 ### P3. Small Business Currents (contributed article), editor Rieva Lesonsky
 - **Why it fits:** An online publication from GrowBiz Media for small business
@@ -290,6 +367,11 @@ never from a bot. Each email links the free demo, not the store.
 | P4 | 2026-11-11 | Marketing Mentor podcast (Ilise Benun) | Podcast | Follow-up is marketing too | No | Not sent |
 | P5 | 2026-11-18 | Doing It For The Kids (Frankie Tortora) | Community, podcast, blog | 20-minute admin reset for chaotic weeks | No (has a sponsor, not pitched) | Not sent |
 | P6 | 2026-11-18 | Leapers (Matthew Knight) | Article / Substack | Taking the dread out of chasing money | No | Not sent |
+| P7 | 2026-11-25 | Creative Boom | Opinion piece | Following up isn't pushy | No (sponsored coverage exists, not pitched) | Not sent |
+| P8 | 2026-11-25 | The Small Business Radio Show (Barry Moltz) | Radio show / podcast | The follow-up gap | No | Not sent |
+
+Checked and dropped on 2026-11-25: Freelance Heroes. Its domain
+(freelance-heroes.com) now serves an unrelated gambling site, so don't link to it.
 
 Owner: when you send one, change its status here (or tell the next run) with the date.
 Tip: in older pitches (P1 to P4), swap the "buzzyfly.com" sign-off for "free demo: buzzyfly.com/demo".
