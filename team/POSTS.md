@@ -445,3 +445,29 @@ The Buzzyfly Digital System puts a 30-day check-in on your Today list for every 
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=cartoon-30-day-checkin
 $49 once. Browser app. No subscription.
+
+### one-list-follow-ups | ready | facebook: professional portfolio
+Image: none
+Follow-ups get missed when they live in your head, your inbox and three apps. Put them in one list:
+
+One row per client: next step, next step date, money owed.
+Sort by date. The top rows are today's work.
+10 minutes every Monday to update it.
+
+That's the whole system. The hard part isn't the tool, it's looking at it every day.
+
+Buzzyfly is that list, already built: a Today screen that shows which follow-up, invoice reminder or onboarding step is due, with the email written. $49 once, works in your browser, no subscription.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=one-list-follow-ups
+
+### simple-invoice-setup | ready | facebook: professional portfolio
+Image: none
+Great at the work, lost when it comes to getting paid? The simplest setup that works:
+
+1. Invoices with a "Pay now" card button.
+2. Send the invoice the same day you finish the job.
+3. Due date and bank details on every invoice.
+4. Reminders at 1 day late, 1 week late, then a phone call at 2 weeks.
+5. One look a week at what's still unpaid.
+
+Our free reminder writer drafts the polite late-payment email for you in 30 seconds. No sign-up needed.
+https://buzzyfly.com/overdue-invoice-email?utm_source=facebook&utm_medium=social&utm_campaign=simple-invoice-setup

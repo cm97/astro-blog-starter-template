@@ -39,7 +39,10 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 | demo-video-retainer | YouTube Shorts | 2026-11-18 | ? | ? | ? |
 | cartoon-scope-creep | YouTube Shorts (#307) | 2026-11-19 | ? | ? | ? |
 | milestone-payments, first-freelance-setup | Facebook queue (POSTS.md, added 2026-11-20) | not posted yet | - | - | - |
-| Community replies R1 to R45 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
+| revision-limit-reply, rate-floor-free-tool, scope-reply-free-tool, feedback-chase-no-nag | Facebook: professional portfolio | 2026-11-20..24 | ? | ? | ? |
+| demo-video-checkin, demo-video-kickoff, demo-video-proposal-send | YouTube Shorts | 2026-11-20..22 | ? | ? | ? |
+| one-list-follow-ups, simple-invoice-setup | Facebook queue (POSTS.md, added 2026-11-25) | not posted yet | - | - | - |
+| Community replies R1 to R49 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
 | Whole site, ad check 2026-11-06 (LOG #215) | mostly direct | to 11-06 | 96 | 1 (first, direct to /) | 0 |
 | Whole site 11-03..04 (sales-b, LOG 2026-11-04) | 9 YouTube, rest direct | - | 38 views | 0 | 0 |
 | Demo videos (weekly check 2026-11-10) | YouTube Shorts, Instagram Reels, Facebook video | 2026-11-03 to 11-10 | site views 11-03..11-10: youtube 27, facebook 6, google 23, direct 61, other 9. YouTube views: proposal 3, invoice 0, scope 18, onboarding 4, pricing 7. Instagram insights: not available (permission) | 1 (direct) | 0 |
@@ -102,6 +105,10 @@ self-promotion rule in the sidebar, then post.** Reddit replies carry no link by
 | L43 | ~2026-11-17 (past week) | [r/AskContractors](https://www.reddit.com/r/AskContractors/comments/1xzp0v5/homeowner_has_only_paid_me_35_of_the_contract/) | "Homeowner has only paid me 35% of the contract after ..." | hot | R43 | draft, owner posts |
 | L44 | ~2026-11-17 (past week) | [r/graphic_design](https://www.reddit.com/r/graphic_design/comments/1xz3z8o/im_soon_to_be_a_first_time_freelancer_what_are/) | "I'm soon to be a first time freelancer – What are the most ... roughly 9 years of experience under my belt in NYC advertising agencies" | warm | R44 | draft, owner posts |
 | L45 | ~2026-11-15 (past week) | [r/PersonalFinanceZA](https://www.reddit.com/r/PersonalFinanceZA/comments/1xxamap/recommendations_for_simple_free_business_admin/) | "Recommendations for simple, free business admin ... keep track of what's been received, sent, paid, and properly filed" | warm | R45 | draft, owner posts |
+| L46 | ~2026-11-18 (past week) | [r/Notion](https://www.reddit.com/r/Notion/comments/1y0uw2y/freelancers_how_do_you_keep_track_of_clients/) | "Freelancers, how do you keep track of clients, projects, and payments without making things complicated?" | hot | R46 | draft, owner posts |
+| L47 | ~2026-11-23 (past week) | [r/indianstartups](https://www.reddit.com/r/indianstartups/comments/1y49z1d/service_founders_how_do_you_handle_scope_creep/) | "how do you handle scope creep without souring the client? ... I handle operations and close mandates at a small consulting firm" | hot | R47 | draft, owner posts |
+| L48 | ~2026-11-18 (past week) | [r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1y050ni/how_do_you_track_multiple_clients_retainers_and/) | "How do you currently track client hours, payments, retainers and monthly workload? I'm exploring..." (may be someone researching a tool) | warm | R48 | draft, owner posts |
+| L49 | ~2026-11-21 (past week) | [r/Invoice](https://www.reddit.com/r/Invoice/comments/1y2pedm/whats_the_simplest_way_to_send_invoices_accept/) | "What's the simplest way to send invoices, accept payments and track ... ask me how to organise customer payments and I'm suddenly out of my depth" | hot | R49 | draft, owner posts |
 
 ### Draft replies (team A, role 4, 2026-11-02)
 
@@ -417,6 +424,47 @@ Do a 15-minute session every Monday: mark what's been paid, chase what's overdue
 
 Best two to post first this round: **R44** (a ready buyer: new freelancer setting up systems) and **R43** (urgent and specific).
 
+### Draft replies, round 9 (team A, role 4, 2026-11-25)
+
+Found 2026-11-25 by web search limited to the past week (the 11-23 run was delivered 2 days late
+and is folded in). Same limits: titles and snippets only, the owner checks each thread and the
+sub's rules. No links on Reddit. Skipped: homeowner-side posts and Google redirect links with no
+traceable post URL.
+
+**R46 (L46, keeping track of clients, projects and payments without overcomplicating it).**
+The version that stays simple is one list, not a system of linked databases:
+- One row per client: name, current project, next step, next step date, money owed and when it's due.
+- Sort by next step date. The top rows are today's work: the follow-up to send, the invoice to chase, the file to ask for.
+- Conversations stay in your email. Just paste the link in the row if you need it.
+- 10 minutes every Monday: update dates, mark what's paid, and pick the week's #1.
+In Notion, that's one database with a date property and a "Today" view filtered to "next step date ≤ today". Resist adding more until you've used it for a month.
+
+**R47 (L47, scope creep without souring the client, small consulting firm).**
+What keeps it friendly is that the answer is predictable and never a no:
+1. Thank them and say yes to the idea: "Good idea, happy to help with that."
+2. Name it plainly: "It's outside the current mandate, so it would be [fee] and [timeline]."
+3. Offer a choice: "Or we can swap it for [item not yet started]. Which would you prefer?"
+4. Send a one-line change note when they choose, so it's in writing.
+Doing it within a day of the ask matters more than the wording. If you wait, it quietly becomes in scope. And keep a running list of every extra ask per client, so the next renewal conversation has facts in it.
+
+**R48 (L48, tracking client hours, retainers and workload).**
+For retainers, the thing to track is hours used against hours bought, per client, per month:
+- One sheet per month: client, retainer hours, hours used (a running total from your time tracker), remaining, and a note when you hit 80%.
+- At 80%, send a heads-up: "We've used 16 of 20 hours this month. Anything else this month would be at [rate], or we roll it to next month. Which works?"
+- Invoice the retainer on the same day each month, in advance, with any extra hours from last month as a separate line.
+The 80% email prevents most retainer arguments, because nobody is surprised at month end.
+
+**R49 (L49, simplest way to invoice, take payments and track them, trades business).**
+Simplest setup that works for a service business:
+1. Use a free invoicing tool with card payments built in (Stripe Invoicing, Square, or your accounting software's invoices), so every invoice has a "Pay now" button.
+2. Invoice on the day of the job, from your phone if you can. Same-day invoices get paid faster.
+3. Put the due date (7 or 14 days) and your bank details on every invoice as a backup.
+4. Reminders: 1 day late, 1 week late, then a call at 2 weeks. Most tools can send the first two automatically.
+5. Once a week, look at one list: what's unpaid, and how late.
+That's it. Fancy features don't matter until those five are a habit.
+
+Best two to post first this round: **R49** (exactly our buyer: a small service owner who says they're "out of my depth" with payments) and **R47** (scope creep at a consulting firm).
+
 ### Lead research and outreach (roles 5 and 6)
 
 No businesses added this run. The searches found only vendor blogs and courses, not small
@@ -458,6 +506,10 @@ No business page stating the problem. No cold notes drafted.
 
 **2026-11-20:** 0 businesses added. Searches turned up questions (above) and tool launches only.
 No cold notes drafted.
+
+**2026-11-25:** 0 businesses added. Questions answered above. Also seen: lead-finder sites
+(ThreadLeads, Distrarc) listing the same Reddit questions as "buyers for your tool", so other
+sellers are reaching these threads too. Answer fast and helpfully, or not at all.
 
 ## Partners
 
@@ -704,6 +756,13 @@ Buyer doubts about Buzzyfly to answer on /store (for the Web builders): "Is it a
 - "I'm about to go freelance. What do I set up first?" Post idea: first-freelance-setup (POSTS.md). This is the most natural buyer moment we've seen: someone setting up their systems from scratch.
 - "I want something simple and free." FAQ: be honest that a spreadsheet works. Our pitch is for people who already have one and still forget to look at it, so the Today list does the looking.
 - Search note: fresh "help me" posts were scarce this week. Most matches were tool launches (Paylark again). Future runs: also try r/smallbusinessuk, r/sweatystartup, r/Contractor and r/AskContractors, where the questions are still real.
+
+### Added 2026-11-25 (from L46 to L49)
+- "How do I keep track without making it complicated?" FAQ for /store: one list, sorted by next step date. That's the Today screen, without building it yourself in Notion.
+- "Scope creep without souring the client." Already covered by the queue's scope posts. The new angle is to answer within a day.
+- "Retainer hours keep running over." Post idea: the 80% heads-up email.
+- "What's the simplest way to invoice and get paid?" Post idea: simple-invoice-setup (POSTS.md).
+- Competition note: lead-finder services now list these same Reddit threads to tool sellers. Replies that are fast, complete and link-free will stand out from the pitches.
 
 ## Ready ad set (role 9, waiting for the owner's yes and daily budget)
 
