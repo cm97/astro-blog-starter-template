@@ -1,5 +1,6 @@
 import { BUZZYFLY_CONFIG } from "../data/monetization";
 import { issueStoredDownloadToken } from "./fulfillment";
+import { isOrderRevoked } from "./stripeRevocation";
 
 /**
  * Access control for the Buzzyfly web apps: the $49 Digital System at /app
@@ -93,6 +94,8 @@ export async function appKeyForOrder(
 	order: { orderId: string; itemId?: string | null; customerEmail?: string | null },
 ): Promise<string | null> {
 	if (!env.DB) return null;
+	// Refunded or disputed: never hand out a key again (thank-you, resend, webhook retry).
+	if (await isOrderRevoked(env, order.orderId)) return null;
 	const itemId = isAppItem(order.itemId) ? order.itemId : APP_ITEM_ID;
 	const existing = await env.DB.prepare(
 		`SELECT token FROM download_tokens

@@ -10,6 +10,8 @@ export interface FulfillmentOrder {
 	/** Stripe subscription and customer ids, set when the checkout started a subscription. */
 	subscriptionId?: string | null;
 	customerId?: string | null;
+	/** Stripe PaymentIntent that paid for the session (one-time payments). Used to revoke on refund/dispute. */
+	paymentIntentId?: string | null;
 }
 
 /** Extracts the fields fulfillment needs from a verified Lemon Squeezy webhook payload. */
@@ -33,10 +35,20 @@ export function parseLemonSqueezyOrder(payload: any): FulfillmentOrder | null {
 
 /** Extracts the fields fulfillment needs from a verified Stripe webhook payload. */
 export function parseStripeOrder(payload: any): FulfillmentOrder | null {
-	if (payload?.type !== "checkout.session.completed") return null;
+	const type = payload?.type;
+	if (type !== "checkout.session.completed" && type !== "checkout.session.async_payment_succeeded") return null;
 
 	const session = payload?.data?.object;
 	const orderId = session?.id;
+
+	// A completed session is not always a paid one: delayed methods (bank
+	// debits, some wallets) complete as "unpaid" and settle later with
+	// checkout.session.async_payment_succeeded. Never unlock before the money is in.
+	const paymentStatus = session?.payment_status;
+	if (paymentStatus !== undefined && paymentStatus !== "paid" && paymentStatus !== "no_payment_required") {
+		console.log(`Buzzyfly fulfillment: Stripe session ${orderId} is ${paymentStatus}; waiting for payment before unlocking`);
+		return null;
+	}
 
 	// `metadata.item_id` is the only reliable source here. Stripe does NOT
 	// include `line_items` on a `checkout.session.completed` event unless the
@@ -67,6 +79,7 @@ export function parseStripeOrder(payload: any): FulfillmentOrder | null {
 		source: typeof session?.client_reference_id === "string" ? session.client_reference_id : null,
 		subscriptionId: typeof session?.subscription === "string" ? session.subscription : null,
 		customerId: typeof session?.customer === "string" ? session.customer : null,
+		paymentIntentId: typeof session?.payment_intent === "string" ? session.payment_intent : null,
 	};
 }
 
