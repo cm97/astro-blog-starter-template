@@ -1,0 +1,13 @@
+---
+/** Sets the saved or OS colour theme before first paint, so there is no flash. */
+---
+<script is:inline>
+	(function () {
+		var d = document.documentElement;
+		d.classList.add("sp");
+		var t = null;
+		try { t = localStorage.getItem("bf-theme"); } catch (e) {}
+		if (t !== "dark" && t !== "light") t = window.matchMedia && matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+		d.setAttribute("data-theme", t);
+	})();
+</script>

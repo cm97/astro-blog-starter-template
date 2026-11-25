@@ -1,9 +1,9 @@
 ---
-title: "Follow-Up Email After No Response: 5 Templates That Actually Get Replies"
+title: "Follow-Up Email After No Response: 5 Templates to Copy"
 seoTitle: "Follow-Up Email After No Response: 5 Templates"
 description: "Five ready-to-send follow-up emails for when a prospect or client goes quiet: proposals, check-ins, re-engagement, referral asks and project wrap-ups."
 pubDate: "Sep 13 2026"
-updatedDate: "Oct 16 2026"
+updatedDate: "Nov 20 2026"
 heroImage: "/blog-placeholder-3.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -35,8 +35,8 @@ Before the templates: a follow-up email that gets a reply does three things.
 Most people treat follow-up as a one-off email. That is why it fails. Run this instead:
 
 1. **Log the send date and channel.** Proposal sent Tuesday 10:14am via email. Write it down. If it only lives in your head, Thursday wipes it.
-2. **Set the first nudge for day 5–7.** Not day 2 (too soon) and not day 14 (they forgot you). Tuesday or Wednesday morning gets the highest reply rate.
-3. **Use the exact subject line below.** "Re: [Project name] proposal" outperforms "Just checking in" every time.
+2. **Set the first nudge for day 5–7.** Not day 2 (too soon) and not day 14 (they forgot you). A Tuesday or Wednesday morning is a good default.
+3. **Use the exact subject line below.** "Re: [Project name] proposal" tells them what it is about. "Just checking in" does not.
 4. **Ask one binary question.** Yes/no or "still interested / take it off my plate." Never "thoughts?"
 5. **Offer one concrete next step.** "Happy to adjust scope" or "I can send a shorter version" — not "let me know how I can help."
 6. **If no reply after the first nudge, send template 3 on day 21.** Same problem, different frame. Do not invent a new novel.
@@ -60,6 +60,7 @@ Day 5–7 nudge due: ________
 Bump due (3 days after the nudge): ________
 Break-up due (~day 14 from the proposal): ________
 Status: waiting / replied / closed
+Amount: $________
 ```
 
 Time box: 4 minutes after the proposal goes out. Do not wait for a calm afternoon. The calm afternoon is when delivery eats the follow-up.
@@ -96,7 +97,7 @@ Use when: You sent a proposal or quote and haven't heard back.
 
 Why it works: It's four sentences. It restates what it's about. It asks one question. It offers flexibility without being needy. The subject line starts with "Re:" — not because it's a reply, but because "Re:" in a subject line reads as a continuation of a conversation, which it is.
 
-**Send on a Tuesday or Wednesday morning.** Response rates on follow-up emails drop significantly on Fridays and Mondays.
+**Send on a Tuesday or Wednesday morning.** Friday and Monday inboxes are often at their fullest.
 
 Fill-in line before you send: "I am holding [start date] until [break-up date]." Add that only if you actually named a start date. A floating "let me know" gives them nothing to answer.
 
@@ -220,6 +221,27 @@ Job: confirm they saw it. Not a novel. Not a second pitch.
 
 Job: create a deadline without a fake countdown. This is the email people actually answer.
 
+## Exact 3-line replies when they answer the follow-up (phone-ready)
+
+When they reply, do not invent a new email. Copy one of these. Time box: 90 seconds.
+
+**They say yes / still interested:**
+> Got it. Invoice is attached. $[number] due [date]. Reply once paid and the welcome note goes out today with the intake link.
+
+**They say not now:**
+> Understood. I'll close the active file. Reply any time in [month they named] and I'll reopen it. No weekly notes until then.
+
+**They ask for a discount:**
+> Scope and start date stay the same. Price is $[number]. Reply yes and the welcome goes out today.
+
+**They want a call first:**
+> The proposal already has the scope and price. If something is blocking the decision, reply with the one question and I'll answer it here. Otherwise the start date is [date].
+
+**They go quiet again after saying yes:**
+> Invoice is still open. Due [date]. Reply paid or tell me the hold is over.
+
+Log the reply type on the same note the same minute. Then open the onboarding checklist if money lands.
+
 ## What you do with the reply
 
 - **Yes:** send the invoice the same day. Welcome note with the start date, the one thing you need from them, and the day they will hear from you next.
@@ -229,6 +251,36 @@ Job: create a deadline without a fake countdown. This is the email people actual
 - **No:** mark closed. Do not argue.
 
 If you cannot name the next date after a yes, you do not have a running client yet. You have a payment waiting on a process that still lives in your head. That is the onboarding checklist, not another follow-up.
+
+## Extra concrete steps that keep follow-ups alive
+
+- Log the exact dollar amount of the proposal on the same note the hour it leaves. Missing numbers become missing cash.
+- Cap open proposal rows at five. Anything past day 14 is closed or parked before you write the next three.
+- After any yes, open the onboarding checklist the same hour and put the new client on next Monday’s Still open.
+- Phone-only: dictate the template into Notes, fill the two blanks, paste, send, mark the log. The calendar hold still has to exist.
+- If three proposals go out the same day, run only the day-5 nudge for the first two. Park the third until the weekly reset.
+- Put a 48-hour reminder on the calendar the same minute the first nudge leaves. Unscheduled bumps die.
+- When a scope ask lands before they reply, park it with: “Got it. I’ll check what we locked and come back with two options.” Do not price it inside the follow-up window.
+- At Friday close, list any day 5–14 touches still open. Those become Monday priority 2.
+- Screenshot or copy the filled send log into the same note as last week’s reset so Monday never starts from blank.
+- Keep the five templates in the same folder as the onboarding checklist and the weekly reset. One open, all available.
+
+## Phone-only follow-up (8 minutes from your phone)
+
+1. Open Notes. Paste the fill-in block. Fill Name + Sent date + Day 5–7 due + Amount.
+2. Copy Template 1. Fill name + project + day. Send.
+3. Set a phone reminder for the bump date titled “Bump — 2 min”.
+4. Mark the log. Close the note.
+
+Do not open other apps until the three are done.
+
+## Day-0 cash lock (add these three before you close the laptop)
+
+1. Amount on the log: "$[number] proposal sent [date]".
+2. Holding date written: "Holding [start] until [break-up date]".
+3. Pre-written bump on calendar:
+
+> Hi [Name] — wanted to make sure the [project] proposal did not get buried. Still want to move forward, or should I take it off my list?
 
 ## What still breaks when the templates only live in your notes app
 

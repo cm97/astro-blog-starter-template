@@ -8,7 +8,10 @@
 
 	try {
 		const params = new URLSearchParams(location.search);
-		const utmSource = cleanSource(params.get("utm_source"));
+		// ?internal=1 marks team and owner browsers (see isInternalSource). It is a
+		// plain parameter because Firecrawl, which runs our site checks, strips
+		// every utm_* parameter before loading the page.
+		const utmSource = params.has("internal") ? "internal" : cleanSource(params.get("utm_source"));
 		if (utmSource) {
 			const parts = [utmSource, cleanSource(params.get("utm_medium")), cleanSource(params.get("utm_campaign"))];
 			const source = parts.map((p) => p ?? "").join("__").replace(/(__)+$/, "");

@@ -1,0 +1,216 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ProductCallout from "../components/ProductCallout.astro";
+
+// Free tool: writes a reply to an out-of-scope client request in the browser.
+// Nothing typed here is sent anywhere. No network calls.
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Scope Creep Reply Writer (Free) — Buzzyfly"
+			description="A client asked for extra work. Pick the situation and copy a polite reply that quotes it, swaps it or parks it. Free, no sign-up, nothing leaves your browser."
+		/>
+		<style>
+			main { width: 960px; }
+			.hero { text-align: center; padding: 1.5em 0 1em; }
+			.hero h1 { font-size: clamp(1.7em, 5vw, 2.5em); line-height: 1.15; margin: 0 0 0.35em; }
+			.hero p { color: rgb(var(--gray-dark)); max-width: 620px; margin: 0 auto; line-height: 1.6; }
+			.privacy { font-size: 0.85em; color: rgb(var(--gray)); margin-top: 0.6em; }
+			.tool { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 1.5em; margin: 1.5em 0 2.5em; }
+			@media (max-width: 760px) { .tool { grid-template-columns: 1fr; } }
+			.panel { border: 1px solid rgb(var(--gray-light)); border-radius: 14px; padding: 1.25em; background: #fff; }
+			.panel h2 { font-size: 1.1em; margin: 0 0 0.8em; }
+			.field { margin-bottom: 0.9em; }
+			.field label, .field legend { display: block; font-weight: 700; font-size: 0.9em; margin-bottom: 0.3em; padding: 0; }
+			.field .hint { font-weight: 400; color: rgb(var(--gray)); }
+			.field input, .field textarea {
+				width: 100%; box-sizing: border-box; min-height: 44px; padding: 0.55em 0.7em;
+				border: 1px solid rgb(var(--gray-light)); border-radius: 8px; font: inherit; background: #fff;
+			}
+			fieldset.field { border: 0; margin: 0 0 0.9em; padding: 0; min-width: 0; }
+			.field .choice { display: flex; gap: 0.6em; align-items: center; min-height: 44px; padding: 0.3em 0.7em; border: 1px solid rgb(var(--gray-light)); border-radius: 8px; margin-bottom: 0.4em; cursor: pointer; font-size: 0.95em; }
+			.field .choice input { width: 20px; height: 20px; min-height: 0; margin: 0; padding: 0; border: 0; flex: none; accent-color: var(--accent); }
+			.field .choice:has(input:checked) { border-color: var(--accent); background: rgba(35, 55, 255, 0.05); }
+			.row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.8em; }
+			@media (max-width: 420px) { .row { grid-template-columns: 1fr; } }
+			[hidden] { display: none !important; }
+			#out-body { min-height: 280px; line-height: 1.55; white-space: pre-wrap; }
+			.actions { display: flex; flex-wrap: wrap; gap: 0.6em; margin-top: 0.8em; }
+			.btn {
+				min-height: 44px; padding: 0.6em 1.1em; border-radius: 10px; font: inherit; font-weight: 700; cursor: pointer;
+				border: 1px solid rgb(var(--black)); background: rgb(var(--black)); color: #fff; text-decoration: none; display: inline-flex; align-items: center;
+			}
+			.btn.secondary { background: #fff; color: rgb(var(--black)); }
+			.btn:focus-visible, .choice:focus-within, input:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+			.status { min-height: 1.4em; font-size: 0.9em; color: rgb(var(--gray-dark)); }
+			.tips { font-size: 0.9em; color: rgb(var(--gray-dark)); line-height: 1.6; padding-left: 1.2em; }
+			.tips li { margin-bottom: 0.3em; }
+			.offer { max-width: 640px; margin: 0 auto 3em; text-align: center; }
+			.offer h2 { font-size: clamp(1.3em, 4.5vw, 1.7em); margin: 0 0 0.4em; }
+			.offer > p { color: rgb(var(--gray-dark)); line-height: 1.6; margin: 0 auto; }
+			.offer :global(.product-callout) { text-align: left; margin-top: 1.5em; }
+			.offer .demo-link { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; margin-top: 0.6em; }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="hero">
+				<h1>Say yes to the client, not to free work.</h1>
+				<p>A client asked for something that wasn't in the deal. Pick what you want to do about it. Copy a short, friendly reply that keeps the price and the deadline honest. Free. No sign-up.</p>
+				<p class="privacy">Nothing you type here leaves your browser.</p>
+			</section>
+
+			<section class="tool" aria-label="Scope creep reply writer">
+				<form class="panel" id="sc-form" autocomplete="off" onsubmit="return false">
+					<h2>1. The request</h2>
+					<div class="row">
+						<div class="field">
+							<label for="client">Client's first name</label>
+							<input id="client" placeholder="Sam" value="Sam" />
+						</div>
+						<div class="field">
+							<label for="me">Your name</label>
+							<input id="me" placeholder="Jordan" />
+						</div>
+					</div>
+					<div class="field">
+						<label for="project">The project</label>
+						<input id="project" placeholder="the website refresh" value="the website refresh" />
+					</div>
+					<div class="field">
+						<label for="ask">What they asked for</label>
+						<input id="ask" placeholder="a blog section" value="a blog section" />
+					</div>
+					<fieldset class="field">
+						<legend>What do you want to do?</legend>
+						<label class="choice"><input type="radio" name="move" value="quote" checked /> Quote it as extra work</label>
+						<label class="choice"><input type="radio" name="move" value="swap" /> Swap it for something already in scope</label>
+						<label class="choice"><input type="radio" name="move" value="later" /> Park it for after launch</label>
+						<label class="choice"><input type="radio" name="move" value="revisions" /> The revision rounds are used up</label>
+					</fieldset>
+					<div class="row" id="price-row">
+						<div class="field">
+							<label for="price">Price <span class="hint">(optional)</span></label>
+							<input id="price" inputmode="decimal" placeholder="$400" />
+						</div>
+						<div class="field" id="time-field">
+							<label for="time">Extra time <span class="hint">(optional)</span></label>
+							<input id="time" placeholder="3 days" />
+						</div>
+					</div>
+					<div class="field" id="swap-field" hidden>
+						<label for="swap">What would come out to make room</label>
+						<input id="swap" placeholder="the FAQ page" />
+					</div>
+					<div class="field" id="rounds-field" hidden>
+						<label for="rounds">Rounds of changes in the proposal</label>
+						<input id="rounds" inputmode="numeric" placeholder="2" value="2" />
+					</div>
+				</form>
+
+				<div class="panel" aria-live="polite">
+					<h2>2. Your reply</h2>
+					<div class="field">
+						<label for="out-subject">Subject</label>
+						<input id="out-subject" />
+					</div>
+					<div class="field">
+						<label for="out-body">Email <span class="hint">(edit anything before you send)</span></label>
+						<textarea id="out-body"></textarea>
+					</div>
+					<div class="actions">
+						<button class="btn" type="button" id="copy">Copy email</button>
+						<a class="btn secondary" id="mailto" href="mailto:">Open in my email app</a>
+					</div>
+					<p class="status" id="status" role="status"></p>
+					<ul class="tips">
+						<li>Reply the same day. The longer you wait, the more it sounds like a yes.</li>
+						<li>Don't start the extra work until they reply with an OK in writing.</li>
+						<li>Anything in [brackets] still needs your detail before you send.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="offer" aria-labelledby="offer-title">
+				<h2 id="offer-title">Have this ready for every client.</h2>
+				<p>The Buzzyfly Digital System keeps your clients and projects in one browser app. Its Scope guard emails cover an out-of-scope request, a change to confirm in writing, and used-up revisions, with the client's name and project filled in. You copy, send and mark it done. It also handles proposal follow-ups, late invoices and onboarding.</p>
+				<a class="demo-link" href="/demo">Try the free demo first, no sign-up →</a>
+				<ProductCallout productId="buzzyfly-digital-system" headingLevel="h3" />
+			</section>
+		</main>
+		<Footer />
+
+		<script>
+			const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
+			const textFields = ["client", "me", "project", "ask", "price", "time", "swap", "rounds"];
+
+			function move() {
+				return (document.querySelector('input[name="move"]:checked') as HTMLInputElement).value;
+			}
+
+			function build() {
+				const v = Object.fromEntries(textFields.map((f) => [f, $(f).value.trim()]));
+				const m = move();
+				$("swap-field").hidden = m !== "swap";
+				$("rounds-field").hidden = m !== "revisions";
+				$("price-row").hidden = m === "swap" || m === "later";
+
+				const name = v.client || "[Name]";
+				const me = v.me || "[Your name]";
+				const project = v.project || "[the project]";
+				const ask = v.ask || "[what they asked for]";
+				const price = v.price || "[price]";
+				const time = v.time || "[time]";
+				let subject = `Re: ${project}`;
+				let body: string;
+
+				if (m === "quote") {
+					body = `Hi ${name},\n\nHappy to help with ${ask}. It's outside what we agreed for ${project}, so I'll quote it separately.\n\nIt would be ${price} and add ${time} to the timeline. Want me to go ahead, or keep it for later?\n\n${me}`;
+				} else if (m === "swap") {
+					const swap = v.swap || "[something already in scope]";
+					body = `Hi ${name},\n\nGood idea. ${cap(ask)} isn't in the current scope for ${project}, but we can fit it in without changing the price or the date.\n\nTo make room, I'd take out ${swap}. Everything else stays the same.\n\nWant me to make that swap, or keep the plan as it is?\n\n${me}`;
+				} else if (m === "later") {
+					body = `Hi ${name},\n\nThanks for this. ${cap(ask)} is a good next step, and it's outside what we agreed for ${project}.\n\nSo we hit the date we agreed, I'll finish the current scope first. Once it's live, I'll send you a separate quote for ${ask}.\n\nDoes that work for you?\n\n${me}`;
+				} else {
+					const rounds = v.rounds || "[number]";
+					subject = `Re: ${project} revisions`;
+					body = `Hi ${name},\n\nThe proposal for ${project} includes ${rounds} round${rounds === "1" ? "" : "s"} of changes, and we've used them. I can do this round, including ${ask}, for ${price}. Or we can lock in the current version.\n\nWhich would you prefer?\n\n${me}`;
+				}
+
+				$("out-subject").value = subject;
+				$("out-body").value = body;
+				updateMailto();
+			}
+			function cap(s: string) {
+				return s.charAt(0).toUpperCase() + s.slice(1);
+			}
+			function updateMailto() {
+				($("mailto") as unknown as HTMLAnchorElement).href =
+					"mailto:?subject=" + encodeURIComponent($("out-subject").value) + "&body=" + encodeURIComponent($("out-body").value);
+			}
+
+			textFields.forEach((f) => $(f).addEventListener("input", build));
+			document.querySelectorAll('input[name="move"]').forEach((el) => el.addEventListener("change", build));
+			["out-subject", "out-body"].forEach((f) => $(f).addEventListener("input", updateMailto));
+
+			$("copy").addEventListener("click", async () => {
+				const text = "Subject: " + $("out-subject").value + "\n\n" + $("out-body").value;
+				try {
+					await navigator.clipboard.writeText(text);
+				} catch {
+					($("out-body") as unknown as HTMLTextAreaElement).select();
+					document.execCommand("copy");
+				}
+				$("status").textContent = "Copied. Paste it into your email and send it.";
+			});
+
+			build();
+		</script>
+	</body>
+</html>

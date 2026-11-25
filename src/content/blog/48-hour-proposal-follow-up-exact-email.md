@@ -3,6 +3,7 @@ title: "The Exact Email You Send 48 Hours After a Proposal Goes Quiet"
 seoTitle: "48-Hour Proposal Follow-Up Exact Email"
 description: "Paste-ready 48-hour follow-up when a proposal gets no reply. Stops the silent close from dying in your head."
 pubDate: 2026-11-04
+updatedDate: 2026-11-16
 category: follow-up
 heroImage: "/blog-placeholder-2.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
@@ -72,6 +73,33 @@ If you cannot name the next date after a yes, you do not have a running client y
 6. Cap open proposal rows at five. Anything past five days is closed or parked before you write the three weekly priorities.
 7. Never send after 3pm. Move those windows to the next morning.
 8. Screenshot the log or copy it into the same note as the weekly reset the same hour you send the proposal. Blank next action means the thread dies again.
+9. If the reply is "still thinking," mark a new 5-day hold and put the next 48-hour on the calendar. Do not invent a third version.
+10. Keep the exact subject line in the log so the next client does not require a rewrite.
+
+## Phone-only version (from your phone, under 5 minutes)
+
+When you are not at a desk.
+
+1. Open the note with the proposal log. Find the 48-hour due.
+2. Paste this into Messages or email:
+
+> Quick check — did the proposal land, or should I resend the link? Holding [start date] until [date]. One line is enough.
+
+3. Log the send time next to the name.
+4. Set a phone reminder for the next hold date or the weekly reset.
+5. Close the app. Done.
+
+Exact short reply if they answer with a question:
+
+> Scope stays [one line]. Price stays [number]. Start still [date] if you reply by [hold date].
+
+## Cash locks most people skip
+
+- Write the exact dollar amount and start date on the log the minute the proposal leaves. Missing numbers become missing cash later.
+- Pre-schedule the 48-hour the same minute the proposal is sent. If it is not on the calendar, it dies when the next message arrives.
+- If they pay, the same-day start line (welcome + intake + kickoff) must already exist. The 48-hour only works if the rest of the sequence is ready.
+- Cap free extra questions in the reply thread to one. Then restate the hold date and stop.
+- After any yes, the deposit request goes out the same hour. Delay past that and the close cools.
 
 ## What still breaks when the email only lives in your head
 

@@ -10,7 +10,7 @@
   <circle cx="320" cy="155" r="44" fill="rgba(0,0,0,0.5)"/>
   <polygon points="308,136 308,174 346,155" fill="white"/>
   <rect width="640" height="130" y="230" fill="url(#a)"/>
-  <text x="22" y="298" font-family="Arial,sans-serif" font-size="25" fill="#fff" font-weight="700">What's in the Zip</text>
-  <text x="22" y="328" font-family="Arial,sans-serif" font-size="15" fill="rgba(255,255,255,0.62)">Three folders. That's the whole product.</text>
+  <text x="22" y="298" font-family="Arial,sans-serif" font-size="25" fill="#fff" font-weight="700">Inside the $49 app</text>
+  <text x="22" y="328" font-family="Arial,sans-serif" font-size="15" fill="rgba(255,255,255,0.62)">Today, emails, Monday reset. Opens in your browser.</text>
   <text x="616" y="342" text-anchor="end" font-family="Arial,sans-serif" font-size="12" fill="#f4c27a" font-weight="700" letter-spacing="2">BUZZYFLY</text>
 </svg>

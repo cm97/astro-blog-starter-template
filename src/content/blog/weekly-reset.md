@@ -3,7 +3,7 @@ title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
 description: "A 20-minute weekly reset for solo operators. A Monday sheet, a Wednesday check and a 12-minute Thursday cash salvage that keep follow-ups alive."
 category: "planning"
 pubDate: "Sep 01 2026"
-updatedDate: "Oct 30 2026"
+updatedDate: "Nov 20 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -183,6 +183,32 @@ If the first client is not on the Monday sheet, the reset is still a personal pr
 - Cap follow-ups at two per reset. Five becomes a blast and the habit dies.
 - Log the invoice amount on the same note the day it leaves. Missing numbers become missing cash.
 - If three clients reply at once, park the non-cash ones. The reset only protects money and the next delivery date.
+- Phone-only version: open the same three lines in Notes app. Dictate the follow-up sentences. Send from the phone. Close the note. The calendar block still has to exist.
+- When the week is already late, run only Block 2 and Block 3. Three priorities and two follow-ups. Skip the full board clear.
+- After the two follow-ups leave, close email for 30 minutes. The reset is done; delivery starts.
+- At Friday close, write one number: open invoices older than 7 days. If it is not zero, that number becomes next Monday priority 3.
+- Screenshot the filled Monday sheet or keep it in the same note as last Friday's close so Monday never starts from a blank page.
+- Cap open proposal rows at five. Anything past Day 14 is closed or parked before you write the three.
+- If a client texts a new ask during the reset, log it as a scope line and finish the three first. Do not answer it inside the 20 minutes.
+- Before you start Block 1, open the last Friday close note. Copy any "Rolls to Monday" lines into this week's Still open so nothing disappears over the weekend.
+- Name the exact time the reset starts and ends on the calendar invite. "Sometime Monday" is how the block gets eaten by the first client text.
+- After Block 3, write the two follow-up names and the exact sentence you sent next to them. If the sentence is not written, it did not happen.
+- When a quiet proposal hits Day 14, move it off the Still open list into a "Parked" row with the close date. Do not keep it as live work.
+- On Wednesday, if one of the three priorities is still zero progress, replace it in the 5-minute check. Do not carry a dead priority into Thursday.
+- Log the total open invoice dollars on the Monday sheet. If that number is bigger than last week, priority 3 becomes "send one invoice reminder."
+- Keep a single Notes page titled "Reset log" and append the filled Monday sheet every week. Searchable history beats a new document every Monday.
+- If you miss the Monday window, run the 12-minute Thursday salvage the same day you notice. Do not wait for the next Monday.
+- After any yes from a follow-up, open the onboarding checklist the same hour and put the new client on next Monday's Still open.
+- Cap the parking line at three items. A fourth means you are running two businesses in your head. Kill or schedule one before the next reset.
+- Before Block 1, open the onboarding checklist for any client who paid in the last 7 days and confirm the day-7 hold still exists on the calendar. Missing holds become silence.
+- Write the exact Stripe or invoice ID next to any new payment on the Monday sheet. Support questions die without the number.
+- If a proposal follow-up is due inside the 20 minutes, send it before you write the three priorities. Cash first.
+- Cap the Still open list at eight lines. Anything past that gets parked or closed before you start Block 2.
+- After the reset, set a 90-minute delivery block on the calendar titled with the first priority. Unprotected delivery is how Thursday dies.
+- Phone-only extra: screenshot the filled sheet and text it to yourself with the label "Monday reset [date]". The photo is the backup when the note app dies.
+- When an invoice reminder is priority 3, paste the exact line from the follow-up templates before you leave the 20 minutes. Do not invent a new version.
+- If zero follow-ups are due, still send one past-client re-engagement line. Empty pipeline is how next month goes quiet.
+- Log one number at the bottom of the Monday sheet: proposals open longer than 10 days. If the number is higher than last week, that becomes the next reset's priority 2.
 
 ## Phrases so you do not draft from a blank screen
 

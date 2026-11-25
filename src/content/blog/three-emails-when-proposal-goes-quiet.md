@@ -123,12 +123,12 @@ Onboarding note started: yes / no
 11. If they reply with a price objection, restate the in-scope line and the price. Do not invent a discount in the reply.
 12. Log the reply time and the next action in the same block. The system is the log plus the three lines, not a new draft.
 
-## Timing windows that actually get replies
+## Timing windows
 
 - Day 3: Tuesday or Wednesday morning, before 11am.
 - Day 7: same, mid-week only.
 - Day 14: any weekday before 11am.
-- Never Friday. Never after 3pm. The reply rate drops and the thread dies over the weekend.
+- Never Friday. Never after 3pm. A late-Friday email tends to sit unread over the weekend.
 
 If a due date lands on Friday or Monday, move it to the nearest Tuesday or Wednesday morning. Do not skip the touch.
 

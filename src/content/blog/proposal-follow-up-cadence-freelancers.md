@@ -2,12 +2,13 @@
 title: "Proposal Follow-Up Cadence for Freelancers (Day 3, 7, 12)"
 description: "The exact Day 3, Day 7, and Day 12 follow-up freelancers send after a proposal gets no reply — close the deal or clear the pipeline."
 pubDate: "Oct 7 2026"
-updatedDate: "Oct 15 2026"
+updatedDate: 2026-11-19
 heroImage: "/blog-placeholder-2.jpg"
 category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. Includes the full follow-up cadence."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
+featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. Includes the full Day 3/7/12 cadence."
 ---
 
 A proposal with no reply is not a maybe. It is a job you have not closed and have not cleared. The money leaks in the gap between send and silence. You rewrite a new note every time, or you do nothing and keep the slot imaginary. Both kill the week.
@@ -135,6 +136,30 @@ Keep it to six lines so you can send it between other jobs.
 >
 > [Your name]
 
+## Extra concrete steps that keep the cadence alive on a slammed week
+
+Do these the same day the due note appears, even if delivery is on fire. Each one takes under 90 seconds.
+
+1. Open the log card first. If Day 3 / 7 / 12 is blank, the follow-up does not exist. Fill the date before you open email.
+2. Phone reminder fires → paste the exact template. Do not rewrite. Swap only the brackets.
+3. After send, write the exact time and “next if no reply: [Day X]” on the same card. Thursday cannot invent a different version.
+4. Cap open proposals at five. Anything past Day 12 is closed or parked before you write Monday’s three priorities.
+5. If the client replies with a question on Day 3 or 7, answer in one paragraph then re-paste the close date. Do not open a new thread.
+6. Yes reply → deposit or invoice the same hour. Welcome note uses the six-line template. Then open the onboarding checklist.
+7. Silence on Day 12 → send the close note, mark the row closed, remove it from the weekly reset. Silence is not a maybe.
+8. Put the three cadence blocks on the calendar the minute the proposal leaves. A date without a block is a wish.
+9. At the Monday reset, scan only the rows with a due date this week. Send what is due, close what is past Day 12. Do not rebuild the list.
+10. Screenshot or copy the filled log into the same note as last Friday’s close so Monday never starts from memory.
+
+Fill-in that protects cash:
+
+```
+Open proposals past Day 12: ________ (close or park)
+Due this week (Day 3/7/12): ________
+Sent today: ________ at ________
+Yes that still needs deposit: ________
+```
+
 ## What still breaks if this only lives in your head
 
 The three emails are short. The leak is the calendar. You forget Day 7 because a delivery fire ate the afternoon. You send a novel on Day 9 because guilt showed up. You leave five proposals open and tell yourself the month is full.
@@ -145,8 +170,6 @@ Run the cadence like a checklist, not a mood:
 2. One note per open proposal. Never two in the same day.
 3. No new proposal goes out until the tracker row exists.
 
-If you want the five ready-to-send notes only — proposal follow-up, mid-project check-in, quiet-lead poke, referral ask, wrap-up — that pack is $19.
-
-The full set is the $49 Digital System: the follow-up checklist, the onboarding checklist, and the 20-minute weekly reset in one browser app. One-time. Yours to keep. Not a subscription and not a coaching call. Opens in your browser after purchase. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+Proposal follow-ups on days 3, 7 and 14 sit inside the Buzzyfly Digital System, next to the onboarding checklist and the 20-minute weekly reset, so a slammed day still has the list to open. Save the Day 12 line above as your own email there. One-time $49. Opens in your browser. No download. No Excel. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

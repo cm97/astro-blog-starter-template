@@ -34,14 +34,14 @@ const productLd = JSON.stringify({
 	name: system.title,
 	description: system.description,
 	image: `${BUZZYFLY_CONFIG.siteUrl}/og-default.jpg`,
-	url: `${BUZZYFLY_CONFIG.siteUrl}/store`,
+	url: `${BUZZYFLY_CONFIG.siteUrl}/store/`,
 	brand: { '@type': 'Brand', name: BUZZYFLY_CONFIG.brandName },
 	offers: {
 		'@type': 'Offer',
 		price: system.price.replace(/[^0-9.]/g, ''),
 		priceCurrency: 'USD',
 		availability: 'https://schema.org/InStock',
-		url: `${BUZZYFLY_CONFIG.siteUrl}/store`,
+		url: `${BUZZYFLY_CONFIG.siteUrl}/store/`,
 		seller: { '@type': 'Organization', name: BUZZYFLY_CONFIG.brandName, url: BUZZYFLY_CONFIG.siteUrl },
 	},
 }).replace(/</g, '\\u003c');
@@ -63,7 +63,30 @@ const CONTENTS = [
 	{ folder: "Scope guard", items: "The exact words when a client asks for more than they paid for" },
 ];
 
-const FAQ = [
+// The first three answer the buyer doubts the Sales team keeps seeing in real
+// posts (team/SALES.md, 2026-11-04 to 2026-11-13).
+const FAQ: { q: string; a: string; link?: { href: string; label: string } }[] = [
+	{
+		q: "I already track clients in a spreadsheet. Why switch?",
+		a: "A spreadsheet holds the list. You still have to check every row, work out who is due today and write each email from scratch. The app keeps the same list, puts what's due today at the top, and has the email ready with the client's name and project filled in. You copy it, send it from your own inbox and mark it done.",
+	},
+	{
+		q: "Follow-up scripts are free online. Why pay $49?",
+		a: "The words aren't the hard part. Remembering to send them on the right day is. The app is not a template pack. It tracks each client and shows the proposal follow-ups on days 3, 7 and 14, the invoice reminders, the onboarding steps when they're due, and keeps the scope replies ready to copy. One payment of $49. No subscription.",
+	},
+	{
+		q: "Can I try it before I pay?",
+		a: "Yes. The free demo is the real app with three sample clients. No sign-up, and nothing you do in it is saved.",
+		link: { href: "/demo", label: "Open the free demo" },
+	},
+	{
+		q: "I already use a CRM or Notion. Why add this?",
+		a: "Those tools hold your records. They don't tell you who to email today. The app's Today list does: it shows which proposal follow-up, invoice reminder or onboarding step is due, with the email ready to copy. Keep your CRM for records and use this for the daily follow-ups.",
+	},
+	{
+		q: "Is my client data stored in the cloud?",
+		a: "No. Your clients, notes and dates are saved in your own browser, on your own device. The app doesn't send them to Buzzyfly. To use it on another device, download a backup file and restore it there. Clearing your browser data also clears the list, so keep a backup.",
+	},
 	{
 		q: "Which one should I buy?",
 		a: "The $49 Digital System. It is the browser web app: follow-ups, onboarding, weekly reset, proposals and pricing. Everything runs in the browser. No download.",
@@ -108,10 +131,13 @@ const FAQ = [
 			.store-eyebrow { margin: 0 0 0.8em; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
 			.store-hero h1 { font-size: clamp(1.8em, 6vw, 2.8em); line-height: 1.12; max-width: 15em; margin: 0 auto 0.5em; }
 			.store-lede { max-width: 32em; margin: 0 auto 1.6em; color: rgb(var(--gray-dark)); font-size: 1.05em; }
-			.store-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 72px; max-width: 100%; white-space: normal; text-align: center; padding: 1.2em 3.2em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.65em; text-decoration: none; box-shadow: 0 6px 18px rgba(35, 55, 255, 0.35); transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+			.store-shot { margin: 2em auto 0; max-width: 460px; }
+			.store-shot img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 750; border-radius: 12px; border: 1px solid rgb(var(--gray-light)); box-shadow: 0 8px 24px rgba(15, 18, 40, 0.08); }
+			@media (max-width: 720px) { .store-shot { max-width: 320px; margin-top: 1.6em; } }
+			.store-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 80px; max-width: 100%; white-space: normal; text-align: center; padding: 1.3em 3.4em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.8em; text-decoration: none; box-shadow: 0 6px 18px rgba(35, 55, 255, 0.35); transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
 			.store-cta:hover { background: var(--accent-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 13, 138, 0.4); }
 			.store-cta:active { transform: translateY(0); box-shadow: 0 3px 10px rgba(35, 55, 255, 0.35); }
-			@media (max-width: 720px) { .store-cta { padding: 1em 1.8em; font-size: 1.35em; } }
+			@media (max-width: 720px) { .store-cta { padding: 1.1em 1.9em; font-size: 1.45em; } }
 			.store-cta-note { max-width: 26em; margin: 0.7em auto 0; font-size: 0.85em; color: rgb(var(--gray-dark)); }
 			/* Phones: price, buy button and refund line all fit in the first screen. */
 			@media (max-width: 720px) {
@@ -120,8 +146,13 @@ const FAQ = [
 				.store-eyebrow { margin-bottom: 0.5em; font-size: 0.7em; letter-spacing: 0.04em; }
 				.store-hero h1 { font-size: 1.6em; margin-bottom: 0.4em; }
 				.store-lede { font-size: 0.98em; margin-bottom: 1em; }
-				.store-cta { min-height: 56px; padding: 0.7em 1.1em; font-size: 1.15em; }
+				.store-cta { min-height: 64px; padding: 0.8em 1.2em; font-size: 1.25em; }
 			}
+			.store-demo { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; max-width: 100%; box-sizing: border-box; padding: 0.55em 1.4em; margin: 0 0 0.9em; border: 2px solid var(--accent); border-radius: 999px; background: #fff; color: var(--accent); font-weight: 800; text-decoration: none; text-align: center; }
+			.store-demo:hover { background: rgba(35, 55, 255, 0.06); color: var(--accent-dark); }
+			.store-demo:focus-visible, .store-cta:focus-visible { outline: 3px solid var(--accent-dark); outline-offset: 3px; }
+			@media (max-width: 720px) { .store-demo { font-size: 0.95em; padding: 0.45em 1.2em; margin-bottom: 0.6em; } .store-hero .store-cta { min-height: 56px; font-size: 1.1em; padding: 0.6em 1em; } }
+			@media (max-width: 420px) { .demo-extra { display: none; } }
 			.store-secondary { display: inline-block; margin-top: 0.9em; font-size: 0.9em; padding: 0.6em 0.4em; }
 			.trust-row { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6em; padding: 0; margin: 1.5em 0 0; }
 			@media (max-width: 720px) { .trust-row { grid-template-columns: 1fr 1fr; } }
@@ -155,7 +186,7 @@ const FAQ = [
 	<body>
 		<Header />
 		<main>
-			<p class="lang-link"><a href="/es/store" hreflang="es" lang="es">Español</a></p>
+			<p class="lang-link"><a href="/es/store" hreflang="es" lang="es">Español</a><a href="/pt/store" hreflang="pt" lang="pt-BR">Português</a></p>
 			<section class="store-hero">
 				<p class="store-eyebrow">For coaches, consultants and solo service providers</p>
 				<h1>Run your client business from a browser app, not memory.</h1>
@@ -163,17 +194,22 @@ const FAQ = [
 					You lose hours rebuilding onboarding emails. Proposals go quiet and you never follow up.
 					Monday starts with a scramble. Open the app. See who needs you today and the email to send.
 				</p>
+				<!-- ADVICE 2026-11-16: all 4 buy clicks that week came from /demo, /store had 0 of 41, so the demo leads. -->
+				<a class="store-demo" href="/demo">Try the free demo first<span class="demo-extra">, no sign-up</span>&nbsp;→</a>
+				<br />
 				<a class="store-cta" href={systemOrder.href}>Get the Digital System — {system.price}</a>
 				<p class="store-cta-note">One-time payment. No subscription. {guaranteeShort}</p>
 				{systemOrder.live && <PayPalLink href={systemOrder.paypalHref} />}
-				<br />
-				<a class="store-secondary" href="/demo">Try the free demo first, no sign-up →</a>
 				<br />
 				<a class="store-secondary" href="#digital-system">See what's inside ↓</a>
 				<ul class="trust-row" aria-label="Why buying here is low risk">
 					{TRUST.map((t) => <li><span aria-hidden="true">{t.icon}</span>{t.label}</li>)}
 				</ul>
 			</section>
+
+			<figure class="store-shot">
+				<img src="/images/today-dashboard.jpg" srcset="/images/today-dashboard-640.jpg 640w, /images/today-dashboard-960.jpg 960w, /images/today-dashboard.jpg 1200w" sizes="(max-width: 340px) calc(100vw - 34px), (max-width: 799px) 322px, 462px" width="1200" height="750" loading="lazy" alt="The Buzzyfly Today list with example clients: two follow-ups due, a proposal and a week-overdue invoice, each with a Write the email button." decoding="async" />
+			</figure>
 
 			<div class="featured-wrap" id="digital-system">
 				<ProductCallout productId={system.id} description={systemDescription} featured headingLevel="h2" />
@@ -209,7 +245,7 @@ const FAQ = [
 				{FAQ.map((item) => (
 					<details>
 						<summary>{item.q}</summary>
-						<p>{item.a}</p>
+						<p>{item.a}{item.link && <> <a href={item.link.href}>{item.link.label} →</a></>}</p>
 					</details>
 				))}
 			</section>

@@ -2,11 +2,14 @@
 import BaseHead from "../components/BaseHead.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import { BUZZYFLY_CONFIG, getOrderAction } from "../data/monetization";
 
 // Free tool: writes an overdue-invoice reminder email in the browser.
 // Nothing typed here is sent anywhere. The only network call is the optional
 // early-access signup, tagged so the admin can count demand for the paid app.
 const WAITLIST_SOURCE = "invoice-tool__waitlist__free-generator";
+// The offer box buys straight from Stripe (the allowed $49 Payment Link).
+const systemOrder = getOrderAction("buzzyfly-digital-system");
 ---
 
 <!doctype html>
@@ -49,6 +52,9 @@ const WAITLIST_SOURCE = "invoice-tool__waitlist__free-generator";
 				border: 1px solid rgb(var(--black)); background: rgb(var(--black)); color: #fff; text-decoration: none; display: inline-flex; align-items: center;
 			}
 			.btn.secondary { background: #fff; color: rgb(var(--black)); }
+			.offer-actions { display: flex; flex-wrap: wrap; gap: 0.6em; justify-content: center; margin: 0 0 0.6em; }
+			.btn.buy { background: var(--accent); border-color: var(--accent); }
+			.btn.buy:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
 			.btn:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
 			.status { min-height: 1.4em; font-size: 0.9em; color: rgb(var(--gray-dark)); }
 			.tips { font-size: 0.9em; color: rgb(var(--gray-dark)); line-height: 1.6; }
@@ -143,14 +149,20 @@ const WAITLIST_SOURCE = "invoice-tool__waitlist__free-generator";
 
 			<section class="waitlist" aria-labelledby="wl-title">
 				<h2 id="wl-title">Chasing more than one invoice?</h2>
-				<p>We're building a simple app that keeps every unpaid invoice in one place, tells you who to chase today, and writes each reminder for you. Want early access when it opens?</p>
+				<p>The Buzzyfly Digital System shows which invoice is overdue on its Today list and has the reminder ready for 1 day, 1 week and 2 weeks late, with the client's name, project and amount filled in. $49 once, browser app, no subscription.</p>
+				<div class="offer-actions">
+					<a class="btn buy" href={systemOrder.href ?? "/store"}>Get it for $49, one time</a>
+					<a class="btn secondary" href="/demo">Try the free demo first</a>
+				</div>
+				<p class="fine">{BUZZYFLY_CONFIG.guaranteeShort} <a href="/store">What's included</a></p>
+				<p>Or get Buzzyfly's weekly email for freelancers:</p>
 				<form id="wl-form">
 					<label class="sr-only" for="wl-email">Email address</label>
 					<input id="wl-email" type="email" placeholder="you@example.com" autocomplete="email" required />
-					<button class="btn" type="submit">Get early access</button>
+					<button class="btn" type="submit">Get the weekly email</button>
 				</form>
 				<p class="status" id="wl-status" role="status"></p>
-				<p class="fine">You'll also get Buzzyfly's weekly email for freelancers. Unsubscribe anytime.</p>
+				<p class="fine">Unsubscribe anytime.</p>
 			</section>
 		</main>
 		<Footer />
@@ -254,7 +266,7 @@ const WAITLIST_SOURCE = "invoice-tool__waitlist__free-generator";
 						body: JSON.stringify({ email: $("wl-email").value, source: WAITLIST_SOURCE }),
 					});
 					if (!res.ok) throw new Error();
-					status.textContent = "You're on the list. We'll email you when it opens.";
+					status.textContent = "You're in. Check your inbox.";
 					$("wl-form").reset();
 				} catch {
 					status.textContent = "Something went wrong. Please try again.";

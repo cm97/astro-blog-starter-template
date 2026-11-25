@@ -82,12 +82,12 @@ After send: set status to closed or parked. Delete the remaining calendar blocks
 
 Keep the Re: even if it is a new thread. It reads as continuation of the yes.
 
-## Exact timing windows that raise reply rate
+## Exact timing windows
 
 - Day 2: Tuesday or Wednesday morning, before 11am.
 - Day 5: same, mid-week only.
 - Day 8: any weekday before 11am.
-- Never Friday. Never after 3pm. The reply rate drops and the thread dies over the weekend.
+- Never Friday. Never after 3pm. A late-Friday email tends to sit unread over the weekend.
 - If day 2 falls on a Friday, send Thursday instead. Do not slide it to Monday and lose the window.
 - If you miss the window, send the next morning before 11am. Do not wait for a “better” day.
 
@@ -136,6 +136,6 @@ Onboarding started: yes / no
 
 You can paste them today. They work until a slammed Thursday. Then the day-2 window passes, the log is empty, and the invoice sits in sent items until you notice the start date is tomorrow and you have no deposit.
 
-The same three lines, plus the onboarding checklist and the 20-minute Monday reset, live inside the Buzzyfly Digital System so the cadence still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The Buzzyfly Digital System puts "Confirm the deposit is paid" on the onboarding checklist for day 1, next to the 20-minute Monday reset. Save these three lines as your own emails in the app, so the cadence still runs when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)

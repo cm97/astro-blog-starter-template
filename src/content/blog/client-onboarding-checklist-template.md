@@ -2,12 +2,13 @@
 title: "Client Onboarding Checklist Template (Copy and Use Today)"
 description: "A client onboarding checklist template for coaches and consultants. Every step from signed contract to kickoff call, ready to run without memory."
 pubDate: "Sep 13 2026"
-updatedDate: "Oct 14 2026"
+updatedDate: "Nov 25 2026"
 heroImage: "/blog-placeholder-2.jpg"
 category: "onboarding"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
+featuredProductDescription: "Browser app with a 10-step onboarding plan (a day for every step), a Today list for due follow-ups, and the Monday reset so week one never dies when you are slammed. One-time."
 ---
 
 A new client signs. You feel good. Then thirty minutes later you're staring at a blank email wondering exactly what you're supposed to send first.
@@ -41,6 +42,10 @@ A checklist that works has three layers:
 Fill-in welcome line you can paste the hour payment clears:
 
 > Hi [Name] — payment received. We start [date]. I need [access or file] by [date]. I reply [window, e.g. weekdays before 4pm]. First thing you get is [deliverable] on [date]. Kickoff is [time]. Out of scope for this start: [one line].
+
+Phone-paste under 160 chars:
+
+> Hi [Name], payment in. Start [date]. Need [file] by [date]. Kickoff [time]. Reply window: weekdays before 4. Out of scope: [one line].
 
 ### Before the kickoff call
 
@@ -125,6 +130,81 @@ Day 6 line:
 - [ ] Send a brief check-in: "How are things feeling so far? Anything you need from me?"
 - [ ] Review progress against what you agreed on the kickoff call
 - [ ] Note any scope questions that have come up — address them explicitly rather than letting them drift
+
+Extra concrete steps that keep onboarding from dying on a slammed week:
+
+- Cap the welcome email at 8 lines. Longer versions get rewritten every time.
+- Put the Day 2 intake nudge on the calendar the hour payment clears. Unscheduled nudges die.
+- Keep the client note in the same folder as the weekly reset sheet. One open, both available.
+- After kickoff, write the next check-in date on the Monday sheet before you close the laptop.
+- If three new clients land the same week, run only Day 0 and Day 2 for each. Park the rest until the weekly reset.
+- Phone-only: dictate the welcome and the Day 2 nudge into Notes, paste, send, mark done. The calendar hold still has to exist.
+- Log the deposit amount and start date in the client note the same hour. Missing numbers become missing cash later.
+- When a scope ask lands before Day 7, park it with: "Got it. I'll check what we locked and come back with two options." Do not price it inside the onboarding window.
+- At Friday close, list any Day 0–7 touches still open. Those become Monday priority 2.
+- Screenshot or copy the filled Day 0 block into the same note as last week's reset so Monday never starts from blank.
+
+## Slammed-week onboarding triage (when 2+ clients sign in 48 hours)
+
+Do not try to run the full Day 0–7 for every new client at once. That is how the whole list collapses.
+
+Run this triage instead:
+
+1. **Day 0 only for every new client** (15 minutes total).
+   - Welcome email sent
+   - Folder created
+   - Intake link + 3-day deadline
+   - Deposit amount + start date written in the note
+   - Scope sentence locked in the welcome
+
+2. **Calendar the Day 2 nudges** the same hour. One calendar event per client titled "Intake nudge — [Name]".
+
+3. **Park everything else** until the next Monday reset. At the reset, pick the one client who is closest to kickoff and run Days 1–4 for that one only. The others stay on Day 0 until their turn.
+
+4. **Phone triage note** (keep in Notes):
+
+```
+New clients this window:
+1) [Name] — Day 0 done — Day 2 calendar set — next action: ____
+2) [Name] — Day 0 done — Day 2 calendar set — next action: ____
+3) [Name] — Day 0 done — Day 2 calendar set — next action: ____
+```
+
+If a third client signs while you are still in triage, the answer is still Day 0 only. Full sequences resume on the next protected Monday reset.
+
+## Phone-only Day 0 to Day 7 sequence (copy from Notes)
+
+When you are on the phone and cannot open a doc, run this exact order. Each line is under 160 characters so it pastes clean.
+
+Day 0: Hi [Name], payment in. Start [date]. Need [file] by [date]. Kickoff [time]. Reply window: weekdays before 4. Out of scope: [one line].
+
+Day 2: Still need the intake before kickoff. Link: [link]. Deadline stays [date].
+
+Day 4: Kickoff done. Goal: [outcome]. You own [item]. I own [item]. Next check-in [date]. Anything not listed is out of scope.
+
+Day 5: Quick status: [what moved]. Next piece due [date]. Anything blocked on your side?
+
+Day 7: Added you to the weekly check. Same day next week we confirm [deliverable] is on track.
+
+Mark each one sent in the client note the same hour. The Digital System app puts the due ones on Today so you do not hunt the note.
+
+## Day-0 cash lock (add these three before you close the laptop)
+
+1. Scope sentence in the welcome: "This start covers [exact deliverable]. Anything outside that is a separate quote."
+2. Amount on the client note: "$[number] paid in full on [date]" or "deposit $[amount], balance due [date]".
+3. Pre-written day-2 nudge on calendar:
+
+> Hi [Name] — still need the intake so kickoff is useful. Link again: [link]. Deadline stays [date]. Reply if something is blocking it.
+
+## Why the first week still dies even with this list
+
+The welcome gets rewritten. The Day 2 nudge never gets scheduled. The kickoff summary sits unsent because the next call started. By Friday the Day 7 retention add is forgotten and week two is silence.
+
+A static checklist still lives in a folder you forget to open. The $49 Digital System gives each new client a 10-step onboarding plan in a browser app, with a day for every step. It shows what is due today, fills the client name and project, and keeps the Monday reset next to it. You open Today, copy the draft, send from your own inbox, mark done.
+
+One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+
+[Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
 ---
 
@@ -211,4 +291,3 @@ The Digital System ($49) is that kit plus the weekly reset and the follow-up ema
 One-time. Yours to keep. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
-

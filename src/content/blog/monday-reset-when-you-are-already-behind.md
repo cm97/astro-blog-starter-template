@@ -2,11 +2,12 @@
 title: "The Monday Reset When You Are Already Behind"
 description: "A 20-minute Monday plan for the week that is already late — three priorities, client dates, and the two follow-ups that protect cash."
 pubDate: 2026-09-29
-updatedDate: 2026-10-28
+updatedDate: 2026-11-20
 category: systems
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
+featuredProductDescription: "Browser app with the 20-minute Monday reset, onboarding checklist, and exact follow-up lines so a slammed week still has a list that runs. One-time."
 ---
 
 Monday is not the problem. The first hour is.
@@ -182,6 +183,21 @@ Invoice or close-out sent: ________
 - Cap open proposal rows at five. Anything past Day 14 is closed or parked before you write the three.
 - If a client texts a new ask during the reset, do not answer it. Log it as a scope line and finish the three first.
 - After the two follow-ups leave, close the email tab for 30 minutes. The reset is done; delivery starts.
+- Pre-write the two follow-up lines in the calendar note the night before. The 8-minute block only needs a paste and send.
+- If three proposals hit the same aging window on Monday, send the two oldest before 11am. Park the third until Wednesday.
+- Write the exact dollar amount of every open invoice on the three-priority card. Missing numbers become missing cash.
+- After Friday close, move any still-open day-7+ proposals to a single "parked" note. One monthly scan is enough; they stop living in the Monday list.
+- When a paid yes lands mid-reset, stop the remaining steps, send the invoice, and open the onboarding Day 0 block the same hour.
+- Keep the three-priority fill-in, the client cards, and the follow-up lines in the same note as the weekly reset sheet. One open, all available.
+
+## Phone-only version (15 minutes)
+
+1. Open Notes. Paste the three-priority fill-in. Write the three lines and set phone reminders for each block.
+2. Scan paid clients only. Write next date or mark paused. Cap at five.
+3. Copy the two follow-up lines. Fill the blanks. Send. Log the time.
+4. Write tomorrow’s first move. Set one reminder. Close the note.
+
+Do not open other apps until the four steps are done.
 
 ## What still breaks if this only lives in your head
 

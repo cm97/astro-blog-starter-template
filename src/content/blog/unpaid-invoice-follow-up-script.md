@@ -64,11 +64,11 @@ Same window: before 11am, mid-week. Same subject: Re: Invoice [number or project
 
 Keep the Re: even if it is a new thread. It reads as continuation.
 
-## Exact timing windows that raise reply rate
+## Exact timing windows
 
 - Day 3: Tuesday or Wednesday morning, before 11am.
 - Day 7: same, mid-week only.
-- Never Friday. Never after 3pm. The reply rate drops and the thread dies over the weekend.
+- Never Friday. Never after 3pm. A late-Friday email tends to sit unread over the weekend.
 - If day 3 falls on a Friday, send Thursday instead. Do not slide it to Monday and lose the window.
 
 ## What you do when they reply

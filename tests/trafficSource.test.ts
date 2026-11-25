@@ -1,7 +1,7 @@
 // Guards where-did-they-come-from tracking. Run: npm run test:traffic
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { cleanSourceTriple, referrerSource } from "../src/lib/trafficSource";
+import { cleanSourceTriple, isInternalSource, referrerSource } from "../src/lib/trafficSource";
 
 test("search engines count as organic", () => {
 	assert.equal(referrerSource("https://www.google.com/"), "google__organic");
@@ -33,5 +33,14 @@ test("referrer sources survive the server-side clean-up unchanged", () => {
 	for (const r of ["https://www.google.com/", "https://old.reddit.com/", "https://www.indiehackers.com/"]) {
 		const s = referrerSource(r)!;
 		assert.equal(cleanSourceTriple(s), s);
+	}
+});
+
+test("team and owner visits tagged internal are recognised", () => {
+	assert.equal(isInternalSource("internal"), true);
+	assert.equal(isInternalSource("internal__check"), true);
+	assert.equal(isInternalSource(cleanSourceTriple("Internal")), true);
+	for (const s of ["google__organic", "direct", "", null, undefined, "internal-ish", "reddit__internal"]) {
+		assert.equal(isInternalSource(s), false, String(s));
 	}
 });

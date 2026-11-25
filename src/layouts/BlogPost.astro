@@ -7,6 +7,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 import ProductCallout from '../components/ProductCallout.astro';
 import EmailOptin from '../components/EmailOptin.astro';
 import { BUZZYFLY_CONFIG, getProduct } from '../data/monetization';
+import { canonicalPath } from '../lib/canonical';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	prev?: CollectionEntry<'blog'> | null;
@@ -46,7 +47,7 @@ const displayHero =
 
 // Article structured data so search engines show the post as an article.
 // `<` is escaped so a title can't close the script tag.
-const pageUrl = new URL(Astro.url.pathname, Astro.site).href;
+const pageUrl = new URL(canonicalPath(Astro.url.pathname), Astro.site).href;
 const articleLd = JSON.stringify({
 	'@context': 'https://schema.org',
 	'@type': 'BlogPosting',
@@ -87,10 +88,18 @@ const articleLd = JSON.stringify({
 			.nav-posts .dir { display: block; font-size: 0.75em; color: rgb(var(--gray)); font-weight: 400; margin-bottom: 0.2em; }
 			.related { margin: 2em 0; }
 			.related h3 { font-size: 1.2em; margin-bottom: 0.8em; }
-			.related ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.6em; }
-			.related a { color: rgb(var(--black)); text-decoration: none; font-weight: 600; display: inline-flex; align-items: center; min-height: 44px; }
+			/* Related reads as small cards: a plain title list was easy to skim
+			   past, so each next-read is now a tappable card that keeps the
+			   reader moving through posts toward the product callouts. */
+			.related ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.9em; }
+			.related li { display: flex; }
+			.related a { display: flex; flex-direction: column; gap: 0.3em; width: 100%; min-height: 44px; padding: 0.9em 1em; border: 1px solid rgb(var(--gray-light)); border-radius: 12px; background: #fff; color: rgb(var(--black)); text-decoration: none; transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease; }
+			.related a:hover { transform: translateY(-2px); box-shadow: var(--box-shadow); border-color: var(--accent); color: rgb(var(--black)); }
+			.related .r-tag { font-size: 0.68em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); }
+			.related .r-title { font-weight: 700; font-size: 0.98em; line-height: 1.3; }
+			.related .r-read { margin-top: auto; padding-top: 0.2em; font-size: 0.8em; font-weight: 700; color: var(--accent); }
 			.prose :global(p > a:only-child) { display: inline-flex; align-items: center; min-height: 44px; }
-			.related a:hover { color: var(--accent); }
+			@media (prefers-reduced-motion: reduce) { .related a { transition: none; } }
 			.sticky-cta { position: fixed; bottom: 0; left: 0; right: 0; background: #fff; border-top: 1px solid rgb(var(--gray-light)); box-shadow: 0 -4px 16px rgba(0,0,0,0.08); padding: 0.7em 1em; display: flex; align-items: center; justify-content: space-between; gap: 1em; z-index: 50; }
 			.sticky-cta .price { font-weight: 700; }
 			.sticky-cta a { display: inline-flex; align-items: center; min-height: 44px; padding: 0.4em 1.4em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 700; text-decoration: none; }
@@ -98,6 +107,12 @@ const articleLd = JSON.stringify({
 			@media (max-width: 720px) { .sticky-cta span:first-child { display: none; } }
 			body { padding-bottom: 72px; }
 			.store-link { text-align: center; font-size: 0.9em; color: rgb(var(--gray)); margin: -1.5em 0 2em; }
+			/* A quiet end-of-article mark: signals the essay is finished so the
+			   product offer below reads as a deliberate next step, not an ad
+			   bolted onto the last paragraph. */
+			.article-end { display: flex; justify-content: center; align-items: center; gap: 0.6em; margin: 2.75em 0 0.25em; }
+			.article-end span { width: 6px; height: 6px; border-radius: 50%; background: rgb(var(--gray-light)); }
+			.article-end span:nth-child(2) { background: var(--accent); }
 		</style>
 	</head>
 
@@ -125,6 +140,7 @@ const articleLd = JSON.stringify({
 						<hr />
 					</div>
 					<slot />
+					<div class="article-end" aria-hidden="true"><span></span><span></span><span></span></div>
 					<ProductCallout
 						productId={calloutProduct.id}
 						description={calloutProduct.title === featuredProductTitle ? featuredProductDescription : undefined}
@@ -149,7 +165,13 @@ const articleLd = JSON.stringify({
 								<h3>Related reads</h3>
 								<ul>
 									{related.map((r) => (
-										<li><a href={`/blog/${r.id}/`}>{r.data.title}</a></li>
+										<li>
+											<a href={`/blog/${r.id}/`}>
+												{r.data.category && <span class="r-tag">{r.data.category}</span>}
+												<span class="r-title">{r.data.title}</span>
+												<span class="r-read">Read →</span>
+											</a>
+										</li>
 									))}
 								</ul>
 							</section>

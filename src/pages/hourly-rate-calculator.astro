@@ -1,0 +1,165 @@
+---
+import BaseHead from "../components/BaseHead.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ProductCallout from "../components/ProductCallout.astro";
+
+// Free tool: works out the lowest hourly rate that covers a freelancer's
+// take-home goal and business costs. Same formula and starting numbers as the
+// Pricing screen in the Digital System app (src/scripts/buzzyApp.ts, renderPricing).
+// Nothing typed here is sent anywhere. No network calls.
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<BaseHead
+			title="Freelance Hourly Rate Calculator (Free) — Buzzyfly"
+			description="Find the lowest hourly rate that covers your take-home goal and business costs. Four numbers, one answer. Free, no sign-up, nothing leaves your browser."
+		/>
+		<style>
+			main { width: 960px; }
+			.hero { text-align: center; padding: 1.5em 0 1em; }
+			.hero h1 { font-size: clamp(1.7em, 5vw, 2.5em); line-height: 1.15; margin: 0 0 0.35em; }
+			.hero p { color: rgb(var(--gray-dark)); max-width: 620px; margin: 0 auto; line-height: 1.6; }
+			.privacy { font-size: 0.85em; color: rgb(var(--gray)); margin-top: 0.6em; }
+			.tool { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.5em; margin: 1.5em 0 2.5em; }
+			@media (max-width: 760px) { .tool { grid-template-columns: 1fr; } }
+			.panel { border: 1px solid rgb(var(--gray-light)); border-radius: 14px; padding: 1.25em; background: #fff; }
+			.panel h2 { font-size: 1.1em; margin: 0 0 0.8em; }
+			.field { margin-bottom: 0.9em; }
+			.field label { display: block; font-weight: 700; font-size: 0.9em; margin-bottom: 0.3em; }
+			.field .hint { font-weight: 400; color: rgb(var(--gray)); }
+			.field input {
+				width: 100%; box-sizing: border-box; min-height: 44px; padding: 0.55em 0.7em;
+				border: 1px solid rgb(var(--gray-light)); border-radius: 8px; font: inherit; background: #fff;
+			}
+			.field input:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+			.big { font-size: clamp(2.4em, 9vw, 3.4em); font-weight: 800; line-height: 1; margin: 0.1em 0 0.15em; color: rgb(var(--black)); }
+			.sub { color: rgb(var(--gray-dark)); margin: 0 0 1em; }
+			.lines { list-style: none; padding: 0; margin: 0 0 1em; border-top: 1px solid rgb(var(--gray-light)); }
+			.lines li { display: flex; justify-content: space-between; gap: 1em; padding: 0.6em 0; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.95em; }
+			.lines strong { white-space: nowrap; }
+			.gap { border-radius: 10px; padding: 0.8em 1em; font-size: 0.95em; line-height: 1.5; background: rgb(var(--gray-light)); }
+			.gap[data-tone="short"] { background: #fff1d6; color: #6b4600; }
+			.gap[data-tone="ok"] { background: #e3f5ea; color: #1d5c36; }
+			.tips { font-size: 0.9em; color: rgb(var(--gray-dark)); line-height: 1.6; padding-left: 1.2em; margin: 1em 0 0; }
+			.tips li { margin-bottom: 0.3em; }
+			.offer { max-width: 640px; margin: 0 auto 3em; text-align: center; }
+			.offer h2 { font-size: clamp(1.3em, 4.5vw, 1.7em); margin: 0 0 0.4em; }
+			.offer > p { color: rgb(var(--gray-dark)); line-height: 1.6; margin: 0 auto; }
+			.offer :global(.product-callout) { text-align: left; margin-top: 1.5em; }
+			.offer .demo-link { display: inline-flex; align-items: center; min-height: 44px; font-weight: 700; margin-top: 0.6em; }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<section class="hero">
+				<h1>Know the rate you can't go below.</h1>
+				<p>Put in what you want to take home, what the business costs, and how many hours you can really bill. Get the lowest hourly rate that covers it. Free. No sign-up.</p>
+				<p class="privacy">Nothing you type here leaves your browser.</p>
+			</section>
+
+			<section class="tool" aria-label="Hourly rate floor calculator">
+				<form class="panel" id="rate-form" autocomplete="off" onsubmit="return false">
+					<h2>1. Your numbers</h2>
+					<div class="field">
+						<label for="income">Yearly take-home goal ($)</label>
+						<input id="income" type="number" min="0" step="1000" inputmode="decimal" value="60000" />
+					</div>
+					<div class="field">
+						<label for="expenses">Yearly business costs ($) <span class="hint">(software, insurance, equipment, accountant)</span></label>
+						<input id="expenses" type="number" min="0" step="100" inputmode="decimal" value="6000" />
+					</div>
+					<div class="field">
+						<label for="weeks">Working weeks a year <span class="hint">(after holidays and sick days)</span></label>
+						<input id="weeks" type="number" min="1" max="52" step="1" inputmode="numeric" value="46" />
+					</div>
+					<div class="field">
+						<label for="hours">Billable hours a week <span class="hint">(client work only, not admin or sales)</span></label>
+						<input id="hours" type="number" min="1" max="80" step="1" inputmode="numeric" value="20" />
+					</div>
+					<div class="field">
+						<label for="current">Your current hourly rate ($) <span class="hint">(optional)</span></label>
+						<input id="current" type="number" min="0" step="5" inputmode="decimal" placeholder="60" />
+					</div>
+				</form>
+
+				<div class="panel" aria-live="polite">
+					<h2>2. Your hourly floor</h2>
+					<p class="big" id="floor">$72</p>
+					<p class="sub">The lowest rate that covers your goal and your costs.</p>
+					<ul class="lines">
+						<li><span>Billable hours a year</span><strong id="billable">920</strong></li>
+						<li><span>Needed each working week</span><strong id="weekly">$1,435</strong></li>
+						<li><span>Half-day (4 billable hours)</span><strong id="halfday">$288</strong></li>
+					</ul>
+					<p class="gap" id="gap" hidden></p>
+					<ul class="tips">
+						<li>This is a floor, not a price. Quote above it so a slow month or a late invoice doesn't sink the year.</li>
+						<li>Taxes are not included. Set your take-home goal before or after tax and stay consistent.</li>
+						<li>Use the hours you really billed last month, not the hours you worked.</li>
+					</ul>
+				</div>
+			</section>
+
+			<section class="offer" aria-labelledby="offer-title">
+				<h2 id="offer-title">Turn the floor into prices you can send.</h2>
+				<p>The Buzzyfly Digital System has this same calculator on its Pricing screen. It also turns your floor into a project price (with a buffer for surprises) and a monthly retainer, rounded up to the nearest $50. When a client asks for a discount, the reply that trades scope for price is ready to copy.</p>
+				<a class="demo-link" href="/demo">Try the free demo first, no sign-up →</a>
+				<ProductCallout productId="buzzyfly-digital-system" headingLevel="h3" />
+			</section>
+		</main>
+		<Footer />
+
+		<script>
+			const $ = (id: string) => document.getElementById(id) as HTMLInputElement;
+			const ids = ["income", "expenses", "weeks", "hours", "current"];
+			const money = (n: number) => "$" + Math.round(n).toLocaleString("en-US");
+			const num = (id: string) => {
+				const v = parseFloat($(id).value);
+				return Number.isFinite(v) && v > 0 ? v : 0;
+			};
+
+			function calc() {
+				const income = num("income");
+				const expenses = num("expenses");
+				const weeks = Math.min(52, num("weeks"));
+				const hours = num("hours");
+				if (!weeks || !hours) {
+					["floor", "billable", "weekly", "halfday"].forEach((id) => ($(id).textContent = "—"));
+					$("gap").hidden = true;
+					return;
+				}
+				const billable = weeks * hours;
+				const need = income + expenses;
+				const floor = Math.ceil(need / billable);
+
+				$("floor").textContent = money(floor);
+				$("billable").textContent = Math.round(weeks * hours).toLocaleString("en-US");
+				$("weekly").textContent = money(need / weeks);
+				$("halfday").textContent = money(floor * 4);
+
+				const gap = $("gap");
+				const current = num("current");
+				if (!current) {
+					gap.hidden = true;
+					return;
+				}
+				gap.hidden = false;
+				const diff = (current - need / billable) * billable;
+				if (diff < 0) {
+					gap.dataset.tone = "short";
+					gap.textContent = `At ${money(current)} an hour and ${Math.round(billable).toLocaleString("en-US")} billable hours, you'd be ${money(-diff)} a year short of your goal plus costs. Raise the rate by ${money(floor - current)} an hour, or bill more hours.`;
+				} else {
+					gap.dataset.tone = "ok";
+					gap.textContent = `At ${money(current)} an hour you're ${money(current - floor)} above your floor. That's ${money(diff)} a year of room for slow weeks, tax or savings.`;
+				}
+			}
+
+			ids.forEach((id) => $(id).addEventListener("input", calc));
+			calc();
+		</script>
+	</body>
+</html>

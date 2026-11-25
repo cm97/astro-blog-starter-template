@@ -1,7 +1,11 @@
 import { APPS_TOKEN_TTL_SECONDS, isAppsItem } from "../../lib/appsAccess";
 import { appKeyForOrder, appKeyUrl, isAppItem } from "../../lib/appAccess";
 import type { APIRoute } from "astro";
-import { verifyLemonSqueezySignature, verifyStripeSignature } from "../../lib/webhookSecurity";
+import {
+	stripeWebhookSecrets,
+	verifyLemonSqueezySignature,
+	verifyStripeSignatureAny,
+} from "../../lib/webhookSecurity";
 import {
 	createDownloadToken,
 	parseLemonSqueezyOrder,
@@ -20,6 +24,7 @@ import {
 	recordDropCheckout,
 	recordDropStatus,
 } from "../../lib/dropAccess";
+import { parseStripeRevocation, recordStripePayment, revokeStripeOrder } from "../../lib/stripeRevocation";
 
 // This endpoint must run on-demand (a Cloudflare Pages Function / Worker),
 // never be statically prerendered, since it verifies a live request signature.
@@ -43,20 +48,22 @@ export const POST: APIRoute = async ({ request, locals }) => {
 	let order: FulfillmentOrder | null = null;
 
 	if (stripeSignature) {
-		if (!env.STRIPE_WEBHOOK_SECRET) {
+		// Stripe has two live endpoints (buzzyfly.com and www.buzzyfly.com) and
+		// each signs with its own whsec_. Accept any configured secret so one
+		// endpoint doesn't 401 on every event (see stripeWebhookSecrets).
+		const secrets = stripeWebhookSecrets(env);
+		if (secrets.length === 0) {
 			console.error("Buzzyfly webhook: STRIPE_WEBHOOK_SECRET is not configured");
 			return new Response("Webhook not configured", { status: 500 });
 		}
-		const valid = await verifyStripeSignature(
-			rawBody,
-			stripeSignature,
-			env.STRIPE_WEBHOOK_SECRET,
-		);
+		const valid = await verifyStripeSignatureAny(rawBody, stripeSignature, secrets);
 		if (!valid) return new Response("Invalid signature", { status: 401 });
 
 		const payload = JSON.parse(rawBody);
 		const subscriptionEvent = parseStripeSubscriptionEvent(payload);
 		if (subscriptionEvent) return handleSubscriptionEvent(subscriptionEvent, env);
+		const revocation = parseStripeRevocation(payload);
+		if (revocation) return handleRevocation(revocation, env);
 		order = parseStripeOrder(payload);
 	} else if (lemonSqueezySignature) {
 		if (!env.LEMONSQUEEZY_WEBHOOK_SECRET) {
@@ -126,6 +133,15 @@ export const POST: APIRoute = async ({ request, locals }) => {
 					status: 200,
 					headers: { "content-type": "application/json" },
 				});
+			}
+			// Remember which PaymentIntent paid for this session so a later
+			// refund or dispute (which only names the charge) can close access.
+			if (order.provider === "stripe" && order.paymentIntentId) {
+				await recordStripePayment(env.DB, {
+					paymentIntentId: order.paymentIntentId,
+					orderId: order.orderId,
+					itemId: order.itemId,
+				}).catch((error) => console.error("Buzzyfly webhook: failed to record payment intent", error));
 			}
 			// Separate, best-effort: a missing source column must never lose the order record.
 			if (order.source) {
@@ -197,6 +213,32 @@ export const POST: APIRoute = async ({ request, locals }) => {
 		{ status: 200, headers: { "content-type": "application/json" } },
 	);
 };
+
+/**
+ * Full refund or new dispute: delete the order's access keys and mark it
+ * revoked. 500 on a D1 failure so Stripe retries the event.
+ */
+async function handleRevocation(
+	revocation: NonNullable<ReturnType<typeof parseStripeRevocation>>,
+	env: Env,
+): Promise<Response> {
+	try {
+		const result = await revokeStripeOrder(env, revocation);
+		if (!result.revoked) {
+			console.error(
+				`Buzzyfly webhook: ${revocation.reason} ${revocation.eventId ?? ""} (${revocation.paymentIntentId ?? revocation.chargeId ?? "no id"}) not revoked: ${result.reason}`,
+			);
+			return json({ received: true, revoked: false });
+		}
+		console.log(
+			`Buzzyfly webhook: ${revocation.reason} revoked order ${result.orderId} (${result.tokensDeleted} key(s) deleted)`,
+		);
+		return json({ received: true, revoked: true, orderId: result.orderId });
+	} catch (error) {
+		console.error(`Buzzyfly webhook: failed to revoke for ${revocation.reason} ${revocation.eventId ?? ""}`, error);
+		return new Response("Could not record revocation", { status: 500 });
+	}
+}
 
 function json(body: unknown): Response {
 	return new Response(JSON.stringify(body), { status: 200, headers: { "content-type": "application/json" } });
