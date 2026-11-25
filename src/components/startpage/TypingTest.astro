@@ -1,0 +1,79 @@
+---
+/** Type a real follow-up line, get your speed, then a soft pitch for the $49 System. */
+import PayPalLink from "../PayPalLink.astro";
+interface Props { buyHref: string; paypalHref: string | null; price: string }
+const { buyHref, paypalHref, price } = Astro.props;
+const LINES = [
+	"Hi Sam, just checking in on the proposal I sent last week. Happy to answer any questions.",
+	"Hi Alex, a quick reminder that invoice 104 was due on Friday. Could you take a look this week?",
+	"Welcome aboard, Jordan! Here is what happens in your first week and what I need from you.",
+];
+---
+<section class="sp-card sp-type" id="typing" aria-labelledby="sp-type-h">
+	<p class="sp-label">Mini game</p>
+	<h2 id="sp-type-h">How fast can you type a follow-up?</h2>
+	<p class="sp-small">Type the line below. The clock starts on your first key.</p>
+	<p class="sp-type__target" data-type-target aria-live="off">{LINES[0]}</p>
+	<label class="sp-sr" for="sp-type-in">Type the line above</label>
+	<textarea id="sp-type-in" data-type-input rows="3" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" placeholder="Start typing here…"></textarea>
+	<div class="sp-type__bar"><span data-type-stats class="sp-small">0 wpm · 100% accurate</span><button type="button" class="sp-type__again" data-type-reset>New line</button></div>
+	<div class="sp-type__done" data-type-done hidden>
+		<p class="sp-type__result" data-type-result role="status"></p>
+		<p class="sp-small">Now picture typing that for every client, every week. The Digital System fills in your follow-up, welcome and late-invoice emails with each client's details. You read it, copy it and send it.</p>
+		<div class="sp-type__cta">
+			<a class="sp-btn sp-btn--primary" href={buyHref}>Get the Digital System — {price}</a>
+			{paypalHref && <PayPalLink href={paypalHref} />}
+		</div>
+	</div>
+	<script type="application/json" data-type-lines set:html={JSON.stringify(LINES)} />
+</section>
+
+<script>
+	const lines: string[] = JSON.parse(document.querySelector("[data-type-lines]")?.textContent ?? "[]");
+	const target = document.querySelector<HTMLElement>("[data-type-target]")!;
+	const input = document.querySelector<HTMLTextAreaElement>("[data-type-input]")!;
+	const stats = document.querySelector<HTMLElement>("[data-type-stats]")!;
+	const done = document.querySelector<HTMLElement>("[data-type-done]")!;
+	const result = document.querySelector<HTMLElement>("[data-type-result]")!;
+	let line = 0, start = 0, typed = 0, wrong = 0, finished = false;
+	function reset(next: boolean) {
+		if (next) line = (line + 1) % lines.length;
+		target.textContent = lines[line];
+		input.value = ""; start = 0; typed = 0; wrong = 0; finished = false;
+		input.disabled = false; done.hidden = true;
+		stats.textContent = "0 wpm · 100% accurate";
+	}
+	input.addEventListener("input", (e) => {
+		if (finished) return;
+		const ev = e as InputEvent;
+		if (!start) start = performance.now();
+		if (ev.inputType?.startsWith("insert")) {
+			typed++;
+			const pos = input.value.length - 1;
+			if (input.value[pos] !== lines[line][pos]) wrong++;
+		}
+		const mins = Math.max((performance.now() - start) / 60000, 1 / 600);
+		const wpm = Math.round(input.value.length / 5 / mins);
+		const acc = typed ? Math.max(0, Math.round(((typed - wrong) / typed) * 100)) : 100;
+		stats.textContent = `${wpm} wpm · ${acc}% accurate`;
+		if (input.value === lines[line]) {
+			finished = true; input.disabled = true;
+			const secs = ((performance.now() - start) / 1000).toFixed(1);
+			result.textContent = `${wpm} words a minute, ${acc}% accurate, ${secs} seconds for one email line.`;
+			done.hidden = false;
+		}
+	});
+	document.querySelector("[data-type-reset]")?.addEventListener("click", () => reset(true));
+</script>
+
+<style>
+	.sp-type__target { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.92em; line-height: 1.5; background: var(--sp-surface-2); border-radius: 10px; padding: 10px 12px; margin: 0.6em 0; color: var(--sp-fg); }
+	.sp-type textarea { width: 100%; box-sizing: border-box; border-radius: 10px; border: 1px solid var(--sp-border); background: var(--sp-surface); color: var(--sp-fg); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 16px; padding: 10px 12px; resize: vertical; }
+	.sp-type textarea:focus { outline: none; border-color: var(--sp-accent-ink); box-shadow: 0 0 0 4px var(--sp-accent-soft); }
+	.sp-type__bar { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+	.sp-type__again { min-height: 44px; background: none; border: 0; color: var(--sp-accent-ink); font: inherit; font-weight: 700; cursor: pointer; }
+	.sp-type__done { margin-top: 0.6em; padding-top: 0.6em; border-top: 1px dashed var(--sp-border); }
+	.sp-type__result { font-weight: 800; margin: 0 0 0.4em; color: var(--sp-fg); }
+	.sp-type__cta { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-top: 0.6em; }
+	.sp-type__cta :global(.paypal-link) { margin-top: 0; }
+</style>
