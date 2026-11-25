@@ -1,0 +1,46 @@
+---
+/** The $49 Digital System offer: the page's one main buy, above the fold on phones. */
+import PayPalLink from "../PayPalLink.astro";
+interface Props { buyHref: string; paypalHref: string | null; price: string; refundShort: string }
+const { buyHref, paypalHref, price, refundShort } = Astro.props;
+---
+<section class="sp-hero sp-card" id="start-offer" aria-label="Buzzyfly Digital System offer">
+	<div class="sp-hero__copy">
+		<p class="sp-label">For coaches and solo service providers</p>
+		<h1>Stop rebuilding your client process from scratch every week.</h1>
+		<p class="sp-hero__sub">A browser app that shows who to follow up with today and drafts the email. New clients get onboarded the same way every time.</p>
+		<div class="sp-hero__buy">
+			<a class="sp-btn sp-btn--primary sp-hero__cta" href={buyHref} data-startpage-cta>Get the Digital System — {price}</a>
+			<p class="sp-hero__note"><strong>{price} one-time</strong> · no subscription · {refundShort}</p>
+			<div class="sp-hero__alt">
+				<a class="sp-btn sp-btn--ghost" href="/demo/">Try the free demo first</a>
+				{paypalHref && <PayPalLink href={paypalHref} />}
+			</div>
+			<p class="sp-small">You unlock the app on the thank-you page after checkout. <a href="/store">See what's inside</a>.</p>
+		</div>
+	</div>
+	<figure class="sp-hero__shot">
+		<img src="/images/today-dashboard.jpg" srcset="/images/today-dashboard-640.jpg 640w, /images/today-dashboard-960.jpg 960w, /images/today-dashboard.jpg 1200w" sizes="(max-width: 699px) calc(100vw - 60px), 460px" width="1200" height="750" alt="The Buzzyfly Today list with example clients: two follow-ups due, a proposal and a week-overdue invoice, each with a Write the email button." decoding="async" fetchpriority="high" />
+		<figcaption class="sp-small">The Today screen, shown with example clients.</figcaption>
+	</figure>
+</section>
+
+<style>
+	.sp-hero { display: grid; gap: 14px; padding: 16px; border: 2px solid var(--sp-accent); }
+	.sp-hero h1 { font-size: clamp(1.35em, 5.2vw, 2.1em); line-height: 1.15; margin: 0 0 0.35em; color: var(--sp-fg); }
+	.sp-hero__sub { margin: 0 0 0.9em; color: var(--sp-muted); line-height: 1.5; font-size: 0.98em; }
+	.sp-hero__cta { width: 100%; min-height: 56px; font-size: 1.2em; box-shadow: 0 6px 18px rgba(35, 55, 255, 0.3); text-align: center; line-height: 1.2; }
+	.sp-hero__note { margin: 0.55em 0 0.4em; font-size: 0.82em; color: var(--sp-muted); line-height: 1.4; }
+	.sp-hero__alt { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin: 0.4em 0 0.5em; }
+	.sp-hero__alt :global(.paypal-link) { margin-top: 0; }
+	.sp-hero__shot { margin: 0; }
+	.sp-hero__shot img { display: block; width: 100%; height: auto; aspect-ratio: 1200 / 750; border-radius: 12px; border: 1px solid var(--sp-border); }
+	.sp-hero__shot figcaption { margin-top: 6px; text-align: center; }
+	@media (max-width: 699px) {
+		.sp-hero__sub { display: none; }
+	}
+	@media (min-width: 700px) {
+		.sp-hero { grid-template-columns: 1.05fr 1fr; align-items: center; padding: 22px 24px; gap: 24px; }
+		.sp-hero__cta { width: auto; padding: 0.6em 1.6em; }
+	}
+</style>

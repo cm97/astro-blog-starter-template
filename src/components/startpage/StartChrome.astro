@@ -1,0 +1,117 @@
+---
+/**
+ * Browser-style top of the start page: logo, theme toggle, the $49 pill,
+ * a web search box, tabs (jump to sections) and a bookmarks bar.
+ */
+interface Props { brand: string; buyHref: string; price: string }
+const { brand, buyHref, price } = Astro.props;
+
+const TABS = [
+	{ href: "#start", label: "Start" },
+	{ href: "#apps", label: "Apps" },
+	{ href: "#notes", label: "Notes" },
+	{ href: "#typing", label: "Typing test" },
+	{ href: "#faq", label: "FAQ" },
+];
+const BOOKMARKS = [
+	{ href: "/store", label: "Store", icon: "🛒" },
+	{ href: "/demo/", label: "Free demo", icon: "▶" },
+	{ href: "/overdue-invoice-email", label: "Overdue invoice email", icon: "💸" },
+	{ href: "/scope-creep-reply", label: "Scope creep reply", icon: "🛡" },
+	{ href: "/hourly-rate-calculator", label: "Rate calculator", icon: "🧮" },
+	{ href: "/checklist", label: "Free checklist", icon: "✅" },
+	{ href: "/blog", label: "Blog", icon: "📝" },
+	{ href: "/jobs", label: "Jobs", icon: "💼" },
+];
+---
+<div class="sp-chrome" data-startpage-shell>
+	<div class="sp-chrome__bar">
+		<a href="/" class="sp-chrome__brand" aria-label={`${brand} home`}>
+			<img src="/buzzyfly-logo.svg" alt="" width="32" height="32" />
+			<span>{brand}</span>
+		</a>
+		<div class="sp-chrome__right">
+			<button type="button" class="sp-theme" data-theme-toggle aria-label="Switch to dark mode" title="Dark mode">
+				<span class="sp-theme__icon" aria-hidden="true"></span>
+			</button>
+			<a class="sp-btn sp-btn--primary sp-chrome__pill" href={buyHref}>Get the System · {price}</a>
+		</div>
+	</div>
+
+	<form class="sp-search" role="search" action="https://duckduckgo.com/" method="get" target="_blank">
+		<label class="sp-sr" for="sp-search-q">Search the web</label>
+		<span class="sp-search__icon" aria-hidden="true">⌕</span>
+		<input id="sp-search-q" name="q" type="search" placeholder="Search the web" autocomplete="off" enterkeyhint="search" />
+		<button type="submit" class="sp-search__go">Search</button>
+	</form>
+
+	<nav class="sp-tabs" aria-label="Start page sections">
+		{TABS.map((t, i) => <a href={t.href} class:list={["sp-tab", { "is-active": i === 0 }]} aria-current={i === 0 ? "true" : undefined}>{t.label}</a>)}
+	</nav>
+
+	<nav class="sp-bookmarks" aria-label="Bookmarks">
+		{BOOKMARKS.map((b) => <a href={b.href}><span aria-hidden="true">{b.icon}</span>{b.label}</a>)}
+	</nav>
+</div>
+
+<script>
+	const btn = document.querySelector<HTMLButtonElement>("[data-theme-toggle]");
+	const root = document.documentElement;
+	function label() {
+		const dark = root.getAttribute("data-theme") === "dark";
+		btn?.setAttribute("aria-label", dark ? "Switch to light mode" : "Switch to dark mode");
+		btn?.setAttribute("aria-pressed", String(dark));
+	}
+	label();
+	requestAnimationFrame(() => root.classList.add("sp-ready"));
+	btn?.addEventListener("click", () => {
+		const next = root.getAttribute("data-theme") === "dark" ? "light" : "dark";
+		root.setAttribute("data-theme", next);
+		try { localStorage.setItem("bf-theme", next); } catch {}
+		label();
+	});
+	// Highlight the tab for the section in view.
+	const tabs = Array.from(document.querySelectorAll<HTMLAnchorElement>(".sp-tab"));
+	if ("IntersectionObserver" in window) {
+		const io = new IntersectionObserver((entries) => {
+			for (const e of entries) {
+				if (!e.isIntersecting) continue;
+				tabs.forEach((t) => {
+					const on = t.getAttribute("href") === `#${e.target.id}`;
+					t.classList.toggle("is-active", on);
+					if (on) t.setAttribute("aria-current", "true"); else t.removeAttribute("aria-current");
+				});
+			}
+		}, { rootMargin: "-40% 0px -55% 0px" });
+		tabs.forEach((t) => { const el = document.querySelector(t.getAttribute("href")!); if (el) io.observe(el); });
+	}
+</script>
+
+<style>
+	.sp-chrome { margin: 10px 0 14px; background: var(--sp-surface); border: 1px solid var(--sp-border); border-radius: 18px; box-shadow: var(--sp-shadow); padding: 10px 12px 6px; }
+	.sp-chrome__bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+	.sp-chrome__brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.1em; color: var(--sp-fg) !important; text-decoration: none; min-height: 44px; }
+	.sp-chrome__right { display: flex; align-items: center; gap: 8px; }
+	.sp-chrome__pill { font-size: 0.9em; padding: 0.35em 0.95em; white-space: nowrap; }
+	.sp-theme { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--sp-border); background: var(--sp-surface-2); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
+	.sp-theme__icon::before { content: "☾"; font-size: 1.15em; color: var(--sp-fg); }
+	:global(html[data-theme="dark"]) .sp-theme__icon::before { content: "☀"; }
+	.sp-search { display: flex; align-items: center; gap: 6px; margin: 8px 0 4px; background: var(--sp-surface-2); border: 1px solid var(--sp-border); border-radius: 999px; padding: 3px 4px 3px 14px; transition: box-shadow 0.15s ease, border-color 0.15s ease; }
+	.sp-search:focus-within { border-color: var(--sp-accent-ink); box-shadow: 0 0 0 4px var(--sp-accent-soft); }
+	.sp-search__icon { color: var(--sp-muted); font-size: 1.15em; }
+	.sp-search input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--sp-fg); font: inherit; font-size: 16px; min-height: 40px; outline: none; }
+	.sp-search__go { border: 0; border-radius: 999px; min-height: 40px; padding: 0 14px; background: var(--sp-surface); color: var(--sp-fg); font: inherit; font-weight: 700; cursor: pointer; border: 1px solid var(--sp-border); }
+	.sp-tabs, .sp-bookmarks { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
+	.sp-tabs::-webkit-scrollbar, .sp-bookmarks::-webkit-scrollbar { display: none; }
+	.sp-tabs { margin-top: 6px; border-bottom: 1px solid var(--sp-border); }
+	.sp-tab { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 10px 10px 0 0; font-size: 0.88em; font-weight: 700; color: var(--sp-muted) !important; text-decoration: none; border: 1px solid transparent; border-bottom: 0; margin-bottom: -1px; }
+	.sp-tab.is-active { background: var(--sp-bg); color: var(--sp-fg) !important; border-color: var(--sp-border); }
+	.sp-bookmarks { padding: 6px 0 2px; }
+	.sp-bookmarks a { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 10px; border-radius: 8px; font-size: 0.82em; color: var(--sp-fg) !important; text-decoration: none; white-space: nowrap; }
+	.sp-bookmarks a:hover { background: var(--sp-accent-soft); }
+	@media (max-width: 420px) {
+		.sp-chrome__brand span { display: none; }
+		.sp-search__go { display: none; }
+	}
+	@media (prefers-reduced-motion: reduce) { .sp-search { transition: none; } }
+</style>
