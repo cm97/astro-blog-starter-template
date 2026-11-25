@@ -45,7 +45,8 @@
 		"test:seo": "esbuild tests/canonical.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/canonical.test.mjs && node --test .test-build/canonical.test.mjs",
 		"test:email": "esbuild tests/email.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/email.test.mjs && node --test .test-build/email.test.mjs",
 		"test:ai": "esbuild tests/ai.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/ai.test.mjs && node --test .test-build/ai.test.mjs",
-		"test:agent": "esbuild tests/agent.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/agent.test.mjs && node --test .test-build/agent.test.mjs"
+		"test:agent": "esbuild tests/agent.test.ts --bundle --platform=node --format=esm --log-level=warning --outfile=.test-build/agent.test.mjs && node --test .test-build/agent.test.mjs",
+		"test:webhook": "esbuild tests/webhookDelivery.test.ts --bundle --platform=node --format=esm --log-level=warning --external:node:sqlite --outfile=.test-build/webhookDelivery.test.mjs && node --test .test-build/webhookDelivery.test.mjs"
 	},
 	"type": "module"
 }
