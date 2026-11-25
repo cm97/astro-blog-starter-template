@@ -3,7 +3,7 @@ title: "Client Onboarding Checklist You Can Finish in 20 Minutes"
 seoTitle: "20-Minute Client Onboarding Checklist for Solo Coaches"
 description: "Exact 20-minute onboarding sequence after a client pays: welcome, intake, kickoff, and day-7 hold so week two does not go quiet."
 pubDate: 2026-11-02
-updatedDate: 2026-11-05
+updatedDate: 2026-11-25
 category: onboarding
 featuredProductTitle: Buzzyfly Digital System
 featuredProductPrice: $49
@@ -108,6 +108,42 @@ Calendar title that survives a scan: "[Client] day-7 check"
 - At the 20-minute mark, if step 6 is unfinished, still close the tab. The incomplete log is better than a perfect one that never gets started.
 - Paste the scope line into the kickoff invite description so it is visible without opening the original proposal.
 - On the day-7 email, include the exact next deliverable date from the private note. A vague "how is it going" gets ignored.
+
+## Phone-only onboarding (12 minutes)
+
+When you are not at a desk. Same gates. Smaller screen.
+
+1. Open Notes. Paste the fill-in card. Write client name, paid amount, and date before you leave the payment screen.
+2. Copy the exact welcome. Fill brackets. Send. Log the time in the note.
+3. Paste the intake link and deadline line. Send in the same thread.
+4. Create the kickoff calendar invite from your phone. Paste the five-bullet agenda. Set the day-7 hold at the same time.
+5. Write the private note line and close the app. Set one reminder for the day-7 email.
+
+Phone fill-in you keep open:
+
+```
+Client: ________ Paid $________ on ________
+Welcome sent: ________
+Intake link sent: ________
+Kickoff: ________ Day-7: ________
+Scope copied: yes
+```
+
+Do not open other apps until the three sends are logged.
+
+## Late-Friday cash locks
+
+Payment lands after 4pm Friday. Still run the first three steps the same day.
+
+- Welcome goes out before you close the laptop. Monday silence kills the start.
+- Intake deadline stays three business days (Wednesday). Do not push it to next Friday.
+- Kickoff invite is on the calendar for Monday or Tuesday. Unsent invites become new threads.
+- Day-7 hold is written before you shut the phone. Future-you will not remember.
+- Private note has the paid amount and next date. The weekly reset finds it Monday or the client disappears.
+
+Exact Friday close line you paste under the welcome:
+
+> Welcome is above. Intake link is open until Wednesday. Kickoff is on the calendar. Reply only if the time does not work.
 
 ## What still breaks when this lives only in your head
 
