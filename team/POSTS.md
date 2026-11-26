@@ -480,3 +480,13 @@ Write a late-invoice reminder. Reply to a scope-creep request. Work out your low
 
 Each one opens in your browser and you keep what you write.
 https://buzzyfly.com/tools/?utm_source=facebook&utm_medium=social&utm_campaign=free-tools-hub
+
+### cartoon-lead-gone-quiet | ready | facebook: professional portfolio, instagram: SAMS Service, youtube
+Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-lead-gone-quiet.mp4
+Title: "Let me think about it" then silence? Send this on day 6
+Great call. Then "let me think about it." Six days later, nothing.
+
+The Buzzyfly Digital System puts the second nudge on your Today list on day 6, with one easy question already written: do you still want help with the project, or has it moved down the list? You copy it and send it from your own inbox.
+
+Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=cartoon-lead-gone-quiet
+$49 once. Browser app. No subscription.
