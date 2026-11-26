@@ -532,6 +532,9 @@ unlock key for the $49 Digital System that you create for them.
 | P8 | Stephanie Manley, [Rescue My Bookkeeping Business](https://www.rescuemybookkeepingbusiness.com/) (coaching and community for women bookkeepers, with a [podcast](https://open.spotify.com/show/4A6VdNXMr3sUSS8raXxop1)) | Women running bookkeeping firms | Her pitch is "building real systems" so the owner stops being the bottleneck. Ready-made client emails (onboarding, late invoices, follow-ups) are exactly that kind of system. | Site menu on rescuemybookkeepingbusiness.com (no contact link on the home page), or the podcast page | PP8 | draft, owner sends (added 2026-11-19) |
 | P9 | Nicki Krawczyk and Kate Sitarz, [Build Your Copywriting Business podcast](https://filthyrichwriter.com/podcast/) on Filthy Rich Writer (weekly, latest episode 2026-11-18) | New and working freelance copywriters | Copywriters chase proposals and invoices like everyone else. A ready follow-up email fits their "business side" episodes. | Contact page on filthyrichwriter.com (not linked from the podcast page; check the site menu), or @nickicopy on X | PP9 | draft, owner sends (added 2026-11-19) |
 | P10 | Christine Gomolka, [The Paid Copywriter Podcast](https://podcasts.apple.com/us/podcast/the-paid-copywriter-podcast/id1600276887) and paidcopywriter.com | Freelance writers getting their first paying clients | Her audience is landing first clients, which is when the proposal follow-up and onboarding emails matter most. | [LinkedIn](https://www.linkedin.com/in/christinegomolka) or the contact page on paidcopywriter.com | PP10 | draft, owner sends (added 2026-11-19) |
+| P11 | Steve Folland, [Being Freelance](https://www.beingfreelance.com/) podcast (since 2015, [Apple Podcasts](https://podcasts.apple.com/us/podcast/being-freelance/id959401077)) and a paid [freelancer community](https://www.beingfreelance.com/freelancer-community), plus a [YouTube channel](https://www.youtube.com/stevefolland) | Self-employed creatives, mostly UK | He talks to freelancers every week about the business side: getting clients, chasing money, staying organised. A ready follow-up email fits his "you're not alone" angle. | [stevefolland.com/contact](https://stevefolland.com/contact) (beingfreelance.com has no contact page) | PP11 below | not sent (found 2026-11-26) |
+| P12 | Frankie Tortora, founder of [Doing It For The Kids](https://www.doingitforthekids.net/) (community for freelance parents, £14/month; co-hosts the [DIFTK podcast](https://open.spotify.com/show/6MOvDpM9muSyadKGtrxdEl) with Steve Folland) | Freelancers working around children | Parents freelance in short, broken blocks of time. A list that says who to email today, with the email written, suits a 20-minute window. | community@doingitforthekids.net (on the home page); [work-with-me page](https://www.doingitforthekids.net/work-with-me/) | PP12 below | not sent (found 2026-11-26) |
+| P13 | Holly Copsey, [The Visionary VA Podcast](https://podcasts.apple.com/us/podcast/the-visionary-va-podcast/id1773112684) (latest episode Nov 19), runs [Virtually Priceless](https://virtuallypriceless.co.uk/) | Virtual assistants building their own business | Her episodes cover clients, pricing and systems. VAs chase proposals, invoices and onboarding for themselves and for their clients. | No public email found; message through the podcast's listed socials. Don't use the Calendly link on her site, which is for client consults | PP13 below | not sent (found 2026-11-26) |
 
 ### Partner pitches (role 12)
 
@@ -586,6 +589,21 @@ Hi Nicki and Kate, your show covers the business side of copywriting, and one ga
 Subject: For writers landing their first clients
 Hi Christine, your audience is getting their first paying clients, which is exactly when the follow-up email gets skipped. I make Buzzyfly, a small browser app that shows who needs a nudge today and has the email written with their name and project: proposal follow-ups, invoice reminders, welcome and intake emails. I'd like to give you a free copy, no obligation. Try it first with sample clients: https://buzzyfly.com/demo?utm_source=paidcopywriter&utm_medium=partner&utm_campaign=partner-paidcopywriter. If you'd ever mention it, I can set up a referral share on terms we agree. [Owner name], support@buzzyfly.com
 
+**PP11 (Steve Folland, Being Freelance).**
+Subject: A small tool for the follow-ups freelancers put off
+Hi Steve, I've been listening to Being Freelance. One thing guests keep coming back to is the email they meant to send and didn't: the quiet proposal, the late invoice. I make Buzzyfly, a small browser app for solo freelancers. Each day it lists who needs a follow-up, and the email is already written with the client's name and project. They copy it and send it from their own inbox. I'd like to give you a free copy to try, no obligation. If you think it suits the community, I'd offer a referral share on terms we agree. You can try it first with sample clients, no sign-up: https://buzzyfly.com/demo?utm_source=beingfreelance&utm_medium=partner&utm_campaign=partner-beingfreelance
+Thanks, [owner name], Buzzyfly (support@buzzyfly.com)
+
+**PP12 (Frankie Tortora, Doing It For The Kids).**
+Subject: For freelance parents with 20 minutes between pickups
+Hi Frankie, DIFTK members work in short blocks around their kids, and the admin is what slips: the follow-up on a quote, the invoice reminder, the welcome email for a new client. I make Buzzyfly, a small browser app. It shows who needs an email today and has it written, with the client's name and project filled in, so a 20-minute window is enough. I'd like to give you a free copy to try, no obligation. If it suits your members, I'd offer a referral share on terms we agree. Try it with sample clients, no sign-up: https://buzzyfly.com/demo?utm_source=diftk&utm_medium=partner&utm_campaign=partner-diftk
+Thanks, [owner name], Buzzyfly (support@buzzyfly.com)
+
+**PP13 (Holly Copsey, The Visionary VA Podcast).**
+Subject: Free review copy: VA follow-ups, already written
+Hi Holly, your show is for VAs building a business that works for them, and the client admin is a big part of that. I make Buzzyfly, a browser app that lists who needs a follow-up today and has the email ready: proposal follow-ups on day 3, 7 and 14, late-invoice reminders, onboarding emails and scope-creep replies. The VA copies it and sends it from their own inbox. I'd like to give you a free copy to try, no obligation, and a referral share on terms we agree if you'd recommend it. Try it with sample clients, no sign-up: https://buzzyfly.com/demo?utm_source=visionaryva&utm_medium=partner&utm_campaign=partner-visionaryva
+Thanks, [owner name], Buzzyfly (support@buzzyfly.com)
+
 ## Newsletters (role 13)
 
 Checked on each newsletter's own booking page on 2026-11-03. Numbers are what the publisher
@@ -611,7 +629,30 @@ No sign-up." Link: https://buzzyfly.com/overdue-invoice-email
 |---|---|---|---|
 | Indie Hackers | yes (below, 2026-11-12) | owner posts any weekday; free | - |
 | Product Hunt | yes (below) | owner picks; schedule up to 1 month ahead | - |
+| BetaList | yes (below, 2026-11-26) | owner submits any day; use the free queue | - |
 | Show HN | yes (below, 2026-11-05): `/demo` is live with no sign-up, which is what HN's rules ask for | owner picks a weekday morning US time | - |
+
+### BetaList launch kit (role 15, 2026-11-26)
+
+Checked on [betalist.com/criteria](https://betalist.com/criteria) (2026-11-26). BetaList takes
+software that is new to its readers, including "a launched product that's live but hasn't had
+much exposure yet", which fits Buzzyfly. Each startup can be featured at most twice (pre-launch
+and launch), so this is our one launch slot. They want a distinct landing page (not a template,
+not a free subdomain) with a clear way in. We have that: /demo opens the real app with no
+sign-up. The criteria page doesn't state a wait time or price. If the submit form offers a paid
+faster slot, skip it: the owner said no paid ads.
+
+- **Name:** Buzzyfly
+- **URL:** https://buzzyfly.com/demo?utm_source=betalist&utm_medium=launch&utm_campaign=betalist
+- **One-liner:** "Know which client to follow up with today, with the email already written"
+- **Description:** "Buzzyfly is a browser app for freelancers, VAs and coaches. Add a client and where they are (proposal sent, invoiced, new). Each day the Today list shows who needs you and has the email ready: day 3, 7 and 14 proposal follow-ups, late-invoice reminders at 1, 7 and 14 days, onboarding emails and scope-creep replies, with the client's name and project filled in. You copy it and send it from your own inbox. Client data stays in your browser. Try it with sample clients, no sign-up. $49 once, no subscription."
+- **Images:** https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/launch/ph-gallery-1.jpg, then ph-gallery-2.jpg (same folder)
+- **Topics:** Productivity, Freelance, Email
+- **Checklist:**
+  1. Owner: open /demo on a phone that day and check it loads with no "Just a moment..." screen.
+  2. Owner: sign in at betalist.com and submit at betalist.com/submit with the fields above. Free queue only.
+  3. When BetaList emails a feature date, add it to the Launches table. Reply to any comments yourself.
+  4. Next week: log visits and buy clicks for `betalist` on the scoreboard.
 
 ### Indie Hackers launch kit (role 15, 2026-11-12)
 

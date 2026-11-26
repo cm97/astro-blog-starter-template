@@ -7,7 +7,7 @@ category: sales
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
-featuredProductDescription: "Browser app that shows who to follow up with today and drafts the email. Onboarding, weekly reset, and the exact reply so the process still exists on the weeks you are slammed. One-time."
+featuredProductDescription: "Browser app that shows who to follow up with today and drafts the email. Proposal follow-ups, onboarding, weekly reset, and room to save your own replies. One-time."
 ---
 
 They read the proposal. They said “let me think about it.” Then silence. Day 2. Day 4. The start date is still on your calendar. The price is still in your head. You keep checking the thread because a soft “just checking in” feels safer than forcing the answer.
@@ -103,6 +103,6 @@ Next action: invoice + onboarding / 90-day check / none
 
 You can paste it today. It works until a slammed Thursday. Then the two-hour window passes, the log is blank, and by next week you have already sent a soft “just checking in” because forcing the decision felt like pressure.
 
-The day-3, day-7 and day-14 proposal follow-ups, the exact “let me think about it” reply, and the 20-minute Monday reset live inside the Buzzyfly Digital System so the maybe still gets a next date when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The day-3, day-7 and day-14 proposal follow-ups and the 20-minute Monday reset live inside the Buzzyfly Digital System, and you can save the “let me think about it” reply above as one of your own emails there, so the maybe still gets a next date when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
