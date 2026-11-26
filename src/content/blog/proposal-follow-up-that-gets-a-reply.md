@@ -2,11 +2,12 @@
 title: "The Proposal Follow-Up Email to Send When It Goes Quiet"
 description: "Three paste-ready follow-ups for when a proposal goes quiet — so the deal does not die because you stopped chasing it."
 pubDate: 2026-10-16
-updatedDate: 2026-11-02
+updatedDate: 2026-11-26
 category: sales
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
+featuredProductDescription: "Browser app that shows who to follow up with today and drafts the email. Onboarding, weekly reset, and the exact proposal follow-up lines so the process still exists on the weeks you are slammed. One-time."
 ---
 
 You sent the proposal. Then silence.
@@ -106,19 +107,26 @@ If you cannot name the next date after a yes, the client is not onboarded. That 
 
 ## Extra concrete steps that stop the ghost
 
-- Paste the original start date into the log the same minute you send the proposal. Without the date the day-3 line has nothing to hold.
-- Keep the three lines in the same note as the Monday reset. One open, both available.
-- Cap at three emails. A fourth becomes a novel and they mute you.
-- If day 3 falls on a Friday, send Thursday instead. Do not slide it to Monday and lose the window.
-- After any yes, add the client to next Monday’s “Still open” so the day-7 onboarding touch does not live only in your head.
-- Log the reply time and the next action in the same block. Blank next action means the thread dies again.
-- Set a phone reminder for the 8-minute block the night before. The calendar alone dies when the week is on fire.
-- If they reply with a question instead of yes/no, answer in one short paragraph, then restate the binary close in the same email. Do not leave the decision open-ended.
-- Write the next touch date on the log the second the current email leaves. Blank next-touch is how the cadence dies.
-- Cap open proposal rows at five. Older ones past Day 14 are closed or parked. More than five is noise, not a pipeline.
-- After any paid yes, open the onboarding checklist the same day. The follow-up sequence ends when money lands; the onboarding sequence starts.
-- Screenshot or copy the proposal send time into the log. Memory of “I sent it last week” is not a date.
-- If the start date you named has already passed by Day 7, replace it with the next available start you can actually hold before you send the line.
+1. Paste the original start date into the log the same minute you send the proposal. Without the date the day-3 line has nothing to hold.
+2. Keep the three lines in the same note as the Monday reset. One open, both available.
+3. Cap at three emails. A fourth becomes a novel and they mute you.
+4. If day 3 falls on a Friday, send Thursday instead. Do not slide it to Monday and lose the window.
+5. After any yes, add the client to next Monday’s “Still open” so the day-7 onboarding touch does not live only in your head.
+6. Log the reply time and the next action in the same block. Blank next action means the thread dies again.
+7. Set a phone reminder for the 8-minute block the night before. The calendar alone dies when the week is on fire.
+8. If they reply with a question instead of yes/no, answer in one short paragraph, then restate the binary close in the same email. Do not leave the decision open-ended.
+9. Write the next touch date on the log the second the current email leaves. Blank next-touch is how the cadence dies.
+10. Cap open proposal rows at five. Older ones past Day 14 are closed or parked. More than five is noise, not a pipeline.
+11. After any paid yes, open the onboarding checklist the same day. The follow-up sequence ends when money lands; the onboarding sequence starts.
+12. Screenshot or copy the proposal send time into the log. Memory of “I sent it last week” is not a date.
+13. If the start date you named has already passed by Day 7, replace it with the next available start you can actually hold before you send the line.
+14. Never send the day-3 line from a new draft. Open the log, paste the one sentence, send, update the next due date, close. Rewriting is how the cadence dies.
+15. If three proposals hit Day 7 on the same morning, send the two highest-price ones first. Park the third until the next open block.
+16. After Day 14 close, move the row out of the active Monday scan. Parked or closed rows do not get a fourth touch.
+17. Phone version: open Notes, paste the log fields, fill the three due dates, set three alarms labeled with the client name and day. The alarms are the system when the laptop is closed.
+18. If they reply “let me check with my partner,” reply with the same binary and a new hold date three days out. Do not invent a new proposal.
+19. Log the exact dollar amount on the card the minute the proposal leaves. Missing numbers become missing cash on the Monday reset.
+20. When a paid yes lands, stop the remaining follow-up blocks the same hour. Open the Day 0 onboarding block instead. Do not leave both sequences running.
 
 Fill-in after any reply:
 
