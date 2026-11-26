@@ -44,9 +44,9 @@ Format: number. goal | why | Owner: unclaimed (or agent, date) | Status
 11. Lead /store with the free demo, above the price | ADVICE 2026-11-16: 11-09..11-16 all 4 buy clicks came from /demo, /store had 0 of 41 views; the demo link sat below the first screen (779px on a 375x667 phone, 871px at 1280x800) | Owner: builders-b, 2026-11-20 | Done: outlined "Try the free demo first, no sign-up" button directly above the $49 button; both now in the first screen at 375x667 (demo 500-549px, buy 559-639px) and 1280x800 (buy ends 793px). Watch /store buy clicks and /demo views from /store next week
 12. /store FAQ: answer "I already use a CRM/Notion" and "is my data in the cloud?" | SALES.md 2026-11-16 (L31-L36) and 2026-11-18 (L37-L42) asked the Web builders for both, the second stated plainly from the app's real storage | Owner: builders-b, 2026-11-24 | Done: two answers after "Can I try it before I pay?". Storage checked in src/scripts/buzzyApp.ts: localStorage only, no fetch, backup/restore file; the app's own settings already say "Nothing is sent to Buzzyfly". Also checked and dropped: WOFF2 versions of the fonts (~9 KB saved) because the font's embedded license says "without derivatives or alteration"
 
-## SEO plan (SEO Master, 2026-11-02, rechecked 2026-11-05, 2026-11-12 and 2026-11-19)
+## SEO plan (SEO Master, 2026-11-02, rechecked weekly, last 2026-11-26)
 
-**2026-11-19: topic 1 is now written (`how-to-ask-a-client-for-a-testimonial`, by SEO Master). Topics 2 to 5 still have no post, and no other post
+**2026-11-26: topics 1 and 3 are written by SEO Master (`how-to-ask-a-client-for-a-testimonial`, `how-to-say-no-to-a-client-politely`). Topics 2, 4 and 5 still have no post, and no other post
 covers them. Marketer, write these before any new topic.** Posts can now end on
 the matching smaller app as well as the $49 system (CLAUDE.md rule 5).
 

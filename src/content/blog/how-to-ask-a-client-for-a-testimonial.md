@@ -2,7 +2,7 @@
 title: "How to Ask a Client for a Testimonial (Exact Email)"
 description: "The exact testimonial request email to send after a project ends, when to send it, and the three questions that get a usable answer instead of 'great job!'"
 pubDate: "Nov 19 2026"
-category: "follow-ups"
+category: "follow-up"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductDescription: "Client follow-ups, onboarding steps and your Monday reset in one browser app, with the 30-day check-in email coming due on its own."
