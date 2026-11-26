@@ -16,6 +16,7 @@ import { escapeHtml, resolveFrom, sendFollowUpEmail } from "./lib/email";
 import { sendDueSequenceEmails } from "./lib/emailSequence";
 import { receiveEmail } from "./lib/inbox";
 import { isIndexNowRun, submitSitemapToIndexNow } from "./lib/indexNow";
+import { runFulfillmentWatchdog } from "./lib/fulfillmentWatchdog";
 import { ensureDownloadSchema, ensureEmailSequenceSchema, ensureFunnelSchema } from "./lib/schema";
 
 interface Env {
@@ -25,6 +26,8 @@ interface Env {
 	ASSETS?: Fetcher;
 	KIDS?: Fetcher;
 	MY_PRODUCTS?: R2Bucket;
+	/** Restricted Stripe key, read-only on Checkout Sessions. Unset = watchdog off. */
+	STRIPE_WATCHDOG_KEY?: string;
 }
 
 // The Buzzyfly Kids app (cm97/react-router-starter-template) is its own
@@ -218,6 +221,11 @@ async function scheduled(event: ScheduledEvent, env: Env, ctx: ExecutionContext)
 			await runJob("funnel schema", () => ensureFunnelSchema(db));
 			await runJob("owner alert", () => alertNewOrders(db, env));
 			await runJob("buyer follow-up", () => followUpRecentBuyers(db, env));
+			// Paid Stripe sessions with no order record: flag them to the owner once.
+			await runJob("fulfillment watchdog", async () => {
+				const result = await runFulfillmentWatchdog(env);
+				if (result.status !== "ok" && result.status !== "skipped") console.log(`Buzzyfly watchdog: ${JSON.stringify(result)}`);
+			});
 			// 3. Weekly email sequence for free-checklist subscribers.
 			await runJob("email sequence", async () => {
 				const { sent, failed } = await sendDueSequenceEmails(env);
