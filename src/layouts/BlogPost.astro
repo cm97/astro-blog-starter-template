@@ -77,6 +77,11 @@ const articleLd = JSON.stringify({
 			.prose { width: 720px; max-width: calc(100% - 2em); margin: auto; padding: 1em; color: rgb(var(--gray-dark)); }
 			.title { margin-bottom: 1em; padding: 1em 0; text-align: center; line-height: 1; }
 			.title h1 { margin: 0 0 0.5em 0; }
+			/* A short centered brand rule reads as a deliberate title treatment,
+			   where the old full-width default <hr> looked like a generic page
+			   divider. Scoped to the title so dividers in the article body are
+			   untouched. */
+			.title hr { width: 60px; height: 4px; margin: 0.2em auto 0; border: 0; border-radius: 999px; background: var(--accent); }
 			@media (max-width: 640px) { .title { padding: 0.5em 0; } .title h1 { font-size: 2rem; line-height: 1.15; } }
 			.date { margin-bottom: 0.5em; color: rgb(var(--gray)); }
 			.last-updated-on { font-style: italic; }
