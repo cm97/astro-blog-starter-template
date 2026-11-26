@@ -1,0 +1,219 @@
+---
+// French version of /store. Same product, same $49 USD price, same Stripe
+// Payment Link from getOrderAction(), and the refund rule with the same meaning.
+import BaseHead from "../../components/BaseHead.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+import ProductCallout from "../../components/ProductCallout.astro";
+import PayPalLink from "../../components/PayPalLink.astro";
+import { ALL_PRODUCTS, BUZZYFLY_CONFIG, getOrderAction } from "../../data/monetization";
+import { GUARANTEE_FR, STORE_ALTERNATES } from "../../data/i18n";
+
+export const prerender = false;
+
+const system = ALL_PRODUCTS.find((p) => p.id === "buzzyfly-digital-system")!;
+const systemOrder = getOrderAction(system.id);
+const guarantee = GUARANTEE_FR;
+
+const DESCRIPTION =
+	"Une application web qui s’ouvre dans le navigateur. Ouvrez-la et voyez qui relancer aujourd’hui, l’e-mail à envoyer, l’onboarding de vos nouveaux clients et votre point du lundi. Rien à télécharger. Pas d’Excel.";
+const FEATURES = [
+	"Tableau « Aujourd’hui » : qui a besoin de vous et quoi lui envoyer",
+	"Relances, onboarding et point hebdomadaire dans le navigateur",
+	"Réponses pour les devis et le périmètre, prêtes à copier",
+	"Fonctionne sur téléphone. Aucun fichier.",
+];
+
+const productLd = JSON.stringify({
+	"@context": "https://schema.org",
+	"@type": "Product",
+	name: system.title,
+	description: DESCRIPTION,
+	image: `${BUZZYFLY_CONFIG.siteUrl}/og-default.jpg`,
+	url: `${BUZZYFLY_CONFIG.siteUrl}/fr/store/`,
+	inLanguage: "fr",
+	brand: { "@type": "Brand", name: BUZZYFLY_CONFIG.brandName },
+	offers: {
+		"@type": "Offer",
+		price: system.price.replace(/[^0-9.]/g, ""),
+		priceCurrency: "USD",
+		availability: "https://schema.org/InStock",
+		url: `${BUZZYFLY_CONFIG.siteUrl}/fr/store/`,
+		seller: { "@type": "Organization", name: BUZZYFLY_CONFIG.brandName, url: BUZZYFLY_CONFIG.siteUrl },
+	},
+}).replace(/</g, "\\u003c");
+
+const TRUST = [
+	{ icon: "⚡", label: "S’ouvre dans votre navigateur après l’achat" },
+	{ icon: "🔁", label: "Sans abonnement" },
+	{ icon: "🛡️", label: "Remboursement sous 30 jours si vous ne pouvez pas accéder à l’app ou si elle n’est pas conforme à la description" },
+	{ icon: "🐝", label: "Créé par un créateur indépendant" },
+];
+
+const CONTENTS = [
+	{ screen: "Aujourd’hui (Today)", items: "Qui relancer aujourd’hui, les étapes d’onboarding à faire et la priorité n° 1 de la semaine" },
+	{ screen: "Relances (Follow-ups)", items: "Chaque prospect, devis et client, avec la date de la prochaine relance déjà calculée" },
+	{ screen: "Rédacteur d’e-mails", items: "Des e-mails qui reprennent le nom du client, le projet et votre signature. Il suffit de copier-coller." },
+	{ screen: "Onboarding", items: "Un plan en 10 étapes pour chaque nouveau client, avec échéances et notes client" },
+	{ screen: "Point hebdomadaire", items: "Un plan guidé de 20 minutes pour le lundi et un outil pour noter vos priorités" },
+	{ screen: "Devis et tarifs", items: "Votre taux horaire plancher, vos prix au projet et vos forfaits mensuels" },
+	{ screen: "Garde-fou du périmètre", items: "Les mots exacts quand un client demande plus que ce qu’il a payé" },
+];
+
+const FAQ = [
+	{
+		q: "L’application est-elle en français ?",
+		a: "Non. L’application et ses modèles d’e-mails sont en anglais. Cette page est en français pour que vous sachiez exactement ce que vous achetez.",
+	},
+	{
+		q: "Est-ce une formation ou un tableur ?",
+		a: "Non. C’est une application web. Ouvrez-la dans le navigateur de votre téléphone ou de votre ordinateur. Pas d’Excel, pas de fichiers, pas de macros.",
+	},
+	{
+		q: "J’utilise déjà un CRM ou Notion. Pourquoi ajouter ceci ?",
+		a: "Ces outils conservent vos données. Ils ne vous disent pas à qui écrire aujourd’hui. La liste « Aujourd’hui » de l’app, si : elle montre quelle relance de devis, quel rappel de facture ou quelle étape d’onboarding est due, avec l’e-mail prêt à copier. Gardez votre CRM pour vos données et utilisez ceci pour les relances du quotidien.",
+	},
+	{
+		q: "Mes données clients sont-elles stockées dans le cloud ?",
+		a: "Non. Vos clients, notes et dates sont enregistrés dans votre propre navigateur, sur votre appareil. L’app ne les envoie pas à Buzzyfly. Pour l’utiliser sur un autre appareil, téléchargez un fichier de sauvegarde et restaurez-le là-bas. Effacer les données du navigateur efface aussi la liste : gardez donc une sauvegarde.",
+	},
+	{
+		q: "Comment je l’obtiens ?",
+		a: "Vous payez une seule fois via Stripe. Après l’achat, vous arrivez directement dans l’application. Rien à télécharger.",
+	},
+	{
+		q: "Le prix est-il en dollars ?",
+		a: "Oui, 49 USD en un seul paiement. Votre banque ou votre carte fait la conversion dans votre devise.",
+	},
+	{
+		q: "Faut-il créer un compte ?",
+		a: "Pas de compte ni de mot de passe. Votre achat inclut un lien d’accès privé qui déverrouille l’application. Sans abonnement.",
+	},
+	{
+		q: "Quelle est la politique de remboursement ?",
+		a: guarantee,
+	},
+	{
+		q: "Pour qui ce n’est pas fait ?",
+		a: "Si vous avez déjà un système documenté qui fonctionne, vous n’en avez pas besoin.",
+	},
+];
+
+const LABELS = {
+	buy: "Acheter",
+	paypalLead: "Ou payez avec",
+	checkoutNote: `Paiement sécurisé par Stripe ou PayPal. Paiement unique. Votre app se déverrouille sur la page suivante après le paiement. ${guarantee}`,
+};
+---
+
+<!doctype html>
+<html lang="fr">
+	<head>
+		<BaseHead
+			title={`Boutique : app de relance clients | ${BUZZYFLY_CONFIG.brandName}`}
+			description="Gérez vos clients avec une app web, pas de mémoire. Relances, onboarding et point hebdomadaire au même endroit. 49 USD, paiement unique."
+			alternates={STORE_ALTERNATES}
+		/>
+		<script type="application/ld+json" set:html={productLd} />
+		<style>
+			main { width: 1000px; }
+			.lang-link { display: flex; justify-content: flex-end; margin: 0 0 0.4em; font-size: 0.85em; }
+			.lang-link a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 0.4em; }
+			.store-hero { text-align: center; padding: 1em 0 1.5em; }
+			.store-eyebrow { margin: 0 0 0.8em; font-size: 0.78em; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); }
+			.store-hero h1 { font-size: clamp(1.8em, 6vw, 2.8em); line-height: 1.12; max-width: 15em; margin: 0 auto 0.5em; }
+			.store-lede { max-width: 32em; margin: 0 auto 1.6em; color: rgb(var(--gray-dark)); font-size: 1.05em; }
+			.store-cta { display: inline-flex; align-items: center; justify-content: center; min-height: 72px; max-width: 100%; white-space: normal; text-align: center; padding: 1.2em 3.2em; border-radius: 999px; background: var(--accent); color: #fff; font-weight: 800; font-size: 1.65em; text-decoration: none; box-shadow: 0 6px 18px rgba(35, 55, 255, 0.35); transition: background-color 0.15s ease-in-out, transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out; }
+			.store-cta:hover { background: var(--accent-dark); color: #fff; transform: translateY(-2px); box-shadow: 0 10px 24px rgba(0, 13, 138, 0.4); }
+			.store-cta:active { transform: translateY(0); box-shadow: 0 3px 10px rgba(35, 55, 255, 0.35); }
+			.store-cta:focus-visible { outline: 3px solid rgb(var(--black)); outline-offset: 3px; }
+			@media (max-width: 720px) { .store-cta { padding: 1em 1.8em; font-size: 1.35em; } }
+			@media (prefers-reduced-motion: reduce) { .store-cta { transition: none; } .store-cta:hover { transform: none; } }
+			.store-secondary { display: inline-block; margin-top: 0.9em; font-size: 0.9em; padding: 0.6em 0.4em; }
+			.trust-row { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6em; padding: 0; margin: 1.5em 0 0; }
+			@media (max-width: 720px) { .trust-row { grid-template-columns: 1fr 1fr; } }
+			.trust-row li { display: flex; align-items: center; justify-content: center; gap: 0.45em; padding: 0.7em 0.5em; border-radius: 10px; background: rgba(var(--gray-light), 55%); font-size: 0.82em; font-weight: 700; color: rgb(var(--gray-dark)); text-align: center; line-height: 1.3; }
+			.featured-wrap { max-width: 640px; margin: 0 auto; scroll-margin-top: 1em; }
+			.featured-wrap :global(.product-callout) { margin-top: 1.5em; }
+			.note { max-width: 640px; margin: 1em auto 0; text-align: center; font-size: 0.9em; color: rgb(var(--gray-dark)); }
+			.store-section { max-width: 720px; margin: 3em auto 0; }
+			.store-section h2 { font-size: 1.6em; }
+			.contents-table { width: 100%; border-collapse: collapse; margin-top: 1em; }
+			.contents-table th, .contents-table td { text-align: left; padding: 0.6em 0.8em; border-bottom: 1px solid rgb(var(--gray-light)); font-size: 0.92em; vertical-align: top; }
+			.contents-table th { color: rgb(var(--gray)); font-size: 0.78em; text-transform: uppercase; letter-spacing: 0.05em; }
+			.faq details { border-bottom: 1px solid rgb(var(--gray-light)); }
+			.faq summary { cursor: pointer; padding: 0.7em 0; min-height: 44px; box-sizing: border-box; font-weight: 700; color: rgb(var(--black)); list-style-position: inside; }
+			.faq details p { margin: 0 0 1em; color: rgb(var(--gray-dark)); font-size: 0.95em; }
+			.final-cta { text-align: center; margin: 3em auto 0; max-width: 720px; padding: 2em 1em; border-radius: 16px; background: rgba(35, 55, 255, 0.05); border: 1px solid rgba(35, 55, 255, 0.15); }
+			.final-cta h2 { font-size: clamp(1.3em, 4.5vw, 1.7em); }
+			.final-cta p { margin: 0.8em 0 0; font-size: 0.85em; color: rgb(var(--gray-dark)); }
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<p class="lang-link"><a href="/store" hreflang="en" lang="en">English</a></p>
+			<section class="store-hero">
+				<p class="store-eyebrow">Pour les coachs, consultants et indépendants</p>
+				<h1>Gérez vos clients avec une app, pas de mémoire.</h1>
+				<p class="store-lede">
+					Vous perdez des heures à réécrire vos e-mails de bienvenue. Vos devis restent sans réponse et vous ne relancez jamais.
+					Le lundi commence dans la précipitation. Ouvrez l’app. Voyez qui a besoin de vous aujourd’hui et quel e-mail envoyer.
+				</p>
+				<a class="store-cta" href={systemOrder.href}>Obtenir le Digital System — {system.price} USD</a>
+				<br />
+				{systemOrder.live && <PayPalLink href={systemOrder.paypalHref} lead="Ou payez avec" />}
+				<br />
+				<a class="store-secondary" href="#digital-system">Voir ce qui est inclus ↓</a>
+				<ul class="trust-row" aria-label="Pourquoi acheter ici est peu risqué">
+					{TRUST.map((t) => <li><span aria-hidden="true">{t.icon}</span>{t.label}</li>)}
+				</ul>
+			</section>
+
+			<div class="featured-wrap" id="digital-system">
+				<ProductCallout
+					productId={system.id}
+					description={DESCRIPTION}
+					features={FEATURES}
+					badge="Le plus populaire"
+					featured
+					headingLevel="h2"
+					labels={LABELS}
+				/>
+			</div>
+			<p class="note">L’application et ses modèles d’e-mails sont en anglais.</p>
+
+			<section class="store-section">
+				<h2>Ce que contient l’app Digital System</h2>
+				<table class="contents-table">
+					<thead><tr><th>Écran</th><th>Ce qu’il fait</th></tr></thead>
+					<tbody>
+						{CONTENTS.map((c) => (
+							<tr><td><strong>{c.screen}</strong></td><td>{c.items}</td></tr>
+						))}
+					</tbody>
+				</table>
+				<p>Fonctionne dans tout navigateur récent, sur téléphone ou ordinateur. Rien à télécharger. Pas d’Excel.</p>
+			</section>
+
+			<section class="store-section faq" aria-labelledby="faq-heading">
+				<h2 id="faq-heading">Questions avant d’acheter</h2>
+				{FAQ.map((item) => (
+					<details>
+						<summary>{item.q}</summary>
+						<p>{item.a}</p>
+					</details>
+				))}
+			</section>
+
+			<section class="final-cta">
+				<h2>Arrêtez de reconstruire votre méthode de mémoire.</h2>
+				<a class="store-cta" href={systemOrder.href}>Obtenir le Digital System — {system.price} USD</a>
+				<br />
+				{systemOrder.live && <PayPalLink href={systemOrder.paypalHref} lead="Ou payez avec" />}
+				<p>Paiement unique. Sans abonnement. {guarantee}</p>
+			</section>
+		</main>
+		<Footer />
+	</body>
+</html>
