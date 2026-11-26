@@ -12,6 +12,8 @@ declare namespace Cloudflare {
 		EMAIL_FROM?: string;
 		// Optional second Stripe signing secret (www.buzzyfly.com endpoint). See stripeWebhookSecrets.
 		STRIPE_WEBHOOK_SECRET_WWW?: string;
+		// Restricted Stripe key (read Checkout Sessions only) for the fulfillment watchdog. Secret, never a var.
+		STRIPE_WATCHDOG_KEY?: string;
 		// Jobs membership (src/lib/jobsAccess.ts). Both unset = /jobs stays fully open.
 		JOBS_MEMBERSHIP_URL?: string;
 		JOBS_MEMBERSHIP_PRICE?: string;
