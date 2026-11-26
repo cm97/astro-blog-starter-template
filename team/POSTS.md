@@ -471,3 +471,12 @@ Great at the work, lost when it comes to getting paid? The simplest setup that w
 
 Our free reminder writer drafts the polite late-payment email for you in 30 seconds. No sign-up needed.
 https://buzzyfly.com/overdue-invoice-email?utm_source=facebook&utm_medium=social&utm_campaign=simple-invoice-setup
+
+### free-tools-hub | ready | facebook: professional portfolio
+Image: none
+Six free tools for freelancers, in one place. No sign-up for any of them.
+
+Write a late-invoice reminder. Reply to a scope-creep request. Work out your lowest hourly rate. Draft a follow-up when a client goes quiet. Put together an onboarding pack for a new client. Run a 20-minute Monday reset.
+
+Each one opens in your browser and you keep what you write.
+https://buzzyfly.com/tools/?utm_source=facebook&utm_medium=social&utm_campaign=free-tools-hub
