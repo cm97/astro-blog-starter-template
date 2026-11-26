@@ -3,7 +3,7 @@ title: "Client Follow-Up After No Response: Exact Day-1 Nudge You Send Today"
 seoTitle: "Client Follow-Up After No Response Day 1 Exact Nudge"
 description: "Paste-ready day-1 follow-up email and SMS for when a client or proposal goes quiet right after you send. Stops the lead from dying in your head."
 pubDate: 2026-11-25
-updatedDate: 2026-11-25
+updatedDate: 2026-11-26
 category: follow-up
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
@@ -86,6 +86,39 @@ Next action: day 3 / onboarding / closed
 ## What still breaks when the nudge only lives in a note
 
 You can paste it today. It works until a slammed Thursday. Then the thread sits open, the original scope sentence is gone, and by Friday you have already decided the lead is dead because sending felt harder than doing delivery.
+
+## Phone-only day-1 (under 2 minutes)
+
+When you are not at a desk. Same binary. No new app.
+
+1. Open the original thread or Notes where the log lives.
+2. Dictate or paste the SMS version. Fill the brackets. Send.
+3. Immediately set a phone reminder for day 3 titled “[Name] day-3 or release.”
+4. Mark the log “day 1 sent” and close the thread. Do not refresh it.
+
+Phone log you keep at the top of Notes:
+
+```
+[Name] day-1 sent [time]
+Scope: ________ Price: ________
+Day-3 reminder: set
+```
+
+## If they reply “busy” or “still thinking”
+
+Do not rewrite the original offer. Use one of these and log the new date.
+
+> Understood. I will hold [start date] until [specific day 3–5 days out]. Reply by then with yes or release.
+
+Or for true busy:
+
+> No problem. Next touch is [day 3 date]. Reply before then if the start date needs to move.
+
+Both keep the original price and scope. Both free your calendar. Do not open a new thread.
+
+## What to do if day 1 is already late
+
+If more than 36 hours have passed and you never sent day 1, send the same line today anyway. Then set day 3 from this moment, not from the original send. Late is better than never. The log still records the real send time.
 
 The day-1, day-3 and day-7 nudges, the onboarding checklist and the 20-minute Monday reset live inside the Buzzyfly Digital System so the follow-up still happens when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
