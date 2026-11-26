@@ -90,7 +90,7 @@ const BOOKMARKS = [
 <style>
 	.sp-chrome { margin: 10px 0 14px; background: var(--sp-surface); border: 1px solid var(--sp-border); border-radius: 18px; box-shadow: var(--sp-shadow); padding: 10px 12px 6px; }
 	.sp-chrome__bar { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
-	.sp-chrome__brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.1em; color: var(--sp-fg) !important; text-decoration: none; min-height: 44px; }
+	.sp-chrome__brand { display: inline-flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.1em; color: var(--sp-fg) !important; text-decoration: none; min-height: 44px; min-width: 44px; }
 	.sp-chrome__right { display: flex; align-items: center; gap: 8px; }
 	.sp-chrome__pill { font-size: 0.9em; padding: 0.35em 0.95em; white-space: nowrap; }
 	.sp-theme { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--sp-border); background: var(--sp-surface-2); cursor: pointer; display: inline-flex; align-items: center; justify-content: center; }
@@ -99,15 +99,15 @@ const BOOKMARKS = [
 	.sp-search { display: flex; align-items: center; gap: 6px; margin: 8px 0 4px; background: var(--sp-surface-2); border: 1px solid var(--sp-border); border-radius: 999px; padding: 3px 4px 3px 14px; transition: box-shadow 0.15s ease, border-color 0.15s ease; }
 	.sp-search:focus-within { border-color: var(--sp-accent-ink); box-shadow: 0 0 0 4px var(--sp-accent-soft); }
 	.sp-search__icon { color: var(--sp-muted); font-size: 1.15em; }
-	.sp-search input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--sp-fg); font: inherit; font-size: 16px; min-height: 40px; outline: none; }
-	.sp-search__go { border: 0; border-radius: 999px; min-height: 40px; padding: 0 14px; background: var(--sp-surface); color: var(--sp-fg); font: inherit; font-weight: 700; cursor: pointer; border: 1px solid var(--sp-border); }
+	.sp-search input { flex: 1; min-width: 0; border: 0; background: transparent; color: var(--sp-fg); font: inherit; font-size: 16px; min-height: 44px; outline: none; }
+	.sp-search__go { border: 0; border-radius: 999px; min-height: 44px; padding: 0 14px; background: var(--sp-surface); color: var(--sp-fg); font: inherit; font-weight: 700; cursor: pointer; border: 1px solid var(--sp-border); }
 	.sp-tabs, .sp-bookmarks { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; -webkit-overflow-scrolling: touch; }
 	.sp-tabs::-webkit-scrollbar, .sp-bookmarks::-webkit-scrollbar { display: none; }
 	.sp-tabs { margin-top: 6px; border-bottom: 1px solid var(--sp-border); }
-	.sp-tab { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 40px; padding: 0 14px; border-radius: 10px 10px 0 0; font-size: 0.88em; font-weight: 700; color: var(--sp-muted) !important; text-decoration: none; border: 1px solid transparent; border-bottom: 0; margin-bottom: -1px; }
+	.sp-tab { flex: 0 0 auto; display: inline-flex; align-items: center; min-height: 44px; padding: 0 14px; border-radius: 10px 10px 0 0; font-size: 0.88em; font-weight: 700; color: var(--sp-muted) !important; text-decoration: none; border: 1px solid transparent; border-bottom: 0; margin-bottom: -1px; }
 	.sp-tab.is-active { background: var(--sp-bg); color: var(--sp-fg) !important; border-color: var(--sp-border); }
 	.sp-bookmarks { padding: 6px 0 2px; }
-	.sp-bookmarks a { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-height: 36px; padding: 0 10px; border-radius: 8px; font-size: 0.82em; color: var(--sp-fg) !important; text-decoration: none; white-space: nowrap; }
+	.sp-bookmarks a { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 6px; min-height: 44px; padding: 0 10px; border-radius: 8px; font-size: 0.82em; color: var(--sp-fg) !important; text-decoration: none; white-space: nowrap; }
 	.sp-bookmarks a:hover { background: var(--sp-accent-soft); }
 	@media (max-width: 420px) {
 		.sp-chrome__brand span { display: none; }
