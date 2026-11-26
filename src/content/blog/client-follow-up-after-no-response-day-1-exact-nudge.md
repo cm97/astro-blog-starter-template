@@ -8,7 +8,7 @@ category: follow-up
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
-featuredProductDescription: "Browser app that shows who to follow up with today and drafts the email. Day-1, day-3 and day-7 nudges plus onboarding and weekly reset so the process still exists on the weeks you are slammed. One-time."
+featuredProductDescription: "Browser app that shows who to follow up with today and fills in the email. Lead follow-ups on days 1 and 6, proposal follow-ups on days 3, 7 and 14, plus onboarding and weekly reset so the process still exists on the weeks you are slammed. One-time."
 ---
 
 You hit send on the proposal or the intake request. Twenty-four hours later the thread is silent. You open the email to check, rewrite a longer version in your head, then close the tab because you do not know what to say that does not sound desperate.
@@ -120,6 +120,6 @@ Both keep the original price and scope. Both free your calendar. Do not open a n
 
 If more than 36 hours have passed and you never sent day 1, send the same line today anyway. Then set day 3 from this moment, not from the original send. Late is better than never. The log still records the real send time.
 
-The day-1, day-3 and day-7 nudges, the onboarding checklist and the 20-minute Monday reset live inside the Buzzyfly Digital System so the follow-up still happens when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+Lead follow-ups on days 1 and 6, proposal follow-ups on days 3, 7 and 14, the onboarding checklist and the 20-minute Monday reset live inside the Buzzyfly Digital System, so the follow-up still happens when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
