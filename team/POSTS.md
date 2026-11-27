@@ -283,9 +283,9 @@ Client asks "can you do it cheaper?" You don't have to drop your rate. Keep the 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=demo-video-discount
 $49 once, no subscription.
 
-### after-project-30-day | ready | facebook: professional portfolio
+### after-project-30-day | posted 2026-11-27, id 1115192551682116_122149523979356277 | facebook: professional portfolio
 Image: none
-The project is delivered and the client is happy. Then you never hear from them again. One email 30 days later fixes most of that:
+The project is delivered and the client is happy. Then you never hear from them again. One short email 30 days later keeps the door open:
 
 "Hi [name], it's been about a month since we wrapped [project]. How is it working for you? If anything needs a tweak, tell me. And if you know someone who needs similar help, I'd be glad to talk to them."
 
