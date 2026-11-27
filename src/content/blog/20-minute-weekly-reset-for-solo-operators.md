@@ -3,12 +3,12 @@ title: "The 20-Minute Weekly Reset for Solo Operators That Survives a Slammed We
 seoTitle: "20-Minute Weekly Reset for Solo Operators"
 description: "A 20-minute weekly reset checklist for coaches and freelancers. Clear the board, pick three priorities, send follow-ups and set tomorrow's first move."
 pubDate: "Oct 16 2026"
-updatedDate: "Nov 13 2026"
+updatedDate: "Nov 27 2026"
 category: "planning"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
-featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductDescription: "Browser app with the 20-minute Monday reset, onboarding checklist, and exact follow-up lines so a slammed week still has a list that runs. One-time. Opens after checkout."
 ---
 
 Monday arrives and the first hour is spent figuring out what you are supposed to be working on. Inbox first. Then the fire. Then the proposal you meant to follow up on. By Thursday the plan is gone.
@@ -68,15 +68,20 @@ Overdue follow-up sent: ________
 Money still open: ________
 ```
 
-## Friday close (3 minutes)
+## Friday close that feeds Monday (4 minutes)
 
-Three lines only:
+Do not rebuild the week. Close it so Monday starts from paper, not memory.
 
-- What shipped this week
-- What is still open and why
-- The one thing that must be true Monday morning
+Four lines only:
 
-If you skip Friday, Monday’s clear-the-board step takes longer. Do the three lines before you shut the laptop.
+```
+Shipped this week: ________
+Still open (and why): ________
+Oldest unpaid or quiet proposal: ________ — next action Monday: ________
+Monday first move already written: ________
+```
+
+If you skip Friday, Monday’s clear-the-board step takes longer and the money lines get invented under pressure. Do the four lines before you shut the laptop.
 
 ## Cash salvage version (when Thursday already died)
 
@@ -88,6 +93,15 @@ Skip the three priorities. Do this instead:
 4. Stop.
 
 The full reset returns next Monday. The salvage keeps money moving this week.
+
+Exact salvage fill-in:
+
+```
+Salvage date: ________
+Open >7 days: ________
+Sent today: ________ / ________
+Tomorrow first block: ________
+```
 
 ## If you skipped Monday entirely
 
