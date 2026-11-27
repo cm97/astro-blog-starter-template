@@ -490,3 +490,27 @@ The Buzzyfly Digital System puts the second nudge on your Today list on day 6, w
 
 Try the free demo, no sign-up: https://buzzyfly.com/demo?utm_source=social&utm_medium=social&utm_campaign=cartoon-lead-gone-quiet
 $49 once. Browser app. No subscription.
+
+### quote-follow-up-schedule | ready | facebook: professional portfolio
+Image: none
+Half your quotes go unanswered? Most people aren't saying no. They're busy. A short schedule wins a good share back:
+
+Day 2: "Just checking the quote came through OK. Any questions about what's included?"
+Day 5: "We have an opening on [day]. Would you like me to hold it for you?"
+Day 10: "Shall I close this quote for now? Happy to pick it up whenever suits."
+
+A concrete slot on day 5 gets far more replies than "just following up".
+
+Buzzyfly shows which proposal follow-up is due today, on day 3, 7 and 14, with the email written. You copy it and send it. $49 once, no subscription.
+https://buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=quote-follow-up-schedule
+
+### waiting-on-client-clause | ready | facebook: professional portfolio
+Image: none
+Project stuck because the client won't send feedback or content? Put one line in every contract:
+
+"Timelines assume feedback and content within 3 working days. Client-side delays move the deadline by the same amount."
+
+Then when it happens, send a fact, not a complaint: "I'll pause [project] until I have your notes, and launch moves by the same number of days."
+
+Try the free Buzzyfly demo, no sign-up: the follow-up emails for quiet clients are already written.
+https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=waiting-on-client-clause

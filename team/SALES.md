@@ -42,7 +42,11 @@ Kept by Sales teams A and B (TEAM.md "Sales team"). Real, public sources only.
 | revision-limit-reply, rate-floor-free-tool, scope-reply-free-tool, feedback-chase-no-nag | Facebook: professional portfolio | 2026-11-20..24 | ? | ? | ? |
 | demo-video-checkin, demo-video-kickoff, demo-video-proposal-send | YouTube Shorts | 2026-11-20..22 | ? | ? | ? |
 | one-list-follow-ups, simple-invoice-setup | Facebook queue (POSTS.md, added 2026-11-25) | not posted yet | - | - | - |
-| Community replies R1 to R49 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
+| deposit-before-start | Facebook: professional portfolio | 2026-11-25 | ? | ? | ? |
+| new-client-onboarding-image | Facebook: professional portfolio (#353) | 2026-11-26 | ? | ? | ? |
+| **First Stripe orders (Developer, LOG 2026-11-26)** | source unknown (no client_reference_id) | 2026-11-25 | 2 /thank-you returns | 1 (/store) | **2: $49 Digital System + $15 Weekly Reset. Unconfirmed: may be the owner's own tests. Owner to check in Stripe** |
+| quote-follow-up-schedule, waiting-on-client-clause | Facebook queue (POSTS.md, added 2026-11-27) | not posted yet | - | - | - |
+| Community replies R1 to R55 (leads below) | Reddit / Facebook groups, owner posts | not posted yet (no LOG line says otherwise) | - | - | - |
 | Whole site, ad check 2026-11-06 (LOG #215) | mostly direct | to 11-06 | 96 | 1 (first, direct to /) | 0 |
 | Whole site 11-03..04 (sales-b, LOG 2026-11-04) | 9 YouTube, rest direct | - | 38 views | 0 | 0 |
 | Demo videos (weekly check 2026-11-10) | YouTube Shorts, Instagram Reels, Facebook video | 2026-11-03 to 11-10 | site views 11-03..11-10: youtube 27, facebook 6, google 23, direct 61, other 9. YouTube views: proposal 3, invoice 0, scope 18, onboarding 4, pricing 7. Instagram insights: not available (permission) | 1 (direct) | 0 |
@@ -109,6 +113,12 @@ self-promotion rule in the sidebar, then post.** Reddit replies carry no link by
 | L47 | ~2026-11-23 (past week) | [r/indianstartups](https://www.reddit.com/r/indianstartups/comments/1y49z1d/service_founders_how_do_you_handle_scope_creep/) | "how do you handle scope creep without souring the client? ... I handle operations and close mandates at a small consulting firm" | hot | R47 | draft, owner posts |
 | L48 | ~2026-11-18 (past week) | [r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1y050ni/how_do_you_track_multiple_clients_retainers_and/) | "How do you currently track client hours, payments, retainers and monthly workload? I'm exploring..." (may be someone researching a tool) | warm | R48 | draft, owner posts |
 | L49 | ~2026-11-21 (past week) | [r/Invoice](https://www.reddit.com/r/Invoice/comments/1y2pedm/whats_the_simplest_way_to_send_invoices_accept/) | "What's the simplest way to send invoices, accept payments and track ... ask me how to organise customer payments and I'm suddenly out of my depth" | hot | R49 | draft, owner posts |
+| L50 | ~2026-11-24 (past week) | [r/smallbusinessowner](https://www.reddit.com/r/smallbusinessowner/comments/1y4e4eh/how_do_you_keep_leads_from_falling_through_the/) | "How do you keep leads from falling through the cracks? ... Work comes in, everybody is busy, and a name you..." | hot | R50 | draft, owner posts |
+| L51 | ~2026-11-26 (past week) | [r/growmybusiness](https://www.reddit.com/r/growmybusiness/comments/1y5asyo/two_person_cleaning_business_half_our_quotes_go/) | "Two person cleaning business, half our quotes go ..." (title cut off in search) | hot | R51 | draft, owner posts |
+| L52 | ~2026-11-26 (past week) | [r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1y57m0l/how_do_you_deal_with_clients_who_delay_projects/) | "How do you deal with clients who delay projects by not responding? I work in web development ... waiting for client feedback, content" | hot | R52 | draft, owner posts |
+| L53 | ~2026-11-26 (past week) | [r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1y5elkp/how_do_you_handle_clients_disputing_refusing/) | "How do you handle clients disputing / refusing payment? ... First year in business but 8 years as a freelancer prior (Filmmaker...)" | hot | R53 | draft, owner posts |
+| L54 | ~2026-11-21 (past week) | [r/graphic_design](https://www.reddit.com/r/graphic_design/comments/1y18z7y/how_do_i_find_a_lawyer_for_a_client_that_wont_pay/) | "How do i find a lawyer for a client that won't pay me? ... contract work with a pretty big beauty company at the end of July. To date, they have not paid a single invoice" | hot | R54 | draft, owner posts |
+| L55 | ~2026-11-22 (past week) | [r/Freelancers](https://www.reddit.com/r/Freelancers/comments/1y25vlw/starting_a_freelance_business_what_tools_do_you/) (also posted in [r/smallbusiness](https://www.reddit.com/r/smallbusiness/comments/1y25twi/starting_a_freelance_business_what_tools_do_you/)) | "Starting a freelance business, what tools do you actually use to manage ... a couple of ongoing retainer clients and one-off projects" | hot | R55 | draft, owner posts |
 
 ### Draft replies (team A, role 4, 2026-11-02)
 
@@ -465,6 +475,56 @@ That's it. Fancy features don't matter until those five are a habit.
 
 Best two to post first this round: **R49** (exactly our buyer: a small service owner who says they're "out of my depth" with payments) and **R47** (scope creep at a consulting firm).
 
+### Draft replies, round 10 (team A, role 4, 2026-11-27)
+
+Found 2026-11-27 by web search limited to the past week, with redirect links resolved to the
+real post URLs. Same limits: titles and snippets only, the owner checks each thread and the
+sub's rules. No links on Reddit except where noted.
+
+**R50 (L50, keeping leads from falling through the cracks).**
+Leads fall through because nobody owns "what happens next" for each one. Three habits fix most of it:
+1. Every lead gets a next step and a date the moment it comes in, even if it's just "reply by tomorrow".
+2. One list, sorted by that date, checked first thing every day. Not the inbox, because the inbox sorts by newest, not by what's due.
+3. A fixed follow-up rhythm for quotes and proposals: day 3, day 7, day 14, then close it politely.
+Whoever opens the list in the morning owns it that day. When the list is short and sorted by date, nobody has to remember anything.
+
+**R51 (L51, two-person cleaning business, half the quotes go unanswered).**
+That's normal for quotes. Most people aren't saying no, they're busy. A short follow-up schedule usually wins a good share back:
+- Day 2: "Hi [name], just checking the quote came through OK. Any questions about what's included?"
+- Day 5: "We have an opening on [day]. Would you like me to hold it for you?" A concrete slot gets answers.
+- Day 10: "Shall I close this quote for now? Happy to pick it up whenever suits."
+Decide who sends them (one of you, every morning), and keep one list of open quotes with the date each follow-up is due. The day-10 message gets surprisingly many replies.
+
+**R52 (L52, clients delaying projects by not responding).**
+Make the client's part of the timeline visible and written down:
+- In the contract: "Timelines assume feedback and content within [3] working days. Delays on the client side move the deadline by the same amount."
+- When you send something: give a date. "Could you send feedback by Thursday?"
+- The day after: "Is Thursday still OK, or would Monday work better?" Two options are easier to answer.
+- After 3 to 4 days more: "I'll pause [project] until I have your notes, and launch moves by the same number of days. Happy to do a 10-minute call instead."
+And invoice on milestones, not on launch, so a silent client doesn't hold up your money too.
+
+**R53 (L53, clients disputing or refusing payment, first year in business).**
+Two parts: getting paid now, and making disputes rarer.
+Now: ask them to put the problem in writing. "Could you list what you feel wasn't delivered as agreed? I'll look at each point." Real issues get fixed, and vague refusals usually shrink once they have to be specific. If they still won't pay for delivered work, send a dated final notice, then small claims (in the UK, a letter before action first).
+Next time: written sign-off at each stage ("Happy with the rough cut? Reply yes and I'll move to the edit"), a deposit before you start, and final files released on final payment. Disputes are much harder when every stage was approved in writing.
+
+**R54 (L54, big company hasn't paid a single invoice since July).**
+For a lawyer: your state bar association runs a lawyer referral service with low-cost first consultations, and many business lawyers will send a demand letter for a flat fee. Before that, and while you look:
+- Send a formal demand yourself: list every invoice, date and amount, the total, and a pay-by date 10 to 14 days out. Address it to their accounts payable team and your main contact.
+- Big companies often have a vendor or AP portal. Ask whether you're set up as a vendor. Unpaid invoices at large companies are often stuck in onboarding paperwork, not refused.
+- Keep every email where they asked for or approved the work.
+If the total is under your state's small claims limit, you can file without a lawyer.
+
+**R55 (L55, starting a freelance business: what tools to use).**
+Keep it to as few as possible. For a mix of retainers and one-off projects you really need:
+1. Invoicing with card payments (Stripe Invoicing, Wave, or your accounting software).
+2. A calendar, and a time tracker for the retainer clients (Toggl's free plan is fine).
+3. One place that tells you what's due today: follow-ups on proposals, invoice reminders, onboarding steps for new clients. A spreadsheet sorted by next step date works if you actually open it every morning.
+4. Saved email templates for the messages you send over and over: welcome, kickoff, feedback chaser, invoice reminder, scope reply.
+Only if the sub allows tool mentions, add with disclosure: "Disclosure, I make a small browser app for #3 and #4 (follow-ups, onboarding and reminders, with the emails written): https://buzzyfly.com/demo?utm_source=reddit&utm_medium=community&utm_campaign=reddit-freelancers-tools. There's a free demo." Otherwise post without it.
+
+Best two to post first this round: **R55** (someone choosing tools right now, so a disclosed mention fits if allowed) and **R51** (a two-person service business, exactly the buyer).
+
 ### Lead research and outreach (roles 5 and 6)
 
 No businesses added this run. The searches found only vendor blogs and courses, not small
@@ -510,6 +570,8 @@ No cold notes drafted.
 **2026-11-25:** 0 businesses added. Questions answered above. Also seen: lead-finder sites
 (ThreadLeads, Distrarc) listing the same Reddit questions as "buyers for your tool", so other
 sellers are reaching these threads too. Answer fast and helpfully, or not at all.
+
+**2026-11-27:** 0 businesses added. Questions answered above. No cold notes drafted.
 
 ## Partners
 
@@ -804,6 +866,14 @@ Buyer doubts about Buzzyfly to answer on /store (for the Web builders): "Is it a
 - "Retainer hours keep running over." Post idea: the 80% heads-up email.
 - "What's the simplest way to invoice and get paid?" Post idea: simple-invoice-setup (POSTS.md).
 - Competition note: lead-finder services now list these same Reddit threads to tool sellers. Replies that are fast, complete and link-free will stand out from the pitches.
+
+### Added 2026-11-27 (from L50 to L55)
+- "Leads fall through the cracks when we're busy." FAQ for /store: the Today list exists for exactly this.
+- "Half our quotes go unanswered." Post idea: quote-follow-up-schedule (POSTS.md): day 2, day 5 with a concrete slot, day 10 close.
+- "Clients delay projects by not responding." Post idea: waiting-on-client-clause (POSTS.md).
+- "Clients dispute payment." FAQ: written sign-off at each stage, plus "list what wasn't delivered".
+- "A big company hasn't paid since July." Post idea: ask whether you're set up as a vendor in their AP system.
+- "What tools should a new freelancer use?" The strongest buyer moment this week. A disclosed, rule-compliant mention with the free demo fits here.
 
 ## Ready ad set (role 9, waiting for the owner's yes and daily budget)
 
