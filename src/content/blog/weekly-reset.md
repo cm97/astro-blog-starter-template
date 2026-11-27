@@ -3,11 +3,12 @@ title: "The 20-Minute Weekly Reset That Doesn't Die by Thursday"
 description: "A 20-minute weekly reset for solo operators. A Monday sheet, a Wednesday check and a 12-minute Thursday cash salvage that keep follow-ups alive."
 category: "planning"
 pubDate: "Sep 01 2026"
-updatedDate: "Nov 20 2026"
+updatedDate: "Nov 27 2026"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 ---
 
 You set up a clean process on Monday. By Thursday it is a corpse. The inbox ate the three priorities. The proposal follow-up is still a feeling. This is the reset that survives a slammed week.
@@ -173,6 +174,36 @@ Exact paste for the day-7 line:
 > Quick status: [what moved]. Next piece due [date]. Anything blocked on your side?
 
 If the first client is not on the Monday sheet, the reset is still a personal productivity trick. The cash lives in the client date.
+
+## Phone-only Friday salvage (8 minutes from the phone)
+
+When you are not at a desk and Thursday already died. Same cash moves. Smaller screen.
+
+1. Open Notes. Paste this card. Fill the blanks before you open email.
+```
+Still true: ________
+Late delivery + new date: ________
+Follow-up 1 sent: ________
+Follow-up 2 sent: ________
+Scope parked: yes
+```
+2. Send the late-delivery line first. "Moving [deliverable] to [date]. Still the right piece, or swap it?"
+3. Send the two follow-ups from the exact lines above. Log the time in the note.
+4. If a scope ask is open, send the park line and close the app. Do not price it from the phone.
+
+Exact phone park line:
+
+> Got it. I'll check what we locked and come back with two options Monday.
+
+Set one reminder for Monday 9am titled "Reset — open the sheet."
+
+## Extra recovery lines for when the week is already late
+
+- If Monday never happened, run only the Thursday salvage on the day you notice. Do not wait for the next Monday.
+- Cap the parking line at three. A fourth means kill one before you write the three priorities.
+- After any payment clears, add the day-2 or day-7 line to Still open before you close the payment tab.
+- Log open invoice dollars at the bottom of the Monday sheet. If higher than last week, priority 3 is one invoice reminder.
+- Screenshot the filled sheet and text it to yourself labeled "Monday reset [date]". The photo is the backup.
 
 ## Extra concrete steps that keep the reset alive
 
