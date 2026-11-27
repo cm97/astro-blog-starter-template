@@ -204,7 +204,7 @@ A 20-minute Monday reset for people who run client work on their own. Check the 
 
 https://www.buzzyfly.com/store?utm_source=facebook&utm_medium=social&utm_campaign=monday-reset-image
 
-### cartoon-messy-onboarding | posted 2026-11-13, youtube id k8KLRZUdo1U (https://www.youtube.com/watch?v=k8KLRZUdo1U); ready for instagram, facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-messy-onboarding | posted 2026-11-13, youtube id k8KLRZUdo1U (https://www.youtube.com/watch?v=k8KLRZUdo1U); instagram tried 2026-11-27, "still processing" twice, not live (media checked before and after); ready for instagram, facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-messy-onboarding.mp4
 Title: New client said yes? Don't let onboarding get messy
 A new client said yes. Then the first week gets messy: no kickoff booked, no logins, no files, and you can't remember if the welcome email went out.
@@ -436,7 +436,7 @@ Monday already feels behind by 10am? A short reset first thing makes the week ea
 We made a free, working version of a 20-minute Monday reset: four timed passes that clear the decks, close last week, pick one priority and block the week. No sign-up.
 https://buzzyfly.com/tools/weekly-reset.html?utm_source=facebook&utm_medium=social&utm_campaign=weekly-reset-free-tool
 
-### cartoon-30-day-checkin | ready (youtube tried 2026-11-24 and 2026-11-25, Zapier 429 Too Many Requests every time, also with a cdn.jsdelivr.net copy of the file; not uploaded, uploads list checked after each) | facebook: professional portfolio, instagram: SAMS Service, youtube
+### cartoon-30-day-checkin | posted 2026-11-27, youtube id ffPxoWJ7JaY (https://www.youtube.com/watch?v=ffPxoWJ7JaY) after 429s on 11-24 and 11-25; ready for instagram, facebook | facebook: professional portfolio, instagram: SAMS Service, youtube
 Video: https://raw.githubusercontent.com/cm97/astro-blog-starter-template/main/public/social/video/cartoon-30-day-checkin.mp4
 Title: Project done? Don't forget the 30-day check-in
 Project delivered. On to the next one. A month later you never asked how it went, and now it feels too late.
