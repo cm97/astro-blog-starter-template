@@ -514,3 +514,9 @@ Then when it happens, send a fact, not a complaint: "I'll pause [project] until 
 
 Try the free Buzzyfly demo, no sign-up: the follow-up emails for quiet clients are already written.
 https://buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=waiting-on-client-clause
+
+### scope-creep-image | ready | facebook: professional portfolio
+Image: https://buzzyfly.com/social/buzzyfly-scope-creep.jpg
+"Can you just add this?" The Buzzyfly Digital System has the replies ready: quote out-of-scope work separately with a price and new timeline, confirm any change in writing (what's added, price, new date), and offer a paid round or lock the version when revisions are used up. They fill in the client's name and project, and you send them yourself. $49 once, works in your browser, no subscription. Try the free demo first, no sign-up:
+
+https://www.buzzyfly.com/demo?utm_source=facebook&utm_medium=social&utm_campaign=scope-creep-image
