@@ -112,6 +112,6 @@ Next action: day-7 set / onboarding opened / closed
 
 You can paste it today. It works until a slammed Thursday. Then the opened proposal sits, the start date stays blocked, and by Friday you have already started work for someone else because the silence felt safer than sending the nudge.
 
-The same 48-hour nudge, the day-3, day-7 and day-10 templates, the log, and the 20-minute Monday reset live inside the Buzzyfly Digital System so the quiet proposal still gets the next touch when delivery is on fire. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
+The Buzzyfly Digital System puts each quiet proposal on your Today list on day 3, day 7 and day 14, with that follow-up already written with the client's name and project, plus the 20-minute Monday reset, so the quiet proposal still gets the next touch when delivery is on fire. The 48-hour nudge above is yours to paste by hand. One browser app. One-time $49. Opens after purchase. No download. No Excel. Not a subscription. Not a coaching call. 30-day refund if you can't get into the app or it isn't what the listing described. No change-of-mind refunds once you've had access.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
