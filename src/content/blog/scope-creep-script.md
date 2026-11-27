@@ -2,12 +2,13 @@
 title: "How to Stop Scope Creep Without Losing the Client"
 description: "The exact reply when a client asks for one more thing — pause, price, two options, written yes — so the extra work is a line item, not a free favor."
 pubDate: "2026-09-01"
-updatedDate: "Nov 11 2026"
+updatedDate: "Nov 27 2026"
 category: "systems"
 heroImage: "/buzzyfly-brand-about.jpg"
 featuredProductTitle: "Buzzyfly Digital System"
 featuredProductPrice: "$49"
 featuredProductDescription: "Onboarding, weekly planning, and follow-ups as checklists you run in 20 minutes — so the process still exists on the weeks you are slammed. Includes the scope-creep script."
+featuredProductUrl: "https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00"
 ---
 
 A client asks for one small thing that was not in the agreement. You say sure. Six weeks later you have done four extra hours and they have no idea you are angry. That is not a personality problem. It is a missing reply.
@@ -146,6 +147,22 @@ Minutes logged: ________
 Line item calculated: ________
 Two-option sent: yes / no
 ```
+
+## Extra concrete steps that stop free work on a slammed Thursday
+
+- Set a phone timer for 60 minutes the second the pause line leaves. When it rings, send the two options even if the scope hunt took longer.
+- Copy the original scope sentence into the private client note before you price the ask. Blank scope becomes free work by day 4.
+- Pre-calculate three common add-on prices (30 min, 60 min, 90 min) and keep them in the same note as the weekly reset. Looking up a rate under pressure is how you discount.
+- If the ask arrives after 4pm, send only the pause line. Price it next morning. Evening yeses become free work.
+- Cap open scope asks at three. A fourth means you are rewriting the engagement. Close or re-scope the whole job the same day.
+- After any written yes, write the invoice line the same hour. The file does not open until the line is on the invoice.
+- At Friday close, mark every parked ask with a date or mark it declined. Unmarked parks become free work next month.
+- Screenshot or copy the filled two-option card into the same note the Monday reset opens. Sent mail is not a system.
+- If they reply with a counter-price, do not negotiate in the same thread. One line: "Original price stands. Add it or park it." Then wait.
+- Never start the extra work because they said "yes, send the invoice later." Invoice first, then open the file.
+- On the next weekly reset, add one row: "Open scope asks waiting on written yes: [count]." Zero is the goal.
+- If three asks land the same week, run only the pause + two options for the first two. Park the third until Monday.
+- Phone-only: dictate the two-option reply into Notes, paste, send, mark the card. The 60-minute timer still has to exist.
 
 ## Weekly reset hook so Thursday cannot erase it
 
