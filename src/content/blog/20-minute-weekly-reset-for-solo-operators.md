@@ -180,7 +180,7 @@ One delivery, one follow-up, one money-unblocker. That is the filter. Everything
 
 You can run the sheet on a calm Monday. It works until three clients reply at once. Then Wednesday never gets a calendar hold. Thursday becomes inbox, and the proposal follow-up waits for a good moment that is not on the clock. The Friday close never happens, so Monday starts with a blank page again.
 
-The Digital System is the same sequence written down so it still runs when you are busy: weekly reset, onboarding checklist, follow-ups. One browser app. One-time $49. No download. Not a subscription. Opens after Stripe checkout.
+The Digital System has its own guided 20-minute Monday reset (check the money, send the follow-ups, move each client forward, score the week's tasks, block time for your #1, drop one thing), next to the onboarding checklist and the follow-ups, so the routine still runs when you are busy. One browser app. One-time $49. No download. Not a subscription. Opens after Stripe checkout.
 
 [Get the Digital System — $49](https://buy.stripe.com/bJebJ3dxudbwejaaVMaVa00)
 
